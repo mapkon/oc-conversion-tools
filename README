@@ -1,3 +1,6 @@
 1. Use maven to set up.
+	1. mvn clean install
+	2. mvn eclipse:eclipse
+	
 2. Further set up instructions are found at code.openxdata.org
 3. This is meant to be the bridging code for communication between openxdata and openclinica.
