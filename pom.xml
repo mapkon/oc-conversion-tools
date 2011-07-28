@@ -1,32 +1,109 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>org.openxdata</groupId>
-		<artifactId>oxd</artifactId>
-		<version>1.3-SNAPSHOT</version>
-	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openxdata</groupId>
 	<artifactId>oc-conversion-tools</artifactId>
+	<version>0.1-SNAPSHOT</version>
 	<name>OpenXdata OpenClinica Conversion Tools</name>
+	<url>http://openxdata.org</url>
+
+	<repositories>
+		<repository>
+			<id>openxdata</id>
+			<url>http://nexus.openxdata.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>openxdata-releases</id>
+			<url>https://nexus.openxdata.org/content/repositories/releases</url>
+		</repository>
+		<repository>
+            <id>openxdata-snapshots</id>
+            <url>https://nexus.openxdata.org/content/repositories/snapshots</url>
+        </repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>model</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>server</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
+			<version>2.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 	</dependencies>
+
+
+	<build>
+		<testResources>
+			<testResource>
+				<directory>${basedir}/src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>!true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
