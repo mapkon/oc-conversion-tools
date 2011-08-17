@@ -9,6 +9,55 @@
 	<name>OpenXdata OpenClinica Conversion Tools</name>
 	<url>http://openxdata.org</url>
 
+	<description>
+        OpenXdata is an open source (under the Apache license, version 2)
+        end-to-end solution for collecting data.
+    </description>
+
+	<organization>
+		<name>OpenXdata Foundation</name>
+		<url>http://www.openxdata.org</url>
+	</organization>
+
+	<issueManagement>
+		<system>trac</system>
+		<url>http://trac.openxdata.org</url>
+	</issueManagement>
+
+	<mailingLists>
+		<mailingList>
+			<name>OpenXdata Users List</name>
+			<archive>http://groups.google.com/group/openxdata-users</archive>
+			<post>openxdata-users@googlegroups.com</post>
+		</mailingList>
+		<mailingList>
+			<name>OpenXdata Dev List</name>
+			<archive>http://groups.google.com/group/openxdata-dev</archive>
+			<post>openxdata-dev@googlegroups.com</post>
+		</mailingList>
+	</mailingLists>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>cattabanks@gmail.com</id>
+			<name>Mark Gerard</name>
+			<email>cattabanks@gmail.com</email>
+			<organization>Centre for International Health, University of Bergen</organization>
+			<organizationUrl>http://www.uib.no/cih/en</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
 	<repositories>
 		<repository>
 			<id>openxdata</id>
@@ -22,9 +71,9 @@
 			<url>https://nexus.openxdata.org/content/repositories/releases</url>
 		</repository>
 		<repository>
-            <id>openxdata-snapshots</id>
-            <url>https://nexus.openxdata.org/content/repositories/snapshots</url>
-        </repository>
+			<id>openxdata-snapshots</id>
+			<url>https://nexus.openxdata.org/content/repositories/snapshots</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -101,4 +150,21 @@
 			</build>
 		</profile>
 	</profiles>
+
+	<scm>
+		<connection>scm:git@github.com:mapkon/oc-conversion-tools.git</connection>
+		<developerConnection>scm:git@github.com:mapkon/oc-conversion-tools.git</developerConnection>
+		<url>https://github.com/mapkon/oc-conversion-tools</url>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>openxdata-snapshots</id>
+			<url>https://nexus.openxdata.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>openxdata-releases</id>
+			<url>https://nexus.openxdata.org/content/repositories/releases</url>
+		</repository>
+	</distributionManagement>
 </project>
