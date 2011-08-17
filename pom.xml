@@ -151,8 +151,8 @@
 	</profiles>
 
 	<scm>
-		<connection>scm:git:git://github.com/mapkon/oc-conversion-tools</connection>
-		<developerConnection>scm:git:git://github.com/mapkon/oc-conversion-tools</developerConnection>
+		<connection>scm:git:git://github.com:mapkon/oc-conversion-tools.git</connection>
+		<developerConnection>scm:git:git://github.com:mapkon/oc-conversion-tools.git</developerConnection>
 		<url>https://github.com/mapkon/oc-conversion-tools</url>
 	</scm>
 
