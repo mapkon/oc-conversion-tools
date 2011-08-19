@@ -5,8 +5,6 @@ import org.openxdata.server.admin.model.Editable;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
@@ -16,9 +14,7 @@ import com.google.gwt.xml.client.NodeList;
  * Imports studies in ODM format.
  */
 public class ODMImport {
-	
-	private static Logger log = LoggerFactory.getLogger(ODMImport.class);
-	
+		
 	/**
 	 * Imports a study, form, or form version from xml.
 	 * 
@@ -62,6 +58,5 @@ public class ODMImport {
 		
 		formDefVersion.setXform(ODMXformImport.importXform(node,metaDataVersionNode));
 		
-		log.debug(formDefVersion.getXform());
 	}
 }
