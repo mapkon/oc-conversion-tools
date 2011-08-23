@@ -1,6 +1,6 @@
-package org.openxdata.oc.convert;
+package org.openxdata.oc.client.convert;
 
-import org.openxdata.oc.convert.util.XmlUtil;
+import org.openxdata.oc.client.convert.util.XmlUtil;
 import org.openxdata.server.admin.model.Editable;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
@@ -18,7 +18,7 @@ public class ODMImport {
 	/**
 	 * Imports a study, form, or form version from xml.
 	 * 
-	 * @param xml the xml text.
+	 * @param doc Document containing xml from odm file.
 	 * @return study, form or form version, depending on what is in the xml text.
 	 */
 	public static Editable importStudyItem(Document doc){
@@ -56,7 +56,7 @@ public class ODMImport {
 		FormDefVersion formDefVersion = new FormDefVersion(0,name.substring(pos + 2),formDef);
 		formDef.addVersion(formDefVersion);
 		
-		formDefVersion.setXform(ODMXformImport.importXform(node,metaDataVersionNode));
+		formDefVersion.setXform(ODMXformImport.importXform(node, metaDataVersionNode));
 		
 	}
 }

@@ -1,4 +1,4 @@
-package org.openxdata.oc.convert.util;
+package org.openxdata.oc.client.convert.util;
 
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;

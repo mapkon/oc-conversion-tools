@@ -1,9 +1,9 @@
-package org.openxdata.oc.convert;
+package org.openxdata.oc.client.convert;
 
 import java.util.Date;
 
-import org.openxdata.oc.convert.util.XformConstants;
-import org.openxdata.oc.convert.util.XmlUtil;
+import org.openxdata.oc.client.convert.util.XformConstants;
+import org.openxdata.oc.client.convert.util.XmlUtil;
 
 import com.google.gwt.xml.client.Document;
 import com.google.gwt.xml.client.Element;
