@@ -56,6 +56,17 @@
 			</roles>
 			<timezone>+1</timezone>
 		</developer>
+		<developer>
+			<id>morten.bendiksen@gmail.com</id>
+			<name>Morten Bendiksen</name>
+			<email>morten.bendiksen@gmail.com</email>
+			<organization>Centre for International Health, University of Bergen</organization>
+			<organizationUrl>http://www.uib.no/cih/en</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
 	</developers>
 
 	<properties>
