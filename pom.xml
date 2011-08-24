@@ -93,6 +93,11 @@
 
 	<dependencies>
 		<dependency>
+			<artifactId>junit</artifactId>
+			<groupId>junit</groupId>
+			<version>4.4</version>
+		</dependency>
+		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>model</artifactId>
 			<version>${model.version}</version>
@@ -122,6 +127,7 @@
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
+		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
