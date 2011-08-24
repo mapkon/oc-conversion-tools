@@ -69,11 +69,8 @@
 	</developers>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
-		<gwt.version>2.2.0</gwt.version>
 		<model.version>1.2.2</model.version>
-		<filtered.sourceDir>${project.build.directory}/generated-sources/filtered</filtered.sourceDir>
 	</properties>
 
 	<repositories>
@@ -105,16 +102,6 @@
 			<artifactId>model</artifactId>
 			<classifier>sources</classifier>
 			<version>${model.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${gwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-servlet</artifactId>
-			<version>${gwt.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -175,20 +162,6 @@
 								<phase>package</phase>
 								<goals>
 									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>gwt-maven-plugin</artifactId>
-						<version>${gwt.version}</version>
-						<executions>
-							<execution>
-								<id>gwt-compile</id>
-								<goals>
-									<goal>generateAsync</goal>
-									<goal>compile</goal>
 								</goals>
 							</execution>
 						</executions>

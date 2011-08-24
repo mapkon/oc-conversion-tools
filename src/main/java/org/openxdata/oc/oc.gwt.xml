@@ -1,9 +1,0 @@
-<module rename-to='oc'>
-
-	<inherits name='com.google.gwt.user.User'/>
-	<inherits name='com.google.gwt.xml.XML' />
-	<inherits name='org.openxdata.server.admin.Model' />
-
-	<!-- Source paths -->
-	<source path='client' />
-</module>
