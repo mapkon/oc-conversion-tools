@@ -1,22 +1,30 @@
-package org.openxdata.oc.client.convert.util;
+package org.openxdata.oc.convert.util;
 
-import com.google.gwt.xml.client.Document;
-import com.google.gwt.xml.client.Element;
-import com.google.gwt.xml.client.Node;
-import com.google.gwt.xml.client.NodeList;
-import com.google.gwt.xml.client.XMLParser;
+import java.io.IOException;
+import java.io.StringReader;
+
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.sun.org.apache.xerces.internal.dom.DOMImplementationImpl;
+import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
 /**
  * Utility methods used when manipulating xml documents.
  * 
  */
-public class XmlUtil {
+public class XMLUtil {
 
 	/**
 	 * All methods in this class are static and hence we expect no external
 	 * Instantiation of this class.
 	 */
-	private XmlUtil() {
+	private XMLUtil() {
 
 	}
 
@@ -151,11 +159,11 @@ public class XmlUtil {
 				continue;
 
 			Element child = (Element) parent.getChildNodes().item(i);
-			if (XmlUtil.getNodeName(child).equals(name))
+			if (XMLUtil.getNodeName(child).equals(name))
 				return child;
 			else if (name.contains("/")) {
 				String parentName = name.substring(0, name.indexOf('/'));
-				if (XmlUtil.getNodeName(child).equals(parentName)) {
+				if (XMLUtil.getNodeName(child).equals(parentName)) {
 					child = getNode(child,
 							name.substring(name.indexOf('/') + 1));
 					if (child != null)
@@ -182,9 +190,9 @@ public class XmlUtil {
 	 * @return the node text value.
 	 */
 	public static String getNodeTextValue(Element parentNode, String name) {
-		Element node = XmlUtil.getNode(parentNode, name);
+		Element node = XMLUtil.getNode(parentNode, name);
 		if (node != null)
-			return XmlUtil.getTextValue(node);
+			return XMLUtil.getTextValue(node);
 		return null;
 	}
 
@@ -194,9 +202,21 @@ public class XmlUtil {
 	 * @param xml
 	 *            the text xml.
 	 * @return the document object.
+	 * @throws SAXException 
 	 */
-	public static Document getDocument(String xml) {
-		return XMLParser.parse(xml);
+	public static Document getDocument(String xml) throws SAXException {
+		
+		DOMParser parser = new DOMParser();
+		try {
+			parser.parse(new InputSource(new StringReader(xml)));
+		} catch (IOException e) {
+			
+			// Since we reading a string, IOException is highly unlikely.
+			throw new RuntimeException("An unexpected IOException occurred.");
+		}
+		
+		Document doc = parser.getDocument();
+		return doc;
 	}
 
 	/**
@@ -248,5 +268,13 @@ public class XmlUtil {
 		}
 
 		return node;
+	}
+	
+	public static Document createDocument(){
+		DOMImplementation impl = DOMImplementationImpl.getDOMImplementation();
+
+		Document doc = impl.createDocument(null, null, null);
+
+		return doc;
 	}
 }

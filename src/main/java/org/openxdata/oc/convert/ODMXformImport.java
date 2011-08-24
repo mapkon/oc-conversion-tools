@@ -1,14 +1,13 @@
-package org.openxdata.oc.client.convert;
+package org.openxdata.oc.convert;
 
 import java.util.Date;
 
-import org.openxdata.oc.client.convert.util.XformConstants;
-import org.openxdata.oc.client.convert.util.XmlUtil;
+import org.openxdata.oc.convert.util.XformConstants;
+import org.openxdata.oc.convert.util.XMLUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
-import com.google.gwt.xml.client.Document;
-import com.google.gwt.xml.client.Element;
-import com.google.gwt.xml.client.NodeList;
-import com.google.gwt.xml.client.XMLParser;
 
 
 public class ODMXformImport {
@@ -20,7 +19,7 @@ public class ODMXformImport {
 		groupId = 0;
 		
 		// Create a new document.
-		Document doc = XMLParser.createDocument();
+		Document doc = XMLUtil.createDocument();
 
 		// Create the document root node.
 		Element xformsNode = doc.createElement(XformConstants.NODE_NAME_XFORMS);
@@ -84,7 +83,7 @@ public class ODMXformImport {
 			importItemGroupRef(doc,element,formDataNode,metaDataVersionNode,element.getAttribute("ItemGroupOID"),xformsNode, modelNode);
 		}
 
-		return XmlUtil.fromDoc2String(doc);
+		return XMLUtil.fromDoc2String(doc);
 	}
 
 	private static void importItemGroupDef(Document doc, Element node, Element formDataNode, Element metaDataVersionNode,Element xformsNode, Element modelNode){
@@ -225,7 +224,7 @@ public class ODMXformImport {
 		widgetNode.setAttribute(XformConstants.ATTRIBUTE_NAME_BIND, OID);
 		groupNode.appendChild(widgetNode);
 		
-		String text = XmlUtil.getTextValue((Element)node.getElementsByTagName("TranslatedText").item(0));
+		String text = XMLUtil.getTextValue((Element)node.getElementsByTagName("TranslatedText").item(0));
 		Element labelNode =  doc.createElement(XformConstants.NODE_NAME_LABEL);
 		labelNode.appendChild(doc.createTextNode(text.trim()));
 		widgetNode.appendChild(labelNode);
@@ -262,7 +261,7 @@ public class ODMXformImport {
 	private static String getTranslatedText(Element node){
 		NodeList nodes = node.getElementsByTagName("TranslatedText");
 		if(nodes != null && nodes.getLength() > 0)
-			return XmlUtil.getTextValue((Element)nodes.item(0));
+			return XMLUtil.getTextValue((Element)nodes.item(0));
 		return "";
 	}
 	

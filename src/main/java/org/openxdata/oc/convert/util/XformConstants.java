@@ -1,4 +1,4 @@
-package org.openxdata.oc.client.convert.util;
+package org.openxdata.oc.convert.util;
 
 
 /**
