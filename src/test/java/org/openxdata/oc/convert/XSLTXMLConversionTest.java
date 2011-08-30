@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.openxdata.oc.convert.exception.InvalidXMLException;
 import org.openxdata.oc.convert.util.XMLUtil;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.sun.org.apache.xml.internal.security.Init;
 import com.sun.org.apache.xml.internal.security.transforms.TransformationException;
@@ -23,8 +25,15 @@ public class XSLTXMLConversionTest {
 		XSLTCompiler compiler = new XSLTCompiler(xslt);		
 		String odm = XMLUtil.loadFile("/org/openxdata/oc/oc-odm.xml");
 		Document doc = compiler.transform(odm);
-		
+		removeNamedAttribute(doc, "study",  "xmlns:OpenClinica");
+		removeNamedAttribute(doc, "study",  "xmlns:oc");
 		System.out.println(format(doc));
+	}
+
+	private void removeNamedAttribute(Document doc, String tag, String xmlns) {
+		NodeList studyDefList = doc.getElementsByTagName(tag);
+		Node studyDef = studyDefList.item(0);
+		studyDef.getAttributes().removeNamedItem(xmlns);
 	}
 	
 	public String format(Document document) {
