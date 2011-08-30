@@ -31,9 +31,9 @@ public class XSLTCompiler {
 			executable = compiler.compile(new DOMSource(xsltDoc));
 
 		} catch (SaxonApiException e) {
-			throw new InvalidXMLException("The XSLT is not Valid");
+			throw new InvalidXMLException("The XSLT is not Valid", e);
 		} catch (SAXException e) {
-			throw new InvalidXMLException("The string is not a valid XML");
+			throw new InvalidXMLException("The string is not a valid XML", e);
 		}
 	}
 
