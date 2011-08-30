@@ -1,6 +1,8 @@
 package org.openxdata.oc.convert.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 
 import org.w3c.dom.DOMImplementation;
@@ -276,5 +278,18 @@ public class XMLUtil {
 		Document doc = impl.createDocument(null, null, null);
 
 		return doc;
+	}
+	
+
+	public static String loadFile(String file) throws IOException {
+		BufferedReader input = new BufferedReader(new InputStreamReader(
+			    XMLUtil.class.getResourceAsStream(file)));
+
+		StringBuilder xsltContent = new StringBuilder();
+		String line;
+		while((line = input.readLine()) != null){
+			xsltContent.append(line + "\n");
+		}
+		return xsltContent.toString();
 	}
 }
