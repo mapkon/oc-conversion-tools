@@ -1,5 +1,7 @@
 package org.openxdata.oc.convert;
 
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 
 import net.sf.saxon.s9api.DOMDestination;
@@ -16,7 +18,7 @@ import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xml.internal.security.transforms.TransformationException;
 
-public class XSLTCompiler {
+public class XSLTCompiler implements ErrorListener {
 
 	private XsltExecutable executable;
 	Processor processor;
@@ -25,6 +27,7 @@ public class XSLTCompiler {
 	public XSLTCompiler(String xslt) throws InvalidXMLException {
 		processor = new Processor(false);
 		compiler = processor.newXsltCompiler();
+		compiler.setErrorListener(this);
 
 		try {
 			Document xsltDoc = XMLUtil.getDocument(xslt);
@@ -40,8 +43,10 @@ public class XSLTCompiler {
 	public Document transform(String input) throws InvalidXMLException, TransformationException {
 		try {
 			XsltTransformer transformer = executable.load();
+			transformer.setErrorListener(this);
 			Document outputDocument = XMLUtil.createDocument();
 			Document inputDocument = XMLUtil.getDocument(input);
+			inputDocument.getFirstChild();
 			DOMDestination destination = new DOMDestination(outputDocument);
 			transformer.setDestination(destination);
 			DOMSource inputSource = new DOMSource(inputDocument);
@@ -51,10 +56,28 @@ public class XSLTCompiler {
 
 			return outputDocument;
 		} catch (SAXException e) {
-			throw new InvalidXMLException("The intput file is not valid XML");
+			throw new InvalidXMLException("The intput file is not valid XML", e);
 		} catch (SaxonApiException e) {
-			throw new TransformationException("Something is wrong with the input xml");
+			throw new TransformationException("Something went wrong with transformation, likely a mismatch between xslt and input xml", e);
 		}
 		
+	}
+
+	@Override
+	public void warning(TransformerException exception)
+			throws TransformerException {
+		System.err.println(exception);
+	}
+
+	@Override
+	public void error(TransformerException exception)
+			throws TransformerException {
+		System.err.println(exception);
+	}
+
+	@Override
+	public void fatalError(TransformerException exception)
+			throws TransformerException {
+		System.err.println(exception);
 	}
 }
