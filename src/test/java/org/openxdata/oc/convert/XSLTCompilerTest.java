@@ -1,56 +1,70 @@
 package org.openxdata.oc.convert;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.openxdata.oc.convert.exception.InvalidXMLException;
+import org.openxdata.oc.convert.util.XMLUtil;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xml.internal.security.transforms.TransformationException;
 
 public class XSLTCompilerTest {
-	
-	XSLTCompiler compiler;
-	
+
+	private String sampleXslt;
+	private String input;
+	private String output;
+
 	@Before
-	public void setup() throws InvalidXMLException {
-		compiler = new XSLTCompiler("<xslt/>");
+	public void setup() throws InvalidXMLException, IOException {
+		sampleXslt = XMLUtil.loadFile("/org/openxdata/oc/sample-xslt.xsl");
+		input = XMLUtil.loadFile("/org/openxdata/oc/sample-input-xml.xml");
+		output = XMLUtil.loadFile("/org/openxdata/oc/sample-output-xml.xml");
 	}
 
+
 	@Test
-	public void compileShouldNotReturnNull() throws TransformationException, InvalidXMLException {
+	public void compileShouldNotReturnNullOnValidInput() throws TransformationException,
+			InvalidXMLException {
+	
+		
+		XSLTCompiler compiler = new XSLTCompiler(sampleXslt);
 		Document doc = compiler.transform("<hei/>");
 		assertNotNull(doc);
 	}
-	
-	@Test
-	public void compileShouldReturnErrorDocumentOnInvalidXML() throws TransformationException, InvalidXMLException {
-		Document doc = compiler.transform("<hei/>");
-		NodeList elements = doc.getChildNodes();
-		for(int i = 0; i < elements.getLength(); i++) {
-			Node node = elements.item(i);
-			short nodeType = node.getNodeType();
-			if (nodeType == Node.ELEMENT_NODE) {
-				String name = node.getNodeName();
-				assertEquals("error", name);
-			}
-		}
+
+	@Test(expected = InvalidXMLException.class)
+	public void compileShouldThrowExceptionOnInvalidXML()
+			throws TransformationException, InvalidXMLException {
+		XSLTCompiler compiler = new XSLTCompiler(sampleXslt);
+		compiler.transform("<invalid--xml--!!>");
 	}
-	
-	@Test(expected=Exception.class)
-	public void compileShouldThrowExceptionOnInvalidXML() throws TransformationException, InvalidXMLException {
-		Document doc = compiler.transform("<hei/>");
-	}
-	
-	@Test(expected=Exception.class)
-	public void compileShouldThrowExceptionOnInvalidXSLT() throws InvalidXMLException, TransformationException {
+
+	@Test(expected = InvalidXMLException.class)
+	public void compileShouldThrowExceptionOnInvalidXSLT()
+			throws InvalidXMLException, TransformationException {
+		XSLTCompiler compiler = new XSLTCompiler("<xslt/>");
 		compiler = new XSLTCompiler("<xslt/>");
-		Document doc = compiler.transform("<hei/>");
+		compiler.transform("<hei/>");
 	}
-	
-	
+
+	@Test
+	public void compileShouldCorrectlyTranslateDocument()
+			throws InvalidXMLException, TransformationException, ParserConfigurationException, SAXException, IOException {
+		
+		XSLTCompiler compiler = new XSLTCompiler(sampleXslt);
+		Document doc = compiler.transform(input);
+		
+		Document expectedDoc = XMLUtil.getDocument(output);
+		
+		assertEquals(expectedDoc.getFirstChild().getNodeName(), doc.getFirstChild().getNodeName());
+	}
 
 }
