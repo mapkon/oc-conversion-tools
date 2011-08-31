@@ -42,8 +42,25 @@
 				select="normalize-space(@OID)"></xsl:value-of>
 			</xsl:attribute>
 			<xform>
-				
-			</xform>
+				<xsl:text>&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</xsl:text>
+				<xf:xforms xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xf:model>
+						<xf:instance id="ODM">
+							<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+								xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3.xsd"
+								ODMVersion="1.3" FileType="Snapshot" Description="" >
+								<xsl:attribute name="FileOID"><xsl:value-of select="current-date()"></xsl:value-of></xsl:attribute>
+								<xsl:attribute name="CreationDateTime"><xsl:value-of select="current-date()"></xsl:value-of></xsl:attribute>
+								<xsl:attribute name="name"><xsl:value-of select="oc:FormDef/@Name"></xsl:value-of></xsl:attribute>
+								<xsl:attribute name="formKey"><xsl:value-of select="oc:FormDef/@OID"></xsl:value-of></xsl:attribute>
+								<ClinicalData>
+									
+								</ClinicalData>
+							</ODM>
+						</xf:instance>
+					</xf:model>
+				</xf:xforms>
+			</xform>			
 		</version>
 	</xsl:template>
 
