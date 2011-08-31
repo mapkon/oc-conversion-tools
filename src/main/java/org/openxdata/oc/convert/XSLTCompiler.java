@@ -58,7 +58,7 @@ public class XSLTCompiler implements ErrorListener {
 		} catch (SAXException e) {
 			throw new InvalidXMLException("The intput file is not valid XML", e);
 		} catch (SaxonApiException e) {
-			throw new TransformationException("Something went wrong with transformation, likely a mismatch between xslt and input xml", e);
+			throw new TransformationException("A transformation error occured: likely a mismatch between xslt and input xml", e);
 		}
 		
 	}
