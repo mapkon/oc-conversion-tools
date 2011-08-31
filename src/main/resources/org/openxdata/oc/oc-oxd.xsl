@@ -42,7 +42,6 @@
 				select="normalize-space(@OID)"></xsl:value-of>
 			</xsl:attribute>
 			<xform>
-				<xsl:text>&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</xsl:text>
 				<xf:xforms xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 					<xf:model>
 						<xf:instance id="ODM">
@@ -53,15 +52,44 @@
 								<xsl:attribute name="CreationDateTime"><xsl:value-of select="current-date()"></xsl:value-of></xsl:attribute>
 								<xsl:attribute name="name"><xsl:value-of select="oc:FormDef/@Name"></xsl:value-of></xsl:attribute>
 								<xsl:attribute name="formKey"><xsl:value-of select="oc:FormDef/@OID"></xsl:value-of></xsl:attribute>
-								<ClinicalData>
-									
+								<ClinicalData StudyOID="" MetaDataVersionOID="v1.0.0" UserID="">
+									<SubjectData SubjectKey="">
+										<StudyEventData StudyEventOID="">
+											<FormData>
+												<xsl:attribute name="FormOID"><xsl:value-of select="oc:FormDef/@OID"></xsl:value-of></xsl:attribute>
+												<xsl:for-each select="oc:ItemGroupDef">
+													<xsl:call-template name="createItemGroupData"></xsl:call-template>
+												</xsl:for-each>
+											</FormData>
+										</StudyEventData>
+									</SubjectData>
 								</ClinicalData>
 							</ODM>
 						</xf:instance>
 					</xf:model>
+					<xsl:variable name="groupId"><xsl:value-of select="1"></xsl:value-of></xsl:variable>
+					<xsl:for-each select="oc:ItemGroupDef">
+							<xsl:call-template name="createGroup">
+								<xsl:with-param name="groupId" select="$groupId"></xsl:with-param>
+							</xsl:call-template>
+							<xsl:variable name="groupId"><xsl:value-of select="$groupId + 1"></xsl:value-of></xsl:variable>
+					</xsl:for-each>
 				</xf:xforms>
 			</xform>			
 		</version>
+	</xsl:template>
+	
+	<xsl:template name="createGroup">
+		<xsl:param name="groupId"></xsl:param>
+		<group>
+			<xsl:attribute name="id"><xsl:value-of select="$groupId"></xsl:value-of></xsl:attribute>
+		</group>
+	</xsl:template>
+	
+	<xsl:template name="createItemGroupData">
+		<ItemGroupData TransactionType="Insert">
+			<xsl:attribute name="ItemGroupOID"><xsl:value-of select="@OID"></xsl:value-of></xsl:attribute>
+		</ItemGroupData>
 	</xsl:template>
 
 </xsl:stylesheet>
