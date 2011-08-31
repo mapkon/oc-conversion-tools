@@ -48,6 +48,14 @@ public class XSLTCompilerTest {
 	}
 
 	@Test(expected = InvalidXMLException.class)
+	public void compileShouldThrowExceptionOnInvalidXSLTXML()
+			throws InvalidXMLException, TransformationException {
+		XSLTCompiler compiler = new XSLTCompiler("<xslt--dfdf?`/>");
+		compiler = new XSLTCompiler("<xslt/>");
+		compiler.transform("<hei/>");
+	}
+	
+	@Test(expected = InvalidXMLException.class)
 	public void compileShouldThrowExceptionOnInvalidXSLT()
 			throws InvalidXMLException, TransformationException {
 		XSLTCompiler compiler = new XSLTCompiler("<xslt/>");
