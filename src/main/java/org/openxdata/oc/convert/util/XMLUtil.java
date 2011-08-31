@@ -1,6 +1,7 @@
 package org.openxdata.oc.convert.util;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -228,10 +229,14 @@ public class XMLUtil {
 	 * @throws SAXException 
 	 */
 	public static Document getDocument(String xml) throws SAXException {
-		
+		InputSource input = new InputSource(new StringReader(xml));
+		return getDocument(input);
+	}
+
+	private static Document getDocument(InputSource input) throws SAXException {
 		DOMParser parser = new DOMParser();
 		try {
-			parser.parse(new InputSource(new StringReader(xml)));
+			parser.parse(input);
 		} catch (IOException e) {
 			
 			// Since we reading a string, IOException is highly unlikely.
@@ -240,6 +245,12 @@ public class XMLUtil {
 		
 		Document doc = parser.getDocument();
 		return doc;
+	}
+	
+	public static Document getDocumentFromResource(String file) throws FileNotFoundException, SAXException {
+		InputStream stream = XMLUtil.class.getResourceAsStream(file);
+		InputSource input = new InputSource(new InputStreamReader(stream));
+		return getDocument(input);
 	}
 
 	/**
