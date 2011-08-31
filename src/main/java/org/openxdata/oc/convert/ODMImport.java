@@ -1,5 +1,6 @@
 package org.openxdata.oc.convert;
 
+import org.openxdata.oc.convert.exception.NoStudyDefinitionException;
 import org.openxdata.oc.convert.util.XMLUtil;
 import org.openxdata.server.admin.model.Editable;
 import org.openxdata.server.admin.model.FormDef;
@@ -25,15 +26,15 @@ public class ODMImport {
 	 * 
 	 * @throws SAXException 
 	 */
-	public Editable importStudyItem(String xml) throws SAXException {
+	public Editable importStudyItem(String xml) throws SAXException, NoStudyDefinitionException {
 		
 		Document doc = XMLUtil.getDocument(xml);
 		Element root = doc.getDocumentElement();
 		
 		NodeList nodes = root.getElementsByTagName("Study");
 		
-		if(nodes == null || nodes.getLength() == 0)
-			return null;
+		if(nodes.getLength() == 0)
+			throw new NoStudyDefinitionException(xml);
 		
 		StudyDef studyDef = new StudyDef();
 		Element studyNode = (Element)nodes.item(0);
