@@ -2,8 +2,11 @@ package org.openxdata.oc.convert.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -15,6 +18,8 @@ import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xerces.internal.dom.DOMImplementationImpl;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
  * Utility methods used when manipulating xml documents.
@@ -29,6 +34,22 @@ public class XMLUtil {
 	private XMLUtil() {
 
 	}
+	
+	public static String format(Document document) {
+        try {
+            OutputFormat format = new OutputFormat(document);
+            format.setLineWidth(65);
+            format.setIndenting(true);
+            format.setIndent(2);
+            Writer out = new StringWriter();
+            XMLSerializer serializer = new XMLSerializer(out, format);
+            serializer.serialize(document);
+
+            return out.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 	/**
 	 * Checks if a node name equals a particular name, regardless of prefix.
@@ -229,7 +250,7 @@ public class XMLUtil {
 	 * @return the xml string.
 	 */
 	public static String fromDoc2String(Document doc) {
-		return doc.toString();
+		return format(doc);
 	}
 
 	/**
