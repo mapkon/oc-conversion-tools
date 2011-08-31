@@ -43,6 +43,7 @@
 			</xsl:attribute>
 			<xform>
 				<xf:xforms xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<xsl:variable name="groupId"><xsl:value-of select="1"></xsl:value-of></xsl:variable>
 					<xf:model>
 						<xf:instance id="ODM">
 							<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -66,8 +67,14 @@
 								</ClinicalData>
 							</ODM>
 						</xf:instance>
+						
+						<xsl:if test="$groupId = 1">
+							<bind id="StudyOID" nodeset="/ODM/ClinicalData/@StudyOID" type="xsd:string" required="true()"/>
+							<bind id="StudyEventData" nodeset="/ODM/ClinicalData/SubjectData/StudyEventData/@StudyEventOID" type="xsd:string" required="true()"/>
+							<bind id="UserID" nodeset="/ODM/ClinicalData/@UserID" type="xsd:int" required="true()"/>
+							
+						</xsl:if>
 					</xf:model>
-					<xsl:variable name="groupId"><xsl:value-of select="1"></xsl:value-of></xsl:variable>
 					<xsl:for-each select="oc:ItemGroupDef">
 							<xsl:call-template name="createGroup">
 								<xsl:with-param name="groupId" select="$groupId"></xsl:with-param>
@@ -83,6 +90,17 @@
 		<xsl:param name="groupId"></xsl:param>
 		<group>
 			<xsl:attribute name="id"><xsl:value-of select="$groupId"></xsl:value-of></xsl:attribute>
+			<xsl:if test="$groupId = 1">
+				<input bind="StudyOID">
+					<label>SubjectKey</label>
+				</input>
+				<input bind="StudyEventData">
+					<label>StudyEventData</label>
+				</input>
+				<input bind="UserID">
+					<label>UserID</label>
+				</input>
+			</xsl:if>
 		</group>
 	</xsl:template>
 	
