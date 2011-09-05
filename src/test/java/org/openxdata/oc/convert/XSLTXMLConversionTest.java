@@ -19,7 +19,7 @@ public class XSLTXMLConversionTest {
 		Init.init();
 		String xslt = XMLUtil.loadFile("/org/openxdata/oc/oc-oxd.xsl");
 		XSLTCompiler compiler = new XSLTCompiler(xslt);		
-		String odm = XMLUtil.loadFile("/org/openxdata/oc/oc-odm.xml");
+		String odm = XMLUtil.loadFile("/org/openxdata/oc/test-odm.xml");
 		Document doc = compiler.transform(odm);
 		removeNamedAttribute(doc, "study",  "xmlns:OpenClinica");
 		removeNamedAttribute(doc, "study",  "xmlns:oc");
@@ -31,6 +31,4 @@ public class XSLTXMLConversionTest {
 		Node studyDef = studyDefList.item(0);
 		studyDef.getAttributes().removeNamedItem(xmlns);
 	}
-	
-
 }

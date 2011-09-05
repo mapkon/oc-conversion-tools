@@ -42,7 +42,7 @@ public class ODMImportTest {
 	@Test
 	public void importStudyItemShouldContainValidOXDFormatElement() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, NoStudyDefinitionException{
 		Editable editable = importODMFile();
-		Document doc = XMLUtil.getDocumentFromResource("/org/openxdata/oc/oc-odm.xml");
+		Document doc = XMLUtil.getDocumentFromResource("/org/openxdata/oc/test-odm.xml");
 		StudyDef study = (StudyDef) editable;
 		
 		XPathEvaluator evaluator = new XPathEvaluator(doc);
@@ -69,7 +69,7 @@ public class ODMImportTest {
 	}
 	
 	private Editable importODMFile() throws IOException, SAXException, NoStudyDefinitionException {
-		xml = XMLUtil.loadFile("/org/openxdata/oc/oc-odm.xml");		
+		xml = XMLUtil.loadFile("/org/openxdata/oc/test-odm.xml");		
 		return importer.importStudyItem(xml);
 	}
 	

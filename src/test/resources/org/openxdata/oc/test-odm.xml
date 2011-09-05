@@ -1,0 +1,4183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ODM FileOID="Mbale_data_setD20110901090232-0500" Description="CRFs for SC1 AND SC2" CreationDateTime="2011-09-01T09:02:32-05:00" FileType="Snapshot" ODMVersion="1.3" xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:OpenClinica="http://www.openclinica.org/ns/openclinica_odm/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3-0.xsd" >
+    <Study OID="S_12175">
+        <GlobalVariables>
+            <StudyName>Default Study - Uganda</StudyName>
+            <StudyDescription>
+                test instance - Site of Uganda
+            </StudyDescription>
+            <ProtocolName>default-study - 12175</ProtocolName>
+        </GlobalVariables>
+        <BasicDefinitions>
+            <MeasurementUnit OID="MU_%" Name="%">
+                <Symbol>
+                    <TranslatedText>%</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;.MM&lt;SUP&gt;-3&lt;/SUP&gt;" Name="10&lt;SUP&gt;3&lt;/SUP&gt;.MM&lt;SUP&gt;-3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>10&lt;SUP&gt;3&lt;/SUP&gt;.MM&lt;SUP&gt;-3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_10&lt;SUP&gt;6&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="10&lt;SUP&gt;6&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>10&lt;SUP&gt;6&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_10&lt;SUP&gt;6&lt;/SUP&gt;MM&lt;SUP&gt;-3&lt;/SUP&gt;" Name="10&lt;SUP&gt;6&lt;/SUP&gt;MM&lt;SUP&gt;-3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>10&lt;SUP&gt;6&lt;/SUP&gt;MM&lt;SUP&gt;-3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_10&lt;SUP&gt;9&lt;/SUP&gt;/L" Name="10&lt;SUP&gt;9&lt;/SUP&gt;/L">
+                <Symbol>
+                    <TranslatedText>10&lt;SUP&gt;9&lt;/SUP&gt;/L</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_BOTTLE(S)" Name="BOTTLE(S)">
+                <Symbol>
+                    <TranslatedText>BOTTLE(S)</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_CELLS/MM3" Name="cells/MM3">
+                <Symbol>
+                    <TranslatedText>cells/MM3</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_CHILDREN" Name="CHILDREN">
+                <Symbol>
+                    <TranslatedText>CHILDREN</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_CM" Name="CM">
+                <Symbol>
+                    <TranslatedText>CM</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_COPIES/ML" Name="COPIES/ML">
+                <Symbol>
+                    <TranslatedText>COPIES/ML</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_DAYS" Name="DAYS">
+                <Symbol>
+                    <TranslatedText>DAYS</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_DAY(S)" Name="DAY(S)">
+                <Symbol>
+                    <TranslatedText>DAY(S)</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_G" Name="G">
+                <Symbol>
+                    <TranslatedText>G</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_G/DL" Name="G/DL">
+                <Symbol>
+                    <TranslatedText>G/DL</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_IF_DEATH,_HOSPITALISATION,_GRA17" Name="IF DEATH, HOSPITALISATION, GRADE III OR IV , FILL IN A SAE CRF">
+                <Symbol>
+                    <TranslatedText>IF DEATH, HOSPITALISATION, GRADE III OR IV , FILL IN A SAE CRF</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_IF_YES,_PLEASE_FILL_IN_A_IML/MML_CR" Name="IF YES, PLEASE FILL IN A IML/MML CRF">
+                <Symbol>
+                    <TranslatedText>IF YES, PLEASE FILL IN A IML/MML CRF</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_IN_T4_CELLS/&#924;L" Name="IN T4 CELLS/&#924;L">
+                <Symbol>
+                    <TranslatedText>IN T4 CELLS/&#924;L</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_KG" Name="KG">
+                <Symbol>
+                    <TranslatedText>KG</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_MG/DAY" Name="MG/DAY">
+                <Symbol>
+                    <TranslatedText>MG/DAY</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_MMOL/L" Name="MMOL/L">
+                <Symbol>
+                    <TranslatedText>MMOL/L</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_/MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="/mm&lt;sup&gt;3&lt;/sup&gt;">
+                <Symbol>
+                    <TranslatedText>/mm&lt;sup&gt;3&lt;/sup&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_MM&lt;SUP&gt;-3&lt;/SUP&gt;" Name="MM&lt;SUP&gt;-3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>MM&lt;SUP&gt;-3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="MM&lt;SUP&gt;3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_NB_OF_DAYS_TAKEN" Name="NB OF DAYS TAKEN">
+                <Symbol>
+                    <TranslatedText>NB OF DAYS TAKEN</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_NB_OF_WEEKS_TAKEN" Name="NB OF WEEKS TAKEN">
+                <Symbol>
+                    <TranslatedText>NB OF WEEKS TAKEN</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_PG" Name="PG">
+                <Symbol>
+                    <TranslatedText>PG</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_UI/L" Name="UI/L">
+                <Symbol>
+                    <TranslatedText>UI/L</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_U/L" Name="U/L">
+                <Symbol>
+                    <TranslatedText>U/L</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_WEEKS" Name="WEEKS">
+                <Symbol>
+                    <TranslatedText>WEEKS</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_YEARS" Name="YEARS">
+                <Symbol>
+                    <TranslatedText>YEARS</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_&#924;MOL/L" Name="&#924;MOL/L">
+                <Symbol>
+                    <TranslatedText>&#924;MOL/L</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_&#924;M&lt;SUP&gt;3&lt;/SUP&gt;" Name="&#181;m&lt;sup&gt;3&lt;/sup&gt;">
+                <Symbol>
+                    <TranslatedText>&#181;m&lt;sup&gt;3&lt;/sup&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+            <MeasurementUnit OID="MU_&#924;&lt;SUP&gt;3&lt;/SUP&gt;" Name="&#924;&lt;SUP&gt;3&lt;/SUP&gt;">
+                <Symbol>
+                    <TranslatedText>&#924;&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+        </BasicDefinitions>
+        <MetaDataVersion OID="v1.0.0" Name="MetaDataVersion_v1.0.0">
+            <Protocol>
+                <StudyEventRef StudyEventOID="SE_SC1" OrderNumber="1" Mandatory="Yes"/>
+                <StudyEventRef StudyEventOID="SE_SC2" OrderNumber="2" Mandatory="Yes"/>
+            </Protocol>
+            <StudyEventDef OID="SE_SC1"  Name="SC1" Repeating="No" Type="Scheduled">
+                <FormRef FormOID="F_MSA1_3" Mandatory="Yes"/>
+                <FormRef FormOID="F_MSA1_2" Mandatory="Yes"/>
+            </StudyEventDef>
+            <StudyEventDef OID="SE_SC2"  Name="SC2" Repeating="No" Type="Scheduled">
+                <FormRef FormOID="F_MSA2_2" Mandatory="Yes"/>
+                <FormRef FormOID="F_MSA2_1" Mandatory="Yes"/>
+            </StudyEventDef>
+            
+            <FormDef OID="F_MSA1_3" Name="MSA1: Mother Screening Assessment 1 - 3" Repeating="No">
+                <ItemGroupRef ItemGroupOID="IG_MSA1_UNGROUPED" Mandatory="Yes"/>
+                <ItemGroupRef ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" Mandatory="No"/>
+            </FormDef>
+            <FormDef OID="F_MSA1_2" Name="MSA1: Mother Screening Assessment 1 - 2" Repeating="No">
+                <ItemGroupRef ItemGroupOID="IG_MSA1_UNGROUPED" Mandatory="Yes"/>
+                <ItemGroupRef ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" Mandatory="No"/>
+            </FormDef>
+            <FormDef OID="F_MSA2_2" Name="MSA2: Mother Screening Assessment 2 - 2" Repeating="No">
+                <ItemGroupRef ItemGroupOID="IG_MSA2_UNGROUPED" Mandatory="Yes"/>
+                <ItemGroupRef ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" Mandatory="No"/>
+            </FormDef>
+            <FormDef OID="F_MSA2_1" Name="MSA2: Mother Screening Assessment 2 - 1" Repeating="No">
+                <ItemGroupRef ItemGroupOID="IG_MSA2_UNGROUPED" Mandatory="Yes"/>
+                <ItemGroupRef ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" Mandatory="No"/>
+            </FormDef>
+            
+      
+        
+            <ItemGroupDef OID="IG_MSA1_UNGROUPED" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO030">
+                <ItemRef ItemOID="I_MSA1_INIT" OrderNumber="1" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_FORMD" OrderNumber="2" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_CONS" OrderNumber="3" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_PGT" OrderNumber="4" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_BIRTHD" OrderNumber="5" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_OLD" OrderNumber="6" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_KHIV" OrderNumber="7" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_HAART" OrderNumber="8" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_ELHAART" OrderNumber="9" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_BEFPEP" OrderNumber="10" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_OTRIAL" OrderNumber="11" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_OTRIAL_S" OrderNumber="12" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_MOVE" OrderNumber="13" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_PMTCT" OrderNumber="14" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_COMPLY" OrderNumber="15" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_ELIG" OrderNumber="16" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_DELIVERY" OrderNumber="17" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_CONSELLING" OrderNumber="18" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_IDPAT" OrderNumber="19" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA1_ID" OrderNumber="20" Mandatory="Yes"/>
+            </ItemGroupDef>
+            <ItemGroupDef OID="IG_MSA1_MSA1_COMPLYREASG" Name="MSA1_complyreasG" Repeating="Yes" SASDatasetName="MSA1_COM">
+                <ItemRef ItemOID="I_MSA1_MSA1_COMPLYREAS" OrderNumber="1" Mandatory="No"/>
+            </ItemGroupDef>
+            <ItemGroupDef OID="IG_MSA2_UNGROUPED" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO031">
+                <ItemRef ItemOID="I_MSA2_INIT" OrderNumber="1" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_FROMD" OrderNumber="2" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_IDV" OrderNumber="3" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_INITBF" OrderNumber="4" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_INTBF" OrderNumber="5" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_HAART" OrderNumber="6" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_ELHAART" OrderNumber="7" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_PAZT" OrderNumber="8" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_PAZTNB" OrderNumber="9" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_POART" OrderNumber="10" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LNVPV" OrderNumber="11" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LAZTV" OrderNumber="12" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_L3TC" OrderNumber="13" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LOART" OrderNumber="14" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LOCATB" OrderNumber="15" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_OLOCATBPREC" OrderNumber="16" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_TRANSF" OrderNumber="17" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_TYPED" OrderNumber="18" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_PMTCTV" OrderNumber="19" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_PMTCT" OrderNumber="20" Mandatory="Yes"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LAZTNBV" OrderNumber="21" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_L3TCNB" OrderNumber="22" Mandatory="No"/>
+            </ItemGroupDef>
+            <ItemGroupDef OID="IG_MSA2_MSA2_POARTPRECG" Name="MSA2_POARTprecG" Repeating="Yes" SASDatasetName="MSA2_POA" Comment="Q3a2a_ If yes,">
+                <ItemRef ItemOID="I_MSA2_MSA2_POARTPREC" OrderNumber="1" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_POARTNBV" OrderNumber="2" Mandatory="No"/>
+            </ItemGroupDef>
+
+      
+            <ItemDef OID="I_MSA1_INIT" Name="Init" DataType="text" Length="7" SASFieldName="Init581" Comment="Researchers initials">
+                <Question>
+                    <TranslatedText>
+                    Fill in your initials (Given Name (G), Surname (S))
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_FORMD" Name="FormD" DataType="date" SASFieldName="FormD582" Comment="Date of form">
+                <Question>
+                    <TranslatedText>
+                    Date of form
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_CONS" Name="MSA1_cons" DataType="integer" Length="1" SASFieldName="MSA1_con" Comment="Informed consent for screening">
+                <Question>
+                    <TranslatedText>
+                    Inclusion/Exclusion criteria  - Has the woman understood/read and signed the informed consent for screening?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_PGT" Name="MSA1_pgt" DataType="integer" Length="1" SASFieldName="MSA1_pgt" Comment="Pregnancy">
+                <Question>
+                    <TranslatedText>
+                    Is she pregnant?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_BIRTHD" Name="MSA1_BirthD" DataType="date" SASFieldName="MSA1_Bir" Comment="M Birth date">
+                <Question>
+                    <TranslatedText>
+                    What is her birth date?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_OLD" Name="MSA1_old" DataType="integer" Length="10" SASFieldName="MSA1_old" Comment="Legal age">
+                <Question>
+                    <TranslatedText>
+                    If birth date not documented, how old is she?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_KHIV" Name="MSA1_KHIV" DataType="integer" Length="1" SASFieldName="MSA1_KHI" Comment="HIV status">
+                <Question>
+                    <TranslatedText>
+                    Is her HIV status documented from the antenatal clinic (or other centre)?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_HAART" Name="MSA1_HAART" DataType="integer" Length="1" SASFieldName="MSA1_HAA" Comment="Currently HAART">
+                <Question>
+                    <TranslatedText>
+                    Is she currently on HAART?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_ELHAART" Name="MSA1_elHAART" DataType="integer" Length="1" SASFieldName="MSA1_elH" Comment="Eligibility for HAART">
+                <Question>
+                    <TranslatedText>
+                    If not, is she eligible for HAART?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_BEFPEP" Name="MSA1_befPEP" DataType="integer" Length="1" SASFieldName="MSA1_bef" Comment="Promise PEP participation">
+                <Question>
+                    <TranslatedText>
+                    Has she participated in the Promise PEP study during a previous pregnancy?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_OTRIAL" Name="MSA1_Otrial" DataType="integer" Length="1" SASFieldName="MSA1_Otr" Comment="Participation to other trial">
+                <Question>
+                    <TranslatedText>
+                    Is she currently in any other trial ?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_OTRIAL_S" Name="MSA1_Otrial_S" DataType="integer" Length="1" SASFieldName="MSA1_583" Comment="End of participation to other trial">
+                <Question>
+                    <TranslatedText>
+                    If yes, will she still be participating in this trial one week after delivery?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_MOVE" Name="MSA1_move" DataType="integer" Length="1" SASFieldName="MSA1_mov" Comment="Remain in catchment area">
+                <Question>
+                    <TranslatedText>
+                    Does she intend to move out of the area of the study in the next year?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_PMTCT" Name="MSA1_PMTCT" DataType="integer" Length="1" SASFieldName="MSA1_PMT" Comment="PMTCT">
+                <Question>
+                    <TranslatedText>
+                    Is she included in a PMTCT program?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_COMPLY" Name="MSA1_comply" DataType="integer" Length="1" SASFieldName="MSA1_com" Comment="Comply with study procedures">
+                <Question>
+                    <TranslatedText>
+                    Is there anything that could prevent her from complying with study procedures? (probe according to SOP)
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_ELIG" Name="MSA1_elig" DataType="integer" Length="1" SASFieldName="MSA1_eli" Comment="Eligibility">
+                <Question>
+                    <TranslatedText>
+                    Based on the screening procedures and questions so far: Is the mother eligible for further participation
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_DELIVERY" Name="MSA1_delivery" DataType="text" Length="31" SASFieldName="MSA1_del" Comment="Site of planned delivery">
+                <Question>
+                    <TranslatedText>
+                    Mother related  - Where does she intend to deliver?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_CONSELLING" Name="MSA1_conselling" DataType="integer" Length="1" SASFieldName="MSA1_584" Comment="Accept counselling">
+                <Question>
+                    <TranslatedText>
+                    Is she willing to accept infant feeding option counselling from a designated research counsellor?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_203"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_IDPAT" Name="IDPAT" DataType="text" Length="12" SASFieldName="IDPAT" Comment="Patient ID">
+                <Question>
+                    <TranslatedText>
+                    Patient ID
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_COMPLYREAS" Name="MSA1_complyreas" DataType="text" Length="63" SASFieldName="MSA1_585" Comment="Reason for non compliance">
+                <Question>
+                    <TranslatedText>
+                    Q10a_ If yes, what could that be?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_NOELIGREAS" Name="MSA1_noeligreas" DataType="text" Length="41" SASFieldName="MSA1_noe" Comment="Reason why mother not eligible">
+                <Question>
+                    <TranslatedText>
+                    Q11a_ If not and reason not listed above, specify why she is not eligible
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_ID" Name="Id" DataType="integer" Length="10" SASFieldName="Id586" Comment="Patient ID">
+                <Question>
+                    <TranslatedText>
+                    Patient ID
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_INIT" Name="INIT" DataType="text" Length="7" SASFieldName="INIT587" Comment="Researchers initials">
+                <Question>
+                    <TranslatedText>
+                    Fill in your initials (Given Name (G), Surname (S))
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_FROMD" Name="FROMD" DataType="date" SASFieldName="FROMD588" Comment="Date of form">
+                <Question>
+                    <TranslatedText>
+                    Date of form
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_IDV" Name="IDV" DataType="text" Length="12" SASFieldName="IDV589" Comment="Patient ID">
+                <Question>
+                    <TranslatedText>
+                    Patient ID
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_INITBF" Name="MSA2_INITBF" DataType="integer" Length="1" SASFieldName="MSA2_INI" Comment="Initiation of breastfeeding">
+                <Question>
+                    <TranslatedText>
+                    Inclusion/Exclusion criteria  - Have you initiated breastfeeding?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_INTBF" Name="MSA2_INTBF" DataType="integer" Length="1" SASFieldName="MSA2_INT" Comment="Intention to breastfeed">
+                <Question>
+                    <TranslatedText>
+                    If not, do you intend to breastfeed your infant?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_398"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_HAART" Name="MSA2_HAART" DataType="integer" Length="1" SASFieldName="MSA2_HAA" Comment="Currently HAART">
+                <Question>
+                    <TranslatedText>
+                    Is the mother currently on HAART?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_ELHAART" Name="MSA2_ELHAART" DataType="integer" Length="1" SASFieldName="MSA2_ELH" Comment="Eligibility for HAART">
+                <Question>
+                    <TranslatedText>
+                    If not, is the mother eligible for HAART?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_PAZT" Name="MSA2_PAZT" DataType="integer" Length="1" SASFieldName="MSA2_PAZ" Comment="Azt during pregnancy">
+                <Question>
+                    <TranslatedText>
+                    If yes specify which regimen  - AZT
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_PAZTNB" Name="MSA2_PAZTNB" DataType="integer" Length="10" SASFieldName="MSA2_590" Comment="Number of weeks under AZT">
+                <Question>
+                    <TranslatedText>
+                    If yes, for how many weeks?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_POART" Name="MSA2_POART" DataType="integer" Length="1" SASFieldName="MSA2_591" Comment="Other ART during pregnancy">
+                <Question>
+                    <TranslatedText>
+                    Other ART
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LNVPV" Name="MSA2_LNVPV" DataType="integer" Length="1" SASFieldName="MSA2_LNV" Comment="Single- dose nevirapine">
+                <Question>
+                    <TranslatedText>
+                    Single-dose nevirapine
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LAZTV" Name="MSA2_LAZTV" DataType="integer" Length="1" SASFieldName="MSA2_LAZ" Comment="AZT">
+                <Question>
+                    <TranslatedText>
+                    AZT
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_L3TC" Name="MSA2_L3TC" DataType="integer" Length="1" SASFieldName="MSA2_L3T" Comment="3TC during labour">
+                <Question>
+                    <TranslatedText>
+                    3TC
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LOART" Name="MSA2_LOART" DataType="integer" Length="1" SASFieldName="MSA2_LOA" Comment="Other ART during labour">
+                <Question>
+                    <TranslatedText>
+                    Other ART
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LOCATB" Name="MSA2_LOCATB" DataType="integer" Length="1" SASFieldName="MSA2_LOC" Comment="Place of birth">
+                <Question>
+                    <TranslatedText>
+                    Mother delivery  - Where did you give birth to your baby?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_401"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_OLOCATBPREC" Name="MSA2_OLOCATBPREC" DataType="text" Length="200" SASFieldName="MSA2_OLO" Comment="Other place of birth">
+                <Question>
+                    <TranslatedText>
+                    If other, specify
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_TRANSF" Name="MSA2_TRANSF" DataType="integer" Length="1" SASFieldName="MSA2_TRA" Comment="Blood transfusion">
+                <Question>
+                    <TranslatedText>
+                    Did you receive a blood transfusion?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_TYPED" Name="MSA2_TYPED" DataType="integer" Length="1" SASFieldName="MSA2_TYP" Comment="Type of delivery">
+                <Question>
+                    <TranslatedText>
+                    What kind of delivery did you have with this baby?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_402"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_PMTCTV" Name="MSA2_PMTCTV" DataType="integer" Length="1" SASFieldName="MSA2_PMT" Comment="PMTCT during pregnancy and labour">
+                <Question>
+                    <TranslatedText>
+                    Has the mother received any ART during pregnancy OR labour?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_397"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_POARTPREC" Name="MSA2_POARTPREC" DataType="text" Length="200" SASFieldName="MSA2_592" Comment="Other ART regimen specify">
+                <Question>
+                    <TranslatedText>
+                    Drug  - Drug
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_POARTNBV" Name="MSA2_POARTNBV" DataType="integer" Length="10" SASFieldName="MSA2_593" Comment="Number of weeks under other ART">
+                <Question>
+                    <TranslatedText>
+                    For how many weeks?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LOARTPREC" Name="MSA2_LOARTPREC" DataType="text" Length="7" SASFieldName="MSA2_594" Comment="Other ART regimen during labour">
+                <Question>
+                    <TranslatedText>
+                    Drug  - Drug
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_PMTCT" Name="MSA2_PMTCT" DataType="integer" Length="1" SASFieldName="MSA2_595" Comment="PMTCT during pregnancy and labour">
+                <Question>
+                    <TranslatedText>
+                    Has the mother received any ART during pregnancy and labour?
+                    </TranslatedText>
+                </Question>
+                <CodeListRef CodeListOID="CL_129"/>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LAZTNBV" Name="MSA2_LAZTNBV" DataType="integer" Length="10" SASFieldName="MSA2_596" Comment="If yes, for how many days?">
+                <Question>
+                    <TranslatedText>
+                    If yes, for how many days?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_L3TCNB" Name="MSA2_L3TCNB" DataType="integer" Length="10" SASFieldName="MSA2_597" Comment="Number of days on 3TC during labour">
+                <Question>
+                    <TranslatedText>
+                    If yes, for how many days?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="I_MSA2_MSA2_LOARTNB" Name="MSA2_LOARTNB" DataType="integer" Length="10" SASFieldName="MSA2_598" Comment="Number of days on other ART during labour">
+                <Question>
+                    <TranslatedText>
+                    For how many days?
+                    </TranslatedText>
+                </Question>
+            </ItemDef>
+            
+            
+            <CodeList OID="CL_372" Name="basis" DataType="integer" SASFormatName="BASIS">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Abnormal lab result</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Clinical assessment</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Both</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_374" Name="diag" DataType="integer" SASFormatName="DIAG">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_375" Name="NY" DataType="integer" SASFormatName="NY">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_380" Name="Ftt" DataType="integer" SASFormatName="FTT">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Partially</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_381" Name="fstatus" DataType="integer" SASFormatName="FSTATUS">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Resolved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>SAE declaration</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Stable at the end of study follow-up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_377" Name="status" DataType="integer" SASFormatName="STATUS">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Similar</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Deteriorated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Hospitalisation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Death</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_378" Name="grade" DataType="integer" SASFormatName="GRADE">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_274" Name="basis" DataType="integer" SASFormatName="BASIS01X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Abnormal lab result</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Clinical assessment</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Both</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_276" Name="diag" DataType="integer" SASFormatName="DIAG02X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_277" Name="NY" DataType="integer" SASFormatName="NY03X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_282" Name="fstatus" DataType="integer" SASFormatName="FSTAT04X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Resolved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>SAE declaration</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Stable at the end of study follow-up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_279" Name="status" DataType="integer" SASFormatName="STATU05X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Similar</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Deteriorated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Hospitalisation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Death</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_280" Name="grade" DataType="integer" SASFormatName="GRADE06X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_2" Name="basis" DataType="integer" SASFormatName="BASIS07X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Abnormal lab result</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Clinical assessment</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Both</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_4" Name="diag" DataType="integer" SASFormatName="DIAG08X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_5" Name="NY" DataType="integer" SASFormatName="NY09X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_10" Name="fstatus" DataType="integer" SASFormatName="FSTAT10X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Resolved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>SAE declaration</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Stable at the end of study follow-up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_7" Name="status" DataType="integer" SASFormatName="STATU11X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Similar</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Deteriorated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Hospitalisation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Death</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_8" Name="grade" DataType="integer" SASFormatName="GRADE12X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_265" Name="NY" DataType="integer" SASFormatName="NY13X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_267" Name="reas" DataType="integer" SASFormatName="REAS">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Mother too sick /weak</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Infant too sick / weak</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Not enough breast milk</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Infant sores in mouth or trush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Milk not strong enough</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Infant had difficulty in latching</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>Breast or nipple problems</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>Infant had breathing difficulties</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Gone / going back to work</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="10">
+                    <Decode>
+                        <TranslatedText>Infant was breastfeeding too often</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="11">
+                    <Decode>
+                        <TranslatedText>Gone / going back to school</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="12">
+                    <Decode>
+                        <TranslatedText>Infant was crying too much</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="13">
+                    <Decode>
+                        <TranslatedText>Advice / pressure from family / partner</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="14">
+                    <Decode>
+                        <TranslatedText>To comfort infant</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="15">
+                    <Decode>
+                        <TranslatedText>Advice / pressure from friends / others</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="16">
+                    <Decode>
+                        <TranslatedText>To help infant grow</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="17">
+                    <Decode>
+                        <TranslatedText>Advice / pressure from HCW / TH</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="18">
+                    <Decode>
+                        <TranslatedText>Separated from infant</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="19">
+                    <Decode>
+                        <TranslatedText>Want to initiate weaning</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="20">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_268" Name="NYD" DataType="integer" SASFormatName="NYD">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Don&apos;t know</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_270" Name="days" DataType="integer" SASFormatName="DAYS">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>1 day</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2 days</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>3 days</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>More than 3 days</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>Don&apos;t know</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_271" Name="logtime" DataType="integer" SASFormatName="LOGTIME">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Never</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>&lt;=12h</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>12-24h</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>More than 24h</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_14" Name="NY" DataType="integer" SASFormatName="NY14X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_16" Name="reas" DataType="integer" SASFormatName="REAS15X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Mother too sick /weak</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Infant too sick / weak</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Not enough breast milk</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Infant sores in mouth or trush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Milk not strong enough</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Infant had difficulty in latching</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>Breast or nipple problems</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>Infant had breathing difficulties</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Gone / going back to work</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="10">
+                    <Decode>
+                        <TranslatedText>Infant was breastfeeding too often</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="11">
+                    <Decode>
+                        <TranslatedText>Gone / going back to school</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="12">
+                    <Decode>
+                        <TranslatedText>Infant was crying too much</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="13">
+                    <Decode>
+                        <TranslatedText>Advice / pressure from family / partner</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="14">
+                    <Decode>
+                        <TranslatedText>To comfort infant</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="15">
+                    <Decode>
+                        <TranslatedText>Advice / pressure from friends / others</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="16">
+                    <Decode>
+                        <TranslatedText>To help infant grow</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="17">
+                    <Decode>
+                        <TranslatedText>Advice / pressure from HCW / TH</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="18">
+                    <Decode>
+                        <TranslatedText>Separated from infant</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="19">
+                    <Decode>
+                        <TranslatedText>Want to initiate weaning</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="20">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_17" Name="NYD" DataType="integer" SASFormatName="NYD16X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Don&apos;t know</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_19" Name="days" DataType="integer" SASFormatName="DAYS17X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>1 day</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2 days</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>3 days</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>More than 3 days</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>Don&apos;t know</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_20" Name="logtime" DataType="integer" SASFormatName="LOGTI18X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Never</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>12h</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>24h</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>More</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_259" Name="NY" DataType="integer" SASFormatName="NY19X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_23" Name="NY" DataType="integer" SASFormatName="NY20X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_236" Name="NY" DataType="integer" SASFormatName="NY21X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_29" Name="NY" DataType="integer" SASFormatName="NY22X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_406" Name="NY" DataType="integer" SASFormatName="NY23X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_407" Name="care" DataType="integer" SASFormatName="CARE">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Done</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Organised during this visit</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Organised later</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Refuse by the mother / father</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Not relevant (baby HIV negative)</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_409" Name="gender" DataType="integer" SASFormatName="GENDER">
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Boy</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Girl</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_410" Name="feedr" DataType="integer" SASFormatName="FEEDR">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Infant perceived unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Mother unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Infant and mother unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_411" Name="time" DataType="integer" SASFormatName="TIME">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>0-1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2-5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>6-12</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>13-23</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_412" Name="day" DataType="integer" SASFormatName="DAY">
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>3</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>4</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>6</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>7</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>8</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>9</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_303" Name="NY" DataType="integer" SASFormatName="NY24X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_306" Name="list" DataType="integer" SASFormatName="LIST">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Above 350</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Below 350</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_307" Name="am" DataType="text" SASFormatName="$AM">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>AM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>PM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_308" Name="gender" DataType="integer" SASFormatName="GENDE25X">
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Boy</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Girl</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_309" Name="feedr" DataType="integer" SASFormatName="FEEDR26X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Infant perceived unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Mother unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Infant and mother unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_310" Name="time" DataType="integer" SASFormatName="TIME27X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>0-1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2-5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>6-12</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>13-23</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_311" Name="day" DataType="integer" SASFormatName="DAY28X">
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>3</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>4</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>6</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>7</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>8</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>9</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_304" Name="care" DataType="integer" SASFormatName="CARE29X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Done</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Organised during this visit</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Organised later</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Refuse by the mother / father</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Not relevant (baby HIV negative)</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_34" Name="NY" DataType="integer" SASFormatName="NY30X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_35" Name="care" DataType="integer" SASFormatName="CARE31X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Done</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Organised during this visit</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Organised later</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Refuse by the mother / father</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_37" Name="list" DataType="integer" SASFormatName="LIST32X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Above 350</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Below 350</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_38" Name="am" DataType="text" SASFormatName="$AM33X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>AM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>PM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_39" Name="gender" DataType="integer" SASFormatName="GENDE34X">
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Boy</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Girl</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_40" Name="feedr" DataType="integer" SASFormatName="FEEDR35X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Infant perceived unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Mother unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Infant and mother unwell</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_41" Name="time" DataType="integer" SASFormatName="TIME36X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>0-1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2-5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>6-12</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>13-23</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_42" Name="day" DataType="integer" SASFormatName="DAY37X">
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>3</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>4</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>6</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>7</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>8</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>9</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_46" Name="NY" DataType="integer" SASFormatName="NY38X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_298" Name="YN" DataType="integer" SASFormatName="YN">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_300" Name="PNU" DataType="float" SASFormatName="PNU">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Pos</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Neg</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_301" Name="ROCHE" DataType="float" SASFormatName="ROCHE">
+                <CodeListItem CodedValue="99">
+                    <Decode>
+                        <TranslatedText>NA</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>NEG</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>POS</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>UND</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_251" Name="YN" DataType="integer" SASFormatName="YN39X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_253" Name="PNU" DataType="float" SASFormatName="PNU40X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Pos</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Neg</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_254" Name="ROCHE" DataType="float" SASFormatName="ROCHE41X">
+                <CodeListItem CodedValue="99">
+                    <Decode>
+                        <TranslatedText>NA</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>NEG</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>POS</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>UND</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_243" Name="YN" DataType="integer" SASFormatName="YN42X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_245" Name="PNU" DataType="float" SASFormatName="PNU43X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Pos</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Neg</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_246" Name="ROCHE" DataType="float" SASFormatName="ROCHE44X">
+                <CodeListItem CodedValue="99">
+                    <Decode>
+                        <TranslatedText>NA</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>NEG</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>POS</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>UND</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_48" Name="YN" DataType="integer" SASFormatName="YN45X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_50" Name="PNU" DataType="integer" SASFormatName="PNU46X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Pos</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Neg</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_51" Name="ROCHE" DataType="integer" SASFormatName="ROCHE47X">
+                <CodeListItem CodedValue="99">
+                    <Decode>
+                        <TranslatedText>NA</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>NEG</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>POS</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>UND</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_54" Name="NY" DataType="integer" SASFormatName="NY48X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_404" Name="NY" DataType="integer" SASFormatName="NY49X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_296" Name="NY" DataType="integer" SASFormatName="NY50X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_56" Name="NY" DataType="integer" SASFormatName="NY51X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_285" Name="NY" DataType="integer" SASFormatName="NY52X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_286" Name="ReasonMissed" DataType="integer" SASFormatName="REASONMI">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>forgot</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>sickness</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>mother away from baby</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>lack of drug</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_287" Name="SwallowDrug" DataType="integer" SASFormatName="SWALLOWD">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Not difficult</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>A bit difficult</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Very difficult</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_288" Name="NegativeEffects" DataType="integer" SASFormatName="NEGATIVE">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_290" Name="NYP" DataType="integer" SASFormatName="NYP">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Perhaps</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_292" Name="AMPM" DataType="integer" SASFormatName="AMPM">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>AM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>PM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_293" Name="Last3Reason" DataType="integer" SASFormatName="LAST3REA">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Mother forgot</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Mother was sick</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Family had visitors</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Lost trial drug</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Breastfeeding discontinued</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Requested to stop by researcher</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>Mother/infant away from home</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>Infant was ill</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Afraid side effects</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="10">
+                    <Decode>
+                        <TranslatedText>Mother request not to continue</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="11">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_294" Name="doseage" DataType="integer" SASFormatName="DOSEAGE">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>0.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>0.75</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>2.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_291" Name="Quant" DataType="integer" SASFormatName="QUANT">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Full</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Almost full</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Half full</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Almost empty</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Empty</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_59" Name="NY" DataType="integer" SASFormatName="NY53X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_61" Name="ReasonMissed" DataType="integer" SASFormatName="REASO54X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>forgot</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>sickness</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>mother away from baby</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>lack of drug</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_62" Name="SwallowDrug" DataType="integer" SASFormatName="SWALL55X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Not difficult</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>A bit difficult</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Very difficult</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_63" Name="NegativeEffects" DataType="integer" SASFormatName="NEGAT56X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_65" Name="NYP" DataType="integer" SASFormatName="NYP57X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Perhaps</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_68" Name="AMPM" DataType="integer" SASFormatName="AMPM58X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>AM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>PM</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_69" Name="Last3Reason" DataType="integer" SASFormatName="LAST359X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Mother forgot</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Mother was sick</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Family had visitors</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Lost trial drug</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Breastfeeding discontinued</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Requested to stop by researcher</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>Mother/infant away from home</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>Infant was ill</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Afraid side effects</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="10">
+                    <Decode>
+                        <TranslatedText>Mother request not to continue</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="11">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_70" Name="doseage" DataType="integer" SASFormatName="DOSEA60X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>1.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>0.75</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>2.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_67" Name="Quant" DataType="integer" SASFormatName="QUANT61X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Full</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Almost full</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Half full</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Almost empty</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Empty</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_415" Name="list" DataType="integer" SASFormatName="LIST62X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Above 350</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Below 350</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_416" Name="dose" DataType="integer" SASFormatName="DOSE">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>0.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>0.75</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>2.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_73" Name="dose" DataType="integer" SASFormatName="DOSE63X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>0.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>0.75</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>2.5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>5</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_75" Name="NY" DataType="integer" SASFormatName="NY64X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_79" Name="location" DataType="integer" SASFormatName="LOCATION">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Right</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Left</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Both</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_80" Name="diagnosis" DataType="integer" SASFormatName="DIAGNOSI">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Full breasts</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Breast abscess</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Nipple thrush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Engorged breasts</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Cracked nipple</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Mastitis</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>Nipple eczema</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_81" Name="grade" DataType="integer" SASFormatName="GRADE65X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_83" Name="status" DataType="integer" SASFormatName="STATU66X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Similar</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Deteriorated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Hospitalisation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_84" Name="status2" DataType="integer" SASFormatName="STATUS2X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Resolved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>SAE declaration</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>stable at the end of study follow-up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_86" Name="NY" DataType="integer" SASFormatName="NY67X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_89" Name="location" DataType="integer" SASFormatName="LOCAT68X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Right</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Left</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Both</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_90" Name="diagnosis" DataType="integer" SASFormatName="DIAGN69X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Full breasts</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Breast abscess</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Nipple thrush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Engorged breasts</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Cracked nipple</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Mastitis</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="7">
+                    <Decode>
+                        <TranslatedText>Nipple eczema</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_91" Name="grade" DataType="integer" SASFormatName="GRADE70X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_93" Name="status" DataType="integer" SASFormatName="STATU71X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Similar</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Deteriorated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Hospitalisation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_94" Name="status2" DataType="integer" SASFormatName="STATU72X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Resolved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>SAE declaration</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>stable at the end of study follow-up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_206" Name="NY" DataType="integer" SASFormatName="NY73X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_213" Name="level" DataType="integer" SASFormatName="LEVEL">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>primary</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>end of primary</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>secondary</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>end of secondary or more</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_214" Name="status" DataType="integer" SASFormatName="STATU74X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Married/Co-habiting</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Single</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Divorced/Separated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Widowed</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_215" Name="work" DataType="integer" SASFormatName="WORK">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Working</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Not working</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Studying</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_218" Name="toilet" DataType="integer" SASFormatName="TOILET">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>None/bush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Bucket</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Pit latrine</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Flush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_96" Name="NY" DataType="integer" SASFormatName="NY75X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_103" Name="level" DataType="integer" SASFormatName="LEVEL76X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>primary</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>end of primary</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>secondary</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>end of secondary or more</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_104" Name="status" DataType="integer" SASFormatName="STATU77X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Married/Co-habiting</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Single</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Divorced/Separated</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Widowed</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_105" Name="work" DataType="integer" SASFormatName="WORK78X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Working</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Not working</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Studying</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_108" Name="toilet" DataType="integer" SASFormatName="TOILE79X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>None/bush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Bucket</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Pit latrine</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Flush</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_234" Name="stage" DataType="integer" SASFormatName="STAGE">
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No staging possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Stage I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Stage II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Stage III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Stage IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_113" Name="stage" DataType="integer" SASFormatName="STAGE80X">
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No staging possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Stage I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Stage II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Stage III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Stage IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_256" Name="NY" DataType="integer" SASFormatName="NY81X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_257" Name="result" DataType="float" SASFormatName="RESULT">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Negative</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>HIV 1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>HIV 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>HIV 1 + 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_248" Name="NY" DataType="integer" SASFormatName="NY82X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_249" Name="result" DataType="float" SASFormatName="RESUL83X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Negative</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>HIV 1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>HIV 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>HIV 1 + 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_231" Name="NY" DataType="integer" SASFormatName="NY84X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_232" Name="result" DataType="float" SASFormatName="RESUL85X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Negative</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>HIV 1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>HIV 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>HIV 1 + 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_115" Name="NY" DataType="integer" SASFormatName="NY86X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_116" Name="result" DataType="integer" SASFormatName="RESUL87X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Negative</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>HIV 1</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>HIV 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>HIV 1 + 2</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="9">
+                    <Decode>
+                        <TranslatedText>Undetermined</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_223" Name="NY" DataType="integer" SASFormatName="NY88X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_227" Name="medicine" DataType="integer" SASFormatName="MEDICINE">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Ingested products</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Inhalation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Skin contact products</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_118" Name="NY" DataType="integer" SASFormatName="NY89X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_122" Name="medicine" DataType="integer" SASFormatName="MEDIC90X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Ingested products</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Inhalation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Skin contact products</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_203" Name="NY" DataType="integer" SASFormatName="NY91X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_153" Name="NY" DataType="integer" SASFormatName="NY92X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_126" Name="NY" DataType="integer" SASFormatName="NY93X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_397" Name="NY" DataType="integer" SASFormatName="NY94X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_398" Name="unsure" DataType="integer" SASFormatName="UNSURE">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Unsure</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_401" Name="birth" DataType="integer" SASFormatName="BIRTH">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Health care centre</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Home assisted</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Home non assisted</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_402" Name="delivery" DataType="integer" SASFormatName="DELIVERY">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Vaginal</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Vacuum</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Forceps</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Elective-caesarean section</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Emergency caesarean section</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_129" Name="NY" DataType="integer" SASFormatName="NY95X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_130" Name="unsure" DataType="integer" SASFormatName="UNSUR96X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Unsure</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_133" Name="birth" DataType="integer" SASFormatName="BIRTH97X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Health care centre</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Home assisted</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Home non assisted</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_134" Name="delivery" DataType="integer" SASFormatName="DELIV98X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Vaginal</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Vacuum</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Forceps</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Elective-caesarean section</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="5">
+                    <Decode>
+                        <TranslatedText>Emergency caesarean section</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="6">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_384" Name="NY" DataType="integer" SASFormatName="NY99X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_389" Name="caus" DataType="integer" SASFormatName="CAUS">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Not related</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Possibly related</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Cannot be assessed</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_393" Name="ftt" DataType="integer" SASFormatName="FTT01X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Partially</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_394" Name="fstatus" DataType="integer" SASFormatName="FSTAT02X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Recovery without sequelae</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Recovery with sequelae</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Death</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Ongoing at the end of the study</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_387" Name="grade" DataType="integer" SASFormatName="GRADE03X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_390" Name="status" DataType="integer" SASFormatName="STATU04X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Unknown</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Ongoing to date</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_392" Name="NYN" DataType="integer" SASFormatName="NYN">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Not applicable</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_136" Name="NY" DataType="integer" SASFormatName="NY05X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_141" Name="caus" DataType="integer" SASFormatName="CAUS06X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>Not related</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Possibly related</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Cannot be assessed</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_145" Name="fstatus" DataType="integer" SASFormatName="FSTAT07X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Recovery without sequelae</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Recovery with sequelae</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Death</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Ongoing at the end of the study</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_139" Name="grade" DataType="integer" SASFormatName="GRADE08X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Grade I</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Grade II</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Grade III</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Grade IV</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="8">
+                    <Decode>
+                        <TranslatedText>No grading possible</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_142" Name="status" DataType="integer" SASFormatName="STATU09X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Unknown</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Ongoing to date</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Improved</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_144" Name="NYN" DataType="integer" SASFormatName="NYN10X">
+                <CodeListItem CodedValue="0">
+                    <Decode>
+                        <TranslatedText>No</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Yes</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Not applicable</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_148" Name="status" DataType="integer" SASFormatName="STATU12X">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Not enroled</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Discontinued follow-up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Lost to follow up</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Completed study</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+            <CodeList OID="CL_151" Name="spec" DataType="integer" SASFormatName="SPEC">
+                <CodeListItem CodedValue="1">
+                    <Decode>
+                        <TranslatedText>Patient withdrawal</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="2">
+                    <Decode>
+                        <TranslatedText>Protocol violation</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="3">
+                    <Decode>
+                        <TranslatedText>Physician decision</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+                <CodeListItem CodedValue="4">
+                    <Decode>
+                        <TranslatedText>Other</TranslatedText>
+                    </Decode>
+                </CodeListItem>
+            </CodeList>
+        </MetaDataVersion>
+    </Study>
+    <ClinicalData StudyOID="S_12175" MetaDataVersionOID="v1.0.0">
+        <SubjectData SubjectKey="SS_3C0006S">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2010-03-15"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3C000LM">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_1">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-05-02"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3C000LM"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CSAC_1">
+                    <ItemGroupData ItemGroupOID="IG_CSAC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CSAC_FORMD" Value="2010-05-02"/>
+                        <ItemData ItemOID="I_CSAC_ID" Value="3C000LM"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3C0052A">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_2">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-03-23"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M0052A"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CLLC_4">
+                    <ItemGroupData ItemGroupOID="IG_CLLC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CLLC_FORMD" Value="2010-03-23"/>
+                        <ItemData ItemOID="I_CLLC_ID" Value="3C0052A"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CSAC_3">
+                    <ItemGroupData ItemGroupOID="IG_CSAC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CSAC_FORMD" Value="2010-03-23"/>
+                        <ItemData ItemOID="I_CSAC_ID" Value="3C0052A"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3COO50M">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_CLLC_4">
+                    <ItemGroupData ItemGroupOID="IG_CLLC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CLLC_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_CLLC_ID" Value="3C0050M"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CSAC_3">
+                    <ItemGroupData ItemGroupOID="IG_CSAC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CSAC_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_CSAC_ID" Value="3C0050M"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M00022F">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-04-07"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0022F"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0003T">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2010-03-19"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-03-19"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0003T"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MHIV_2">
+                    <ItemGroupData ItemGroupOID="IG_MHIV_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MHIV_FORMD" Value="2010-03-19"/>
+                        <ItemData ItemOID="I_MHIV_ID" Value="3M0003T"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0003Z">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2010-03-05"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-01-12"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0003Z"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MHIV_2">
+                    <ItemGroupData ItemGroupOID="IG_MHIV_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MHIV_FORMD" Value="2010-01-12"/>
+                        <ItemData ItemOID="I_MHIV_ID" Value="3M0003Z"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0004F">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2010-02-08"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-01-08"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0004F"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MHIV_2">
+                    <ItemGroupData ItemGroupOID="IG_MHIV_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MHIV_FORMD" Value="2010-01-08"/>
+                        <ItemData ItemOID="I_MHIV_ID" Value="3M0004F"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_1">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-04-13"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M0004F"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0005L">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2010-03-26"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-03-26"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0005L"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MHIV_2">
+                    <ItemGroupData ItemGroupOID="IG_MHIV_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MHIV_FORMD" Value="2010-03-26"/>
+                        <ItemData ItemOID="I_MHIV_ID" Value="3M0005L"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_1">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-03-26"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M0005L"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-03-26"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0005L"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0016S">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-02-22"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0016S"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0020P">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-03-19"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M0020P"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0050M">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_2">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M0050M"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0051T">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_2">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M0051T"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CLLC_4">
+                    <ItemGroupData ItemGroupOID="IG_CLLC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CLLC_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_CLLC_ID" Value="3C0051T"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CSAC_3">
+                    <ItemGroupData ItemGroupOID="IG_CSAC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CSAC_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_CSAC_ID" Value="3C051T"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M0082T">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_2">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M0082T"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CLLC_4">
+                    <ItemGroupData ItemGroupOID="IG_CLLC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CLLC_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_CLLC_ID" Value="3C0082T"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CSAC_3">
+                    <ItemGroupData ItemGroupOID="IG_CSAC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CSAC_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_CSAC_ID" Value="3C0082T"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2010-04-08"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3C0082T"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M1234A">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2011-02-28"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2011-02-28"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="3M1234A"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MHIV_2">
+                    <ItemGroupData ItemGroupOID="IG_MHIV_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MHIV_FORMD" Value="2011-02-28"/>
+                        <ItemData ItemOID="I_MHIV_ID" Value="3M1234A"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M1235D">
+            <StudyEventData StudyEventOID="SE_SC2">
+                <FormData FormOID="F_MSA2_2">
+                    <ItemGroupData ItemGroupOID="IG_MSA2_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA2_FROMD" Value="2011-02-10"/>
+                        <ItemData ItemOID="I_MSA2_IDV" Value="3M1235D"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CLLC_4">
+                    <ItemGroupData ItemGroupOID="IG_CLLC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CLLC_FORMD" Value="2011-02-02"/>
+                        <ItemData ItemOID="I_CLLC_ID" Value="3C1235D"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_CSAC_3">
+                    <ItemGroupData ItemGroupOID="IG_CSAC_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_CSAC_FORMD" Value="2011-02-02"/>
+                        <ItemData ItemOID="I_CSAC_ID" Value="3C1235D"/>
+                    </ItemGroupData>
+                </FormData>
+                <FormData FormOID="F_MLLM_3">
+                    <ItemGroupData ItemGroupOID="IG_MLLM_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MLLM_FORMD" Value="2011-02-02"/>
+                        <ItemData ItemOID="I_MLLM_ID" Value="M1235D"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+        <SubjectData SubjectKey="SS_3M4651E">
+            <StudyEventData StudyEventOID="SE_SC1">
+                <FormData FormOID="F_MSA1_3">
+                    <ItemGroupData ItemGroupOID="IG_MSA1_UNGROUPED" TransactionType="Insert">
+                        <ItemData ItemOID="I_MSA1_FORMD" Value="2011-02-26"/>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+    </ClinicalData>
+</ODM>
