@@ -41,16 +41,15 @@
 			</xsl:attribute>
 			<xsl:for-each select="oc:FormDef">
 				<xform>
-				<xsl:variable name="xform">
-				
-					<xsl:call-template name="createForm"/>
+					<xsl:variable name="xform">
 
-				</xsl:variable>
+						<xsl:call-template name="createForm" />
 
-				<xsl:copy-of select="$xform" />
-			</xform>
+					</xsl:variable>
+					<xsl:copy-of select="$xform" />
+				</xform>
 			</xsl:for-each>
-			
+
 		</version>
 	</xsl:template>
 
@@ -88,32 +87,37 @@
 						</ClinicalData>
 					</ODM>
 				</xf:instance>
-			
-			<xsl:call-template name="createBinds"/>
-			
+
+				<xsl:call-template name="createBinds" />
+
 			</xf:model>
 			<xsl:for-each select="oc:ItemGroupRef">
-				<xsl:call-template name="createGroup" >
+				<xsl:call-template name="createGroup">
 				</xsl:call-template>
 			</xsl:for-each>
 		</xf:xforms>
 
 	</xsl:template>
-	
+
 	<xsl:template name="createBinds">
-		
+
 	</xsl:template>
 
 	<xsl:template name="createGroup">
 		<group>
 			<xsl:attribute name="id"><xsl:value-of select="position()"></xsl:value-of></xsl:attribute>
-			
-			<xsl:variable name="groupId"><xsl:value-of select="@ItemGroupOID"/></xsl:variable>
+
+			<xsl:variable name="groupId">
+				<xsl:value-of select="@ItemGroupOID" />
+			</xsl:variable>
 			<xsl:for-each select="//oc:ItemGroupDef[@OID = $groupId]/oc:ItemRef">
-				<xsl:variable name="itemId"><xsl:value-of select="@ItemOID"/></xsl:variable>
+				<xsl:variable name="itemId">
+					<xsl:value-of select="@ItemOID" />
+				</xsl:variable>
 				<xsl:for-each select="//oc:ItemDef[@OID = $itemId]">
 					<item>
-						<xsl:attribute name="name"><xsl:value-of select="@Name"/></xsl:attribute>
+						<xsl:attribute name="name"><xsl:value-of
+							select="@Name" /></xsl:attribute>
 					</item>
 				</xsl:for-each>
 			</xsl:for-each>
