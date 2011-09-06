@@ -13,7 +13,9 @@
 				<xsl:value-of select="//oc:StudyName"></xsl:value-of>
 			</xsl:attribute>
 			<xsl:attribute name="studyKey"> <xsl:value-of select="//oc:Study/@OID" /></xsl:attribute>
+
 			<xsl:apply-templates select="oc:ODM/oc:Study" />
+
 		</study>
 	</xsl:template>
 
@@ -27,7 +29,9 @@
 				<xsl:value-of
 				select="normalize-space(oc:MetaDataVersion/oc:FormDef/@Name)"></xsl:value-of>
 			</xsl:attribute>
+
 			<xsl:apply-templates select="oc:MetaDataVersion" />
+
 		</form>
 	</xsl:template>
 
@@ -92,15 +96,19 @@
 
 			</xf:model>
 			<xsl:for-each select="oc:ItemGroupRef">
-				<xsl:call-template name="createGroup">
-				</xsl:call-template>
+				<xsl:call-template name="createGroup" />
 			</xsl:for-each>
 		</xf:xforms>
 
 	</xsl:template>
 
 	<xsl:template name="createBinds">
-
+		<xsl:for-each select="..//oc:ItemDef">
+			<bind>
+				<xsl:attribute name="id"><xsl:value-of select="@OID"/></xsl:attribute>
+				<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData[@ItemOID='<xsl:value-of select="@OID"/>']/@Value</xsl:attribute>
+			</bind>
+		</xsl:for-each>
 	</xsl:template>
 
 	<xsl:template name="createGroup">
@@ -115,10 +123,70 @@
 					<xsl:value-of select="@ItemOID" />
 				</xsl:variable>
 				<xsl:for-each select="//oc:ItemDef[@OID = $itemId]">
-					<item>
+					
+					<xsl:choose>
+						<xsl:when test="oc:CodeListRef">
+							<select1>
+							<xsl:variable name="codeListID"><xsl:value-of select="oc:CodeListRef/@CodeListOID"/></xsl:variable>
+							<label>
+								<xsl:value-of select="normalize-space(oc:Question/oc:TranslatedText)"></xsl:value-of>
+							</label>
+							<xsl:for-each select="//oc:CodeList[@OID = $codeListID]/oc:CodeListItem">
+								<item>
+									<xsl:attribute name="id"><xsl:value-of select="@CodedValue"/></xsl:attribute>
+									<label>
+										<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
+									</label>
+									<value>
+										<xsl:value-of select="@CodedValue"></xsl:value-of>
+									</value>
+								</item>
+							</xsl:for-each>
+							</select1>
+						</xsl:when>
+						<xsl:otherwise>
+						
+							<input>
 						<xsl:attribute name="name"><xsl:value-of
 							select="@Name" /></xsl:attribute>
-					</item>
+
+						<xsl:choose>
+							<xsl:when test="@DataType = 'integer'">
+								<xsl:attribute name="type">xsd:int</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'float'">
+								<xsl:attribute name="type">xsd:decimal</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'date'">
+								<xsl:attribute name="type">xsd:date</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'time'">
+								<xsl:attribute name="type">xsd:time</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'datetime'">
+								<xsl:attribute name="type">xsd:dateTime</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'boolean'">
+								<xsl:attribute name="type">xsd:boolean</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'double'">
+								<xsl:attribute name="type">xsd:decimal</xsl:attribute>
+							</xsl:when>
+							<xsl:when test="@DataType = 'base64Binary'">
+								<xsl:attribute name="type">xsd:base64Binary</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:attribute name="type">xsd:string</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
+						<label>
+							<xsl:value-of select="normalize-space(oc:Question/oc:TranslatedText)"></xsl:value-of>
+						</label>
+					</input>
+						
+						</xsl:otherwise>
+					</xsl:choose>
+					
 				</xsl:for-each>
 			</xsl:for-each>
 		</group>
