@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:oc="http://www.cdisc.org/ns/odm/v1.3"
-	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1">
+	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1" xmlns:xf="http://www.w3.org/2002/xforms">
 	<xsl:output method="xml" />
 
 	<xsl:template match="/">
@@ -104,10 +104,10 @@
 
 	<xsl:template name="createBinds">
 		<xsl:for-each select="..//oc:ItemDef">
-			<bind>
+			<xf:bind>
 				<xsl:attribute name="id"><xsl:value-of select="@OID"/></xsl:attribute>
 				<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData[@ItemOID='<xsl:value-of select="@OID"/>']/@Value</xsl:attribute>
-			</bind>
+			</xf:bind>
 		</xsl:for-each>
 	</xsl:template>
 
@@ -126,27 +126,27 @@
 					
 					<xsl:choose>
 						<xsl:when test="oc:CodeListRef">
-							<select1>
+							<xf:select1>
 							<xsl:variable name="codeListID"><xsl:value-of select="oc:CodeListRef/@CodeListOID"/></xsl:variable>
-							<label>
+							<xf:label>
 								<xsl:value-of select="normalize-space(oc:Question/oc:TranslatedText)"></xsl:value-of>
-							</label>
+							</xf:label>
 							<xsl:for-each select="//oc:CodeList[@OID = $codeListID]/oc:CodeListItem">
-								<item>
+								<xf:item>
 									<xsl:attribute name="id"><xsl:value-of select="@CodedValue"/></xsl:attribute>
-									<label>
+									<xf:label>
 										<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
-									</label>
-									<value>
+									</xf:label>
+									<xf:value>
 										<xsl:value-of select="@CodedValue"></xsl:value-of>
-									</value>
-								</item>
+									</xf:value>
+								</xf:item>
 							</xsl:for-each>
-							</select1>
+							</xf:select1>
 						</xsl:when>
 						<xsl:otherwise>
 						
-							<input>
+							<xf:input>
 						<xsl:attribute name="name"><xsl:value-of
 							select="@Name" /></xsl:attribute>
 
@@ -179,10 +179,10 @@
 								<xsl:attribute name="type">xsd:string</xsl:attribute>
 							</xsl:otherwise>
 						</xsl:choose>
-						<label>
+						<xf:label>
 							<xsl:value-of select="normalize-space(oc:Question/oc:TranslatedText)"></xsl:value-of>
-						</label>
-					</input>
+						</xf:label>
+					</xf:input>
 						
 						</xsl:otherwise>
 					</xsl:choose>
