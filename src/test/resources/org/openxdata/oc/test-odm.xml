@@ -196,23 +196,17 @@
             
             <FormDef OID="F_MSA1_3" Name="MSA1: Mother Screening Assessment 1 - 3" Repeating="No">
                 <ItemGroupRef ItemGroupOID="IG_MSA1_UNGROUPED" Mandatory="Yes"/>
-                <ItemGroupRef ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" Mandatory="No"/>
             </FormDef>
             <FormDef OID="F_MSA1_2" Name="MSA1: Mother Screening Assessment 1 - 2" Repeating="No">
-                <ItemGroupRef ItemGroupOID="IG_MSA1_UNGROUPED" Mandatory="Yes"/>
                 <ItemGroupRef ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" Mandatory="No"/>
             </FormDef>
             <FormDef OID="F_MSA2_2" Name="MSA2: Mother Screening Assessment 2 - 2" Repeating="No">
-                <ItemGroupRef ItemGroupOID="IG_MSA2_UNGROUPED" Mandatory="Yes"/>
                 <ItemGroupRef ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" Mandatory="No"/>
             </FormDef>
             <FormDef OID="F_MSA2_1" Name="MSA2: Mother Screening Assessment 2 - 1" Repeating="No">
                 <ItemGroupRef ItemGroupOID="IG_MSA2_UNGROUPED" Mandatory="Yes"/>
-                <ItemGroupRef ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" Mandatory="No"/>
             </FormDef>
             
-      
-        
             <ItemGroupDef OID="IG_MSA1_UNGROUPED" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO030">
                 <ItemRef ItemOID="I_MSA1_INIT" OrderNumber="1" Mandatory="Yes"/>
                 <ItemRef ItemOID="I_MSA1_FORMD" OrderNumber="2" Mandatory="Yes"/>
