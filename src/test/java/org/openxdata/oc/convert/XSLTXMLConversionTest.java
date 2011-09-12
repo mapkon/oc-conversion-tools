@@ -17,7 +17,7 @@ public class XSLTXMLConversionTest {
 	@Test
 	public void test() throws IOException, InvalidXMLException, TransformationException {
 		Init.init();
-		String xslt = XMLUtil.loadFile("/org/openxdata/oc/oc-oxd.xsl");
+		String xslt = XMLUtil.loadFile("/org/openxdata/oc/transform.xsl");
 		XSLTCompiler compiler = new XSLTCompiler(xslt);		
 		String odm = XMLUtil.loadFile("/org/openxdata/oc/test-odm.xml");
 		Document doc = compiler.transform(odm);
