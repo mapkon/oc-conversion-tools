@@ -40,39 +40,70 @@
 			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 			<xf:model>
-				<xf:instance id="ODM">
-					<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-						xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 ODM1-3.xsd"
-						ODMVersion="1.3" FileType="Snapshot" Description="">
-						<xsl:attribute name="FileOID"><xsl:value-of
-							select="current-date()"></xsl:value-of></xsl:attribute>
-
-						<xsl:attribute name="CreationDateTime"><xsl:value-of
-							select="current-date()"></xsl:value-of></xsl:attribute>
+				<xsl:variable name="instanceElementName">
+					<xsl:value-of select="../../@OID" />-<xsl:value-of select="@OID"/>
+				</xsl:variable>
+				<xf:instance>
+					<xsl:attribute name="id"><xsl:value-of
+						select="$instanceElementName" /></xsl:attribute>
+					<ODM>
+						<xsl:attribute name="Description">converted from ODM to Xform</xsl:attribute>
 						<xsl:attribute name="name"><xsl:value-of
-							select="oc:FormDef/@Name"></xsl:value-of></xsl:attribute>
+							select="@Name"></xsl:value-of></xsl:attribute>
 						<xsl:attribute name="formKey"><xsl:value-of
-							select="oc:FormDef/@OID"></xsl:value-of></xsl:attribute>
+							select="@OID"></xsl:value-of></xsl:attribute>
+						<xsl:attribute name="id"><xsl:value-of select="$instanceElementName"/></xsl:attribute>
 
-						<xsl:for-each select="oc:FormRef">
-							<xsl:variable name="formId" select="@FormOID" />
-							<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
-								<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
-								<xsl:for-each
-									select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
-									<ItemData value="">
-										<xsl:attribute name="ItemOID"><xsl:value-of
-											select="@ItemOID"></xsl:value-of></xsl:attribute>
-									</ItemData>
-								</xsl:for-each>
-							</xsl:for-each>
-						</xsl:for-each>
+						<ClinicalData>
+							<xsl:attribute name="StudyOID"><xsl:value-of select="../../@OID"/></xsl:attribute>
+							<xsl:attribute name="MetaDataVersionOID"><xsl:value-of select="../@OID"/></xsl:attribute>
+							<SubjectData SubjectKey="">
+		            <StudyEventData>
+		            	<xsl:attribute name="StudyEventOID"><xsl:value-of select="@OID"/></xsl:attribute>
+		            	
+	                
+										<xsl:for-each select="oc:FormRef">
+											<xsl:variable name="formId" select="@FormOID" />
+											
+											<FormData>
+												<xsl:attribute name="FormOID"><xsl:value-of select="$formId"/></xsl:attribute>
+																					
+												<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
+													<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
+													<ItemGroupData>
+													<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId"/></xsl:attribute>
+													<xsl:for-each
+														select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
+														<ItemData value="">
+															<xsl:attribute name="ItemOID"><xsl:value-of
+																select="@ItemOID"></xsl:value-of></xsl:attribute>
+														</ItemData>
+													</xsl:for-each>
+													</ItemGroupData>
+												</xsl:for-each>
+											
+											</FormData>
+											
+										</xsl:for-each>
+								
+									
+		            </StudyEventData>
+	        		</SubjectData>
+						</ClinicalData>
 					</ODM>
 				</xf:instance>
 
-				<xsl:call-template name="createBinds" />
+				<xsl:call-template name="createBinds" >
+					<xsl:with-param name="studyEventId"><xsl:value-of select="@OID"/></xsl:with-param>
+				</xsl:call-template>
 
 			</xf:model>
+			<xf:group id="1">
+				<xf:label>Subject key</xf:label>
+				<xf:input bind="subjectKeyBind">
+					<xf:label>Subject Key</xf:label>
+				</xf:input>			
+			</xf:group>
 			<xsl:for-each select="oc:FormRef">
 				<xsl:call-template name="createGroup" />
 			</xsl:for-each>
@@ -81,6 +112,10 @@
 	</xsl:template>
 
 	<xsl:template name="createBinds">
+		<xsl:param name="studyEventId"/>
+		<xsl:message><xsl:value-of select="$studyEventId"/></xsl:message>
+	
+		<xf:bind id="subjectKeyBind" nodeset="/ODM/ClinicalData/SubjectData/@SubjectKey" type="xsd:string"></xf:bind>
 
 		<xsl:for-each select="oc:FormRef">
 			<xsl:variable name="formId" select="@FormOID" />
@@ -92,8 +127,11 @@
 						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 						<xsl:attribute name="id"><xsl:value-of
 							select="$itemId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ItemData[@ItemOID='<xsl:value-of
-							select="$itemId" />']/@Value</xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData[@StudyEventOID=<xsl:value-of
+						  select="$studyEventId"/>]/FormData[@FormOID=<xsl:value-of
+							select="$formId"/>]/ItemGroupData[@ItemGroupOID=<xsl:value-of
+							select="$itemGroupId"/>]/ItemData[@ItemOID='<xsl:value-of
+							select="$itemId"/>']/@Value</xsl:attribute>
 
 						<xsl:choose>
 							<xsl:when test="$itemDef/@DataType = 'integer'">
@@ -134,12 +172,12 @@
 	<xsl:template name="createGroup">
 		<group>
 
-			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
-			<label>
-				page
-				<xsl:value-of select="position()" />
-			</label>
+			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
 			<xsl:variable name="formId" select="@FormOID" />
+			<label>
+				<xsl:value-of select="../../oc:FormDef[@OID = $formId]/@Name"/>
+			</label>
+			
 			<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
