@@ -92,6 +92,14 @@
 		</repository>
 	</repositories>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>springsource</id>
+			<url>http://maven.springframework.org/snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+
 	<dependencies>
 		<dependency>
 			<artifactId>junit</artifactId>
@@ -102,6 +110,11 @@
 			<groupId>net.sf.saxon</groupId>
 			<artifactId>saxon</artifactId>
 			<version>9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-eclipse-batch</artifactId>
+			<version>1.8.0-03</version>
 		</dependency>
 	</dependencies>
 
@@ -133,7 +146,28 @@
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 					<encoding>UTF-8</encoding>
+
+					<compilerId>groovy-eclipse-compiler</compilerId>
+					<verbose>true</verbose>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-compiler</artifactId>
+						<version>2.5.1</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.codehaus.groovy</groupId>
+								<artifactId>groovy-eclipse-batch</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-batch</artifactId>
+						<version>1.8.0-01</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
