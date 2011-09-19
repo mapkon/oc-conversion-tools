@@ -99,17 +99,6 @@
 			<version>4.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openxdata</groupId>
-			<artifactId>model</artifactId>
-			<version>${model.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openxdata</groupId>
-			<artifactId>model</artifactId>
-			<classifier>sources</classifier>
-			<version>${model.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>net.sf.saxon</groupId>
 			<artifactId>saxon</artifactId>
 			<version>9.3</version>
