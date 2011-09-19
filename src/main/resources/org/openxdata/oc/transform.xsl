@@ -38,14 +38,14 @@
 
 	<xsl:template name="createForm">
 
-		<xf:xforms xmlns:xf="http://www.w3.org/2002/xforms"
+		<xforms xmlns="http://www.w3.org/2002/xforms"
 			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-			<xf:model>
+			<model>
 				<xsl:variable name="instanceElementName">
 					<xsl:value-of select="../../@OID" />-<xsl:value-of select="@OID"/>
 				</xsl:variable>
-				<xf:instance>
+				<instance>
 					<xsl:attribute name="id"><xsl:value-of
 						select="$instanceElementName" /></xsl:attribute>
 					<ODM>
@@ -93,38 +93,37 @@
 	        		</SubjectData>
 						</ClinicalData>
 					</ODM>
-				</xf:instance>
+				</instance>
 
 				<xsl:call-template name="createBinds" >
 					<xsl:with-param name="studyEventId"><xsl:value-of select="@OID"/></xsl:with-param>
 				</xsl:call-template>
 
-			</xf:model>
-			<xf:group id="1">
-				<xf:label>Subject key</xf:label>
-				<xf:input bind="subjectKeyBind">
-					<xf:label>Subject Key</xf:label>
-				</xf:input>			
-			</xf:group>
+			</model>
+			<group id="1">
+				<label>Subject key</label>
+				<input bind="subjectKeyBind">
+					<label>Subject Key</label>
+				</input>			
+			</group>
 			<xsl:for-each select="oc:FormRef">
 				<xsl:call-template name="createGroup" />
 			</xsl:for-each>
-		</xf:xforms>
+		</xforms>
 
 	</xsl:template>
 
 	<xsl:template name="createBinds">
 		<xsl:param name="studyEventId"/>
-		<xsl:message><xsl:value-of select="$studyEventId"/></xsl:message>
 	
-		<xf:bind id="subjectKeyBind" nodeset="/ODM/ClinicalData/SubjectData/@SubjectKey" type="xsd:string"></xf:bind>
+		<bind id="subjectKeyBind" nodeset="/ODM/ClinicalData/SubjectData/@SubjectKey" type="xsd:string"></bind>
 
 		<xsl:for-each select="oc:FormRef">
 			<xsl:variable name="formId" select="@FormOID" />
 			<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
-					<xf:bind>
+					<bind>
 						<xsl:variable name="itemId" select="@ItemOID" />
 						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 						<xsl:attribute name="id"><xsl:value-of
@@ -165,7 +164,7 @@
 							</xsl:otherwise>
 						</xsl:choose>
 
-					</xf:bind>
+					</bind>
 				</xsl:for-each>
 			</xsl:for-each>
 		</xsl:for-each>
@@ -189,44 +188,44 @@
 					<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 					<xsl:choose>
 						<xsl:when test="$itemDef/oc:CodeListRef">
-							<xf:select1>
+							<select1>
 								<xsl:attribute name="bind"><xsl:value-of
 									select="$itemId" /></xsl:attribute>
 								<xsl:variable name="codeListID">
 									<xsl:value-of select="$itemDef/oc:CodeListRef/@CodeListOID" />
 								</xsl:variable>
-								<xf:label>
+								<label>
 									<xsl:value-of
 										select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
-								</xf:label>
+								</label>
 								<xsl:for-each
 									select="../../oc:CodeList[@OID = $codeListID]/oc:CodeListItem">
-									<xf:item>
+									<item>
 										<xsl:attribute name="id"><xsl:value-of
 											select="@CodedValue" /></xsl:attribute>
 
-										<xf:label>
+										<label>
 											<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
-										</xf:label>
-										<xf:value>
+										</label>
+										<value>
 											<xsl:value-of select="@CodedValue"></xsl:value-of>
-										</xf:value>
-									</xf:item>
+										</value>
+									</item>
 								</xsl:for-each>
-							</xf:select1>
+							</select1>
 						</xsl:when>
 						<xsl:otherwise>
 
-							<xf:input>
+							<input>
 								<xsl:attribute name="bind"><xsl:value-of
 									select="$itemId" /></xsl:attribute>
 
 
-								<xf:label>
+								<label>
 									<xsl:value-of
 										select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
-								</xf:label>
-							</xf:input>
+								</label>
+							</input>
 
 						</xsl:otherwise>
 					</xsl:choose>
