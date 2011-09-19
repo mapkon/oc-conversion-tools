@@ -1,12 +1,17 @@
 package org.openxdata.oc.convert;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 
 import net.sf.saxon.s9api.DOMDestination;
+import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
@@ -47,7 +52,7 @@ public class XSLTCompiler implements ErrorListener {
 			Document outputDocument = XMLUtil.createDocument();
 			Document inputDocument = XMLUtil.getDocument(input);
 			inputDocument.getFirstChild();
-			DOMDestination destination = new DOMDestination(outputDocument);
+			Destination destination = new DOMDestination(outputDocument);
 			transformer.setDestination(destination);
 			DOMSource inputSource = new DOMSource(inputDocument);
 			transformer.setSource(inputSource);
