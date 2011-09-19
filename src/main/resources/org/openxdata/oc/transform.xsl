@@ -26,7 +26,9 @@
 					<version>
 						<xsl:attribute name="name"><xsl:value-of
 							select="@Name" />-v1</xsl:attribute>
-						<xsl:call-template name="createForm" />
+							<xform>
+								<xsl:call-template name="createForm" />
+							</xform>
 					</version>
 				</form>
 			</xsl:for-each>
