@@ -34,7 +34,7 @@ class Transform {
 	}
 
 	private String loadFile(def file) {
-		def xslt = new File(getClass().getResource(file).getFile()).text
-		return xslt
+		def resource = new File(getClass().getResource(file).getFile()).text
+		return resource
 	}
 }
