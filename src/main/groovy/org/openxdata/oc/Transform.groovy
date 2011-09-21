@@ -1,7 +1,9 @@
 package org.openxdata.oc
 
-// require(url='http://xml.apache.org/xalan-j/', jar='serializer.jar')
-// require(url='http://xml.apache.org/xalan-j/', jar='xalan_270.jar')
+import groovy.inspect.TextNode
+import groovy.util.logging.Log
+import groovy.xml.XmlUtil
+
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
