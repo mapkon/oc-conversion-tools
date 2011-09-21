@@ -21,7 +21,7 @@
 						<xsl:value-of select="@Name"></xsl:value-of>
 					</xsl:attribute>
 					<xsl:attribute name="name">
-						<xsl:value-of select="@Name"></xsl:value-of>
+						<xsl:value-of select="@OID"></xsl:value-of>
 					</xsl:attribute>
 					<version>
 						<xsl:attribute name="name"><xsl:value-of
