@@ -6,15 +6,12 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
-import com.sun.org.apache.xml.internal.security.Init;
-
-import groovy.inspect.TextNode;
-import groovy.xml.StreamingMarkupBuilder
-import groovy.xml.XmlUtil;
-
+@Log
 class Transform {
 
 	public String transformODM(def odm){
+		
+		log.info("Starting transformation of file")
 		
 		def xslt = loadFile("/org/openxdata/oc/transform-v0.1.xsl");
 		
