@@ -16,7 +16,6 @@ class CompilerTest extends GroovyTestCase {
 							</xsl:template>
 						</xsl:transform>"""
 
-	@Test
 	void testShouldNotReturnNullOnValidInput() {
 		def compiler = new XSLTCompiler(sampleXslt)
 		String doc = compiler.transform("<hei/>")
