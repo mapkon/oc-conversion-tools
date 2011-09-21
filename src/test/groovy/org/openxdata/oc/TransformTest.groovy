@@ -1,14 +1,15 @@
 package org.openxdata.oc
 
-import groovy.xml.XmlUtil;
-
 import org.junit.Test
+import groovy.xml.XmlUtil;
+import java.util.jar.Attributes.Name;
+
 
 class TransformTest extends GroovyTestCase {
 
 	def outputDoc
 	def inputDoc
-	
+
 	public void setUp(){
 		def transformer = new Transform();
 		def inputString = new File(getClass().getResource("/org/openxdata/oc/test-odm.xml").getFile()).text
@@ -17,26 +18,70 @@ class TransformTest extends GroovyTestCase {
 		inputDoc = new XmlParser().parseText(inputString)
 	}
 
-	@Test
 	void testShouldContainOXDStudyElement(){
 
+		println XmlUtil.asString(outputDoc)
+		
 		assertTrue(outputDoc.name().equals("study"))
 		assertTrue(outputDoc.children().size() > 0)
 	}
 
-	@Test
-	void testShouldContainFormElement() {
-		def formsInInput = inputDoc.Study.MetaDataVersion.StudyEventDef
+	void testShouldContainCorrectNumberOfFormElements() {
+		def formsInInput = inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef
 		assertEquals( formsInInput.size(), outputDoc.form.size() )
 		assertEquals( formsInInput.size(), outputDoc.children().size() )
 	}
 
-	@Test
 	void testShouldContainVersionElement() {
 		outputDoc.form.each { assertTrue( it.version.size() == 1 ) }
 	}
 
-	@Test
+	void testBindElementsShouldAppearInCorrectPlaceForEachFormAndPage() {
+
+		def versionNode = inputDoc.Study.MetaDataVersion
+		def numberOfInputsTested = 0;
+		versionNode.Protocol.StudyEventRef.each {
+			def eventId = it.@StudyEventOID
+			def eventDef = versionNode.StudyEventDef.find {
+				it.@OID == eventId;
+			}
+			eventDef.FormRef.each {
+				def formId = it.@FormOID
+				def formDef = versionNode.FormDef.find {it.@OID==formId}
+				formDef.ItemGroupRef.each {
+
+					def groupId = it.@ItemGroupOID
+					def groupDef = versionNode.ItemGroupDef.find { it.@OID == groupId }
+					groupDef.ItemRef.each {
+						def itemId = it.@ItemOID
+						def itemDef = versionNode.ItemDef.find { it.@OID == itemId }
+
+						def outputForm = outputDoc.form.find { it.@name.equals(eventDef.@OID) }
+						def xforms = outputForm.version.xform
+						def xformsNode = new XmlSlurper().parseText(xforms.text())
+
+						def bind = xformsNode.model.bind.find { it.@id = itemId }
+						assertNotNull bind
+						numberOfInputsTested++
+					}
+				}
+			}
+		}
+
+		def itemsInInput = inputDoc.Study.MetaDataVersion.ItemGroupDef.ItemRef.size();
+
+		assertTrue numberOfInputsTested > 1
+		assertTrue numberOfInputsTested >= itemsInInput
+	}
+
+	void testExistenceOfFormDefGivenStudyEventRef() {
+		inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef.each {
+			def eventOID = it.@StudyEventOID
+			def form = outputDoc.form.find{it.@name==eventOID}
+			assertEquals(eventOID, form.@name)
+		}
+	}
+		
 	void testShouldContainXformElement() {
 
 		outputDoc.form.version.each{
