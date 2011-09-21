@@ -4,7 +4,6 @@ import org.junit.Test
 import groovy.xml.XmlUtil;
 import java.util.jar.Attributes.Name;
 
-
 class TransformTest extends GroovyTestCase {
 
 	def outputDoc

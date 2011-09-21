@@ -1,5 +1,6 @@
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openxdata</groupId>
@@ -68,38 +69,6 @@
 		</developer>
 	</developers>
 
-	<properties>
-		<java.version>1.6</java.version>
-		<model.version>1.2.2</model.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<repositories>
-		<repository>
-			<id>openxdata</id>
-			<url>http://nexus.openxdata.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>openxdata-releases</id>
-			<url>https://nexus.openxdata.org/content/repositories/releases</url>
-		</repository>
-		<repository>
-			<id>openxdata-snapshots</id>
-			<url>https://nexus.openxdata.org/content/repositories/snapshots</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>springsource</id>
-			<url>http://maven.springframework.org/snapshot</url>
-		</pluginRepository>
-	</pluginRepositories>
-
-
 	<dependencies>
 		<dependency>
 			<artifactId>junit</artifactId>
@@ -107,9 +76,14 @@
 			<version>4.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-eclipse-batch</artifactId>
-			<version>1.8.0-03</version>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>1.8.0-beta-3</version>
+    </dependency>
+		<dependency>
+			<groupId>com.github.groovy-wslite</groupId>
+			<artifactId>groovy-wslite</artifactId>
+			<version>0.2</version>
 		</dependency>
 	</dependencies>
 
@@ -117,10 +91,6 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-				<filtering>false</filtering>
 			</resource>
 		</resources>
 		<testResources>
@@ -132,38 +102,29 @@
 		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>1.6</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<encoding>UTF-8</encoding>
-
-					<compilerId>groovy-eclipse-compiler</compilerId>
-					<verbose>true</verbose>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-eclipse-compiler</artifactId>
-						<version>2.5.1</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.codehaus.groovy</groupId>
-								<artifactId>groovy-eclipse-batch</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-eclipse-batch</artifactId>
-						<version>1.8.0-01</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <version>1.2</version>
+        <configuration>
+          <providerSelection>1.7</providerSelection>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
