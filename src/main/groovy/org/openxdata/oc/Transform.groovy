@@ -1,11 +1,10 @@
 package org.openxdata.oc
 
-import org.junit.Test
-import org.openxdata.oc.convert.XSLTCompiler;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+// require(url='http://xml.apache.org/xalan-j/', jar='serializer.jar')
+// require(url='http://xml.apache.org/xalan-j/', jar='xalan_270.jar')
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.stream.StreamResult
+import javax.xml.transform.stream.StreamSource
 
 import com.sun.org.apache.xml.internal.security.Init;
 
@@ -17,11 +16,14 @@ class Transform {
 
 	public String transformODM(def odm){
 		
-		Init.init();
-		
 		def xslt = loadFile("/org/openxdata/oc/transform-v0.1.xsl");
-		def compiler = new XSLTCompiler(xslt);
-		def doc = new XmlParser().parseText(compiler.transform(odm));
+		
+		def factory = TransformerFactory.newInstance()
+		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
+		def byteArray = new ByteArrayOutputStream()
+		transformer.transform(new StreamSource(new StringReader(odm)), new StreamResult(byteArray))
+		def xml = byteArray.toString("UTF-8")
+		def doc = new XmlParser().parseText(xml)
 
 		doc.form.version.xform.each {
 			def s = ""
