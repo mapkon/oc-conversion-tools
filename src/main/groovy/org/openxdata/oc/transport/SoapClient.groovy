@@ -4,14 +4,23 @@ import groovyx.net.ws.WSClient
 
 
 class SoapClient {
-	
-	def response
+
+	def host
+	def proxy
+
 	SoapClient(def host){
-		proxy = new WSClient(host, this.class.classLoader)
-		proxy.initialize()
+		this.host = host
 	}
 
-	def getProxy(){
-		return proxy
+	def getStudies() {
+		proxy = new WSClient(host, this.class.classLoader)
+		proxy.initialize()
+
+		def studies = new ArrayList<String>()
+		proxy.listAll().each {
+			studies.add(it)
+		}
+
+		return studies
 	}
 }
