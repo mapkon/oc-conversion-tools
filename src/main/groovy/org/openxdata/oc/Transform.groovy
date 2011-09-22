@@ -15,7 +15,7 @@ class Transform {
 		
 		log.info("Starting transformation of file")
 		
-		def xslt = loadFile("/org/openxdata/oc/transform-v0.1.xsl");
+		def xslt = loadFile("transform-v0.1.xsl");
 		
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))

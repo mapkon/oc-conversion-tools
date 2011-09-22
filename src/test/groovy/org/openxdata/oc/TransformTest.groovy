@@ -11,7 +11,7 @@ class TransformTest extends GroovyTestCase {
 
 	public void setUp(){
 		def transformer = new Transform();
-		def inputString = new File(getClass().getResource("/org/openxdata/oc/test-odm.xml").getFile()).text
+		def inputString = new File(getClass().getResource("test-odm.xml").getFile()).text
 		def outputString = transformer.transformODM(inputString)
 		outputDoc = new XmlParser().parseText(outputString)
 		inputDoc = new XmlParser().parseText(inputString)
