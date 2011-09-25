@@ -4,7 +4,8 @@ import groovy.xml.XmlUtil
 
 import java.util.Collection
 
-class ODMBuilder {
+
+public class ODMBuilder {
 
 	public String buildODM(Collection<String> instanceData) {
 		def odm = """<ODM></ODM>"""
@@ -14,7 +15,7 @@ class ODMBuilder {
 			def instanceXml = parser.parseText(it)
 			addSubjectData(odmXml, instanceXml)
 		}
-		return XmlUtil.serialize(odmXml)
+		return XmlUtil.asString(odmXml)
 	}
 
 	def addSubjectData(def xml, def instanceNode) {
