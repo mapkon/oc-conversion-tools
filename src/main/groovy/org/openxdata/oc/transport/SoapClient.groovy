@@ -16,7 +16,7 @@ class SoapClient {
 		buildHeader(userName, password)
 	}
 
-	def buildHeader(def user, def password){
+	private def buildHeader(def user, def password){
 		header = """<soapenv:Header>
 					  <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
 					        <wsse:UsernameToken wsu:Id="UsernameToken-27777511" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
@@ -55,7 +55,7 @@ class SoapClient {
 		return xml
 	}
 
-	def getMetadata(def studyOID) {
+	private def getMetadata(def studyOID) {
 		def body = """<soapenv:Body>
 					      <v1:getMetadataRequest>
 					         <v1:studyMetadata>
