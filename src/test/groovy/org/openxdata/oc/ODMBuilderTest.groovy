@@ -37,8 +37,6 @@ class ODMBuilderTest {
 		
 		def xml = new XmlParser().parseText(odm);
 		
-		println XmlUtil.asString(xml)
-		
 		assertTrue(xml.depthFirst().ItemData.size() > 1)
 		assertEquals(xml.depthFirst().ItemData.size(), 4)
 		
