@@ -3,14 +3,18 @@ package org.openxdata.oc.transport
 import java.util.Collection
 
 import org.openxdata.oc.ODMBuilder
-import org.openxdata.oc.exception.ImportODMException
+import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.model.OpenclinicaStudy
 
-class SoapClient {
+
+public class OpenClinicaSoapClientImpl {
 
 	def url
 	def header
+	def dataPath = "/ws/data/v1"
+	def studyPath = "/ws/study/v1"
 
-	SoapClient(def url, def userName, def password){
+	OpenClinicaSoapClientImpl(def url, def userName, def password){
 		this.url = url
 		buildHeader(userName, password)
 	}
@@ -25,16 +29,16 @@ class SoapClient {
 					  </wsse:Security></soapenv:Header>"""
 	}
 
-	private String buildEnvelope(String body) {
-		def envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1" xmlns:bean="http://openclinica.org/ws/beans">""" + header + body +
+	private String buildEnvelope(String path, String body) {
+		def envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org""" + path + """" xmlns:bean="http://openclinica.org/ws/beans">""" + header + body +
 				"""</soapenv:Envelope>"""
 		return envelope
 	}
 
-	private Node sendRequest(String envelope) {
+	public Node sendRequest(String envelope) {
 		def outs = envelope.getBytes()
 
-		def host = new java.net.URL(url)
+		def host = new java.net.URL(url + studyPath)
 		HttpURLConnection conn = host.openConnection()
 
 		conn.setRequestMethod("POST")
@@ -54,46 +58,61 @@ class SoapClient {
 		return xml
 	}
 
-	private def getMetadata(def studyOID) {
+	public def getMetadata(def studyOID) {
 		def body = """<soapenv:Body>
 					      <v1:getMetadataRequest>
 					         <v1:studyMetadata>
 					            <bean:studyRef>
 					               <bean:identifier>"""+ studyOID +"""</bean:identifier>
-					               <!--Optional:-->
-					               <bean:siteRef>
-					                  <bean:identifier>?</bean:identifier>
-					               </bean:siteRef>
 					            </bean:studyRef>
 					         </v1:studyMetadata>
 					      </v1:getMetadataRequest>
 					   </soapenv:Body>"""
 
-		def envelope = buildEnvelope(body)
+		def envelope = buildEnvelope(studyPath, body)
 		def xml = sendRequest(envelope)
 		return xml.depthFirst().odm
 	}
 
-	private def listAll(){
+	public List<OpenclinicaStudy> listAll(){
 		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
 
-		def envelope = buildEnvelope(body)
-		def xml = sendRequest(envelope)
-		return xml;
+		def envelope = buildEnvelope(studyPath,body)
+		def response = sendRequest(envelope)
+
+		Collection<OpenclinicaStudy> studies = extractStudies(response)
+
+		return studies;
+	}
+
+	def extractStudies(def response){
+
+		List<OpenclinicaStudy> studies  = new ArrayList<OpenclinicaStudy>()
+		response.depthFirst().study.each {
+			def study = new OpenclinicaStudy()
+			study.setOID(it.oid.text())
+			study.setName(it.name.text())
+			study.setIdentifier(it.identifier.text())
+			studies.add(study)
+		}
+
+		return studies
 	}
 
 	public def importData(Collection<String> instanceData){
+
 		def importODM = new ODMBuilder().buildODM(instanceData)
 		def body = """<soapenv:Body>
-					  	<v1:importRequest>""" +importODM + """</v1:importRequest>
+					  	<v1:importRequest>""" + importODM + """</v1:importRequest>
 					  </soapenv:Body>"""
 
-		def envelope = buildEnvelope(body)
+		def envelope = buildEnvelope(dataPath, body)
+		println envelope
 		def reply = sendRequest(envelope)
 
 		def result = reply.depthFirst().result[0].text()
 		if(result != "Success")
-			throw new ImportODMException(reply.depthFirst().error[0].text())
+			throw new ImportException(reply.depthFirst().error[0].text())
 
 		return result;
 	}
