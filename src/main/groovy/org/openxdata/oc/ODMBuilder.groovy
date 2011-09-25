@@ -6,7 +6,7 @@ import java.util.Collection
 
 class ODMBuilder {
 
-	String buildODM(Collection<String> instanceData) {
+	public String buildODM(Collection<String> instanceData) {
 		def odm = """<ODM></ODM>"""
 		def parser = new XmlParser()
 		def odmXml = parser.parseText(odm)
