@@ -1,10 +1,9 @@
 package org.openxdata.oc.transport
 
-import org.omg.CORBA.portable.ResponseHandler
+import java.util.Collection
 
-import sun.net.www.http.HttpClient
-
-
+import org.openxdata.oc.ODMBuilder
+import org.openxdata.oc.exception.ImportODMException
 
 class SoapClient {
 
@@ -75,15 +74,27 @@ class SoapClient {
 		return xml.depthFirst().odm
 	}
 
-	def listAll(){
+	private def listAll(){
 		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
-		
+
 		def envelope = buildEnvelope(body)
 		def xml = sendRequest(envelope)
 		return xml;
 	}
-	
-	def importData(){
-		def body = """"""	
+
+	public def importData(Collection<String> instanceData){
+		def importODM = new ODMBuilder().buildODM(instanceData)
+		def body = """<soapenv:Body>
+					  	<v1:importRequest>""" +importODM + """</v1:importRequest>
+					  </soapenv:Body>"""
+
+		def envelope = buildEnvelope(body)
+		def reply = sendRequest(envelope)
+
+		def result = reply.depthFirst().result[0].text()
+		if(result != "Success")
+			throw new ImportODMException(reply.depthFirst().error[0].text())
+
+		return result;
 	}
 }
