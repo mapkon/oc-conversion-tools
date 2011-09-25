@@ -1,8 +1,5 @@
 package org.openxdata.oc
 
-import groovy.xml.XmlUtil
-
-import org.junit.Test
 
 class TransformTest extends GroovyTestCase {
 
