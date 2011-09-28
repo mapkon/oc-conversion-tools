@@ -10,8 +10,17 @@ import javax.xml.transform.stream.StreamSource
 
 @Log
 public class Transform {
+	
+	private Transform() {
+		
+	}
+	
+	public static Transform getTransformer() {
+		Transform t = new Transform();
+		return t;
+	}
 
-	public String transformODM(def odm){
+	String transformODM(def odm){
 		
 		log.info("Starting transformation of file")
 		
