@@ -121,7 +121,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 					  </soapenv:Body>"""
 
 		def envelope = buildEnvelope(dataPath, body)
-		println envelope
 		def reply = sendRequest(envelope)
 
 		def result = reply.depthFirst().result[0].text()
