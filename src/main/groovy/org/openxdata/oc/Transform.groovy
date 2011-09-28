@@ -33,6 +33,16 @@ public class Transform {
 		def xml = byteArray.toString("UTF-8")
 		def doc = new XmlParser().parseText(xml)
 
+		
+		// parse measurement unit special tags
+		parseMeasurementUnits(doc)
+		// making the xform into a string
+		serialiseXform(doc)
+
+		return XmlUtil.asString(doc);
+	}
+
+	private serialiseXform(Node doc) {
 		doc.form.version.xform.each {
 			def s = ""
 			it.children().each {s += XmlUtil.asString(it) }
@@ -40,8 +50,17 @@ public class Transform {
 			it.remove(it.children())
 			it.children().add(text)
 		}
+	}
 
-		return XmlUtil.asString(doc);
+	private parseMeasurementUnits(Node doc) {
+		doc.breadthFirst().hint.each {
+			def text = it.text()
+			text = text.replace("<SUP>", "^")
+			text = text.replace("</SUP>", "")
+			def parent = it.parent()
+			parent.remove(it)
+			new Node(parent, "hint", text)
+		}
 	}
 
 	private String loadFile(def file) {

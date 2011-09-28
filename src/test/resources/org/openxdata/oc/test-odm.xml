@@ -267,7 +267,9 @@
                     <TranslatedText>
                     Fill in your initials (Given Name (G), Surname (S))
                     </TranslatedText>
+                    
                 </Question>
+                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_FORMD" Name="FormD" DataType="date" SASFieldName="FormD582" Comment="Date of form">
                 <Question>
@@ -448,6 +450,7 @@
                     <TranslatedText>
                     Patient ID
                     </TranslatedText>
+                    <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA2_MSA2_INITBF" Name="MSA2_INITBF" DataType="integer" Length="1" SASFieldName="MSA2_INI" Comment="Initiation of breastfeeding">

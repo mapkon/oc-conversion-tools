@@ -216,7 +216,9 @@
 
 										<label>
 											<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
+											
 										</label>
+										
 										<value>
 											<xsl:value-of select="@CodedValue"></xsl:value-of>
 										</value>
@@ -235,6 +237,12 @@
 									<xsl:value-of
 										select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
 								</label>
+								<xsl:if test="$itemDef/oc:MeasurementUnitRef">
+									<hint>
+										<xsl:variable name="unitId"><xsl:value-of select="$itemDef/oc:MeasurementUnitRef/@MeasurementUnitOID"/></xsl:variable>
+										<xsl:value-of select="//oc:MeasurementUnit[@OID=$unitId]/oc:Symbol/oc:TranslatedText"/>
+									</hint>
+								</xsl:if>
 							</input>
 
 						</xsl:otherwise>
