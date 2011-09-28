@@ -90,9 +90,9 @@ public class OpenClinicaSoapClientImpl {
 		List<OpenclinicaStudy> studies  = new ArrayList<OpenclinicaStudy>()
 		response.depthFirst().study.each {
 			def study = new OpenclinicaStudy()
-			study.setOID(it.oid.text())
-			study.setName(it.name.text())
-			study.setIdentifier(it.identifier.text())
+			study.OID = it.oid.text()
+			study.name = it.name.text()
+			study.identifier = it.identifier.text()
 			studies.add(study)
 		}
 
