@@ -36,7 +36,11 @@ public class Transform {
 	}
 
 	private String loadFile(def file) {
-		def resource = new File(getClass().getResource(file).getFile()).text
-		return resource
+		def lines = getClass().getResourceAsStream(file).readLines()
+		def stringBuilder = new StringBuilder()
+		lines.each {
+			stringBuilder.append(it);
+		}
+		return stringBuilder.toString()
 	}
 }
