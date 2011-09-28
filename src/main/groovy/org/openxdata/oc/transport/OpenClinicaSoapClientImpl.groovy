@@ -3,11 +3,12 @@ package org.openxdata.oc.transport
 import java.util.Collection
 
 import org.openxdata.oc.ODMBuilder
+import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.OpenclinicaStudy
 
 
-public class OpenClinicaSoapClientImpl {
+public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 
 	def url
 	def header
@@ -58,7 +59,7 @@ public class OpenClinicaSoapClientImpl {
 		return xml
 	}
 
-	public def getMetadata(def studyOID) {
+	public String getMetadata(String studyOID) {
 		def body = """<soapenv:Body>
 					      <v1:getMetadataRequest>
 					         <v1:studyMetadata>
@@ -71,7 +72,13 @@ public class OpenClinicaSoapClientImpl {
 
 		def envelope = buildEnvelope(studyPath, body)
 		def xml = sendRequest(envelope)
-		return xml.depthFirst().odm
+		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">""" + xml.depthFirst().odm[0].children()[0] +"</ODM>"
+	}
+
+	public String getOpenxdataForm(String openclinicaStudyOID) {
+		def ODM = getMetadata(openclinicaStudyOID)
+		def transformer = Transform.getTransformer()
+		return transformer.transformODM(ODM)
 	}
 
 	public List<OpenclinicaStudy> listAll(){

@@ -11,7 +11,9 @@ public interface OpenClinicaSoapClient {
 	 */
 	List<OpenclinicaStudy> listAll()
 
-	def getMetadata(def studyOID)
+	String getMetadata(String studyOID)
+	
+	String getOpenxdataForm(String openclinicaStudyOID)
 
 	Node sendRequest(String envelope)
 
