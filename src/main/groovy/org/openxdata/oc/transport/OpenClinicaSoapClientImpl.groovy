@@ -6,17 +6,25 @@ import org.openxdata.oc.ODMBuilder
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.OpenclinicaStudy
+import org.openxdata.oc.transport.factory.ConnectionFactory
 
 
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 
-	def url
+	def connectionFactory
 	def header
 	def dataPath = "/ws/data/v1"
 	def studyPath = "/ws/study/v1"
 
-	OpenClinicaSoapClientImpl(def url, def userName, def password){
-		this.url = url
+	/**
+	 * Constructs a OpenClinicaSoapClientImpl that uses the connectionFactory for getting a connection to openclinica web services.
+	 * 
+	 * @param connectionFactory a factory for creating HttpURLConnection objects
+	 * @param userName the user name
+	 * @param password the users password
+	 */
+	OpenClinicaSoapClientImpl(ConnectionFactory connectionFactory, def userName, def password){
+		this.connectionFactory = connectionFactory
 		buildHeader(userName, password)
 	}
 
@@ -39,8 +47,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 	public Node sendRequest(String envelope) {
 		def outs = envelope.getBytes()
 
-		def host = new java.net.URL(url + studyPath)
-		HttpURLConnection conn = host.openConnection()
+		HttpURLConnection conn = connectionFactory.getConnection()
 
 		conn.setRequestMethod("POST")
 		conn.setDoOutput(true)
