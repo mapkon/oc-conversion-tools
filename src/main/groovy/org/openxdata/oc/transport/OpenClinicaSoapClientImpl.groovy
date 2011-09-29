@@ -1,5 +1,8 @@
 package org.openxdata.oc.transport
 
+import groovy.xml.Namespace
+import groovy.xml.XmlUtil
+
 import java.util.Collection
 
 import org.openxdata.oc.ODMBuilder
@@ -15,6 +18,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 	def header
 	def dataPath = "/ws/data/v1"
 	def studyPath = "/ws/study/v1"
+	def subjectPath = "/ws/studySubject/v1"
 
 	/**
 	 * Constructs a OpenClinicaSoapClientImpl that uses the connectionFactory for getting a connection to openclinica web services.
@@ -85,21 +89,22 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 	public String getOpenxdataForm(String studyOID) {
 		def ODM = getMetadata(studyOID)
 		def transformer = Transform.getTransformer()
+		
+		def subjectKeys = getSubjectKeys(studyOID)
 		return transformer.transformODM(ODM)
 	}
 
 	public List<OpenclinicaStudy> listAll(){
 		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
 
-		def envelope = buildEnvelope(studyPath,body)
+		def envelope = buildEnvelope(studyPath, body)
 		def response = sendRequest(envelope)
 
 		Collection<OpenclinicaStudy> studies = extractStudies(response)
-
 		return studies;
 	}
 
-	def extractStudies(def response){
+	private def extractStudies(def response){
 
 		List<OpenclinicaStudy> studies  = new ArrayList<OpenclinicaStudy>()
 		response.depthFirst().study.each {
@@ -128,5 +133,32 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 			throw new ImportException(reply.depthFirst().error[0].text())
 
 		return result;
+	}
+	
+	public Collection<String> getSubjectKeys(String studyOID){
+		def body = """<soapenv:Body>
+				      <v1:listAllByStudyRequest>
+				         <bean:studyRef>
+				            <bean:identifier>""" + studyOID + """</bean:identifier>
+				         </bean:studyRef>
+				      </v1:listAllByStudyRequest>
+				   </soapenv:Body>"""
+		
+		def envelope = buildEnvelope(subjectPath, body)
+		def response = sendRequest(envelope)
+		Collection<String> subjectKeys = extractSubjectKeys(response)
+
+		return subjectKeys
+	}
+	
+	def extractSubjectKeys(def response){
+		
+		List<String> subjectKeys = new ArrayList<String>()
+		def ns = new Namespace("http://openclinica.org/ws/beans", "ns2")
+		def subjects = response.depthFirst()[ns.subject].each {
+			subjectKeys.add(it[ns.uniqueIdentifier].text())
+		}
+ 
+		return subjectKeys
 	}
 }

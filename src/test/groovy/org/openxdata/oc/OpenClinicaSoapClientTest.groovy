@@ -75,6 +75,17 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 		}
 	}
+	
+	void testGetStudySubjectsMUSTReturnValidStudyList(){
+		def factory = setUpMocks(studySubjectListXML)
+		play{
+			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
+			def subjectKeys = soapClient.getSubjectKeys("default-study")
+			
+			assertNotNull subjectKeys
+			assertEquals 4, subjectKeys.size()
+		}
+	}
 
 	private setUpMocks(def returnXml) {
 		def connection = mock(HttpURLConnection.class)

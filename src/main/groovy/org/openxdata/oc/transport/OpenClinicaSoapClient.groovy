@@ -18,4 +18,6 @@ public interface OpenClinicaSoapClient {
 	Node sendRequest(String envelope)
 
 	def importData(Collection<String> instanceData)
+	
+	Collection<String> getSubjectKeys(String studyOID)
 }
