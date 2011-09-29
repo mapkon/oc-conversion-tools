@@ -5,11 +5,11 @@ class TransformTest extends GroovyTestCase {
 
 	def outputDoc
 	def inputDoc
+	def transformer = new Transform();
 
 	public void setUp(){
-		def transformer = new Transform();
 		def inputString = new File(getClass().getResource("test-odm.xml").getFile()).text
-		def outputString = transformer.transformODM(inputString)
+		def outputString = transformer.transformODM(inputString, ['Jonny', 'Morten', 'Jorn', 'Janne'])
 		outputDoc = new XmlParser().parseText(outputString)
 		inputDoc = new XmlParser().parseText(inputString)
 	}
@@ -88,6 +88,6 @@ class TransformTest extends GroovyTestCase {
 
 			assertNotNull(parsedXform)
 			assertEquals("xforms", parsedXform.name())
-		}
+		}		
 	}
 }

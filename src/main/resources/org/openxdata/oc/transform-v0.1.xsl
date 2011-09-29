@@ -97,9 +97,9 @@
 			</model>
 			<group id="1">
 				<label>Subject key</label>
-				<input bind="subjectKeyBind">
-					<label>Subject Key</label>
-				</input>
+					<select1 bind="">
+						<label>Subject Key</label>
+					</select1>
 			</group>
 			<xsl:for-each select="oc:FormRef">
 				<xsl:call-template name="createGroup" />

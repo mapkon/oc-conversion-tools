@@ -20,7 +20,7 @@ public class Transform {
 		return t;
 	}
 
-	String transformODM(def odm){
+	String transformODM(def odm, def subjectKeys){
 		
 		log.info("Starting transformation of file")
 		
@@ -32,24 +32,33 @@ public class Transform {
 		transformer.transform(new StreamSource(new StringReader(odm)), new StreamResult(byteArray))
 		def xml = byteArray.toString("UTF-8")
 		def doc = new XmlParser().parseText(xml)
-
+		
+		// Add subjects keys 
+		injectSubjectKeys(doc, subjectKeys)
 		
 		// parse measurement unit special tags
 		parseMeasurementUnits(doc)
+		
 		// making the xform into a string
 		serialiseXform(doc)
 
 		return XmlUtil.asString(doc);
 	}
+	
+	private def injectSubjectKeys(def doc, def subjectKeys) {
 
-	private serialiseXform(Node doc) {
-		doc.form.version.xform.each {
-			def s = ""
-			it.children().each {s += XmlUtil.asString(it) }
-			def text = new TextNode("""<?xml version="1.0" encoding="UTF-8"?>"""+s)
-			it.remove(it.children())
-			it.children().add(text)
+		def subjectKeyGroup = doc.breadthFirst().group.find {it.@id.equals('1')}
+		subjectKeyGroup.select1.each {
+			subjectKeys.each { key ->
+				Node itemNode = new Node(it, "item", [id:key])
+				addItemElements(itemNode, key)
+			}
 		}
+	}
+	
+	private def addItemElements(def node, def value){
+		new Node(node, "label", value)
+		new Node (node, "value", value)
 	}
 
 	private parseMeasurementUnits(Node doc) {
@@ -60,6 +69,16 @@ public class Transform {
 			def parent = it.parent()
 			parent.remove(it)
 			new Node(parent, "hint", text)
+		}
+	}
+	
+	private serialiseXform(Node doc) {
+		doc.form.version.xform.each {
+			def s = ""
+			it.children().each {s += XmlUtil.asString(it) }
+			def text = new TextNode("""<?xml version="1.0" encoding="UTF-8"?>"""+s)
+			it.remove(it.children())
+			it.children().add(text)
 		}
 	}
 
