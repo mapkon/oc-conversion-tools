@@ -14,7 +14,7 @@ class TransformTest extends GroovyTestCase {
 		inputDoc = new XmlParser().parseText(inputString)
 	}
 
-	void testShouldContainOXDStudyElement(){		
+	void testMUSTContainOXDStudyElement(){		
 		assertTrue(outputDoc.name().equals("study"))
 		assertTrue(outputDoc.children().size() > 0)
 	}
@@ -75,7 +75,7 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 		
-	void testShouldContainXformElement() {
+	void testMUSTContainXformElement() {
 
 		outputDoc.form.version.each{
 			assertTrue(it.xform.size() == 1)
