@@ -14,7 +14,6 @@
 				<xsl:value-of select="//oc:StudyName"></xsl:value-of>
 			</xsl:attribute>
 			<xsl:attribute name="studyKey"> <xsl:value-of select="//oc:Study/@OID" /></xsl:attribute>
-
 			<xsl:for-each select="oc:ODM/oc:Study/oc:MetaDataVersion/oc:StudyEventDef">
 				<form>
 					<xsl:attribute name="description">
@@ -32,13 +31,10 @@
 					</version>
 				</form>
 			</xsl:for-each>
-
 		</study>
 	</xsl:template>
-
 	<xsl:template name="createForm">
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
 			<model>
 				<xsl:variable name="instanceElementName">
 					<xsl:value-of select="../../@OID" />
@@ -56,7 +52,6 @@
 							select="@OID"></xsl:value-of></xsl:attribute>
 						<xsl:attribute name="id"><xsl:value-of
 							select="$instanceElementName" /></xsl:attribute>
-
 						<ClinicalData>
 							<xsl:attribute name="StudyOID"><xsl:value-of
 								select="../../@OID" /></xsl:attribute>
@@ -66,15 +61,11 @@
 								<StudyEventData>
 									<xsl:attribute name="StudyEventOID"><xsl:value-of
 										select="@OID" /></xsl:attribute>
-
-
 									<xsl:for-each select="oc:FormRef">
 										<xsl:variable name="formId" select="@FormOID" />
-
 										<FormData>
 											<xsl:attribute name="FormOID"><xsl:value-of
 												select="$formId" /></xsl:attribute>
-
 											<xsl:for-each
 												select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 												<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
@@ -90,18 +81,13 @@
 													</xsl:for-each>
 												</ItemGroupData>
 											</xsl:for-each>
-
 										</FormData>
-
 									</xsl:for-each>
-
-
 								</StudyEventData>
 							</SubjectData>
 						</ClinicalData>
 					</ODM>
 				</instance>
-
 				<xsl:call-template name="createBinds">
 					<xsl:with-param name="studyEventId">
 						<xsl:value-of select="@OID" />
@@ -119,12 +105,10 @@
 				<xsl:call-template name="createGroup" />
 			</xsl:for-each>
 		</xforms>
-
 	</xsl:template>
 
 	<xsl:template name="createBinds">
 		<xsl:param name="studyEventId" />
-
 		<bind id="subjectKeyBind" nodeset="/ODM/ClinicalData/SubjectData/@SubjectKey"
 			type="xsd:string"></bind>
 
@@ -143,7 +127,6 @@
 							select="$formId" />]/ItemGroupData[@ItemGroupOID=<xsl:value-of
 							select="$itemGroupId" />]/ItemData[@ItemOID='<xsl:value-of
 							select="$itemId" />']/@Value</xsl:attribute>
-
 						<xsl:choose>
 							<xsl:when test="$itemDef/@DataType = 'integer'">
 								<xsl:attribute name="type">xsd:int</xsl:attribute>
@@ -173,22 +156,18 @@
 								<xsl:attribute name="type">xsd:string</xsl:attribute>
 							</xsl:otherwise>
 						</xsl:choose>
-
 					</bind>
 				</xsl:for-each>
 			</xsl:for-each>
 		</xsl:for-each>
 	</xsl:template>
-
 	<xsl:template name="createGroup">
 		<group>
-
 			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
 			<xsl:variable name="formId" select="@FormOID" />
 			<label>
 				<xsl:value-of select="../../oc:FormDef[@OID = $formId]/@Name" />
 			</label>
-
 			<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
@@ -213,12 +192,9 @@
 									<item>
 										<xsl:attribute name="id"><xsl:value-of
 											select="@CodedValue" /></xsl:attribute>
-
 										<label>
-											<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
-											
+											<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>										
 										</label>
-										
 										<value>
 											<xsl:value-of select="@CodedValue"></xsl:value-of>
 										</value>
@@ -227,12 +203,9 @@
 							</select1>
 						</xsl:when>
 						<xsl:otherwise>
-
 							<input>
 								<xsl:attribute name="bind"><xsl:value-of
 									select="$itemId" /></xsl:attribute>
-
-
 								<label>
 									<xsl:value-of
 										select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
@@ -244,12 +217,10 @@
 									</hint>
 								</xsl:if>
 							</input>
-
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:for-each>
 			</xsl:for-each>
-
 		</group>
 	</xsl:template>
 
