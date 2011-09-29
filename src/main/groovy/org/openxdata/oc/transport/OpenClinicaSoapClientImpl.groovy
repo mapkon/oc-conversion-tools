@@ -82,8 +82,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">""" + xml.depthFirst().odm[0].children()[0] +"</ODM>"
 	}
 
-	public String getOpenxdataForm(String openclinicaStudyOID) {
-		def ODM = getMetadata(openclinicaStudyOID)
+	public String getOpenxdataForm(String studyOID) {
+		def ODM = getMetadata(studyOID)
 		def transformer = Transform.getTransformer()
 		return transformer.transformODM(ODM)
 	}
