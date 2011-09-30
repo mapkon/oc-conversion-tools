@@ -13,7 +13,7 @@ public interface OpenClinicaSoapClient {
 
 	String getMetadata(String studyOID)
 	
-	String getOpenxdataForm(String openclinicaStudyOID)
+	String getOpenxdataForm(String openclinicaStudyOID, Collection<String> subjectKeys)
 
 	Node sendRequest(String envelope)
 

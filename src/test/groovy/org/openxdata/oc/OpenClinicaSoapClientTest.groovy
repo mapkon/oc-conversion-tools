@@ -62,12 +62,12 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	void testGetOpenxdataFormMUSTReturnValidForm() {
 		def factory = setUpMocks(getMetaDataReturnXML)
-		
 		play {
+			
 			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
-			def response = soapClient.getOpenxdataForm("001")
+			def response = soapClient.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
 			def xml = new XmlParser().parseText(response)
-						
+
 			assertEquals  "study", xml.name()
 			assertEquals  "form", xml.form[0].name()
 			assertEquals  "version", xml.form.version[0].name()
@@ -76,7 +76,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	void testGetStudySubjectsMUSTReturnValidStudyList(){
+	void testGetSubjectKeysSHOULDReturnSubjectKeys(){
 		def factory = setUpMocks(studySubjectListXML)
 		play{
 			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
