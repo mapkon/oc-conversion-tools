@@ -9,10 +9,10 @@ import org.openxdata.oc.ODMBuilder
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.OpenclinicaStudy
-import org.openxdata.oc.transport.factory.ConnectionFactory
+import org.openxdata.oc.transport.factory.ConnectionURL
 
 
-public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
+public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	def connectionFactory
 	def header
@@ -48,7 +48,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient{
 		return envelope
 	}
 
-	public Node sendRequest(String envelope) {
+	Node sendRequest(String envelope) {
 		def outs = envelope.getBytes()
 
 		HttpURLConnection conn = connectionFactory.getConnection()

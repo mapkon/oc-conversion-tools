@@ -15,8 +15,6 @@ public interface OpenClinicaSoapClient {
 	
 	String getOpenxdataForm(String openclinicaStudyOID, Collection<String> subjectKeys)
 
-	Node sendRequest(String envelope)
-
 	def importData(Collection<String> instanceData)
 	
 	Collection<String> getSubjectKeys(String studyOID)
