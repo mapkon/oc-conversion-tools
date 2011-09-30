@@ -5,7 +5,7 @@ import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.openxdata.oc.transport.OpenClinicaSoapClientImpl
-import org.openxdata.oc.transport.factory.ConnectionFactory
+import org.openxdata.oc.transport.factory.ConnectionURL
 
 
 @WithGMock
@@ -96,7 +96,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def outputStream = new ByteArrayOutputStream()
 		connection.getOutputStream().returns(outputStream)
 		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
-		def factory = mock(ConnectionFactory.class)
+		def factory = mock(ConnectionURL.class)
 		factory.getConnection().returns(connection)
 		return factory
 	}

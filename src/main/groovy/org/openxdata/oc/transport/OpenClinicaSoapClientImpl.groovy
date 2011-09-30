@@ -14,7 +14,7 @@ import org.openxdata.oc.transport.factory.ConnectionURL
 
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
-	def connectionFactory
+	def connectionURL
 	def header
 	def dataPath = "/ws/data/v1"
 	def studyPath = "/ws/study/v1"
@@ -27,8 +27,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	 * @param userName the user name
 	 * @param password the users password
 	 */
-	OpenClinicaSoapClientImpl(ConnectionFactory connectionFactory, def userName, def password){
-		this.connectionFactory = connectionFactory
+	OpenClinicaSoapClientImpl(ConnectionURL url, def userName, def password){
+		this.connectionURL = url
 		buildHeader(userName, password)
 	}
 
@@ -51,7 +51,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	Node sendRequest(String envelope) {
 		def outs = envelope.getBytes()
 
-		HttpURLConnection conn = connectionFactory.getConnection()
+		HttpURLConnection conn = connectionURL.getConnection()
 
 		conn.setRequestMethod("POST")
 		conn.setDoOutput(true)

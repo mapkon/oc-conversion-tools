@@ -2,7 +2,7 @@ package org.openxdata.oc.transport.factory
 
 import java.net.HttpURLConnection;
 
-public class ConnectionFactoryIpml implements ConnectionFactory {
+public class StudyConnectionURL implements ConnectionURL {
 
 	public HttpURLConnection getConnection() {
 		URL url = new URL("http://localhost:8080/OpenClinica-ws-3.1.1/ws/study/v1")
