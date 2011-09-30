@@ -5,7 +5,7 @@ import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.openxdata.oc.transport.OpenClinicaSoapClientImpl
-import org.openxdata.oc.transport.factory.ConnectionURL
+import org.openxdata.oc.transport.factory.ConnectionURLFactory;
 
 
 @WithGMock
@@ -19,8 +19,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 		play {
 			
-			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
-			def all = soapClient.listAll()
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def all = client.listAll()
 			assertEquals 2, all.size()
 		}
 	}
@@ -30,8 +31,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 		play {
 			
-			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
-			def all = soapClient.listAll()
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def all = client.listAll()
 
 			def xml = new XmlParser().parseText(listAllReturnXML)
 			def studies = xml.depthFirst().study
@@ -51,8 +53,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		
 		play{
 			
-			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
-			def response = soapClient.getMetadata("001")
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def response = client.getMetadata("001")
 			def xml = new XmlSlurper().parseText(response).declareNamespace(oc: "http://www.cdisc.org/ns/odm/v1.3")
 						
 			assertEquals  "ODM", xml.name()
@@ -64,8 +67,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def factory = setUpMocks(getMetaDataReturnXML)
 		play {
 			
-			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
-			def response = soapClient.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def response = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
 			def xml = new XmlParser().parseText(response)
 
 			assertEquals  "study", xml.name()
@@ -77,10 +81,11 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	void testGetSubjectKeysSHOULDReturnSubjectKeys(){
-		def factory = setUpMocks(studySubjectListXML)
+		def factory = setUpMocksX(studySubjectListXML)
 		play{
-			def soapClient = new OpenClinicaSoapClientImpl(factory, username, password)
-			def subjectKeys = soapClient.getSubjectKeys("default-study")
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def subjectKeys = client.getSubjectKeys("default-study")
 			
 			assertNotNull subjectKeys
 			assertEquals 4, subjectKeys.size()
@@ -96,8 +101,26 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def outputStream = new ByteArrayOutputStream()
 		connection.getOutputStream().returns(outputStream)
 		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
-		def factory = mock(ConnectionURL.class)
-		factory.getConnection().returns(connection)
+
+		def factory = mock(ConnectionURLFactory.class)
+		factory.getStudyConnection().returns(connection)
+		
+		return factory
+	}
+	
+	private setUpMocksX(def returnXml) {
+		def connection = mock(HttpURLConnection.class)
+		connection.setRequestMethod("POST")
+		connection.setRequestProperty("Content-Type", "text/xml")
+		connection.setRequestProperty("Content-Length", is(instanceOf(String.class)))
+		connection.setDoOutput(true)
+		def outputStream = new ByteArrayOutputStream()
+		connection.getOutputStream().returns(outputStream)
+		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
+
+		def factory = mock(ConnectionURLFactory.class)
+		factory.getStudySubjectConnectionURL().returns(connection)
+		
 		return factory
 	}
 	
