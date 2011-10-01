@@ -7,6 +7,7 @@ import groovy.xml.XmlUtil
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
+import org.openxdata.oc.exception.MalformedStudyDefinitionException
 
 @Log
 public class Transform {
@@ -47,14 +48,18 @@ public class Transform {
 	}
 	
 	private def injectSubjectKeys(def doc, def subjectKeys) {
-
 		log.info("Injecting " + subjectKeys.size() + " Subject Keys into converted Study " + doc.@name +".")
 		def subjectKeyGroup = doc.breadthFirst().group.find {it.@id.equals('1')}
-		subjectKeyGroup.select1.each {
-			subjectKeys.each { key ->
-				Node itemNode = new Node(it, "item", [id:key])
-				addItemElements(itemNode, key)
+		if (subjectKeyGroup != null){
+			subjectKeyGroup.select1.each {
+				subjectKeys.each { key ->
+					Node itemNode = new Node(it, "item", [id:key])
+					addItemElements(itemNode, key)
+				}
 			}
+		}
+		else{
+			throw new MalformedStudyDefinitionException("Study does not have questions defined for it.")
 		}
 	}
 	

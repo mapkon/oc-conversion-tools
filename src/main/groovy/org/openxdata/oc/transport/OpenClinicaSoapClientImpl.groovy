@@ -2,6 +2,7 @@ package org.openxdata.oc.transport
 
 import groovy.util.logging.Log
 import groovy.xml.Namespace
+import groovy.xml.XmlUtil;
 
 import java.util.Collection
 
@@ -112,6 +113,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 		def envelope = buildEnvelope(studyPath, body)
 		def xml = sendRequest(envelope, factory.getStudyConnection())
+		
 		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">""" + xml.depthFirst().odm[0].children()[0] +"</ODM>"
 	}
 
