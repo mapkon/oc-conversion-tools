@@ -1,11 +1,11 @@
 package org.openxdata.oc
 
 import static org.hamcrest.Matchers.*
-import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
+import org.openxdata.oc.model.OpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClientImpl
-import org.openxdata.oc.transport.factory.ConnectionURLFactory;
+import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
 
 @WithGMock
@@ -33,18 +33,18 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
-			def all = client.listAll()
-
-			def xml = new XmlParser().parseText(listAllReturnXML)
-			def studies = xml.depthFirst().study
+			def actual = client.listAll()
 			
-			assertEquals all[0].OID, studies[0].oid.text()
-			assertEquals all[0].name,studies[0].name.text()
-			assertEquals all[0].identifier,studies[0].identifier.text()
+			def study1 = new OpenclinicaStudy(identifier: "default-study", OID: "S_DEFAULTS1", name:"Default Study")
+			def study2 = new OpenclinicaStudy(identifier: "001", OID: "S_001", name: "Test Study")
+			
+			assertEquals actual[0].OID, study1.OID
+			assertEquals actual[0].name, study1.name
+			assertEquals actual[0].identifier, study1.identifier
 
-			assertEquals all[1].OID, studies[1].oid.text()
-			assertEquals all[1].name,studies[1].name.text()
-			assertEquals all[1].identifier,studies[1].identifier.text()
+			assertEquals actual[1].OID, study2.OID
+			assertEquals actual[1].name, study2.name
+			assertEquals actual[1].identifier, study2.identifier
 		}
 	}
 
