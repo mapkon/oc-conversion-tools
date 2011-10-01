@@ -1,5 +1,6 @@
 package org.openxdata.oc.transport
 
+import groovy.util.logging.Log
 import groovy.xml.Namespace
 
 import java.util.Collection
@@ -11,6 +12,7 @@ import org.openxdata.oc.model.OpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
 
+@Log
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	def header
@@ -27,6 +29,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	 * @param password the users password
 	 */
 	OpenClinicaSoapClientImpl(def userName, def password){
+		log.info("Initialized Openclinica Soap Client.")
 		buildHeader(userName, password)
 	}
 
@@ -47,6 +50,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 
 	Node sendRequest(String envelope, HttpURLConnection conn) {
+		log.info("Sending request to: " + conn)
 		def outs = envelope.getBytes()
 
 		conn.setRequestMethod("POST")
@@ -68,6 +72,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	
 	def parseXML(String response){
 		
+		log.info("Parsing returned XML to remove characters not allowed in prolong.")
 		def validXML
 		if(response.startsWith("--") && response.endsWith("--")){
 			
@@ -94,6 +99,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	} 
 
 	public String getMetadata(String studyOID) {
+		log.info("Fetching Metadata for Openclinica study with ID: " + studyOID)
 		def body = """<soapenv:Body>
 					      <v1:getMetadataRequest>
 					         <v1:studyMetadata>
@@ -110,6 +116,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 
 	public String getOpenxdataForm(String studyOID, Collection<String> subjectKeys) {
+		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
 		def ODM = getMetadata(studyOID)
 		def transformer = Transform.getTransformer()
 		
@@ -117,6 +124,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 
 	public List<OpenclinicaStudy> listAll(){
+		log.info("Fetching all available studies...")
 		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
 
 		def envelope = buildEnvelope(studyPath, body)
@@ -128,6 +136,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	private def extractStudies(def response){
 
+		log.info("Extracting studies from response.")
 		List<OpenclinicaStudy> studies  = new ArrayList<OpenclinicaStudy>()
 		response.depthFirst().study.each {
 			def study = new OpenclinicaStudy()
@@ -142,22 +151,26 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	public def importData(Collection<String> instanceData){
 
+		log.info("Starting import to Openclinca.")
 		def importODM = new ODMBuilder().buildODM(instanceData)
 		def body = """<soapenv:Body>
 					  	<v1:importRequest>""" + importODM + """</v1:importRequest>
 					  </soapenv:Body>"""
 
 		def envelope = buildEnvelope(dataPath, body)
+		log.info("Sending request to :" + factory.getStudyConnection())
 		def reply = sendRequest(envelope, factory.getStudyConnection())
 
 		def result = reply.depthFirst().result[0].text()
 		if(result != "Success")
 			throw new ImportException(reply.depthFirst().error[0].text())
 
+		log.info("Successfully exported data to openclinica.")
 		return result;
 	}
 	
 	public Collection<String> getSubjectKeys(String studyOID){
+		log.info("Fetching subject keys for Openclinica study with ID: " + studyOID)
 		def body = """<soapenv:Body>
 				      <v1:listAllByStudyRequest>
 				         <bean:studyRef>
@@ -170,6 +183,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		def response = sendRequest(envelope, factory.getStudySubjectConnectionURL())
 		Collection<String> subjectKeys = extractSubjectKeys(response)
 
+		log.info("Found :" + subjectKeys.size())
 		return subjectKeys
 	}
 	

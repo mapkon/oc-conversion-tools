@@ -22,7 +22,7 @@ public class Transform {
 
 	String transformODM(def odm, def subjectKeys){
 		
-		log.info("Starting transformation of file")
+		log.info("Starting transformation of file...")
 		
 		def xslt = loadFile("transform-v0.1.xsl");
 		
@@ -42,11 +42,13 @@ public class Transform {
 		// making the xform into a string
 		serialiseXform(doc)
 
+		log.info("<< Successfully transformed file. >>")
 		return XmlUtil.asString(doc);
 	}
 	
 	private def injectSubjectKeys(def doc, def subjectKeys) {
 
+		log.info("Injecting " + subjectKeys.size() + " Subject Keys into converted Study " + doc.@name +".")
 		def subjectKeyGroup = doc.breadthFirst().group.find {it.@id.equals('1')}
 		subjectKeyGroup.select1.each {
 			subjectKeys.each { key ->
@@ -62,6 +64,9 @@ public class Transform {
 	}
 
 	private parseMeasurementUnits(Node doc) {
+		
+		log.info("Parsing Measurement units.")
+		
 		doc.breadthFirst().hint.each {
 			def text = it.text()
 			text = text.replace("<SUP>", "^")
@@ -73,6 +78,8 @@ public class Transform {
 	}
 	
 	private serialiseXform(Node doc) {
+		
+		log.info("Transforming the xform tag to string as required by openxdata.")
 		doc.form.version.xform.each {
 			def s = ""
 			it.children().each {s += XmlUtil.asString(it) }
