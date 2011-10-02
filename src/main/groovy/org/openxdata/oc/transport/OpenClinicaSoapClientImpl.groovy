@@ -70,6 +70,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			os.write(outs)
 			is = conn.getInputStream()
 		}catch (Exception ex){
+			log.info('Failed to establish connection to:' + conn)
 			throw new UnAvailableException('Connection Failed', ex)
 		}
 		
