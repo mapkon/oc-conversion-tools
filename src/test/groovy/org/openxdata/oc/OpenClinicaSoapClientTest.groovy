@@ -1,8 +1,11 @@
 package org.openxdata.oc
 
 import static org.hamcrest.Matchers.*
+import groovy.mock.interceptor.MockFor
 
 import org.gmock.WithGMock
+import org.junit.Test
+import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.OpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClientImpl
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
@@ -89,6 +92,19 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			assertNotNull subjectKeys
 			assertEquals 4, subjectKeys.size()
+		}
+	}
+	
+	void testWrongURLMUSTThrowUnAvailableException(){
+		def mock = new MockFor(ConnectionURLFactory)
+		mock.demand.getStudyConnection { throw new UnAvailableException("Incorrect url") }
+
+		def factory = mock.proxyInstance()
+
+		shouldFail(UnAvailableException){
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			client.listAll()
 		}
 	}
 

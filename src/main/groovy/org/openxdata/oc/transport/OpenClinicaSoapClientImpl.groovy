@@ -9,6 +9,7 @@ import java.util.Collection
 import org.openxdata.oc.ODMBuilder
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.OpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
@@ -52,6 +53,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	Node sendRequest(String envelope, HttpURLConnection conn) {
 		log.info("Sending request to: " + conn)
+		
 		def outs = envelope.getBytes()
 
 		conn.setRequestMethod("POST")
@@ -60,9 +62,22 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		conn.setRequestProperty("Content-Length", outs.length.toString())
 		conn.setRequestProperty("Content-Type", "text/xml")
 
-		def os = conn.getOutputStream()
-		os.write(outs)
-		def is = conn.getInputStream()
+		def os
+		def is
+		
+		try{
+			os = conn.getOutputStream()
+			os.write(outs)
+			is = conn.getInputStream()
+		}catch (Exception ex){
+			throw new UnAvailableException('Connection Failed', ex)
+		}
+		
+		def xml = buildResponse(is)
+		return xml
+	}
+
+	private buildResponse(InputStream is) {
 		def builder = new StringBuilder()
 		for (String s :is.readLines()) {
 			builder.append(s)
