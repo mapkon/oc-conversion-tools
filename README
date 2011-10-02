@@ -1,5 +1,5 @@
 ############################################################				
-# How to set up IDE.								       #
+# How to set up IDE.                                       #								       
 ############################################################
 
 1. Use maven to set up.
@@ -9,7 +9,7 @@
 	3. Start coding
 	
 ############################################################
-# Usage as a dependency									   #
+# Usage as a dependency.                                   #					               
 ############################################################
 
 This library is intended to be used as a dependency in the openxdata application.
