@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>mapkon/oc-conversion-tools @ GitHub</title>
+
+  <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #3841e6;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      color: #ffffff;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+    h1 { font-size: 3.8em; color: #c7be19; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #c7be19; }
+    h3 { text-align: center; color: #c7be19; }
+    a { color: #c7be19; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+    pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+  </style>
+</head>
+
+<body>
+  <a href="http://github.com/mapkon/oc-conversion-tools"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+  <div id="container">
+
+    <div class="download">
+      <a href="http://github.com/mapkon/oc-conversion-tools/zipball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+      <a href="http://github.com/mapkon/oc-conversion-tools/tarball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    </div>
+
+    <h1><a href="http://github.com/mapkon/oc-conversion-tools">oc-conversion-tools</a>
+      <span class="small">by <a href="http://github.com/mapkon">mapkon</a></span></h1>
+
+    <div class="description">
+      openxdata openclinica form conversion tools
+    </div>
+
+    <p>This library enables the conversion of ODm format forms defined in openclinica to xforms understand in openxdata. It is meant to enable the use of the openxdata mobile client in data collection during vaccine/clinical trials.
+
+The CRFs defined in openclinica are converted to a format understandable by openxdata and used on the mobile. The collected data is sent back to openclinica.</p><h2>Dependencies</h2>
+<p>1. JUnit 4.4
+2. GMock 0.8.1
+3. Hamcrest-all 1.1
+4. Groovy-all 1.8.0</p>
+<h2>Install</h2>
+<p>This library is intended to be used as a dependency in the openxdata application.
+
+The following instructions assume you have set up openclinca web services and it is running.
+For instructions on how to set up openclinica, 
+please visit: https://docs.openclinica.com/3.1/technical-documents/openclinica-web-services-guide/using-openclinica-web-services
+
+1. Define a Setting Group in openxdata called 'openclinica' with settings url, user name and password.
+These settings will be used to connect to openclinica so it goes without saying that they must be valid in the openclinca context 
+and can access openclinca web services.
+
+2. Add the url for the openclinica webservices in the format [protocol][host][port]
+
+3. Run the openxdata application and go to the dash board
+
+4. Click on the 'openclinica' button to load the study management console.
+
+5. For any bugs, please file an issue at https://github.com/mapkon/oc-conversion-tools/issues
+
+
+* Further set up instructions are found at http://code.openxdata.org *</p>
+<h2>License</h2>
+<p> http://www.apache.org/licenses/LICENSE-2.0</p>
+<h2>Authors</h2>
+<p>kata mapkon (cattabanks@gmail.com)<br/>Morten Bendiksen (morten.bendiksen@gmail.com)<br/><br/>      </p>
+<h2>Contact</h2>
+<p>kata mapkon (cattabanks@gmail.com)<br/>      </p>
+
+
+    <h2>Download</h2>
+    <p>
+      You can download this project in either
+      <a href="http://github.com/mapkon/oc-conversion-tools/zipball/master">zip</a> or
+      <a href="http://github.com/mapkon/oc-conversion-tools/tarball/master">tar</a> formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre>$ git clone git://github.com/mapkon/oc-conversion-tools</pre>
+    </p>
+
+    <div class="footer">
+      get the source code on GitHub : <a href="http://github.com/mapkon/oc-conversion-tools">mapkon/oc-conversion-tools</a>
+    </div>
+
+  </div>
+
+  
+</body>
+</html>
