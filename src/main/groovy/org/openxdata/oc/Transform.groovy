@@ -16,6 +16,10 @@ public class Transform {
 		
 	}
 	
+	/**
+	 * Returns an instance of the transformer.
+	 * @return transformer.
+	 */
 	public static Transform getTransformer() {
 		Transform t
 		if(t == null)
@@ -24,6 +28,14 @@ public class Transform {
 		return t;
 	}
 
+	/**
+	 * Transforms an ODM file to openxdata xform.
+	 * 
+	 * @param odm ODM file to convert.
+	 * @param subjectKeys Subject Keys to insert into form.
+	 * 
+	 * @return Valid OpenXdata form.
+	 */
 	String transformODM(def odm, def subjectKeys){
 		
 		log.info("Starting transformation of file...")
