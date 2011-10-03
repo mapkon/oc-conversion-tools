@@ -35,7 +35,15 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		buildHeader(userName, password)
 	}
 
-	private def buildHeader(def user, def password){
+	/**
+	 * Builds the header for openclinica web services.
+	 * 
+	 * @param user username for user allowed to access openclinica web services.
+	 * @param password Password for user.
+	 * 
+	 * @return Valid SOAP header with authentication details.
+	 */
+	private def buildHeader(def userName, def password){
 		header = """<soapenv:Header>
 					  <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
 					        <wsse:UsernameToken wsu:Id="UsernameToken-27777511" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
@@ -45,13 +53,29 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 					  </wsse:Security></soapenv:Header>"""
 	}
 
+	/**
+	 * Builds a given an endpoint path and a body.
+	 * 
+	 * @param path endpoint to connect to.
+	 * @param body Body of the envelope encapsulating the request to make.
+	 * 
+	 * @return Valid envelope that can initiate requests against an openlinica service.
+	 */
 	private String buildEnvelope(String path, String body) {
 		def envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org""" + path + """" xmlns:bean="http://openclinica.org/ws/beans">""" + header + body +
 				"""</soapenv:Envelope>"""
 		return envelope
 	}
 
-	Node sendRequest(String envelope, HttpURLConnection conn) {
+	/**
+	 * Sends request to the openclinica web service.
+	 * 
+	 * @param envelope SOAP envelope to send.
+	 * @param conn HTTPURLConnection to connect to.
+	 * 
+	 * @return Response from openclinica web service.
+	 */
+	private Node sendRequest(String envelope, HttpURLConnection conn) {
 		log.info("Sending request to: " + conn)
 		
 		def outs = envelope.getBytes()
@@ -78,6 +102,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return xml
 	}
 
+	/**
+	 * Builds a response by reading from the HttpConnection input stream.
+	 * 
+	 * @param is Input stream to read from.
+	 * @return Response in XML format.
+	 */
 	private buildResponse(InputStream is) {
 		def builder = new StringBuilder()
 		for (String s :is.readLines()) {
@@ -87,6 +117,11 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return xml
 	}
 	
+	/**
+	 * Parses an XML removing invalid characters that are occassionally appended to the responses from openclinica web services when gettings study subjects.
+	 * @param response Response to parse.
+	 * @return A valid XML string.
+	 */
 	def parseXML(String response){
 		
 		log.info("Parsing returned XML to remove characters not allowed in prolong.")
@@ -132,7 +167,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">""" + xml.depthFirst().odm[0].children()[0] +"</ODM>"
 	}
-
+	
 	public String getOpenxdataForm(String studyOID, Collection<String> subjectKeys) {
 		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
 		def ODM = getMetadata(studyOID)
