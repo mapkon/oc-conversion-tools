@@ -2,12 +2,17 @@ package org.openxdata.oc.transport.factory
 
 public class ConnectionURLFactory {
 
-	public HttpURLConnection getStudyConnection(String host){
+	def host
+	public ConnectionURLFactory(String host){
+		this.host = host
+	}
+	
+	public HttpURLConnection getStudyConnection(){
 		URL url = new URL(host + "/ws/study/v1")
 		return url.openConnection()
 	}
 
-	public HttpURLConnection getStudySubjectConnectionURL(String host){
+	public HttpURLConnection getStudySubjectConnectionURL(){
 		URL url = new URL(host + "/ws/studySubject/v1")
 		return url.openConnection()
 	}
