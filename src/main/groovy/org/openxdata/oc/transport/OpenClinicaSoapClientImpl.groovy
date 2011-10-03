@@ -47,7 +47,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		header = """<soapenv:Header>
 					  <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
 					        <wsse:UsernameToken wsu:Id="UsernameToken-27777511" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-					            <wsse:Username>""" + user + """</wsse:Username>
+					            <wsse:Username>""" + userName + """</wsse:Username>
 					            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">"""+password+"""</wsse:Password>
 					        </wsse:UsernameToken>
 					  </wsse:Security></soapenv:Header>"""
@@ -150,16 +150,27 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return xml
 	} 
 
+	public List<OpenclinicaStudy> listAll(){
+		log.info("Fetching all available studies...")
+		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
+
+		def envelope = buildEnvelope(studyPath, body)
+		def response = sendRequest(envelope, factory.getStudyConnection())
+
+		Collection<OpenclinicaStudy> studies = extractStudies(response)
+		return studies;
+	}
+	
 	public String getMetadata(String studyOID) {
 		log.info("Fetching Metadata for Openclinica study with ID: " + studyOID)
 		def body = """<soapenv:Body>
-					      <v1:getMetadataRequest>
-					         <v1:studyMetadata>
-					            <bean:studyRef>
-					               <bean:identifier>"""+ studyOID +"""</bean:identifier>
-					            </bean:studyRef>
-					         </v1:studyMetadata>
-					      </v1:getMetadataRequest>
+						  <v1:getMetadataRequest>
+							 <v1:studyMetadata>
+								<bean:studyRef>
+								   <bean:identifier>"""+ studyOID +"""</bean:identifier>
+								</bean:studyRef>
+							 </v1:studyMetadata>
+						  </v1:getMetadataRequest>
 					   </soapenv:Body>"""
 
 		def envelope = buildEnvelope(studyPath, body)
@@ -176,17 +187,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return transformer.transformODM(ODM, subjectKeys)
 	}
 
-	public List<OpenclinicaStudy> listAll(){
-		log.info("Fetching all available studies...")
-		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
-
-		def envelope = buildEnvelope(studyPath, body)
-		def response = sendRequest(envelope, factory.getStudyConnection())
-
-		Collection<OpenclinicaStudy> studies = extractStudies(response)
-		return studies;
-	}
-
+	/**
+	 * Extracts studies from a SOAP response.
+	 * 
+	 * @param response Response containing studies
+	 * @return List of studies.
+	 */
 	private def extractStudies(def response){
 
 		log.info("Extracting studies from response.")
@@ -200,6 +206,24 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		}
 
 		return studies
+	}
+	
+	public Collection<String> getSubjectKeys(String studyOID){
+		log.info("Fetching subject keys for Openclinica study with ID: " + studyOID)
+		def body = """<soapenv:Body>
+					  <v1:listAllByStudyRequest>
+						 <bean:studyRef>
+							<bean:identifier>""" + studyOID + """</bean:identifier>
+						 </bean:studyRef>
+					  </v1:listAllByStudyRequest>
+				   </soapenv:Body>"""
+		
+		def envelope = buildEnvelope(subjectPath, body)
+		def response = sendRequest(envelope, factory.getStudySubjectConnectionURL())
+		Collection<String> subjectKeys = extractSubjectKeys(response)
+
+		log.info("Found :" + subjectKeys.size())
+		return subjectKeys
 	}
 
 	public def importData(Collection<String> instanceData){
@@ -221,25 +245,13 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		log.info("Successfully exported data to openclinica.")
 		return result;
 	}
-	
-	public Collection<String> getSubjectKeys(String studyOID){
-		log.info("Fetching subject keys for Openclinica study with ID: " + studyOID)
-		def body = """<soapenv:Body>
-				      <v1:listAllByStudyRequest>
-				         <bean:studyRef>
-				            <bean:identifier>""" + studyOID + """</bean:identifier>
-				         </bean:studyRef>
-				      </v1:listAllByStudyRequest>
-				   </soapenv:Body>"""
 		
-		def envelope = buildEnvelope(subjectPath, body)
-		def response = sendRequest(envelope, factory.getStudySubjectConnectionURL())
-		Collection<String> subjectKeys = extractSubjectKeys(response)
-
-		log.info("Found :" + subjectKeys.size())
-		return subjectKeys
-	}
-	
+	/**
+	 * Extracts subjects keys from a SOAP response.
+	 * 
+	 * @param response Response containing subject keys.
+	 * @return List of subject keys.
+	 */
 	def extractSubjectKeys(def response){
 		
 		List<String> subjectKeys = new ArrayList<String>()
