@@ -17,7 +17,10 @@ public class Transform {
 	}
 	
 	public static Transform getTransformer() {
-		Transform t = new Transform();
+		Transform t
+		if(t == null)
+			t = new Transform();
+			
 		return t;
 	}
 
