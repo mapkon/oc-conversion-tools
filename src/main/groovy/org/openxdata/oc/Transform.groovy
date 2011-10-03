@@ -45,7 +45,6 @@ public class Transform {
 
 		log.info("<< Successfully transformed file. >>")
 		
-		println doc
 		return XmlUtil.asString(doc);
 	}
 	
