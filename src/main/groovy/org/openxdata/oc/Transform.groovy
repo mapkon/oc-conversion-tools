@@ -44,22 +44,29 @@ public class Transform {
 		serialiseXform(doc)
 
 		log.info("<< Successfully transformed file. >>")
+		
+		println doc
 		return XmlUtil.asString(doc);
 	}
 	
 	private def injectSubjectKeys(def doc, def subjectKeys) {
 		log.info("Injecting " + subjectKeys.size() + " Subject Keys into converted Study " + doc.@name +".")
-		def subjectKeyGroup = doc.breadthFirst().group.find {it.@id.equals('1')}
-		if (subjectKeyGroup != null){
-			subjectKeyGroup.select1.each {
-				subjectKeys.each { key ->
-					Node itemNode = new Node(it, "item", [id:key])
-					addItemElements(itemNode, key)
+
+		doc.depthFirst().form.each {
+			def subjectKeyGroups = doc.breadthFirst().group.findAll {it.@id.equals('1')}
+			if (subjectKeyGroups != null){
+				subjectKeyGroups.each {
+					it.select1.each { selectGroup ->
+						subjectKeys.each { key ->
+							Node itemNode = new Node(selectGroup, "item", [id:key])
+							addItemElements(itemNode, key)
+						}
+					}
 				}
 			}
-		}
-		else{
-			throw new MalformedStudyDefinitionException("Study does not have questions defined for it.")
+			else{
+				throw new MalformedStudyDefinitionException("Study does not have questions defined for it.")
+			}
 		}
 	}
 	
