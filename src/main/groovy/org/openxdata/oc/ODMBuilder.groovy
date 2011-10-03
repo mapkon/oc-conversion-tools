@@ -9,6 +9,13 @@ import java.util.Collection
 @Log
 public class ODMBuilder {
 
+	/**
+	 * Constructs an ODM file to push to openclinica.
+	 * 
+	 * @param instanceData Instance Data collected from openXdata to add to the ODM file.
+	 * 
+	 * @return A valid ODM file.
+	 */
 	public String buildODM(Collection<String> instanceData) {
 		
 		log.info("Starting building of ODM file")
