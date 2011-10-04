@@ -118,7 +118,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 	
 	/**
-	 * Parses an XML removing invalid characters that are occassionally appended to the responses from openclinica web services when gettings study subjects.
+	 * Parses an XML removing invalid characters that are occasionally appended to the responses from openclinica web services when getting study subjects.
 	 * @param response Response to parse.
 	 * @return A valid XML string.
 	 */
