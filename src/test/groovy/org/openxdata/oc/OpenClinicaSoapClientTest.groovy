@@ -41,6 +41,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def study1 = new OpenclinicaStudy(identifier: "default-study", OID: "S_DEFAULTS1", name:"Default Study")
 			def study2 = new OpenclinicaStudy(identifier: "001", OID: "S_001", name: "Test Study")
 			
+			assertEquals actual[0], study1
+			assertEquals actual[1], study2
 			assertEquals actual[0].OID, study1.OID
 			assertEquals actual[0].name, study1.name
 			assertEquals actual[0].identifier, study1.identifier
