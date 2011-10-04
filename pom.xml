@@ -1,10 +1,11 @@
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openxdata</groupId>
 	<artifactId>oc-conversion-tools</artifactId>
-	<version>0.3-BETA.1</version>
+	<version>0.3-BETA.2-SNAPSHOT</version>
 	<name>OpenXdata OpenClinica Conversion Tools</name>
 	<url>http://openxdata.org</url>
 
@@ -67,7 +68,7 @@
 			<timezone>+1</timezone>
 		</developer>
 	</developers>
-	
+
 	<repositories>
 		<repository>
 			<id>org.codehaus</id>
