@@ -132,7 +132,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			def endIndex = response.indexOf("</SOAP-ENV:Envelope>")
 			validXML = response.substring(beginIndex, endIndex)
 			
-			// Add enclosing envlope tag
+			// Add enclosing envelope tag
 			def builder = new StringBuilder()
 			builder.append(validXML)
 			builder.append("</SOAP-ENV:Envelope>")
