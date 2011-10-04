@@ -263,7 +263,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return subjectKeys
 	}
 	
-	public void setConnectionFactory(ConnectionURLFactory factory){
+	public def setConnectionFactory(ConnectionURLFactory factory){
 		this.factory = factory
 	}
 }
