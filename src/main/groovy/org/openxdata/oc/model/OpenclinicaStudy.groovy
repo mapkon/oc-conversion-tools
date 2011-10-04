@@ -1,12 +1,14 @@
 package org.openxdata.oc.model
 
 import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString;
+
 
 /**
  * Simple representation of the OpenClinica Study.
  */
-@EqualsAndHashCode
-public class OpenclinicaStudy {
+@ToString(includeNames=true)
+@EqualsAndHashCode public class OpenclinicaStudy {
 	
 	String OID
 	String name
