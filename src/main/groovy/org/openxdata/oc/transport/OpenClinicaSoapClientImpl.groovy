@@ -157,7 +157,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		def envelope = buildEnvelope(studyPath, body)
 		def response = sendRequest(envelope, factory.getStudyConnection())
 
-		Collection<OpenclinicaStudy> studies = extractStudies(response)
+		List<OpenclinicaStudy> studies = extractStudies(response)
 		return studies;
 	}
 	
