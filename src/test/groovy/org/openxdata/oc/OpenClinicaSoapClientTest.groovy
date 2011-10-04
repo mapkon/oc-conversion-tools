@@ -43,13 +43,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			assertEquals actual[0], study1
 			assertEquals actual[1], study2
-			assertEquals actual[0].OID, study1.OID
-			assertEquals actual[0].name, study1.name
-			assertEquals actual[0].identifier, study1.identifier
-
-			assertEquals actual[1].OID, study2.OID
-			assertEquals actual[1].name, study2.name
-			assertEquals actual[1].identifier, study2.identifier
 		}
 	}
 
