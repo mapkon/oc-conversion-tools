@@ -1,4 +1,4 @@
-package org.openxdata.oc.transport
+package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
 import groovy.xml.Namespace
@@ -11,6 +11,7 @@ import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.OpenclinicaStudy
+import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
 
@@ -263,7 +264,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return subjectKeys
 	}
 	
-	public void setConnectionFactory(ConnectionURLFactory factory){
+	public def setConnectionFactory(ConnectionURLFactory factory){
 		this.factory = factory
 	}
 }
