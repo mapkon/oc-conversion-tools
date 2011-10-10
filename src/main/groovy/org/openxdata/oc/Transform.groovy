@@ -12,20 +12,16 @@ import org.openxdata.oc.exception.MalformedStudyDefinitionException
 @Log
 public class Transform {
 	
-	private Transform() {
-		
-	}
+	private static Transform INSTANCE = new Transform()
+	
+	private Transform() {}
 	
 	/**
 	 * Returns an instance of the transformer.
 	 * @return transformer.
 	 */
 	public static Transform getTransformer() {
-		Transform t
-		if(t == null)
-			t = new Transform();
-			
-		return t;
+		return INSTANCE
 	}
 
 	/**
