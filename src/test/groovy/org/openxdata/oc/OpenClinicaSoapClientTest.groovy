@@ -4,11 +4,10 @@ import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
 
 import org.gmock.WithGMock
-import org.junit.Test
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.OpenclinicaStudy
-import org.openxdata.oc.transport.OpenClinicaSoapClientImpl
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
+import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 
 
 @WithGMock
