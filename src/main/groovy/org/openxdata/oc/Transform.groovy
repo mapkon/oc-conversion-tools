@@ -75,6 +75,8 @@ public class Transform {
 		else{
 			throw new MalformedStudyDefinitionException("Study does not have questions defined for it.")
 		}
+		
+		log.info("Injecting subjects successful.")
 	}
 	
 	private def addItemElements(def node, def value){
@@ -94,6 +96,8 @@ public class Transform {
 			parent.remove(it)
 			new Node(parent, "hint", text)
 		}
+		
+		log.info("Parsing Measurement Units successful.")
 	}
 	
 	private serialiseXform(Node doc) {
@@ -106,6 +110,8 @@ public class Transform {
 			it.remove(it.children())
 			it.children().add(text)
 		}
+		
+		log.info("Transforming Xform tag to String successful.")
 	}
 
 	private String loadFile(def file) {
