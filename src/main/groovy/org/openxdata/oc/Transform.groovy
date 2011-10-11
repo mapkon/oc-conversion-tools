@@ -36,7 +36,7 @@ public class Transform {
 		
 		log.info("Starting transformation of file...")
 		
-		def xslt = loadFile("transform-v0.1.xsl");
+		def xslt = loadFile("transform-v0.1.xsl")
 		
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
@@ -55,7 +55,7 @@ public class Transform {
 		serialiseXform(doc)
 
 		log.info("<< Successfully transformed file. >>")
-		return XmlUtil.asString(doc);
+		return XmlUtil.asString(doc)
 	}
 	
 	private def injectSubjectKeys(def doc, def subjectKeys) {

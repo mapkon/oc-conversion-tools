@@ -5,7 +5,7 @@ class TransformTest extends GroovyTestCase {
 
 	def outputDoc
 	def inputDoc
-	def transformer = new Transform();
+	def transformer = new Transform()
 
 	public void setUp(){
 		def inputString = new File(getClass().getResource("test-odm.xml").getFile()).text
@@ -36,7 +36,7 @@ class TransformTest extends GroovyTestCase {
 		versionNode.Protocol.StudyEventRef.each {
 			def eventId = it.@StudyEventOID
 			def eventDef = versionNode.StudyEventDef.find {
-				it.@OID == eventId;
+				it.@OID == eventId
 			}
 			eventDef.FormRef.each {
 				def formId = it.@FormOID
@@ -61,7 +61,7 @@ class TransformTest extends GroovyTestCase {
 			}
 		}
 
-		def itemsInInput = inputDoc.Study.MetaDataVersion.ItemGroupDef.ItemRef.size();
+		def itemsInInput = inputDoc.Study.MetaDataVersion.ItemGroupDef.ItemRef.size()
 
 		assertTrue numberOfInputsTested > 1
 		assertTrue numberOfInputsTested >= itemsInInput
