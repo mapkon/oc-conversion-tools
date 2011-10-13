@@ -71,7 +71,7 @@ public class Transform {
 			}
 		}
 		else{
-			log.info("No Subjects Attached to the Study: . " + doc.@name + " Adding Input Node to the Form.")
+			log.info("No Subjects Attached to the Study: " + doc.@name + "." + " Adding Input Node to the Form.")
 			subjectKeyGroup.each {
 				def inputNode = new Node(it, "input", [bind:"subjectKeyBind"])
 			}

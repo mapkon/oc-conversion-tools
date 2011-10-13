@@ -226,7 +226,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		def response = sendRequest(envelope, factory.getStudySubjectConnectionURL())
 		Collection<String> subjectKeys = extractSubjectKeys(response)
 
-		log.info("Found :" + subjectKeys.size())
+		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: " + studyOID)
 		return subjectKeys
 	}
 
