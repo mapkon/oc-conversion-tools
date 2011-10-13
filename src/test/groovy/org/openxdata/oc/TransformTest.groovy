@@ -1,5 +1,8 @@
 package org.openxdata.oc
 
+import groovy.inspect.TextNode;
+import groovy.xml.XmlUtil;
+
 
 class TransformTest extends GroovyTestCase {
 

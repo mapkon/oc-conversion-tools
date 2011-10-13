@@ -7,7 +7,6 @@ import groovy.xml.XmlUtil
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
-import org.openxdata.oc.exception.MalformedStudyDefinitionException
 
 @Log
 public class Transform {
@@ -59,24 +58,26 @@ public class Transform {
 	}
 	
 	private def injectSubjectKeys(def doc, def subjectKeys) {
-		log.info("Injecting " + subjectKeys.size() + " Subject Keys into converted Study " + doc.@name +".")
 
-		def subjectKeyGroups = doc.breadthFirst().group.findAll {it.@id.equals('1')}
-		if (subjectKeyGroups != null){
-			subjectKeyGroups.each {
-				it.select1.each { selectGroup ->
-					subjectKeys.each { key ->
-						Node itemNode = new Node(selectGroup, "item", [id:key])
-						addItemElements(itemNode, key)
-					}
+		def subjectKeyGroup = doc.breadthFirst().group.findAll {it.@id.equals('1')}
+		if(subjectKeys.size > 0){
+			log.info("Injecting " + subjectKeys.size() + " Subject Keys into converted Study " + doc.@name +".")
+			subjectKeyGroup.each {
+				def selectNode = new Node(it, "select1", [bind:"subjectKeyBind"])
+				subjectKeys.each { key ->
+					Node itemNode = new Node(selectNode, "item", [id:key])
+					addItemElements(itemNode, key)
 				}
 			}
 		}
 		else{
-			throw new MalformedStudyDefinitionException("Study does not have questions defined for it.")
+			log.info("No Subjects Attached to the Study: . " + doc.@name + " Adding Input Node to the Form.")
+			subjectKeyGroup.each {
+				def inputNode = new Node(it, "input", [bind:"subjectKeyBind"])
+			}
 		}
-		
-		log.info("Injecting subjects successful.")
+
+		log.info("Done processing subjects.")
 	}
 	
 	private def addItemElements(def node, def value){

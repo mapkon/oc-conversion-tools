@@ -2,6 +2,7 @@ package org.openxdata.oc.transport
 
 import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
+import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.openxdata.oc.exception.UnAvailableException
@@ -99,6 +100,61 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
 			client.listAll()
+		}
+	}
+	
+	void testMUSTHaveInputNodeOnZeroSubjectKeys(){
+
+		def factory = setUpMocks(getMetaDataReturnXML)
+		play {
+
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def response = client.getOpenxdataForm("001", [])
+
+			def xml = new XmlParser().parseText(response)
+			xml.form.version.xform.each {
+
+				def xformString = it.text()
+				def parsedXform = new XmlParser().parseText(xformString)
+
+				def group1 = parsedXform.depthFirst().group.findAll{
+					it.@id.equals('1')
+				}
+				group1.each {
+					assertEquals  2, it.children().size() // Extra one is the label node
+					assertEquals "input", it.children()[1].name().localPart
+				}
+			}
+		}
+	}
+	
+	void testMUSTHaveSelectNodeGivenSubjectKeys(){
+
+		def factory = setUpMocks(getMetaDataReturnXML)
+		play {
+
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def response = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
+			def xml = new XmlParser().parseText(response)
+
+			xml.form.version.xform.each {
+
+				def xformString = it.text()
+				def parsedXform = new XmlParser().parseText(xformString)
+
+				def group1 = parsedXform.depthFirst().group.findAll{
+					it.@id.equals('1')
+				}
+				group1.each {
+					assertEquals  2, it.children().size() // Extra one is the label node
+					assertEquals "select1", it.children()[1].name().localPart
+					it.select1.each{selectNode ->
+						assertEquals 4, selectNode.children().size()
+					}
+				}
+			}
 		}
 	}
 
