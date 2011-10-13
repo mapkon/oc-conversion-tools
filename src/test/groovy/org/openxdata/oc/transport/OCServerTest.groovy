@@ -23,7 +23,7 @@ public class OCServerTest {
 	public void setUp(){
 		def factory = new ConnectionURLFactory("http://158.37.6.164/OpenClinica-ws-3.1.1")
 		client = new OpenClinicaSoapClientImpl("MarkG", "b9a60a9d91a96ee522d0c942e5b88dfba25b0a12")
-		client.setConnectionFactory(factory);
+		client.setConnectionFactory(factory)
 	}
 	
 	@Test

@@ -14,7 +14,7 @@ class TransformTest extends GroovyTestCase {
 		inputDoc = new XmlParser().parseText(inputString)
 	}
 
-	void testMUSTContainOXDStudyElement(){		
+	void testMUSTContainOXDStudyElement(){	
 		assertTrue(outputDoc.name().equals("study"))
 		assertTrue(outputDoc.children().size() > 0)
 	}
