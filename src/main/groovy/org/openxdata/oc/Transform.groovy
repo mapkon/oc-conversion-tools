@@ -61,7 +61,7 @@ public class Transform {
 
 		def subjectKeyGroup = doc.breadthFirst().group.findAll {it.@id.equals('1')}
 		if(subjectKeys.size > 0){
-			log.info("Injecting " + subjectKeys.size() + " Subject Keys into converted Study " + doc.@name +".")
+			log.info("Inserting " + subjectKeys.size() + " Subject Keys into converted Study: " + doc.@name +".")
 			subjectKeyGroup.each {
 				def selectNode = new Node(it, "select1", [bind:"subjectKeyBind"])
 				subjectKeys.each { key ->
