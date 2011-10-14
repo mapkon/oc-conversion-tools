@@ -2,10 +2,16 @@ package org.openxdata.oc.transport
 
 import org.openxdata.oc.model.OpenclinicaStudy
 
+/**
+ * Defines methods that represent endpoints OpenClinica Web services. Note that this is not a web service in itself but
+ * rather tries to map the methods to resemble the one defined in the web services.
+ *
+ */
 public interface OpenClinicaSoapClient {
 
 	/**
-	 * Fetches all available studies from an openclinica web service.
+	 * Fetches all available studies from an openclinica web service. 
+	 * The returned list depends on the authenticated user and the sutdies mapped to them.
 	 */
 	List<OpenclinicaStudy> listAll()
 
@@ -38,7 +44,7 @@ public interface OpenClinicaSoapClient {
 	Collection<String> getSubjectKeys(String studyOID)
 
 	/**
-	* Exports given data to openclinica.
+	* Imports given data into openclinica.
 	*
 	* @param instanceData the instanceData collected in openxdata that is to be exported to openclinica.
 	*
