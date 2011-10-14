@@ -4,7 +4,7 @@ import org.openxdata.oc.model.OpenclinicaStudy
 
 /**
  * Defines methods that represent endpoints OpenClinica Web services. Note that this is not a web service in itself but
- * rather tries to map the methods to resemble the one defined in the web services.
+ * rather tries to map the methods to resemble the endpoints defined in the web services.
  *
  */
 public interface OpenClinicaSoapClient {
