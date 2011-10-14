@@ -45,7 +45,7 @@ public class Transform {
 		def doc = new XmlParser().parseText(xml)
 		
 		// Add subjects keys 
-		injectSubjectKeys(doc, subjectKeys)
+		insertSubjectKeys(doc, subjectKeys)
 		
 		// parse measurement unit special tags
 		parseMeasurementUnits(doc)
@@ -57,7 +57,7 @@ public class Transform {
 		return XmlUtil.asString(doc)
 	}
 	
-	private def injectSubjectKeys(def doc, def subjectKeys) {
+	private def insertSubjectKeys(def doc, def subjectKeys) {
 
 		def subjectKeyGroup = doc.breadthFirst().group.findAll {it.@id.equals('1')}
 		if(subjectKeys.size > 0){
