@@ -53,7 +53,8 @@ public class OCServerTest {
 	
 	@Test
 	public void testGetMetaData() {
-		String studies = client.getMetadata("default-study")
+		String studies = client.getMetadata("default-study")		
+		
 		assertNotNull(studies)
 	}
 }

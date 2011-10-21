@@ -42,8 +42,9 @@ public class Transform {
 		def byteArray = new ByteArrayOutputStream()
 		transformer.transform(new StreamSource(new StringReader(odm)), new StreamResult(byteArray))
 		def xml = byteArray.toString("UTF-8")
-		def doc = new XmlParser().parseText(xml)
 		
+		def doc = new XmlParser().parseText(xml)
+				
 		// Add subjects keys 
 		insertSubjectKeys(doc, subjectKeys)
 		
