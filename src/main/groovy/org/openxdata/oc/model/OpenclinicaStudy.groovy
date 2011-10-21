@@ -11,6 +11,6 @@ import groovy.transform.ToString;
 @EqualsAndHashCode public class OpenclinicaStudy {
 	
 	String OID
-	String name
 	String identifier
+	String name
 }
