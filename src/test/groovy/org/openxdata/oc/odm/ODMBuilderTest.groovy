@@ -1,11 +1,12 @@
-package org.openxdata.oc;
+package org.openxdata.oc.odm;
 
 import static org.junit.Assert.*
-import groovy.xml.XmlUtil;
+import groovy.util.logging.Log
 
 import org.junit.Test
+import org.openxdata.oc.odm.ODMBuilder
 
-class ODMBuilderTest {
+public class ODMBuilderTest {
 
 	@Test
 	void testThatInstanceDataIsInserted(){

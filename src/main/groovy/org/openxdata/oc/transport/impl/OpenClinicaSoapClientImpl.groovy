@@ -2,15 +2,14 @@ package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
 import groovy.xml.Namespace
-import groovy.xml.XmlUtil;
 
 import java.util.Collection
 
-import org.openxdata.oc.ODMBuilder
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.OpenclinicaStudy
+import org.openxdata.oc.odm.ODMBuilder
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
