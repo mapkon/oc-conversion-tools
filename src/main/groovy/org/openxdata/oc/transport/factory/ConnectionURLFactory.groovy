@@ -1,7 +1,7 @@
 package org.openxdata.oc.transport.factory
 
 /**
- * Builds a connection for accessing openclinca web services.
+ * Builds a connection for accessing OpenClinca web services end-point.
  *
  */
 public class ConnectionURLFactory {
@@ -9,7 +9,7 @@ public class ConnectionURLFactory {
 	def host
 	
 	/**
-	 * Constructs valid endpoints to openclinica web services given a host name.
+	 * Constructs valid end-point to OpenClinca web services given a host name.
 	 * @param host Host name to connect to.
 	 */
 	public ConnectionURLFactory(String host){
@@ -17,8 +17,8 @@ public class ConnectionURLFactory {
 	}
 	
 	/**
-	 * Gets the connection for accessing the study endpoint in openclinica web services.
-	 * @return URL for connecting to the study endpoint.
+	 * Gets the connection for accessing the study end-point in OpenClinca web services.
+	 * @return URL for connecting to the study end-point.
 	 */
 	public HttpURLConnection getStudyConnection(){
 		URL url = new URL(host + "/ws/study/v1")
@@ -26,8 +26,8 @@ public class ConnectionURLFactory {
 	}
 
 	/**
-	* Gets the connection for accessing the study subject endpoint in openclinica web services.
-	* @return URL for connecting to the study subject endpoint.
+	* Gets the connection for accessing the study subject end-point in OpenClinca web services.
+	* @return URL for connecting to the study subject end-point.
 	*/
 	public HttpURLConnection getStudySubjectConnectionURL(){
 		URL url = new URL(host + "/ws/studySubject/v1")
