@@ -11,9 +11,12 @@ import javax.xml.transform.stream.StreamSource
 @Log
 public class Transform {
 	
+	def util
 	private static Transform INSTANCE = new Transform()
 	
-	private Transform() {}
+	private Transform() {
+		util = new TransformUtil()
+	}
 	
 	/**
 	 * Returns an instance of the transformer.
@@ -35,7 +38,7 @@ public class Transform {
 		
 		log.info("Starting transformation of file...")
 		
-		def xslt = loadFile("transform-v0.1.xsl")
+		def xslt = util.loadFileContents("transform-v0.1.xsl")
 		
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
@@ -114,14 +117,5 @@ public class Transform {
 		}
 		
 		log.info("Transforming Xform tag to String successful.")
-	}
-
-	private String loadFile(def file) {
-		def lines = getClass().getResourceAsStream(file).readLines()
-		def stringBuilder = new StringBuilder()
-		lines.each {
-			stringBuilder.append(it);
-		}
-		return stringBuilder.toString()
 	}
 }
