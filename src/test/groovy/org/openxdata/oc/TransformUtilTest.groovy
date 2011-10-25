@@ -10,6 +10,7 @@ class TransformUtilTest extends GroovyTestCase {
 	def odmFile
 	def transformFile
 	def odmFileContent
+	def xformWithDuplicateBindings
 		
 	def util = new TransformUtil()
 	
@@ -17,10 +18,8 @@ class TransformUtilTest extends GroovyTestCase {
 		
 		odmFile = util.loadFile("test-odm.xml")
 		transformFile = util.loadFile("transform-v0.1.xsl") 
-		
 		odmFileContent = util.loadFileContents("test-odm.xml")
-		
-		
+		xformWithDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-duplicate-bindings.xml"))
 	}
 	
 	@Test void testLoadFile(){
@@ -53,11 +52,16 @@ class TransformUtilTest extends GroovyTestCase {
 	
 	@Test void testHasDuplicateBindings(){
 		
-		def xformWithDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-duplicate-bindings.xml"))
 		assertTrue util.hasDuplicateBindings(xformWithDuplicateBindings)
 		
 		// Triangulating
 		def xformWithNoDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-no-duplicate-bindings.xml"))
 		assertFalse util.hasDuplicateBindings(xformWithNoDuplicateBindings)
+	}
+	
+	@Test void testGetSimilarBindingsMUSTReturnCorrectSizeOfDuplicateBindings(){
+		
+		def bindings = util.getSimilarBindings(xformWithDuplicateBindings)
+		assertEquals 386, bindings.size()
 	}
 }

@@ -30,15 +30,15 @@ public class TransformUtil {
 
 	public def hasDuplicateBindings(def doc) {
 
-		def bindings = doc.breadthFirst().bind.findAll{it.'@id'}.'@id'
-		if (getSimilarBindings(bindings).isEmpty())
+		if (getSimilarBindings(doc).isEmpty())
 			return false
 
 		return true
 	}
 
-	public def getSimilarBindings(def bindings) {
+	public def getSimilarBindings(def doc) {
 
+		def bindings = doc.breadthFirst().bind.findAll{it.'@id'}.'@id'
 		final def duplicatedBindings = new ArrayList<String>()
 		def set = new HashSet<String>() {
 			@Override
@@ -54,7 +54,6 @@ public class TransformUtil {
 			set.add(bind)
 		}
 
-		println duplicatedBindings.size()
 		return duplicatedBindings
 	}
 }
