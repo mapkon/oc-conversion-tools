@@ -50,8 +50,8 @@ public class TransformUtil {
 			}
 		}
 		
-		for (String bind : bindings) {
-			set.add(bind)
+		bindings.each {
+			set.add(it)
 		}
 
 		return duplicatedBindings
