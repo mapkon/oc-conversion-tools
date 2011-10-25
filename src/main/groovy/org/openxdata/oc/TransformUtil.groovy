@@ -1,5 +1,7 @@
 package org.openxdata.oc
 
+import org.openxdata.oc.model.BindSet
+
 /**
  * Encapsulates utilities needed by the Transformation class to perform its duties well. 
  * The reason of separating them into a different class is to avoid the trap of having big classes and also to separate concerns.
@@ -37,22 +39,13 @@ public class TransformUtil {
 	public def getDuplicateBindings(def docWithDuplicateBindings) {
 
 		def bindings = docWithDuplicateBindings.breadthFirst().bind.findAll{it.'@id'}.'@id'
-		final def duplicatedBindings = new ArrayList<String>()
-		def set = new HashSet<String>() {
-			@Override
-			public boolean add(String e) {
-				if (contains(e)) {
-					duplicatedBindings.add(e)
-				}
-				return super.add(e)
-			}
-		}
+		def set = new BindSet<String>()
 		
 		bindings.each {
 			set.add(it)
 		}
 
-		return duplicatedBindings
+		return set.duplicatedBindings
 	}
 	
 	public def uniquifyBindings(def doc){
