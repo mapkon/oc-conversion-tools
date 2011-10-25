@@ -27,4 +27,34 @@ public class TransformUtil {
 
 		return builder.toString()
 	}
+
+	public def hasDuplicateBindings(def doc) {
+
+		def bindings = doc.breadthFirst().bind.findAll{it.'@id'}.'@id'
+		if (getSimilarBindings(bindings).isEmpty())
+			return false
+
+		return true
+	}
+
+	public def getSimilarBindings(def bindings) {
+
+		final def duplicatedBindings = new ArrayList<String>()
+		def set = new HashSet<String>() {
+			@Override
+			public boolean add(String e) {
+				if (contains(e)) {
+					duplicatedBindings.add(e)
+				}
+				return super.add(e)
+			}
+		}
+		
+		for (String bind : bindings) {
+			set.add(bind)
+		}
+
+		println duplicatedBindings.size()
+		return duplicatedBindings
+	}
 }

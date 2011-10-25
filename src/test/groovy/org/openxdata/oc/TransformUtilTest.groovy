@@ -41,7 +41,13 @@ class TransformUtilTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testInsertSubjectsMUSTInsertCorrectNumberOfSubjects(){
+	@Test void testHasDuplicateBindings(){
 		
+		def xformWithDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-duplicate-bindings.xml"))
+		assertTrue util.hasDuplicateBindings(xformWithDuplicateBindings)
+		
+		// Triangulating
+		def xformWithNoDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-no-duplicate-bindings.xml"))
+		assertFalse util.hasDuplicateBindings(xformWithNoDuplicateBindings)
 	}
 }
