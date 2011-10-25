@@ -1,7 +1,6 @@
 package org.openxdata.oc
 
-import groovy.xml.XmlUtil;
-
+import org.apache.commons.collections.CollectionUtils
 import org.junit.Test
 
 
@@ -10,8 +9,10 @@ class TransformUtilTest extends GroovyTestCase {
 	def odmFile
 	def transformFile
 	def odmFileContent
+	
 	def xformWithDuplicateBindings
-		
+	def xformWithNoDuplicateBindings
+	
 	def util = new TransformUtil()
 	
 	public void setUp() {
@@ -20,6 +21,7 @@ class TransformUtilTest extends GroovyTestCase {
 		transformFile = util.loadFile("transform-v0.1.xsl") 
 		odmFileContent = util.loadFileContents("test-odm.xml")
 		xformWithDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-duplicate-bindings.xml"))
+		xformWithNoDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-no-duplicate-bindings.xml"))
 	}
 	
 	@Test void testLoadFile(){
@@ -55,13 +57,21 @@ class TransformUtilTest extends GroovyTestCase {
 		assertTrue util.hasDuplicateBindings(xformWithDuplicateBindings)
 		
 		// Triangulating
-		def xformWithNoDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-no-duplicate-bindings.xml"))
 		assertFalse util.hasDuplicateBindings(xformWithNoDuplicateBindings)
 	}
 	
 	@Test void testGetSimilarBindingsMUSTReturnCorrectSizeOfDuplicateBindings(){
 		
-		def bindings = util.getSimilarBindings(xformWithDuplicateBindings)
-		assertEquals 386, bindings.size()
+		def duplicateBindings = util.getDuplicateBindings(xformWithDuplicateBindings)
+		assertEquals 386, duplicateBindings.size()
+	}
+	
+	@Test void testUniquifyBindingsShouldReturnUniqueBindings(){
+		
+		def duplicateBindings = util.getDuplicateBindings(xformWithDuplicateBindings)
+		assertEquals 386, duplicateBindings.size()
+		
+		def xformWithUniquifiedBindings = util.uniquifyBindings(xformWithDuplicateBindings)
+		assertEquals 0, util.getDuplicateBindings(xformWithNoDuplicateBindings).size()
 	}
 }

@@ -1,7 +1,5 @@
 package org.openxdata.oc
 
-
-
 /**
  * Encapsulates utilities needed by the Transformation class to perform its duties well. 
  * The reason of separating them into a different class is to avoid the trap of having big classes and also to separate concerns.
@@ -28,17 +26,17 @@ public class TransformUtil {
 		return builder.toString()
 	}
 
-	public def hasDuplicateBindings(def doc) {
+	public def hasDuplicateBindings(def docWithDuplicateBindings) {
 
-		if (getSimilarBindings(doc).isEmpty())
+		if (getDuplicateBindings(docWithDuplicateBindings).isEmpty())
 			return false
 
 		return true
 	}
 
-	public def getSimilarBindings(def doc) {
+	public def getDuplicateBindings(def docWithDuplicateBindings) {
 
-		def bindings = doc.breadthFirst().bind.findAll{it.'@id'}.'@id'
+		def bindings = docWithDuplicateBindings.breadthFirst().bind.findAll{it.'@id'}.'@id'
 		final def duplicatedBindings = new ArrayList<String>()
 		def set = new HashSet<String>() {
 			@Override
@@ -55,5 +53,11 @@ public class TransformUtil {
 		}
 
 		return duplicatedBindings
+	}
+	
+	public def uniquifyBindings(def doc){
+		def duplicateBindings = getDuplicateBindings(doc)
+		
+		return 0
 	}
 }
