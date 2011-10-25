@@ -1,22 +1,34 @@
 package org.openxdata.oc
 
+import groovy.xml.XmlUtil;
+
 import org.junit.Test
 
 
 class TransformUtilTest extends GroovyTestCase {
 	
+	def odmFile
+	def transformFile
+	def odmFileContent
+		
 	def util = new TransformUtil()
 	
+	public void setUp() {
+		
+		odmFile = util.loadFile("test-odm.xml")
+		transformFile = util.loadFile("transform-v0.1.xsl") 
+		
+		odmFileContent = util.loadFileContents("test-odm.xml")
+		
+		
+	}
+	
 	@Test void testLoadFile(){
-		def file = util.loadFile("transform-v0.1.xsl") 
+		assertNotNull odmFile
+		assertEquals "test-odm.xml", odmFile.getName()
 		
-		assertNotNull file
-		assertEquals "transform-v0.1.xsl", file.getName()
-		
-		def file2 = util.loadFile("test-odm.xml")
-		
-		assertNotNull file2
-		assertEquals "test-odm.xml", file2.getName()
+		assertNotNull transformFile
+		assertEquals "transform-v0.1.xsl", transformFile.getName()		
 		
 	}
 	
@@ -27,12 +39,10 @@ class TransformUtilTest extends GroovyTestCase {
 	}
 	
 	@Test void testLoadFileContents(){
-		
-		def fileContents = util.loadFileContents("test-odm.xml")
-		
-		assertTrue fileContents.contains("<ODM")
-		assertTrue fileContents.endsWith("</ODM>")
-		assertTrue fileContents.startsWith("""<?xml version="1.0" encoding="UTF-8"?>""")
+				
+		assertTrue odmFileContent.contains("<ODM")
+		assertTrue odmFileContent.endsWith("</ODM>")
+		assertTrue odmFileContent.startsWith("""<?xml version="1.0" encoding="UTF-8"?>""")
 	}
 	
 	@Test void testLoadFileContentsMUSTThrowExceptionOnNullOrEmptyFileName(){
