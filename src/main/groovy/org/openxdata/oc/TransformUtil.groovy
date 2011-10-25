@@ -1,6 +1,5 @@
 package org.openxdata.oc
 
-import org.codehaus.groovy.reflection.ReflectionUtils
 
 
 /**
@@ -20,7 +19,7 @@ public class TransformUtil {
 	}
 
 	public def loadFileContents(def fileName){
-		
+
 		def file = loadFile(fileName)
 
 		def builder = new StringBuilder()
