@@ -29,7 +29,7 @@ public class ConnectionURLFactory {
 	* Gets the connection for accessing the study subject end-point in OpenClinca web services.
 	* @return URL for connecting to the study subject end-point.
 	*/
-	public HttpURLConnection getStudySubjectConnectionURL(){
+	public HttpURLConnection getStudySubjectConnection(){
 		URL url = new URL(host + "/ws/studySubject/v1")
 		return url.openConnection()
 	}
