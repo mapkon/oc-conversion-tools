@@ -20,7 +20,7 @@ class ConvertedStudyDef {
 		initDescription()
 		
 		initForms()
-		initBindings()
+		//initBindings()
 	}
 	
 	def initId(){
