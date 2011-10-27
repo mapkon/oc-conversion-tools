@@ -1,5 +1,8 @@
 package org.openxdata.oc
 
+import org.junit.Test
+
+
 class TransformTest extends GroovyTestCase {
 
 	def outputDoc
@@ -13,7 +16,7 @@ class TransformTest extends GroovyTestCase {
 		inputDoc = new XmlParser().parseText(inputString)
 	}
 
-	void testMUSTContainOXDStudyElement(){	
+	@Test void testMUSTContainOXDStudyElement(){	
 		assertTrue(outputDoc.name().equals("study"))
 		assertTrue(outputDoc.children().size() > 0)
 	}
