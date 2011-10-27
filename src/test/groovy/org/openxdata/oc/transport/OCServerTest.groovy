@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openxdata.oc.model.OpenclinicaStudy;
+import org.openxdata.oc.model.ConvertedOpenclinicaStudy;
 import org.openxdata.oc.transport.OpenClinicaSoapClient;
 import org.openxdata.oc.transport.factory.ConnectionURLFactory;
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl;
@@ -28,7 +28,7 @@ public class OCServerTest {
 	
 	@Test
 	public void listAll() {
-		List<OpenclinicaStudy> studies = client.listAll()
+		List<ConvertedOpenclinicaStudy> studies = client.listAll()
 		
 		assertNotNull(studies)
 		assertEquals(1, studies.size())

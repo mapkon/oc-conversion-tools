@@ -1,6 +1,6 @@
 package org.openxdata.oc.transport
 
-import org.openxdata.oc.model.OpenclinicaStudy
+import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 
 /**
  * Defines methods that represent endpoints OpenClinica Web services. Note that this is not a web service in itself but
@@ -13,7 +13,7 @@ public interface OpenClinicaSoapClient {
 	 * Fetches all available studies from an openclinica web service. 
 	 * The returned list depends on the authenticated user and the sutdies mapped to them.
 	 */
-	List<OpenclinicaStudy> listAll()
+	List<ConvertedOpenclinicaStudy> listAll()
 
 	/**
 	* Gets Metadata for the specified Study Identifier. The metadata is encapsulated in an ODM file.

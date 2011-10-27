@@ -6,7 +6,7 @@ import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.openxdata.oc.exception.UnAvailableException
-import org.openxdata.oc.model.OpenclinicaStudy
+import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 
@@ -38,8 +38,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			client.setConnectionFactory(factory)
 			def actual = client.listAll()
 			
-			def study1 = new OpenclinicaStudy(identifier: "default-study", OID: "S_DEFAULTS1", name:"Default Study")
-			def study2 = new OpenclinicaStudy(identifier: "001", OID: "S_001", name: "Test Study")
+			def study1 = new ConvertedOpenclinicaStudy(identifier: "default-study", OID: "S_DEFAULTS1", name:"Default Study")
+			def study2 = new ConvertedOpenclinicaStudy(identifier: "001", OID: "S_001", name: "Test Study")
 			
 			assertEquals actual[0], study1
 			assertEquals actual[1], study2

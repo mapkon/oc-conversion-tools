@@ -8,7 +8,7 @@ import java.util.Collection
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
-import org.openxdata.oc.model.OpenclinicaStudy
+import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.odm.ODMBuilder
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
@@ -150,14 +150,14 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return xml
 	} 
 
-	public List<OpenclinicaStudy> listAll(){
+	public List<ConvertedOpenclinicaStudy> listAll(){
 		log.info("Fetching all available studies...")
 		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
 
 		def envelope = buildEnvelope(studyPath, body)
 		def response = sendRequest(envelope, factory.getStudyConnection())
 
-		List<OpenclinicaStudy> studies = extractStudies(response)
+		List<ConvertedOpenclinicaStudy> studies = extractStudies(response)
 		return studies;
 	}
 	
@@ -199,9 +199,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def extractStudies(def response){
 
 		log.info("Extracting studies from response.")
-		List<OpenclinicaStudy> studies  = new ArrayList<OpenclinicaStudy>()
+		List<ConvertedOpenclinicaStudy> studies  = new ArrayList<ConvertedOpenclinicaStudy>()
 		response.depthFirst().study.each {
-			def study = new OpenclinicaStudy()
+			def study = new ConvertedOpenclinicaStudy()
 			study.OID = it.oid.text()
 			study.name = it.name.text()
 			study.identifier = it.identifier.text()

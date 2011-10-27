@@ -8,7 +8,7 @@ import groovy.transform.ToString;
  * Simple representation of the OpenClinica Study.
  */
 @ToString(includeNames=true)
-@EqualsAndHashCode public class OpenclinicaStudy {
+@EqualsAndHashCode public class ConvertedOpenclinicaStudy {
 	
 	String OID
 	String identifier
