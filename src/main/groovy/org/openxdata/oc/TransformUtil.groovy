@@ -38,7 +38,7 @@ public class TransformUtil {
 
 	public def getDuplicateBindings(def docWithDuplicateBindings) {
 
-		def bindings = docWithDuplicateBindings.breadthFirst().bind.findAll{it.'@id'}.'@id'
+		def bindings = docWithDuplicateBindings.breadthFirst().bind.findAll{it.@id}.'@id'
 		def set = new BindSet<String>()
 		
 		bindings.each {
