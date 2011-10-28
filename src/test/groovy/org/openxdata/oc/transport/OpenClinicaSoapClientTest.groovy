@@ -2,9 +2,9 @@ package org.openxdata.oc.transport
 
 import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
-import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
+import org.junit.Test
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
@@ -17,7 +17,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	def username = "user"
 	def password = "pass"
 	
-	void testListAllMUSTReturnListOfCorrectSize() {
+	@Test void testListAllMUSTReturnListOfCorrectSize() {
 		def factory = setUpMocks(listAllReturnXML)
 
 		play {
@@ -29,7 +29,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 
-	void testListAllMUSTReturnValidOpenclinicaStudies() {
+	@Test void testListAllMUSTReturnValidOpenclinicaStudies() {
 		def factory = setUpMocks(listAllReturnXML)
 
 		play {
@@ -46,7 +46,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 
-	void testGetMetaDataMUSTReturnCorrectStudy() {
+	@Test void testGetMetaDataMUSTReturnCorrectStudy() {
 		def factory = setUpMocks(getMetaDataReturnXML)
 		
 		play{
@@ -61,24 +61,27 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}	
 	}
 	
-	void testGetOpenxdataFormMUSTReturnValidForm() {
+	@Test void testGetOpenxdataFormMUSTReturnValidForm() {
 		def factory = setUpMocks(getMetaDataReturnXML)
 		play {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
-			def response = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
-			def xml = new XmlParser().parseText(response)
+			def convertedStudy = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
 
-			assertEquals  "study", xml.name()
-			assertEquals  "form", xml.form[0].name()
-			assertEquals  "version", xml.form.version[0].name()
-			assertEquals  "xform", xml.form.version.xform[0].name()
+			
+			def forms = convertedStudy.forms
+			def version = convertedStudy.getFormVersion(forms[0])
+			
+			assertEquals  "Test Study", convertedStudy.name
+			assertEquals  "SE_VISIT", forms[0].@name.text()			
+			assertEquals  "Visit-v1", version.@name.text()
+			assertEquals  "xform", forms.xform[0].name()
 			
 		}
 	}
 	
-	void testGetSubjectKeysSHOULDReturnSubjectKeys(){
+	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
 		def factory = setUpMocksX(studySubjectListXML)
 		play{
 			def client = new OpenClinicaSoapClientImpl(username, password)
@@ -90,7 +93,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	void testWrongURLMUSTThrowUnAvailableException(){
+	@Test void testWrongURLMUSTThrowUnAvailableException(){
 		def mock = new MockFor(ConnectionURLFactory)
 		mock.demand.getStudyConnection { throw new UnAvailableException("Incorrect url") }
 
@@ -103,17 +106,18 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	void testMUSTHaveInputNodeOnZeroSubjectKeys(){
+	@Test void testMUSTHaveInputNodeOnZeroSubjectKeys(){
 
 		def factory = setUpMocks(getMetaDataReturnXML)
 		play {
 
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
-			def response = client.getOpenxdataForm("001", [])
+			def convertedStudy = client.getOpenxdataForm("001", [])
 
-			def xml = new XmlParser().parseText(response)
-			xml.form.version.xform.each {
+			def version = convertedStudy.getFormVersion(convertedStudy.forms[0])
+			
+			version.xform.each {
 
 				def xformString = it.text()
 				def parsedXform = new XmlParser().parseText(xformString)
@@ -129,17 +133,18 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	void testMUSTHaveSelectNodeGivenSubjectKeys(){
+	@Test void testMUSTHaveSelectNodeGivenSubjectKeys(){
 
 		def factory = setUpMocks(getMetaDataReturnXML)
 		play {
 
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
-			def response = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
-			def xml = new XmlParser().parseText(response)
+			def convertedStudy = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
 
-			xml.form.version.xform.each {
+			def version = convertedStudy.getFormVersion(convertedStudy.forms[0])
+			
+			version.xform.each {
 
 				def xformString = it.text()
 				def parsedXform = new XmlParser().parseText(xformString)
