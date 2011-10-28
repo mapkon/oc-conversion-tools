@@ -9,14 +9,11 @@ import org.openxdata.oc.TransformUtil
 class ConvertedStudyDefTest extends GroovyTestCase {
 
 	def odmDef
-	def odmXmlStream
-
-	def convertedXform
 	def convertedStudyDef
 
 	public void setUp(){
 
-		odmXmlStream = new TransformUtil().loadFileContents("test-odm.xml")
+		def odmXmlStream = new TransformUtil().loadFileContents("test-odm.xml")
 
 		odmDef = new ODMDefinition()
 		odmDef.initializeProperties(odmXmlStream)
