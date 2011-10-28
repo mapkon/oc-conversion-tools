@@ -37,7 +37,7 @@ public class Transform {
 	 * 
 	 * @return Valid OpenXdata form.
 	 */
-	def ConvertODMToXform(def odm, def subjectKeys){
+	def ConvertODMToXform(def odm){
 		
 		log.info("Starting transformation of file...")
 		

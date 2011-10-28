@@ -183,7 +183,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
 		def ODM = getMetadata(studyOID)
 		
-		def convertedStudy = Transform.getTransformer().ConvertODMToXform(ODM, subjectKeys)		
+		def convertedStudy = Transform.getTransformer().ConvertODMToXform(ODM)		
+		// Insert Subject Keys
 		
 		log.info("<< ODM To OpenXData Transformation Complete. Returning... >>")
 		
