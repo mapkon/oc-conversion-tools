@@ -5,41 +5,42 @@ import org.junit.Test
 
 class TransformTest extends GroovyTestCase {
 
-	def outputDoc
 	def inputDoc
-	def transformer = new Transform()
+	def convertedStudy
 
 	public void setUp(){
 		def inputString = new TransformUtil().loadFileContents("test-odm.xml")
-		def outputString = transformer.transformODM(inputString, ['Jonny', 'Morten', 'Jorn', 'Janne'])
-		outputDoc = new XmlParser().parseText(outputString)
+		
+		convertedStudy = new Transform().transformODM(inputString, ['Jonny', 'Morten', 'Jorn', 'Janne'])
 		inputDoc = new XmlParser().parseText(inputString)
 	}
 
-	@Test void testMUSTContainOXDStudyElement(){	
-		assertTrue(outputDoc.name().equals("study"))
-		assertTrue(outputDoc.children().size() > 0)
+	@Test void testConvertedStudyDefProperties(){	
+		
+		def actual = "Default Study - Uganda"
+		
+		assertEquals actual, convertedStudy.name
+		assertEquals 2, convertedStudy.forms.size()
+		assertNotNull convertedStudy.getFormVersion(convertedStudy.forms[0])
 	}
 
-	void testShouldContainCorrectNumberOfFormElements() {
+	@Test void testShouldContainCorrectNumberOfFormElements() {
 		def formsInInput = inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef
-		assertEquals( formsInInput.size(), outputDoc.form.size() )
-		assertEquals( formsInInput.size(), outputDoc.children().size() )
+		assertEquals( formsInInput.size(), convertedStudy.forms.size() )
+		assertEquals( formsInInput.size(), convertedStudy.forms.children().size() )
 	}
 
-	void testShouldContainVersionElement() {
-		outputDoc.form.each { assertTrue( it.version.size() == 1 ) }
+	@Test void testShouldContainVersionElement() {
+		convertedStudy.forms.each { assertTrue( it.version.size() == 1 ) }
 	}
 
-	void testBindElementsShouldAppearInCorrectPlaceForEachFormAndPage() {
+	@Test void testBindElementsShouldAppearInCorrectPlaceForEachFormAndPage() {
 
 		def versionNode = inputDoc.Study.MetaDataVersion
-		def numberOfInputsTested = 0;
+		def numberOfInputsTested = 0
 		versionNode.Protocol.StudyEventRef.each {
 			def eventId = it.@StudyEventOID
-			def eventDef = versionNode.StudyEventDef.find {
-				it.@OID == eventId
-			}
+			def eventDef = versionNode.StudyEventDef.find { it.@OID == eventId }
 			eventDef.FormRef.each {
 				def formId = it.@FormOID
 				def formDef = versionNode.FormDef.find {it.@OID==formId}
@@ -51,12 +52,15 @@ class TransformTest extends GroovyTestCase {
 						def itemId = it.@ItemOID
 						def itemDef = versionNode.ItemDef.find { it.@OID == itemId }
 
-						def outputForm = outputDoc.form.find { it.@name.equals(eventDef.@OID) }
+						def outputForm = convertedStudy.forms.find { it.@name.equals(eventDef.@OID) }
 						def xforms = outputForm.version.xform
 						def xformsNode = new XmlSlurper().parseText(xforms.text())
 
 						def bind = xformsNode.model.bind.find { it.@id = itemId }
+						
 						assertNotNull bind
+						assertEquals 1, bind.size()
+
 						numberOfInputsTested++
 					}
 				}
@@ -69,21 +73,21 @@ class TransformTest extends GroovyTestCase {
 		assertTrue numberOfInputsTested >= itemsInInput
 	}
 
-	void testExistenceOfFormDefGivenStudyEventRef() {
+	@Test void testExistenceOfFormDefGivenStudyEventRef() {
 		inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef.each {
 			def eventOID = it.@StudyEventOID
-			def form = outputDoc.form.find{it.@name==eventOID}
-			assertEquals(eventOID, form.@name)
+			def form = convertedStudy.forms.find{it.@name==eventOID}
+			assertEquals(eventOID, form.@name.text())
 		}
 	}
 		
-	void testMUSTContainXformElement() {
+	@Test void testMUSTContainXformElement() {
 
-		outputDoc.form.version.each{
+		convertedStudy.forms.version.each{
 			assertTrue(it.xform.size() == 1)
 		}
 
-		outputDoc.form.version.xform.each {
+		convertedStudy.forms.version.xform.each {
 			def xformString = it.text()
 
 			def parsedXform = new XmlSlurper().parseText(xformString)

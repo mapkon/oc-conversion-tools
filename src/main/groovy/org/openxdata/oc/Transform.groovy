@@ -8,6 +8,8 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
+import org.openxdata.oc.model.ConvertedStudyDef
+
 
 @Log
 public class Transform {
@@ -35,7 +37,7 @@ public class Transform {
 	 * 
 	 * @return Valid OpenXdata form.
 	 */
-	String transformODM(def odm, def subjectKeys){
+	def transformODM(def odm, def subjectKeys){
 		
 		log.info("Starting transformation of file...")
 		
@@ -59,7 +61,12 @@ public class Transform {
 		serialiseXform(doc)
 
 		log.info("<< Successfully transformed file. >>")
-		return XmlUtil.asString(doc)
+		
+		def convertedStudyXform = XmlUtil.asString(doc)
+		def convertedStudyDef = new ConvertedStudyDef()
+		convertedStudyDef.initializeProperties(convertedStudyXform)
+		
+		return convertedStudyDef
 	}
 	
 	private def insertSubjectKeys(def doc, def subjectKeys) {
