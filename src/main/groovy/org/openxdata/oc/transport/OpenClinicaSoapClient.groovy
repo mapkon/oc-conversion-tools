@@ -32,7 +32,7 @@ public interface OpenClinicaSoapClient {
 	*
 	* @return A valid openxdata xform.
 	*/
-	String getOpenxdataForm(String openclinicaStudyOID, Collection<String> subjectKeys)
+	def getOpenxdataForm(String openclinicaStudyOID, Collection<String> subjectKeys)
 
 	/**
 	* Retrieves subject keys for a given study identifier.
