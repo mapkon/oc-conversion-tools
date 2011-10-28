@@ -43,15 +43,15 @@
 				</xsl:variable>
 				<instance>
 					<xsl:attribute name="id"><xsl:value-of
-						select="$instanceElementName" /></xsl:attribute>
+						select="normalize-space($instanceElementName)"/></xsl:attribute>
 					<ODM>
 						<xsl:attribute name="Description">converted from ODM to Xform</xsl:attribute>
 						<xsl:attribute name="name"><xsl:value-of
 							select="@Name"></xsl:value-of></xsl:attribute>
 						<xsl:attribute name="formKey"><xsl:value-of
-							select="@OID"></xsl:value-of></xsl:attribute>
+							select="normalize-space(@OID)"></xsl:value-of></xsl:attribute>
 						<xsl:attribute name="id"><xsl:value-of
-							select="$instanceElementName" /></xsl:attribute>
+							select="normalize-space($instanceElementName)"/></xsl:attribute>
 						<ClinicalData>
 							<xsl:attribute name="StudyOID"><xsl:value-of
 								select="../../@OID" /></xsl:attribute>
@@ -158,6 +158,7 @@
 			</xsl:for-each>
 		</xsl:for-each>
 	</xsl:template>
+	
 	<xsl:template name="createGroup">
 		<group>
 			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
