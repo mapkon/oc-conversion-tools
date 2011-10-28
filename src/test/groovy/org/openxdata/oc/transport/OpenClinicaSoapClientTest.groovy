@@ -18,7 +18,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	def password = "pass"
 	
 	@Test void testListAllMUSTReturnListOfCorrectSize() {
-		def factory = setUpMocks(listAllReturnXML)
+		def factory = setUpMocks(listAllReturnSOAPResponse)
 
 		play {
 			
@@ -30,7 +30,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testListAllMUSTReturnValidOpenclinicaStudies() {
-		def factory = setUpMocks(listAllReturnXML)
+		def factory = setUpMocks(listAllReturnSOAPResponse)
 
 		play {
 			
@@ -47,7 +47,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testGetMetaDataMUSTReturnCorrectStudy() {
-		def factory = setUpMocks(getMetaDataReturnXML)
+		def factory = setUpMocks(metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -62,7 +62,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormMUSTReturnValidForm() {
-		def factory = setUpMocks(getMetaDataReturnXML)
+		def factory = setUpMocks(metaDataReturnSOAPResponse)
 		play {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
@@ -82,7 +82,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
-		def factory = setUpMocksX(studySubjectListXML)
+		def factory = setUpMocksX(studySubjectListSOAPResponse)
 		play{
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
@@ -195,8 +195,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		return factory
 	}
 	
-	
-	def listAllReturnXML = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	def listAllReturnSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 								<SOAP-ENV:Header/>
 								<SOAP-ENV:Body>
 								   <listAllResponse xmlns="http://openclinica.org/ws/study/v1">
@@ -217,7 +216,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 								</SOAP-ENV:Body>
 							 </SOAP-ENV:Envelope>"""
 
- 	def getMetaDataReturnXML = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+ 	def metaDataReturnSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 								   <SOAP-ENV:Header/>
 								   <SOAP-ENV:Body>
 									  <createResponse xmlns="http://openclinica.org/ws/study/v1">
@@ -299,7 +298,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 								   </SOAP-ENV:Body>
 								</SOAP-ENV:Envelope>"""
 
-	def studySubjectListXML = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 								   <SOAP-ENV:Header/>
 								   <SOAP-ENV:Body>
 								      <ns4:listAllByStudyResponse xmlns:ns4="http://openclinica.org/ws/studySubject/v1" xmlns:ns2="http://openclinica.org/ws/beans" xmlns:ns3="http://openclinica.org/ws/crf/v1">
