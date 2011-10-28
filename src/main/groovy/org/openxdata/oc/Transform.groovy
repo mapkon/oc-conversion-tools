@@ -30,14 +30,14 @@ public class Transform {
 	}
 
 	/**
-	 * Transforms an ODM file to openxdata xform.
+	 * Converts an ODM file to openxdata xform.
 	 * 
 	 * @param odm ODM file to convert.
 	 * @param subjectKeys Subject Keys to insert into form.
 	 * 
 	 * @return Valid OpenXdata form.
 	 */
-	def transformODM(def odm, def subjectKeys){
+	def ConvertODMToXform(def odm, def subjectKeys){
 		
 		log.info("Starting transformation of file...")
 		
