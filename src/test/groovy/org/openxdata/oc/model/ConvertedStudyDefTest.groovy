@@ -32,7 +32,6 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertNotNull convertedStudyDef.name
 		assertNotNull convertedStudyDef.description
 		assertNotNull convertedStudyDef.forms
-		//assertNotNull convertedStudyDef.bindings
 	}
 
 	@Test void testStudyIDMUSTMatchOIDOfODMFile(){
@@ -92,10 +91,5 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertNotNull version
 		assertTrue version.@name.text().contains('-v1')
 		assertEquals form.@description.text()+'-v1', version.@name.text()
-	}
-	
-	@Test void testStudyFormVersionShouldHaveBindings(){
-		
-		//assertEquals 45, convertedStudyDef.bindings.size()
 	}
 }
