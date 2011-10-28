@@ -10,10 +10,9 @@ class ConvertedStudyDef {
 	def bindings
 	
 	def parsedXml
-	def slurper = new XmlSlurper()
 	
 	public def initializeProperties(def xmlStream){
-		this.parsedXml = slurper.parseText(xmlStream)
+		this.parsedXml = new XmlSlurper().parseText(xmlStream)
 		
 		initId()
 		initName()

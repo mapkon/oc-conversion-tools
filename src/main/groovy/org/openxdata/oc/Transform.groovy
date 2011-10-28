@@ -13,7 +13,7 @@ import javax.xml.transform.stream.StreamSource
 public class Transform {
 	
 	def util
-	private static Transform INSTANCE = new Transform()
+	private static def INSTANCE = new Transform()
 	
 	private Transform() {
 		util = new TransformUtil()
