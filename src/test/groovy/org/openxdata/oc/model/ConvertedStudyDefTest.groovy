@@ -21,10 +21,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		odmDef = new ODMDefinition()
 		odmDef.initializeProperties(odmXmlStream)
 
-		convertedStudyDef = new ConvertedStudyDef()
-		convertedXform = Transform.getTransformer().transformODM(odmXmlStream, [:])
-
-		convertedStudyDef.initializeProperties(convertedXform)
+		convertedStudyDef  = Transform.getTransformer().transformODM(odmXmlStream, [:])
 	}
 
 	@Test void testInitializeProperties(){
