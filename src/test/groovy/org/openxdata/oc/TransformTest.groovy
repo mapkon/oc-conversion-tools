@@ -31,6 +31,7 @@ class TransformTest extends GroovyTestCase {
 	}
 
 	@Test void testShouldContainVersionElement() {
+		assertNotNull convertedStudy.forms
 		convertedStudy.forms.each { assertTrue( it.version.size() == 1 ) }
 	}
 
@@ -53,10 +54,9 @@ class TransformTest extends GroovyTestCase {
 						def itemDef = versionNode.ItemDef.find { it.@OID == itemId }
 
 						def outputForm = convertedStudy.forms.find { it.@name.equals(eventDef.@OID) }
-						def xforms = outputForm.version.xform
-						def xformsNode = new XmlSlurper().parseText(xforms.text())
+						def xformNode = outputForm.version.xform
 
-						def bind = xformsNode.model.bind.find { it.@id = itemId }
+						def bind = xformNode.xforms.model.bind.find { it.@id = itemId }
 						
 						assertNotNull bind
 						assertEquals 1, bind.size()
@@ -77,23 +77,21 @@ class TransformTest extends GroovyTestCase {
 		inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef.each {
 			def eventOID = it.@StudyEventOID
 			def form = convertedStudy.forms.find{it.@name==eventOID}
-			assertEquals(eventOID, form.@name.text())
+			assertEquals eventOID, form.@name.text()
 		}
 	}
 		
 	@Test void testMUSTContainXformElement() {
 
-		convertedStudy.forms.version.each{
-			assertTrue(it.xform.size() == 1)
-		}
-
-		convertedStudy.forms.version.xform.each {
-			def xformString = it.text()
-
-			def parsedXform = new XmlSlurper().parseText(xformString)
-
-			assertNotNull(parsedXform)
-			assertEquals("xforms", parsedXform.name())
-		}		
+		def xformNode = convertedStudy.forms.version.xform
+		
+		xformNode.each { xNode ->
+			
+			assertEquals 1, xNode.children().size()
+			
+			xNode.children().each{
+				assertEquals "xforms", it.name().toString()
+			}
+		}	
 	}
 }

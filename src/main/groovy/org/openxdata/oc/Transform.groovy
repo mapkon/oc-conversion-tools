@@ -49,10 +49,9 @@ public class Transform {
 		transformer.transform(new StreamSource(new StringReader(odm)), new StreamResult(byteArray))
 		def xml = byteArray.toString("UTF-8")
 		
-		def doc = new XmlParser().parseText(xml)
-				
-		// Add subjects keys 
-		insertSubjectKeys(doc, subjectKeys)
+		def doc = new XmlSlurper().parseText(xml)
+			
+		def convertedStudyDef = new ConvertedStudyDef(doc)
 		
 		// parse measurement unit special tags
 		parseMeasurementUnits(doc)
@@ -61,10 +60,6 @@ public class Transform {
 		serialiseXform(doc)
 
 		log.info("<< Successfully transformed file. >>")
-		
-		def convertedStudyXform = XmlUtil.asString(doc)
-		def convertedStudyDef = new ConvertedStudyDef()
-		convertedStudyDef.initializeProperties(convertedStudyXform)
 		
 		return convertedStudyDef
 	}

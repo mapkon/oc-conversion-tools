@@ -5,20 +5,18 @@ class ConvertedStudyDef {
 	def id
 	def name
 	def description
-	
 	def forms
-		
-	def parsedXml
 	
-	public def initializeProperties(def xmlStream){
-		this.parsedXml = new XmlSlurper().parseText(xmlStream)
+	def convertedXformXml
+	
+	public def ConvertedStudyDef(def convertedXformXml){
+		this.convertedXformXml = convertedXformXml
 		
 		initId()
 		initName()
 		initDescription()
 		
 		initForms()
-		//initBindings()
 	}
 	
 	def initId(){
