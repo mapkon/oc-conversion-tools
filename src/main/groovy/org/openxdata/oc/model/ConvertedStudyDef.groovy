@@ -19,20 +19,20 @@ class ConvertedStudyDef {
 		initForms()
 	}
 	
-	def initId(){
-		this.id = parsedXml.@studyKey.text()
+	private def initId(){
+		this.id = convertedXformXml.@studyKey.text()
 	}
 	
-	def initName(){
-		this.name = parsedXml.@name.text()
+	private def initName(){
+		this.name = convertedXformXml.@name.text()
 	}
 	
-	def initDescription(){
-		this.description = parsedXml.@description.text()
+	private def initDescription(){
+		this.description = convertedXformXml.@description.text()
 	}
 	
-	def initForms(){
-		this.forms = parsedXml.children()
+	private def initForms(){
+		this.forms = convertedXformXml.children()
 	}
 	
 	public def getFormVersion(def form){
