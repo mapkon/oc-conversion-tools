@@ -184,7 +184,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		def ODM = getMetadata(studyOID)
 		
 		def convertedStudy = Transform.getTransformer().ConvertODMToXform(ODM)		
-		// Insert Subject Keys
+		//TODO: Insert Subject Keys
 		
 		log.info("<< ODM To OpenXData Transformation Complete. Returning... >>")
 		
