@@ -1,7 +1,7 @@
 package org.openxdata.oc.model
 
-import groovy.xml.XmlUtil
 
+import org.junit.Ignore
 import org.junit.Test
 import org.openxdata.oc.Transform
 import org.openxdata.oc.TransformUtil
@@ -80,32 +80,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertTrue version.@name.text().contains('-v1')
 		assertEquals form.@description.text()+'-v1', version.@name.text()
 	}
-	
-	@Test void testinsertSubjectKeysMUSTInsertCorrectNumberOfSubjectKeys(){
 		
-		convertedStudyDef.insertSubjectKeys(['Jonny', 'Morten', 'Jorn', 'Janne'])
-		
-		def subjectKeyGroup = convertedStudyDef.getFormVersion(convertedStudyDef.forms[0]).xform.xforms.group.find{it.@id== '1'}
-				
-		subjectKeyGroup.each{
-			println XmlUtil.asString(it)
-		}
-		assertEquals 2, subjectKeyGroup.getAt(0).children().size()
-		
-		def labelNode = subjectKeyGroup.getAt(0).children[0]
-		
-		assertNotNull labelNode
-		assertEquals 'label', labelNode.name()
-		assertEquals 1, labelNode.children().size()
-		
-		def select1Node = subjectKeyGroup.getAt(0).children()[1]
-		
-		assertNotNull select1Node
-		assertEquals 'select1', select1Node.name()
-		assertEquals 4, select1Node.children().size()
-		
-	}
-	
 	@Test void testSerializeXformNode(){
 		
 		def xformText = convertedStudyDef.serializeXformNode()
