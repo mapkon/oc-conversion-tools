@@ -82,7 +82,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	
 	@Test void testinsertSubjectKeysMUSTInsertCorrectNumberOfSubjectKeys(){
 		
-		convertedStudyDef.insertSubjectKeys(subjects)
+		convertedStudyDef.appendSubjectKeyNode(subjects)
 		
 		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id== '1'}
 				
@@ -107,7 +107,8 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	}
 	
 	@Test void testInsertSubjectsShouldInsertCorrectSubjectKeys(){
-		convertedStudyDef.insertSubjectKeys(subjects)
+		
+		convertedStudyDef.appendSubjectKeyNode(subjects)
 		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
 		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
 

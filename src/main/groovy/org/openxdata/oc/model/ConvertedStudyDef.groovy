@@ -77,10 +77,8 @@ class ConvertedStudyDef {
 		return text
 	}
 	
-	def insertSubjectKeys(def subjectKeys){
-		
-		def subjectKeyGroup = getNodeList("group").find {it.@id.equals('1')}
-		
+	def appendSubjectKeyNode(def subjectKeys){
+
 		if(subjectKeys.size() > 0){
 			log.info("Inserting " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +".")
 			addSubjectKeySelectNodes(subjectKeys)
