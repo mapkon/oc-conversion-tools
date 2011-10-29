@@ -190,7 +190,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
 
 		def factory = mock(ConnectionURLFactory.class)
-		factory.getStudySubjectConnectionURL().returns(connection)
+		factory.getStudySubjectConnection().returns(connection)
 		
 		return factory
 	}
