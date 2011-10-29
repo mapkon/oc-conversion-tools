@@ -94,6 +94,19 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testWrongURLMUSTThrowUnAvailableException(){
+
+		def mock = new MockFor(ConnectionURLFactory)
+		mock.demand.getStudyConnection { throw new UnAvailableException("Incorrect url") }
+		def factory = mock.proxyInstance()
+		shouldFail(UnAvailableException){
+
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			client.listAll()
+		}
+	}
+	
 	private setUpMocks(def returnXml) {
 		def connection = mock(HttpURLConnection.class)
 		connection.setRequestMethod("POST")
