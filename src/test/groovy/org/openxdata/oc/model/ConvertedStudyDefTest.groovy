@@ -101,8 +101,22 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		
 		assertNotNull select1Node
 		assertEquals 'select1', select1Node.name().toString()
+		assertEquals 'subjectKeyBind', select1Node.@bind.toString()
 		assertEquals 4, select1Node.children().size()
 		
+	}
+	
+	@Test void testInsertSubjectsShouldInsertCorrectSubjectKeys(){
+		convertedStudyDef.insertSubjectKeys(subjects)
+		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
+		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
+
+		assertEquals 4, select1Node.children().size()
+		assertEquals 'Jonny', select1Node.children()[0].@id.toString()
+		assertEquals 'Morten', select1Node.children()[1].@id.toString()
+		assertEquals 'Jorn', select1Node.children()[2].@id.toString()
+		assertEquals 'Janne', select1Node.children()[3].@id.toString()
+
 	}
 	
 	@Test void testSerializeXformNode(){
