@@ -1,6 +1,5 @@
 package org.openxdata.oc.model
 
-
 import org.junit.Test
 import org.openxdata.oc.Transform
 import org.openxdata.oc.TransformUtil
@@ -10,6 +9,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 
 	def odmDef
 	def convertedStudyDef
+	def subjects = ['Jonny', 'Morten', 'Jorn', 'Janne']
 
 	public void setUp(){
 
@@ -82,7 +82,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	
 	@Test void testinsertSubjectKeysMUSTInsertCorrectNumberOfSubjectKeys(){
 		
-		convertedStudyDef.insertSubjectKeys(['Jonny', 'Morten', 'Jorn', 'Janne'])
+		convertedStudyDef.insertSubjectKeys(subjects)
 		
 		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id== '1'}
 				
