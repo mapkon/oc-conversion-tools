@@ -1,7 +1,6 @@
 package org.openxdata.oc.model
 
 
-import org.junit.Ignore
 import org.junit.Test
 import org.openxdata.oc.Transform
 import org.openxdata.oc.TransformUtil
