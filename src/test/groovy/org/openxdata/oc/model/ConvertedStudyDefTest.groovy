@@ -79,7 +79,32 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertTrue version.@name.text().contains('-v1')
 		assertEquals form.@description.text()+'-v1', version.@name.text()
 	}
+	
+	@Test void testinsertSubjectKeysMUSTInsertCorrectNumberOfSubjectKeys(){
 		
+		convertedStudyDef.insertSubjectKeys(['Jonny', 'Morten', 'Jorn', 'Janne'])
+		
+		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id== '1'}
+				
+		assertEquals 2, subjectKeyGroup.size()
+		assertEquals 'group', subjectKeyGroup[0].name()
+		subjectKeyGroup.each {
+			assertEquals 2, it.getAt(0).children().size()
+		}
+		
+		def labelNode = subjectKeyGroup[0].getAt(0).children()[0]
+		
+		assertNotNull labelNode
+		assertEquals 'label', labelNode.name()
+		
+		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
+		
+		assertNotNull select1Node
+		assertEquals 'select1', select1Node.name().toString()
+		assertEquals 4, select1Node.children().size()
+		
+	}
+	
 	@Test void testSerializeXformNode(){
 		
 		def xformText = convertedStudyDef.serializeXformNode()

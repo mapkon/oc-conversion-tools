@@ -3,9 +3,9 @@ package org.openxdata.oc.model
 import groovy.inspect.TextNode
 import groovy.util.logging.Log
 import groovy.util.slurpersupport.Node
-import groovy.xml.MarkupBuilder
 import groovy.xml.StreamingMarkupBuilder
 import groovy.xml.XmlUtil
+import groovy.xml.streamingmarkupsupport.StreamingMarkupWriter
 
 @Log
 class ConvertedStudyDef {
@@ -45,24 +45,26 @@ class ConvertedStudyDef {
 	
 	private addSubjectKeySelectNodes(def subjectKeys) {
 
-		def writer = new StringWriter()
-		def xml = new MarkupBuilder(writer)
-		def subjectGroup = convertedXformXml.'**'.find{it.name() == 'group' && it.@id == '1'}
+		def subjectGroup = convertedXformXml.'**'.findAll{it.name() == 'group' && it.@id == '1'}
 
-		xml.subjectSet(){
-			label('Subject Key')
-			select1(bind:'subjectKeyBind'){
+		def xml = new StreamingMarkupBuilder().bind {
+			mkp.xmlDeclaration()
+			mkp.declareNamespace(xf:'xmlns:xf="http://www.w3.org/2002/xforms')
+			xf.select1(bind:'subjectKeyBind'){
 				subjectKeys.each{ nodeValue ->
-					item(id:nodeValue){
-						label(nodeValue)
-						value(nodeValue)
+					xf.item(id:nodeValue){
+						xf.label(nodeValue)
+						xf.value(nodeValue)
 					}
 				}
 			}
 		}
 
-		def group = new XmlSlurper().parseText(writer.toString())
-		subjectGroup.replaceBody(group.children())
+		def newGroupNode = new XmlSlurper().parseText(xml.toString())
+
+		subjectGroup.each {
+			it.appendNode(newGroupNode)
+		}
 	}
 
 	private replaceHintNodeText(def hintNode) {
