@@ -1,6 +1,7 @@
 package org.openxdata.oc.model
 
-import org.junit.Ignore
+import groovy.xml.XmlUtil
+
 import org.junit.Test
 import org.openxdata.oc.Transform
 import org.openxdata.oc.TransformUtil
@@ -31,7 +32,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 
 		def actual = 'Default Study - Uganda'
 
-		assertEquals actual, odmDef.name.toString()
+		assertEquals actual, odmDef.name 
 		assertEquals actual, convertedStudyDef.name
 	}
 
@@ -39,7 +40,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 
 		def actual = 'test instance - Site of Uganda'
 
-		assertEquals actual, odmDef.description.toString()
+		assertEquals actual, odmDef.description
 		assertEquals actual, convertedStudyDef.description
 	}
 
@@ -78,5 +79,59 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertNotNull version
 		assertTrue version.@name.text().contains('-v1')
 		assertEquals form.@description.text()+'-v1', version.@name.text()
+	}
+	
+	@Test void testinsertSubjectKeysMUSTInsertCorrectNumberOfSubjectKeys(){
+		
+		convertedStudyDef.insertSubjectKeys(['Jonny', 'Morten', 'Jorn', 'Janne'])
+		
+		def subjectKeyGroup = convertedStudyDef.getFormVersion(convertedStudyDef.forms[0]).xform.xforms.group.find{it.@id== '1'}
+				
+		subjectKeyGroup.each{
+			println XmlUtil.asString(it)
+		}
+		assertEquals 2, subjectKeyGroup.getAt(0).children().size()
+		
+		def labelNode = subjectKeyGroup.getAt(0).children[0]
+		
+		assertNotNull labelNode
+		assertEquals 'label', labelNode.name()
+		assertEquals 1, labelNode.children().size()
+		
+		def select1Node = subjectKeyGroup.getAt(0).children()[1]
+		
+		assertNotNull select1Node
+		assertEquals 'select1', select1Node.name()
+		assertEquals 4, select1Node.children().size()
+		
+	}
+	
+	@Test void testSerializeXformNode(){
+		
+		def xformText = convertedStudyDef.serializeXformNode()
+		
+		assertNotNull xformText
+		assertTrue xformText instanceof String
+	}
+	
+	@Test void testParseMeasureUnits(){
+		def measurementUnits = convertedStudyDef.parseMeasurementUnits()
+		
+		assertNotNull measurementUnits
+		assertEquals 1, measurementUnits.size()
+		assertEquals "10^3/MM^3", measurementUnits.get("10<SUP>3</SUP>/MM<SUP>3</SUP>")
+	}
+	
+	@Test void testGetNodeListShouldReturnExistingNodeList(){
+		
+		def hintNodeList = convertedStudyDef.getNodeList("hint")
+		
+		assertNotNull hintNodeList
+		assertEquals 1, hintNodeList.size()
+		
+		def groupNodeList = convertedStudyDef.getNodeList("group")
+		
+		assertNotNull groupNodeList
+		assertEquals 6, groupNodeList.size()
 	}
 }

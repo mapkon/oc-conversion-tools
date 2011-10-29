@@ -36,7 +36,7 @@ public class OCServerTest {
 	
 	@Test
 	public void testGetSubjects() {
-		Collection<String> subjects = client.getSubjectKeys("default-study")
+		def subjects = client.getSubjectKeys("default-study")
 		assertNotNull(subjects)
 		assertEquals(82, subjects.size())
 	}

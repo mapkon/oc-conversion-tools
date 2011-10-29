@@ -1,5 +1,13 @@
 package org.openxdata.oc.model
 
+import groovy.inspect.TextNode
+import groovy.util.logging.Log
+import groovy.util.slurpersupport.Node
+import groovy.xml.MarkupBuilder
+import groovy.xml.StreamingMarkupBuilder
+import groovy.xml.XmlUtil
+
+@Log
 class ConvertedStudyDef {
 	
 	def id
@@ -35,7 +43,93 @@ class ConvertedStudyDef {
 		this.forms = convertedXformXml.children()
 	}
 	
-	public def getFormVersion(def form){
+	private addSubjectKeySelectNodes(def subjectKeys) {
+
+		def writer = new StringWriter()
+		def xml = new MarkupBuilder(writer)
+		def subjectGroup = convertedXformXml.'**'.find{it.name() == 'group' && it.@id == '1'}
+
+		xml.subjectSet(){
+			label('Subject Key')
+			select1(bind:'subjectKeyBind'){
+				subjectKeys.each{ nodeValue ->
+					item(id:nodeValue){
+						label(nodeValue)
+						value(nodeValue)
+					}
+				}
+			}
+		}
+
+		def group = new XmlSlurper().parseText(writer.toString())
+		subjectGroup.replaceBody(group.children())
+	}
+
+	private replaceHintNodeText(def hintNode) {
+		def text = hintNode.text()
+		text = text.replace("<SUP>", "^")
+		text = text.replace("</SUP>", "")
+
+		hintNode.replaceBody(text)
+		
+		return text
+	}
+	
+	def insertSubjectKeys(def subjectKeys){
+		
+		def subjectKeyGroup = getNodeList("group").find {it.@id.equals('1')}
+		
+		if(subjectKeys.size() > 0){
+			log.info("Inserting " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +".")
+			addSubjectKeySelectNodes(subjectKeys)
+		}
+		else{
+			log.info("No Subjects Attached to the Study: " + convertedXformXml.@name + "." + " Adding Input Node to the Form.")
+			subjectKeyGroup.each {
+				def inputNode = new Node(it, "input", [bind:"subjectKeyBind"])
+			}
+		}
+
+		log.info("Done processing subjects.")
+	}
+
+	def parseMeasurementUnits(){
+		log.info("Parsing Measurement units.")
+
+		def parsedMeasurementUnits = [:]
+		def hintNodes = getNodeList("hint")
+		
+		hintNodes.each {
+			
+			def originalText = it.text()
+			def parsedText = replaceHintNodeText(it)
+			
+			parsedMeasurementUnits[originalText] = parsedText
+		}
+		
+		return parsedMeasurementUnits
+		log.info("Parsing Measurement Units successful.")
+	}
+
+	def serializeXformNode(){
+		log.info("Transforming the xform tag to string as required by openxdata.")
+
+		def xformNodeText
+		convertedXformXml.form.version.xform.each {
+			it.children().each { xformNodeText += XmlUtil.asString(it) }
+			def textNode = new TextNode("""<?xml version="1.0" encoding="UTF-8"?>"""+ xformNodeText)
+			it.replaceBody(textNode)
+		}
+		
+		return xformNodeText
+		log.info("Transforming Xform tag to String successful.")
+	}
+
+	def getFormVersion(def form){
 		return form.children()
+	}
+	
+	def getNodeList(def tagName){
+		return convertedXformXml.breadthFirst().findAll{it.name().equals(tagName)}
 	}
 }

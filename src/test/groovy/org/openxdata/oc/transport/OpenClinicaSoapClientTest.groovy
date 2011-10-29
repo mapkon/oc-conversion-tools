@@ -2,6 +2,7 @@ package org.openxdata.oc.transport
 
 import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
+import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.junit.Test
