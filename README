@@ -6,7 +6,6 @@
 
 	1. mvn eclipse:eclipse
 	2. Import into eclipse
-	3. Start coding
 	
 ############################################################
 # Usage as a dependency.                                   #					               
