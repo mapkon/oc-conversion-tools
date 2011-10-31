@@ -6,6 +6,7 @@ import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.junit.Test
+import org.openxdata.oc.exception.ImportException;
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
@@ -17,6 +18,29 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 	def username = "user"
 	def password = "pass"
+	def instanceData = new ArrayList<String>()
+	
+	void setUp(){
+		instanceData.add("""<?xml version="1.0" encoding="UTF-8"?>
+							<test_study_se_visit_visit-v1 xmlns="" Description="converted from ODM to Xform" formKey="test_study_se_visit_visit-v1" id="10" name="SE_VISIT_Visit-v1">
+							  <ClinicalData xmlns="http://www.w3.org/2002/xforms" MetaDataVersionOID="v1.0.0" StudyOID="S_001">
+								<SubjectData SubjectKey="SS_MARK">
+								  <StudyEventData StudyEventOID="SE_VISIT">
+									<FormData FormOID="F_SAMPLECRF_1">
+									  <ItemGroupData ItemGroupOID="IG_SAMPL_UNGROUPED">
+										<ItemData ItemOID="I_SAMPL_SC_ITEM_01" Value="really" value=""/>
+										<ItemData ItemOID="I_SAMPL_SC_ITEM_02" Value="ok" value=""/>
+									  </ItemGroupData>
+									  <ItemGroupData ItemGroupOID="IG_SAMPL_GROUP01">
+										<ItemData ItemOID="I_SAMPL_SC_REPEATING_ITEM_01" Value="2011-09-15" value=""/>
+										<ItemData ItemOID="I_SAMPL_SC_REPEATING_ITEM_02" Value="222" value=""/>
+									  </ItemGroupData>
+									</FormData>
+								  </StudyEventData>
+								</SubjectData>
+							  </ClinicalData>
+							</test_study_se_visit_visit-v1>""")
+	}
 	
 	@Test void testListAllMUSTReturnListOfCorrectSize() {
 		def factory = setUpStudyConnectionMock(listAllReturnSOAPResponse)
@@ -106,7 +130,33 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			client.listAll()
 		}
 	}
+	
+	@Test void testThatImportDataReturnsSuccessResponseOnCorrectODMFormat(){
 		
+		def factory = setUpStudyConnectionMock(importSOAPSuccessResponse)
+		play{
+			
+			def client = new OpenClinicaSoapClientImpl(username, password)
+			client.setConnectionFactory(factory)
+			def reponse = client.importData(instanceData)
+			
+			assertNotNull reponse
+			assertEquals 'Success', reponse
+		}
+	}
+	
+	@Test void testThatImportDataReturnsErrorOnIncorrectODM(){
+		def factory = setUpStudyConnectionMock(importSOAPErrorResponse)
+		play{
+
+			shouldFail(ImportException.class){
+				def client = new OpenClinicaSoapClientImpl(username, password)
+				client.setConnectionFactory(factory)
+				def reponse = client.importData(instanceData)
+			}
+		}
+	}
+	
 	private def setUpConnectionMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)
@@ -296,4 +346,23 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 								      </ns4:listAllByStudyResponse>
 								   </SOAP-ENV:Body>
 								</SOAP-ENV:Envelope>"""
+	
+	def importSOAPSuccessResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+								   <SOAP-ENV:Header/>
+								   <SOAP-ENV:Body>
+								      <importDataResponse xmlns="http://openclinica.org/ws/data/v1">
+								         <result>Success</result>
+								      </importDataResponse>
+								   </SOAP-ENV:Body>
+								</SOAP-ENV:Envelope>'''
+	
+	def importSOAPErrorResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+									   <SOAP-ENV:Header/>
+									   <SOAP-ENV:Body>
+									      <importDataResponse xmlns="http://openclinica.org/ws/data/v1">
+									         <result>Fail</result>
+									         <error>Error.</error>
+									      </importDataResponse>
+									   </SOAP-ENV:Body>
+									</SOAP-ENV:Envelope>'''
 }
