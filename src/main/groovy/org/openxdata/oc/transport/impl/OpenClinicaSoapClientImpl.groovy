@@ -9,7 +9,7 @@ import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
-import org.openxdata.oc.odm.ODMBuilder
+import org.openxdata.oc.model.ODMDefinition;
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
@@ -233,13 +233,15 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	public def importData(Collection<String> instanceData){
 
 		log.info("Starting import to Openclinca.")
-		def importODM = new ODMBuilder().buildODM(instanceData)
+		
+		def odm = new ODMDefinition()
+		def importXMl = odm.appendInstanceData(instanceData)
+		
 		def body = """<soapenv:Body>
-					  	<v1:importRequest>""" + importODM + """</v1:importRequest>
+					  	<v1:importRequest>""" + importXMl + """</v1:importRequest>
 					  </soapenv:Body>"""
 
 		def envelope = buildEnvelope(dataPath, body)
-		log.info("Sending request to :" + factory.getStudyConnection())
 		def reply = sendRequest(envelope, factory.getStudyConnection())
 
 		def result = reply.depthFirst().result[0].text()

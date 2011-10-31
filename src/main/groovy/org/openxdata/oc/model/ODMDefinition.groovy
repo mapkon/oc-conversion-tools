@@ -1,5 +1,9 @@
 package org.openxdata.oc.model
 
+import groovy.util.logging.Log
+import groovy.xml.XmlUtil
+
+@Log
 class ODMDefinition {
 
 	def OID
@@ -8,6 +12,7 @@ class ODMDefinition {
 	def studyEventDefs
 	
 	def parsedOdmXml
+	def instanceData
 	
 	public def initializeProperties(def odmXml){
 		parsedOdmXml = new XmlSlurper().parseText(odmXml)
@@ -32,5 +37,40 @@ class ODMDefinition {
 	
 	private def initStudyEventDefs(){
 		this.studyEventDefs = parsedOdmXml.Study.MetaDataVersion.StudyEventDef
+	}
+	
+	private def addSubjectData(def xml, def instanceNode) {
+		
+		log.info("Adding subject Data.")
+		
+		def studyOID = instanceNode.ClinicalData.@StudyOID[0]
+		def metadataVersion = instanceNode.ClinicalData.@MetaDataVersionOID[0]
+		def clinicalData = xml.ClinicalData.find {it.@StudyOID == studyOID && it.@MetaDataVersionOID == metadataVersion}
+		if (clinicalData == null) {
+			clinicalData = new Node(xml, "ClinicalData", ['StudyOID':studyOID, 'MetaDataVersion':metadataVersion])
+		}
+		
+		clinicalData.append(instanceNode.ClinicalData.SubjectData)
+		
+		log.info("<<Successfully added subject data ODM file.>>")
+	}
+	
+	def appendInstanceData(def instanceData){
+		
+		log.info("Appending instance data ODM file")
+		
+		this.instanceData = instanceData
+		
+		def odm = """<ODM></ODM>"""
+		def odmXml = new XmlParser().parseText(odm)
+		
+		instanceData.each {
+			def instanceXml = new XmlParser().parseText(it)
+			addSubjectData(odmXml, instanceXml)
+		}
+		
+		log.info("<<Successfully appended instance data ODM file.>>")
+		
+		return XmlUtil.asString(odmXml)
 	}
 }
