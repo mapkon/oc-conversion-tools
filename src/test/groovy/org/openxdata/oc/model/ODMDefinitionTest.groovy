@@ -2,6 +2,7 @@ package org.openxdata.oc.model
 
 import org.junit.Test
 import org.openxdata.oc.TransformUtil
+import org.openxdata.oc.exception.ImportException;
 
 
 class ODMDefinitionTest extends GroovyTestCase {
@@ -66,6 +67,7 @@ class ODMDefinitionTest extends GroovyTestCase {
 	}
 	
 	@Test void testAppendInstanceDataAppendsTheInstanceData(){
+		
 		def odm = odmDef.appendInstanceData(instanceData)
 		
 		def xml = new XmlParser().parseText(odm)
@@ -75,5 +77,10 @@ class ODMDefinitionTest extends GroovyTestCase {
 		assertEquals xml.depthFirst().ItemData.size(), 4
 	}
 	
-	//Test empty instance data.
+	@Test void testAppendInstanceDataShouldThrowExceptionOnNullInstanceData(){
+		def emptyInstanceData = new ArrayList<String>()
+		shouldFail(ImportException.class){
+			odmDef.appendInstanceData(emptyInstanceData)
+		}
+	}
 }

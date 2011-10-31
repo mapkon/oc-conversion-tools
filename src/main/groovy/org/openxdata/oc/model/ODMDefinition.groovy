@@ -1,5 +1,7 @@
 package org.openxdata.oc.model
 
+import org.openxdata.oc.exception.ImportException;
+
 import groovy.util.logging.Log
 import groovy.xml.XmlUtil
 
@@ -56,19 +58,22 @@ class ODMDefinition {
 	}
 	
 	def appendInstanceData(def instanceData){
-		
-		log.info("Appending instance data ODM file")
+
+		if(instanceData.isEmpty())
+			throw new ImportException("Cannot process empty instance data.")
+			
+		log.info("Processing instance data ODM file: " + instanceData)
 		
 		this.instanceData = instanceData
-		
+
 		def odm = """<ODM></ODM>"""
 		def odmXml = new XmlParser().parseText(odm)
-		
+
 		instanceData.each {
 			def instanceXml = new XmlParser().parseText(it)
 			addSubjectData(odmXml, instanceXml)
 		}
-		
+
 		log.info("<<Successfully appended instance data ODM file.>>")
 		
 		return XmlUtil.asString(odmXml)
