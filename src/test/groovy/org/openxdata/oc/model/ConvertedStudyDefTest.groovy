@@ -80,7 +80,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertEquals form.@description.text()+'-v1', version.@name.text()
 	}
 	
-	@Test void testinsertSubjectKeysMUSTInsertCorrectNumberOfSubjectKeys(){
+	@Test void testAppendSubjectKeysMUSTAppendCorrectNumberOfSubjectKeys(){
 		
 		convertedStudyDef.appendSubjectKeyNode(subjects)
 		
@@ -106,7 +106,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		
 	}
 	
-	@Test void testInsertSubjectsShouldInsertCorrectSubjectKeys(){
+	@Test void testAppendSubjectsShouldAppendCorrectSubjectKeys(){
 		
 		convertedStudyDef.appendSubjectKeyNode(subjects)
 		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
@@ -123,7 +123,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	// Add test select1 label node
 	// Add test select1 value node
 	
-	@Test void testInsertNullSubjectsShouldInsertInputNode(){
+	@Test void testAppendNullSubjectsShouldAppendInputNode(){
 		
 		convertedStudyDef.appendSubjectKeyNode([:])
 		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
