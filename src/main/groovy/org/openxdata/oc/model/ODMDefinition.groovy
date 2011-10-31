@@ -18,19 +18,19 @@ class ODMDefinition {
 		initStudyEventDefs()
 	}
 	
-	def initOID(){
+	private def initOID(){
 		this.OID = parsedOdmXml.Study.@OID.text()
 	}
 	
-	def initName(){
+	private def initName(){
 		this.name = parsedOdmXml.Study.GlobalVariables.StudyName.text()
 	}
 	
-	def initDescription(){
+	private def initDescription(){
 		this.description = parsedOdmXml.Study.GlobalVariables.StudyDescription.text().trim()
 	}
 	
-	def initStudyEventDefs(){
+	private def initStudyEventDefs(){
 		this.studyEventDefs = parsedOdmXml.Study.MetaDataVersion.StudyEventDef
 	}
 }
