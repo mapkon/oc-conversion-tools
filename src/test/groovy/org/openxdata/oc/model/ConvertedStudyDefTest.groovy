@@ -143,7 +143,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertEquals 'subjectKeyBind', input1Node.@bind.toString()
 	}
 	
-	@Test void testParseMeasureUnits(){
+	@Test void testParseMeasureUnitsShouldConvertOCMeasureunitsToXformHints(){
 		def measurementUnits = convertedStudyDef.parseMeasurementUnits()
 		
 		assertNotNull measurementUnits
@@ -151,7 +151,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertEquals "10^3/MM^3", measurementUnits.get("10<SUP>3</SUP>/MM<SUP>3</SUP>")
 	}
 	
-	@Test void testSerializeXformNode(){
+	@Test void testSerializeXformNodeShouldConvertXformNodeToString(){
 		
 		def xformText = convertedStudyDef.serializeXformNode()
 		
