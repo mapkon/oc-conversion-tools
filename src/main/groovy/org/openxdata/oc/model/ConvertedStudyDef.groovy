@@ -96,11 +96,11 @@ class ConvertedStudyDef {
 	def appendSubjectKeyNode(def subjectKeys){
 
 		log.info("Processing subjects to determine whether to append <input> node or <select1> node.")
-		if(subjectKeys.size() > 0){
-			appendSubjectKeySelectNodes(subjectKeys)
+		if(subjectKeys.isEmpty()){
+			appendSubjectKeyInputNode()
 		}
 		else{
-			appendSubjectKeyInputNode()
+			appendSubjectKeySelectNodes(subjectKeys)
 		}
 
 		log.info("Done processing subjects.")

@@ -125,6 +125,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
 		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
 		
+		assertEquals 'select1', select1Node.name()
 		select1Node.children().each{
 			assertEquals 'label', it.children()[0].name().toString()
 			assertEquals 'value', it.children()[1].name().toString()
