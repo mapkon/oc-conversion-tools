@@ -120,8 +120,16 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 
 	}
 	
-	// Add test select1 label node
-	// Add test select1 value node
+	@Test void testAppendSubjectsShouldAppendSelect1NodeWithLabelNode(){
+		convertedStudyDef.appendSubjectKeyNode(subjects)
+		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
+		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
+		
+		select1Node.children().each{
+			assertEquals 'label', it.children()[0].name().toString()
+			assertEquals 'value', it.children()[1].name().toString()
+		}
+	}
 	
 	@Test void testAppendNullSubjectsShouldAppendInputNode(){
 		
