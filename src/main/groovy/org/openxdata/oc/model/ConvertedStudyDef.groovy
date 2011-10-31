@@ -53,10 +53,14 @@ class ConvertedStudyDef {
 		return text
 	}
 	
+	private def getSubjectKeyGroupNode(){
+		return getNodeList('group').findAll{it.name() == 'group' && it.@id == '1'}
+	}
+	
 	private appendSubjectKeySelectNodes(def subjectKeys) {
 
-		log.info("Inserting " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +".")
-		def subjectGroup = convertedXformXml.'**'.findAll{it.name() == 'group' && it.@id == '1'}
+		log.info("Appending " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +" by adding <select1> nodes.")
+		def subjectGroup = getSubjectKeyGroupNode()
 
 		def xml = new StreamingMarkupBuilder().bind {
 			mkp.xmlDeclaration()
