@@ -60,9 +60,9 @@ class ODMDefinition {
 	def appendInstanceData(def instanceData){
 
 		if(instanceData.isEmpty())
-			throw new ImportException("Cannot process empty instance data.")
+			throw new ImportException('Cannot process empty instance data.')
 			
-		log.info("Processing instance data ODM file: " + instanceData)
+		log.info('Processing instance data')
 		
 		this.instanceData = instanceData
 
@@ -70,6 +70,8 @@ class ODMDefinition {
 		def odmXml = new XmlParser().parseText(odm)
 
 		instanceData.each {
+			
+			log.info("Processing instance data: " + it)
 			def instanceXml = new XmlParser().parseText(it)
 			addSubjectData(odmXml, instanceXml)
 		}
