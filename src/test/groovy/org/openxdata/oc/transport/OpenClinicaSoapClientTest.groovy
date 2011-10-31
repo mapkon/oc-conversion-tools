@@ -19,7 +19,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	def password = "pass"
 	
 	@Test void testListAllMUSTReturnListOfCorrectSize() {
-		def factory = setUpMocks(listAllReturnSOAPResponse)
+		def factory = setUpStudyConnectionMock(listAllReturnSOAPResponse)
 
 		play {
 			
@@ -31,7 +31,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testListAllMUSTReturnValidOpenclinicaStudies() {
-		def factory = setUpMocks(listAllReturnSOAPResponse)
+		def factory = setUpStudyConnectionMock(listAllReturnSOAPResponse)
 
 		play {
 			
@@ -48,7 +48,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testGetMetaDataMUSTReturnCorrectStudy() {
-		def factory = setUpMocks(metaDataReturnSOAPResponse)
+		def factory = setUpStudyConnectionMock(metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -63,7 +63,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormMUSTReturnValidForm() {
-		def factory = setUpMocks(metaDataReturnSOAPResponse)
+		def factory = setUpStudyConnectionMock(metaDataReturnSOAPResponse)
 		play {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
@@ -83,7 +83,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
-		def factory = setUpMocksX(studySubjectListSOAPResponse)
+		def factory = setStudySubjectConnectionMock(studySubjectListSOAPResponse)
 		play{
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
@@ -106,8 +106,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			client.listAll()
 		}
 	}
-	
-	private setUpMocks(def returnXml) {
+		
+	private def setUpConnectionMock(returnXml) {
+		
 		def connection = mock(HttpURLConnection.class)
 		connection.setRequestMethod("POST")
 		connection.setRequestProperty("Content-Type", "text/xml")
@@ -116,6 +117,12 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def outputStream = new ByteArrayOutputStream()
 		connection.getOutputStream().returns(outputStream)
 		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
+		
+		return connection
+	}
+	
+	private setUpStudyConnectionMock(def returnXml) {
+		def connection = setUpConnectionMock(returnXml)
 
 		def factory = mock(ConnectionURLFactory.class)
 		factory.getStudyConnection().returns(connection)
@@ -123,15 +130,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		return factory
 	}
 	
-	private setUpMocksX(def returnXml) {
-		def connection = mock(HttpURLConnection.class)
-		connection.setRequestMethod("POST")
-		connection.setRequestProperty("Content-Type", "text/xml")
-		connection.setRequestProperty("Content-Length", is(instanceOf(String.class)))
-		connection.setDoOutput(true)
-		def outputStream = new ByteArrayOutputStream()
-		connection.getOutputStream().returns(outputStream)
-		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
+	private setStudySubjectConnectionMock(def returnXml) {
+		def connection = setUpConnectionMock(returnXml)
 
 		def factory = mock(ConnectionURLFactory.class)
 		factory.getStudySubjectConnection().returns(connection)
@@ -159,7 +159,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 								   </listAllResponse>
 								</SOAP-ENV:Body>
 							 </SOAP-ENV:Envelope>"""
-
+	
  	def metaDataReturnSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 								   <SOAP-ENV:Header/>
 								   <SOAP-ENV:Body>
@@ -241,7 +241,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 									  </createResponse>
 								   </SOAP-ENV:Body>
 								</SOAP-ENV:Envelope>"""
-
+	 
 	def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 								   <SOAP-ENV:Header/>
 								   <SOAP-ENV:Body>
