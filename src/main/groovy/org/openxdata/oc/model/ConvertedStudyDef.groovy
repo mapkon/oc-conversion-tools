@@ -76,25 +76,36 @@ class ConvertedStudyDef {
 		}
 
 		def newGroupNode = new XmlSlurper().parseText(xml.toString())
+		subjectGroup.each { it.appendNode(newGroupNode) }
+	}
+	
+	private appendSubjectKeyInputNode() {
+		log.info("No Subjects Attached to the Study: " + convertedXformXml.@name + "." + " Adding Input Node to the Form.")
+		
+		def subjectGroup = getSubjectKeyGroupNode()
+		def xml = new StreamingMarkupBuilder().bind {
+			mkp.xmlDeclaration()
+			mkp.declareNamespace(xf:'xmlns:xf="http://www.w3.org/2002/xforms')
+			xf.input(bind:'subjectKeyBind')
+		}
 
+		def newGroupNode = new XmlSlurper().parseText(xml.toString())
 		subjectGroup.each { it.appendNode(newGroupNode) }
 	}
 	
 	def appendSubjectKeyNode(def subjectKeys){
 
+		log.info("Processing subjects to determine whether to append <input> node or <select1> node.")
 		if(subjectKeys.size() > 0){
 			appendSubjectKeySelectNodes(subjectKeys)
 		}
 		else{
-			log.info("No Subjects Attached to the Study: " + convertedXformXml.@name + "." + " Adding Input Node to the Form.")
-			subjectKeyGroup.each {
-				def inputNode = new Node(it, "input", [bind:"subjectKeyBind"])
-			}
+			appendSubjectKeyInputNode()
 		}
 
 		log.info("Done processing subjects.")
 	}
-
+	
 	def parseMeasurementUnits(){
 		log.info("Parsing Measurement units.")
 

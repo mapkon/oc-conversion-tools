@@ -120,12 +120,18 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 
 	}
 	
-	@Test void testSerializeXformNode(){
+	// Add test select1 label node
+	// Add test select1 value node
+	
+	@Test void testInsertNullSubjectsShouldInsertInputNode(){
 		
-		def xformText = convertedStudyDef.serializeXformNode()
+		convertedStudyDef.appendSubjectKeyNode([:])
+		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
+		def input1Node = subjectKeyGroup[1].getAt(0).children()[1]
 		
-		assertNotNull xformText
-		assertTrue xformText instanceof String
+		assertNotNull input1Node
+		assertEquals 'input', input1Node.name().toString()
+		assertEquals 'subjectKeyBind', input1Node.@bind.toString()
 	}
 	
 	@Test void testParseMeasureUnits(){
