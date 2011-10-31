@@ -136,6 +136,14 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertEquals "10^3/MM^3", measurementUnits.get("10<SUP>3</SUP>/MM<SUP>3</SUP>")
 	}
 	
+	@Test void testSerializeXformNode(){
+		
+		def xformText = convertedStudyDef.serializeXformNode()
+		
+		assertNotNull xformText
+		assertTrue xformText instanceof String
+	}
+		
 	@Test void testGetNodeListShouldReturnExistingNodeList(){
 		
 		def hintNodeList = convertedStudyDef.getNodeList("hint")
@@ -148,4 +156,5 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertNotNull groupNodeList
 		assertEquals 6, groupNodeList.size()
 	}
+
 }
