@@ -92,7 +92,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
-			def convertedStudy = client.getOpenxdataForm("001", ['Jonny','Jorn', 'Janne','Morten'])
+			def convertedStudy = client.getOpenxdataForm("001")
 
 			
 			def forms = convertedStudy.forms

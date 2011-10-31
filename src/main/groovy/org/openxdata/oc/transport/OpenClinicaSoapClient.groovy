@@ -25,14 +25,13 @@ public interface OpenClinicaSoapClient {
 	String getMetadata(String studyOID)
 	
 	/**
-	* Retrieves ODM file for given study identifier, transforms it to an openxdata xform and inserts subject keys.
+	* Retrieves ODM file for given study identifier and transforms it to an object mimicking openxdata xform definition.
 	*
 	* @param studyOID Study identifier for which to get metadata for.
-	* @param subjectKeys The subject keys to insert into the form.
 	*
-	* @return A valid openxdata xform.
+	* @return Converted Object mimicking the OpenXData Xform Definition.
 	*/
-	def getOpenxdataForm(String openclinicaStudyOID, Collection<String> subjectKeys)
+	def getOpenxdataForm(String openclinicaStudyOID)
 
 	/**
 	* Retrieves subject keys for a given study identifier.
