@@ -105,8 +105,8 @@ class ConvertedStudyDef {
 			parsedMeasurementUnits[originalText] = parsedText
 		}
 		
-		return parsedMeasurementUnits
 		log.info("Parsing Measurement Units successful.")
+		return parsedMeasurementUnits
 	}
 
 	def serializeXformNode(){
@@ -119,8 +119,8 @@ class ConvertedStudyDef {
 			it.replaceBody(textNode)
 		}
 		
-		return xformNodeText
 		log.info("Transforming Xform tag to String successful.")
+		return xformNodeText
 	}
 
 	def getFormVersion(def form){
