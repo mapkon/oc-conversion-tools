@@ -43,8 +43,19 @@ class ConvertedStudyDef {
 		this.forms = convertedXformXml.children()
 	}
 	
-	private addSubjectKeySelectNodes(def subjectKeys) {
+	private replaceHintNodeText(def hintNode) {
+		def text = hintNode.text()
+		text = text.replace("<SUP>", "^")
+		text = text.replace("</SUP>", "")
 
+		hintNode.replaceBody(text)
+		
+		return text
+	}
+	
+	private appendSubjectKeySelectNodes(def subjectKeys) {
+
+		log.info("Inserting " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +".")
 		def subjectGroup = convertedXformXml.'**'.findAll{it.name() == 'group' && it.@id == '1'}
 
 		def xml = new StreamingMarkupBuilder().bind {
@@ -62,26 +73,13 @@ class ConvertedStudyDef {
 
 		def newGroupNode = new XmlSlurper().parseText(xml.toString())
 
-		subjectGroup.each {
-			it.appendNode(newGroupNode)
-		}
-	}
-
-	private replaceHintNodeText(def hintNode) {
-		def text = hintNode.text()
-		text = text.replace("<SUP>", "^")
-		text = text.replace("</SUP>", "")
-
-		hintNode.replaceBody(text)
-		
-		return text
+		subjectGroup.each { it.appendNode(newGroupNode) }
 	}
 	
 	def appendSubjectKeyNode(def subjectKeys){
 
 		if(subjectKeys.size() > 0){
-			log.info("Inserting " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +".")
-			addSubjectKeySelectNodes(subjectKeys)
+			appendSubjectKeySelectNodes(subjectKeys)
 		}
 		else{
 			log.info("No Subjects Attached to the Study: " + convertedXformXml.@name + "." + " Adding Input Node to the Form.")
