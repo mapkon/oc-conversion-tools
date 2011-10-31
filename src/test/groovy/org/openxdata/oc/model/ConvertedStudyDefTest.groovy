@@ -84,7 +84,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		
 		convertedStudyDef.appendSubjectKeyNode(subjects)
 		
-		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id== '1'}
+		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
 				
 		assertEquals 2, subjectKeyGroup.size()
 		assertEquals 'group', subjectKeyGroup[0].name()
@@ -109,7 +109,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	@Test void testAppendSubjectsShouldAppendCorrectSubjectKeys(){
 		
 		convertedStudyDef.appendSubjectKeyNode(subjects)
-		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
+		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
 		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
 
 		assertEquals 4, select1Node.children().size()
@@ -126,7 +126,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	@Test void testAppendNullSubjectsShouldAppendInputNode(){
 		
 		convertedStudyDef.appendSubjectKeyNode([:])
-		def subjectKeyGroup = convertedStudyDef.getNodeList("group").findAll{it.@id == '1'}
+		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
 		def input1Node = subjectKeyGroup[1].getAt(0).children()[1]
 		
 		assertNotNull input1Node
