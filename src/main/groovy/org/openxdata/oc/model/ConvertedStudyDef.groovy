@@ -52,11 +52,7 @@ class ConvertedStudyDef {
 		
 		return text
 	}
-	
-	private def getSubjectKeyGroupNode(){
-		return getNodeList('group').findAll{it.name() == 'group' && it.@id == '1'}
-	}
-	
+		
 	private appendSubjectKeySelectNodes(def subjectKeys) {
 
 		log.info("Appending " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +" by adding <select1> nodes.")
@@ -91,6 +87,10 @@ class ConvertedStudyDef {
 
 		def newGroupNode = new XmlSlurper().parseText(xml.toString())
 		subjectGroup.each { it.appendNode(newGroupNode) }
+	}
+	
+	def getSubjectKeyGroupNode(){
+		return getNodeList('group').findAll{it.name() == 'group' && it.@id == '1'}
 	}
 	
 	def appendSubjectKeyNode(def subjectKeys){
