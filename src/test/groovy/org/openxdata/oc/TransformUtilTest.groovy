@@ -65,13 +65,4 @@ class TransformUtilTest extends GroovyTestCase {
 		def duplicateBindings = util.getDuplicateBindings(xformWithDuplicateBindings)
 		assertEquals 386, duplicateBindings.size()
 	}
-	
-	@Test void testUniquifyBindingsShouldReturnUniqueBindings(){
-		
-		def duplicateBindings = util.getDuplicateBindings(xformWithDuplicateBindings)
-		assertEquals 386, duplicateBindings.size()
-		
-		def xformWithUniquifiedBindings = util.uniquifyBindings(xformWithDuplicateBindings)
-		assertEquals 0, util.getDuplicateBindings(xformWithNoDuplicateBindings).size()
-	}
 }

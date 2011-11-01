@@ -47,10 +47,4 @@ public class TransformUtil {
 
 		return set.duplicatedBindings
 	}
-	
-	public def uniquifyBindings(def doc){
-		def duplicateBindings = getDuplicateBindings(doc)
-		
-		return 0
-	}
 }
