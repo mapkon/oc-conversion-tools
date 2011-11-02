@@ -2,11 +2,10 @@ package org.openxdata.oc.transport
 
 import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
-import groovy.xml.XmlUtil;
 
 import org.gmock.WithGMock
 import org.junit.Test
-import org.openxdata.oc.exception.ImportException;
+import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
@@ -155,6 +154,21 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 				def reponse = client.importData(instanceData)
 			}
 		}
+	}
+	
+	@Test void testSetConnectionFactory(){
+		
+		def host = 'http://localhost/openclinica'
+		def connectionFactory = new ConnectionURLFactory(host)
+		OpenClinicaSoapClient client = new OpenClinicaSoapClientImpl('user','pass')
+		
+		client.setConnectionFactory(connectionFactory)
+		
+		def studyURL = connectionFactory.getStudyConnection().getURL()
+		def studySubjectURL = connectionFactory.getStudySubjectConnection().getURL()
+		
+		assertEquals host+'/ws/study/v1', studyURL.toString()
+		assertEquals host+'/ws/studySubject/v1', studySubjectURL.toString()
 	}
 	
 	private def setUpConnectionMock(returnXml) {
