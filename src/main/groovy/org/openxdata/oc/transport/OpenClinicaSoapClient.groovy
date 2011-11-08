@@ -1,7 +1,7 @@
 package org.openxdata.oc.transport
 
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
-import org.openxdata.oc.transport.factory.ConnectionURLFactory;
+import org.openxdata.oc.transport.factory.ConnectionFactory;
 
 /**
  * Defines methods that represent endpoints OpenClinica Web services. Note that this is not a web service in itself but
@@ -51,6 +51,6 @@ public interface OpenClinicaSoapClient {
 	*/
 	def importData(Collection<String> instanceData)
 	
-	void setConnectionFactory(ConnectionURLFactory connectionFactory)
+	void setConnectionFactory(ConnectionFactory connectionFactory)
 	
 }

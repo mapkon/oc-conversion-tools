@@ -8,7 +8,7 @@ import org.junit.Test
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
-import org.openxdata.oc.transport.factory.ConnectionURLFactory
+import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 
 
@@ -159,7 +159,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	@Test void testSetConnectionFactory(){
 		
 		def host = 'http://localhost/openclinica'
-		def connectionFactory = new ConnectionURLFactory(host)
+		def connectionFactory = new ConnectionFactory(host)
 		OpenClinicaSoapClient client = new OpenClinicaSoapClientImpl('user','pass')
 		
 		client.setConnectionFactory(connectionFactory)

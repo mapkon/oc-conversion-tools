@@ -11,7 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy;
 import org.openxdata.oc.transport.OpenClinicaSoapClient;
-import org.openxdata.oc.transport.factory.ConnectionURLFactory;
+import org.openxdata.oc.transport.factory.ConnectionFactory;
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl;
 
 @Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
@@ -21,7 +21,7 @@ public class OCServerTest {
 	
 	@Before
 	public void setUp(){
-		def factory = new ConnectionURLFactory("http://158.37.6.164/OpenClinica-ws-3.1.1")
+		def factory = new ConnectionFactory("http://158.37.6.164/OpenClinica-ws-3.1.1")
 		client = new OpenClinicaSoapClientImpl("MarkG", "b9a60a9d91a96ee522d0c942e5b88dfba25b0a12")
 		client.setConnectionFactory(factory)
 	}

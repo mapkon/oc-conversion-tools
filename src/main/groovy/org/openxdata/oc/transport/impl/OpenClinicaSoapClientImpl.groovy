@@ -6,10 +6,11 @@ import groovy.xml.Namespace
 import java.util.Collection
 
 import org.openxdata.oc.Transform
+import org.openxdata.oc.model.ODMDefinition
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
-import org.openxdata.oc.model.ODMDefinition;
+import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionURLFactory
 
@@ -22,7 +23,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	def studyPath = "/ws/study/v1"
 	def subjectPath = "/ws/studySubject/v1"
 	
-	private def factory
+	private def connectionFactory
 
 	/**
 	 * Constructs a OpenClinicaSoapClientImpl that connects to openclinica web services.
@@ -174,7 +175,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 					   </soapenv:Body>"""
 
 		def envelope = buildEnvelope(studyPath, body)
-		def xml = sendRequest(envelope, factory.getStudyConnection())
+		def xml = sendRequest(envelope, connectionFactory.getStudyConnection())
 		
 		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">""" + xml.depthFirst().odm[0].children()[0] +"</ODM>"
 	}
@@ -223,7 +224,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 				   </soapenv:Body>"""
 		
 		def envelope = buildEnvelope(subjectPath, body)
-		def response = sendRequest(envelope, factory.getStudySubjectConnection())
+		def response = sendRequest(envelope, connectionFactory.getStudySubjectConnection())
 		Collection<String> subjectKeys = extractSubjectKeys(response)
 
 		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: " + studyOID)
@@ -242,7 +243,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 					  </soapenv:Body>"""
 
 		def envelope = buildEnvelope(dataPath, body)
-		def reply = sendRequest(envelope, factory.getStudyConnection())
+		def reply = sendRequest(envelope, connectionFactory.getStudyConnection())
 
 		def result = reply.depthFirst().result[0].text()
 		if(result != "Success")
@@ -269,7 +270,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return subjectKeys
 	}
 	
-	public void setConnectionFactory(ConnectionURLFactory factory){
-		this.factory = factory
+	public void setConnectionFactory(ConnectionFactory factory){
+		this.connectionFactory = factory
 	}
 }

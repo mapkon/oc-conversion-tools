@@ -5,7 +5,7 @@ import org.junit.Test
 class ConnectionFactoryTest extends GroovyTestCase {
 	
 	def host = 'http://localhost:8080/openclinica'
-	def factory = new ConnectionURLFactory(host)
+	def factory = new ConnectionFactory(host)
 	
 	@Test void testGetStudyConnectionShouldReturnCorrectURL(){
 		
