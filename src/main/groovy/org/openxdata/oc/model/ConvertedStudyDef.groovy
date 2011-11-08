@@ -40,7 +40,7 @@ class ConvertedStudyDef {
 	}
 	
 	private def initForms(){
-		this.forms = convertedXformXml.children()
+		this.forms = convertedXformXml.form
 	}
 	
 	private replaceHintNodeText(def hintNode) {
