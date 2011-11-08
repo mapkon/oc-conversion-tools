@@ -42,7 +42,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testListAllMUSTReturnListOfCorrectSize() {
-		def factory = setUpFactoryMock(listAllReturnSOAPResponse)
+		def factory = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 
 		play {
 			
@@ -54,7 +54,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testListAllMUSTReturnValidOpenclinicaStudies() {
-		def factory = setUpFactoryMock(listAllReturnSOAPResponse)
+		def factory = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 
 		play {
 			
@@ -71,7 +71,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testGetMetaDataMUSTReturnCorrectStudy() {
-		def factory = setUpFactoryMock(metaDataReturnSOAPResponse)
+		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -86,7 +86,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormMUSTReturnValidForm() {
-		def factory = setUpFactoryMock(metaDataReturnSOAPResponse)
+		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
@@ -107,7 +107,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
-		def factory = setUpFactoryMock(studySubjectListSOAPResponse)
+		def factory = setUpConnectionFactoryMock(studySubjectListSOAPResponse)
 		play{
 			def client = new OpenClinicaSoapClientImpl(username, password)
 			client.setConnectionFactory(factory)
@@ -133,7 +133,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	@Test void testThatImportDataReturnsSuccessResponseOnCorrectODMFormat(){
 		
-		def factory = setUpFactoryMock(importSOAPSuccessResponse)
+		def factory = setUpConnectionFactoryMock(importSOAPSuccessResponse)
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(username, password)
@@ -146,7 +146,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testThatImportDataReturnsErrorOnIncorrectODM(){
-		def factory = setUpFactoryMock(importSOAPErrorResponse)
+		def factory = setUpConnectionFactoryMock(importSOAPErrorResponse)
 		play{
 
 			shouldFail(ImportException.class){
@@ -172,7 +172,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		assertEquals host+'/ws/studySubject/v1', studySubjectURL.toString()
 	}
 	
-	private def setUpFactoryMock(returnXml) {
+	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)
 		connection.setRequestMethod("POST")

@@ -19,7 +19,7 @@ class HttpTransportHandlerTest {
 	
 	@Test void testSendRequestShouldNotReturnNull(){
 		
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			assertNotNull response
@@ -27,7 +27,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingEnvelope(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -37,7 +37,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingHeader(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -47,7 +47,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingBody(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -57,7 +57,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingChildren(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -67,7 +67,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingListAllResponse(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -78,7 +78,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainResultElement(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -92,7 +92,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElement(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -106,7 +106,7 @@ class HttpTransportHandlerTest {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElementContains2Studies(){
-		def connection = setUpFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -118,7 +118,7 @@ class HttpTransportHandlerTest {
 		}
 	}
 	
-	private def setUpFactoryMock(responseStream) {
+	private def setUpConnectionFactoryMock(responseStream) {
 		
 		def connection = mock(HttpURLConnection.class)
 		connection.setRequestMethod("POST")

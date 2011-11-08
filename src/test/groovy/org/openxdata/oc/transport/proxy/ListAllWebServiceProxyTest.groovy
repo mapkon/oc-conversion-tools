@@ -14,7 +14,7 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 	
 	@Before void setUp(){
 		
-		def connectionFactory = setUpFactoryMock(listAllReturnSOAPResponse)	
+		def connectionFactory = setUpConnectionFactoryMock(listAllReturnSOAPResponse)	
 		listAllProxy = new ListAllWebServiceProxy(username:"uname", hashedPassword:"pass", connectionFactory:connectionFactory)
 	}
 	
@@ -76,7 +76,7 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 		assertEquals 2, studiesSize.size() 
 	}
 	
-	private def setUpFactoryMock(returnXml) {
+	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)
 		connection.setRequestMethod("POST")

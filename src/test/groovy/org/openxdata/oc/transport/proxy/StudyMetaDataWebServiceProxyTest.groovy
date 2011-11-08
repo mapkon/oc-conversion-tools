@@ -14,7 +14,7 @@ class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 
 	@Before void setUp(){
 
-		def connectionFactory = setUpFactoryMock(metaDataReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		getMetadataProxy = new StudyMetaDataWebServiceProxy(username:'uname', hashedPassword:'pass', connectionFactory:connectionFactory)
 	}
 
@@ -208,8 +208,7 @@ class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 		}
 	}
 	
-
-	private def setUpFactoryMock(returnXml) {
+	private def setUpConnectionFactoryMock(returnXml) {
 
 		def connection = mock(HttpURLConnection.class)
 		connection.setRequestMethod('POST')
