@@ -34,8 +34,8 @@ class ListAllWebServiceProxy extends SoapRequestProperties {
 
 	private def extractStudies(def response){
 		log.info("Extracting studies from response.")
-		List<ConvertedOpenclinicaStudy> studies  = new ArrayList<ConvertedOpenclinicaStudy>()
-
+		
+		def studies = []
 		response.depthFirst().study.each {
 			def study = new ConvertedOpenclinicaStudy()
 			study.OID = it.oid.text()
