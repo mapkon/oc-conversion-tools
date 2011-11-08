@@ -86,10 +86,6 @@ class HttpTransportHandler {
 	}
 
 	private def buildSoapResponseXML(def validXML) {
-		def builder = new StringBuilder()
-		builder.append(validXML)
-		builder.append("</SOAP-ENV:Envelope>")
-
-		return builder.toString()
+		"${validXML}</SOAP-ENV:Envelope>"
 	}
 }
