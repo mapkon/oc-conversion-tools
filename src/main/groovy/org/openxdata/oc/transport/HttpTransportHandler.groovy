@@ -22,7 +22,7 @@ class HttpTransportHandler {
 
 		def is = readStream()
 
-		return parseInputStream(is)
+		return parseSoapXml(is.text)
 	}
 
 	private def readStream() {
@@ -65,15 +65,6 @@ class HttpTransportHandler {
 		outputStream.write(bytes)
 	}
 
-	private def parseInputStream(InputStream is) {
-		def builder = new StringBuilder()
-		for (String s : is.readLines()) {
-			builder.append(s)
-		}
-
-		return parseSoapXml(builder.toString())
-	}
-
 	private def parseSoapXml(def response){
 
 		def validXML
@@ -99,7 +90,6 @@ class HttpTransportHandler {
 		builder.append(validXML)
 		builder.append("</SOAP-ENV:Envelope>")
 
-		validXML = builder.toString()
-		return validXML
+		return builder.toString()
 	}
 }
