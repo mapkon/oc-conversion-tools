@@ -13,17 +13,17 @@ class ListAllWebServiceProxy extends SoapRequestProperties {
 	def connectionFactory
 
 	def getSoapEnvelope() {
-		'''<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1">''' +
-				getHeader() +
-		'''<soapenv:Body>
+		"""<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1"> 
+				${getHeader()}
+			<soapenv:Body>
 		   <v1:listAllRequest>?</v1:listAllRequest>
 		  </soapenv:Body>
-	     </soapenv:Envelope>'''
+	     </soapenv:Envelope>"""
 	}
 
 	public def listAll() {
 
-		log.info("Fetching all available studies...")
+		log.info('Fetching all available studies...')
 		def envelope = getSoapEnvelope()
 
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
@@ -33,7 +33,7 @@ class ListAllWebServiceProxy extends SoapRequestProperties {
 	}
 
 	private def extractStudies(def response){
-		log.info("Extracting studies from response.")
+		log.info('Extracting studies from response.')
 		
 		def studies = []
 		response.depthFirst().study.each {
