@@ -185,23 +185,28 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
 		
 		def odmMetaData = getMetadata(studyOID)
-		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)	
+		def convertedStudy = transformMetaData(odmMetaData)
 		
 		log.info("<< ODM To OpenXData Transformation Complete. Returning... >>")
 		
-		return convertedStudy
+		return convertedStudy.convertedXformXml
 	}
 
-	/**
-	 * Extracts studies from a SOAP response.
-	 * 
-	 * @param response Response containing studies
-	 * @return List of studies.
-	 */
-	private def extractStudies(def response){
+	private transformMetaData(String odmMetaData) {
+		
+		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
+		convertedStudy.appendSubjectKeyNode([:])
+		convertedStudy.parseMeasurementUnits()
+		convertedStudy.serializeXformNode()
+		
+		return convertedStudy
+	}
+	
+	private def extractStudies(def response){
 		log.info("Extracting studies from response.")
 		List<ConvertedOpenclinicaStudy> studies  = new ArrayList<ConvertedOpenclinicaStudy>()
+
 		response.depthFirst().study.each {
 			def study = new ConvertedOpenclinicaStudy()
 			study.OID = it.oid.text()
@@ -209,10 +214,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			study.identifier = it.identifier.text()
 			studies.add(study)
 		}
-
 		return studies
 	}
-	
+		
 	public Collection<String> getSubjectKeys(String studyOID){
 		log.info("Fetching subject keys for Openclinica study with ID: " + studyOID)
 		def body = """<soapenv:Body>
