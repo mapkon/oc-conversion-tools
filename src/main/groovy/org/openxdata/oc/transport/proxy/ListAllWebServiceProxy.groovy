@@ -6,18 +6,19 @@ import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
+
 @Log
 class ListAllWebServiceProxy extends SoapRequestProperties {
 
 	def connectionFactory
 
 	def getSoapEnvelope() {
-		"""<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1">""" +
+		'''<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1">''' +
 				getHeader() +
-				"""<soapenv:Body>
+		'''<soapenv:Body>
 		   <v1:listAllRequest>?</v1:listAllRequest>
 		  </soapenv:Body>
-	     </soapenv:Envelope>"""
+	     </soapenv:Envelope>'''
 	}
 
 	public def listAll() {
