@@ -4,7 +4,7 @@ package org.openxdata.oc.transport.factory
  * Builds a connection for accessing OpenClinca web services end-point.
  *
  */
-public class ConnectionURLFactory {
+public class ConnectionFactory {
 
 	def host
 	
@@ -12,7 +12,7 @@ public class ConnectionURLFactory {
 	 * Constructs valid end-point to OpenClinca web services given a host name.
 	 * @param host Host name to connect to.
 	 */
-	public ConnectionURLFactory(String host){
+	public ConnectionFactory(String host){
 		this.host = host
 	}
 	
