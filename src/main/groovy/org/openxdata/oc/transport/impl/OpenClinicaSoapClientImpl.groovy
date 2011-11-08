@@ -12,12 +12,16 @@ import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.OpenClinicaSoapClient
-import org.openxdata.oc.transport.factory.ConnectionURLFactory
+import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
+import org.openxdata.oc.transport.soap.SoapRequestProperties
 
 
 @Log
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
+	def username
+	def password
+	
 	def header
 	def dataPath = "/ws/data/v1"
 	def studyPath = "/ws/study/v1"
@@ -33,6 +37,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	 */
 	OpenClinicaSoapClientImpl(def userName, def password){
 		log.info("Initialized Openclinica Soap Client.")
+		
+		this.username = userName
+		this.password = password
 		buildHeader(userName, password)
 	}
 
@@ -152,14 +159,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	} 
 
 	public List<ConvertedOpenclinicaStudy> listAll(){
-		log.info("Fetching all available studies...")
-		def body = """<soapenv:Body><v1:listAllRequest>?</v1:listAllRequest></soapenv:Body>"""
-
-		def envelope = buildEnvelope(studyPath, body)
-		def response = sendRequest(envelope, factory.getStudyConnection())
-
-		List<ConvertedOpenclinicaStudy> studies = extractStudies(response)
-		return studies;
+		
+		def listAllProxy = new ListAllWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		return listAllProxy.listAll()
 	}
 	
 	public String getMetadata(String studyOID) {
@@ -201,20 +203,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		convertedStudy.serializeXformNode()
 		
 		return convertedStudy
-	}
-	
-	private def extractStudies(def response){
-		log.info("Extracting studies from response.")
-		List<ConvertedOpenclinicaStudy> studies  = new ArrayList<ConvertedOpenclinicaStudy>()
-
-		response.depthFirst().study.each {
-			def study = new ConvertedOpenclinicaStudy()
-			study.OID = it.oid.text()
-			study.name = it.name.text()
-			study.identifier = it.identifier.text()
-			studies.add(study)
-		}
-		return studies
 	}
 		
 	public Collection<String> getSubjectKeys(String studyOID){

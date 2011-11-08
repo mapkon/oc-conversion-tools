@@ -179,6 +179,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		connection.setRequestProperty("Content-Type", "text/xml")
 		connection.setRequestProperty("Content-Length", is(instanceOf(String.class)))
 		connection.setDoOutput(true)
+		connection.getURL().returns("mock url").atMostOnce()
+
 		def outputStream = new ByteArrayOutputStream()
 		connection.getOutputStream().returns(outputStream)
 		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
