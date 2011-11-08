@@ -6,14 +6,14 @@ import groovy.xml.Namespace
 import java.util.Collection
 
 import org.openxdata.oc.Transform
-import org.openxdata.oc.model.ODMDefinition
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
-import org.openxdata.oc.transport.factory.ConnectionFactory
+import org.openxdata.oc.model.ODMDefinition
 import org.openxdata.oc.transport.OpenClinicaSoapClient
+import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
-import org.openxdata.oc.transport.soap.SoapRequestProperties
+import org.openxdata.oc.transport.proxy.StudyMetaDataWebServiceProxy
 
 
 @Log
@@ -164,22 +164,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return listAllProxy.listAll()
 	}
 	
-	public String getMetadata(String studyOID) {
-		log.info("Fetching Metadata for Openclinica study with ID: " + studyOID)
-		def body = """<soapenv:Body>
-						  <v1:getMetadataRequest>
-							 <v1:studyMetadata>
-								<bean:studyRef>
-								   <bean:identifier>"""+ studyOID +"""</bean:identifier>
-								</bean:studyRef>
-							 </v1:studyMetadata>
-						  </v1:getMetadataRequest>
-					   </soapenv:Body>"""
-
-		def envelope = buildEnvelope(studyPath, body)
-		def xml = sendRequest(envelope, connectionFactory.getStudyConnection())
-		
-		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">""" + xml.depthFirst().odm[0].children()[0] +"</ODM>"
+	public String getMetadata(String identifier) {
+		def getMetaDataProxy = new StudyMetaDataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		return getMetaDataProxy.getMetaData(identifier)
 	}
 	
 	public def getOpenxdataForm(String studyOID) {
