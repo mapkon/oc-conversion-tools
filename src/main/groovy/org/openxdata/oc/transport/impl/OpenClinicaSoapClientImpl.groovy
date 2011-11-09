@@ -5,12 +5,11 @@ import groovy.util.logging.Log
 import java.util.Collection
 
 import org.openxdata.oc.Transform
-import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
-import org.openxdata.oc.model.ODMDefinition
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
+import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
 import org.openxdata.oc.transport.proxy.StudyMetaDataWebServiceProxy
@@ -198,25 +197,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 		
 	public def importData(Collection<String> instanceData){
-
-		log.info("Starting import to Openclinca.")
-		
-		def odm = new ODMDefinition()
-		def importXMl = odm.appendInstanceData(instanceData)
-		
-		def body = """<soapenv:Body>
-					  	<v1:importRequest>""" + importXMl + """</v1:importRequest>
-					  </soapenv:Body>"""
-
-		def envelope = buildEnvelope(dataPath, body)
-		def reply = sendRequest(envelope, connectionFactory.getStudyConnection())
-
-		def result = reply.depthFirst().result[0].text()
-		if(result != "Success")
-			throw new ImportException(reply.depthFirst().error[0].text())
-
-		log.info("Successfully exported data to openclinica.")
-		return result;
+		def importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		return importProxy.importData(instanceData);
 	}
 	
 	public void setConnectionFactory(ConnectionFactory factory){
