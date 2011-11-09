@@ -25,6 +25,17 @@ class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 			assertNotNull response
 		}
 	}
+	
+	@Test void testGetEnvelopeHasCorrectStudyPath(){
+
+		def envelope = getMetadataProxy.getSoapEnvelope()
+		def envelopeXml = new XmlSlurper().parseText(envelope)
+
+		def actual = 'http://openclinica.org/ws/study/v1'
+		def namespaceList = envelopeXml.'**'.collect { it.namespaceURI() }.unique()
+
+		assertEquals actual, namespaceList[2].toString()
+	}
 
 	@Test void testGetMetaDataShouldReturnValidResponseWithODMRoot(){
 		play{

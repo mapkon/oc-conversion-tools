@@ -25,6 +25,17 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testGetEnvelopeHasCorrectStudyPath(){
+
+		def envelope = listAllProxy.getSoapEnvelope()
+		def envelopeXml = new XmlSlurper().parseText(envelope)
+
+		def actual = 'http://openclinica.org/ws/study/v1'
+		def namespaceList = envelopeXml.'**'.collect { it.namespaceURI() }.unique()
+
+		assertEquals actual, namespaceList[2].toString()
+	}
+	
 	@Test void testListAllShouldReturnCorrectNumberOfStudies() {
 		play{
 			def studies = listAllProxy.listAll()
