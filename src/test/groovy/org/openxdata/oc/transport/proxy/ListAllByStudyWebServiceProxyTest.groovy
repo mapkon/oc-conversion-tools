@@ -17,6 +17,17 @@ class ListAllByStudyWebServiceProxyTest {
 		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:'uname', hashedPassword:'pass', connectionFactory:connectionFactory)
 	}
 
+	@Test void testGetEnvelopeHasCorrectSubjectPath(){
+		
+		def envelope = listAllByStudyProxy.getSoapEnvelope()
+		def envelopeXml = new XmlSlurper().parseText(envelope)
+		
+		def actual = 'http://openclinica.org/ws/studySubject/v1'
+		def namespaceList = envelopeXml.'**'.collect { it.namespaceURI() }.unique()
+		
+		assertEquals actual, namespaceList[2].toString()
+	}
+	
 	@Test void testListAllByStudyShouldNotReturnNull(){
 		play{
 
