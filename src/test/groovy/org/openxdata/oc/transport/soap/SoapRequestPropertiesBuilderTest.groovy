@@ -23,17 +23,45 @@ class SoapRequestPropertiesBuilderTest extends GroovyTestCase {
 		def headerXml = parser.parseText(header)
 		
 		assertEquals 'Header', headerXml.name()
+	}
+	
+	@Test void testGetHeaderShouldReturnValidSecurityElement(){
+		
+		def header = listAllProxy.getHeader()
+		def headerXml = parser.parseText(header)
+		
 		assertEquals 'Security', headerXml.children()[0].name()
+	}
+	
+	@Test void testGetHeaderShouldReturnValidUsername(){
+		
+		def header = listAllProxy.getHeader()
+		def headerXml = parser.parseText(header)
+		
 		assertEquals 'uname', headerXml.depthFirst().find{it.name().equals('Username')}.text()
+	}
+	
+	@Test void testGetHeaderShouldReturnValidPassword(){
+		
+		def header = listAllProxy.getHeader()
+		def headerXml = parser.parseText(header)
+		
 		assertEquals 'pass', headerXml.depthFirst().find{it.name().equals('Password')}.text()
 	}
 	
-	@Test void testGetListAllSoapRequestEnvelopeShouldReturnValidEnvelope(){
+	@Test void testListAllSoapRequestEnvelopeShouldReturnValidEnvelope(){
 		
 		def envelope = listAllProxy.getSoapEnvelope()
 		def envelopeXML = parser.parseText(envelope)
 		
 		assertEquals 'Envelope', envelopeXML.name()
+	}
+	
+	@Test void testListAllSoapRequestEnvelopeShouldReturnValidEnvelopeWithHeaderElement(){
+		
+		def envelope = listAllProxy.getSoapEnvelope()
+		def envelopeXML = parser.parseText(envelope)
+		
 		assertEquals 'Header', envelopeXML.children()[0].name()
 	}
 	
