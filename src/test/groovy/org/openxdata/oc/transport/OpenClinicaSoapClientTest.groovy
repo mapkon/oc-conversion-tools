@@ -46,10 +46,10 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 		play {
 			
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
-			def all = client.listAll()
-			assertEquals 2, all.size()
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
+			
+			def studies = client.listAll()
+			assertEquals 2, studies.size()
 		}
 	}
 
@@ -58,8 +58,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 		play {
 			
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
+			
 			def actual = client.listAll()
 			
 			def study1 = new ConvertedOpenclinicaStudy(identifier: "default-study", OID: "S_DEFAULTS1", name:"Default Study")
@@ -75,8 +75,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		
 		play{
 			
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
+			
 			def response = client.getMetadata("001")
 			def xml = new XmlSlurper().parseText(response).declareNamespace(oc: "http://www.cdisc.org/ns/odm/v1.3")
 						
@@ -89,8 +89,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
 			
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
+			
 			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
@@ -109,8 +109,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
 		def factory = setUpConnectionFactoryMock(studySubjectListSOAPResponse)
 		play{
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
+			
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
+			
 			def subjectKeys = client.getSubjectKeys("default-study")
 			
 			assertNotNull subjectKeys
@@ -125,8 +126,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def factory = mock.proxyInstance()
 		shouldFail(UnAvailableException){
 
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 			client.listAll()
 		}
 	}
@@ -136,8 +136,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def factory = setUpConnectionFactoryMock(importSOAPSuccessResponse)
 		play{
 			
-			def client = new OpenClinicaSoapClientImpl(username, password)
-			client.setConnectionFactory(factory)
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 			def reponse = client.importData(instanceData)
 			
 			assertNotNull reponse

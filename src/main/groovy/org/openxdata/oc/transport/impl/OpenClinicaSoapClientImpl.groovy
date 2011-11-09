@@ -5,7 +5,6 @@ import groovy.util.logging.Log
 import java.util.Collection
 
 import org.openxdata.oc.Transform
-import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -18,31 +17,34 @@ import org.openxdata.oc.transport.proxy.StudyMetaDataWebServiceProxy
 @Log
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
-	def username
-	def password
 	
-	private def connectionFactory
-
-	OpenClinicaSoapClientImpl(def userName, def password){
-		log.info("Initialized Openclinica Soap Client.")
+	private def importProxy
+	private def listAllProxy
+	private def getMetaDataProxy
+	private def listAllByStudyProxy
 		
-		this.username = userName
-		this.password = password
+	OpenClinicaSoapClientImpl(def username, def password, def connectionFactory){
+		
+		log.info("Initialized Openclinica Soap Client.")
+				
+		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		listAllProxy = new ListAllWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		getMetaDataProxy = new StudyMetaDataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 	}
 
-	public List<ConvertedOpenclinicaStudy> listAll(){
+	public List<ConvertedOpenclinicaStudy> listAll(){		
 		
-		def listAllProxy = new ListAllWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return listAllProxy.listAll()
 	}
 	
 	public String getMetadata(String identifier) {
-		def getMetaDataProxy = new StudyMetaDataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		
 		return getMetaDataProxy.getMetaData(identifier)
 	}
 	
 	public Collection<String> getSubjectKeys(String studyIdentifier){
-		def listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		
 		return listAllByStudyProxy.listAllByStudy(studyIdentifier)
 	}
 	
@@ -70,7 +72,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 		
 	public def importData(Collection<String> instanceData){
-		def importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		
 		return importProxy.importData(instanceData);
 	}
 }
