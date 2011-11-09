@@ -19,36 +19,30 @@ public interface OpenClinicaSoapClient {
 	/**
 	* Gets Metadata for the specified Study Identifier. The metadata is encapsulated in an ODM file.
 	*
-	* @param studyOID the study identifier for which to retrieve meta data for.
+	* @param studyIdentifier the study identifier for which to retrieve meta data for.
 	*
 	* @return An XML stream of the ODM file.
 	*/
-	String getMetadata(String studyOID)
+	String getMetadata(String studyIdentifier)
 	
 	/**
 	* Retrieves ODM file for given study identifier and transforms it to an object mimicking openxdata xform definition.
 	*
-	* @param studyOID Study identifier for which to get metadata for.
+	* @param studyIdentifier Study identifier for which to get metadata for.
 	*
 	* @return Converted Object mimicking the OpenXData Xform Definition.
 	*/
-	def getOpenxdataForm(String openclinicaStudyOID)
+	def getOpenxdataForm(String studyIdentifier)
 
 	/**
 	* Retrieves subject keys for a given study identifier.
 	*
-	* @param studyOID The Study identifier to retrieve subjects for.
+	* @param studyIdentifier The Study identifier to retrieve subjects for.
 	*
 	* @return List of subjects assigned to the study.
 	*/
-	Collection<String> getSubjectKeys(String studyOID)
+	Collection<String> getSubjectKeys(String studyIdentifier)
 
-	/**
-	* Imports given data into openclinica.
-	*
-	* @param instanceData the instanceData collected in openxdata that is to be exported to openclinica.
-	*
-	*/
 	def importData(Collection<String> instanceData)
 	
 	void setConnectionFactory(ConnectionFactory connectionFactory)
