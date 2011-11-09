@@ -33,21 +33,26 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 	}
 
-	public List<ConvertedOpenclinicaStudy> listAll(){		
-		
-		return listAllProxy.listAll()
-	}
-	
 	public String getMetadata(String identifier) {
 		
 		return getMetaDataProxy.getMetaData(identifier)
 	}
 	
+	public List<ConvertedOpenclinicaStudy> listAll(){		
+		
+		return listAllProxy.listAll()
+	}
+	
+	public def importData(Collection<String> instanceData){
+		
+		return importProxy.importData(instanceData);
+	}
+		
 	public Collection<String> getSubjectKeys(String studyIdentifier){
 		
 		return listAllByStudyProxy.listAllByStudy(studyIdentifier)
 	}
-	
+
 	public def getOpenxdataForm(String studyOID) {
 		
 		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
@@ -69,10 +74,5 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		convertedStudy.serializeXformNode()
 		
 		return convertedStudy
-	}
-		
-	public def importData(Collection<String> instanceData){
-		
-		return importProxy.importData(instanceData);
 	}
 }
