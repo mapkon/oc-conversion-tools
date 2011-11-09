@@ -149,7 +149,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def factory = setUpConnectionFactoryMock(importSOAPErrorResponse)
 		play{
 
-			shouldFail(ImportException.class){
+			shouldFail(ImportException){
 				def client = new OpenClinicaSoapClientImpl(username, password)
 				client.setConnectionFactory(factory)
 				def reponse = client.importData(instanceData)
