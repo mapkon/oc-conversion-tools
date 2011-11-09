@@ -23,7 +23,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def getMetaDataProxy
 	private def listAllByStudyProxy
 		
-	OpenClinicaSoapClientImpl(def username, def password, def connectionFactory){
+	def OpenClinicaSoapClientImpl(def username, def password, def connectionFactory){
 		
 		log.info("Initialized Openclinica Soap Client.")
 				
