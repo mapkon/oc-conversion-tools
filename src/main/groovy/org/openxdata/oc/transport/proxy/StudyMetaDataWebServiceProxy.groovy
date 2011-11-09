@@ -28,9 +28,9 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 	}
 
 	private def getEnvelope(def identifier){
-		envelope = '''<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1">''' +
-							getHeader() +
-					'''<soapenv:Body>
+		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1" xmlns:bean="http://openclinica.org/ws/beans">
+							${getHeader()}
+						<soapenv:Body>
 						<v1:getMetadataRequest>
 						   <v1:studyMetadata>
 							  <bean:studyRef>
