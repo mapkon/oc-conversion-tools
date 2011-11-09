@@ -9,10 +9,11 @@ import org.openxdata.oc.transport.soap.SoapRequestProperties
 class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 
 	def envelope
+	def identifier
 	def connectionFactory
 	
 	def getSoapEnvelope() {
-		return envelope
+		return getEnvelope(identifier)
 	}
 
 	def getMetaData(String identifier){
