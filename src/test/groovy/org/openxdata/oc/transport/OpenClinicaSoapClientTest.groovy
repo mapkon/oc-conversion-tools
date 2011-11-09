@@ -17,7 +17,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 	def username = "user"
 	def password = "pass"
-	def instanceData = new ArrayList<String>()
+	def instanceData = []
 	
 	void setUp(){
 		instanceData.add("""<?xml version="1.0" encoding="UTF-8"?>
