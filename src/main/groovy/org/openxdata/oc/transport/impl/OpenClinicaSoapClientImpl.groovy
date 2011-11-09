@@ -1,7 +1,6 @@
 package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
-import groovy.xml.Namespace
 
 import java.util.Collection
 
@@ -12,6 +11,7 @@ import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.model.ODMDefinition
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
+import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
 import org.openxdata.oc.transport.proxy.StudyMetaDataWebServiceProxy
 
@@ -169,6 +169,11 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return getMetaDataProxy.getMetaData(identifier)
 	}
 	
+	public Collection<String> getSubjectKeys(String studyIdentifier){
+		def listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		return listAllByStudyProxy.listAllByStudy(studyIdentifier)
+	}
+	
 	public def getOpenxdataForm(String studyOID) {
 		
 		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
@@ -192,24 +197,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return convertedStudy
 	}
 		
-	public Collection<String> getSubjectKeys(String studyOID){
-		log.info("Fetching subject keys for Openclinica study with ID: " + studyOID)
-		def body = """<soapenv:Body>
-					  <v1:listAllByStudyRequest>
-						 <bean:studyRef>
-							<bean:identifier>""" + studyOID + """</bean:identifier>
-						 </bean:studyRef>
-					  </v1:listAllByStudyRequest>
-				   </soapenv:Body>"""
-		
-		def envelope = buildEnvelope(subjectPath, body)
-		def response = sendRequest(envelope, connectionFactory.getStudySubjectConnection())
-		Collection<String> subjectKeys = extractSubjectKeys(response)
-
-		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: " + studyOID)
-		return subjectKeys
-	}
-
 	public def importData(Collection<String> instanceData){
 
 		log.info("Starting import to Openclinca.")
@@ -230,23 +217,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 		log.info("Successfully exported data to openclinica.")
 		return result;
-	}
-		
-	/**
-	 * Extracts subjects keys from a SOAP response.
-	 * 
-	 * @param response Response containing subject keys.
-	 * @return List of subject keys.
-	 */
-	def extractSubjectKeys(def response){
-		
-		List<String> subjectKeys = new ArrayList<String>()
-		def ns = new Namespace("http://openclinica.org/ws/beans", "ns2")
-		def subjects = response.depthFirst()[ns.subject].each {
-			subjectKeys.add(it[ns.uniqueIdentifier].text())
-		}
- 
-		return subjectKeys
 	}
 	
 	public void setConnectionFactory(ConnectionFactory factory){
