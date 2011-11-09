@@ -150,26 +150,10 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		play{
 
 			shouldFail(ImportException){
-				def client = new OpenClinicaSoapClientImpl(username, password)
-				client.setConnectionFactory(factory)
+				def client = new OpenClinicaSoapClientImpl(username, password, factory)
 				def reponse = client.importData(instanceData)
 			}
 		}
-	}
-	
-	@Test void testSetConnectionFactory(){
-		
-		def host = 'http://localhost/openclinica'
-		def connectionFactory = new ConnectionFactory(host)
-		OpenClinicaSoapClient client = new OpenClinicaSoapClientImpl('user','pass')
-		
-		client.setConnectionFactory(connectionFactory)
-		
-		def studyURL = connectionFactory.getStudyConnection().getURL()
-		def studySubjectURL = connectionFactory.getStudySubjectConnection().getURL()
-		
-		assertEquals host+'/ws/study/v1', studyURL.toString()
-		assertEquals host+'/ws/studySubject/v1', studySubjectURL.toString()
 	}
 	
 	private def setUpConnectionFactoryMock(returnXml) {

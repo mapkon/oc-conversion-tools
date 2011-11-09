@@ -44,7 +44,5 @@ public interface OpenClinicaSoapClient {
 	Collection<String> getSubjectKeys(String studyIdentifier)
 
 	def importData(Collection<String> instanceData)
-	
-	void setConnectionFactory(ConnectionFactory connectionFactory)
-	
+		
 }

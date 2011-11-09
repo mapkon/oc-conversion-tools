@@ -73,8 +73,4 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		def importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData);
 	}
-	
-	public void setConnectionFactory(ConnectionFactory factory){
-		this.connectionFactory = factory
-	}
 }
