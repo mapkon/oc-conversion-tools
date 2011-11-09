@@ -1,13 +1,21 @@
 package org.openxdata.oc.transport.soap
 
+import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
+import org.openxdata.oc.transport.proxy.StudyMetaDataWebServiceProxy
 
 
 class SoapRequestPropertiesBuilderTest extends GroovyTestCase {
 	
+	def listAllProxy 
+	def getMetaDataProxy
 	def parser = new XmlSlurper() 
-	def listAllProxy = new ListAllWebServiceProxy(username:"uname", hashedPassword:"pass", connectionFactory:null)
+	
+	@Before public void setUp(){
+		listAllProxy = new ListAllWebServiceProxy(username:"uname", hashedPassword:"pass", connectionFactory:null)
+		getMetaDataProxy = new StudyMetaDataWebServiceProxy(identifier:'OID', username:"uname", hashedPassword:"pass", connectionFactory:null)
+	}
 	
 	@Test void testGetHeaderShouldReturnValidHeader(){
 		
@@ -27,5 +35,21 @@ class SoapRequestPropertiesBuilderTest extends GroovyTestCase {
 		
 		assertEquals 'Envelope', envelopeXML.name()
 		assertEquals 'Header', envelopeXML.children()[0].name()
+	}
+	
+	@Test void testGetMetaDataSoapRequestShouldReturnValidEnvelope(){
+		
+		def envelope = getMetaDataProxy.getSoapEnvelope()
+		def envelopeXML = parser.parseText(envelope)
+		
+		assertEquals 'Envelope', envelopeXML.name()
+	}
+	
+	@Test void testGetMetaDataSoapRequestEnvelopeShouldReturnValidEnvelopeWithHeaderElement(){
+		
+		def envelope = getMetaDataProxy.getSoapEnvelope()
+		def envelopeXML = parser.parseText(envelope)
+		
+		assertEquals 'Envelope', envelopeXML.name()
 	}
 }
