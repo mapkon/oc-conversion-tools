@@ -53,7 +53,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 
-	@Test void testListAllMUSTReturnValidOpenclinicaStudies() {
+	@Test void testListAllMUSTReturnsValidOpenclinicaStudies() {
 		def factory = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
 
 		play {
@@ -70,7 +70,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 
-	@Test void testGetMetaDataMUSTReturnValidXmlWithODMRootElement() {
+	@Test void testGetMetaDataMUSTReturnsValidXmlWithODMRootElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		
 		play{
@@ -84,7 +84,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}	
 	}
 	
-	@Test void testGetMetaDataMUSTReturnValidXmlWithStudyElement() {
+	@Test void testGetMetaDataMUSTReturnsValidXmlWithStudyElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		
 		play{
@@ -98,7 +98,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetMetaDataMUSTReturnValidXmlWithOnlyOneStudyElement() {
+	@Test void testGetMetaDataMUSTReturnsValidXmlWithOnlyOneStudyElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		
 		play{
@@ -112,7 +112,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetMetaDataMUSTReturnValidXmlWithCorrectStudyOID() {
+	@Test void testGetMetaDataMUSTReturnsValidXmlWithCorrectStudyOID() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		
 		play{
@@ -126,13 +126,14 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetMetaDataMUSTReturnValidXmlWithCorrectStudyName() {
+	@Test void testGetOpenxdataFormReturnsValidXmlWithCorrectStudyName() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
@@ -145,151 +146,151 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyRootElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
-			
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
+
 			assertEquals 'study', convertedStudyXml.name()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyName() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
-			
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
+
 			assertEquals 'Test Study', convertedStudyXml.@name.text()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyStudyKey() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
-			
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
+
 			assertEquals 'S_001', convertedStudyXml.@studyKey.text()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithCorrectNumberOfForms() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
-			
-			
+
+
 			assertEquals 1, forms.size()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithCorrectFormName() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
-			
-			
+
+
 			assertEquals  "SE_VISIT", forms[0].@name.text()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithVersionElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()[0]
-			
+
 			assertEquals  "version", version.name()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithVersionName() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
-			
+
 			assertEquals  "Visit-v1", version.@name.text()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
-			
+
 			assertEquals  "xform", forms.xform[0].name()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def xforms = convertedStudyXml.form.version.xform.xforms[0]
-			
+
 			assertEquals  "xforms", xforms.name()
-			
 		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsIsSerialized() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {
-			
+
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
-			
-			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def xml = client.getOpenxdataForm("001")
+			def convertedStudyXml = new XmlSlurper().parseText(xml)
 
 			def xformsContent = convertedStudyXml.form.version.xform[0].text()
-			
+
 			assertTrue xformsContent instanceof String
-			
 		}
 	}
 	

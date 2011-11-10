@@ -1,6 +1,7 @@
 package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
+import groovy.xml.XmlUtil
 
 import java.util.Collection
 
@@ -56,11 +57,15 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	public def getOpenxdataForm(String studyOID) {
 		
-		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
-		
 		try{
+			
+			log.info("Fetching Form for Openclinica study with ID: " + studyOID)
+			
 			def odmMetaData = getMetadata(studyOID)
-			return convertODM(odmMetaData)
+			def xformXml = convertODM(odmMetaData)
+			
+			return XmlUtil.asString(xformXml)
+			
 		}catch(def ex){
 		log.info("Failed with Exception: ${ex.getMessage()}")
 			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
