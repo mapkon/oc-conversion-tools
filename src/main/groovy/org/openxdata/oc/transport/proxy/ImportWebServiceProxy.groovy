@@ -2,6 +2,7 @@ package org.openxdata.oc.transport.proxy
 
 import groovy.util.logging.Log
 
+import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.ODMDefinition
 import org.openxdata.oc.transport.HttpTransportHandler
@@ -43,7 +44,7 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 		else{
 			
 			log.info("Data Export to OpenClinica Failed with Error: ${result}")
-			throw new ImportException(result)
+			throw new ImportException(ErrorCode.IMPORT_ERROR)
 		}
 	}
 
