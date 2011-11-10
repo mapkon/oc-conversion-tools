@@ -32,8 +32,7 @@ public class Transform {
 		log.info("Starting transformation of file...")
 
 		try{
-			def convertedStudyDef = transformODMToXform(odm)
-			return convertedStudyDef
+			return transformODMToXform(odm)
 		}catch(def ex){
 			log.info("Incomplete Transformation due to Exception.")
 			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
