@@ -76,7 +76,7 @@ class HttpTransportHandler {
 		return new XmlParser().parseText(validXml)
 	}
 
-	private String cleanXML(log, response) {
+	private String cleanXML(def response) {
 		
 		def validXml
 		
