@@ -1,11 +1,8 @@
 package org.openxdata.oc.transport
 
-import groovy.util.Node
 import groovy.util.logging.Log
 
-import java.io.InputStream;
-import java.net.HttpURLConnection
-
+import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.UnAvailableException
 
 @Log
@@ -32,7 +29,7 @@ class HttpTransportHandler {
 		}catch (Exception ex){
 			log.info(ex.getMessage())
 			log.info('Error Processing connection to: ' + connection.getURL())
-			throw new UnAvailableException('Connection Failed', ex)
+			throw new UnAvailableException(ErrorCode.SERVER_UNAVAILABLE)
 		}
 	}
 
