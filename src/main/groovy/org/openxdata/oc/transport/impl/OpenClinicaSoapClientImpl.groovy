@@ -5,9 +5,10 @@ import groovy.util.logging.Log
 import java.util.Collection
 
 import org.openxdata.oc.Transform
+import org.openxdata.oc.exception.ErrorCode
+import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClient
-import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
@@ -57,15 +58,24 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		log.info("Fetching Form for Openclinica study with ID: " + studyOID)
 		
-		def odmMetaData = getMetadata(studyOID)
+		try{
+			def odmMetaData = getMetadata(studyOID)
+			return convertODM(odmMetaData)
+		}catch(def ex){
+		log.info("Failed with Exception: ${ex.getMessage()}")
+			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
+		}
+	}
+
+	private convertODM(def odmMetaData) {
+		
 		def convertedStudy = transformMetaData(odmMetaData)
-		
 		log.info("<< ODM To OpenXData Transformation Complete. Returning... >>")
-		
+
 		return convertedStudy.convertedXformXml
 	}
 
-	private transformMetaData(String odmMetaData) {
+	private transformMetaData(def odmMetaData) {
 		
 		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
