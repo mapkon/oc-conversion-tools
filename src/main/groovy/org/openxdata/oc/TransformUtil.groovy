@@ -10,17 +10,12 @@ import org.openxdata.oc.model.BindSet
  */
 public class TransformUtil {
 
-	public def loadFile(def fileName){
-		if(fileName){
-			return new File(getClass().getResource(fileName).getFile())
-		}
-		else{
-			throw new IllegalArgumentException("File Name cannot null or empty.")
-		}
-	}
-
 	public def loadFileContents(def fileName){
-		return loadFile(fileName).text
+		if(fileName){
+			return getClass().getResourceAsStream(fileName).text
+		}else{
+			throw new IllegalArgumentException('File name cannot be null or empty.')
+		}
 	}
 
 	public def hasDuplicateBindings(def docWithDuplicateBindings) {

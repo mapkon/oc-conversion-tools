@@ -6,8 +6,6 @@ import org.junit.Test
 
 class TransformUtilTest extends GroovyTestCase {
 	
-	def odmFile
-	def transformFile
 	def odmFileContent
 	
 	def xformWithDuplicateBindings
@@ -17,38 +15,32 @@ class TransformUtilTest extends GroovyTestCase {
 	
 	public void setUp() {
 		
-		odmFile = util.loadFile("test-odm.xml")
-		transformFile = util.loadFile("transform-v0.1.xsl") 
 		odmFileContent = util.loadFileContents("test-odm.xml")
 		xformWithDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-duplicate-bindings.xml"))
 		xformWithNoDuplicateBindings = new XmlParser().parseText(util.loadFileContents("test-xform-no-duplicate-bindings.xml"))
-	}
-	
-	@Test void testLoadFile(){
-		assertNotNull odmFile
-		assertEquals "test-odm.xml", odmFile.getName()
-		
-		assertNotNull transformFile
-		assertEquals "transform-v0.1.xsl", transformFile.getName()		
-		
-	}
-	
-	@Test void testLoadFileMUSTThrowExceptionOnNullOrEmptyFileName() {
-		shouldFail(IllegalArgumentException.class){
-			def file = util.loadFile("")
-		}
 	}
 	
 	@Test void testLoadFileContents(){
 				
 		assertTrue odmFileContent.contains("<ODM")
 		assertTrue odmFileContent.endsWith("</ODM>")
+	}
+	
+	@Test void testLoadFileContentsStartWithXmlProcessingInstructions(){
 		assertTrue odmFileContent.startsWith("""<?xml version="1.0" encoding="UTF-8"?>""")
 	}
 	
 	@Test void testLoadFileContentsMUSTThrowExceptionOnNullOrEmptyFileName(){
 		shouldFail(IllegalArgumentException.class){
 			def file = util.loadFileContents("")
+		}
+	}
+	
+	@Test void testLoadFileContentsRendersCorrectMessageOnEmptyFileName(){
+		try{
+			util.loadFileContents("")
+		}catch(def ex){
+			assertEquals 'File name cannot be null or empty.', ex.getMessage()
 		}
 	}
 	
