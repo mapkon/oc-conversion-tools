@@ -1,9 +1,10 @@
 package org.openxdata.oc.model
 
-import org.openxdata.oc.exception.ImportException;
-
 import groovy.util.logging.Log
 import groovy.xml.XmlUtil
+
+import org.openxdata.oc.exception.ErrorCode
+import org.openxdata.oc.exception.ImportException
 
 @Log
 class ODMDefinition {
@@ -60,7 +61,7 @@ class ODMDefinition {
 	def appendInstanceData(def instanceData){
 
 		if(instanceData.isEmpty())
-			throw new ImportException('Cannot process empty instance data.')
+			throw new ImportException(ErrorCode.EMPTY_INSTANCE_DATA)
 			
 		log.info('Processing instance data')
 		
