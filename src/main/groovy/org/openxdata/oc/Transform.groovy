@@ -21,24 +21,12 @@ public class Transform {
 		util = new TransformUtil()
 	}
 	
-	/**
-	 * Returns an instance of the transformer.
-	 * @return transformer.
-	 */
 	public static Transform getTransformer() {
 		return INSTANCE
 	}
 
-	/**
-	 * Converts an ODM file to openxdata xform.
-	 * 
-	 * @param odm ODM file to convert.
-	 * @param subjectKeys Subject Keys to insert into form.
-	 * 
-	 * @return Valid OpenXdata form.
-	 */
 	def ConvertODMToXform(def odm){
-		
+
 		log.info("Starting transformation of file...")
 		
 		def xslt = util.loadFileContents("transform-v0.1.xsl")
