@@ -8,6 +8,8 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
+import org.openxdata.oc.exception.ErrorCode;
+import org.openxdata.oc.exception.ImportException;
 import org.openxdata.oc.model.ConvertedStudyDef
 
 
@@ -28,20 +30,29 @@ public class Transform {
 	def ConvertODMToXform(def odm){
 
 		log.info("Starting transformation of file...")
+
+		try{
+			def convertedStudyDef = transformODMToXform(odm)
+			return convertedStudyDef
+		}catch(def ex){
+			log.info("Incomplete Transformation due to Exception.")
+			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
+		}
+	}
+
+	private ConvertedStudyDef transformODMToXform(odm) {
 		
 		def xslt = util.loadFileContents("transform-v0.1.xsl")
-		
+
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
 		def byteArray = new ByteArrayOutputStream()
 		transformer.transform(new StreamSource(new StringReader(odm)), new StreamResult(byteArray))
 		def xml = byteArray.toString("UTF-8")
-		
+
 		def doc = new XmlSlurper().parseText(xml)
-			
+
 		def convertedStudyDef = new ConvertedStudyDef(doc)
-		
-		log.info("<< Successfully transformed file. >>")
 		
 		return convertedStudyDef
 	}
