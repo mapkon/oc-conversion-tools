@@ -33,9 +33,7 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 						<soapenv:Body>
 						<v1:getMetadataRequest>
 						   <v1:studyMetadata>
-							  <bean:studyRef>
-								 <bean:identifier>${identifier}</bean:identifier>
-							  </bean:studyRef>
+							  <bean:identifier>${identifier}</bean:identifier>
 						   </v1:studyMetadata>
 						</v1:getMetadataRequest>
 					 </soapenv:Body>
