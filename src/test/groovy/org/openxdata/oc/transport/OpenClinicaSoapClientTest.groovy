@@ -78,7 +78,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 			
 			def response = client.getMetadata("001")
-			def xml = new XmlSlurper().parseText(response).declareNamespace(oc: "http://www.cdisc.org/ns/odm/v1.3")
+			def xml = new XmlSlurper().parseText(response)
 						
 			assertEquals  "ODM", xml.name()
 		}	
@@ -92,7 +92,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 			
 			def response = client.getMetadata("001")
-			def xml = new XmlSlurper().parseText(response).declareNamespace(oc: "http://www.cdisc.org/ns/odm/v1.3")
+			def xml = new XmlSlurper().parseText(response)
 						
 			assertEquals  "Study", xml.Study[0].name()
 		}
