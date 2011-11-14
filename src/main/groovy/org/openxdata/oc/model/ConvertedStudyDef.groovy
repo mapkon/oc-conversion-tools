@@ -43,67 +43,8 @@ class ConvertedStudyDef {
 		this.forms = convertedXformXml.form
 	}
 	
-	private replaceHintNodeText(def hintNode) {
-		def text = hintNode.text()
-		text = text.replace("<SUP>", "^")
-		text = text.replace("</SUP>", "")
-
-		hintNode.replaceBody(text)
-		
-		return text
-	}
-		
-	private appendSubjectKeySelectNodes(def subjectKeys) {
-
-		log.info("Appending " + subjectKeys.size() + " Subject Keys into converted Study: " + convertedXformXml.@name +" by adding <select1> nodes.")
-		def subjectGroup = getSubjectKeyGroupNode()
-
-		def xml = new StreamingMarkupBuilder().bind {
-			mkp.xmlDeclaration()
-			mkp.declareNamespace(xf:'xmlns:xf="http://www.w3.org/2002/xforms')
-			xf.select1(bind:'subjectKeyBind'){
-				subjectKeys.each{ nodeValue ->
-					xf.item(id:nodeValue){
-						xf.label(nodeValue)
-						xf.value(nodeValue)
-					}
-				}
-			}
-		}
-
-		def newGroupNode = new XmlSlurper().parseText(xml.toString())
-		subjectGroup.each { it.appendNode(newGroupNode) }
-	}
-	
-	private appendSubjectKeyInputNode() {
-		log.info("No Subjects Attached to the Study: " + convertedXformXml.@name + "." + " Adding Input Node to the Form.")
-		
-		def subjectGroup = getSubjectKeyGroupNode()
-		def xml = new StreamingMarkupBuilder().bind {
-			mkp.xmlDeclaration()
-			mkp.declareNamespace(xf:'xmlns:xf="http://www.w3.org/2002/xforms')
-			xf.input(bind:'subjectKeyBind')
-		}
-
-		def newGroupNode = new XmlSlurper().parseText(xml.toString())
-		subjectGroup.each { it.appendNode(newGroupNode) }
-	}
-	
 	def getSubjectKeyGroupNode(){
-		return getNodeList('group').findAll{it.name() == 'group' && it.@id == '1'}
-	}
-	
-	def appendSubjectKeyNode(def subjectKeys){
-
-		log.info("Processing subjects to determine whether to append <input> node or <select1> node.")
-		if(subjectKeys.isEmpty()){
-			appendSubjectKeyInputNode()
-		}
-		else{
-			appendSubjectKeySelectNodes(subjectKeys)
-		}
-
-		log.info("Done processing subjects.")
+		return convertedXformXml.depthFirst().group.find{it.'@id'.equals('1')}
 	}
 	
 	def parseMeasurementUnits(){

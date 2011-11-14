@@ -1,5 +1,6 @@
 package org.openxdata.oc.model
 
+import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.Transform
 import org.openxdata.oc.TransformUtil
@@ -8,10 +9,10 @@ import org.openxdata.oc.TransformUtil
 class ConvertedStudyDefTest extends GroovyTestCase {
 
 	def odmDef
+	def subjectKeyGroup
 	def convertedStudyDef
-	def subjects = ['Jonny', 'Morten', 'Jorn', 'Janne']
 
-	public void setUp(){
+	@Before public void setUp(){
 
 		def odmXmlStream = new TransformUtil().loadFileContents("test-odm.xml")
 
@@ -19,6 +20,8 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		odmDef.initializeProperties(odmXmlStream)
 
 		convertedStudyDef  = Transform.getTransformer().ConvertODMToXform(odmXmlStream)
+		
+		subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
 	}
 
 	@Test void testStudyIDMUSTMatchOIDOfODMFile(){
@@ -76,71 +79,42 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		def version = convertedStudyDef.getFormVersion(form)
 		
 		assertNotNull version
-		assertTrue version.@name.text().contains('-v1')
-		assertEquals form.@description.text()+'-v1', version.@name.text()
+		assertTrue version.'@name'.text().contains('-v1')
 	}
 	
-	@Test void testAppendSubjectKeysMUSTAppendCorrectNumberOfSubjectKeys(){
+	@Test void testVersionNameHasVNumberSequence(){
 		
-		convertedStudyDef.appendSubjectKeyNode(subjects)
+		def form = convertedStudyDef.forms[0]
+		def version = convertedStudyDef.getFormVersion(form)
 		
-		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
-				
-		assertEquals 2, subjectKeyGroup.size()
-		assertEquals 'group', subjectKeyGroup[0].name()
-		subjectKeyGroup.each {
-			assertEquals 2, it.getAt(0).children().size()
-		}
+		assertEquals "${form.'@description'}-v1", version.'@name'.text()
+	}
+	
+	@Test void testConvertedStudyXmlGroupName(){
+		assertEquals 'group', subjectKeyGroup.name().localPart
+	}
+
+	@Test void testAppendedSubjectKeyNodeHas2Elements(){
+
+		assertEquals 2, subjectKeyGroup.children().size()
+	}
+	
+	@Test void testAppendedSubjectKeyNodeHasLabelNode(){
 		
-		def labelNode = subjectKeyGroup[0].getAt(0).children()[0]
+		
+		def labelNode = subjectKeyGroup.children()[0]
 		
 		assertNotNull labelNode
-		assertEquals 'label', labelNode.name()
-		
-		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
-		
-		assertNotNull select1Node
-		assertEquals 'select1', select1Node.name().toString()
-		assertEquals 'subjectKeyBind', select1Node.@bind.toString()
-		assertEquals 4, select1Node.children().size()
-		
-	}
-	
-	@Test void testAppendSubjectsShouldAppendCorrectSubjectKeys(){
-		
-		convertedStudyDef.appendSubjectKeyNode(subjects)
-		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
-		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
-
-		assertEquals 4, select1Node.children().size()
-		assertEquals 'Jonny', select1Node.children()[0].@id.toString()
-		assertEquals 'Morten', select1Node.children()[1].@id.toString()
-		assertEquals 'Jorn', select1Node.children()[2].@id.toString()
-		assertEquals 'Janne', select1Node.children()[3].@id.toString()
-
-	}
-	
-	@Test void testAppendSubjectsShouldAppendSelect1NodeWithLabelNode(){
-		convertedStudyDef.appendSubjectKeyNode(subjects)
-		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
-		def select1Node = subjectKeyGroup[1].getAt(0).children()[1]
-		
-		assertEquals 'select1', select1Node.name()
-		select1Node.children().each{
-			assertEquals 'label', it.children()[0].name().toString()
-			assertEquals 'value', it.children()[1].name().toString()
-		}
+		assertEquals 'label', labelNode.name().localPart
 	}
 	
 	@Test void testAppendNullSubjectsShouldAppendInputNode(){
 		
-		convertedStudyDef.appendSubjectKeyNode([:])
-		def subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
-		def input1Node = subjectKeyGroup[1].getAt(0).children()[1]
+		def inputNode = subjectKeyGroup.get('input')
 		
-		assertNotNull input1Node
-		assertEquals 'input', input1Node.name().toString()
-		assertEquals 'subjectKeyBind', input1Node.@bind.toString()
+		assertNotNull inputNode
+		assertEquals 'input', inputNode[0].name().localPart
+		assertEquals 'subjectKeyBind', inputNode.'@bind'.text()
 	}
 	
 	@Test void testParseMeasureUnitsShouldConvertOCMeasureunitsToXformHints(){
@@ -158,18 +132,4 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		assertNotNull xformText
 		assertTrue xformText instanceof String
 	}
-		
-	@Test void testGetNodeListShouldReturnExistingNodeList(){
-		
-		def hintNodeList = convertedStudyDef.getNodeList("hint")
-		
-		assertNotNull hintNodeList
-		assertEquals 1, hintNodeList.size()
-		
-		def groupNodeList = convertedStudyDef.getNodeList("group")
-		
-		assertNotNull groupNodeList
-		assertEquals 6, groupNodeList.size()
-	}
-
 }
