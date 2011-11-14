@@ -238,12 +238,18 @@ class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 		return factory
 	}
 
-	def metaDataReturnSOAPResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		def metaDataReturnSOAPResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 										<SOAP-ENV:Header/>
 										<SOAP-ENV:Body>
 										   <createResponse xmlns="http://openclinica.org/ws/study/v1">
 											  <result>Success</result>
-											  <odm><![CDATA[<Study OID="S_001">
+											  <ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1" 
+												xmlns:OpenClinicaRules="http://www.openclinica.org/ns/rules/v3.1" 
+												xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+												FileOID="Study-MetaD20111114170805+0100" Description="Study Metadata" 
+												CreationDateTime="2011-11-14T17:08:05+01:00" FileType="Snapshot" 
+												ODMVersion="1.3" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 OpenClinica-ODM1-3-0-OC2-0.xsd">
+									<![CDATA[<Study OID="S_001">
 											 <GlobalVariables>
 												 <StudyName>Test Study</StudyName>
 												 <StudyDescription>
@@ -315,7 +321,7 @@ class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 													 </RangeCheck>
 												 </ItemDef>
 											 </MetaDataVersion>
-										 </Study>]]></odm>
+										 </Study>]]></ODM>
 										   </createResponse>
 										</SOAP-ENV:Body>
 									 </SOAP-ENV:Envelope>'''
