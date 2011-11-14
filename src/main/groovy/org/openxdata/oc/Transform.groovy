@@ -1,6 +1,5 @@
 package org.openxdata.oc
 
-import groovy.inspect.TextNode
 import groovy.util.logging.Log
 import groovy.xml.XmlUtil
 
@@ -8,8 +7,8 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
-import org.openxdata.oc.exception.ErrorCode;
-import org.openxdata.oc.exception.ImportException;
+import org.openxdata.oc.exception.ErrorCode
+import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.ConvertedStudyDef
 
 
@@ -34,12 +33,12 @@ public class Transform {
 		try{
 			return transformODMToXform(odm)
 		}catch(def ex){
-			log.info("Incomplete Transformation due to Exception.")
+			log.info("Incomplete Transformation due to: ${ex.getMessage()}")
 			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
 		}
 	}
 
-	private ConvertedStudyDef transformODMToXform(odm) {
+	private def transformODMToXform(odm) {
 		
 		def xslt = util.loadFileContents("transform-v0.1.xsl")
 
