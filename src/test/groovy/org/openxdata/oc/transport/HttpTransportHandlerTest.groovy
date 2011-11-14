@@ -1,14 +1,15 @@
 package org.openxdata.oc.transport;
 
 import static org.hamcrest.Matchers.*
-import static org.junit.Assert.*
+import groovy.mock.interceptor.MockFor
 
-import org.gmock.WithGMock
-import org.junit.Before
 import org.junit.Test
+import org.junit.Before
+import org.gmock.WithGMock
+import org.openxdata.oc.exception.UnAvailableException
 
 @WithGMock
-class HttpTransportHandlerTest {
+class HttpTransportHandlerTest extends GroovyTestCase {
 	
 	def transportHandler
 	
@@ -115,6 +116,19 @@ class HttpTransportHandlerTest {
 			def studies = listAllResponse.children()[1]
 			
 			assertEquals 2, studies.children().size()
+		}
+	}
+	
+	@Test void testUnAvailableExceptionShouldBeThrownWhenServerCannotBeReached(){
+		def mock = new MockFor(HttpTransportHandler)
+		mock.demand.sendRequest { throw new UnAvailableException("Server is unreacheable!") }
+		
+		def handler = mock.proxyInstance()
+		
+		play{
+			shouldFail(UnAvailableException) {
+				def response = handler.sendRequest(null)
+			}
 		}
 	}
 	
