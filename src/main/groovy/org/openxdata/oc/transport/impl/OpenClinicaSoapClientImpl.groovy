@@ -35,7 +35,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 	}
 
-	public String getMetadata(String identifier) {
+	public def getMetadata(String identifier) {
 		
 		return getMetaDataProxy.getMetaData(identifier)
 	}
@@ -72,22 +72,14 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		}
 	}
 
-	private convertODM(def odmMetaData) {
-		
-		def convertedStudy = transformMetaData(odmMetaData)
+	private transformMetaData(def odmMetaData) {
+
+		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
+
+		convertedStudy.parseMeasurementUnits()
+		convertedStudy.serializeXformNode()
 		log.info("<< ODM To OpenXData Transformation Complete. Returning... >>")
 
 		return convertedStudy.convertedXformXml
-	}
-
-	private transformMetaData(def odmMetaData) {
-		
-		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
-
-		convertedStudy.appendSubjectKeyNode([:])
-		convertedStudy.parseMeasurementUnits()
-		convertedStudy.serializeXformNode()
-		
-		return convertedStudy
 	}
 }

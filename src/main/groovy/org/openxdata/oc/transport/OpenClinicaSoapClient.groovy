@@ -23,7 +23,7 @@ public interface OpenClinicaSoapClient {
 	*
 	* @return An XML stream of the ODM file.
 	*/
-	String getMetadata(String studyIdentifier)
+	def getMetadata(String studyIdentifier)
 	
 	/**
 	* Retrieves ODM file for given study identifier and transforms it to an object mimicking openxdata xform definition.
