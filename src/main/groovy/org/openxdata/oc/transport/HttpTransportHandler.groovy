@@ -13,7 +13,7 @@ class HttpTransportHandler {
 
 	def sendRequest(def conn) {
 
-		log.info('Sending request to: ' + conn.getURL())
+		log.info("Sending request to: ${conn.getURL()}")
 
 		this.connection = conn
 
@@ -26,9 +26,8 @@ class HttpTransportHandler {
 
 		try{
 			return establishConnection()
-		}catch (Exception ex){
-			log.info(ex.getMessage())
-			log.info('Error Processing connection to: ' + connection.getURL())
+		}catch (def ex){
+			log.info("Error Processing connection to: ${connection.getURL()} with message: ${ex.getMessage()}")
 			throw new UnAvailableException(ErrorCode.SERVER_UNAVAILABLE)
 		}
 	}
