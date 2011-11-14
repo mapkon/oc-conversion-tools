@@ -30,8 +30,6 @@ class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
 
 		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: " + studyIdentifier)
 		return subjectKeys
-
-		return ""
 	}
 
 	private def getEnvelope(def identifier){
