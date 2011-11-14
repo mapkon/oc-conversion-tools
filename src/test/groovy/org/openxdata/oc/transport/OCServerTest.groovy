@@ -3,6 +3,8 @@ package org.openxdata.oc.transport;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import groovy.xml.XmlUtil;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import org.openxdata.oc.transport.OpenClinicaSoapClient;
 import org.openxdata.oc.transport.factory.ConnectionFactory;
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl;
 
-@Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
+//@Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
 public class OCServerTest {
 
 	def client
@@ -26,33 +28,129 @@ public class OCServerTest {
 	}
 	
 	@Test
-	public void listAll() {
+	public void listAllDoesNotReturnNull() {
 		List<ConvertedOpenclinicaStudy> studies = client.listAll()
 		
 		assertNotNull studies
+	}
+	
+	@Test
+	public void listAllReturns1Study() {
+		List<ConvertedOpenclinicaStudy> studies = client.listAll()
+		
 		assertEquals 1, studies.size()
 	}
 	
 	@Test
-	public void testGetSubjects() {
+	public void testGetSubjectsDoesNotReturnNull() {
 		def subjects = client.getSubjectKeys("default-study")
 		
 		assertNotNull subjects
+	}
+	
+	@Test
+	public void testGetSubjectsReturnsCorrectNumberOfSubjects() {
+		def subjects = client.getSubjectKeys("default-study")
+		
 		assertEquals 82, subjects.size()
 	}
 	
 	@Test
-	public void testGetOpenXdataForm() {
+	public void testGetOpenXdataFormDoesNotReturnNull() {
 		
-		String xml = client.getOpenxdataForm("default-study")
+		String convertedXml = client.getOpenxdataForm("default-study")
 		
-		assertNotNull xml
+		def xml = new XmlSlurper().parseText(convertedXml)
+		
+		assertNotNull xml		
 	}
 	
 	@Test
-	public void testGetMetaData() {
+	public void testGetOpenXdataFormReturnsValidStudyRoot() {
+		
+		String metadata = client.getOpenxdataForm("default-study")
+		
+		def xml = new XmlSlurper().parseText(metadata)
+		
+		assertEquals 'study', xml.name()
+				
+	}
+	
+	@Test
+	public void testGetOpenXdataFormReturnsValidStudyWithFormElement() {
+		
+		String metadata = client.getOpenxdataForm("default-study")
+		
+		def xml = new XmlSlurper().parseText(metadata)
+		
+		def form = xml.form
+		
+		assertEquals 'form', form.name()
+		
+	}
+	
+	@Test
+	public void testGetOpenXdataFormReturnsValidStudyWithVersionElement() {
+		
+		String metadata = client.getOpenxdataForm("default-study")
+		
+		def xml = new XmlSlurper().parseText(metadata)
+		
+		def version = xml.form.version
+		
+		assertEquals 'version', version.name()
+		
+	}
+	
+	@Test
+	public void testGetOpenXdataFormReturnsValidStudyWithXformElement() {
+		
+		String metadata = client.getOpenxdataForm("default-study")
+		
+		def xml = new XmlSlurper().parseText(metadata)
+		
+		def xform = xml.form.version.xform
+		
+		assertEquals 'xform', xform.name()
+		
+	}
+	
+	@Test
+	public void testGetOpenXdataFormReturnsValidStudyWithXformsElement() {
+		
+		String metadata = client.getOpenxdataForm("default-study")
+		
+		def xml = new XmlSlurper().parseText(metadata)
+		
+		def xforms = xml.form.version.xform.xforms
+		
+		assertEquals 'xforms', xforms.name()
+		
+	}
+	
+	@Test
+	public void testGetMetaDataDoesNotReturnNull() {
 		def metadata = client.getMetadata("default-study")		
 		
 		assertNotNull metadata
+	}
+	
+	@Test
+	public void testGetMetaDataReturnsValidODM() {
+		def metadata = client.getMetadata("default-study")
+		
+		def metadataXml = new XmlSlurper().parseText(metadata)
+		assertEquals 'ODM', metadataXml.name()
+	}
+	
+	@Test
+	public void testGetMetaDataReturnsValidODMWithStudy() {
+		def metadata = client.getMetadata("default-study")
+		
+		def metadataXml = new XmlSlurper().parseText(metadata)
+		
+		def study = metadataXml.ODM.Study
+		
+		assertEquals 'Study', study.name()
 	}
 }
