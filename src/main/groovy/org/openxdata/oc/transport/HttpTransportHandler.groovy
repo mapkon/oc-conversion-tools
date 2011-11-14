@@ -37,8 +37,6 @@ class HttpTransportHandler {
 
 		setConnectionProperties()
 
-		def bytes = envelope.getBytes()
-
 		writeToOutputStream()
 		def inputStream = connection.getInputStream()
 
