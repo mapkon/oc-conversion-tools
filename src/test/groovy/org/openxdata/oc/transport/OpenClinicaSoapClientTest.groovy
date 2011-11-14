@@ -5,6 +5,7 @@ import groovy.mock.interceptor.MockFor
 
 import org.junit.Test
 import org.gmock.WithGMock
+import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.UnAvailableException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
@@ -339,6 +340,16 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			shouldFail(ImportException){
 				def client = new OpenClinicaSoapClientImpl(username, password, factory)
 				def reponse = client.importData(instanceData)
+			}
+		}
+	}
+	
+	@Test void testThatInvalidXmlThrowsParseException(){
+		def factory = setUpConnectionFactoryMock('''<////ODM>''')
+		play{
+			shouldFail(ParseException){
+				def client = new OpenClinicaSoapClientImpl(username, password, factory)
+				def xml = client.getOpenxdataForm("001")
 			}
 		}
 	}
