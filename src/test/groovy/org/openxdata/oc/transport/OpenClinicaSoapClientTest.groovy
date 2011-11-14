@@ -303,7 +303,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def subjectKeys = client.getSubjectKeys("default-study")
 			
-			assertNotNull subjectKeys
 			assertEquals 4, subjectKeys.size()
 		}
 	}

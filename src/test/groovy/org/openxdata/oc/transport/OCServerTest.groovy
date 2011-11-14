@@ -16,7 +16,7 @@ import org.openxdata.oc.transport.OpenClinicaSoapClient;
 import org.openxdata.oc.transport.factory.ConnectionFactory;
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl;
 
-//@Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
+@Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
 public class OCServerTest {
 
 	def client
