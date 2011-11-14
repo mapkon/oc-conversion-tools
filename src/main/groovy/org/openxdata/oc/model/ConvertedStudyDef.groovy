@@ -51,7 +51,7 @@ class ConvertedStudyDef {
 		log.info("Parsing Measurement units.")
 
 		def parsedMeasurementUnits = [:]
-		def hintNodes = getNodeList("hint")
+		def hintNodes = convertedXformXml.depthFirst().hint.findAll{it}
 		
 		hintNodes.each {
 			
@@ -81,9 +81,5 @@ class ConvertedStudyDef {
 
 	def getFormVersion(def form){
 		return form.children()
-	}
-	
-	def getNodeList(def tagName){
-		return convertedXformXml.breadthFirst().findAll{it.name().equals(tagName)}
 	}
 }
