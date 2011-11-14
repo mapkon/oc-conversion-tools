@@ -7,7 +7,7 @@ import java.util.Collection
 
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ErrorCode
-import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
@@ -68,7 +68,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			
 		}catch(def ex){
 		log.info("Failed with Exception: ${ex.getMessage()}")
-			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
+			throw new ParseException(ErrorCode.XML_PARSE_EXCEPTION)
 		}
 	}
 

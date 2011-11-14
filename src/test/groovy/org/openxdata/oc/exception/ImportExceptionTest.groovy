@@ -15,14 +15,6 @@ class ImportExceptionTest {
 		}
 	}
 
-	@Test void testImportExceptionRendersCorrectXMLParseErrorMessage(){
-
-		def ex = new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
-
-		def actual = 'The returned XML might be malformed.'
-		assertEquals actual, ex.errorMessage()
-	}
-
 	@Test void testImportExceptionRendersCorrectEmptyInstanceErrorMessage(){
 
 		def ex = new ImportException(ErrorCode.EMPTY_INSTANCE_DATA)
