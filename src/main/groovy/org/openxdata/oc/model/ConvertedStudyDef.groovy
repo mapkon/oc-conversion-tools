@@ -44,14 +44,14 @@ class ConvertedStudyDef {
 	}
 	
 	def getSubjectKeyGroupNode(){
-		return convertedXformXml.depthFirst().group.find{it.'@id'.equals('1')}
+		return convertedXformXml.depthFirst().find{it.'@id'.equals('1')}
 	}
 	
 	def parseMeasurementUnits(){
 		log.info("Parsing Measurement units.")
 
 		def parsedMeasurementUnits = [:]
-		def hintNodes = convertedXformXml.depthFirst().hint.findAll{it}
+		def hintNodes = convertedXformXml.depthFirst().findAll{it.name().equals('hint')}
 		
 		hintNodes.each {
 			
@@ -63,6 +63,16 @@ class ConvertedStudyDef {
 		
 		log.info("Parsing Measurement Units successful.")
 		return parsedMeasurementUnits
+	}
+	
+	private replaceHintNodeText(def hintNode) {
+		def text = hintNode.text()
+		text = text.replace("<SUP>", "^")
+		text = text.replace("</SUP>", "")
+
+		hintNode.replaceBody(text)
+
+		return text
 	}
 
 	def serializeXformNode(){

@@ -24,7 +24,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		subjectKeyGroup = convertedStudyDef.getSubjectKeyGroupNode()
 	}
 
-	@Test void testStudyIDMUSTMatchOIDOfODMFile(){
+	@Test void jtestStudyIDMUSTMatchOIDOfODMFile(){
 
 		assertNotNull convertedStudyDef.id
 		assertTrue convertedStudyDef.id.equals(odmDef.OID.toString())
@@ -91,7 +91,7 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 	}
 	
 	@Test void testConvertedStudyXmlGroupName(){
-		assertEquals 'group', subjectKeyGroup.name().localPart
+		assertEquals 'group', subjectKeyGroup.name()
 	}
 
 	@Test void testAppendedSubjectKeyNodeHas2Elements(){
@@ -105,15 +105,15 @@ class ConvertedStudyDefTest extends GroovyTestCase {
 		def labelNode = subjectKeyGroup.children()[0]
 		
 		assertNotNull labelNode
-		assertEquals 'label', labelNode.name().localPart
+		assertEquals 'label', labelNode.name()
 	}
 	
 	@Test void testAppendNullSubjectsShouldAppendInputNode(){
 		
-		def inputNode = subjectKeyGroup.get('input')
+		def inputNode = subjectKeyGroup.children()[1]
 		
 		assertNotNull inputNode
-		assertEquals 'input', inputNode[0].name().localPart
+		assertEquals 'input', inputNode[0].name()
 		assertEquals 'subjectKeyBind', inputNode.'@bind'.text()
 	}
 	

@@ -72,7 +72,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		}
 	}
 
-	private transformMetaData(def odmMetaData) {
+	private convertODM(def odmMetaData) {
 
 		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
