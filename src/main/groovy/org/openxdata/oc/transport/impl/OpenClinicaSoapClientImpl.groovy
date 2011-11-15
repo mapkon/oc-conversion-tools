@@ -64,6 +64,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			def odmMetaData = getMetadata(studyOID)
 			def xformXml = convertODM(odmMetaData)
 			
+			log.info("Transformation complete. Returning...")
 			return XmlUtil.asString(xformXml)
 			
 		}catch(def ex){
@@ -78,7 +79,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 		convertedStudy.parseMeasurementUnits()
 		convertedStudy.serializeXformNode()
-		log.info("<< ODM To OpenXData Transformation Complete. Returning... >>")
+		log.info("Successfully transformed the ODM to Xform.")
 
 		return convertedStudy.convertedXformXml
 	}
