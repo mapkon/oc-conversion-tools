@@ -47,8 +47,10 @@ class TransformUtilTest extends GroovyTestCase {
 	@Test void testHasDuplicateBindings(){
 		
 		assertTrue util.hasDuplicateBindings(xformWithDuplicateBindings)
-		
-		// Triangulating
+	}
+	
+	@Test void testHasDuplicateBindingsShoutReturnZeroOnNoDuplicateBindings(){
+
 		assertFalse util.hasDuplicateBindings(xformWithNoDuplicateBindings)
 	}
 	
