@@ -9,6 +9,7 @@ import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 
+
 @Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
 public class OCServerTest extends GroovyTestCase {
 
@@ -19,13 +20,13 @@ public class OCServerTest extends GroovyTestCase {
 		client = new OpenClinicaSoapClientImpl("MarkG", "b9a60a9d91a96ee522d0c942e5b88dfba25b0a12", factory)
 	}
 
-	@Test public void listAllDoesNotReturnNull() {
+	@Test public void testListAllDoesNotReturnNull() {
 		List<ConvertedOpenclinicaStudy> studies = client.listAll()
 
 		assertNotNull studies
 	}
 
-	@Test public void listAllReturns1Study() {
+	@Test public void testListAllReturns1Study() {
 		List<ConvertedOpenclinicaStudy> studies = client.listAll()
 
 		assertEquals 1, studies.size()
@@ -42,74 +43,7 @@ public class OCServerTest extends GroovyTestCase {
 
 		assertEquals 82, subjects.size()
 	}
-
-	@Test public void testGetOpenXdataFormDoesNotReturnNull() {
-
-		String convertedXml = client.getOpenxdataForm("default-study")
-
-		def xml = new XmlSlurper().parseText(convertedXml)
-
-		assertNotNull xml
-	}
-
-	@Test public void testGetOpenXdataFormReturnsValidStudyRoot() {
-
-		String metadata = client.getOpenxdataForm("default-study")
-
-		def xml = new XmlSlurper().parseText(metadata)
-
-		assertEquals 'study', xml.name()
-
-	}
-
-	@Test public void testGetOpenXdataFormReturnsValidStudyWithFormElement() {
-
-		String metadata = client.getOpenxdataForm("default-study")
-
-		def xml = new XmlSlurper().parseText(metadata)
-
-		def form = xml.form[0]
-
-		assertEquals 'form', form.name()
-
-	}
-
-	@Test public void testGetOpenXdataFormReturnsValidStudyWithVersionElement() {
-
-		String metadata = client.getOpenxdataForm("default-study")
-
-		def xml = new XmlSlurper().parseText(metadata)
-
-		def version = xml.form.version[0]
-
-		assertEquals 'version', version.name()
-
-	}
-
-	@Test public void testGetOpenXdataFormReturnsValidStudyWithXformElement() {
-
-		String metadata = client.getOpenxdataForm("default-study")
-
-		def xml = new XmlSlurper().parseText(metadata)
-
-		def xform = xml.form.version.xform[0]
-
-		assertEquals 'xform', xform.name()
-
-	}
-
-	@Test public void testGetOpenXdataFormReturnsValidStudyWithXformsElement() {
-
-		String metadata = client.getOpenxdataForm("default-study")
-
-		def xml = new XmlSlurper().parseText(metadata)
-
-		def xforms = xml.form.version.xform.xforms[0]
-
-		assertEquals 'xforms', xforms.name()
-
-	}
-
+	
 	@Test public void testGetMetaDataDoesNotReturnNull() {
 		def metadata = client.getMetadata("default-study")
 
@@ -131,5 +65,61 @@ public class OCServerTest extends GroovyTestCase {
 		def study = metadataXml.ODM.Study[0]
 
 		assertEquals 'Study', study.name()
+	}
+
+	@Test public void testGetOpenXdataFormDoesNotReturnNull() {
+
+		String convertedXform = client.getOpenxdataForm("default-study")
+
+		assertNotNull convertedXform
+	}
+
+	@Test public void testGetOpenXdataFormReturnsValidStudyRoot() {
+
+		String convertedXform = client.getOpenxdataForm("default-study")
+
+		def xml = new XmlSlurper().parseText(convertedXform)
+		assertEquals 'study', xml.name()
+
+	}
+
+	@Test public void testGetOpenXdataFormReturnsValidStudyWithFormElement() {
+
+		String convertedXform = client.getOpenxdataForm("default-study")
+
+		def form = convertedXform.form[0]
+
+		assertEquals 'form', form.name()
+
+	}
+
+	@Test public void testGetOpenXdataFormReturnsValidStudyWithVersionElement() {
+
+		String convertedXform = client.getOpenxdataForm("default-study")
+
+		def version = convertedXform.form.version[0]
+
+		assertEquals 'version', version.name()
+
+	}
+
+	@Test public void testGetOpenXdataFormReturnsValidStudyWithXformElement() {
+
+		String convertedXform = client.getOpenxdataForm("default-study")
+
+		def xform = convertedXform.form.version.xform[0]
+
+		assertEquals 'xform', xform.name()
+
+	}
+
+	@Test public void testGetOpenXdataFormReturnsValidStudyWithXformsElement() {
+
+		String convertedXform = client.getOpenxdataForm("default-study")
+
+		def xforms = convertedXform.form.version.xform.xforms[0]
+
+		assertEquals 'xforms', xforms.name()
+
 	}
 }
