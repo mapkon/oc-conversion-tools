@@ -58,17 +58,16 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	public def getOpenxdataForm(String studyOID) {
 		
 		try{
-			
+
 			log.info("Fetching Form for Openclinica study with ID: ${studyOID}")
-			
+
 			def odmMetaData = getMetadata(studyOID)
 			def xformXml = convertODM(odmMetaData)
-			
+
 			log.info("Transformation complete. Returning...")
 			return XmlUtil.asString(xformXml)
-			
 		}catch(def ex){
-		log.info("Failed with Exception: ${ex.getMessage()}")
+			log.info("Failed with Exception: ${ex.getMessage()}")
 			throw new ParseException(ErrorCode.XML_PARSE_EXCEPTION)
 		}
 	}
