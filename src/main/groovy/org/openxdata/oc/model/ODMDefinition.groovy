@@ -42,22 +42,6 @@ class ODMDefinition {
 		this.studyEventDefs = parsedOdmXml.Study.MetaDataVersion.StudyEventDef
 	}
 	
-	private def addSubjectData(def xml, def instanceNode) {
-		
-		log.info("Adding subject Data.")
-		
-		def studyOID = instanceNode.ClinicalData.@StudyOID[0]
-		def metadataVersion = instanceNode.ClinicalData.@MetaDataVersionOID[0]
-		def clinicalData = xml.ClinicalData.find {it.@StudyOID == studyOID && it.@MetaDataVersionOID == metadataVersion}
-		if (clinicalData == null) {
-			clinicalData = new Node(xml, "ClinicalData", ['StudyOID':studyOID, 'MetaDataVersion':metadataVersion])
-		}
-		
-		clinicalData.append(instanceNode.ClinicalData.SubjectData)
-		
-		log.info("<<Successfully added subject data ODM file.>>")
-	}
-	
 	def appendInstanceData(def instanceData){
 
 		if(instanceData.isEmpty())
@@ -80,5 +64,21 @@ class ODMDefinition {
 		log.info("<<Successfully appended instance data ODM file.>>")
 		
 		return XmlUtil.asString(odmXml)
+	}
+	
+	private def addSubjectData(def xml, def instanceNode) {
+		
+		log.info("Adding subject Data.")
+		
+		def studyOID = instanceNode.ClinicalData.@StudyOID[0]
+		def metadataVersion = instanceNode.ClinicalData.@MetaDataVersionOID[0]
+		def clinicalData = xml.ClinicalData.find {it.@StudyOID == studyOID && it.@MetaDataVersionOID == metadataVersion}
+		if (clinicalData == null) {
+			clinicalData = new Node(xml, "ClinicalData", ['StudyOID':studyOID, 'MetaDataVersion':metadataVersion])
+		}
+		
+		clinicalData.append(instanceNode.ClinicalData.SubjectData)
+		
+		log.info("<<Successfully added subject data ODM file.>>")
 	}
 }
