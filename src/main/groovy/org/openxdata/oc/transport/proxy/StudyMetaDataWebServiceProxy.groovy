@@ -23,8 +23,9 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 		envelope = getEnvelope(identifier)
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
 		def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
-				
-		return """<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3">${response.depthFirst().ODM[0]}</ODM>"""
+			
+		def odmElement = response.depthFirst().odm[0].children()[0]
+		return odmElement
 	}
 
 	private def getEnvelope(def identifier){
