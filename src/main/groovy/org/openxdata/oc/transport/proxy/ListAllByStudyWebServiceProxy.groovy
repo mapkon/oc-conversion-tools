@@ -19,7 +19,7 @@ class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
 
 	def listAllByStudy(def studyIdentifier){
 
-		log.info("Fetching subject keys for Openclinica study with ID: " + studyIdentifier)
+		log.info("Fetching subject keys for Openclinica study with ID: ${studyIdentifier}")
 
 		envelope = getEnvelope(studyIdentifier)
 		
@@ -28,7 +28,7 @@ class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
 
 		def subjectKeys = extractSubjectKeys(response)
 
-		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: " + studyIdentifier)
+		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: ${studyIdentifier}")
 		return subjectKeys
 	}
 
@@ -38,7 +38,7 @@ class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
 						<soapenv:Body>
 						  <v1:listAllByStudyRequest>
 							 <bean:studyRef>
-								<bean:identifier>""" + identifier + """</bean:identifier>
+								<bean:identifier>${identifier}</bean:identifier>
 							 </bean:studyRef>
 						  </v1:listAllByStudyRequest>
 					   </soapenv:Body>

@@ -59,7 +59,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		try{
 			
-			log.info("Fetching Form for Openclinica study with ID: " + studyOID)
+			log.info("Fetching Form for Openclinica study with ID: ${studyOID}")
 			
 			def odmMetaData = getMetadata(studyOID)
 			def xformXml = convertODM(odmMetaData)

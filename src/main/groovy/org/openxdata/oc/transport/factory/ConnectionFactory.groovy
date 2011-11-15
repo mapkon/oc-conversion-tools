@@ -21,7 +21,7 @@ public class ConnectionFactory {
 	 * @return URL for connecting to the study end-point.
 	 */
 	public HttpURLConnection getStudyConnection(){
-		URL url = new URL(host + "/ws/study/v1")
+		URL url = new URL("${host}/ws/study/v1")
 		return url.openConnection()
 	}
 
@@ -30,7 +30,7 @@ public class ConnectionFactory {
 	* @return URL for connecting to the study subject end-point.
 	*/
 	public HttpURLConnection getStudySubjectConnection(){
-		URL url = new URL(host + "/ws/studySubject/v1")
+		URL url = new URL("${host}/ws/studySubject/v1")
 		return url.openConnection()
 	}
 }

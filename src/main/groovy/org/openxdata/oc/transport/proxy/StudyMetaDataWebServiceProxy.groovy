@@ -18,7 +18,7 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 
 	def getMetaData(String identifier){
 		
-		log.info("Fetching Metadata for Openclinica study with ID: " + identifier)
+		log.info("Fetching Metadata for Openclinica study with ID: ${identifier}")
 		
 		envelope = getEnvelope(identifier)
 		def transportHandler = new HttpTransportHandler(envelope:envelope)

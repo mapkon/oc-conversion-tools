@@ -81,7 +81,7 @@ class ConvertedStudyDef {
 		def xformNodeText
 		convertedXformXml.form.version.xform.each {
 			it.children().each { xformNodeText += XmlUtil.asString(it) }
-			def textNode = new TextNode("""<?xml version="1.0" encoding="UTF-8"?>"""+ xformNodeText)
+			def textNode = new TextNode("""<?xml version="1.0" encoding="UTF-8"?>${xformNodeText}""")
 			it.replaceBody(textNode)
 		}
 		
