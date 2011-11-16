@@ -65,7 +65,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			def xformXml = convertODM(odmMetaData)
 
 			log.info("Transformation complete. Returning...")
-			return XmlUtil.asString(xformXml)
+			return xformXml
 		}catch(def ex){
 			log.info("Failed with Exception: ${ex.getMessage()}")
 			throw new ParseException(ErrorCode.XML_PARSE_EXCEPTION)

@@ -133,8 +133,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 			
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
@@ -150,8 +149,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			assertEquals 'study', convertedStudyXml.name()
 		}
@@ -163,8 +161,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			assertEquals 'Test Study', convertedStudyXml.@name.text()
 		}
@@ -176,8 +173,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			assertEquals 'S_001', convertedStudyXml.@studyKey.text()
 		}
@@ -189,8 +185,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
@@ -206,8 +201,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
@@ -223,8 +217,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()[0]
@@ -239,8 +232,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
@@ -255,8 +247,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
@@ -271,8 +262,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def xforms = convertedStudyXml.form.version.xform.xforms[0]
 
@@ -286,8 +276,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def client = new OpenClinicaSoapClientImpl(username, password, factory)
 
-			def xml = client.getOpenxdataForm("001")
-			def convertedStudyXml = new XmlSlurper().parseText(xml)
+			def convertedStudyXml = client.getOpenxdataForm("001")
 
 			def xformsContent = convertedStudyXml.form.version.xform[0].text()
 

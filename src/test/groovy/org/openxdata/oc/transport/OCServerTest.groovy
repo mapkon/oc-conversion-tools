@@ -21,13 +21,13 @@ public class OCServerTest extends GroovyTestCase {
 	}
 
 	@Test public void testListAllDoesNotReturnNull() {
-		List<ConvertedOpenclinicaStudy> studies = client.listAll()
+		def studies = client.listAll()
 
 		assertNotNull studies
 	}
 
 	@Test public void testListAllReturns1Study() {
-		List<ConvertedOpenclinicaStudy> studies = client.listAll()
+		def studies = client.listAll()
 
 		assertEquals 1, studies.size()
 	}
@@ -69,23 +69,22 @@ public class OCServerTest extends GroovyTestCase {
 
 	@Test public void testGetOpenXdataFormDoesNotReturnNull() {
 
-		String convertedXform = client.getOpenxdataForm("default-study")
+		def convertedXform = client.getOpenxdataForm("default-study")
 
 		assertNotNull convertedXform
 	}
 
 	@Test public void testGetOpenXdataFormReturnsValidStudyRoot() {
 
-		String convertedXform = client.getOpenxdataForm("default-study")
+		def convertedXform = client.getOpenxdataForm("default-study")
 
-		def xml = new XmlSlurper().parseText(convertedXform)
-		assertEquals 'study', xml.name()
+		assertEquals 'study', convertedXform.getAt(0).name()
 
 	}
 
 	@Test public void testGetOpenXdataFormReturnsValidStudyWithFormElement() {
 
-		String convertedXform = client.getOpenxdataForm("default-study")
+		def convertedXform = client.getOpenxdataForm("default-study")
 
 		def form = convertedXform.form[0]
 
@@ -95,17 +94,19 @@ public class OCServerTest extends GroovyTestCase {
 
 	@Test public void testGetOpenXdataFormReturnsValidStudyWithVersionElement() {
 
-		String convertedXform = client.getOpenxdataForm("default-study")
+		def convertedXform = client.getOpenxdataForm("default-study")
 
 		def version = convertedXform.form.version[0]
 
 		assertEquals 'version', version.name()
+		System.gc()
 
 	}
 
 	@Test public void testGetOpenXdataFormReturnsValidStudyWithXformElement() {
 
-		String convertedXform = client.getOpenxdataForm("default-study")
+		System.gc()
+		def convertedXform = client.getOpenxdataForm("default-study")
 
 		def xform = convertedXform.form.version.xform[0]
 
@@ -115,7 +116,7 @@ public class OCServerTest extends GroovyTestCase {
 
 	@Test public void testGetOpenXdataFormReturnsValidStudyWithXformsElement() {
 
-		String convertedXform = client.getOpenxdataForm("default-study")
+		def convertedXform = client.getOpenxdataForm("default-study")
 
 		def xforms = convertedXform.form.version.xform.xforms[0]
 
