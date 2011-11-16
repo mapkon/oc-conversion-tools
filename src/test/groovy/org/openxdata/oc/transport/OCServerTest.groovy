@@ -99,7 +99,6 @@ public class OCServerTest extends GroovyTestCase {
 		def version = convertedXform.form.version[0]
 
 		assertEquals 'version', version.name()
-		System.gc()
 
 	}
 
