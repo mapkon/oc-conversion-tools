@@ -241,6 +241,21 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testGetOpenxdataFormReturnsValidXformWithVersionDescription() {
+		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
+		play {
+
+			def client = new OpenClinicaSoapClientImpl(username, password, factory)
+
+			def convertedStudyXml = client.getOpenxdataForm("001")
+
+			def forms = convertedStudyXml.children()
+			def version = forms.children()
+
+			assertEquals  "Converted from ODM", version.@description.text()
+		}
+	}
+	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformElement() {
 		def factory = setUpConnectionFactoryMock(metaDataReturnSOAPResponse)
 		play {

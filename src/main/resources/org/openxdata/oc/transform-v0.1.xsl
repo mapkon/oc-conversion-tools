@@ -7,24 +7,20 @@
 
 	<xsl:template match="/">
 		<study>
-			<xsl:attribute name="description">
-				<xsl:value-of select="normalize-space(//oc:StudyDescription)"></xsl:value-of>
-			</xsl:attribute>
-			<xsl:attribute name="name">
-				<xsl:value-of select="//oc:StudyName"></xsl:value-of>
-			</xsl:attribute>
-			<xsl:attribute name="studyKey"> <xsl:value-of select="//oc:Study/@OID" /></xsl:attribute>
+			<xsl:attribute name="name"><xsl:value-of select="//oc:StudyName"></xsl:value-of></xsl:attribute>
+			<xsl:attribute name="studyKey"><xsl:value-of select="//oc:Study/@OID" /></xsl:attribute>
+			<xsl:attribute name="description"><xsl:value-of select="normalize-space(//oc:StudyDescription)"></xsl:value-of></xsl:attribute>
 			<xsl:for-each select="oc:ODM/oc:Study/oc:MetaDataVersion/oc:StudyEventDef">
 				<form>
-					<xsl:attribute name="description">
-						<xsl:value-of select="@Name"></xsl:value-of>
-					</xsl:attribute>
 					<xsl:attribute name="name">
 						<xsl:value-of select="@OID"></xsl:value-of>
 					</xsl:attribute>
+					<xsl:attribute name="description">
+						<xsl:value-of select="@Name"></xsl:value-of>
+					</xsl:attribute>
 					<version>
-						<xsl:attribute name="name"><xsl:value-of
-							select="@Name" />-v1</xsl:attribute>
+						<xsl:attribute name="name"><xsl:value-of select="@Name" />-v1</xsl:attribute>
+						<xsl:attribute name="description">Converted from ODM</xsl:attribute>
 						<xform>
 							<xsl:call-template name="createForm" />
 						</xform>
@@ -45,7 +41,7 @@
 					<xsl:attribute name="id"><xsl:value-of
 						select="normalize-space($instanceElementName)"/></xsl:attribute>
 					<ODM>
-						<xsl:attribute name="Description">converted from ODM to Xform</xsl:attribute>
+						<xsl:attribute name="Description">This Xform was converted from an ODM file using the oc-conversion-tools</xsl:attribute>
 						<xsl:attribute name="name"><xsl:value-of
 							select="@Name"></xsl:value-of></xsl:attribute>
 						<xsl:attribute name="formKey"><xsl:value-of
