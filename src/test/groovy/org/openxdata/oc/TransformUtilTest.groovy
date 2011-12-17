@@ -1,6 +1,5 @@
 package org.openxdata.oc
 
-import org.apache.commons.collections.CollectionUtils
 import org.junit.Test
 
 
