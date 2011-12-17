@@ -439,7 +439,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 														 <ItemRef ItemOID="I_SAMPL_SC_ITEM_01" OrderNumber="1" Mandatory="No"/>
 														 <ItemRef ItemOID="I_SAMPL_SC_ITEM_02" OrderNumber="2" Mandatory="Yes"/>
 													 </ItemGroupDef>
-													 <ItemGroupDef OID="IG_SAMPL_GROUP01" Name="Group01" Repeating="No" SASDatasetName="GROUP01" Comment="Repeating items">
+													 <ItemGroupDef OID="IG_SAMPL_GROUP01" Name="Group01" Repeating="Yes" SASDatasetName="GROUP01" Comment="Repeating items">
 														 <ItemRef ItemOID="I_SAMPL_SC_REPEATING_ITEM_01" OrderNumber="1" Mandatory="No"/>
 														 <ItemRef ItemOID="I_SAMPL_SC_REPEATING_ITEM_02" OrderNumber="2" Mandatory="No"/>
 													 </ItemGroupDef>
