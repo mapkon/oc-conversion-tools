@@ -10,7 +10,7 @@ import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 
 
-@Ignore("Not intended to be run during standard build because it is dependent on existing openclinica installation.")
+@Ignore("Not intended to be run during standard test-build because it is dependent on an existing openclinica installation.")
 public class OCServerTest extends GroovyTestCase {
 
 	def client
