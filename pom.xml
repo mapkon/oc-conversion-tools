@@ -135,10 +135,6 @@
 					<artifactId>hibernate</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>com.googlecode.genericdao</groupId>
-            		<artifactId>dao-hibernate</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>net.sf.opencsv</groupId>
             		<artifactId>opencsv</artifactId>
 				</exclusion>
@@ -225,14 +221,6 @@
 				<exclusion>
 					<groupId>net.jcip</groupId>
             		<artifactId>jcip-annotations</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>net.sf.gilead</groupId>
-            		<artifactId>gilead-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>net.sf.gilead</groupId>
-            		<artifactId>gilead4gwt</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.gilead</groupId>
