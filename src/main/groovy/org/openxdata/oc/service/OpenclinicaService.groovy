@@ -4,6 +4,9 @@ import java.util.List
 
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.exception.UnexpectedException
+import org.openxdata.server.dao.EditableDAO;
+import org.openxdata.server.dao.FormDataDAO;
+import org.openxdata.server.service.StudyManagerService;
 
 public interface OpenclinicaService {
 
@@ -15,5 +18,11 @@ public interface OpenclinicaService {
 
 	StudyDef importOpenClinicaStudy(String identifier) throws UnexpectedException;
 
-	String exportOpenClinicaStudyData(String studyKey);
+	String exportOpenClinicaStudyData(String studyKey)
+
+	void setFormDataDAO(FormDataDAO formDataDAO)
+
+	void setEditableDAO(EditableDAO editableDAO)
+
+	void setStudyService(StudyManagerService studyService)
 }

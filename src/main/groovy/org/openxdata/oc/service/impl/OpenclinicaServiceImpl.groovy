@@ -29,15 +29,13 @@ import org.openxdata.xform.StudyImporter
 @Log
 public class OpenclinicaServiceImpl implements OpenclinicaService {
 
-	private FormDataDAO formDataDAO
+	private def client
 	
-	private EditableDAO editableDAO
+	private def formDataDAO
 	
-	private SettingDAO settingDAO
-
-	private OpenClinicaSoapClient client
+	private def editableDAO
 		
-	private StudyManagerService studyService	
+	private def studyService	
 	
 	private OpenClinicaSoapClient getClient() {
 		
@@ -202,5 +200,17 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			}
 		}
 		return (String) getClient().importData(allData)	
+	}
+	
+	void setFormDataDAO(FormDataDAO formDataDAO) {
+		this.formDataDAO = formDataDAO
+	}
+
+	void setEditableDAO(EditableDAO editableDAO) {
+		this.editableDAO = editableDAO
+	}
+
+	void setStudyService(StudyManagerService studyService) {
+		this.studyService = studyService
 	}
 }
