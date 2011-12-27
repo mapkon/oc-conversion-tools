@@ -43,6 +43,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 	}
 
 	public def createStudy() {
+		
 		study = new StudyDef()
 		study.setName('Test Study')
 
