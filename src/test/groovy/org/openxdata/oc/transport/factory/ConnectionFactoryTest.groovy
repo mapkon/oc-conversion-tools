@@ -4,16 +4,23 @@ import org.junit.Test
 
 class ConnectionFactoryTest extends GroovyTestCase {
 	
-	def host = 'http://localhost:8080/openclinica'
-	def factory = new ConnectionFactory(host)
+	def factory = new ConnectionFactory()
+	
+	@Test void testHostNameEqualsPropertiesFileHostName() {
+		
+		def host = factory.getStudyConnection().getURL().getHost()
+		assertEquals '158.37.6.164', host
+	}
 	
 	@Test void testGetStudyConnectionShouldReturnCorrectURL(){
 		
-		assertTrue factory.getStudyConnection().getURL().getHost().toString().equals('localhost')
-		assertEquals 'http://localhost:8080/openclinica/ws/study/v1', factory.getStudyConnection().getURL().toString()
+		def url = factory.getStudyConnection().getURL().toString()
+		assertEquals 'http://158.37.6.164/OpenClinica-ws/ws/study/v1', url
 	}
 	
 	@Test void testGetStudySubjectConnectionShouldReturnCorrectURL(){		
-		assertEquals 'http://localhost:8080/openclinica/ws/studySubject/v1', factory.getStudySubjectConnection().getURL().toString()
+		
+		def url = factory.getStudySubjectConnection().getURL().toString()
+		assertEquals 'http://158.37.6.164/OpenClinica-ws/ws/studySubject/v1', url
 	}
 }
