@@ -13,6 +13,7 @@ import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
+import org.openxdata.oc.util.PropertiesUtil;
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
@@ -43,14 +44,14 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			
 			log.info("OXD: Initializing client for first time use.")
 			
-			String host = settingDAO.getSetting("openClinicaWebServiceHost")
-			String userName = settingDAO.getSetting("OpenClinicaUserName")
-			String password = settingDAO.getSetting("OpenClinicaUserHashedPassword")
+			def props = new PropertiesUtil().loadProperties('openclinica.properties')
 			
-			ConnectionFactory factory = new ConnectionFactory(host)
+			def host = props.getAt('host')
 			
-			client = new OpenClinicaSoapClientImpl(userName, password, factory)
+			ConnectionFactory connectionFactory = new ConnectionFactory(host:host)
+			client = new OpenClinicaSoapClientImpl(connectionFactory)
 		}
+		
 		return client
 	}
 	
