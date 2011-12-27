@@ -14,6 +14,7 @@ import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
 import org.openxdata.oc.transport.proxy.StudyMetaDataWebServiceProxy
+import org.openxdata.oc.util.PropertiesUtil
 
 
 @Log
@@ -24,11 +25,28 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def listAllProxy
 	private def getMetaDataProxy
 	private def listAllByStudyProxy
+	
+	def username
+	def password
+	def connectionFactory
 		
-	def OpenClinicaSoapClientImpl(def username, def password, def connectionFactory){
+	def OpenClinicaSoapClientImpl(def connectionFactory){
 		
-		log.info("Initialized Openclinica Soap Client.")
-				
+		log.info("Initializing Openclinica Soap Client.")
+		
+		this.connectionFactory = connectionFactory
+			
+		def util = new PropertiesUtil()
+		def props = util.loadProperties('openclinica.properties')
+		
+		username = props.getAt('username')
+		password = props.getAt('password')
+		
+		init()
+		
+	}
+	
+	void init() {
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		listAllProxy = new ListAllWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		getMetaDataProxy = new StudyMetaDataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
