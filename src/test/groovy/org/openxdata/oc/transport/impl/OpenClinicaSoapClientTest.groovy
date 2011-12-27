@@ -367,11 +367,11 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		connection.getOutputStream().returns(outputStream)
 		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
 		
-		def factory = mock(ConnectionFactory.class)
-		factory.getStudyConnection().returns(connection).atMostOnce()
-		factory.getStudySubjectConnection().returns(connection).atMostOnce()
+		def connectionFactory = mock(ConnectionFactory.class)
+		connectionFactory.getStudyConnection().returns(connection).atMostOnce()
+		connectionFactory.getStudySubjectConnection().returns(connection).atMostOnce()
 		
-		return factory
+		return connectionFactory
 	}
 	
 	def listAllReturnSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
