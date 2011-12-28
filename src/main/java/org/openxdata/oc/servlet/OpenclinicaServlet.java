@@ -34,7 +34,7 @@ public class OpenclinicaServlet extends HttpServlet {
 		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
 		
 		 formDataDAO = (FormDataDAO) ctx.getBean("formDataDAO");
-		 editableDAO = (EditableDAO) ctx.getBean("editableDAO");
+		 editableDAO = (EditableDAO) ctx.getBean("studyManagerDAO");
 		 studyService = (StudyManagerService) ctx.getBean("studyManagerService");
 		 
 		 openclinicaService = new OpenclinicaServiceImpl();
