@@ -36,7 +36,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		this.connectionFactory = connectionFactory
 			
 		def util = new PropertiesUtil()
-		def props = util.loadProperties('openclinica.properties')
+		def props = util.loadProperties('META-INF/openclinica.properties')
 		
 		username = props.getAt('username')
 		password = props.getAt('password')

@@ -11,7 +11,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 	def util = new PropertiesUtil()
 
 	@Before void setUp() {
-		props = util.loadProperties('openclinica.properties')
+		props = util.loadProperties('META-INF/openclinica.properties')
 	}
 
 	@Test void testLoadPropertiesDoesNotReturnNull() {

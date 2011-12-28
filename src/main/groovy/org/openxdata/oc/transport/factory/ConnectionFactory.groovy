@@ -14,7 +14,7 @@ public class ConnectionFactory {
 	
 	def ConnectionFactory() {
 		
-		def props = new PropertiesUtil().loadProperties('openclinica.properties')
+		def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
 		host = props.getAt('host')
 	}
 	

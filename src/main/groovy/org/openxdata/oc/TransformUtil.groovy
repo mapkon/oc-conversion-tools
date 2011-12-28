@@ -12,7 +12,8 @@ public class TransformUtil {
 
 	public def loadFileContents(def fileName){
 		if(fileName){
-			return getClass().getResourceAsStream(fileName).text
+			def stream = getClass().getResourceAsStream(fileName)
+			return stream.text
 		}else{
 			throw new IllegalArgumentException('File name cannot be null or empty.')
 		}

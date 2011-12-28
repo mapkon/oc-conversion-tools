@@ -7,10 +7,8 @@ class PropertiesUtil {
 	def loadProperties(def fileName) {
 		if(fileName){
 			
-			new File(fileName).withInputStream { stream ->
-				props.load(stream)
-			}
-			
+			def stream = getClass().getClassLoader().getResourceAsStream(fileName)
+			props.load(stream)
 			return props
 		}else {
 			throw new IllegalArgumentException('Properties File Name cannot be Null or empty!')
