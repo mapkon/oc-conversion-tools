@@ -1,5 +1,6 @@
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openxdata</groupId>
@@ -74,7 +75,7 @@
 			<url>http://snapshots.repository.codehaus.org</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<artifactId>junit</artifactId>
@@ -94,18 +95,18 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>1.8.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>2.5.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.8.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>2.5.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>xform-study-import</artifactId>
 			<version>0.2</version>
@@ -116,10 +117,10 @@
 			<version>1.8.3</version>
 		</dependency>
 		<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-        </dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>server</artifactId>
@@ -143,15 +144,15 @@
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.opencsv</groupId>
-            		<artifactId>opencsv</artifactId>
+					<artifactId>opencsv</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.bluecove</groupId>
-            		<artifactId>bluecove</artifactId>
+					<artifactId>bluecove</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>quartz</groupId>
-            		<artifactId>quartz</artifactId>
+					<artifactId>quartz</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>log4j</groupId>
@@ -159,103 +160,103 @@
 				</exclusion>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
-            		<artifactId>slf4j-api</artifactId>
+					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
-            		<artifactId>slf4j-log4j12</artifactId>
+					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.fcitmuk</groupId>
-            		<artifactId>sms-server</artifactId>
+					<artifactId>sms-server</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.openxdata</groupId>
-            		<artifactId>openxdata-mobile-model</artifactId>
+					<artifactId>openxdata-mobile-model</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>rhino</groupId>
-            		<artifactId>js</artifactId>
+					<artifactId>js</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>c3p0</groupId>
-            		<artifactId>c3p0</artifactId>
+					<artifactId>c3p0</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>commons-lang</groupId>
-            		<artifactId>commons-lang</artifactId>
+					<artifactId>commons-lang</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>commons-fileupload</groupId>
-            		<artifactId>commons-fileupload</artifactId>
+					<artifactId>commons-fileupload</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.apache.commons</groupId>
-            		<artifactId>commons-io</artifactId>
+					<artifactId>commons-io</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.kxml</groupId>
-            		<artifactId>kxml2</artifactId>
+					<artifactId>kxml2</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.minixpath</groupId>
-            		<artifactId>minixpath</artifactId>
+					<artifactId>minixpath</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>javax.mail</groupId>
-            		<artifactId>mail</artifactId>
+					<artifactId>mail</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.aspectj</groupId>
-            		<artifactId>aspectjrt</artifactId>
+					<artifactId>aspectjrt</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.aspectj</groupId>
-            		<artifactId>aspectjweaver</artifactId>
+					<artifactId>aspectjweaver</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.jcraft</groupId>
-            		<artifactId>jzlib</artifactId>
+					<artifactId>jzlib</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.liquibase</groupId>
-            		<artifactId>liquibase-core</artifactId>
+					<artifactId>liquibase-core</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.openxdata</groupId>
-            		<artifactId>protocol-api</artifactId>
+					<artifactId>protocol-api</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.jcip</groupId>
-            		<artifactId>jcip-annotations</artifactId>
+					<artifactId>jcip-annotations</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.gilead</groupId>
-            		<artifactId>gilead-hibernate</artifactId>
+					<artifactId>gilead-hibernate</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.gilead</groupId>
-            		<artifactId>beanlib</artifactId>
+					<artifactId>beanlib</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>net.sf.gilead</groupId>
-            		<artifactId>beanlib-hibernate</artifactId>
+					<artifactId>beanlib-hibernate</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>cglib</groupId>
-            		<artifactId>cglib</artifactId>
+					<artifactId>cglib</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>asm</groupId>
-            		<artifactId>asm</artifactId>
+					<artifactId>asm</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>aopalliance</groupId>
-            		<artifactId>aopalliance</artifactId>
+					<artifactId>aopalliance</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>jboss</groupId>
-            		<artifactId>javassist</artifactId>
+					<artifactId>javassist</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
