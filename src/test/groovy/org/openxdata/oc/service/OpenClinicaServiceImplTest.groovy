@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue
 import java.util.List
 
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
@@ -25,7 +26,7 @@ import org.openxdata.server.dao.EditableDAO
 import org.openxdata.server.dao.FormDataDAO
 import org.openxdata.server.service.StudyManagerService
 
-
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class OpenClinicaServiceImplTest {
 	
