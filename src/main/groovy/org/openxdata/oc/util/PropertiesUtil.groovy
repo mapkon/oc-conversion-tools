@@ -17,6 +17,6 @@ class PropertiesUtil {
 	}
 	
 	def getOCProperty(def propName) {
-		return props.getAt(propName)
+		return props.getProperty(propName)
 	}
 }
