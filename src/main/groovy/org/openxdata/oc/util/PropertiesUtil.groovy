@@ -1,5 +1,6 @@
 package org.openxdata.oc.util
 
+
 class PropertiesUtil {
 
 	def props = new Properties()

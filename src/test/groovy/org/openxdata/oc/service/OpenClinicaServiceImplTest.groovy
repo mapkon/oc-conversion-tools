@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertTrue
 
-import java.io.File
-import java.net.URL
-import java.util.ArrayList
 import java.util.List
 
 import org.junit.Before
@@ -26,7 +23,6 @@ import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.dao.EditableDAO
 import org.openxdata.server.dao.FormDataDAO
-import org.openxdata.server.dao.StudyDAO
 import org.openxdata.server.service.StudyManagerService
 
 
