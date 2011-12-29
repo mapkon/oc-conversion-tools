@@ -50,7 +50,6 @@ public class Transform {
 
 		def doc = new XmlSlurper().parseText(xml)
 
-		println XmlUtil.serialize(doc)
 		def convertedStudyDef = new ConvertedStudyDef(doc)
 		
 		return convertedStudyDef
