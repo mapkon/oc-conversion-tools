@@ -4,9 +4,9 @@ import java.util.List
 
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.exception.UnexpectedException
-import org.openxdata.server.dao.EditableDAO;
-import org.openxdata.server.dao.FormDataDAO;
-import org.openxdata.server.service.StudyManagerService;
+import org.openxdata.server.dao.EditableDAO
+import org.openxdata.server.dao.FormDataDAO
+import org.openxdata.server.dao.StudyDAO
 
 public interface OpenclinicaService {
 
@@ -24,5 +24,5 @@ public interface OpenclinicaService {
 
 	void setEditableDAO(EditableDAO editableDAO)
 
-	void setStudyService(StudyManagerService studyService)
+	void setStudyDAO(StudyDAO studyService)
 }

@@ -13,7 +13,7 @@ import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
-import org.openxdata.oc.util.PropertiesUtil;
+import org.openxdata.oc.util.PropertiesUtil
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
@@ -22,9 +22,8 @@ import org.openxdata.server.admin.model.User
 import org.openxdata.server.admin.model.exception.UnexpectedException
 import org.openxdata.server.dao.EditableDAO
 import org.openxdata.server.dao.FormDataDAO
-import org.openxdata.server.dao.SettingDAO
+import org.openxdata.server.dao.StudyDAO
 import org.openxdata.server.security.util.OpenXDataSecurityUtil
-import org.openxdata.server.service.StudyManagerService
 import org.openxdata.xform.StudyImporter
 
 @Log
@@ -36,7 +35,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	
 	private def editableDAO
 		
-	private def studyService	
+	private def studyDAO	
 	
 	private OpenClinicaSoapClient getClient() {
 		
@@ -57,7 +56,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	
 	@Override
 	public Boolean hasStudyData(String studyKey) {
-		StudyDef study = studyService.getStudy(studyKey)
+		StudyDef study = studyDAO.getStudy(studyKey)
 		return editableDAO.hasEditableData(study)
 	}
 	
@@ -211,7 +210,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		this.editableDAO = editableDAO
 	}
 
-	void setStudyService(StudyManagerService studyService) {
-		this.studyService = studyService
+	void setStudyDAO(StudyDAO studyDAO) {
+		this.studyDAO = studyDAO
 	}
 }

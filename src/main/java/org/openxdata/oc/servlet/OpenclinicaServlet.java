@@ -10,6 +10,7 @@ import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.dao.EditableDAO;
 import org.openxdata.server.dao.FormDataDAO;
+import org.openxdata.server.dao.StudyDAO;
 import org.openxdata.server.service.StudyManagerService;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -20,30 +21,29 @@ public class OpenclinicaServlet extends HttpServlet {
 		
 	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
 	
+	private StudyDAO studyDAO;
 	private FormDataDAO formDataDAO;
 	private EditableDAO editableDAO;
 	
-	private StudyManagerService studyService;
 	private OpenclinicaService openclinicaService;
 	
-	
-    @Override
+	@Override
 	public void init() {
-    	
+
 		ServletContext sctx = this.getServletContext();
 		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
-		
-		 formDataDAO = (FormDataDAO) ctx.getBean("formDataDAO");
-		 editableDAO = (EditableDAO) ctx.getBean("studyManagerDAO");
-		 studyService = (StudyManagerService) ctx.getBean("studyManagerService");
-		 
-		 openclinicaService = new OpenclinicaServiceImpl();
-		 
-		 openclinicaService.setFormDataDAO(formDataDAO);
-		 openclinicaService.setEditableDAO(editableDAO);
-		 openclinicaService.setStudyService(studyService);
-		 
-    }
+
+		studyDAO = (StudyDAO) ctx.getBean("studyDAO");
+		formDataDAO = (FormDataDAO) ctx.getBean("formDataDAO");
+		editableDAO = (EditableDAO) ctx.getBean("studyManagerDAO");
+
+		openclinicaService = new OpenclinicaServiceImpl();
+
+		openclinicaService.setStudyDAO(studyDAO);
+		openclinicaService.setFormDataDAO(formDataDAO);
+		openclinicaService.setEditableDAO(editableDAO);
+
+	}
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
