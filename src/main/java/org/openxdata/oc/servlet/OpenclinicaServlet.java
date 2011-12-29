@@ -11,7 +11,6 @@ import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.dao.EditableDAO;
 import org.openxdata.server.dao.FormDataDAO;
 import org.openxdata.server.dao.StudyDAO;
-import org.openxdata.server.service.StudyManagerService;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
