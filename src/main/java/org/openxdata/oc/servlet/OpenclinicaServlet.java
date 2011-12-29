@@ -11,6 +11,8 @@ import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.dao.EditableDAO;
 import org.openxdata.server.dao.FormDataDAO;
 import org.openxdata.server.dao.StudyDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -25,6 +27,8 @@ public class OpenclinicaServlet extends HttpServlet {
 	private EditableDAO editableDAO;
 	
 	private OpenclinicaService openclinicaService;
+	
+	private static final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
 	
 	@Override
 	public void init() {
@@ -51,6 +55,7 @@ public class OpenclinicaServlet extends HttpServlet {
     	String oid = request.getParameter("oid");
     	String action = request.getParameter("action");
     	
+    	log.info("Fetching study for oid: " + oid);
     	if(DOWNLOAD_AND_CONVERT.equals(action)) {
     		study = downloadAndConvertOpenclinicaStudy(oid);
     	}
