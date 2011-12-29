@@ -1,6 +1,8 @@
 package org.openxdata.oc.servlet;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +33,10 @@ public class OpenclinicaServlet extends HttpServlet {
 	private static final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
 	
 	@Override
-	public void init() {
+	public void init(ServletConfig config) throws ServletException {
 
+		super.init(config);
+		
 		ServletContext sctx = this.getServletContext();
 		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
 
