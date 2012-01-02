@@ -12,7 +12,7 @@ class PropertiesUtil {
 			props.load(stream)
 			return props
 		}else {
-			throw new IllegalArgumentException('Properties File Name cannot be Null or empty!')
+			throw new IllegalArgumentException('File Name cannot be Null or Empty!')
 		}
 	}
 	

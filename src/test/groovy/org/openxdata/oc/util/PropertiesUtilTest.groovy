@@ -21,7 +21,17 @@ class PropertiesUtilTest extends GroovyTestCase {
 
 	@Test void testLoadPropertiesThrowsExceptionOnNullFileName() {
 		shouldFail(IllegalArgumentException){
-			def properties = new PropertiesUtil().loadProperties(null)
+			def util = new PropertiesUtil()
+			util.loadProperties(null)
+		}
+	}
+
+	@Test void testLoadPropertiesThrowsExceptionOnNullFileNameWithCorrectMessage() {
+		try {
+			def util = new PropertiesUtil()
+			util.loadProperties(null)
+		}catch(def ex) {
+			assertEquals 'File Name cannot be Null or Empty!', ex.getMessage()
 		}
 	}
 
@@ -65,27 +75,27 @@ class PropertiesUtilTest extends GroovyTestCase {
 		def host = util.getOCProperty('host')
 		assertNotNull host
 	}
-	
+
 	@Test void testGetOCPropertyReturnsValidHost() {
 		def host = util.getOCProperty('host')
 		assertNotNull 'http://158.37.6.164/OpenClinica-ws', host
 	}
-	
+
 	@Test void testGetOCPropertyReturnsUserNameProperty() {
 		def username = util.getOCProperty('username')
 		assertNotNull username
 	}
-	
+
 	@Test void testGetOCPropertyReturnsValidUsername() {
 		def username = util.getOCProperty('username')
 		assertNotNull 'MarkG', username
 	}
-	
+
 	@Test void testGetOCPropertyReturnsPasswordProperty() {
 		def username = util.getOCProperty('username')
 		assertNotNull username
 	}
-	
+
 	@Test void testGetOCPropertyReturnsValidPassword() {
 		def password = util.getOCProperty('password')
 		assertNotNull 'password', password
