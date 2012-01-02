@@ -17,6 +17,7 @@ import org.openxdata.server.admin.model.StudyDef
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 
+
 @RunWith(MockitoJUnitRunner.class)
 class OpenclinicaServletTest extends GroovyTestCase {
 
@@ -42,14 +43,13 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		request.setParameter('action', 'downloadAndConvert')
 	}
 
-	public def createStudy() {
+	private def createStudy() {
 		
 		study = new StudyDef()
 		study.setName('Test Study')
 
-		def version = new FormDefVersion()
-
 		def form = new FormDef()
+		def version = new FormDefVersion()
 
 		form.addVersion(version)
 
