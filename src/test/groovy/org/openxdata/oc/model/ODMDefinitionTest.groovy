@@ -1,8 +1,8 @@
 package org.openxdata.oc.model
 
 import org.junit.Test
-import org.openxdata.oc.TransformUtil
 import org.openxdata.oc.exception.ImportException;
+import org.openxdata.oc.util.TransformUtil;
 
 
 class ODMDefinitionTest extends GroovyTestCase {

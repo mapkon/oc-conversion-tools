@@ -3,7 +3,7 @@ package org.openxdata.oc.model
 import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.Transform
-import org.openxdata.oc.TransformUtil
+import org.openxdata.oc.util.TransformUtil;
 
 
 class ConvertedStudyDefTest extends GroovyTestCase {

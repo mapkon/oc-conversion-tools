@@ -14,10 +14,10 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
-import org.openxdata.oc.TransformUtil
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
+import org.openxdata.oc.util.TransformUtil;
 import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
