@@ -42,7 +42,7 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		studyDAO = (StudyDAO) ctx.getBean("studyDAO");
 		formDataDAO = (FormDataDAO) ctx.getBean("formDataDAO");
-		editableDAO = (EditableDAO) ctx.getBean("studyManagerDAO");
+		editableDAO = (EditableDAO) ctx.getBean("editableDAO");
 
 		openclinicaService = new OpenclinicaServiceImpl();
 
