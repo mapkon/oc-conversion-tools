@@ -57,7 +57,7 @@ public class OpenClinicaServiceImplTest {
 				
 		Mockito.when(studyService.getStudies()).thenReturn(studies)
     	Mockito.when(studyService.getStudyKey(Mockito.anyInt())).thenReturn("key")
-    	Mockito.when(studyService.getStudy(Mockito.anyString())).thenReturn(study)
+    	Mockito.when(studyService.getStudyByKey(Mockito.anyString())).thenReturn(study)
     	Mockito.when(editableDAO.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
     	
     	Mockito.when(soapClient.listAll()).thenReturn(openClinicaConvertedStudies)
