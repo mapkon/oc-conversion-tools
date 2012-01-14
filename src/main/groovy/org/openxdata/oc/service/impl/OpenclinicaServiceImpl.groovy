@@ -45,7 +45,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			
 			log.info("OXD: Initializing client for first time use.")
 			
-			def props = new PropertiesUtil().loadProperties('openclinica.properties')
+			def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
 			
 			def host = props.getAt('host')
 			
