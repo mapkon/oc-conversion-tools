@@ -14,8 +14,8 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 	def getSoapEnvelope() {
 		return getEnvelope(identifier)
 	}
-
-	def getMetaData(String identifier){
+	
+	def getMetaData(def identifier){
 		
 		log.info("Fetching Metadata for Openclinica study with ID: ${identifier}")
 		
@@ -26,7 +26,7 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 		def odmElement = response.depthFirst().odm[0].children()[0]
 		return odmElement
 	}
-
+	
 	private def getEnvelope(def identifier){
 		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1" xmlns:bean="http://openclinica.org/ws/beans">
 							${getHeader()}

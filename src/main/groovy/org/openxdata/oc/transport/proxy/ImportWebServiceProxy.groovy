@@ -17,7 +17,7 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 	def getSoapEnvelope() {
 		getEnvelope(importXml)
 	}
-
+	
 	def importData(def instanceData){
 
 		log.info("Starting import to Openclinca.")
@@ -33,6 +33,15 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 		return getImportMessage(response)
 	}
 
+	private def getEnvelope(def importXml){
+		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
+							${getHeader()}
+						<soapenv:Body>
+							<v1:importRequest>${importXml}</v1:importRequest>
+						</soapenv:Body>
+					 </soapenv:Envelope>"""
+	}
+	
 	private def getImportMessage(response) {
 		
 		def result = response.depthFirst().result[0].text()
@@ -45,14 +54,5 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 			log.info("Data Export to OpenClinica Failed with Error: ${result}")
 			throw new ImportException(ErrorCode.IMPORT_ERROR)
 		}
-	}
-
-	private def getEnvelope(def importXml){
-		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
-							${getHeader()}
-						<soapenv:Body>
-							<v1:importRequest>${importXml}</v1:importRequest>
-						</soapenv:Body>
-					 </soapenv:Envelope>"""
 	}
 }
