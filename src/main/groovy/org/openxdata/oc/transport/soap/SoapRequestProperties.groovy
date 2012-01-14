@@ -4,6 +4,7 @@ abstract class SoapRequestProperties {
 
 	def username
 	def hashedPassword
+	def connectionFactory
 	
 	def getHeader(){
 		"""<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">

@@ -10,7 +10,6 @@ class StudyMetaDataWebServiceProxy extends SoapRequestProperties {
 
 	def envelope
 	def identifier
-	def connectionFactory
 	
 	def getSoapEnvelope() {
 		return getEnvelope(identifier)

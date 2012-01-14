@@ -11,7 +11,6 @@ class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
 
 	def envelope
 	def identifier
-	def connectionFactory
 
 	def getSoapEnvelope() {
 		getEnvelope(identifier)

@@ -10,8 +10,6 @@ import org.openxdata.oc.transport.soap.SoapRequestProperties
 @Log
 class ListAllWebServiceProxy extends SoapRequestProperties {
 
-	def connectionFactory
-
 	def getSoapEnvelope() {
 		"""<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/study/v1"> 
 				${getHeader()}

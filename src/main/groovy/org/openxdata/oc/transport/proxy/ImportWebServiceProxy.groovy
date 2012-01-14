@@ -13,7 +13,6 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 
 	def envelope
 	def importXml
-	def connectionFactory
 
 	def getSoapEnvelope() {
 		getEnvelope(importXml)

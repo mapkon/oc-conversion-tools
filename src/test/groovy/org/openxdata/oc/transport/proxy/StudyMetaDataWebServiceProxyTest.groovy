@@ -7,6 +7,7 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.transport.factory.ConnectionFactory
 
+
 @WithGMock
 class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 
