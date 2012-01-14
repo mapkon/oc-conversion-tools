@@ -17,16 +17,19 @@ import org.mockito.runners.MockitoJUnitRunner
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
-import org.openxdata.oc.util.TransformUtil;
+import org.openxdata.oc.util.TransformUtil
 import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
+import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
+import org.openxdata.server.admin.model.paging.PagingLoadConfig
+import org.openxdata.server.admin.model.paging.PagingLoadResult
 import org.openxdata.server.dao.EditableDAO
 import org.openxdata.server.dao.FormDataDAO
-import org.openxdata.server.service.StudyManagerService
+import org.openxdata.server.dao.StudyDAO
 
-@Ignore
+//@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class OpenClinicaServiceImplTest {
 	
@@ -34,7 +37,7 @@ public class OpenClinicaServiceImplTest {
 	
 	@Mock private EditableDAO editableDAO
    
-    @Mock private StudyManagerService studyService
+    @Mock private StudyDAO studyDAO
    
     @Mock private OpenClinicaSoapClient soapClient
     
@@ -43,7 +46,7 @@ public class OpenClinicaServiceImplTest {
 	
 	def studies = []
     def subjects = []
-    def formDataList = []
+	def formDataListResult
     def openClinicaConvertedStudies = []
 	
 	@Before public void setUp() throws Exception {
@@ -55,9 +58,9 @@ public class OpenClinicaServiceImplTest {
     	
     	StudyDef study = createStudy()
 				
-		Mockito.when(studyService.getStudies()).thenReturn(studies)
-    	Mockito.when(studyService.getStudyKey(Mockito.anyInt())).thenReturn("key")
-    	Mockito.when(studyService.getStudyByKey(Mockito.anyString())).thenReturn(study)
+		Mockito.when(studyDAO.getStudies()).thenReturn(studies)
+    	Mockito.when(studyDAO.getStudyKey(Mockito.anyInt())).thenReturn("key")
+    	Mockito.when(studyDAO.getStudyByKey(Mockito.anyString())).thenReturn(study)
     	Mockito.when(editableDAO.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
     	
     	Mockito.when(soapClient.listAll()).thenReturn(openClinicaConvertedStudies)
@@ -66,7 +69,7 @@ public class OpenClinicaServiceImplTest {
 		def odmMetaData = new TransformUtil().loadFileContents("OpenclinicaGetMetaDataSoapResponse.xml")
 		Mockito.when(soapClient.getMetadata(Mockito.anyString())).thenReturn(odmMetaData)
 				
-		Mockito.when(formDataDAO.getFormDataList(Mockito.any(FormDef.class))).thenReturn(formDataList)
+		Mockito.when(formDataDAO.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
 		Mockito.when(soapClient.importData(Mockito.anyCollection())).thenReturn("Success")
 				
     }
@@ -76,8 +79,10 @@ public class OpenClinicaServiceImplTest {
 		FormData formData = new FormData()
 		FormData formData2 = new FormData()
 		
+		def formDataList = []
 		formDataList.add(formData)
 		formDataList.add(formData2)
+		def formDataListResult = new PagingLoadResult<FormData>(formDataList, 0, 0)
 	}
 
 	private StudyDef createStudy() {
@@ -125,11 +130,11 @@ public class OpenClinicaServiceImplTest {
     
 	@Test public void testHasStudyData(){
 		
-		String studyKey = studyService.getStudyKey(1)
+		String studyKey = studyDAO.getStudyKey(1)
 		assertTrue(openClinicaService.hasStudyData(studyKey))
 		
 		Mockito.when(editableDAO.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
-		String studyKey2 = studyService.getStudyKey(2)
+		String studyKey2 = studyDAO.getStudyKey(2)
 		assertFalse(openClinicaService.hasStudyData(studyKey2))
 	}
 	
