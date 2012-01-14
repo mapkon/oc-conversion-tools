@@ -20,6 +20,8 @@ import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.User
 import org.openxdata.server.admin.model.exception.UnexpectedException
+import org.openxdata.server.admin.model.paging.PagingLoadConfig;
+import org.openxdata.server.admin.model.paging.PagingLoadResult;
 import org.openxdata.server.dao.EditableDAO
 import org.openxdata.server.dao.FormDataDAO
 import org.openxdata.server.dao.StudyDAO
@@ -191,12 +193,15 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 
 	@Override
 	public String exportOpenClinicaStudyData(String studyKey) {
-		StudyDef study = studyService.getStudy(studyKey)
-		List<String> allData = new ArrayList<String>() 
+		
+		def allData = []
+		def config = new PagingLoadConfig(0, 5);
+		StudyDef study = studyDAO.getStudyByKey(studyKey)
+		
 		for (FormDef form : study.getForms()) {
-			List<FormData> dataList = formDataDAO.getFormDataList(form)
-			for (FormData formData: dataList) {
-				allData.add(formData.getData())
+			def dataList = formDataDAO.getFormDataList(form.getDefaultVersion(), config)
+			dataList.getData().each {
+				allData.add(it)
 			}
 		}
 		return (String) getClient().importData(allData)	
