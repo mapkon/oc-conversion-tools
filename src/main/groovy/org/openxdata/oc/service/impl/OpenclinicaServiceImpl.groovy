@@ -73,7 +73,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		
 		try{
 			
-			List<StudyDef> openxdataStudies = studyService.getStudies()
+			List<StudyDef> openxdataStudies = studyDAO.getStudies()
 			
 			for (def study : studies) {
 				log.info("OXD: Checking duplicate studies.")
@@ -127,7 +127,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		StudyDef study = createStudy(importer)
 		
 		log.info("OXD: Saving converted study definition.")
-		studyService.saveStudy(study)
+		studyDAO.saveStudy(study)
 		
 		return study
 	}
