@@ -56,7 +56,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	
 	@Override
 	public Boolean hasStudyData(String studyKey) {
-		StudyDef study = studyDAO.getStudy(studyKey)
+		StudyDef study = studyDAO.getStudyByKey(studyKey)
 		return editableDAO.hasEditableData(study)
 	}
 	
