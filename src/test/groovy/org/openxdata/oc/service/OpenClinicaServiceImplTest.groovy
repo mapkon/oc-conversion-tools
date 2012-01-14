@@ -32,63 +32,63 @@ import org.openxdata.server.dao.StudyDAO
 //@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class OpenClinicaServiceImplTest {
-	
-	@Mock private FormDataDAO formDataDAO
-	
-	@Mock private EditableDAO editableDAO
-   
-    @Mock private StudyDAO studyDAO
-   
-    @Mock private OpenClinicaSoapClient soapClient
-    
-    @InjectMocks private def openClinicaService = new OpenclinicaServiceImpl()
 
-	
+	@Mock private FormDataDAO formDataDAO
+
+	@Mock private EditableDAO editableDAO
+
+	@Mock private StudyDAO studyDAO
+
+	@Mock private OpenClinicaSoapClient client
+
+	@InjectMocks private def openClinicaService = new OpenclinicaServiceImpl()
+
+
 	def studies = []
-    def subjects = []
+	def subjects = []
 	def formDataListResult
-    def openClinicaConvertedStudies = []
-	
+	def openClinicaConvertedStudies = []
+
 	@Before public void setUp() throws Exception {
-    	
-    	initSubjects()
-    	initFormDataList()
-    	initStudyDefinitions()
-    	initConvertedOpenClinicaStudies()
-    	
-    	StudyDef study = createStudy()
-				
+
+		initSubjects()
+		initFormDataList()
+		initStudyDefinitions()
+		initConvertedOpenClinicaStudies()
+
+		StudyDef study = createStudy()
+
 		Mockito.when(studyDAO.getStudies()).thenReturn(studies)
-    	Mockito.when(studyDAO.getStudyKey(Mockito.anyInt())).thenReturn("key")
-    	Mockito.when(studyDAO.getStudyByKey(Mockito.anyString())).thenReturn(study)
-    	Mockito.when(editableDAO.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
-    	
-    	Mockito.when(soapClient.listAll()).thenReturn(openClinicaConvertedStudies)
-    	Mockito.when(soapClient.getSubjectKeys(Mockito.anyString())).thenReturn(subjects)
-    	
+		Mockito.when(studyDAO.getStudyKey(Mockito.anyInt())).thenReturn("key")
+		Mockito.when(studyDAO.getStudyByKey(Mockito.anyString())).thenReturn(study)
+		Mockito.when(editableDAO.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
+
+		Mockito.when(client.listAll()).thenReturn(openClinicaConvertedStudies)
+		Mockito.when(client.getSubjectKeys(Mockito.anyString())).thenReturn(subjects)
+
 		def odmMetaData = new TransformUtil().loadFileContents("OpenclinicaGetMetaDataSoapResponse.xml")
-		Mockito.when(soapClient.getMetadata(Mockito.anyString())).thenReturn(odmMetaData)
-				
+		Mockito.when(client.getMetadata(Mockito.anyString())).thenReturn(odmMetaData)
+
 		Mockito.when(formDataDAO.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
-		Mockito.when(soapClient.importData(Mockito.anyCollection())).thenReturn("Success")
-				
-    }
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
+
+	}
 
 	private void initFormDataList() {
-		
+
 		FormData formData = new FormData()
 		FormData formData2 = new FormData()
-		
+
 		def formDataList = []
 		formDataList.add(formData)
 		formDataList.add(formData2)
-		def formDataListResult = new PagingLoadResult<FormData>(formDataList, 0, 0)
+		formDataListResult = new PagingLoadResult<FormData>(formDataList, 0, 0)
 	}
 
 	private StudyDef createStudy() {
-		
+
 		StudyDef study = new StudyDef()
-		
+
 		FormDef form = new FormDef()
 
 		study.addForm(form)
@@ -102,15 +102,15 @@ public class OpenClinicaServiceImplTest {
 		subjects.add("Morten")
 		subjects.add("Jonny")
 	}
-	
+
 	private void initStudyDefinitions() {
 		// Study definitions
 		StudyDef study = new StudyDef()
 		study.setName("study")
 		study.setStudyKey("oid")
-		
+
 		studies.add(study)
-		
+
 	}
 
 	private void initConvertedOpenClinicaStudies() {
@@ -118,76 +118,76 @@ public class OpenClinicaServiceImplTest {
 		convertedStudy.setIdentifier("id")
 		convertedStudy.setOID("oid")
 		convertedStudy.setName("study")
-		
+
 		def convertedStudy2 = new ConvertedOpenclinicaStudy()
 		convertedStudy2.setIdentifier("id2")
 		convertedStudy2.setOID("oid2")
 		convertedStudy2.setName("study2")
-		
+
 		openClinicaConvertedStudies.add(convertedStudy)
 		openClinicaConvertedStudies.add(convertedStudy2)
 	}
-    
+
 	@Test public void testHasStudyData(){
-		
+
 		String studyKey = studyDAO.getStudyKey(1)
 		assertTrue(openClinicaService.hasStudyData(studyKey))
-		
+
 		Mockito.when(editableDAO.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
 		String studyKey2 = studyDAO.getStudyKey(2)
 		assertFalse(openClinicaService.hasStudyData(studyKey2))
 	}
-	
+
 	@Test public void testGetOpenclinicaStudiesMustReturnCorrectNumberOfStudies(){
-		
+
 		def studies = openClinicaService.getOpenClinicaStudies()
-		
+
 		assertEquals(2, studies.size())
 		assertEquals("study", studies.get(0).getName())
 		assertEquals("study2", studies.get(1).getName())
 	}
-	
+
 	@Test public void testGetOpenClinicaStudiesMustNotReturnDuplicateStudies(){
-		
+
 		def ocStudies = null
-		
+
 		StudyDef study2 = new StudyDef()
 		study2.setName("study2")
 		study2.setStudyKey("oid2")
-		
+
 		studies.add(study2)
-		
+
 		ocStudies = openClinicaService.getOpenClinicaStudies()
 		assertEquals(2, ocStudies.size())
-		
+
 	}
-	
+
 	@Test public void testGetSubjectsShouldReturnCorrectNumberOfSubjects(){
-		
+
 		List<String> studySubjects = openClinicaService.getStudySubjects("studyOID")
-		
+
 		assertEquals(4, studySubjects.size())
 	}
-	
+
 	@Test public void testGetSubjectsShouldRetursValidSubjectKeys(){
-		
+
 		List<String> studySubjects = openClinicaService.getStudySubjects("studyOID")
-		
+
 		assertEquals("Jorn", studySubjects.get(0))
 		assertEquals("Janne", studySubjects.get(1))
 		assertEquals("Morten", studySubjects.get(2))
 		assertEquals("Jonny", studySubjects.get(3))
 	}
-	
+
 	@Test public void testExportDataShouldReturnSuccessMessage() {
 
 		String message = openClinicaService.exportOpenClinicaStudyData("oid")
 		assertEquals("Success", message)
 	}
-	
+
 	@Test public void testExportDataShouldShouldFailOnEmptyInstanceDataWithMessage() {
 
-		Mockito.when(soapClient.importData(Mockito.anyCollection())).thenReturn("Fail")
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Fail")
 		String message = openClinicaService.exportOpenClinicaStudyData("oid")
 		assertEquals("Fail", message)
 	}
