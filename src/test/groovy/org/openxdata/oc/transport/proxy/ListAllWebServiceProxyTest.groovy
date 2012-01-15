@@ -2,7 +2,7 @@ package org.openxdata.oc.transport.proxy
 
 import static org.hamcrest.Matchers.*
 
-import org.gmock.WithGMock;
+import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -14,7 +14,7 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 	
 	@Before void setUp(){
 		
-		def connectionFactory = setUpConnectionFactoryMock(listAllReturnSOAPResponse)	
+		def connectionFactory = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)	
 		listAllProxy = new ListAllWebServiceProxy(username:"uname", hashedPassword:"pass", connectionFactory:connectionFactory)
 	}
 	
@@ -81,7 +81,7 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 	
 	@Test void testExtractStudiesShouldExtractCorrectNumberOfStudiesFromResponse(){
 		
-		def responseXml = new XmlParser().parseText(listAllReturnSOAPResponse)
+		def responseXml = new XmlParser().parseText(TestUtils.listAllReturnSOAPResponse)
 		def studiesSize = listAllProxy.extractStudies(responseXml)
 		
 		assertEquals 2, studiesSize.size() 
@@ -105,25 +105,4 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 		
 		return factory
 	}
-	
-	def listAllReturnSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-										<SOAP-ENV:Header/>
-										<SOAP-ENV:Body>
-										   <listAllResponse xmlns="http://openclinica.org/ws/study/v1">
-											  <result>Success</result>
-											  <studies>
-												 <study>
-													<identifier>default-study</identifier>
-													<oid>S_DEFAULTS1</oid>
-													<name>Default Study</name>
-												 </study>
-												 <study>
-													<identifier>001</identifier>
-													<oid>S_001</oid>
-													<name>Test Study</name>
-												 </study>
-											  </studies>
-										   </listAllResponse>
-										</SOAP-ENV:Body>
-									 </SOAP-ENV:Envelope>"""
 }

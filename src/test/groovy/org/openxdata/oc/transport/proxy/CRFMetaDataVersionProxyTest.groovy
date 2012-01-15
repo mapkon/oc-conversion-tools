@@ -6,7 +6,6 @@ import groovy.util.GroovyTestCase
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
-import org.openxdata.oc.TestUtils
 import org.openxdata.oc.transport.factory.ConnectionFactory
 
 

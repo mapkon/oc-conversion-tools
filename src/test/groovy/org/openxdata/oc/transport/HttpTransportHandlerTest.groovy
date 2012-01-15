@@ -3,10 +3,11 @@ package org.openxdata.oc.transport;
 import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
 
-import org.junit.Test
-import org.junit.Before
 import org.gmock.WithGMock
+import org.junit.Before
+import org.junit.Test
 import org.openxdata.oc.exception.UnAvailableException
+
 
 @WithGMock
 class HttpTransportHandlerTest extends GroovyTestCase {
@@ -20,7 +21,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	
 	@Test void testSendRequestShouldNotReturnNull(){
 		
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			assertNotNull response
@@ -28,7 +29,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingEnvelope(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -38,7 +39,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingHeader(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -48,7 +49,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingBody(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -58,7 +59,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingChildren(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -68,7 +69,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingListAllResponse(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -79,7 +80,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainResultElement(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -93,7 +94,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElement(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -107,7 +108,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElementContains2Studies(){
-		def connection = setUpConnectionFactoryMock(listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -154,25 +155,4 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 		   					<v1:listAllRequest>?</v1:listAllRequest>
 		  				</soapenv:Body>
 	     			</soapenv:Envelope>'''
-	
-	def listAllReturnSOAPResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-										<SOAP-ENV:Header/>
-										<SOAP-ENV:Body>
-										   <listAllResponse xmlns="http://openclinica.org/ws/study/v1">
-											  <result>Success</result>
-											  <studies>
-												 <study>
-													<identifier>default-study</identifier>
-													<oid>S_DEFAULTS1</oid>
-													<name>Default Study</name>
-												 </study>
-												 <study>
-													<identifier>001</identifier>
-													<oid>S_001</oid>
-													<name>Test Study</name>
-												 </study>
-											  </studies>
-										   </listAllResponse>
-										</SOAP-ENV:Body>
-									 </SOAP-ENV:Envelope>'''
 }
