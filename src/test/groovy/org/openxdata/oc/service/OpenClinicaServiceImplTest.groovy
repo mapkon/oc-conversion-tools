@@ -29,7 +29,7 @@ import org.openxdata.server.dao.EditableDAO
 import org.openxdata.server.dao.FormDataDAO
 import org.openxdata.server.dao.StudyDAO
 
-//@Ignore
+
 @RunWith(MockitoJUnitRunner.class)
 public class OpenClinicaServiceImplTest {
 
