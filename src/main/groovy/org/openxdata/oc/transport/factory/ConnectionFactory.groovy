@@ -18,20 +18,18 @@ public class ConnectionFactory {
 		host = props.getAt('host')
 	}
 	
-	/**
-	 * Gets the connection for accessing the study end-point in OpenClinca web services.
-	 * @return URL for connecting to the study end-point.
-	 */
+	def getCRFConnection() {
+		
+		url = new URL("${host}/ws/crf/v1")
+		return url.openConnection()
+	}
+	
 	public HttpURLConnection getStudyConnection(){
 
 		url = new URL("${host}/ws/study/v1")
 		return url.openConnection()
 	}
 
-	/**
-	* Gets the connection for accessing the study subject end-point in OpenClinca web services.
-	* @return URL for connecting to the study subject end-point.
-	*/
 	public HttpURLConnection getStudySubjectConnection(){
 		
 		url = new URL("${host}/ws/studySubject/v1")

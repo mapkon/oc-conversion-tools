@@ -224,7 +224,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 		connection.getInputStream().returns(new ByteArrayInputStream(TestData.getReturnXml().getBytes()))
 
 		def factory = mock(ConnectionFactory.class)
-		factory.getStudyConnection().returns(connection)
+		factory.getCRFConnection().returns(connection)
 		return factory
 	}
 }

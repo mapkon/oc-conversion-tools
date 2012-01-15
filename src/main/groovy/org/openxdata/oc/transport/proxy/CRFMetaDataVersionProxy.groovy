@@ -23,7 +23,7 @@ class CRFMetaDataVersionProxy extends SoapRequestProperties {
 		envelope = getEnvelope(studyOID)
 
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
-		def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
+		def response = transportHandler.sendRequest(connectionFactory.getCRFConnection())
 
 		def odmElement = response.depthFirst().odm[0].children()[0]
 		return odmElement
