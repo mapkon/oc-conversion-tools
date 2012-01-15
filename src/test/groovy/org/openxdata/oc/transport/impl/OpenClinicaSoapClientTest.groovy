@@ -5,6 +5,7 @@ import groovy.mock.interceptor.MockFor
 
 import org.gmock.WithGMock
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.exception.UnAvailableException
@@ -19,11 +20,11 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	void setUp(){
 		
-		latestCRFVersions = TestUtils.getReturnXml()
+		latestCRFVersions = TestData.getReturnXml()
 	}
 	
 	@Test void testListAllMUSTReturnListOfCorrectSize() {
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 
 		play {
 			
@@ -35,7 +36,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testListAllMUSTReturnsValidOpenclinicaStudies() {
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 
 		play {
 			
@@ -52,7 +53,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 
 	@Test void testGetMetaDataMUSTReturnsValidXmlWithODMRootElement() {
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.metaDataReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -66,7 +67,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetMetaDataMUSTReturnsValidXmlWithStudyElement() {
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.metaDataReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -80,7 +81,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetMetaDataMUSTReturnsValidXmlWithOnlyOneStudyElement() {
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.metaDataReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -94,7 +95,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetMetaDataMUSTReturnsValidXmlWithCorrectStudyOID() {
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.metaDataReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
 		
 		play{
 			
@@ -280,7 +281,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.studySubjectListSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)
@@ -305,11 +306,11 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	@Test void testThatImportDataReturnsSuccessResponseOnCorrectODMFormat(){
 		
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.importSOAPSuccessResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			def reponse = client.importData(TestUtils.instanceData)
+			def reponse = client.importData(TestData.instanceData)
 			
 			assertNotNull reponse
 			assertEquals 'Success', reponse
@@ -317,12 +318,12 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testThatImportDataReturnsErrorOnIncorrectODM(){
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.importSOAPErrorResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
 		play{
 
 			shouldFail(ImportException){
 				def client = new OpenClinicaSoapClientImpl(connectionFactory)
-				def reponse = client.importData(TestUtils.instanceData)
+				def reponse = client.importData(TestData.instanceData)
 			}
 		}
 	}
