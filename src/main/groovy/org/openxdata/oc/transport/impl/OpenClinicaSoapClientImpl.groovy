@@ -9,6 +9,7 @@ import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClient
+import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
@@ -28,6 +29,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def listAllProxy
 	private def getMetaDataProxy
 	private def listAllByStudyProxy
+	private def crfMetaDataVersionProxy
 			
 	def OpenClinicaSoapClientImpl(def connectionFactory){
 		
@@ -50,9 +52,14 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		listAllProxy = new ListAllWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		getMetaDataProxy = new StudyMetaDataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		crfMetaDataVersionProxy = new CRFMetaDataVersionProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 	}
 
-	public def getMetadata(String identifier) {
+	def findAllCRFS(def studyOID) {
+		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
+	}
+	
+	public def getMetadata(def identifier) {
 		
 		return getMetaDataProxy.getMetaData(identifier)
 	}
@@ -90,7 +97,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	private getXform(def studyOID) {
 
-		def odmMetaData = getMetadata(studyOID)
+		def odmMetaData = findAllCRFS(studyOID)
 		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
 		convertedStudy.parseMeasurementUnits()

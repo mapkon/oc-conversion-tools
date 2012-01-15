@@ -11,8 +11,10 @@ import org.openxdata.oc.transport.factory.ConnectionFactory;
 public interface OpenClinicaSoapClient {
 
 	List<ConvertedOpenclinicaStudy> listAll()
+
+	def findAllCRFS(def studyOID)
 	
-	def getMetadata(String studyIdentifier)
+	def getMetadata(def studyIdentifier)
 	
 	def getOpenxdataForm(String studyIdentifier)
 
