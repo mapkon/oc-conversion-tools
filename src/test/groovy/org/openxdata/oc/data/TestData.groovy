@@ -1,8 +1,10 @@
 package org.openxdata.oc.data
 
+import org.junit.Ignore
 import org.openxdata.oc.util.TransformUtil
 
 
+@Ignore("Some maven installation will attempt to run this as a test")
 class TestData {
 
 	static def getReturnXml() {
