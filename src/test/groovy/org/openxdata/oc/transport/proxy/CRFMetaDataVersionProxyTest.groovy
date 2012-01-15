@@ -173,6 +173,43 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testFindCRFSReturnsResponseWithStudyEventRefElement(){
+		play{
+
+			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
+			def xml = new XmlSlurper().parseText(response)
+
+			def studyEventRefName = xml.Study.MetaDataVersion.Protocol.StudyEventRef[0].name()
+			
+			assertEquals  'StudyEventRef', studyEventRefName
+		}
+	}
+	
+	@Test void testFindCRFSReturnsResponseWithStudyEventRefElementWithCorrectOID(){
+		play{
+
+			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
+			def xml = new XmlSlurper().parseText(response)
+
+			def studyEventRefOID = xml.Study.MetaDataVersion.Protocol.StudyEventRef[0].@StudyEventOID.text()
+			
+			assertEquals  'SE_INTERCUR', studyEventRefOID
+		}
+	}
+	
+	@Test void testFindCRFSReturnsResponseWithStudyEventRefHasCorrespondingStudyEventDef(){
+		play{
+
+			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
+			def xml = new XmlSlurper().parseText(response)
+
+			def studyEventDefElement = xml.Study.MetaDataVersion.StudyEventDef[0]
+			def studyEventRefElement = xml.Study.MetaDataVersion.Protocol.StudyEventRef[0]
+			
+			assertEquals  studyEventDefElement.@OID, studyEventRefElement.@StudyEventOID
+		}
+	}
+	
 	private def setUpConnectionFactoryMock() {
 
 		def connection = mock(HttpURLConnection.class)
