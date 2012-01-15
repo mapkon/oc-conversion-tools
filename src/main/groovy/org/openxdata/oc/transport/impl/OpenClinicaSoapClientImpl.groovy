@@ -20,15 +20,15 @@ import org.openxdata.oc.util.PropertiesUtil
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	
+	def username
+	def password
+	def connectionFactory
+	
 	private def importProxy
 	private def listAllProxy
 	private def getMetaDataProxy
 	private def listAllByStudyProxy
-	
-	def username
-	def password
-	def connectionFactory
-		
+			
 	def OpenClinicaSoapClientImpl(def connectionFactory){
 		
 		log.info("Initializing Openclinica Soap Client.")
