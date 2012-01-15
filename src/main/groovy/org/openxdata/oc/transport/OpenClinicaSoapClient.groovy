@@ -10,37 +10,12 @@ import org.openxdata.oc.transport.factory.ConnectionFactory;
  */
 public interface OpenClinicaSoapClient {
 
-	/**
-	 * Fetches all available studies from an openclinica web service. 
-	 * The returned list depends on the authenticated user and the sutdies mapped to them.
-	 */
 	List<ConvertedOpenclinicaStudy> listAll()
-
-	/**
-	* Gets Metadata for the specified Study Identifier. The metadata is encapsulated in an ODM file.
-	*
-	* @param studyIdentifier the study identifier for which to retrieve meta data for.
-	*
-	* @return An XML stream of the ODM file.
-	*/
+	
 	def getMetadata(String studyIdentifier)
 	
-	/**
-	* Retrieves ODM file for given study identifier and transforms it to an object mimicking openxdata xform definition.
-	*
-	* @param studyIdentifier Study identifier for which to get metadata for.
-	*
-	* @return Converted Object mimicking the OpenXData Xform Definition.
-	*/
 	def getOpenxdataForm(String studyIdentifier)
 
-	/**
-	* Retrieves subject keys for a given study identifier.
-	*
-	* @param studyIdentifier The Study identifier to retrieve subjects for.
-	*
-	* @return List of subjects assigned to the study.
-	*/
 	Collection<String> getSubjectKeys(String studyIdentifier)
 
 	def importData(Collection<String> instanceData)
