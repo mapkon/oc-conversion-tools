@@ -6,6 +6,7 @@ import groovy.util.GroovyTestCase
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.transport.factory.ConnectionFactory
 
 
@@ -220,7 +221,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 		def outputStream = new ByteArrayOutputStream()
 		connection.getOutputStream().returns(outputStream)
-		connection.getInputStream().returns(new ByteArrayInputStream(TestUtils.getReturnXml().getBytes()))
+		connection.getInputStream().returns(new ByteArrayInputStream(TestData.getReturnXml().getBytes()))
 
 		def factory = mock(ConnectionFactory.class)
 		factory.getStudyConnection().returns(connection)

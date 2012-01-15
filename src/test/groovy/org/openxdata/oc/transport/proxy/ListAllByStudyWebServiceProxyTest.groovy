@@ -6,14 +6,16 @@ import static org.junit.Assert.*
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.transport.factory.ConnectionFactory
+
 
 @WithGMock
 class ListAllByStudyWebServiceProxyTest {
 
 	def listAllByStudyProxy
 	@Before void setUp(){
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.studySubjectListSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:'uname', hashedPassword:'pass', connectionFactory:connectionFactory)
 	}
 

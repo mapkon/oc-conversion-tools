@@ -6,6 +6,7 @@ import groovy.mock.interceptor.MockFor
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.UnAvailableException
 
 
@@ -21,7 +22,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	
 	@Test void testSendRequestShouldNotReturnNull(){
 		
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			assertNotNull response
@@ -29,7 +30,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingEnvelope(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -39,7 +40,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingHeader(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -49,7 +50,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingBody(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -59,7 +60,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingChildren(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -69,7 +70,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingListAllResponse(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -80,7 +81,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainResultElement(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -94,7 +95,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElement(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -108,7 +109,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElementContains2Studies(){
-		def connection = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			

@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.*
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
-import org.openxdata.oc.TestUtils
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.transport.factory.ConnectionFactory
 
 
@@ -16,7 +16,7 @@ class StudyMetaDataWebServiceProxyTest extends GroovyTestCase {
 
 	@Before void setUp(){
 
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.metaDataReturnSOAPResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
 		getMetadataProxy = new StudyMetaDataWebServiceProxy(username:'uname', hashedPassword:'pass', connectionFactory:connectionFactory)
 	}
 

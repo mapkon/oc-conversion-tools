@@ -5,7 +5,9 @@ import static org.hamcrest.Matchers.*
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.transport.factory.ConnectionFactory
+
 
 @WithGMock
 class ListAllWebServiceProxyTest extends GroovyTestCase {
@@ -14,7 +16,7 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 	
 	@Before void setUp(){
 		
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.listAllReturnSOAPResponse)	
+		def connectionFactory = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)	
 		listAllProxy = new ListAllWebServiceProxy(username:"uname", hashedPassword:"pass", connectionFactory:connectionFactory)
 	}
 	
@@ -81,7 +83,7 @@ class ListAllWebServiceProxyTest extends GroovyTestCase {
 	
 	@Test void testExtractStudiesShouldExtractCorrectNumberOfStudiesFromResponse(){
 		
-		def responseXml = new XmlParser().parseText(TestUtils.listAllReturnSOAPResponse)
+		def responseXml = new XmlParser().parseText(TestData.listAllReturnSOAPResponse)
 		def studiesSize = listAllProxy.extractStudies(responseXml)
 		
 		assertEquals 2, studiesSize.size() 

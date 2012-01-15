@@ -5,8 +5,10 @@ import static org.hamcrest.Matchers.*
 import org.gmock.WithGMock
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.transport.factory.ConnectionFactory
+
 
 @WithGMock
 class ImportWebServiceProxyTest extends GroovyTestCase {
@@ -15,7 +17,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 
 	@Before void setUp(){
 
-		def connectionFactory = setUpConnectionFactoryMock(TestUtils.importSOAPSuccessResponse)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
 		importProxy = new ImportWebServiceProxy(connectionFactory:connectionFactory)
 
 	}
@@ -41,7 +43,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 	@Test void testImportShouldNotReturnNull(){
 
 		play{
-			def message = importProxy.importData(TestUtils.instanceData)
+			def message = importProxy.importData(TestData.instanceData)
 			assertNotNull message
 		}
 	}
@@ -49,17 +51,17 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 	@Test void testImportShouldSuccessOnCorrectInstanceData(){
 
 		play{
-			def message = importProxy.importData(TestUtils.instanceData)
+			def message = importProxy.importData(TestData.instanceData)
 			assertEquals 'Success', message
 		}
 	}
 
 	@Test void testImportShouldFailOnIncorrectImport(){
-		def connectionFactory2 = setUpConnectionFactoryMock(TestUtils.importSOAPErrorResponse)
+		def connectionFactory2 = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
 		play{
 			shouldFail(ImportException){
 				def importProxy2 = new ImportWebServiceProxy(connectionFactory:connectionFactory2)
-				def message = importProxy2.importData(TestUtils.instanceData)
+				def message = importProxy2.importData(TestData.instanceData)
 				assertEquals 'Error', message
 			}
 		}
