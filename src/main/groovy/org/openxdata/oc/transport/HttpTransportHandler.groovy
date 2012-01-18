@@ -27,7 +27,7 @@ class HttpTransportHandler {
 		try{
 			return establishConnection()
 		}catch (def ex){
-			log.info("Error Processing connection to: ${connection.getURL()} with message: ${ex.getMessage()}")
+			log.info("Error Processing connection to: ${connection.getURL()}. Exception: ${ex.getMessage()}")
 			throw new UnAvailableException(ErrorCode.SERVER_UNAVAILABLE)
 		}
 	}
