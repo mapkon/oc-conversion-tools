@@ -115,10 +115,7 @@
 				<xsl:if test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 					<xf:bind>
 						<xsl:attribute name="id"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData[@StudyEventOID=<xsl:value-of
-							select="$studyEventId" />]/FormData[@FormOID=<xsl:value-of
-							select="$formId" />]/ItemGroupData[@ItemGroupOID=<xsl:value-of
-							select="$itemGroupId" />]</xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/<xsl:value-of select="$itemGroupId"/></xsl:attribute>
 					</xf:bind>
 				</xsl:if>
 				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
@@ -128,11 +125,7 @@
 						<xsl:attribute name="id"><xsl:value-of
 							select="$itemId" />-<xsl:value-of
 							select="$formId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData[@StudyEventOID=<xsl:value-of
-							select="$studyEventId" />]/FormData[@FormOID=<xsl:value-of
-							select="$formId" />]/ItemGroupData[@ItemGroupOID=<xsl:value-of
-							select="$itemGroupId" />]/ItemData[@ItemOID='<xsl:value-of
-							select="$itemId" />']/@Value</xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemId" />'</xsl:attribute>
 						<xsl:choose>
 							<xsl:when test="$itemDef/@DataType = 'integer'">
 								<xsl:attribute name="type">xsd:int</xsl:attribute>
