@@ -44,7 +44,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 	@Test void testLoadPropertiesReturnsValidHostProperty() {
 
 		def host = props.getAt('host')
-		assertEquals 'http://158.37.6.164/OpenClinica-ws', host
+		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT', host
 	}
 
 	@Test void testLoadPropertiesReturnsUserNameProperty() {
@@ -68,7 +68,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 	@Test void testLoadPropertiesReturnsValidPasswordProperty() {
 
 		def password = props.getAt('password')
-		assertEquals 'password', password
+		assertEquals 'b9a60a9d91a96ee522d0c942e5b88dfba25b0a12', password
 	}
 
 	@Test void testGetOCPropertyReturnsHostProperty() {
@@ -78,7 +78,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 
 	@Test void testGetOCPropertyReturnsValidHost() {
 		def host = util.getOCProperty('host')
-		assertNotNull 'http://158.37.6.164/OpenClinica-ws', host
+		assertNotNull 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT', host
 	}
 
 	@Test void testGetOCPropertyReturnsUserNameProperty() {

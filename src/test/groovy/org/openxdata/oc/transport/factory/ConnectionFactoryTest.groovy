@@ -9,19 +9,19 @@ class ConnectionFactoryTest extends GroovyTestCase {
 	@Test void testHostNameEqualsPropertiesFileHostName() {
 		
 		def host = factory.getStudyConnection().getURL().getHost()
-		assertEquals '158.37.6.164', host
+		assertEquals '10.10.3.217', host
 	}
 	
 	@Test void testGetStudyConnectionShouldReturnCorrectURL(){
 		
 		def url = factory.getStudyConnection().getURL().toString()
-		assertEquals 'http://158.37.6.164/OpenClinica-ws/ws/study/v1', url
+		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/study/v1', url
 	}
 	
 	@Test void testGetStudySubjectConnectionShouldReturnCorrectURL(){		
 		
 		def url = factory.getStudySubjectConnection().getURL().toString()
-		assertEquals 'http://158.37.6.164/OpenClinica-ws/ws/studySubject/v1', url
+		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/studySubject/v1', url
 	}
 	
 	@Test void testGetCRFConnectionURLDoesNotReturnNull() {
@@ -31,6 +31,6 @@ class ConnectionFactoryTest extends GroovyTestCase {
 	
 	@Test void testGetCRFConnectionURLReturnsCorrectURL() {
 		def url = factory.getCRFConnection().getURL().toString()
-		assertEquals 'http://158.37.6.164/OpenClinica-ws/ws/crf/v1', url
+		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/crf/v1', url
 	}
 }
