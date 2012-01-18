@@ -33,41 +33,6 @@ public class OCServerTest extends GroovyTestCase {
 		assertEquals 1, studies.size()
 	}
 
-	@Test public void testGetSubjectsDoesNotReturnNull() {
-		def subjects = client.getSubjectKeys("default-study")
-
-		assertNotNull subjects
-	}
-
-	@Test public void testGetSubjectsReturnsCorrectNumberOfSubjects() {
-		def subjects = client.getSubjectKeys("default-study")
-
-		assertEquals 82, subjects.size()
-	}
-	
-	@Test public void testGetMetaDataDoesNotReturnNull() {
-		def metadata = client.getMetadata("default-study")
-
-		assertNotNull metadata
-	}
-
-	@Test public void testGetMetaDataReturnsValidODM() {
-		def metadata = client.getMetadata("default-study")
-
-		def metadataXml = new XmlSlurper().parseText(metadata)
-		assertEquals 'ODM', metadataXml.name()
-	}
-
-	@Test public void testGetMetaDataReturnsValidODMWithStudy() {
-		def metadata = client.getMetadata("default-study")
-
-		def metadataXml = new XmlSlurper().parseText(metadata)
-
-		def study = metadataXml.ODM.Study[0]
-
-		assertEquals 'Study', study.name()
-	}
-
 	@Test public void testGetOpenXdataFormDoesNotReturnNull() {
 
 		def convertedXform = client.getOpenxdataForm(oid)
