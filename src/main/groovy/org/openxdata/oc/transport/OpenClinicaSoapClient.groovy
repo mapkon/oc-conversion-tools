@@ -16,9 +16,9 @@ public interface OpenClinicaSoapClient {
 	
 	def getMetadata(def studyIdentifier)
 	
-	def getOpenxdataForm(String studyIdentifier)
+	def getOpenxdataForm(def studyIdentifier)
 
-	Collection<String> getSubjectKeys(String studyIdentifier)
+	Collection<String> getSubjectKeys(def studyIdentifier)
 
 	def importData(Collection<String> instanceData)
 		
