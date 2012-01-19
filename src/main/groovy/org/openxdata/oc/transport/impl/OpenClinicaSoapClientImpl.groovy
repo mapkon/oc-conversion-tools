@@ -74,12 +74,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return importProxy.importData(instanceData);
 	}
 		
-	public Collection<String> getSubjectKeys(String studyIdentifier){
+	public Collection<String> getSubjectKeys(def identifier){
 		
-		return listAllByStudyProxy.listAllByStudy(studyIdentifier)
+		return listAllByStudyProxy.listAllByStudy(identifier)
 	}
 
-	public def getOpenxdataForm(String studyOID) {
+	public def getOpenxdataForm(def studyOID) {
 		
 		try{
 

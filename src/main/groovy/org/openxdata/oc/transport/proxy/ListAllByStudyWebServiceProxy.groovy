@@ -16,18 +16,18 @@ class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
 		getEnvelope(identifier)
 	}
 
-	def listAllByStudy(def studyIdentifier){
+	def listAllByStudy(def identifier){
 
-		log.info("Fetching subject keys for Openclinica study with ID: ${studyIdentifier}")
+		log.info("Fetching subject keys for Openclinica study with ID: ${identifier}")
 
-		envelope = getEnvelope(studyIdentifier)
+		envelope = getEnvelope(identifier)
 
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
 		def response = transportHandler.sendRequest(connectionFactory.getStudySubjectConnection())
 
 		def subjectKeys = extractSubjectKeys(response)
 
-		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: ${studyIdentifier}")
+		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: ${identifier}")
 		return subjectKeys
 	}
 
