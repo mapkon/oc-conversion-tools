@@ -147,6 +147,11 @@
 		    <version>0.1-BETA-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+		    <groupId>com.jcraft</groupId>
+		    <artifactId>jzlib</artifactId>
+		    <version>1.0.7</version>
+		</dependency>
+		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>server</artifactId>
 			<version>1.7-SNAPSHOT</version>
