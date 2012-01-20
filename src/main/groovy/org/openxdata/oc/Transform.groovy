@@ -41,7 +41,7 @@ public class Transform {
 
 	private def transformODMToXform(odm) {
 		
-		def xslt = util.loadFileContents("transform-v0.1.xsl")
+		def xslt = util.loadFileContents("/org/openxdata/oc/transform-v0.1.xsl")
 
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
