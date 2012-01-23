@@ -29,8 +29,6 @@ public class Transform {
 
 	def ConvertODMToXform(def odm){
 
-		log.info("Starting transformation of file...")
-
 		try{
 			return transformODMToXform(odm)
 		}catch(def ex){
@@ -40,6 +38,8 @@ public class Transform {
 	}
 
 	private def transformODMToXform(odm) {
+		
+		log.info("Starting transformation of file...")
 		
 		def xslt = util.loadFileContents("transform-v0.1.xsl")
 
