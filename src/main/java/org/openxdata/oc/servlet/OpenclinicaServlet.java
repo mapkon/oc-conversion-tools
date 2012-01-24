@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.openxdata.oc.service.OpenclinicaService;
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
 import org.openxdata.server.admin.model.StudyDef;
-import org.openxdata.server.dao.EditableDAO;
-import org.openxdata.server.dao.FormDataDAO;
-import org.openxdata.server.dao.StudyDAO;
+import org.openxdata.server.service.FormService;
+import org.openxdata.server.service.StudyManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
@@ -24,9 +23,8 @@ public class OpenclinicaServlet extends HttpServlet {
 		
 	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
 	
-	private StudyDAO studyDAO;
-	private FormDataDAO formDataDAO;
-	private EditableDAO editableDAO;
+	private FormService formService;
+	private StudyManagerService studyService;
 	
 	private OpenclinicaService openclinicaService;
 	
@@ -40,15 +38,13 @@ public class OpenclinicaServlet extends HttpServlet {
 		ServletContext sctx = this.getServletContext();
 		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
 
-		studyDAO = (StudyDAO) ctx.getBean("studyDAO");
-		formDataDAO = (FormDataDAO) ctx.getBean("formDataDAO");
-		editableDAO = (EditableDAO) ctx.getBean("editableDAO");
+		formService = (FormService) ctx.getBean("formService");
+		studyService = (StudyManagerService) ctx.getBean("studyManagerService");
 
 		openclinicaService = new OpenclinicaServiceImpl();
 
-		openclinicaService.setStudyDAO(studyDAO);
-		openclinicaService.setFormDataDAO(formDataDAO);
-		openclinicaService.setEditableDAO(editableDAO);
+		openclinicaService.setStudyService(studyService);
+		openclinicaService.setFormService(formService);
 
 	}
     
