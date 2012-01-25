@@ -7,7 +7,7 @@ import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
 @Log
-class ListAllByStudyWebServiceProxy extends SoapRequestProperties {
+class ListAllSubjectsByStudyWebServiceProxy extends SoapRequestProperties {
 
 	def envelope
 	def identifier

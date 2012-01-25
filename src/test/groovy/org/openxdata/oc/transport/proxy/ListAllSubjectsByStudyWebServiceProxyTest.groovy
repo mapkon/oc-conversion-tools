@@ -11,12 +11,12 @@ import org.openxdata.oc.transport.factory.ConnectionFactory
 
 
 @WithGMock
-class ListAllByStudyWebServiceProxyTest {
+class ListAllSubjectsByStudyWebServiceProxyTest {
 
 	def listAllByStudyProxy
 	@Before void setUp(){
 		def connectionFactory = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
-		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:'uname', hashedPassword:'pass', connectionFactory:connectionFactory)
+		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:'uname', hashedPassword:'pass', connectionFactory:connectionFactory)
 	}
 
 	@Test void testGetEnvelopeHasCorrectSubjectPath(){

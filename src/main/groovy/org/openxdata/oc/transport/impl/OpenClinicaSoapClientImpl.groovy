@@ -10,7 +10,7 @@ import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
-import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
+import org.openxdata.oc.transport.proxy.ListAllSubjectsByStudyWebServiceProxy
 import org.openxdata.oc.util.PropertiesUtil
 
 
@@ -44,7 +44,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	
 	void init() {
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		crfMetaDataVersionProxy = new CRFMetaDataVersionProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 	}
 
