@@ -13,10 +13,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
-import org.openxdata.oc.util.TransformUtil
 import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
@@ -50,7 +48,6 @@ public class OpenClinicaServiceImplTest {
 		initSubjects()
 		initFormDataList()
 		initStudyDefinitions()
-		initConvertedOpenClinicaStudies()
 
 		StudyDef study = createStudy()
 
@@ -105,20 +102,6 @@ public class OpenClinicaServiceImplTest {
 
 	}
 
-	private void initConvertedOpenClinicaStudies() {
-		def convertedStudy = new ConvertedOpenclinicaStudy()
-		convertedStudy.setIdentifier("id")
-		convertedStudy.setOID("oid")
-		convertedStudy.setName("study")
-
-		def convertedStudy2 = new ConvertedOpenclinicaStudy()
-		convertedStudy2.setIdentifier("id2")
-		convertedStudy2.setOID("oid2")
-		convertedStudy2.setName("study2")
-
-		openClinicaConvertedStudies.add(convertedStudy)
-		openClinicaConvertedStudies.add(convertedStudy2)
-	}
 
 	@Test public void testHasStudyData(){
 

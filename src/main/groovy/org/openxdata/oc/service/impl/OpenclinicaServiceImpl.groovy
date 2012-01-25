@@ -8,7 +8,6 @@ import java.util.Collection
 import java.util.Date
 import java.util.List
 
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
