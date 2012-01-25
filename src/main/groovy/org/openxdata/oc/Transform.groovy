@@ -30,8 +30,14 @@ public class Transform {
 	def ConvertODMToXform(def odm){
 
 		try{
-			return transformODMToXform(odm)
+			
+			def xform = transformODMToXform(odm)
+			log.info("Transformation complete. Returning...")
+			
+			return xform
+			
 		}catch(def ex){
+		
 			log.info("Incomplete Transformation due to: ${ex.getMessage()}")
 			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
 		}
