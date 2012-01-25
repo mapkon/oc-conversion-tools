@@ -1,6 +1,5 @@
 package org.openxdata.oc.transport
 
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 
 /**
  * Defines methods that represent endpoints OpenClinica Web services. Note that this is not a web service in itself but
@@ -8,8 +7,6 @@ import org.openxdata.oc.model.ConvertedOpenclinicaStudy
  *
  */
 public interface OpenClinicaSoapClient {
-
-	List<ConvertedOpenclinicaStudy> listAll()
 
 	def findAllCRFS(def studyOID)
 		

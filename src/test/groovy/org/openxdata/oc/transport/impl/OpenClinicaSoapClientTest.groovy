@@ -4,13 +4,11 @@ import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
 
 import org.gmock.WithGMock
-import org.junit.Ignore
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.exception.UnAvailableException
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionFactory
 
 
@@ -22,35 +20,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	void setUp(){
 		
 		latestCRFVersions = TestData.getReturnXml()
-	}
-	
-	@Test void testListAllMUSTReturnListOfCorrectSize() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
-
-		play {
-			
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			
-			def studies = client.listAll()
-			assertEquals 2, studies.size()
-		}
-	}
-
-	@Test void testListAllMUSTReturnsValidOpenclinicaStudies() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
-
-		play {
-			
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			
-			def actual = client.listAll()
-			
-			def study1 = new ConvertedOpenclinicaStudy(identifier: "default-study", OID: "S_DEFAULTS1", name:"Default Study")
-			def study2 = new ConvertedOpenclinicaStudy(identifier: "001", OID: "S_001", name: "Test Study")
-			
-			assertEquals actual[0], study1
-			assertEquals actual[1], study2
-		}
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXmlWithCorrectStudyName() {
@@ -234,18 +203,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def subjectKeys = client.getSubjectKeys("default-study")
 			
 			assertEquals 4, subjectKeys.size()
-		}
-	}
-	
-	@Test void testWrongURLMUSTThrowUnAvailableException(){
-
-		def mock = new MockFor(ConnectionFactory)
-		mock.demand.getStudyConnection { throw new UnAvailableException("Incorrect url") }
-		def connectionFactory = mock.proxyInstance()
-		shouldFail(UnAvailableException){
-
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			client.listAll()
 		}
 	}
 	

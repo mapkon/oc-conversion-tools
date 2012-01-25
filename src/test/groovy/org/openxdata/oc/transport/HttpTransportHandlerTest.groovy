@@ -22,7 +22,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	
 	@Test void testSendRequestShouldNotReturnNull(){
 		
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			assertNotNull response
@@ -30,7 +30,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingEnvelope(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -40,7 +40,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingHeader(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -50,7 +50,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidResponseContainingBody(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -60,7 +60,7 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingChildren(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -70,18 +70,18 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testSendRequestShouldReturnValidBodyContainingListAllResponse(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
 			def body = response.children()[1]
 			def name = body.children()[0].name().localPart
-			assertEquals 'listAllResponse', name
+			assertEquals 'listAllByStudyResponse', name
 		}
 	}
 	
 	@Test void testSendRequestShouldReturnValidListAllResponseContainResultElement(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
@@ -94,30 +94,30 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElement(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+	@Test void testSendRequestShouldReturnValidListAllResponseContainsubjectsElement(){
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
 			def body = response.children()[1]
 			def listAllResponse = body.children()[0]
-			def studies = listAllResponse.children()[1]
+			def subjects = listAllResponse.children()[1]
 			
-			def name = studies.name().localPart
-			assertEquals 'studies', name
+			def name = subjects.name().localPart
+			assertEquals 'studySubjects', name
 		}
 	}
 	
-	@Test void testSendRequestShouldReturnValidListAllResponseContainStudiesElementContains2Studies(){
-		def connection = setUpConnectionFactoryMock(TestData.listAllReturnSOAPResponse)
+	@Test void testSendRequestShouldReturnValidListAllResponseContainsubjectsElementContains2subjects(){
+		def connection = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
 		play{
 			def response = transportHandler.sendRequest(connection)
 			
 			def body = response.children()[1]
 			def listAllResponse = body.children()[0]
-			def studies = listAllResponse.children()[1]
+			def subjects = listAllResponse.children()[1]
 			
-			assertEquals 2, studies.children().size()
+			assertEquals 4, subjects.children().size()
 		}
 	}
 	

@@ -7,12 +7,10 @@ import java.util.Collection
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ParseException
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllByStudyWebServiceProxy
-import org.openxdata.oc.transport.proxy.ListAllWebServiceProxy
 import org.openxdata.oc.util.PropertiesUtil
 
 
@@ -25,7 +23,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	def connectionFactory
 	
 	private def importProxy
-	private def listAllProxy
 	private def listAllByStudyProxy
 	private def crfMetaDataVersionProxy
 			
@@ -47,18 +44,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	
 	void init() {
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		listAllProxy = new ListAllWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		listAllByStudyProxy = new ListAllByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		crfMetaDataVersionProxy = new CRFMetaDataVersionProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 	}
 
 	def findAllCRFS(def studyOID) {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
-	}
-	
-	public List<ConvertedOpenclinicaStudy> listAll(){		
-		
-		return listAllProxy.listAll()
 	}
 	
 	public def importData(Collection<String> instanceData){

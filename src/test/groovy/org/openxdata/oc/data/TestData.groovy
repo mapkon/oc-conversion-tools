@@ -42,27 +42,6 @@ class TestData {
 	
 	}
 
-	static def listAllReturnSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-										<SOAP-ENV:Header/>
-										<SOAP-ENV:Body>
-										   <listAllResponse xmlns="http://openclinica.org/ws/study/v1">
-											  <result>Success</result>
-											  <studies>
-												 <study>
-													<identifier>default-study</identifier>
-													<oid>S_DEFAULTS1</oid>
-													<name>Default Study</name>
-												 </study>
-												 <study>
-													<identifier>001</identifier>
-													<oid>S_001</oid>
-													<name>Test Study</name>
-												 </study>
-											  </studies>
-										   </listAllResponse>
-										</SOAP-ENV:Body>
-									 </SOAP-ENV:Envelope>"""
-
 	static def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 										   <SOAP-ENV:Header/>
 										   <SOAP-ENV:Body>

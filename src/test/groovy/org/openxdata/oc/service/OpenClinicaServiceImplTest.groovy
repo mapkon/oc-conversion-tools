@@ -59,7 +59,6 @@ public class OpenClinicaServiceImplTest {
 		Mockito.when(studyService.getStudyByKey(Mockito.anyString())).thenReturn(study)
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
 
-		Mockito.when(client.listAll()).thenReturn(openClinicaConvertedStudies)
 		Mockito.when(client.getSubjectKeys(Mockito.anyString())).thenReturn(subjects)
 
 		Mockito.when(formService.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
@@ -129,30 +128,6 @@ public class OpenClinicaServiceImplTest {
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
 		String studyKey2 = studyService.getStudyKey(2)
 		assertFalse(openClinicaService.hasStudyData(studyKey2))
-	}
-
-	@Test public void testGetOpenclinicaStudiesMustReturnCorrectNumberOfStudies(){
-
-		def studies = openClinicaService.getOpenClinicaStudies()
-
-		assertEquals(2, studies.size())
-		assertEquals("study", studies.get(0).getName())
-		assertEquals("study2", studies.get(1).getName())
-	}
-
-	@Test public void testGetOpenClinicaStudiesMustNotReturnDuplicateStudies(){
-
-		def ocStudies = null
-
-		StudyDef study2 = new StudyDef()
-		study2.setName("study2")
-		study2.setStudyKey("oid2")
-
-		studies.add(study2)
-
-		ocStudies = openClinicaService.getOpenClinicaStudies()
-		assertEquals(2, ocStudies.size())
-
 	}
 
 	@Test public void testGetSubjectsShouldReturnCorrectNumberOfSubjects(){
