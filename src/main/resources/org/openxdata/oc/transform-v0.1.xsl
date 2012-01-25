@@ -105,8 +105,7 @@
 
 	<xsl:template name="createBinds">
 		<xsl:param name="studyEventId" />
-		<bind id="subjectKeyBind" nodeset="/ODM/ClinicalData/SubjectData/SubjectKey"
-			type="xsd:string"></bind>
+		<bind id="subjectKeyBind" nodeset="/ODM/ClinicalData/SubjectData/SubjectKey" type="xsd:string"></bind>
 
 		<xsl:for-each select="oc:FormRef">
 			<xsl:variable name="formId" select="@FormOID" />
