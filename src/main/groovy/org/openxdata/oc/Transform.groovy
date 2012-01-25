@@ -1,5 +1,6 @@
 package org.openxdata.oc
 
+import groovy.inspect.TextNode
 import groovy.util.logging.Log
 import groovy.xml.XmlUtil
 
@@ -9,8 +10,7 @@ import javax.xml.transform.stream.StreamSource
 
 import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.model.ConvertedStudyDef
-import org.openxdata.oc.util.TransformUtil;
+import org.openxdata.oc.util.TransformUtil
 
 
 @Log
@@ -51,8 +51,45 @@ public class Transform {
 
 		def doc = new XmlSlurper().parseText(xml)
 
-		def convertedStudyDef = new ConvertedStudyDef(doc)
+		parseMeasurementUnits(doc)
+		serializeXformNode(doc)
 		
-		return convertedStudyDef
+		return doc
+	}
+	
+	def parseMeasurementUnits(def doc){
+		log.info("Parsing Measurement units...")
+
+		def parsedMeasurementUnits = [:]
+		def hintNodes = doc.depthFirst().findAll{it.name().equals('hint')}
+		
+		hintNodes.each {
+			
+			def originalText = it.text()
+			def parsedText = replaceHintNodeText(it)
+			
+			parsedMeasurementUnits[originalText] = parsedText
+		}
+	}
+	
+	private replaceHintNodeText(def hintNode) {
+		def text = hintNode.text()
+		text = text.replace("<SUP>", "^")
+		text = text.replace("</SUP>", "")
+
+		hintNode.replaceBody(text)
+
+		return text
+	}
+
+	def serializeXformNode(def doc){
+		log.info("Transforming the xform tag to string...")
+
+		doc.form.version.xform.each { xform ->
+			def xformText = ""
+			xform.children().each { xformText += XmlUtil.asString(it) }
+			def textNode = new TextNode("""${xformText}""")
+			xform.replaceBody(textNode)
+		}
 	}
 }

@@ -81,12 +81,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private getXform(def studyOID) {
 
 		def odmMetaData = findAllCRFS(studyOID)
-		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
+		def convertedXform = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
-		convertedStudy.parseMeasurementUnits()
-		convertedStudy.serializeXformNode()
-		log.info("Successfully transformed the ODM to Xform.")
-
-		return convertedStudy.convertedXformXml
+		return convertedXform
 	}
 }
