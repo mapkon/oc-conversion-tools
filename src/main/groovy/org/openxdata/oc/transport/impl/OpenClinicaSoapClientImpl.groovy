@@ -66,11 +66,10 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		try{
 
-			log.info("Fetching Form for Openclinica study with ID: ${studyOID}")
+			log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
 
 			def xform = getXform(studyOID)
 
-			log.info("Transformation complete. Returning...")
 			return xform
 		}catch(def ex){
 			log.info("Failed with Exception: ${ex.getMessage()}")
