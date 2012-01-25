@@ -5,7 +5,6 @@ import groovy.util.logging.Log
 import groovy.util.slurpersupport.Node
 import groovy.xml.StreamingMarkupBuilder
 import groovy.xml.XmlUtil
-import groovy.xml.streamingmarkupsupport.StreamingMarkupWriter
 
 @Log
 class ConvertedStudyDef {
