@@ -52,62 +52,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			assertEquals actual[1], study2
 		}
 	}
-
-	@Test void testGetMetaDataMUSTReturnsValidXmlWithODMRootElement() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
-		
-		play{
-			
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			
-			def response = client.getMetadata("001")
-			def xml = new XmlSlurper().parseText(response)
-						
-			assertEquals  "ODM", xml.name()
-		}	
-	}
-	
-	@Test void testGetMetaDataMUSTReturnsValidXmlWithStudyElement() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
-		
-		play{
-			
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			
-			def response = client.getMetadata("001")
-			def xml = new XmlSlurper().parseText(response)
-						
-			assertEquals  "Study", xml.Study[0].name()
-		}
-	}
-	
-	@Test void testGetMetaDataMUSTReturnsValidXmlWithOnlyOneStudyElement() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
-		
-		play{
-			
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			
-			def response = client.getMetadata("001")
-			def xml = new XmlSlurper().parseText(response).declareNamespace(oc: "http://www.cdisc.org/ns/odm/v1.3")
-						
-			assertEquals  1, xml.Study[0].size()
-		}
-	}
-	
-	@Test void testGetMetaDataMUSTReturnsValidXmlWithCorrectStudyOID() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.metaDataReturnSOAPResponse)
-		
-		play{
-			
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			
-			def response = client.getMetadata("001")
-			def xml = new XmlSlurper().parseText(response).declareNamespace(oc: "http://www.cdisc.org/ns/odm/v1.3")
-						
-			assertEquals  "S_001", xml.Study[0].@OID.text()
-		}
-	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXmlWithCorrectStudyName() {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)

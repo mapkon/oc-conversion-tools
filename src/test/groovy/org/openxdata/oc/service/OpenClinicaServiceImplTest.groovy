@@ -62,9 +62,6 @@ public class OpenClinicaServiceImplTest {
 		Mockito.when(client.listAll()).thenReturn(openClinicaConvertedStudies)
 		Mockito.when(client.getSubjectKeys(Mockito.anyString())).thenReturn(subjects)
 
-		def odmMetaData = new TransformUtil().loadFileContents("OpenclinicaGetMetaDataSoapResponse.xml")
-		Mockito.when(client.getMetadata(Mockito.anyString())).thenReturn(odmMetaData)
-
 		Mockito.when(formService.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
 
