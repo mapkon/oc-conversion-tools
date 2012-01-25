@@ -29,8 +29,6 @@ public class Transform {
 
 	def ConvertODMToXform(def odm){
 
-		log.info("Starting transformation of file...")
-
 		try{
 			return transformODMToXform(odm)
 		}catch(def ex){
@@ -42,6 +40,9 @@ public class Transform {
 	private def transformODMToXform(odm) {
 		
 		def xslt = util.loadFileContents("/org/openxdata/oc/transform-v0.1.xsl")
+
+		log.info("Starting transformation of file...")
+		
 
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))

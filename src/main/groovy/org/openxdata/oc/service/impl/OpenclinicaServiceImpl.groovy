@@ -14,18 +14,15 @@ import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 import org.openxdata.oc.util.PropertiesUtil
-import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.User
 import org.openxdata.server.admin.model.exception.UnexpectedException
-import org.openxdata.server.admin.model.paging.PagingLoadConfig;
-import org.openxdata.server.admin.model.paging.PagingLoadResult;
-import org.openxdata.server.dao.EditableDAO
-import org.openxdata.server.dao.FormDataDAO
-import org.openxdata.server.dao.StudyDAO
+import org.openxdata.server.admin.model.paging.PagingLoadConfig
 import org.openxdata.server.security.util.OpenXDataSecurityUtil
+import org.openxdata.server.service.FormService
+import org.openxdata.server.service.StudyManagerService
 import org.openxdata.xform.StudyImporter
 
 @Log
@@ -33,11 +30,9 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 
 	private def client
 	
-	private def formDataDAO
-	
-	private def editableDAO
-		
-	private def studyDAO	
+	private def formService
+			
+	private def studyService	
 	
 	private OpenClinicaSoapClient getClient() {
 		
@@ -58,8 +53,8 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	
 	@Override
 	public Boolean hasStudyData(String studyKey) {
-		StudyDef study = studyDAO.getStudyByKey(studyKey)
-		return editableDAO.hasEditableData(study)
+		StudyDef study = studyService.getStudyByKey(studyKey)
+		return studyService.hasEditableData(study)
 	}
 	
 	@Override
@@ -75,7 +70,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		
 		try{
 			
-			List<StudyDef> openxdataStudies = studyDAO.getStudies()
+			List<StudyDef> openxdataStudies = studyService.getStudies()
 			
 			for (def study : studies) {
 				log.info("OXD: Checking duplicate studies.")
@@ -129,7 +124,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		StudyDef study = createStudy(importer)
 		
 		log.info("OXD: Saving converted study definition.")
-		studyDAO.saveStudy(study)
+		studyService.saveStudy(study)
 		
 		return study
 	}
@@ -196,10 +191,10 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		
 		def allData = []
 		def config = new PagingLoadConfig(0, 5);
-		StudyDef study = studyDAO.getStudyByKey(studyKey)
+		StudyDef study = studyService.getStudyByKey(studyKey)
 		
 		for (FormDef form : study.getForms()) {
-			def dataList = formDataDAO.getFormDataList(form.getDefaultVersion(), config)
+			def dataList = formService.getFormDataList(form.getDefaultVersion(), config)
 			dataList.getData().each {
 				allData.add(it)
 			}
@@ -207,15 +202,11 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		return (String) getClient().importData(allData)	
 	}
 	
-	void setFormDataDAO(FormDataDAO formDataDAO) {
-		this.formDataDAO = formDataDAO
+	void setStudyService(StudyManagerService studyService) {
+		this.studyService = studyService
 	}
-
-	void setEditableDAO(EditableDAO editableDAO) {
-		this.editableDAO = editableDAO
-	}
-
-	void setStudyDAO(StudyDAO studyDAO) {
-		this.studyDAO = studyDAO
+	
+	void setFormService(FormService formService) {
+		this.formService = formService
 	}
 }
