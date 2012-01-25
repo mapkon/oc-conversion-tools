@@ -124,7 +124,7 @@
 						<xsl:attribute name="id"><xsl:value-of
 							select="$itemId" />-<xsl:value-of
 							select="$formId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemId" />'</xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemId" /></xsl:attribute>
 						<xsl:choose>
 							<xsl:when test="$itemDef/@DataType = 'integer'">
 								<xsl:attribute name="type">xsd:int</xsl:attribute>
