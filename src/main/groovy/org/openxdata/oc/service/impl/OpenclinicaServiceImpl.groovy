@@ -8,7 +8,6 @@ import java.util.Collection
 import java.util.Date
 import java.util.List
 
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -55,63 +54,6 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	public Boolean hasStudyData(String studyKey) {
 		StudyDef study = studyService.getStudyByKey(studyKey)
 		return studyService.hasEditableData(study)
-	}
-	
-	@Override
-	public def getOpenClinicaStudies() {
-		
-		log.info("OXD: Fetching available OpenClinica studies.")
-		
-		List<ConvertedOpenclinicaStudy> studies = getClient().listAll()
-		
-		log.info("OXD: " + studies.size() + "studies and returned to OpenXdata.")
-		
-		def returnStudies = []
-		
-		try{
-			
-			List<StudyDef> openxdataStudies = studyService.getStudies()
-			
-			for (def study : studies) {
-				log.info("OXD: Checking duplicate studies.")
-				if(!isStudyDownloaded(openxdataStudies, study)){
-					returnStudies.add(study)
-				}
-			}
-			
-		}catch(Exception ex){
-			throw new UnexpectedException(ex)
-		}
-
-		return returnStudies
-	}
-
-	private void appendSubjects(ConvertedOpenclinicaStudy study, def ocStudy) {
-		
-		Collection<String> subjects = getClient().getSubjectKeys(study.getIdentifier())
-		
-		log.info("OXD: Appending " + subjects.size() + "subjects to the study")
-		
-		ocStudy.setSubjects(subjects)
-	}
-
-	private boolean isStudyDownloaded(List<ConvertedOpenclinicaStudy> studies, ConvertedOpenclinicaStudy study) {
-				
-		studies.each {
-			
-			String oxdStudyName = it.getName()
-			String oxdStudyIdentifier = it.getStudyKey()
-			
-			String ocStudyName = study.getName()
-			String ocStudyIdentifier = study.getIdentifier()
-			
-			if(oxdStudyName.equals(ocStudyName) && 
-					oxdStudyIdentifier == ocStudyIdentifier) {
-				
-				return true
-			}
-		}
-		return false
 	}
 
 	@Override

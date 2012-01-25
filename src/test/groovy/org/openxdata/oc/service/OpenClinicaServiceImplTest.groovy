@@ -13,10 +13,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
-import org.openxdata.oc.util.TransformUtil
 import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
@@ -50,7 +48,6 @@ public class OpenClinicaServiceImplTest {
 		initSubjects()
 		initFormDataList()
 		initStudyDefinitions()
-		initConvertedOpenClinicaStudies()
 
 		StudyDef study = createStudy()
 
@@ -59,11 +56,7 @@ public class OpenClinicaServiceImplTest {
 		Mockito.when(studyService.getStudyByKey(Mockito.anyString())).thenReturn(study)
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
 
-		Mockito.when(client.listAll()).thenReturn(openClinicaConvertedStudies)
 		Mockito.when(client.getSubjectKeys(Mockito.anyString())).thenReturn(subjects)
-
-		def odmMetaData = new TransformUtil().loadFileContents("OpenclinicaGetMetaDataSoapResponse.xml")
-		Mockito.when(client.getMetadata(Mockito.anyString())).thenReturn(odmMetaData)
 
 		Mockito.when(formService.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
@@ -109,20 +102,6 @@ public class OpenClinicaServiceImplTest {
 
 	}
 
-	private void initConvertedOpenClinicaStudies() {
-		def convertedStudy = new ConvertedOpenclinicaStudy()
-		convertedStudy.setIdentifier("id")
-		convertedStudy.setOID("oid")
-		convertedStudy.setName("study")
-
-		def convertedStudy2 = new ConvertedOpenclinicaStudy()
-		convertedStudy2.setIdentifier("id2")
-		convertedStudy2.setOID("oid2")
-		convertedStudy2.setName("study2")
-
-		openClinicaConvertedStudies.add(convertedStudy)
-		openClinicaConvertedStudies.add(convertedStudy2)
-	}
 
 	@Test public void testHasStudyData(){
 
@@ -132,30 +111,6 @@ public class OpenClinicaServiceImplTest {
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
 		String studyKey2 = studyService.getStudyKey(2)
 		assertFalse(openClinicaService.hasStudyData(studyKey2))
-	}
-
-	@Test public void testGetOpenclinicaStudiesMustReturnCorrectNumberOfStudies(){
-
-		def studies = openClinicaService.getOpenClinicaStudies()
-
-		assertEquals(2, studies.size())
-		assertEquals("study", studies.get(0).getName())
-		assertEquals("study2", studies.get(1).getName())
-	}
-
-	@Test public void testGetOpenClinicaStudiesMustNotReturnDuplicateStudies(){
-
-		def ocStudies = null
-
-		StudyDef study2 = new StudyDef()
-		study2.setName("study2")
-		study2.setStudyKey("oid2")
-
-		studies.add(study2)
-
-		ocStudies = openClinicaService.getOpenClinicaStudies()
-		assertEquals(2, ocStudies.size())
-
 	}
 
 	@Test public void testGetSubjectsShouldReturnCorrectNumberOfSubjects(){

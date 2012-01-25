@@ -1,11 +1,8 @@
 package org.openxdata.oc.transport;
 
-import java.util.List
-
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import org.openxdata.oc.model.ConvertedOpenclinicaStudy
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 
@@ -19,18 +16,6 @@ public class OCServerTest extends GroovyTestCase {
 	@Before public void setUp(){
 		def factory = new ConnectionFactory()
 		client = new OpenClinicaSoapClientImpl(factory)
-	}
-
-	@Test public void testListAllDoesNotReturnNull() {
-		def studies = client.listAll()
-
-		assertNotNull studies
-	}
-
-	@Test public void testListAllReturns1Study() {
-		def studies = client.listAll()
-
-		assertEquals 1, studies.size()
 	}
 
 	@Test public void testGetOpenXdataFormDoesNotReturnNull() {

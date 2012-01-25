@@ -10,9 +10,7 @@ import org.openxdata.server.service.StudyManagerService
 public interface OpenclinicaService {
 
 	Boolean hasStudyData(String studyKey);
-	
-	def getOpenClinicaStudies() throws UnexpectedException;
-	
+		
 	List<String> getStudySubjects(String studyOID) throws UnexpectedException;
 
 	StudyDef importOpenClinicaStudy(String identifier) throws UnexpectedException;

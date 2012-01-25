@@ -50,20 +50,4 @@ class TransformUtilTest extends GroovyTestCase {
 			assertEquals 'File name cannot be null or empty.', ex.getMessage()
 		}
 	}
-
-	@Test void testHasDuplicateBindings(){
-
-		assertTrue util.hasDuplicateBindings(xformWithDuplicateBindings)
-	}
-
-	@Test void testHasDuplicateBindingsShoutReturnZeroOnNoDuplicateBindings(){
-
-		assertFalse util.hasDuplicateBindings(xformWithNoDuplicateBindings)
-	}
-
-	@Test void testGetSimilarBindingsMUSTReturnCorrectSizeOfDuplicateBindings(){
-
-		def duplicateBindings = util.getDuplicateBindings(xformWithDuplicateBindings)
-		assertEquals 386, duplicateBindings.size()
-	}
 }
