@@ -233,8 +233,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<input>
-						<xsl:attribute name="bind"><xsl:value-of
-							select="$itemId" />-<xsl:value-of select="$formId" /></xsl:attribute>
+						<xsl:attribute name="bind"><xsl:value-of select="$itemId" />-<xsl:value-of select="$formId" /></xsl:attribute>
 						<label>
 							<xsl:value-of
 								select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
