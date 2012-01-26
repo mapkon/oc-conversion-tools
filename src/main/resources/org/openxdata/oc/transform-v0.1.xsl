@@ -51,8 +51,6 @@
 						<ClinicalData>
 							<xsl:attribute name="StudyOID"><xsl:value-of
 								select="../../@OID" /></xsl:attribute>
-							<xsl:attribute name="MetaDataVersionOID"><xsl:value-of
-								select="../@OID" /></xsl:attribute>
 							<SubjectData SubjectKey="">
 								<StudyEventData>
 									<xsl:attribute name="StudyEventOID"><xsl:value-of
