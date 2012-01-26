@@ -112,7 +112,7 @@
 				<xsl:if test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 					<xf:bind>
 						<xsl:attribute name="id"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/<xsl:value-of select="$itemGroupId"/></xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData<xsl:value-of select="$itemGroupId"/></xsl:attribute>
 					</xf:bind>
 				</xsl:if>
 				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
