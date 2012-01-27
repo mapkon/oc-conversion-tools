@@ -111,8 +111,13 @@
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:if test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 					<xf:bind>
+						<xsl:variable name="itemId" select="@ItemOID" />
+						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 						<xsl:attribute name="id"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemGroupId"/></xsl:attribute>
+						<xsl:call-template name="determineQuestionType">
+							<xsl:with-param name="itemDef" select="$itemDef"/>
+						</xsl:call-template>
 					</xf:bind>
 				</xsl:if>
 				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
@@ -123,35 +128,9 @@
 							select="$itemId" />-<xsl:value-of
 							select="$formId" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemId" /></xsl:attribute>
-						<xsl:choose>
-							<xsl:when test="$itemDef/@DataType = 'integer'">
-								<xsl:attribute name="type">xsd:int</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'float'">
-								<xsl:attribute name="type">xsd:decimal</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'date'">
-								<xsl:attribute name="type">xsd:date</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'time'">
-								<xsl:attribute name="type">xsd:time</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'datetime'">
-								<xsl:attribute name="type">xsd:dateTime</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'boolean'">
-								<xsl:attribute name="type">xsd:boolean</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'double'">
-								<xsl:attribute name="type">xsd:decimal</xsl:attribute>
-							</xsl:when>
-							<xsl:when test="$itemDef/@DataType = 'base64Binary'">
-								<xsl:attribute name="type">xsd:base64Binary</xsl:attribute>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:attribute name="type">xsd:string</xsl:attribute>
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:call-template name="determineQuestionType">
+							<xsl:with-param name="itemDef" select="$itemDef"/>
+						</xsl:call-template>
 					</bind>
 				</xsl:for-each>
 			</xsl:for-each>
@@ -250,6 +229,39 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="determineQuestionType">
+		<xsl:param name="itemDef"/>
+		<xsl:choose>
+			<xsl:when test="$itemDef/@DataType = 'integer'">
+				<xsl:attribute name="type">xsd:int</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'float'">
+				<xsl:attribute name="type">xsd:decimal</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'date'">
+				<xsl:attribute name="type">xsd:date</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'time'">
+				<xsl:attribute name="type">xsd:time</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'datetime'">
+				<xsl:attribute name="type">xsd:dateTime</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'boolean'">
+				<xsl:attribute name="type">xsd:boolean</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'double'">
+				<xsl:attribute name="type">xsd:decimal</xsl:attribute>
+			</xsl:when>
+			<xsl:when test="$itemDef/@DataType = 'base64Binary'">
+				<xsl:attribute name="type">xsd:base64Binary</xsl:attribute>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:attribute name="type">xsd:string</xsl:attribute>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 </xsl:stylesheet>
