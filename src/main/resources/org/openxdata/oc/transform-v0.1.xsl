@@ -180,29 +180,9 @@
 			</label>
 			<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
-				<xsl:choose>
-					<xsl:when test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
-						<group>
-							<xsl:attribute name="id"><xsl:value-of
-								select="$itemGroupId" /></xsl:attribute>
-							<repeat>
-								<xsl:attribute name="bind"><xsl:value-of
-									select="$itemGroupId" /></xsl:attribute>
-								<xf:label>
-									<xsl:value-of select="$itemGroupId" />
-								</xf:label>
-								<xsl:call-template name="createQuestions">
-									<xsl:with-param name="formId" select="$formId" />
-								</xsl:call-template>
-							</repeat>
-						</group>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:call-template name="createQuestions">
-							<xsl:with-param name="formId" select="$formId" />
-						</xsl:call-template>
-					</xsl:otherwise>
-				</xsl:choose>
+					<xsl:call-template name="createQuestions">
+						<xsl:with-param name="formId" select="$formId" />
+					</xsl:call-template>
 			</xsl:for-each>
 		</group>
 	</xsl:template>
