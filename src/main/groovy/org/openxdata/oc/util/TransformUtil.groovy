@@ -1,5 +1,8 @@
 package org.openxdata.oc.util
 
+import groovy.util.logging.Log
+
+@Log
 public class TransformUtil {
 
 	public def loadFileContents(def fileName){
