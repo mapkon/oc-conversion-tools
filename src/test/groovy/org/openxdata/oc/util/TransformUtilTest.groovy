@@ -7,16 +7,11 @@ class TransformUtilTest extends GroovyTestCase {
 
 	def odmFileContent
 
-	def xformWithDuplicateBindings
-	def xformWithNoDuplicateBindings
-
 	def util = new TransformUtil()
 
 	public void setUp() {
 
 		odmFileContent = util.loadFileContents('test-odm.xml')
-		xformWithDuplicateBindings = new XmlParser().parseText(util.loadFileContents('test-xform-duplicate-bindings.xml'))
-		xformWithNoDuplicateBindings = new XmlParser().parseText(util.loadFileContents('test-xform-no-duplicate-bindings.xml'))
 	}
 
 	@Test void testLoadFileContentsDoesNotReturnNull(){

@@ -66,11 +66,10 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		try{
 
-			log.info("Fetching Form for Openclinica study with ID: ${studyOID}")
+			log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
 
 			def xform = getXform(studyOID)
 
-			log.info("Transformation complete. Returning...")
 			return xform
 		}catch(def ex){
 			log.info("Failed with Exception: ${ex.getMessage()}")
@@ -81,12 +80,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private getXform(def studyOID) {
 
 		def odmMetaData = findAllCRFS(studyOID)
-		def convertedStudy = Transform.getTransformer().ConvertODMToXform(odmMetaData)
+		def convertedXform = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
-		convertedStudy.parseMeasurementUnits()
-		convertedStudy.serializeXformNode()
-		log.info("Successfully transformed the ODM to Xform.")
-
-		return convertedStudy.convertedXformXml
+		return convertedXform
 	}
 }
