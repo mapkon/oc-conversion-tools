@@ -71,7 +71,7 @@
 														select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
 														<ItemData value="">
 															<xsl:attribute name="ItemOID"><xsl:value-of
-																select="@ItemOID"></xsl:value-of></xsl:attribute>
+																select="@ItemOID"/>-<xsl:value-of select="$formId" /></xsl:attribute>
 														</ItemData>
 													</xsl:for-each>
 												</ItemGroupData>
