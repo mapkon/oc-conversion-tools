@@ -108,7 +108,7 @@
 						<xsl:variable name="itemId" select="@ItemOID" />
 						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 						<xsl:attribute name="id"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemGroupId"/></xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/@<xsl:value-of select="@ItemOID"/></xsl:attribute>
 						<xsl:call-template name="determineQuestionType">
 							<xsl:with-param name="itemDef" select="$itemDef"/>
 						</xsl:call-template>
@@ -119,7 +119,7 @@
 						<xsl:variable name="itemId" select="@ItemOID" />
 						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 						<xsl:attribute name="id"><xsl:value-of select="$itemId" />-<xsl:value-of select="$formId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/<xsl:value-of select="$itemId" /></xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/@<xsl:value-of select="$itemId"/></xsl:attribute>
 						<xsl:call-template name="determineQuestionType">
 							<xsl:with-param name="itemDef" select="$itemDef"/>
 						</xsl:call-template>
