@@ -202,59 +202,79 @@
 						<xf:label>
 							<xsl:value-of select="$itemGroupId" />
 						</xf:label>
-						<xsl:call-template name="createQuestions">
+						<xsl:call-template name="insertQuestionsAccordingToType">
 							<xsl:with-param name="formId" select="$formId" />
+							<xsl:with-param name="itemId" select="$itemId" />
+							<xsl:with-param name="itemDef" select="$itemDef" />
 						</xsl:call-template>
+
 					</repeat>
 				</xsl:when>
-				<xsl:when test="$itemDef/oc:CodeListRef">
-					<select1>
-						<xsl:attribute name="bind"><xsl:value-of
-							select="$itemId" />-<xsl:value-of select="$formId" /></xsl:attribute>
-						<xsl:variable name="codeListID">
-							<xsl:value-of select="$itemDef/oc:CodeListRef/@CodeListOID" />
-						</xsl:variable>
-						<label>
-							<xsl:value-of
-								select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
-						</label>
-						<xsl:for-each
-							select="../../oc:CodeList[@OID = $codeListID]/oc:CodeListItem">
-							<item>
-								<xsl:attribute name="id"><xsl:value-of
-									select="@CodedValue" /></xsl:attribute>
-								<label>
-									<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
-								</label>
-								<value>
-									<xsl:value-of select="@CodedValue"></xsl:value-of>
-								</value>
-							</item>
-						</xsl:for-each>
-					</select1>
-				</xsl:when>
 				<xsl:otherwise>
-					<input>
-						<xsl:attribute name="bind"><xsl:value-of
-							select="$itemId" />-<xsl:value-of select="$formId" /></xsl:attribute>
-						<label>
-							<xsl:value-of
-								select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
-						</label>
-						<xsl:if test="$itemDef/oc:MeasurementUnitRef">
-							<hint>
-								<xsl:variable name="unitId">
-									<xsl:value-of
-										select="$itemDef/oc:MeasurementUnitRef/@MeasurementUnitOID" />
-								</xsl:variable>
-								<xsl:value-of
-									select="//oc:MeasurementUnit[@OID=$unitId]/oc:Symbol/oc:TranslatedText" />
-							</hint>
-						</xsl:if>
-					</input>
+					<xsl:call-template name="insertQuestionsAccordingToType">
+						<xsl:with-param name="formId" select="$formId" />
+						<xsl:with-param name="itemId" select="$itemId" />
+						<xsl:with-param name="itemDef" select="$itemDef" />
+					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>
 
+	<xsl:template name="insertQuestionsAccordingToType">
+	
+		<xsl:param name="itemId" />
+		<xsl:param name="formId" />
+		<xsl:param name="itemDef" />
+		
+		<xsl:choose>
+			<xsl:when test="$itemDef/oc:CodeListRef">
+			<select1>
+				<xsl:attribute name="bind"><xsl:value-of select="$itemId" />-<xsl:value-of
+					select="$formId" /></xsl:attribute>
+				<xsl:variable name="codeListID">
+					<xsl:value-of select="$itemDef/oc:CodeListRef/@CodeListOID" />
+				</xsl:variable>
+				<label>
+					<xsl:value-of
+						select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
+				</label>
+				<xsl:for-each
+					select="../../oc:CodeList[@OID = $codeListID]/oc:CodeListItem">
+					<item>
+						<xsl:attribute name="id"><xsl:value-of
+							select="@CodedValue" /></xsl:attribute>
+						<label>
+							<xsl:value-of select="oc:Decode/oc:TranslatedText"></xsl:value-of>
+						</label>
+						<value>
+							<xsl:value-of select="@CodedValue"></xsl:value-of>
+						</value>
+					</item>
+				</xsl:for-each>
+			</select1>
+		</xsl:when>
+		<xsl:otherwise>
+			<input>
+				<xsl:attribute name="bind"><xsl:value-of select="$itemId" />-<xsl:value-of
+					select="$formId" /></xsl:attribute>
+				<label>
+					<xsl:value-of
+						select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
+				</label>
+				<xsl:if test="$itemDef/oc:MeasurementUnitRef">
+					<hint>
+						<xsl:variable name="unitId">
+							<xsl:value-of
+								select="$itemDef/oc:MeasurementUnitRef/@MeasurementUnitOID" />
+						</xsl:variable>
+						<xsl:value-of
+							select="//oc:MeasurementUnit[@OID=$unitId]/oc:Symbol/oc:TranslatedText" />
+					</hint>
+				</xsl:if>
+			</input>
+		</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
 </xsl:stylesheet>
