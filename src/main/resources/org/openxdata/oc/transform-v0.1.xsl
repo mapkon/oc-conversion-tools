@@ -194,21 +194,28 @@
 			<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 			<xsl:choose>
 				<xsl:when test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
-					<xsl:attribute name="id"><xsl:value-of
-						select="$itemGroupId" /></xsl:attribute>
-					<repeat>
-						<xsl:attribute name="bind"><xsl:value-of
-							select="$itemGroupId" /></xsl:attribute>
-						<xf:label>
+					<xsl:attribute name="id">
+						<xsl:value-of select="$itemGroupId" />
+					</xsl:attribute>
+					<group>
+						<xsl:attribute name="id">
 							<xsl:value-of select="$itemGroupId" />
-						</xf:label>
-						<xsl:call-template name="insertQuestionsAccordingToType">
-							<xsl:with-param name="formId" select="$formId" />
-							<xsl:with-param name="itemId" select="$itemId" />
-							<xsl:with-param name="itemDef" select="$itemDef" />
-						</xsl:call-template>
-
-					</repeat>
+						</xsl:attribute>
+						<label>
+							<xsl:value-of select="../../oc:FormDef[@OID = $formId]/@Name" />
+						</label>
+						<repeat>
+							<xsl:attribute name="bind"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
+							<xf:label>
+								<xsl:value-of select="$itemGroupId" />
+							</xf:label>
+							<xsl:call-template name="insertQuestionsAccordingToType">
+								<xsl:with-param name="formId" select="$formId" />
+								<xsl:with-param name="itemId" select="$itemId" />
+								<xsl:with-param name="itemDef" select="$itemDef" />
+							</xsl:call-template>
+						</repeat>
+					</group>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="insertQuestionsAccordingToType">
