@@ -73,7 +73,7 @@
 														select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
 														<ItemData value="">
 															<xsl:attribute name="ItemOID"><xsl:value-of
-																select="@ItemOID" />-<xsl:value-of select="$formId" /></xsl:attribute>
+																select="@ItemOID" /></xsl:attribute>
 														</ItemData>
 													</xsl:for-each>
 												</ItemGroupData>
@@ -237,8 +237,7 @@
 		<xsl:choose>
 			<xsl:when test="$itemDef/oc:CodeListRef">
 			<select1>
-				<xsl:attribute name="bind"><xsl:value-of select="$itemId" />-<xsl:value-of
-					select="$formId" /></xsl:attribute>
+				<xsl:attribute name="bind"><xsl:value-of select="$itemId" /></xsl:attribute>
 				<xsl:variable name="codeListID">
 					<xsl:value-of select="$itemDef/oc:CodeListRef/@CodeListOID" />
 				</xsl:variable>
@@ -263,8 +262,7 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<input>
-				<xsl:attribute name="bind"><xsl:value-of select="$itemId" />-<xsl:value-of
-					select="$formId" /></xsl:attribute>
+				<xsl:attribute name="bind"><xsl:value-of select="$itemId" /></xsl:attribute>
 				<label>
 					<xsl:value-of
 						select="normalize-space($itemDef/oc:Question/oc:TranslatedText)"></xsl:value-of>
