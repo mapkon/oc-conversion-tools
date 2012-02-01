@@ -105,36 +105,49 @@
 			<xsl:variable name="formId" select="@FormOID" />
 			<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
-				<xsl:if test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
-					<xf:bind>
-						<xsl:variable name="itemId" select="@ItemOID" />
-						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
-						<xsl:attribute name="id"><xsl:value-of
-							select="$itemGroupId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/@<xsl:value-of
-							select="@ItemOID" /></xsl:attribute>
-						<xsl:call-template name="determineQuestionType">
-							<xsl:with-param name="itemDef" select="$itemDef" />
+				<xsl:choose>
+					<xsl:when test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
+						<xf:bind>
+							<xsl:variable name="itemId" select="@ItemOID" />
+							<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
+							<xsl:attribute name="id"><xsl:value-of
+								select="$itemGroupId" /></xsl:attribute>
+							<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/@<xsl:value-of
+								select="$itemGroupId" /></xsl:attribute>
+						</xf:bind>
+						<xsl:call-template name="createItemBinds">
+							<xsl:with-param name="formId" select="$formId" />
+							<xsl:with-param name="itemGroupId" select="$itemGroupId" />
 						</xsl:call-template>
-					</xf:bind>
-				</xsl:if>
-				<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
-					<bind>
-						<xsl:variable name="itemId" select="@ItemOID" />
-						<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
-						<xsl:attribute name="id"><xsl:value-of
-							select="$itemId" />-<xsl:value-of select="$formId" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/@<xsl:value-of
-							select="$itemId" /></xsl:attribute>
-						<xsl:call-template name="determineQuestionType">
-							<xsl:with-param name="itemDef" select="$itemDef" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="createItemBinds">
+							<xsl:with-param name="formId" select="$formId" />
+							<xsl:with-param name="itemGroupId" select="$itemGroupId" />
 						</xsl:call-template>
-					</bind>
-				</xsl:for-each>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:for-each>
 		</xsl:for-each>
 	</xsl:template>
 
+	<xsl:template name="createItemBinds">
+		<xsl:param name="formId"/>
+		<xsl:param name="itemGroupId" />
+		<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
+			<bind>
+				<xsl:variable name="itemId" select="@ItemOID" />
+				<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
+				<xsl:attribute name="id"><xsl:value-of select="$itemId" /></xsl:attribute>
+				<xsl:attribute name="nodeset">/ODM/ClinicalData/SubjectData/StudyEventData/FormData/ItemGroupData/ItemData/@<xsl:value-of
+					select="$itemId" /></xsl:attribute>
+				<xsl:call-template name="determineQuestionType">
+					<xsl:with-param name="itemDef" select="$itemDef" />
+				</xsl:call-template>
+			</bind>
+		</xsl:for-each>
+	</xsl:template>
+	
 	<xsl:template name="determineQuestionType">
 		<xsl:param name="itemDef" />
 		<xsl:choose>
