@@ -170,7 +170,7 @@
 
 	<xsl:template name="createGroup">
 		<group>
-			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
+			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
 			<xsl:variable name="formId" select="@FormOID" />
 			<label>
 				<xsl:value-of select="../../oc:FormDef[@OID = $formId]/@Name" />
