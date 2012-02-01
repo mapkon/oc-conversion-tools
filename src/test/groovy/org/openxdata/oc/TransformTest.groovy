@@ -72,7 +72,7 @@ class TransformTest extends GroovyTestCase {
 						
 						def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 						
-						def bind = xformNode.model.bind.find { it.@id.equals("""${itemDef.@ItemOID +'-'+ formId}""") }
+						def bind = xformNode.model.bind.find { it.@id.equals("""${itemDef.@ItemOID}""") }
 						
 						assertEquals 1, bind.size()
 
