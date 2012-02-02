@@ -4,6 +4,7 @@
  */
 package org.openxdata.oc.handler;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,13 @@ import org.springframework.stereotype.Component;
 @Component("processorCreator")
 public class ProcessorCreator
 {
+    private ApplicationContext context;
+
+    public ProcessorCreator(ApplicationContext context) {
+	this.context = context;
+    }
+    
+    
 
         public RequestHandler buildRequestHandler(String type)
         {
@@ -26,6 +34,7 @@ public class ProcessorCreator
                         System.err.println("Error While Creating Handler: "+ex);
                         rh = new ErrorWhileProcessHandler(ex);
                 }
+		rh.setApplicationContext(context);
                 return rh;
         }
 

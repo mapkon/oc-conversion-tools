@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import org.openxdata.model.ResponseHeader;
 import org.openxdata.server.admin.model.User;
+import org.springframework.context.ApplicationContext;
 
 /**
  *
@@ -40,5 +41,8 @@ public class ErrorWhileProcessHandler implements RequestHandler
         rh.write(zdos);
         zos.finish();
         zdos.flush();
+    }
+     public void setApplicationContext(ApplicationContext ctx) {
+	
     }
 }

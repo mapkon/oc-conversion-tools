@@ -61,7 +61,7 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
-		processorCreator = new ProcessorCreator();
+		processorCreator = new ProcessorCreator(ctx);
 
 	}
     

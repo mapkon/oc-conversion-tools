@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.openxdata.server.admin.model.User;
+import org.springframework.context.ApplicationContext;
 
 /**
  * Handle all stream requests from the mobile client.The implemetation of this class
@@ -24,4 +25,6 @@ public interface RequestHandler
      * @throws IOException
      */
     public void handleRequest(User user, InputStream is, OutputStream os) throws IOException;
+    
+    public void setApplicationContext(ApplicationContext ctx);
 }
