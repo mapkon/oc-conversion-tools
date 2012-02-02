@@ -147,7 +147,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def forms = convertedStudyXml.children()
 			def version = forms.children()[0]
 
-			assertEquals  "Converted from ODM", version.@description.text()
+			assertEquals  "Converted from ODM using the oc-conversion-tools", version.@description.text()
 		}
 	}
 	

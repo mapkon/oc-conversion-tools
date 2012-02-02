@@ -21,7 +21,7 @@
 					</xsl:attribute>
 					<version>
 						<xsl:attribute name="name"><xsl:value-of select="@Name" />-v1</xsl:attribute>
-						<xsl:attribute name="description">Converted from ODM</xsl:attribute>
+						<xsl:attribute name="description">Converted from ODM using the oc-conversion-tools</xsl:attribute>
 						<xform>
 							<xsl:call-template name="createForm" />
 						</xform>
