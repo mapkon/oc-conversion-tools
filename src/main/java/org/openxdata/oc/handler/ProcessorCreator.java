@@ -45,9 +45,9 @@ public class ProcessorCreator
                 } catch (ClassNotFoundException classNotFoundException) {
                 }
                 try {
-                        return (Class<RequestHandler>) Class.forName("org.openxdata.workflow.server.handlers." + handlerClassName);
+                        return (Class<RequestHandler>) Class.forName("org.openxdata.oc.handler." + handlerClassName);
                 } catch (ClassNotFoundException classNotFoundException) {
                 }
-                return (Class<RequestHandler>) Class.forName("org.openxdata.workflow.server.handlers." + handlerClassName + "Handler");
+                return (Class<RequestHandler>) Class.forName("org.openxdata.oc.handler." + handlerClassName + "Handler");
         }
 }
