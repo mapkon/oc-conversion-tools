@@ -15,8 +15,8 @@ import org.springframework.context.ApplicationContext;
  * will have to know how to read the data and send the send the required reply;
  * @author kay
  */
-public interface RequestHandler
-{
+public interface RequestHandler {
+
     /**
      * Processes the request and and builds the necessary reply
      * @param user User who sent request
@@ -25,6 +25,6 @@ public interface RequestHandler
      * @throws IOException
      */
     public void handleRequest(User user, InputStream is, OutputStream os) throws IOException;
-    
+
     public void setApplicationContext(ApplicationContext ctx);
 }

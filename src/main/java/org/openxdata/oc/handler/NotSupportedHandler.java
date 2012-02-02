@@ -18,27 +18,24 @@ import org.springframework.context.ApplicationContext;
  *
  * @author kay
  */
-public class NotSupportedHandler implements RequestHandler
-{
+public class NotSupportedHandler implements RequestHandler {
+
     private final String type;
 
-    public NotSupportedHandler(String type)
-    {
-        this.type = type;
+    public NotSupportedHandler(String type) {
+	this.type = type;
     }
 
     @Override
-    public void handleRequest(User user, InputStream is, OutputStream os) throws IOException
-    {
-        ZOutputStream zos = new ZOutputStream(os, JZlib.Z_BEST_COMPRESSION);
-        DataOutputStream zdos = new DataOutputStream(zos);
-        ResponseHeader rh = new ResponseHeader(ResponseHeader.STATUS_ERROR);
-        rh.write(zdos);
-        zos.finish();
-        zdos.flush();
+    public void handleRequest(User user, InputStream is, OutputStream os) throws IOException {
+	ZOutputStream zos = new ZOutputStream(os, JZlib.Z_BEST_COMPRESSION);
+	DataOutputStream zdos = new DataOutputStream(zos);
+	ResponseHeader rh = new ResponseHeader(ResponseHeader.STATUS_ERROR);
+	rh.write(zdos);
+	zos.finish();
+	zdos.flush();
     }
 
     public void setApplicationContext(ApplicationContext ctx) {
-	
     }
 }

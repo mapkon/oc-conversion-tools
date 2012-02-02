@@ -22,27 +22,25 @@ import org.springframework.context.ApplicationContext;
  *
  * @author kay
  */
-public class FormDownloadHandler implements RequestHandler
-{
-    @Autowired FormDownloadService formDownloadService;
+public class FormDownloadHandler implements RequestHandler {
+
+    @Autowired
+    FormDownloadService formDownloadService;
 
     public FormDownloadHandler() {
     }
 
-    
-    
-   @Override
-    public void handleRequest(User user,InputStream is, OutputStream os) throws IOException
-    {
-        String serName = PersistentHelper.readUTF(new DataInputStream(is));
-        ZOutputStream zos = new ZOutputStream(os, JZlib.Z_BEST_COMPRESSION);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        formDownloadService.downloadUsers(baos,serName);
-        formDownloadService.downloadAllForms(baos,serName,"en");
-        zos.write(ResponseHeader.STATUS_SUCCESS);
-        zos.write(baos.toByteArray());
-        zos.flush();
-        zos.finish();
+    @Override
+    public void handleRequest(User user, InputStream is, OutputStream os) throws IOException {
+	String serName = PersistentHelper.readUTF(new DataInputStream(is));
+	ZOutputStream zos = new ZOutputStream(os, JZlib.Z_BEST_COMPRESSION);
+	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	formDownloadService.downloadUsers(baos, serName);
+	formDownloadService.downloadAllForms(baos, serName, "en");
+	zos.write(ResponseHeader.STATUS_SUCCESS);
+	zos.write(baos.toByteArray());
+	zos.flush();
+	zos.finish();
     }
 
     public void setApplicationContext(ApplicationContext ctx) {

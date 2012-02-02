@@ -18,31 +18,28 @@ import org.springframework.context.ApplicationContext;
  *
  * @author kay
  */
-public class ErrorWhileProcessHandler implements RequestHandler
-{
+public class ErrorWhileProcessHandler implements RequestHandler {
+
     private final Throwable t;
 
-    public ErrorWhileProcessHandler()
-    {
-        t = null;
+    public ErrorWhileProcessHandler() {
+	t = null;
     }
 
-    public ErrorWhileProcessHandler(Throwable t)
-    {
-        this.t = t;
+    public ErrorWhileProcessHandler(Throwable t) {
+	this.t = t;
     }
 
     @Override
-    public void handleRequest(User user,InputStream is, OutputStream os) throws IOException
-    {
-        ZOutputStream zos = new ZOutputStream(os,JZlib.Z_BEST_COMPRESSION);
-        DataOutputStream zdos = new DataOutputStream(zos);
-        ResponseHeader rh = new ResponseHeader(ResponseHeader.STATUS_ERROR);
-        rh.write(zdos);
-        zos.finish();
-        zdos.flush();
+    public void handleRequest(User user, InputStream is, OutputStream os) throws IOException {
+	ZOutputStream zos = new ZOutputStream(os, JZlib.Z_BEST_COMPRESSION);
+	DataOutputStream zdos = new DataOutputStream(zos);
+	ResponseHeader rh = new ResponseHeader(ResponseHeader.STATUS_ERROR);
+	rh.write(zdos);
+	zos.finish();
+	zdos.flush();
     }
-     public void setApplicationContext(ApplicationContext ctx) {
-	
+
+    public void setApplicationContext(ApplicationContext ctx) {
     }
 }
