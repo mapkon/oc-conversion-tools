@@ -122,7 +122,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:call-template name="createItemBinds">
-							<xsl:with-param name="formId" select="$formId" />
 							<xsl:with-param name="itemGroupId" select="$itemGroupId" />
 						</xsl:call-template>
 					</xsl:otherwise>
@@ -132,7 +131,6 @@
 	</xsl:template>
 
 	<xsl:template name="createItemBinds">
-		<xsl:param name="formId"/>
 		<xsl:param name="itemGroupId" />
 		<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
 			<bind>
@@ -223,8 +221,7 @@
 								<xsl:value-of select="$itemGroupId" />
 							</xf:label>
 							<xsl:call-template name="insertQuestionsAccordingToType">
-								<xsl:with-param name="formId" select="$formId" />
-								<xsl:with-param name="itemId" select="$itemId" />
+								<xsl:with-param name="itemOID" select="$itemOID"></xsl:with-param>
 								<xsl:with-param name="itemDef" select="$itemDef" />
 							</xsl:call-template>
 						</repeat>
@@ -232,8 +229,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="insertQuestionsAccordingToType">
-						<xsl:with-param name="formId" select="$formId" />
-						<xsl:with-param name="itemId" select="$itemId" />
+						<xsl:with-param name="itemOID" select="$itemId"/>
 						<xsl:with-param name="itemDef" select="$itemDef" />
 					</xsl:call-template>
 				</xsl:otherwise>
@@ -243,8 +239,7 @@
 
 	<xsl:template name="insertQuestionsAccordingToType">
 	
-		<xsl:param name="itemId" />
-		<xsl:param name="formId" />
+		<xsl:param name="itemOID"/>
 		<xsl:param name="itemDef" />
 		
 		<xsl:choose>
