@@ -16,5 +16,5 @@ abstract class SoapRequestProperties {
 			</wsse:Security></soapenv:Header>"""
 	}
 	
-	def abstract getSoapEnvelope()
+	abstract def getSoapEnvelope(def identifier)
 }

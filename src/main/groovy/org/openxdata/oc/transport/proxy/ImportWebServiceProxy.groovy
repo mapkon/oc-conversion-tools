@@ -14,8 +14,13 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 	def envelope
 	def importXml
 
-	def getSoapEnvelope() {
-		getEnvelope(importXml)
+	def getSoapEnvelope(def importXml){
+		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
+							${getHeader()}
+						<soapenv:Body>
+							<v1:importRequest>${importXml}</v1:importRequest>
+						</soapenv:Body>
+					 </soapenv:Envelope>"""
 	}
 	
 	def importData(def instanceData){
@@ -25,21 +30,12 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 		def odm = new ODMDefinition()
 		importXml = odm.appendInstanceData(instanceData)
 
-		envelope = getEnvelope(importXml)
+		envelope = getSoapEnvelope(importXml)
 
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
 		def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
 
 		return getImportMessage(response)
-	}
-
-	private def getEnvelope(def importXml){
-		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
-							${getHeader()}
-						<soapenv:Body>
-							<v1:importRequest>${importXml}</v1:importRequest>
-						</soapenv:Body>
-					 </soapenv:Envelope>"""
 	}
 	
 	private def getImportMessage(response) {

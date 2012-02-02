@@ -12,15 +12,24 @@ class ListAllSubjectsByStudyWebServiceProxy extends SoapRequestProperties {
 	def envelope
 	def identifier
 
-	def getSoapEnvelope() {
-		getEnvelope(identifier)
+	def getSoapEnvelope(def studyOID){
+		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/studySubject/v1" xmlns:bean="http://openclinica.org/ws/beans">
+							${getHeader()}
+						<soapenv:Body>
+						  <v1:listAllByStudyRequest>
+							 <bean:studyRef>
+								<bean:identifier>${studyOID}</bean:identifier>
+							 </bean:studyRef>
+						  </v1:listAllByStudyRequest>
+					   </soapenv:Body>
+					</soapenv:Envelope>"""
 	}
-
+	
 	def listAllByStudy(def identifier){
 
 		log.info("Fetching subject keys for Openclinica study with ID: ${identifier}")
 
-		envelope = getEnvelope(identifier)
+		envelope = getSoapEnvelope(identifier)
 
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
 		def response = transportHandler.sendRequest(connectionFactory.getStudySubjectConnection())
@@ -29,19 +38,6 @@ class ListAllSubjectsByStudyWebServiceProxy extends SoapRequestProperties {
 
 		log.info("Found : " + subjectKeys.size() + " Subjects attached to Study with Identifier: ${identifier}")
 		return subjectKeys
-	}
-
-	private def getEnvelope(def identifier){
-		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/studySubject/v1" xmlns:bean="http://openclinica.org/ws/beans">
-							${getHeader()}
-						<soapenv:Body>
-						  <v1:listAllByStudyRequest>
-							 <bean:studyRef>
-								<bean:identifier>${identifier}</bean:identifier>
-							 </bean:studyRef>
-						  </v1:listAllByStudyRequest>
-					   </soapenv:Body>
-					</soapenv:Envelope>"""
 	}
 
 	private def extractSubjectKeys(def response){
