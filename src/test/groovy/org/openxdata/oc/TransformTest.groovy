@@ -51,41 +51,32 @@ class TransformTest extends GroovyTestCase {
 
 		assertTrue version.'@name'.text().contains('-v1')
 	}
-
-	@Test void testBindElementsShouldAppearInCorrectPlaceForEachFormAndPage() {
-
-		def versionNode = inputDoc.Study.MetaDataVersion
-		def numberOfInputsTested = 0
-		versionNode.Protocol.StudyEventRef.each {
-			def eventId = it.@StudyEventOID
-			def eventDef = versionNode.StudyEventDef.find { it.@OID == eventId }
-			eventDef.FormRef.each {
-				def formId = it.@FormOID
-				def formDef = versionNode.FormDef.find {it.@OID==formId}
-				formDef.ItemGroupRef.each {
-
-					def groupId = it.@ItemGroupOID
-					def groupDef = versionNode.ItemGroupDef.find { it.@OID == groupId }
-					groupDef.ItemRef.each { itemDef -> 
-						
-						def form = convertedXform.form.find { it.'@name'.equals(eventDef.'@OID') }
-						
-						def xformNode = new XmlSlurper().parseText(form.version.xform.text())
-						
-						def bind = xformNode.model.bind.find { it.@id.equals("""${itemDef.@ItemOID}""") }
-						
-						assertEquals 1, bind.size()
-
-						numberOfInputsTested++
-					}
-				}
-			}
+	
+	@Test void testThatTheNumberOfBindsAre47Given45ItemRefsInODM() {
+		
+		def binds = getBinds();
+		
+		// The extra two bindings are because of the repeat parent bindings
+		assertEquals 47, binds.size()
+	}
+	
+	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
+		
+		def binds = getBinds()
+		def itemRefs = getItemRefs()
+		
+		// The extra two bindings are because of the repeat parent bindings
+		assertTrue  'The number of binds should be equal to the number of ItemRefs in ODM + 2', binds.size() >= itemRefs.size()
+	}
+	
+	@Test void testThatEveryItemRefIntheODMHasABindInTheConvertedXform() {
+		
+		def itemRefs = getItemRefs()
+		itemRefs.each {
+			
+			def bind = getBind(it.@ItemOID)
+			assertEquals bind, it.@ItemOID
 		}
-
-		def itemsInInput = inputDoc.Study.MetaDataVersion.ItemGroupDef.ItemRef.size()
-
-		assertTrue numberOfInputsTested > 1
-		assertTrue numberOfInputsTested >= itemsInInput
 	}
 
 	@Test void testExistenceOfFormDefGivenStudyEventRef() {
@@ -161,5 +152,64 @@ class TransformTest extends GroovyTestCase {
 		def version = convertedXform.form[0].children()
 
 		assertEquals "${convertedXform.form[0].'@description'}-v1", version.'@name'.text()
+	}
+	
+	def getItemRefs() {
+
+		def itemRefs = []
+		def versionNode = inputDoc.Study.MetaDataVersion
+		versionNode.Protocol.StudyEventRef.each {
+			def studyEventId = it.@StudyEventOID
+			def studyEventDef = versionNode.StudyEventDef.find { it.@OID == studyEventId }
+
+			studyEventDef.FormRef.each {
+
+				def formId = it.@FormOID
+				def formDef = versionNode.FormDef.find { it.@OID == formId }
+
+				formDef.ItemGroupRef.each {
+
+					def itemGroupOID = it.@ItemGroupOID
+					def itemGroupDef = versionNode.ItemGroupDef.find { it.@OID == itemGroupOID }
+					
+					itemRefs.addAll(itemGroupDef.children())
+				}
+			}
+		}
+		
+		return itemRefs
+	}
+	
+	def getBinds() {
+		
+		def binds = []
+		def versionNode = inputDoc.Study.MetaDataVersion
+		versionNode.Protocol.StudyEventRef.each {
+			def studyEventId = it.@StudyEventOID
+			def studyEventDef = versionNode.StudyEventDef.find { it.@OID == studyEventId }
+			
+			def form = convertedXform.form.find { it.@name == studyEventDef.@OID }
+			def xformNode = new XmlSlurper().parseText(form.version.xform.text())
+			
+			def formBinds = xformNode.depthFirst().findAll{ it.name().toString() == 'bind'}
+			formBinds.each {
+				binds.add(it.@id)
+			}
+		}
+		
+		return binds
+	}
+	
+	def getBind(def itemOID) {
+		
+		def bind
+		def binds = getBinds()
+		binds.each {
+			if(it.toString() == itemOID) {
+				bind = it
+			}
+		}
+		
+		return bind
 	}
 }
