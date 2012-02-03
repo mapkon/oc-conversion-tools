@@ -6,28 +6,9 @@
 
 	1. mvn eclipse:eclipse
 	2. Import into eclipse
-	
-############################################################
-# Usage as a dependency.                                   #					               
-############################################################
 
-This library is intended to be used as a dependency in the openxdata application.
+The eclipse version must have the groovy plugin installed.
 
-The following instructions assume you have set up openclinca web services and it is running.
-For instructions on how to set up openclinica, 
-please visit: https://docs.openclinica.com/3.1/technical-documents/openclinica-web-services-guide/using-openclinica-web-services
-
-1. Define a Setting Group in openxdata called 'openclinica' with settings url, user name and password.
-These settings will be used to connect to openclinica so it goes without saying that they must be valid in the openclinca context 
-and can access openclinca web services.
-
-2. Add the url for the openclinica webservices in the format [protocol][host][port]
-
-3. Run the openxdata application and go to the dash board
-
-4. Click on the 'openclinica' button to load the study management console.
-
-5. For any bugs, please file an issue at https://github.com/mapkon/oc-conversion-tools/issues
-
+For any bugs, please file an issue at https://github.com/mapkon/oc-conversion-tools/issues
 
 * Further set up instructions are found at https://trac.openxdata.org/wiki/OpenClinica*
