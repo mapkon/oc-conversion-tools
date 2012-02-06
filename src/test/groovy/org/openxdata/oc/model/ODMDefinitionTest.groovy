@@ -1,22 +1,16 @@
 package org.openxdata.oc.model
 
 import org.junit.Test
-import org.openxdata.oc.exception.ImportException;
-import org.openxdata.oc.util.TransformUtil;
+import org.openxdata.oc.exception.ImportException
 
 
 class ODMDefinitionTest extends GroovyTestCase {
 
-	def odmDef
+	def exportedInstanceData
 	def instanceData = new ArrayList<String>()
 	
 	public void setUp(){
 
-		def odmXmlStream = new TransformUtil().loadFileContents("test-odm.xml")
-
-		odmDef = new ODMDefinition()
-		odmDef.initializeProperties(odmXmlStream)
-		
 		instanceData.add("""<?xml version="1.0" encoding="UTF-8"?>
 							<test_study_se_visit_visit-v1 xmlns="" Description="converted from ODM to Xform" formKey="test_study_se_visit_visit-v1" id="10" name="SE_VISIT_Visit-v1">
 							  <ClinicalData xmlns="http://www.w3.org/2002/xforms" MetaDataVersionOID="v1.0.0" StudyOID="S_001">
@@ -36,51 +30,30 @@ class ODMDefinitionTest extends GroovyTestCase {
 								</SubjectData>
 							  </ClinicalData>
 							</test_study_se_visit_visit-v1>""")
-	}
-
-	@Test void testInitializePropertiesShouldInitializeProperties(){
-		assertNotNull odmDef.OID
-		assertNotNull odmDef.name
-		assertNotNull odmDef.description	
-		assertNotNull odmDef.studyEventDefs
-	}
-	
-	@Test void testInitializedOIDShouldEqualsNameInODM(){
-		assertEquals "S_12175", odmDef.OID
-	}
-	
-	@Test void testInitializedNameShouldEqualsNameInODM(){
-		assertEquals "Default Study - Uganda", odmDef.name
-	}
-	
-	@Test void testInitializedDescriptionShouldEqualsNameInODM(){
-		assertEquals "test instance - Site of Uganda", odmDef.description
-	}
-	
-	@Test void testInitializedStudyEventDefsShouldBeSameSizeAsInODM(){
 		
-		def studyEventDefs = odmDef.studyEventDefs
+		def odmDef = new ODMDefinition()
+		exportedInstanceData = odmDef.appendInstanceData(instanceData)
+	}
+	
+	@Test void testAppendInstanceDataDoesNotReturnNull() {
 		
-		assertEquals 2, studyEventDefs.size()
-		assertEquals 'SE_SC1', studyEventDefs[0].'@OID'.text()
-		assertEquals 'SE_SC2', studyEventDefs[1].'@OID'.text()
+		def xml = new XmlParser().parseText(exportedInstanceData)
+		
+		assertNotNull xml.instanceData
 	}
 	
 	@Test void testAppendInstanceDataAppendsTheInstanceData(){
 		
-		def odm = odmDef.appendInstanceData(instanceData)
 		
-		def xml = new XmlParser().parseText(odm)
+		def xml = new XmlParser().parseText(exportedInstanceData)
 		
-		assertNotNull odmDef.instanceData
-		assertTrue xml.depthFirst().ItemData.size() > 1
 		assertEquals xml.depthFirst().ItemData.size(), 4
 	}
 	
 	@Test void testAppendInstanceDataShouldThrowExceptionOnNullInstanceData(){
 		def emptyInstanceData = new ArrayList<String>()
 		shouldFail(ImportException.class){
-			odmDef.appendInstanceData(emptyInstanceData)
+			new ODMDefinition().appendInstanceData(emptyInstanceData)
 		}
 	}
 }

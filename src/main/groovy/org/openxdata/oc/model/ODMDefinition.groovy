@@ -8,39 +8,8 @@ import org.openxdata.oc.exception.ImportException
 
 @Log
 class ODMDefinition {
-
-	def OID
-	def name
-	def description
-	def studyEventDefs
 	
-	def parsedOdmXml
 	def instanceData
-	
-	public def initializeProperties(def odmXml){
-		parsedOdmXml = new XmlSlurper().parseText(odmXml)
-		
-		initOID()
-		initName()
-		initDescription()
-		initStudyEventDefs()
-	}
-	
-	private def initOID(){
-		this.OID = parsedOdmXml.Study.@OID.text()
-	}
-	
-	private def initName(){
-		this.name = parsedOdmXml.Study.GlobalVariables.StudyName.text()
-	}
-	
-	private def initDescription(){
-		this.description = parsedOdmXml.Study.GlobalVariables.StudyDescription.text().trim()
-	}
-	
-	private def initStudyEventDefs(){
-		this.studyEventDefs = parsedOdmXml.Study.MetaDataVersion.StudyEventDef
-	}
 	
 	def appendInstanceData(def instanceData){
 
