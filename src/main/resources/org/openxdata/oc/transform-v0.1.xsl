@@ -60,21 +60,25 @@
 						<xsl:for-each select="oc:FormRef">
 
 							<xsl:variable name="formId" select="@FormOID" />
-							<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
 							<xsl:for-each select="../../oc:FormDef[@OID=$formId]/oc:ItemGroupRef">
 								<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 								<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
 								<xsl:choose>
 									<xsl:when test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 										<xsl:element name="{$itemGroupId}">
+											<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
 											<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
-												<xsl:element name="{@ItemOID}" />
+												<xsl:element name="{@ItemOID}">
+													<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
+												</xsl:element>
 											</xsl:for-each>
 										</xsl:element>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
-											<xsl:element name="{@ItemOID}" />
+											<xsl:element name="{@ItemOID}">
+												<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
+											</xsl:element>
 										</xsl:for-each>
 									</xsl:otherwise>
 								</xsl:choose>

@@ -154,6 +154,34 @@ class TransformTest extends GroovyTestCase {
 		assertEquals "${convertedXform.form[0].'@description'}-v1", version.'@name'.text()
 	}
 	
+	@Test void testODMDataBindsHaveFormOIDAttribute() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each { 
+			it.model.instance.ODM.children().each { element ->
+				def text = element.@FormOID.text()
+				assertTrue "Should have attribute FormOID", text.size() > 0
+			}
+		}
+	}
+		
+	
+	def getXformNodes() {
+
+		def nodes = []
+		convertedXform.form.each {
+			
+			def xformNode = new XmlSlurper().parseText(it.version.xform.text()).declareNamespace(xf:"http://www.w3.org/2002/xforms")
+			
+			nodes.add(xformNode)
+		}
+		
+		return nodes
+	}
+	
+	
+	
 	def getItemRefs() {
 
 		def itemRefs = []
