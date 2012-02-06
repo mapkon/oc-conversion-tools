@@ -28,7 +28,7 @@ class ODMDefinition {
 			addSubjectData(odmXml, instanceXml)
 		}
 
-		log.info("<<Successfully appended instance data ODM file.>>")
+		log.info("<<Successfully appended instance data to ODM file.>>")
 		
 		return XmlUtil.asString(odmXml)
 	}
