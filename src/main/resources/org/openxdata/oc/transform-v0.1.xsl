@@ -48,8 +48,6 @@
 							select="@Name" /></xsl:attribute>
 						<xsl:attribute name="formKey"><xsl:value-of
 							select="normalize-space(@OID)" /></xsl:attribute>
-						<xsl:attribute name="id"><xsl:value-of
-							select="normalize-space($instanceElementName)" /></xsl:attribute>
 						<xsl:attribute name="StudyOID"><xsl:value-of
 							select="../../@OID" /></xsl:attribute>
 						<xsl:attribute name="StudyEventOID"><xsl:value-of
