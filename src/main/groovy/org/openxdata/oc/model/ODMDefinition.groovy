@@ -15,9 +15,7 @@ class ODMDefinition {
 
 		if(instanceData.isEmpty())
 			throw new ImportException(ErrorCode.EMPTY_INSTANCE_DATA)
-			
-		log.info('Processing instance data')
-		
+					
 		this.instanceData = instanceData
 
 		def odm = """<ODM></ODM>"""
