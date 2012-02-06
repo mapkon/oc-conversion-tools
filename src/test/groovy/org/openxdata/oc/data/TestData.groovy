@@ -40,6 +40,44 @@ class TestData {
 		return instanceData
 	
 	}
+	
+	static def getOpenXdataInstanceData() {
+		
+		def instanceData = []
+		def oxdInstanceData = '''
+								<ODM id="S_12175 - SE_SC2" StudyOID="S_12175" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="SE_SC2" FormOID="F_MSA2_2" name="SC2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" StudyEventOID="SE_SC2" MetaDataVersionOID="v1.0.0" xmlns:xf="http://www.w3.org/2002/xforms">
+								  <xf:IG_MSA2_MSA2_POARTPRECG xmlns:xf="http://www.w3.org/2002/xforms">
+								    <xf:I_MSA2_MSA2_POARTPREC>Chloroquin</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>3</xf:I_MSA2_MSA2_POARTNBV>
+								  </xf:IG_MSA2_MSA2_POARTPRECG>
+								  <xf:I_MSA2_INIT xmlns:xf="http://www.w3.org/2002/xforms">MGM</xf:I_MSA2_INIT>
+								  <xf:I_MSA2_FROMD xmlns:xf="http://www.w3.org/2002/xforms">2012-02-03</xf:I_MSA2_FROMD>
+								  <xf:I_MSA2_IDV xmlns:xf="http://www.w3.org/2002/xforms">009</xf:I_MSA2_IDV>
+								  <xf:I_MSA2_MSA2_INITBF xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_INITBF>
+								  <xf:I_MSA2_MSA2_INTBF xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_INTBF>
+								  <xf:I_MSA2_MSA2_HAART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_HAART>
+								  <xf:I_MSA2_MSA2_ELHAART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_ELHAART>
+								  <xf:I_MSA2_MSA2_PAZT xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_PAZT>
+								  <xf:I_MSA2_MSA2_PAZTNB xmlns:xf="http://www.w3.org/2002/xforms">9</xf:I_MSA2_MSA2_PAZTNB>
+								  <xf:I_MSA2_MSA2_POART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_POART>
+								  <xf:I_MSA2_MSA2_LNVPV xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_LNVPV>
+								  <xf:I_MSA2_MSA2_LAZTV xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_LAZTV>
+								  <xf:I_MSA2_MSA2_L3TC xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_L3TC>
+								  <xf:I_MSA2_MSA2_LOART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_LOART>
+								  <xf:I_MSA2_MSA2_LOCATB xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_LOCATB>
+								  <xf:I_MSA2_MSA2_OLOCATBPREC xmlns:xf="http://www.w3.org/2002/xforms">kololo</xf:I_MSA2_MSA2_OLOCATBPREC>
+								  <xf:I_MSA2_MSA2_TRANSF xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_TRANSF>
+								  <xf:I_MSA2_MSA2_TYPED xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_TYPED>
+								  <xf:I_MSA2_MSA2_PMTCTV xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_PMTCTV>
+								  <xf:I_MSA2_MSA2_PMTCT xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_PMTCT>
+								  <xf:I_MSA2_MSA2_LAZTNBV xmlns:xf="http://www.w3.org/2002/xforms">7</xf:I_MSA2_MSA2_LAZTNBV>
+								  <xf:I_MSA2_MSA2_L3TCNB xmlns:xf="http://www.w3.org/2002/xforms">7</xf:I_MSA2_MSA2_L3TCNB>
+								</ODM> '''
+		
+		instanceData.add(oxdInstanceData)
+
+		return instanceData
+	}
 
 	static def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 										   <SOAP-ENV:Header/>

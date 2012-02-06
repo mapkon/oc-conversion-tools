@@ -16,11 +16,19 @@ class ODMDefinitionTest extends GroovyTestCase {
 		exportedInstanceData = odmDef.appendInstanceData(TestData.getInstanceData())
 	}
 	
+	@Test void testInstanceDataHasMetaDataVersionOID() {
+		
+		def instanceData = TestData.getOpenXdataInstanceData()
+		instanceData.each {
+			
+			def xml = new XmlParser().parseText(it)
+			assertEquals "v1.0.0", xml.@MetaDataVersionOID
+		}
+	}
+	
 	@Test void testAppendInstanceDataDoesNotReturnNull() {
-		
-		def xml = new XmlParser().parseText(exportedInstanceData)
-		
-		assertNotNull xml.instanceData
+				
+		assertNotNull exportedInstanceData
 	}
 	
 	@Test void testAppendInstanceDataAppendsTheInstanceData(){
