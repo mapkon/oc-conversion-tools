@@ -165,7 +165,19 @@ class TransformTest extends GroovyTestCase {
 			}
 		}
 	}
+	
+	@Test void testODMDataBindsHaveItemGroupOIDAttribute() {
 		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			it.model.instance.ODM.children().each { element ->
+				def text = element.@ItemGroupOID.text()
+				assertTrue "Should have attribute ItemGroupOID", text.size() > 0
+			}
+		}
+	}
+	
 	
 	def getXformNodes() {
 
@@ -208,6 +220,7 @@ class TransformTest extends GroovyTestCase {
 		return itemRefs
 	}
 	
+	
 	def getBinds() {
 		
 		def binds = []
@@ -227,6 +240,7 @@ class TransformTest extends GroovyTestCase {
 		
 		return binds
 	}
+	
 	
 	def getBind(def itemOID) {
 		
