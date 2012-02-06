@@ -101,23 +101,23 @@
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:choose>
 					<xsl:when test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
-						<xf:bind>
+						<bind>
 							<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=@ItemOID]" />
 
 							<xsl:attribute name="id"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
 							<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$itemGroupId" /></xsl:attribute>
 
 							<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
-								<xf:bind>
+								<bind>
 									<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 									<xsl:attribute name="nodeset">/ODM/<xsl:value-of
 										select="$itemGroupId" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 									<xsl:call-template name="determineQuestionType">
 										<xsl:with-param name="itemDef" select="../../oc:ItemDef[@OID=@ItemOID]" />
 									</xsl:call-template>
-								</xf:bind>
+								</bind>
 							</xsl:for-each>
-						</xf:bind>
+						</bind>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:call-template name="createItemBinds">
