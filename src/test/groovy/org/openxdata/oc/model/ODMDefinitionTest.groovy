@@ -7,8 +7,8 @@ import org.openxdata.oc.exception.ImportException
 
 class ODMDefinitionTest extends GroovyTestCase {
 
+	def instanceData = []
 	def exportedInstanceData
-	def instanceData = new ArrayList<String>()
 	
 	public void setUp(){
 		
