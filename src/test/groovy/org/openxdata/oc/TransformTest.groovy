@@ -178,6 +178,15 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testConvertedXmlShouldHaveSubjectkeyAttributeInTheInstanceODMElement() {
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			def odmNode = it.model.instance.ODM
+			
+			assertEquals "", odmNode.'@SubjectKey'.text()
+		}
+	}
 	
 	def getXformNodes() {
 
@@ -191,8 +200,6 @@ class TransformTest extends GroovyTestCase {
 		
 		return nodes
 	}
-	
-	
 	
 	def getItemRefs() {
 
@@ -220,7 +227,6 @@ class TransformTest extends GroovyTestCase {
 		return itemRefs
 	}
 	
-	
 	def getBinds() {
 		
 		def binds = []
@@ -240,7 +246,6 @@ class TransformTest extends GroovyTestCase {
 		
 		return binds
 	}
-	
 	
 	def getBind(def itemOID) {
 		

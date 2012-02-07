@@ -54,6 +54,8 @@
 							select="@OID" /></xsl:attribute>
 						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of 
 							select="../@OID" /></xsl:attribute>
+							
+						<xsl:attribute name="SubjectKey" />
 						
 						<xsl:for-each select="oc:FormRef">
 
