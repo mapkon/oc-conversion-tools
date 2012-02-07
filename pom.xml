@@ -69,12 +69,15 @@
 		</developer>
 	</developers>
 
-	<repositories>
-		<repository>
-			<id>org.codehaus</id>
-			<url>http://snapshots.repository.codehaus.org</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>openxdata</id>
+            <url>http://nexus.openxdata.org/content/groups/public</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 	<properties>
 		<slf4j.version>1.6.1</slf4j.version>
