@@ -1,7 +1,6 @@
 package org.openxdata.oc.proto
 
 import groovy.xml.StreamingMarkupBuilder
-import groovy.xml.XmlUtil
 
 class SubmissionProtocol {
 
@@ -62,7 +61,6 @@ class SubmissionProtocol {
 			}
 		}
 
-		println XmlUtil.serialize(xml)
 		return xml.toString()
 	}
 
