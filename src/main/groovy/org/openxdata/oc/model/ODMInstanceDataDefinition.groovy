@@ -23,8 +23,10 @@ class ODMInstanceDataDefinition {
 
 		instanceData.each {
 			
-			log.info("Processing instance data: " + it)
 			def convertedInstanceData = new SubmissionProtocol().createOpenClinicaInstanceData(it)
+			
+			log.info("Processing converted instance data: \n ${convertedInstanceData}")
+			
 			def instanceXml = new XmlParser().parseText(convertedInstanceData)
 			ocInstanceData = addSubjectData(instanceXml)
 		}
