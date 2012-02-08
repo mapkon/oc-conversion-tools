@@ -212,7 +212,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			def reponse = client.importData(TestData.instanceData)
+			def reponse = client.importData(TestData.getOpenXdataInstanceData())
 			
 			assertNotNull reponse
 			assertEquals 'Success', reponse
@@ -225,7 +225,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			shouldFail(ImportException){
 				def client = new OpenClinicaSoapClientImpl(connectionFactory)
-				def reponse = client.importData(TestData.instanceData)
+				def reponse = client.importData(TestData.getOpenXdataInstanceData())
 			}
 		}
 	}
