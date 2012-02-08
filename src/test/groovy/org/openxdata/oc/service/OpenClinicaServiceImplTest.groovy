@@ -102,7 +102,6 @@ public class OpenClinicaServiceImplTest {
 
 	}
 
-
 	@Test public void testHasStudyData(){
 
 		String studyKey = studyService.getStudyKey(1)

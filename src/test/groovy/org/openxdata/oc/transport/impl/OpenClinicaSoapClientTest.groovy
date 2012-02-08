@@ -249,7 +249,31 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def subjectKeys = client.findAllCRFS("oid")
 			
-			assertNotNull subjectKeys
+			assertNotNull response
+		}
+	}
+	
+	@Test void testFindEventsByStudyOIDDoesNotReturnNull() {
+		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
+		play{
+			
+			def client = new OpenClinicaSoapClientImpl(connectionFactory)
+			
+			def studyEvents = client.findEventsByStudyOID("oid")
+			
+			assertNotNull "Should never return null", studyEvents
+		}
+	}
+	
+	@Test void testFindEventsByStudyOIDReturnsCorrectNumberOfEvents() {
+		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
+		play{
+			
+			def client = new OpenClinicaSoapClientImpl(connectionFactory)
+			
+			def studyEvents = client.findEventsByStudyOID("oid")
+			
+			assertEquals "The events should be 71", 71, studyEvents.children().size()
 		}
 	}
 	
@@ -269,6 +293,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = mock(ConnectionFactory.class)
 		connectionFactory.getCRFConnection().returns(connection).atMostOnce()
 		connectionFactory.getStudyConnection().returns(connection).atMostOnce()
+		connectionFactory.getEventConnection().returns(connection).atMostOnce()
 		connectionFactory.getStudySubjectConnection().returns(connection).atMostOnce()
 		
 		return connectionFactory

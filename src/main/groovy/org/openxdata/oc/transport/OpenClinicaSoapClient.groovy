@@ -15,5 +15,7 @@ public interface OpenClinicaSoapClient {
 	Collection<String> getSubjectKeys(def studyIdentifier)
 
 	def importData(Collection<String> instanceData)
+	
+	def findEventsByStudyOID(def studyOID)
 		
 }

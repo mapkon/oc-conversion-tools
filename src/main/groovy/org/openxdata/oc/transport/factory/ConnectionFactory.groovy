@@ -35,4 +35,9 @@ public class ConnectionFactory {
 		url = new URL("${host}/ws/studySubject/v1")
 		return url.openConnection()
 	}
+	
+	public HttpURLConnection getEventConnection() {
+		url = new URL("${host}/ws/event/v1")
+		return url.openConnection()
+	}
 }

@@ -33,4 +33,9 @@ class ConnectionFactoryTest extends GroovyTestCase {
 		def url = factory.getCRFConnection().getURL().toString()
 		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/crf/v1', url
 	}
+	
+	@Test void testGetEventConnectionURLReturnsCorrectURL() {
+		def url = factory.getEventConnection().getURL().toString()
+		assertEquals "The events service should equal the actual one.", 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/event/v1', url
+	}
 }
