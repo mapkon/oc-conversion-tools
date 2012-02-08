@@ -247,7 +247,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)
 			
-			def subjectKeys = client.findAllCRFS("oid")
+			def response = client.findAllCRFS("oid")
 			
 			assertNotNull response
 		}
