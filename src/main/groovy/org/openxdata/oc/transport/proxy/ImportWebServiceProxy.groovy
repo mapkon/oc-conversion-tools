@@ -4,7 +4,7 @@ import groovy.util.logging.Log
 
 import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.model.ODMDefinition
+import org.openxdata.oc.model.ODMInstanceDataDefinition
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
@@ -27,8 +27,7 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 
 		log.info("Starting import to Openclinca.")
 
-		def odm = new ODMDefinition()
-		importXml = odm.appendInstanceData(instanceData)
+		importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
 
 		envelope = getSoapEnvelope(importXml)
 
