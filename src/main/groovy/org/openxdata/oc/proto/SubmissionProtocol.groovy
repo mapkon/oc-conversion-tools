@@ -44,7 +44,7 @@ class SubmissionProtocol {
 														def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
 														itemDataNodes.each {
 															
-															ItemData (ItemOID:it.name(), value:"$it"){
+															ItemData (ItemOID:it.name(), Value:"$it"){
 															}
 														}
 													}
