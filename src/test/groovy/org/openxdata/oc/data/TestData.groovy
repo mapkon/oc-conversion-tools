@@ -12,67 +12,42 @@ class TestData {
 		def response = new TransformUtil().loadFileContents('CRFRequestResponse.xml')
 	}
 	
-	static def getInstanceData() {
-		
-		def instanceData = []
-		
-		def testInstanceData = """<test_study_se_visit_visit-v1 xmlns="" Description="converted from ODM to Xform" formKey="test_study_se_visit_visit-v1" id="10" name="SE_VISIT_Visit-v1">
-								  <ClinicalData xmlns="http://www.w3.org/2002/xforms" MetaDataVersionOID="v1.0.0" StudyOID="S_001">
-									<SubjectData SubjectKey="SS_MARK">
-									  <StudyEventData StudyEventOID="SE_VISIT">
-										<FormData FormOID="F_SAMPLECRF_1">
-										  <ItemGroupData ItemGroupOID="IG_SAMPL_UNGROUPED">
-											<ItemData ItemOID="I_SAMPL_SC_ITEM_01" Value="really" value=""/>
-											<ItemData ItemOID="I_SAMPL_SC_ITEM_02" Value="ok" value=""/>
-										  </ItemGroupData>
-										  <ItemGroupData ItemGroupOID="IG_SAMPL_GROUP01">
-											<ItemData ItemOID="I_SAMPL_SC_REPEATING_ITEM_01" Value="2011-09-15" value=""/>
-											<ItemData ItemOID="I_SAMPL_SC_REPEATING_ITEM_02" Value="222" value=""/>
-										  </ItemGroupData>
-										</FormData>
-									  </StudyEventData>
-									</SubjectData>
-								  </ClinicalData>
-								</test_study_se_visit_visit-v1>"""
-		
-		instanceData.add(testInstanceData)
-		
-		return instanceData
-	
-	}
-	
 	static def getOpenXdataInstanceData() {
 		
 		def instanceData = []
 		def oxdInstanceData = '''
-								<ODM id="S_12175 - SE_SC2" StudyOID="S_12175" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="SE_SC2" FormOID="F_MSA2_2" name="SC2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" StudyEventOID="SE_SC2" MetaDataVersionOID="v1.0.0" xmlns:xf="http://www.w3.org/2002/xforms">
-								  <xf:IG_MSA2_MSA2_POARTPRECG xmlns:xf="http://www.w3.org/2002/xforms">
-								    <xf:I_MSA2_MSA2_POARTPREC>Chloroquin</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV>3</xf:I_MSA2_MSA2_POARTNBV>
-								  </xf:IG_MSA2_MSA2_POARTPRECG>
-								  <xf:I_MSA2_INIT xmlns:xf="http://www.w3.org/2002/xforms">MGM</xf:I_MSA2_INIT>
-								  <xf:I_MSA2_FROMD xmlns:xf="http://www.w3.org/2002/xforms">2012-02-03</xf:I_MSA2_FROMD>
-								  <xf:I_MSA2_IDV xmlns:xf="http://www.w3.org/2002/xforms">009</xf:I_MSA2_IDV>
-								  <xf:I_MSA2_MSA2_INITBF xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_INITBF>
-								  <xf:I_MSA2_MSA2_INTBF xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_INTBF>
-								  <xf:I_MSA2_MSA2_HAART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_HAART>
-								  <xf:I_MSA2_MSA2_ELHAART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_ELHAART>
-								  <xf:I_MSA2_MSA2_PAZT xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_PAZT>
-								  <xf:I_MSA2_MSA2_PAZTNB xmlns:xf="http://www.w3.org/2002/xforms">9</xf:I_MSA2_MSA2_PAZTNB>
-								  <xf:I_MSA2_MSA2_POART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_POART>
-								  <xf:I_MSA2_MSA2_LNVPV xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_LNVPV>
-								  <xf:I_MSA2_MSA2_LAZTV xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_LAZTV>
-								  <xf:I_MSA2_MSA2_L3TC xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_L3TC>
-								  <xf:I_MSA2_MSA2_LOART xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_LOART>
-								  <xf:I_MSA2_MSA2_LOCATB xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_LOCATB>
-								  <xf:I_MSA2_MSA2_OLOCATBPREC xmlns:xf="http://www.w3.org/2002/xforms">kololo</xf:I_MSA2_MSA2_OLOCATBPREC>
-								  <xf:I_MSA2_MSA2_TRANSF xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_TRANSF>
-								  <xf:I_MSA2_MSA2_TYPED xmlns:xf="http://www.w3.org/2002/xforms">1</xf:I_MSA2_MSA2_TYPED>
-								  <xf:I_MSA2_MSA2_PMTCTV xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_PMTCTV>
-								  <xf:I_MSA2_MSA2_PMTCT xmlns:xf="http://www.w3.org/2002/xforms">0</xf:I_MSA2_MSA2_PMTCT>
-								  <xf:I_MSA2_MSA2_LAZTNBV xmlns:xf="http://www.w3.org/2002/xforms">7</xf:I_MSA2_MSA2_LAZTNBV>
-								  <xf:I_MSA2_MSA2_L3TCNB xmlns:xf="http://www.w3.org/2002/xforms">7</xf:I_MSA2_MSA2_L3TCNB>
-								</ODM> '''
+								<ODM StudyOID="S_12175" MetaDataVersionOID="v1.0.0" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="SE_SC2" name="SC2" StudyEventOID="SE_SC2" id="7" SubjectKey="Foo_Key" xmlns:xf="http://www.w3.org/2002/xforms">
+								  <IG_MSA2_MSA2_POARTPRECG FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">
+								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">3</xf:I_MSA2_MSA2_POARTNBV>
+								  </IG_MSA2_MSA2_POARTPRECG>
+								  <I_MSA2_INIT FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">CTK</I_MSA2_INIT>
+								  <I_MSA2_FROMD FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">2012-02-07</I_MSA2_FROMD>
+								  <I_MSA2_IDV FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">009</I_MSA2_IDV>
+								  <I_MSA2_MSA2_INITBF FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">1</I_MSA2_MSA2_INITBF>
+								  <I_MSA2_MSA2_INTBF FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">3</I_MSA2_MSA2_INTBF>
+								  <I_MSA2_MSA2_HAART FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_HAART>
+								  <I_MSA2_MSA2_ELHAART FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_ELHAART>
+								  <I_MSA2_MSA2_PAZT FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_PAZT>
+								  <I_MSA2_MSA2_PAZTNB FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">2</I_MSA2_MSA2_PAZTNB>
+								  <I_MSA2_MSA2_POART FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_POART>
+								  <I_MSA2_MSA2_LNVPV FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_LNVPV>
+								  <I_MSA2_MSA2_LAZTV FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">1</I_MSA2_MSA2_LAZTV>
+								  <I_MSA2_MSA2_L3TC FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">1</I_MSA2_MSA2_L3TC>
+								  <I_MSA2_MSA2_LOART FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_LOART>
+								  <I_MSA2_MSA2_LOCATB FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">2</I_MSA2_MSA2_LOCATB>
+								  <I_MSA2_MSA2_OLOCATBPREC FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">None</I_MSA2_MSA2_OLOCATBPREC>
+								  <I_MSA2_MSA2_TRANSF FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_TRANSF>
+								  <I_MSA2_MSA2_TYPED FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">1</I_MSA2_MSA2_TYPED>
+								  <I_MSA2_MSA2_PMTCTV FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">1</I_MSA2_MSA2_PMTCTV>
+								  <I_MSA2_MSA2_PMTCT FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">0</I_MSA2_MSA2_PMTCT>
+								  <I_MSA2_MSA2_LAZTNBV FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">4</I_MSA2_MSA2_LAZTNBV>
+								  <I_MSA2_MSA2_L3TCNB FormOID="F_MSA2_1" ItemGroupOID="IG_MSA2_UNGROUPED">4</I_MSA2_MSA2_L3TCNB>
+								  <I_MSA2_MSA2_L3TCNB2 FormOID="F_MSA2_1_2" ItemGroupOID="IG_MSA2_UNGROUPED_2">4</I_MSA2_MSA2_L3TCNB2>
+								  <I_MSA2_MSA2_HAART_T FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">0</I_MSA2_MSA2_HAART_T>
+
+								</ODM>
+								 '''
 		
 		instanceData.add(oxdInstanceData)
 
