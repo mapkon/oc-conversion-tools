@@ -26,7 +26,6 @@ class CRFMetaDataVersionProxy extends SoapRequestProperties {
 
 		log.info("Fetching CRF- Metadata for Openclinica study with ID: ${studyOID}")
 
-		this.studyOID = studyOID
 		envelope = getSoapEnvelope(studyOID)
 
 		def transportHandler = new HttpTransportHandler(envelope:envelope)
