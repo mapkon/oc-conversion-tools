@@ -29,6 +29,5 @@ class EventWebServiceProxy extends SoapRequestProperties {
 		def events = response.depthFirst().events[0]
 		
 		return events
-		
 	}
 }

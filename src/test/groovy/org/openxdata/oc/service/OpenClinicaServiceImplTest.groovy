@@ -154,4 +154,11 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 		def returnedEvents = openClinicaService.getEvents("OID")
 		assertEquals 71, returnedEvents.size()
 	}
+	
+	@Test void testGetEventsReturnsEventsWithSubjectKeys() {
+		def returnedEvents = openClinicaService.getEvents("OID")
+		returnedEvents.each {
+			assertTrue "Each event should have at least one subject attached", it.getSubjectKeys().size() >= 1
+		}
+	}
 }
