@@ -54,6 +54,13 @@ class TestData {
 		return instanceData
 	}
 
+	static def event1Xml = """<event>
+								<studySubjectOIDs>SS_20100200 SS_2M89098L SS_3M9779A</studySubjectOIDs>
+								<formOID>F_AEAD_3</formOID>
+								<eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+								<ordinal>1</ordinal>
+							 </event>"""
+	
 	static def eventProxyResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 									   <SOAP-ENV:Header/>
 									   <SOAP-ENV:Body>
@@ -490,6 +497,435 @@ class TestData {
 									      </findEventsByStudyOidResponse>
 									   </SOAP-ENV:Body>
 									</SOAP-ENV:Envelope>"""
+	
+	static def eventNode = """<events>
+					            <event>
+					               <studySubjectOIDs>SS_20100200 SS_2M89098L SS_3M9779A</studySubjectOIDs>
+					               <formOID>F_AEAD_3</formOID>
+					               <eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A SS_3M0001B SS_3C000LM</studySubjectOIDs>
+					               <formOID>F_SAES_2</formOID>
+					               <eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A SS_20100200</studySubjectOIDs>
+					               <formOID>F_AEAD_3</formOID>
+					               <eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+					               <ordinal>2</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A</studySubjectOIDs>
+					               <formOID>F_SAES_2</formOID>
+					               <eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+					               <ordinal>2</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M1001N SS_3M1235D SS_4M5678B SS_4M1234A SS_3M00022F</studySubjectOIDs>
+					               <formOID>F_BC_1</formOID>
+					               <eventDefinitionOID>SE_BOTTLE</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_1M0059F SS_2M0230K</studySubjectOIDs>
+					               <formOID>F_CCAC_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_1M0059F SS_3C000LM</studySubjectOIDs>
+					               <formOID>F_CCMC_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0001B SS_2M0230K</studySubjectOIDs>
+					               <formOID>F_CEAC_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M0003B SS_1M0059F</studySubjectOIDs>
+					               <formOID>F_CSDI_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0003Z SS_3M1235D SS_20100200_5643 SS_4M0003B SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MBA1_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_1M0059F</studySubjectOIDs>
+					               <formOID>F_MHIV_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_1M0059F</studySubjectOIDs>
+					               <formOID>F_MMLM_1</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M0003B SS_20100200_3763 SS_3M1235D SS_20100200_5643</studySubjectOIDs>
+					               <formOID>F_MEAM_2</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A SS_20100200_3763 SS_20100200_5643 SS_M20002Y SS_3C000LM SS_3M1235D SS_3R1020L</studySubjectOIDs>
+					               <formOID>F_MMLM_2</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5643 SS_3M1235D SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MHIV_2</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M5678B SS_20100200_3763 SS_20100200_5643 SS_3M1235D SS_M20002Y</studySubjectOIDs>
+					               <formOID>F_CCMC_2</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763 SS_M20002Y SS_3M1235D SS_20100200_5643</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M0003B SS_3M1235D SS_20100200_5643 SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CCAC_2</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M1235D SS_20100200_5643 SS_20100200_3763 SS_M20002Y</studySubjectOIDs>
+					               <formOID>F_CLLC_4</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M0003B</studySubjectOIDs>
+					               <formOID>F_CEAC_3</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5643 SS_3M1234A SS_3M1235D SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CEAC_4</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5643 SS_M20002Y SS_3M1235D SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CSDI_2</formOID>
+					               <eventDefinitionOID>SE_D7</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_2465 SS_4M1234A SS_4M1001N SS_4M9889Z SS_4M5678B</studySubjectOIDs>
+					               <formOID>F_CFSC_1</formOID>
+					               <eventDefinitionOID>SE_FINALSTA</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M1234A SS_4M1001N SS_4M5678B</studySubjectOIDs>
+					               <formOID>F_BC_1</formOID>
+					               <eventDefinitionOID>SE_FINALSTA</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_11111 SS_20100200_8076 SS_4M0003B SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CILC_1</formOID>
+					               <eventDefinitionOID>SE_IMMUNISA</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5457</studySubjectOIDs>
+					               <formOID>F_CMIC_1</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A SS_3M9876Z</studySubjectOIDs>
+					               <formOID>F_MBA2_1</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_6935 SS_3M9876Z SS_20100200_5589</studySubjectOIDs>
+					               <formOID>F_MHIV_2</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9876Z SS_20100200_8748</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9876Z</studySubjectOIDs>
+					               <formOID>F_CBLC_2</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9876Z</studySubjectOIDs>
+					               <formOID>F_MMLM_2</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>2</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5589</studySubjectOIDs>
+					               <formOID>F_MHIV_2</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>2</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A</studySubjectOIDs>
+					               <formOID>F_CCMC_2</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>2</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M9779A</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+					               <ordinal>2</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M1012W SS_1M0059F</studySubjectOIDs>
+					               <formOID>F_MHIV_1</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_1M0059F</studySubjectOIDs>
+					               <formOID>F_MLLM_1</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3C000LM SS_3M0001B SS_4M1004B SS_3R1020L</studySubjectOIDs>
+					               <formOID>F_MSA1_1</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0016S SS_4M0003B SS_1M0059F</studySubjectOIDs>
+					               <formOID>F_MSA1_2</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M1014M SS_20100200_2350 SS_3C0006S SS_20100200_6947 SS_20100200_4960 SS_20100200_5664 SS_3M0002T SS_20100200_336 SS_20100200_6288 SS_4M1012W SS_20100200_2072 SS_4M1001N SS_20100200_5306 SS_3M0005L SS_2M89098L SS_3M0003T SS_20100200_2465 SS_3M00022F SS_20100200_9269 SS_20100200_4364 SS_20100200_5643 SS_20100200_6999 SS_20100200_3197 SS_20100200_9805 SS_20100200_3931 SS_20100200_5678 SS_20100200_8245 SS_20100200_8693 SS_3M0020P SS_2M0230K SS_4M9999X SS_4M5678B SS_4M1234A SS_20100200_9838 SS_007 SS_20100200_9575 SS_20100200_3638 SS_20100200_8076 SS_20100200_6935 SS_0002 SS_0001 SS_0003 SS_00120 SS_20100200_5589 SS_20100200_8748 SS_0004 SS_20100200_5457 SS_4M1013Q SS_3M0003Z SS_20100200_897 SS_3M0004F SS_3M4651E SS_20100200_3763 SS_20100200 SS_3M1234A</studySubjectOIDs>
+					               <formOID>F_MSA1_3</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3931 SS_4M1013Q SS_4M1014M SS_4M1001N SS_3M0020P SS_3M0016S SS_3M0003T SS_3M0005L SS_3M0004F SS_3M0003Z SS_20100200_8748 SS_00120 SS_0001 SS_0002 SS_20100200_6935 SS_20100200_8076 SS_0003 SS_20100200_5589 SS_0004 SS_20100200_5457 SS_20100200_897 SS_20100200_3763 SS_20100200 SS_20100200_2350 SS_20100200_6947 SS_20100200_4960 SS_20100200_5664 SS_20100200_336 SS_20100200_2072 SS_20100200_5306 SS_20100200_5643 SS_20100200_6288 SS_20100200_3638 SS_20100200_9575 SS_20100200_9838 SS_20100200_8693 SS_20100200_4364 SS_20100200_9269 SS_20100200_2465 SS_20100200_6999 SS_20100200_3197 SS_20100200_9805 SS_20100200_5678 SS_20100200_8245 SS_4M9999X SS_4M5678B SS_4M1234A SS_3M1234A SS_2M89098L</studySubjectOIDs>
+					               <formOID>F_MHIV_2</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5664 SS_2M89098L SS_20100200_2072 SS_20100200_5306 SS_3M0004F SS_20100200_5678 SS_4M1012W SS_20100200_9805 SS_20100200_8245 SS_4M1014M SS_4M1001N SS_3M0003Z SS_20100200_3197 SS_20100200_8748 SS_20100200_3931 SS_20100200_6999 SS_20100200_4364 SS_20100200_9269 SS_20100200_8693 SS_00120 SS_0001 SS_0002 SS_4M1013Q SS_20100200_6935 SS_4M9999X SS_20100200_8076 SS_4M5678B SS_20100200_4960 SS_20100200_336 SS_0003 SS_20100200_5589 SS_3M0005L SS_4M1234A SS_20100200_2465 SS_20100200_9838 SS_20100200_9575 SS_0004 SS_20100200_5457 SS_20100200_897 SS_20100200_3638 SS_2M89098L SS_20100200_6288 SS_20100200_3763 SS_3M1234A SS_20100200 SS_20100200_2350 SS_20100200_5643 SS_3M00022F SS_3M0020P SS_3M0016S SS_3M0003T SS_20100200_6947</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_SC1</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_2M0230K</studySubjectOIDs>
+					               <formOID>F_CLLC_1</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3C000LM</studySubjectOIDs>
+					               <formOID>F_CSAC_1</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0004F SS_3C000LM SS_4M1004B SS_4M1001N SS_1M0059F SS_3M0005L</studySubjectOIDs>
+					               <formOID>F_MSA2_1</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_6947 SS_20100200_3763 SS_3M0082T SS_3M1235D SS_4M1001N SS_20100200_4960 SS_3M0005L SS_4M1004B SS_20100200_5643</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M1004B</studySubjectOIDs>
+					               <formOID>F_CSAC_2</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763 SS_0004 SS_20100200_4960 SS_20100200_5643 SS_4M1004B SS_3M1235D SS_20100200_6947 SS_3M0082T SS_3COO50M SS_3C0052A SS_3M0051T</studySubjectOIDs>
+					               <formOID>F_CLLC_4</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0082T SS_3M0051T SS_20100200_3763 SS_000A SS_3C0052A SS_20100200_4960 SS_3M1235D SS_20100200_6947 SS_4M0003B SS_3M0050M SS_20100200_5643 SS_0004</studySubjectOIDs>
+					               <formOID>F_MSA2_2</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763 SS_20100200_6947 SS_20100200_4960 SS_20100200_5643 SS_3M0082T SS_3COO50M SS_3C0052A SS_3M0051T SS_3M1235D</studySubjectOIDs>
+					               <formOID>F_CSAC_3</formOID>
+					               <eventDefinitionOID>SE_SC2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5643</studySubjectOIDs>
+					               <formOID>F_MBA1_1</formOID>
+					               <eventDefinitionOID>SE_W10</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5643</studySubjectOIDs>
+					               <formOID>F_CCAC_2</formOID>
+					               <eventDefinitionOID>SE_W10</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_5643</studySubjectOIDs>
+					               <formOID>F_CBLC_2</formOID>
+					               <eventDefinitionOID>SE_W10</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MBA1_1</formOID>
+					               <eventDefinitionOID>SE_W14</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0032G</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_W14</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CCAC_2</formOID>
+					               <eventDefinitionOID>SE_W14</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CBLC_2</formOID>
+					               <eventDefinitionOID>SE_W14</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_8748</studySubjectOIDs>
+					               <formOID>F_CCAC_2</formOID>
+					               <eventDefinitionOID>SE_W18</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_4M0003B</studySubjectOIDs>
+					               <formOID>F_CBLC_1</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CMIC_1</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0001B</studySubjectOIDs>
+					               <formOID>F_CSDC_1</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MBA1_1</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MMLM_2</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MHIV_2</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763 SS_2M89098L</studySubjectOIDs>
+					               <formOID>F_CCMC_2</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0011Q SS_20100200_5643 SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_MLLM_3</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CCAC_2</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763</studySubjectOIDs>
+					               <formOID>F_CBLC_2</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_3763 SS_M001</studySubjectOIDs>
+					               <formOID>F_CSDC_2</formOID>
+					               <eventDefinitionOID>SE_W2</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_2M0230K</studySubjectOIDs>
+					               <formOID>F_MLLM_5</formOID>
+					               <eventDefinitionOID>SE_W50</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_3M0061H</studySubjectOIDs>
+					               <formOID>F_CMIC_1</formOID>
+					               <eventDefinitionOID>SE_W6</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					            <event>
+					               <studySubjectOIDs>SS_20100200_8748 SS_3M0061H</studySubjectOIDs>
+					               <formOID>F_CBLC_2</formOID>
+					               <eventDefinitionOID>SE_W6</eventDefinitionOID>
+					               <ordinal>1</ordinal>
+					            </event>
+					         </events>"""
 	
 	static def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 										   <SOAP-ENV:Header/>

@@ -8,6 +8,7 @@ import java.util.Collection
 import java.util.Date
 import java.util.List
 
+import org.openxdata.oc.model.Event
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -43,7 +44,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			
 			def host = props.getAt('host')
 			
-			ConnectionFactory connectionFactory = new ConnectionFactory(host:host)
+			def connectionFactory = new ConnectionFactory(host:host)
 			client = new OpenClinicaSoapClientImpl(connectionFactory)
 		}
 		
@@ -142,6 +143,20 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			}
 		}
 		return (String) getClient().importData(allData)	
+	}
+	
+	List<Event> getEvents(String studyOID){
+		
+		def events = []
+		def xml = client.findEventsByStudyOID(studyOID)
+		
+		def eventNode = new XmlSlurper().parseText(xml)
+		eventNode.event.each {
+			def event = new Event(it)
+			events.add(event)
+		}
+		
+		return events
 	}
 	
 	void setStudyService(StudyManagerService studyService) {
