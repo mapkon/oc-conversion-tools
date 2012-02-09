@@ -33,7 +33,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
 			
-			assertEquals  "Uganda", convertedStudyXml.@name.text()
+			assertEquals  "Default Study", convertedStudyXml.@name.text()
 						
 		}
 	}
@@ -50,18 +50,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetOpenxdataFormReturnsValidXformWithStudyName() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
-		play {
-
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-
-			def convertedStudyXml = client.getOpenxdataForm("oid")
-
-			assertEquals 'Uganda', convertedStudyXml.@name.text()
-		}
-	}
-	
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyStudyKey() {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
@@ -70,7 +58,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def convertedStudyXml = client.getOpenxdataForm("oid")
 
-			assertEquals 'S_12175', convertedStudyXml.@studyKey.text()
+			assertEquals 'S_DEFAULTS1', convertedStudyXml.@studyKey.text()
 		}
 	}
 	

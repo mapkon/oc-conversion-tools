@@ -81,7 +81,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def studyOID = xml.Study[0].@OID
 
-			assertEquals 'S_12175', studyOID.text()
+			assertEquals 'S_DEFAULTS1', studyOID.text()
 		}
 	}
 
@@ -103,7 +103,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def studyNameText = xml.Study.GlobalVariables.StudyName[0].text()
 
-			assertEquals 'Uganda', studyNameText
+			assertEquals 'Default Study', studyNameText
 		}
 	}
 
@@ -125,7 +125,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def studyDescriptionElement = xml.Study.GlobalVariables.StudyDescription[0]
 
-			assertEquals 'Site of Uganda', studyDescriptionElement.text().trim()
+			assertEquals 'test instance', studyDescriptionElement.text().trim()
 		}
 	}
 
@@ -147,7 +147,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def protocolNameElement = xml.Study.GlobalVariables.ProtocolName[0]
 
-			assertEquals '12175', protocolNameElement.text()
+			assertEquals 'default-study', protocolNameElement.text()
 		}
 	}
 
@@ -306,7 +306,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testFindCRFSReturnsResponseWithTHIRDStudyEventDefHavingFormRefWithFormOID_F_SAES_2() {
+	@Test void testFindCRFSReturnsResponseWithTHIRDStudyEventDefHavingFormRefWithFormOID_F_AEAD_3() {
 		play{
 
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
@@ -314,11 +314,11 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[2].children()[0]
 
-			assertEquals 'F_SAES_2', formRefs.@FormOID.text()
+			assertEquals 'F_AEAD_3', formRefs.@FormOID.text()
 		}
 	}
 	
-	@Test void testFindCRFSReturnsResponseWithTHIRDStudyEventDefHavingFormRefWithFormOID_F_AEAD_3() {
+	@Test void testFindCRFSReturnsResponseWithTHIRDStudyEventDefHavingFormRefWithFormOID_F_SAES_2() {
 		play{
 
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
@@ -326,7 +326,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[2].children()[1]
 
-			assertEquals 'F_AEAD_3', formRefs.@FormOID.text()
+			assertEquals 'F_SAES_2', formRefs.@FormOID.text()
 		}
 	}
 	
@@ -534,13 +534,25 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testFindCRFSReturnsResponseWithEIGTHStudyEventDefHavingFormRefWithFormOID_F_CBLC_2() {
+	@Test void testFindCRFSReturnsResponseWithEIGTHStudyEventDefHavingFormRefWithFormOID_F_MMLM_2() {
 		play{
 
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
 			def xml = new XmlSlurper().parseText(response)
 
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[6]
+
+			assertEquals 'F_MMLM_2', formRefs.@FormOID.text()
+		}
+	}
+	
+	@Test void testFindCRFSReturnsResponseWithEIGTHStudyEventDefHavingFormRefWithFormOID_F_CBLC_2() {
+		play{
+
+			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
+			def xml = new XmlSlurper().parseText(response)
+
+			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[7]
 
 			assertEquals 'F_CBLC_2', formRefs.@FormOID.text()
 		}
@@ -552,21 +564,9 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
 			def xml = new XmlSlurper().parseText(response)
 
-			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[7]
-
-			assertEquals 'F_CSDC_2', formRefs.@FormOID.text()
-		}
-	}
-	
-	@Test void testFindCRFSReturnsResponseWithEIGTHStudyEventDefHavingFormRefWithFormOID_F_MMLM_2() {
-		play{
-
-			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
-			def xml = new XmlSlurper().parseText(response)
-
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[8]
 
-			assertEquals 'F_MMLM_2', formRefs.@FormOID.text()
+			assertEquals 'F_CSDC_2', formRefs.@FormOID.text()
 		}
 	}
 	
