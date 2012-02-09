@@ -19,7 +19,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	void setUp(){
 		
-		latestCRFVersions = TestData.getReturnXml()
+		latestCRFVersions = TestData.getCRFWebServiceResponse()
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXmlWithCorrectStudyName() {
@@ -242,7 +242,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	@Test void testFindAllCRFSDoesNotReturnNull() {
 		
-		def connectionFactory = setUpConnectionFactoryMock(TestData.getReturnXml())
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)

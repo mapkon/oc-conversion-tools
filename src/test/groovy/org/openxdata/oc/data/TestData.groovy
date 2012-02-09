@@ -7,7 +7,7 @@ import org.openxdata.oc.util.TransformUtil
 @Ignore("Some maven installation will attempt to run this as a test")
 class TestData {
 
-	static def getReturnXml() {
+	static def getCRFWebServiceResponse() {
 		
 		def response = new TransformUtil().loadFileContents('CRFRequestResponse.xml')
 	}
