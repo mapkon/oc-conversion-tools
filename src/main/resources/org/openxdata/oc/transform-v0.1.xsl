@@ -121,7 +121,7 @@
 									<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 									<xsl:attribute name="nodeset">/ODM/<xsl:value-of
 										select="$itemGroupId" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
-									<xsl:call-template name="determineQuestionType">
+									<xsl:call-template name="determineBindQuestionType">
 										<xsl:with-param name="itemDef" select="../../oc:ItemDef[@OID=@ItemOID]" />
 									</xsl:call-template>
 								</bind>
@@ -146,14 +146,14 @@
 				<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemId]" />
 				<xsl:attribute name="id"><xsl:value-of select="$itemId" /></xsl:attribute>
 				<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$itemId" /></xsl:attribute>
-				<xsl:call-template name="determineQuestionType">
+				<xsl:call-template name="determineBindQuestionType">
 					<xsl:with-param name="itemDef" select="$itemDef" />
 				</xsl:call-template>
 			</bind>
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template name="determineQuestionType">
+	<xsl:template name="determineBindQuestionType">
 		<xsl:param name="itemDef" />
 		<xsl:choose>
 			<xsl:when test="$itemDef/@DataType = 'integer'">
@@ -205,6 +205,7 @@
 	<xsl:template name="createQuestions">
 		<xsl:param name="formId" />
 		<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
+				
 		<xsl:choose>
 			<xsl:when test="//oc:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 				<xsl:attribute name="id">
@@ -222,10 +223,11 @@
 						<xsl:for-each select="../../oc:ItemGroupDef[@OID=$itemGroupId]/oc:ItemRef">
 							<xsl:variable name="itemOID" select="@ItemOID" />
 							<xsl:variable name="itemDef" select="../../oc:ItemDef[@OID=$itemOID]" />
-
+					
 							<xsl:call-template name="insertQuestionsAccordingToType">
 								<xsl:with-param name="itemOID" select="$itemOID"></xsl:with-param>
 								<xsl:with-param name="itemDef" select="$itemDef" />
+								<xsl:with-param name="formId" select="$formId" />
 							</xsl:call-template>
 						</xsl:for-each>
 					</repeat>
