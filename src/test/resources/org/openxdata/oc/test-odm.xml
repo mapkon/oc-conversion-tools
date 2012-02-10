@@ -231,6 +231,13 @@
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA1_MSA1_COMPLYREASG" Name="MSA1_complyreasG" Repeating="Yes" SASDatasetName="MSA1_COM">
                 <ItemRef ItemOID="I_MSA1_MSA1_COMPLYREAS" OrderNumber="1" Mandatory="No"/>
+                
+                <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" ItemGroupName="MSA1_complyreasG">
+                    <OpenClinica:PresentInForm FormOID="F_MSA1_2" ShowGroup="Yes" FormName="Extra Medication" FormVersionName="2">
+                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
+                        <OpenClinica:ItemGroupHeader>Q9_ Follow up</OpenClinica:ItemGroupHeader>
+                    </OpenClinica:PresentInForm>
+                </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA2_UNGROUPED" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO031">
                 <ItemRef ItemOID="I_MSA2_INIT" OrderNumber="1" Mandatory="Yes"/>
@@ -416,6 +423,15 @@
                     Q10a_ If yes, what could that be?
                     </TranslatedText>
                 </Question>
+                <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_COMPLYREAS">
+                    <OpenClinica:ItemPresentInForm FormOID="F_MSA1_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
+                        <OpenClinica:LeftItemText>Test Left Item</OpenClinica:LeftItemText>
+                        <OpenClinica:ItemHeader>Test header</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemSubHeader>Test Sub Header</OpenClinica:ItemSubHeader>
+                        <OpenClinica:SectionLabel>Test Section Label</OpenClinica:SectionLabel>
+                        <OpenClinica:ItemResponse ResponseType="text"/>
+                    </OpenClinica:ItemPresentInForm>
+                </OpenClinica:ItemDetails>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_NOELIGREAS" Name="MSA1_noeligreas" DataType="text" Length="41" SASFieldName="MSA1_noe" Comment="Reason why mother not eligible">
                 <Question>
