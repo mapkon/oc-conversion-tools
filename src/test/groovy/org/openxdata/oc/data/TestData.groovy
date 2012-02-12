@@ -4,7 +4,7 @@ import org.junit.Ignore
 import org.openxdata.oc.util.TransformUtil
 
 
-@Ignore("Some maven installation will attempt to run this as a test")
+@Ignore("Some maven installations will attempt to run this as a test")
 class TestData {
 
 	static def getCRFWebServiceResponse() {
