@@ -425,9 +425,9 @@
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_COMPLYREAS">
                     <OpenClinica:ItemPresentInForm FormOID="F_MSA1_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
-                        <OpenClinica:LeftItemText>Test Left Item</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>Test header</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>Test Sub Header</OpenClinica:ItemSubHeader>
+                        <OpenClinica:LeftItemText>Test Left Item Text</OpenClinica:LeftItemText>
+                        <OpenClinica:ItemHeader>Test ItemHeader</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemSubHeader>Test ItemSubHeader</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>Test Section Label</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="text"/>
                     </OpenClinica:ItemPresentInForm>
