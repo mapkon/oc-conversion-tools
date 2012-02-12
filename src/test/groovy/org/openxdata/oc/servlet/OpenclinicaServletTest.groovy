@@ -9,6 +9,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
+import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.FormDef
@@ -33,7 +34,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		study = createStudy()
 
-		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(metaDataReturnSOAPResponse)
+		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
 		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(study)
 
 		request = new MockHttpServletRequest()
