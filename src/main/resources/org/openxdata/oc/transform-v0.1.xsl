@@ -3,7 +3,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:odm="http://www.cdisc.org/ns/odm/v1.3"
 	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1"
 	xmlns:xf="http://www.w3.org/2002/xforms">
-	
+
 	<xsl:output method="xml" />
 
 	<xsl:template match="/">
@@ -12,7 +12,8 @@
 			<xsl:attribute name="studyKey"><xsl:value-of select="//odm:Study/@OID" /></xsl:attribute>
 			<xsl:attribute name="description"><xsl:value-of
 				select="normalize-space(//odm:StudyDescription)" /></xsl:attribute>
-			<xsl:for-each select="odm:ODM/odm:Study/odm:MetaDataVersion/odm:StudyEventDef">
+			<xsl:for-each
+				select="odm:ODM/odm:Study/odm:MetaDataVersion/odm:StudyEventDef">
 				<form>
 					<xsl:attribute name="name">
 						<xsl:value-of select="@OID" />
@@ -21,7 +22,8 @@
 						<xsl:value-of select="@Name" />
 					</xsl:attribute>
 					<version>
-						<xsl:attribute name="name"><xsl:value-of select="@Name" />-v1</xsl:attribute>
+						<xsl:attribute name="name"><xsl:value-of
+							select="@Name" />-v1</xsl:attribute>
 						<xsl:attribute name="description">Converted from ODM using the oc-conversion-tools</xsl:attribute>
 						<xform>
 							<xsl:call-template name="createForm" />
@@ -53,34 +55,43 @@
 							select="../../@OID" /></xsl:attribute>
 						<xsl:attribute name="StudyEventOID"><xsl:value-of
 							select="@OID" /></xsl:attribute>
-						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of 
+						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of
 							select="../@OID" /></xsl:attribute>
-							
+
 						<xsl:attribute name="SubjectKey" />
-						
+
 						<xsl:for-each select="odm:FormRef">
 
 							<xsl:variable name="formId" select="@FormOID" />
 							<xsl:for-each select="../../odm:FormDef[@OID=$formId]/odm:ItemGroupRef">
 								<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 								<xsl:choose>
-									<xsl:when test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
+									<xsl:when
+										test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 										<xsl:element name="{$itemGroupId}">
-											<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
-											<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-											<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
+											<xsl:attribute name="FormOID"><xsl:value-of
+												select="$formId" /></xsl:attribute>
+											<xsl:attribute name="ItemGroupOID"><xsl:value-of
+												select="$itemGroupId" /></xsl:attribute>
+											<xsl:for-each
+												select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
 												<xsl:element name="{@ItemOID}">
-													<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
-													<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
+													<xsl:attribute name="FormOID"><xsl:value-of
+														select="$formId" /></xsl:attribute>
+													<xsl:attribute name="ItemGroupOID"><xsl:value-of
+														select="$itemGroupId" /></xsl:attribute>
 												</xsl:element>
 											</xsl:for-each>
 										</xsl:element>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
+										<xsl:for-each
+											select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
 											<xsl:element name="{@ItemOID}">
-												<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
-												<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
+												<xsl:attribute name="FormOID"><xsl:value-of
+													select="$formId" /></xsl:attribute>
+												<xsl:attribute name="ItemGroupOID"><xsl:value-of
+													select="$itemGroupId" /></xsl:attribute>
 											</xsl:element>
 										</xsl:for-each>
 									</xsl:otherwise>
@@ -110,20 +121,27 @@
 			<xsl:for-each select="../../odm:FormDef[@OID=$formId]/odm:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:choose>
-					<xsl:when test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
+					<xsl:when
+						test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 						<bind>
-							<xsl:variable name="itemDef" select="../../odm:ItemDef[@OID=@ItemOID]" />
+							<xsl:variable name="itemDef"
+								select="../../odm:ItemDef[@OID=@ItemOID]" />
 
-							<xsl:attribute name="id"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-							<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$itemGroupId" /></xsl:attribute>
+							<xsl:attribute name="id"><xsl:value-of
+								select="$itemGroupId" /></xsl:attribute>
+							<xsl:attribute name="nodeset">/ODM/<xsl:value-of
+								select="$itemGroupId" /></xsl:attribute>
 
-							<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
+							<xsl:for-each
+								select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
 								<bind>
-									<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
+									<xsl:attribute name="id"><xsl:value-of
+										select="@ItemOID" /></xsl:attribute>
 									<xsl:attribute name="nodeset">/ODM/<xsl:value-of
 										select="$itemGroupId" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 									<xsl:call-template name="determineBindQuestionType">
-										<xsl:with-param name="itemDef" select="../../odm:ItemDef[@OID=@ItemOID]" />
+										<xsl:with-param name="itemDef"
+											select="../../odm:ItemDef[@OID=@ItemOID]" />
 									</xsl:call-template>
 								</bind>
 							</xsl:for-each>
@@ -146,7 +164,8 @@
 				<xsl:variable name="itemId" select="@ItemOID" />
 				<xsl:variable name="itemDef" select="../../odm:ItemDef[@OID=$itemId]" />
 				<xsl:attribute name="id"><xsl:value-of select="$itemId" /></xsl:attribute>
-				<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$itemId" /></xsl:attribute>
+				<xsl:attribute name="nodeset">/ODM/<xsl:value-of
+					select="$itemId" /></xsl:attribute>
 				<xsl:call-template name="determineBindQuestionType">
 					<xsl:with-param name="itemDef" select="$itemDef" />
 				</xsl:call-template>
@@ -206,13 +225,13 @@
 	<xsl:template name="createQuestions">
 		<xsl:param name="formId" />
 		<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
-				
+
 		<xsl:choose>
 			<xsl:when test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 				<xsl:attribute name="id">
 					<xsl:value-of select="$itemGroupId" />
 				</xsl:attribute>
-								
+
 				<group>
 					<xsl:attribute name="id">
 						<xsl:value-of select="$itemGroupId" />
@@ -221,11 +240,14 @@
 						<xsl:value-of select="../../odm:FormDef[@OID = $formId]/@Name" />
 					</label>
 					<repeat>
-						<xsl:attribute name="bind"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-						<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
+						<xsl:attribute name="bind"><xsl:value-of
+							select="$itemGroupId" /></xsl:attribute>
+						<xsl:for-each
+							select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
 							<xsl:variable name="itemOID" select="@ItemOID" />
-							<xsl:variable name="itemDef" select="../../odm:ItemDef[@OID=$itemOID]" />
-				
+							<xsl:variable name="itemDef"
+								select="../../odm:ItemDef[@OID=$itemOID]" />
+
 							<xsl:call-template name="insertQuestionsAccordingToType">
 								<xsl:with-param name="itemOID" select="$itemOID"></xsl:with-param>
 								<xsl:with-param name="itemDef" select="$itemDef" />
@@ -236,7 +258,8 @@
 				</group>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
+				<xsl:for-each
+					select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
 					<xsl:variable name="itemId" select="@ItemOID" />
 					<xsl:variable name="itemDef" select="../../odm:ItemDef[@OID=$itemId]" />
 					<xsl:call-template name="insertQuestionsAccordingToType">
@@ -254,35 +277,38 @@
 		<xsl:param name="itemOID" />
 		<xsl:param name="itemDef" />
 		<xsl:param name="formId" />
-		
+
 		<xsl:variable name="questionText">
 			<xsl:call-template name="createQuestionText">
 				<xsl:with-param name="itemDef" select="$itemDef" />
 				<xsl:with-param name="formId" select="$formId" />
 			</xsl:call-template>
 		</xsl:variable>
-		
+
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:CodeListRef">
 				<select1>
-					<xsl:attribute name="bind"><xsl:value-of select="$itemOID" /></xsl:attribute>
+					<xsl:attribute name="bind"><xsl:value-of
+						select="$itemOID" /></xsl:attribute>
 					<xsl:variable name="codeListID">
 						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
 					</xsl:variable>
 					<label>
-					<xsl:choose>
-						<xsl:when test="$questionText = '--'">
-							<xsl:value-of
-								select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="$questionText" />
-						</xsl:otherwise>
-					</xsl:choose>
+						<xsl:choose>
+							<xsl:when test="$questionText = '--'">
+								<xsl:value-of
+									select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$questionText" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</label>
-					<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
+					<xsl:for-each
+						select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
 						<item>
-							<xsl:attribute name="id"><xsl:value-of select="@CodedValue" /></xsl:attribute>
+							<xsl:attribute name="id"><xsl:value-of
+								select="@CodedValue" /></xsl:attribute>
 							<label>
 								<xsl:value-of select="odm:Decode/odm:TranslatedText"></xsl:value-of>
 							</label>
@@ -295,24 +321,27 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<input>
-					<xsl:attribute name="bind"><xsl:value-of select="$itemOID" /></xsl:attribute>
+					<xsl:attribute name="bind"><xsl:value-of
+						select="$itemOID" /></xsl:attribute>
 					<label>
-					<xsl:choose>
-						<xsl:when test="$questionText = '--'">
-							<xsl:value-of
-								select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="$questionText" />
-						</xsl:otherwise>
-					</xsl:choose>
+						<xsl:choose>
+							<xsl:when test="$questionText = '--'">
+								<xsl:value-of
+									select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$questionText" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</label>
 					<xsl:if test="$itemDef/odm:MeasurementUnitRef">
 						<hint>
 							<xsl:variable name="unitId">
-								<xsl:value-of select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
+								<xsl:value-of
+									select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
 							</xsl:variable>
-							<xsl:value-of select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
+							<xsl:value-of
+								select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
 						</hint>
 					</xsl:if>
 				</input>
@@ -325,10 +354,19 @@
 		<xsl:param name="itemDef" />
 		<xsl:param name="formId" />
 
-		<xsl:variable name="constructedQuestionText"><xsl:value-of select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:ItemHeader" />-<xsl:value-of select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:ItemSubHeader"/>-<xsl:value-of select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:LeftItemText"/></xsl:variable>
-		
+		<xsl:variable name="constructedQuestionText">
+			<xsl:value-of
+				select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:ItemHeader" />
+			-
+			<xsl:value-of
+				select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:ItemSubHeader" />
+			-
+			<xsl:value-of
+				select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:LeftItemText" />
+		</xsl:variable>
+
 		<xsl:value-of select="normalize-space($constructedQuestionText)" />
-		
+
 	</xsl:template>
 
 </xsl:stylesheet>
