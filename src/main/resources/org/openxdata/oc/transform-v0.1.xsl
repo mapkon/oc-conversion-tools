@@ -295,7 +295,7 @@
 					</xsl:variable>
 					<label>
 						<xsl:choose>
-							<xsl:when test="$questionText = '--'">
+							<xsl:when test="$questionText = '- -'">
 								<xsl:value-of
 									select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 							</xsl:when>
@@ -325,7 +325,7 @@
 						select="$itemOID" /></xsl:attribute>
 					<label>
 						<xsl:choose>
-							<xsl:when test="$questionText = '--'">
+							<xsl:when test="$questionText = '- -'">
 								<xsl:value-of
 									select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 							</xsl:when>
