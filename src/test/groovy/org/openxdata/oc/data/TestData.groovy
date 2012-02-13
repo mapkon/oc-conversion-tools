@@ -17,7 +17,7 @@ class TestData {
 		def instanceData = []
 		def oxdInstanceData = '''
 								<ODM StudyOID="S_12175" MetaDataVersionOID="v1.0.0" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="SE_SC2" name="SC2" StudyEventOID="SE_SC2" id="7" SubjectKey="Foo_Key" xmlns:xf="http://www.w3.org/2002/xforms">
-								  <IG_MSA2_MSA2_POARTPRECG FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">
+								  <IG_MSA2_MSA2_POARTPRECG>
 								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
 								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" FormOID="F_MSA2_2" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">3</xf:I_MSA2_MSA2_POARTNBV>
 								  </IG_MSA2_MSA2_POARTPRECG>

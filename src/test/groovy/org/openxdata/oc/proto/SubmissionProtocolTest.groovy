@@ -154,6 +154,7 @@ class SubmissionProtocolTest {
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemDataNodes() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
+		
 		itemGroupDataNodes.each {
 			assertTrue "Must have ItemData Nodes", it.children().size() > 0
 		}

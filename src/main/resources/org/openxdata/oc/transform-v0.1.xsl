@@ -69,10 +69,6 @@
 									<xsl:when
 										test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
 										<xsl:element name="{$itemGroupId}">
-											<xsl:attribute name="FormOID"><xsl:value-of
-												select="$formId" /></xsl:attribute>
-											<xsl:attribute name="ItemGroupOID"><xsl:value-of
-												select="$itemGroupId" /></xsl:attribute>
 											<xsl:for-each
 												select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
 												<xsl:element name="{@ItemOID}">
