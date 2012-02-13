@@ -34,8 +34,8 @@ class SubmissionProtocol {
 
 										itemNodes.each {
 
-											def itemFormOID = getItemFormOIDForRepeat(it)
-											def itemGroupOID = getItemGroupOIDForRepeat(it)
+											String itemFormOID = getItemFormOIDForRepeat(it)
+											String itemGroupOID = getItemGroupOIDForRepeat(it)
 
 											if(itemFormOID.equals(formOID.toString())) {
 
