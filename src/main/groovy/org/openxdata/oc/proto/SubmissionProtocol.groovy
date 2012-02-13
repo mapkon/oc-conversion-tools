@@ -5,6 +5,7 @@ import groovy.xml.StreamingMarkupBuilder
 class SubmissionProtocol {
 
 	def instanceDataXml
+	
 	def createOpenClinicaInstanceData(def openXdataInstanceData) {
 
 		def xml
@@ -69,7 +70,7 @@ class SubmissionProtocol {
 
 		def itemFormOID
 
-		// We imagine it is an instance definition for a repeat question
+		// Assumption is that this is an instance definition for a repeat question
 		if(item.children().size() > 0) {
 			item.children().each {
 				itemFormOID = it.@FormOID
@@ -86,7 +87,7 @@ class SubmissionProtocol {
 
 		def itemGroupOID
 
-		// We imagine it is an instance definition for a repeat question
+		// Assumption is that this is an instance definition for a repeat question
 		if(item.children().size() > 0) {
 			item.children().each {
 				itemGroupOID = it.@ItemGroupOID
@@ -102,15 +103,25 @@ class SubmissionProtocol {
 	def getItemGroupItemDataNodes(String itemGroupOID) {
 
 		def itemNodes = [] 
-		def itemGroups = instanceDataXml.children().findAll { it.@ItemGroupOID == itemGroupOID}
 		
-		itemGroups.each {
-			if(it.children().size() > 0) {
-				it.children().each { item ->
-					itemNodes.add(item)
+		instanceDataXml.children().each {
+			
+		// Assumption is that this is an instance definition for a repeat question
+			if(it.@ItemGroupOID == "") {
+				if(it.children().size() > 0) {
+					it.children().each { item ->
+						if(item.@ItemGroupOID.equals(itemGroupOID)) {
+							itemNodes.add(item)
+						}
+					}
 				}
 			}
-			else if(it.children().size() == 0){
+		}
+		
+		def matchingItemNodes = instanceDataXml.children().findAll { it.@ItemGroupOID == itemGroupOID}
+		
+		matchingItemNodes.each {
+			if(it.children().size() == 0){
 				itemNodes.add(it)
 			}
 		}
