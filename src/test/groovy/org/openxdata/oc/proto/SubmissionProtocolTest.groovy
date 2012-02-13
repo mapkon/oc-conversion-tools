@@ -169,19 +169,19 @@ class SubmissionProtocolTest {
 		}
 	}
 	
-	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHavingOneItemData() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHavingOneItemDataNode() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
 		assertEquals 1, itemGroupDataNodes[0].children().size()
 	}
 	
-	@Test void testCreateInstanceDataReturnsValidXmlWithSecondItemGroupDataHavingOneItemData() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithSecondItemGroupDataHavingTwentyTwoItemDataNodes() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
 		assertEquals 22, itemGroupDataNodes[1].children().size()
 	}
 	
-	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingOneItemData() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingThreeItemDataNodes() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
 		assertEquals 3, itemGroupDataNodes[2].children().size()
