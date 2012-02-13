@@ -131,21 +131,19 @@
 								select="$itemGroupId" /></xsl:attribute>
 							<xsl:attribute name="nodeset">/ODM/<xsl:value-of
 								select="$itemGroupId" /></xsl:attribute>
-
-							<xsl:for-each
-								select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
-								<bind>
-									<xsl:attribute name="id"><xsl:value-of
-										select="@ItemOID" /></xsl:attribute>
-									<xsl:attribute name="nodeset">/ODM/<xsl:value-of
-										select="$itemGroupId" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
-									<xsl:call-template name="determineBindQuestionType">
-										<xsl:with-param name="itemDef"
-											select="../../odm:ItemDef[@OID=@ItemOID]" />
-									</xsl:call-template>
-								</bind>
-							</xsl:for-each>
 						</bind>
+
+					<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupId]/odm:ItemRef">
+						<bind>
+							<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
+							<xsl:attribute name="nodeset">/ODM/<xsl:value-of
+								select="$itemGroupId" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
+							<xsl:call-template name="determineBindQuestionType">
+								<xsl:with-param name="itemDef"
+									select="../../odm:ItemDef[@OID=@ItemOID]" />
+							</xsl:call-template>
+						</bind>
+					</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:call-template name="createItemBinds">
