@@ -86,7 +86,7 @@
 		<dependency>
 			<artifactId>junit</artifactId>
 			<groupId>junit</groupId>
-			<version>4.4</version>
+			<version>4.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.gmock</groupId>
@@ -277,6 +277,24 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>org.concordion</groupId>
+			<artifactId>concordion</artifactId>
+			<version>1.4.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit-dep</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.concordion</groupId>
+			<artifactId>concordion-extensions</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+            
 	</dependencies>
 
 	<build>
@@ -301,6 +319,11 @@
 					<argLine>-Xms1024m -Xmx1024m</argLine>
 					<testFailureIgnore>false</testFailureIgnore>
 					<skip>false</skip>
+					<systemPropertyVariables>
+						<concordion.output.dir>
+							${project.build.directory}/concordion
+						</concordion.output.dir>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<plugin>

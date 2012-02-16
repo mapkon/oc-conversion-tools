@@ -11,4 +11,15 @@ public class TransformUtil {
 		}
 	}
 
+	public String getStudyName(def xformText) {
+		
+		if(xformText instanceof String) {
+			def xml = new XmlSlurper().parseText(xformText)
+			return xml.@name.text()
+			
+		}	
+		else {
+			return xformText.@name.text()
+		}	
+	}
 }

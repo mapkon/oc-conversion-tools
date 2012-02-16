@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+	<link href="../concordion.css" rel="stylesheet" type="text/css" />
+    <body>
+	
+		<h1>Testing Study Name</h1>
+		<p>
+			The Study Name of the Converted OpenXData Study should match the Study Name specified in the OpenClinica Study.
+		</p>
+        <div class="example">
+		
+			<h3>Examples</h3>
+			
+			<p>
+				A Study in OpenClinica with name "Default Study - Uganda" will be converted to an openXdata Study with name
+				<span concordion:assertEquals="getStudyName()">Default Study - Uganda</span>
+			</p>
+		</div>
+    </body>
+</html>
