@@ -18,6 +18,7 @@ import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.User
+import org.openxdata.server.admin.model.exception.OpenXDataSessionExpiredException
 import org.openxdata.server.admin.model.exception.UnexpectedException
 import org.openxdata.server.admin.model.paging.PagingLoadConfig
 import org.openxdata.server.security.util.OpenXDataSecurityUtil
@@ -66,16 +67,14 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		StudyImporter importer = new StudyImporter(xml)
 		StudyDef study = createStudy(importer)
 		
-		log.info("OXD: Saving converted study definition.")
-		studyService.saveStudy(study)
-		
 		return study
 	}
 
 	private StudyDef createStudy(StudyImporter importer) {
 		
 		Date dateCreated = new Date()
-		User creator = OpenXDataSecurityUtil.getLoggedInUser()
+		
+		User creator = getUser();
 		
 		StudyDef study = (StudyDef) importer.extractStudy()
 		study.setCreator(creator)
@@ -93,6 +92,17 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		}
 		
 		return study
+	}
+	
+	private User getUser() {
+		User user = null;
+		try {
+			user = OpenXDataSecurityUtil.getLoggedInUser()
+		}catch(OpenXDataSessionExpiredException ex){
+			user = new User('admin')
+		}
+		
+		return user
 	}
 	
 	private void setFormVersionProperties(FormDef form, Date dateCreated, User creator) {

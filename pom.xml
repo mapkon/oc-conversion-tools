@@ -149,10 +149,6 @@
 				</exclusion>
 				<exclusion>
 					<groupId>org.springframework.security</groupId>
-					<artifactId>spring-security-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.security</groupId>
 					<artifactId>spring-security-core-tiger</artifactId>
 				</exclusion>
 				<exclusion>
