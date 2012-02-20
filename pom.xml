@@ -288,6 +288,7 @@
 					<artifactId>junit-dep</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.concordion</groupId>
