@@ -320,11 +320,6 @@
 					<argLine>-Xms1024m -Xmx1024m</argLine>
 					<testFailureIgnore>false</testFailureIgnore>
 					<skip>false</skip>
-					<systemPropertyVariables>
-						<concordion.output.dir>
-							${project.build.directory}/concordion
-						</concordion.output.dir>
-					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -373,6 +368,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.1</version>
 			</plugin>
+
 		</plugins>
 	</build>
 
@@ -393,6 +389,67 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>acceptance-test</id>
+			<activation>
+				<property>
+					<name>type</name>
+					<value>acceptance</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>add-specs-source</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>${basedir}/src/test/specs</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.3.1</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<source>1.5</source>
+							<target>1.5</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-surefire-plugin</artifactId>	
+		                <version>2.11</version>
+		                <configuration>
+							<forkMode>pertest</forkMode>
+							<argLine>-Xms1024m -Xmx1024m</argLine>
+							<testFailureIgnore>false</testFailureIgnore>
+							<skip>false</skip>
+							<testSourceDirectory>src/test/specs</testSourceDirectory>
+		                    <includes>
+		                        <include>**/*Fixture.java</include>
+		                    </includes>
+		                    <systemPropertyVariables>
+		                        <propertyName>concordion.output.dir</propertyName>
+		                        <buildDirectory>target/concordion</buildDirectory>
+		                    </systemPropertyVariables>
+		                </configuration>
 					</plugin>
 				</plugins>
 			</build>
