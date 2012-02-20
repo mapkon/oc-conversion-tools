@@ -1977,10 +1977,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q2a_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCAC_1" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q2a_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CCAC_UNGROUPED" Name="IG_CCAC_UNGROUPED" Repeating="No" SASDatasetName="UNGROUPE">
@@ -2018,9 +2014,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CCAC_2" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCAC_1" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CCAC_CCA_ME_OPRECG" Name="CCA_ME_OprecG" Repeating="Yes" SASDatasetName="CCA_ME_O">
@@ -2028,9 +2021,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CCAC_CCA_ME_OPRECG" ItemGroupName="CCA_ME_OprecG">
                     <OpenClinica:PresentInForm FormOID="F_CCAC_2" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCAC_1" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
@@ -2040,9 +2030,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CCAC_2" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCAC_1" ShowGroup="Yes" FormName="CCA: Child Clinical Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MEAM_MEA_MI_MCONDG" Name="MEA_MI_McondG" Repeating="Yes" SASDatasetName="MEA_MI_M">
@@ -2050,9 +2037,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MEAM_MEA_MI_MCONDG" ItemGroupName="MEA_MI_McondG">
                     <OpenClinica:PresentInForm FormOID="F_MEAM_2" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MEAM_1" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
@@ -2110,9 +2094,6 @@
                     <OpenClinica:PresentInForm FormOID="F_MEAM_2" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MEAM_1" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MEAM_MEA_MI_MEDG" Name="MEA_MI_MEDG" Repeating="Yes" SASDatasetName="MEA_M002" Comment="Q17a_  If Yes,">
@@ -2128,10 +2109,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q17a_  If Yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MEAM_1" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q17a_  If Yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MEAM_MEA_MI_OARTPRECG" Name="MEA_MI_OARTprecG" Repeating="Yes" SASDatasetName="MEA_MI_O" Comment="Q16c1_ If Yes,">
@@ -2142,10 +2119,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q16c1_ If Yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MEAM_1" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q16c1_ If Yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MEAM_MEA_IC_ELIGREASG" Name="MEA_IC_eligreasG" Repeating="Yes" SASDatasetName="MEA_IC_E">
@@ -2154,9 +2127,6 @@
                     <OpenClinica:PresentInForm FormOID="F_MEAM_2" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MEAM_1" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MEAM_MEA_MI_BSURGPRECG" Name="MEA_MI_BsurgprecG" Repeating="Yes" SASDatasetName="MEA_MI_B">
@@ -2164,9 +2134,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MEAM_MEA_MI_BSURGPRECG" ItemGroupName="MEA_MI_BsurgprecG">
                     <OpenClinica:PresentInForm FormOID="F_MEAM_2" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MEAM_1" ShowGroup="Yes" FormName="MEA: Mother Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
@@ -2231,10 +2198,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q1a_ specify</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCMC_1" ShowGroup="Yes" FormName="CCM: Child Concomitant Medications" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q1a_ specify</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CCMC_CCM_MPG2" Name="CCM_MPG2" Repeating="Yes" SASDatasetName="CCM_MPG2" Comment="Q2b_">
@@ -2243,10 +2206,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CCMC_CCM_MPG2" ItemGroupName="CCM_MPG2">
                     <OpenClinica:PresentInForm FormOID="F_CCMC_2" ShowGroup="Yes" FormName="CCM: Child Concomitant Medications" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q2b_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCMC_1" ShowGroup="Yes" FormName="CCM: Child Concomitant Medications" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q2b_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2262,10 +2221,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q2a_ Medicines prescribed at this visit (for 1 month max, and beside study drugs)</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCMC_1" ShowGroup="Yes" FormName="CCM: Child Concomitant Medications" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q2a_ Medicines prescribed at this visit (for 1 month max, and beside study drugs)</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CCMC_UNGROUPED" Name="IG_CCMC_UNGROUPED" Repeating="No" SASDatasetName="UNGRO004">
@@ -2275,9 +2230,6 @@
                 <ItemRef ItemOID="I_CCMC_CCM_T" OrderNumber="4" Mandatory="Yes"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CCMC_UNGROUPED" ItemGroupName="Ungrouped">
                     <OpenClinica:PresentInForm FormOID="F_CCMC_2" ShowGroup="Yes" FormName="CCM: Child Concomitant Medications" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CCMC_1" ShowGroup="Yes" FormName="CCM: Child Concomitant Medications" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2291,14 +2243,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
                         <OpenClinica:ItemGroupHeader>Q3c1_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CEAC_3" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                        <OpenClinica:ItemGroupHeader>Q3c1_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CEAC_1" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q3c1_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CEAC_CEA_IC_NOELIGREASG" Name="CEA_IC_NOELIGREASG" Repeating="Yes" SASDatasetName="CEA_IC_N" Comment="Q11a_">
@@ -2306,14 +2250,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CEAC_CEA_IC_NOELIGREASG" ItemGroupName="CEA_IC_NOELIGREASG">
                     <OpenClinica:PresentInForm FormOID="F_CEAC_4" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="4">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                        <OpenClinica:ItemGroupHeader>Q11a_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CEAC_3" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                        <OpenClinica:ItemGroupHeader>Q11a_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CEAC_1" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q11a_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2433,12 +2369,6 @@
                 <ItemRef ItemOID="I_CEAC_CEA_GI_SEROREF" OrderNumber="112" Mandatory="Yes"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CEAC_UNGROUPED" ItemGroupName="Ungrouped">
                     <OpenClinica:PresentInForm FormOID="F_CEAC_4" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="4">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CEAC_3" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CEAC_1" ShowGroup="Yes" FormName="CEA: Child Enrollment Assessment" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2574,12 +2504,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CSAC_3" ShowGroup="Yes" FormName="CSA: Child Screening Assessment" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSAC_2" ShowGroup="Yes" FormName="CSA: Child Screening Assessment" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSAC_1" ShowGroup="Yes" FormName="CSA: Child Screening Assessment" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CSAC_UNGROUPED" Name="IG_CSAC_UNGROUPED" Repeating="No" SASDatasetName="UNGRO00a">
@@ -2599,12 +2523,6 @@
                 <ItemRef ItemOID="I_CSAC_CSA_IC_HEALTH" OrderNumber="14" Mandatory="Yes"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CSAC_UNGROUPED" ItemGroupName="Ungrouped">
                     <OpenClinica:PresentInForm FormOID="F_CSAC_3" ShowGroup="Yes" FormName="CSA: Child Screening Assessment" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSAC_2" ShowGroup="Yes" FormName="CSA: Child Screening Assessment" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSAC_1" ShowGroup="Yes" FormName="CSA: Child Screening Assessment" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2653,9 +2571,6 @@
                     <OpenClinica:PresentInForm FormOID="F_MSA2_2" ShowGroup="Yes" FormName="MSA2: Mother Screening Assessment 2" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA2_1" ShowGroup="Yes" FormName="MSA2: Mother Screening Assessment 2" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA2_MSA2_POARTPRECG" Name="MSA2_POARTprecG" Repeating="Yes" SASDatasetName="MSA2_POA" Comment="Q3a2a_ If yes,">
@@ -2666,10 +2581,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
                         <OpenClinica:ItemGroupHeader>Q3a2a_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA2_1" ShowGroup="Yes" FormName="MSA2: Mother Screening Assessment 2" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q3a2a_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA2_MSA2_POARTPRECG2" Name="MSA2_POARTprecG2" Repeating="Yes" SASDatasetName="MSA2_00d" Comment="Q3e1_ If yes,">
@@ -2678,10 +2589,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MSA2_MSA2_POARTPRECG2" ItemGroupName="MSA2_POARTprecG2">
                     <OpenClinica:PresentInForm FormOID="F_MSA2_2" ShowGroup="Yes" FormName="MSA2: Mother Screening Assessment 2" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                        <OpenClinica:ItemGroupHeader>Q3e1_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA2_1" ShowGroup="Yes" FormName="MSA2: Mother Screening Assessment 2" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q3e1_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2711,12 +2618,6 @@
                     <OpenClinica:PresentInForm FormOID="F_MSA1_3" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_2" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_1" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA1_MSA1_COMPLYREASG" Name="MSA1_complyreasG" Repeating="Yes" SASDatasetName="MSA1_COM">
@@ -2725,12 +2626,6 @@
                     <OpenClinica:PresentInForm FormOID="F_MSA1_3" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_2" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_1" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA1_MSA1_NOELIGREASG" Name="MSA1_noeligreasG" Repeating="Yes" SASDatasetName="MSA1_NOE">
@@ -2738,12 +2633,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MSA1_MSA1_NOELIGREASG" ItemGroupName="MSA1_noeligreasG">
                     <OpenClinica:PresentInForm FormOID="F_MSA1_3" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_2" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_1" ShowGroup="Yes" FormName="MSA1: Mother Screening Assessment 1" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
@@ -2754,20 +2643,8 @@
                 <ItemRef ItemOID="I_MLLM_MLL_OLE_PRECV" OrderNumber="4" Mandatory="No"/>
                 <ItemRef ItemOID="I_MLLM_MLL_OLE_COLDV" OrderNumber="5" Mandatory="No"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MLLM_MLL_OTESTG" ItemGroupName="MLL_OtestG">
-                    <OpenClinica:PresentInForm FormOID="F_MLLM_3" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q19_ Other lab exam</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                     <OpenClinica:PresentInForm FormOID="F_MLLM_5" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="5">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q19_ Other lab exam</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MLLM_2" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q19_ Other lab exam</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MLLM_1" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q19_ Other lab exam</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2881,16 +2758,7 @@
                 <ItemRef ItemOID="I_MLLM_MLL_LYM_RESULTV" OrderNumber="106" Mandatory="No"/>
                 <ItemRef ItemOID="I_MLLM_MLL_PLAT_RESULTV" OrderNumber="107" Mandatory="No"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MLLM_UNGROUPED" ItemGroupName="Ungrouped">
-                    <OpenClinica:PresentInForm FormOID="F_MLLM_3" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                     <OpenClinica:PresentInForm FormOID="F_MLLM_5" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="5">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MLLM_2" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MLLM_1" ShowGroup="Yes" FormName="MLL: Mother Laboratory Log" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -2904,9 +2772,6 @@
                 <ItemRef ItemOID="I_MHIV_MHV_WEIGHT" OrderNumber="6" Mandatory="Yes"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MHIV_UNGROUPED" ItemGroupName="Ungrouped">
                     <OpenClinica:PresentInForm FormOID="F_MHIV_2" ShowGroup="Yes" FormName="MHIV: Mother HIV" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MHIV_1" ShowGroup="Yes" FormName="MHIV: Mother HIV" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3018,15 +2883,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CLLC_4" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="4">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CLLC_3" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CLLC_2" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CLLC_1" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CLLC_CLL_OTESTG" Name="CLL_OtestG" Repeating="Yes" SASDatasetName="CLL_OTES" Comment="Q26_ Other lab test">
@@ -3036,18 +2892,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CLLC_CLL_OTESTG" ItemGroupName="CLL_OtestG">
                     <OpenClinica:PresentInForm FormOID="F_CLLC_4" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="4">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q26_ Other lab test</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CLLC_3" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="3">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q26_ Other lab test</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CLLC_2" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q26_ Other lab test</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CLLC_1" ShowGroup="Yes" FormName="CLL: Child Laboratory Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q26_ Other lab test</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3064,14 +2908,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
                         <OpenClinica:ItemGroupHeader>Q6_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_2" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
-                        <OpenClinica:ItemGroupHeader>Q7_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_1" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q7_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_AEAD_AE_IDIAGG" Name="AE_IdiagG" Repeating="Yes" SASDatasetName="AE_IDIAG" Comment="Q1b_ If AE is based on clinical assessment, please specify diagnosis">
@@ -3080,14 +2916,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_AEAD_AE_IDIAGG" ItemGroupName="AE_IdiagG">
                     <OpenClinica:PresentInForm FormOID="F_AEAD_3" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
-                        <OpenClinica:ItemGroupHeader>Q1b_ If AE is based on clinical assessment, please specify diagnosis</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_2" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
-                        <OpenClinica:ItemGroupHeader>Q1b_ If AE is based on clinical assessment, please specify diagnosis</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_1" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q1b_ If AE is based on clinical assessment, please specify diagnosis</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3118,12 +2946,6 @@
                     <OpenClinica:PresentInForm FormOID="F_AEAD_3" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_2" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_1" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_AEAD_AE_FSDIAGG" Name="AE_FSdiagG" Repeating="Yes" SASDatasetName="AE_FSDIA" Comment="If this AE has NOT become a SAE:">
@@ -3131,14 +2953,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_AEAD_AE_FSDIAGG" ItemGroupName="AE_FSdiagG">
                     <OpenClinica:PresentInForm FormOID="F_AEAD_3" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="3">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
-                        <OpenClinica:ItemGroupHeader>If this AE has NOT become a SAE:</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_2" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
-                        <OpenClinica:ItemGroupHeader>If this AE has NOT become a SAE:</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_1" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>If this AE has NOT become a SAE:</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3161,14 +2975,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
                         <OpenClinica:ItemGroupHeader>Q5_ Follow up</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_2" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
-                        <OpenClinica:ItemGroupHeader>Q6_ Follow up</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_AEAD_1" ShowGroup="Yes" FormName="AE: Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q6_ Follow up</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_SAES_SAE_IDIAGG" Name="SAE_IdiagG" Repeating="Yes" SASDatasetName="SAE_IDIA" Comment="Q4_ Initial">
@@ -3177,10 +2983,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_SAES_SAE_IDIAGG" ItemGroupName="SAE_IdiagG">
                     <OpenClinica:PresentInForm FormOID="F_SAES_2" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
-                        <OpenClinica:ItemGroupHeader>Q4_ Initial</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_SAES_1" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q4_ Initial</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3195,10 +2997,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_SAES_SAE_FUG_1" ItemGroupName="SAE_FUG_1">
                     <OpenClinica:PresentInForm FormOID="F_SAES_2" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
-                        <OpenClinica:ItemGroupHeader>Q9_ Follow up</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_SAES_1" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q9_ Follow up</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3241,9 +3039,6 @@
                     <OpenClinica:PresentInForm FormOID="F_SAES_2" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_SAES_1" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_SAES_SAE_FUG_2" Name="SAE_FUG_2" Repeating="Yes" SASDatasetName="SAE_F00k" Comment="Q10_">
@@ -3256,10 +3051,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
                         <OpenClinica:ItemGroupHeader>Q10_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_SAES_1" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q10_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_SAES_SAE_ICOLLDG" Name="SAE_IcollDG" Repeating="Yes" SASDatasetName="SAE_ICOL" Comment="Q1b_ If SAE based on abnormal lab result only">
@@ -3267,10 +3058,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_SAES_SAE_ICOLLDG" ItemGroupName="SAE_IcollDG">
                     <OpenClinica:PresentInForm FormOID="F_SAES_2" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                        <OpenClinica:ItemGroupHeader>Q1b_ If SAE based on abnormal lab result only</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_SAES_1" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q1b_ If SAE based on abnormal lab result only</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3285,10 +3072,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
                         <OpenClinica:ItemGroupHeader>Q14_ What is/are final:</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_SAES_1" ShowGroup="Yes" FormName="SAE: Serious Adverse Event" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q13_ What is/are final:</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CSDI_BOTTLE" Name="Bottle" Repeating="Yes" SASDatasetName="BOTTLE" Comment="Q7_ Bottle given:">
@@ -3298,10 +3081,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CSDI_2" ShowGroup="Yes" FormName="CSDI: Child Study Drug Initiation" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="2" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q7_ Bottle given:</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSDI_1" ShowGroup="Yes" FormName="CSDI: Child Study Drug Initiation" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="2" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q4_ Bottle given:</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
@@ -3324,9 +3103,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CSDI_2" ShowGroup="Yes" FormName="CSDI: Child Study Drug Initiation" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSDI_1" ShowGroup="Yes" FormName="CSDI: Child Study Drug Initiation" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MMLM_MML_DPG" Name="MML_DPG" Repeating="Yes" SASDatasetName="MML_DPG" Comment="Q3_ Drug prescribed today(1 month max, list all drugs prescribed that day plus renewal of previous Rx if applicable)">
@@ -3338,10 +3114,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MMLM_MML_DPG" ItemGroupName="MML_DPG">
                     <OpenClinica:PresentInForm FormOID="F_MMLM_2" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q3_ Drug prescribed today(1 month max, list all drugs prescribed that day plus renewal of previous Rx if applicable)</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MMLM_1" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q3_ Drug prescribed today(1 month max, list all drugs prescribed that day plus renewal of previous Rx if applicable)</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3356,9 +3128,6 @@
                     <OpenClinica:PresentInForm FormOID="F_MMLM_2" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MMLM_1" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MMLM_MML_SLV_TRAD" Name="MML_SLV_TRAD" Repeating="Yes" SASDatasetName="MML_SLV_" Comment="Q2a_ If yes,">
@@ -3367,10 +3136,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MMLM_MML_SLV_TRAD" ItemGroupName="MML_SLV_TRAD">
                     <OpenClinica:PresentInForm FormOID="F_MMLM_2" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
-                        <OpenClinica:ItemGroupHeader>Q2a_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MMLM_1" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q2a_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3388,10 +3153,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q1a_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_MMLM_1" ShowGroup="Yes" FormName="MML: Mother Medication Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q1a_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CBLC_CBL_GQBF_OPRECG" Name="CBL_GQBF_OprecG" Repeating="Yes" SASDatasetName="CBL_GQBF" Comment="Q43b_">
@@ -3399,10 +3160,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CBLC_CBL_GQBF_OPRECG" ItemGroupName="CBL_GQBF_OprecG">
                     <OpenClinica:PresentInForm FormOID="F_CBLC_2" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q43b_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q43b_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3473,9 +3230,6 @@
                     <OpenClinica:PresentInForm FormOID="F_CBLC_2" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CBLC_CBL_QLC_OPRECG" Name="CBL_QLC_OprecG" Repeating="Yes" SASDatasetName="CBL_QLC_" Comment="Q47c_">
@@ -3483,10 +3237,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CBLC_CBL_QLC_OPRECG" ItemGroupName="CBL_QLC_OprecG">
                     <OpenClinica:PresentInForm FormOID="F_CBLC_2" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="20"/>
-                        <OpenClinica:ItemGroupHeader>Q47c_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q47c_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3498,10 +3248,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q20a_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q20a_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CBLC_CBL_24H_REASPRECG" Name="CBL_24h_reasprecG" Repeating="Yes" SASDatasetName="CBL_24H_" Comment="Q20c_">
@@ -3509,10 +3255,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CBLC_CBL_24H_REASPRECG" ItemGroupName="CBL_24h_reasprecG">
                     <OpenClinica:PresentInForm FormOID="F_CBLC_2" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q20c_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q20c_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3524,10 +3266,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
                         <OpenClinica:ItemGroupHeader>Q40a_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q40a_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CBLC_CBL_6DR_REASPRECG" Name="CBL_6dR_reasprecG" Repeating="Yes" SASDatasetName="CBL_600p" Comment="Q41a_">
@@ -3535,10 +3273,6 @@
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CBLC_CBL_6DR_REASPRECG" ItemGroupName="CBL_6dR_reasprecG">
                     <OpenClinica:PresentInForm FormOID="F_CBLC_2" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="2">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="10"/>
-                        <OpenClinica:ItemGroupHeader>Q41a_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CBLC_1" ShowGroup="Yes" FormName="CBL: Child Breastfeeding Log" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q41a_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3549,10 +3283,6 @@
                 <ItemRef ItemOID="I_CSDC_CSD_DA_BWEIGHT" OrderNumber="3" Mandatory="No"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CSDC_BOTTLE" ItemGroupName="Bottle">
                     <OpenClinica:PresentInForm FormOID="F_CSDC_2" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q7a_</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSDC_1" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q7a_</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
@@ -3567,10 +3297,6 @@
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                         <OpenClinica:ItemGroupHeader>Q12b_ If yes,</OpenClinica:ItemGroupHeader>
                     </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSDC_1" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="1">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                        <OpenClinica:ItemGroupHeader>Q12b_ If yes,</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_CSDC_BL" Name="BL" Repeating="Yes" SASDatasetName="BL">
@@ -3580,9 +3306,6 @@
                 <ItemRef ItemOID="I_CSDC_CSD_DA_BLOSTD" OrderNumber="4" Mandatory="No"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CSDC_BL" ItemGroupName="BL">
                     <OpenClinica:PresentInForm FormOID="F_CSDC_2" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSDC_1" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="40"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3622,9 +3345,6 @@
                 <ItemRef ItemOID="I_CSDC_CSD_P_NOTRENEW" OrderNumber="32" Mandatory="No"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="IG_CSDC_UNGROUPED" ItemGroupName="Ungrouped">
                     <OpenClinica:PresentInForm FormOID="F_CSDC_2" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
-                    </OpenClinica:PresentInForm>
-                    <OpenClinica:PresentInForm FormOID="F_CSDC_1" ShowGroup="Yes" FormName="CSD: Child Study Drug" FormVersionName="1">
                         <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="1"/>
                     </OpenClinica:PresentInForm>
                 </OpenClinica:ItemGroupDetails>
@@ -3915,20 +3635,20 @@
             <ItemDef OID="I_CCAC_CCA_GS_CRYING" Name="CCA_GS_CRYING" DataType="integer" Length="1" SASFieldName="CCA_GS_C" Comment="Excessive crying" OpenClinica:FormOIDs="F_CCAC_2,F_CCAC_1">
                 <Question OpenClinica:QuestionNumber="Q3_">
                     <TranslatedText>
-                    &lt;i&gt;&lt;font color=red&gt;Data below completed according to in depth history, clinical examination and available documentation and extra lab results when indicated for clinical purposes.&lt;br/&gt;If necessary, fill in a CCM CRF&lt;br/&gt;&lt;/font color&gt;&lt;/i&gt;General symptoms  - Excessive crying
+                    Data below completed according to in depth history, clinical examination and available documentation and extra lab results when indicated for clinical purposes.If necessary, fill in a CCM CRFGeneral symptoms  - Excessive crying
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_259"/>
                 <OpenClinica:ItemDetails ItemOID="I_CCAC_CCA_GS_CRYING">
                     <OpenClinica:ItemPresentInForm FormOID="F_CCAC_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Excessive crying</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>&lt;i&gt;&lt;font color=red&gt;Data below completed according to in depth history, clinical examination and available documentation and extra lab results when indicated for clinical purposes.&lt;br/&gt;If necessary, fill in a CCM CRF&lt;br/&gt;&lt;/font color&gt;&lt;/i&gt;General symptoms</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemHeader>Data below completed according to in depth history, clinical examination and available documentation and extra lab results when indicated for clinical purposes.If necessary, fill in a CCM CRFGeneral symptoms</OpenClinica:ItemHeader>
                         <OpenClinica:SectionLabel>CCA</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
                     <OpenClinica:ItemPresentInForm FormOID="F_CCAC_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Excessive crying</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>&lt;i&gt;&lt;font color=red&gt;Data below completed according to in depth history, clinical examination and available documentation and extra lab results when indicated for clinical purposes.&lt;br/&gt;If necessary, fill in a CCM CRF&lt;br/&gt;&lt;/font color&gt;&lt;/i&gt;General symptoms</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemHeader>Data below completed according to in depth history, clinical examination and available documentation and extra lab results when indicated for clinical purposes.If necessary, fill in a CCM CRFGeneral symptoms</OpenClinica:ItemHeader>
                         <OpenClinica:SectionLabel>CCA</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -7070,15 +6790,15 @@
             <ItemDef OID="I_CEAC_CEA_13AB_BMILKV" Name="CEA_13AB_BMILKv" DataType="integer" Length="1" SASFieldName="CEA_13AB" Comment="2-3 day breast milk" OpenClinica:FormOIDs="F_CEAC_4">
                 <Question OpenClinica:QuestionNumber="Q18_">
                     <TranslatedText>
-                    Early feeding history&lt;br/&gt;Feeding day 1-3 after birth&lt;br/&gt;  - - breast milk
+                    Early feeding historyFeeding day 1-3 after birth  - - breast milk
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_406"/>
                 <OpenClinica:ItemDetails ItemOID="I_CEAC_CEA_13AB_BMILKV">
                     <OpenClinica:ItemPresentInForm FormOID="F_CEAC_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>- breast milk</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>Early feeding history&lt;br/&gt;Feeding day 1-3 after birth&lt;br/&gt;</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>&lt;i&gt;Within the &lt;font color=red&gt;first three days&lt;/font color&gt; after birth did your baby get any of the following items?&lt;/i&gt;</OpenClinica:ItemSubHeader>
+                        <OpenClinica:ItemHeader>Early feeding historyFeeding day 1-3 after birth</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemSubHeader>Within the first three days after birth did your baby get any of the following items?</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>CEA</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -7334,7 +7054,7 @@
                     <OpenClinica:ItemPresentInForm FormOID="F_CEAC_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>- breast milk</OpenClinica:LeftItemText>
                         <OpenClinica:ItemHeader>Feeding day  4-7 after birth</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>&lt;i&gt;Between  &lt;font color=red&gt; Day 4 and 7  &lt;/font color&gt; after birth did your baby get any of the following items?&lt;/i&gt;</OpenClinica:ItemSubHeader>
+                        <OpenClinica:ItemSubHeader>Between   Day 4 and 7   after birth did your baby get any of the following items?</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>CEA</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -7808,7 +7528,7 @@
                     <OpenClinica:ItemPresentInForm FormOID="F_MBA2_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Have you had, or do you have any breast event such as pain, redness, feeling of heat, pus, swellings or other problem related to your breasts?</OpenClinica:LeftItemText>
                         <OpenClinica:ItemHeader>Breast health</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>&lt;sup&gt; 1 &lt;/sup &gt; ( If death, hospitalisation, grade IV, fill in a SAE CRF and report SAE according to SOPs)&lt;br&gt; &lt;sup&gt; 2 &lt;/sup &gt; (If yes, please enter a MML CRF)</OpenClinica:ItemSubHeader>
+                        <OpenClinica:ItemSubHeader> 1  ( If death, hospitalisation, grade IV, fill in a SAE CRF and report SAE according to SOPs)  2  (If yes, please enter a MML CRF)</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>MBA 2</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -12263,14 +11983,14 @@
             <ItemDef OID="I_AEAD_AE_IDIAGSV" Name="AE_IDIAGSv" DataType="integer" Length="1" SASFieldName="AE_ID07d" Comment="Severity of diagnosis" OpenClinica:FormOIDs="F_AEAD_3">
                 <Question OpenClinica:QuestionNumber="Q2_">
                     <TranslatedText>
-                    Initial severity of diagnosis  - &lt;font color=red&gt;If grade III or IV, fill in a SAE CRF and report SAE according to SOPs&lt;/font color&gt;
+                    Initial severity of diagnosis  - If grade III or IV, fill in a SAE CRF and report SAE according to SOPs
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_374"/>
                 <OpenClinica:ItemDetails ItemOID="I_AEAD_AE_IDIAGSV">
                     <OpenClinica:ItemPresentInForm FormOID="F_AEAD_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Initial severity of diagnosis</OpenClinica:LeftItemText>
-                        <OpenClinica:RightItemText>&lt;font color=red&gt;If grade III or IV, fill in a SAE CRF and report SAE according to SOPs&lt;/font color&gt;</OpenClinica:RightItemText>
+                        <OpenClinica:RightItemText>If grade III or IV, fill in a SAE CRF and report SAE according to SOPs</OpenClinica:RightItemText>
                         <OpenClinica:SectionLabel>AE</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -12279,14 +11999,14 @@
             <ItemDef OID="I_AEAD_AE_ITTTV" Name="AE_ITTTv" DataType="integer" Length="1" SASFieldName="AE_ITTTv" Comment="Treatment" OpenClinica:FormOIDs="F_AEAD_3">
                 <Question OpenClinica:QuestionNumber="Q3_">
                     <TranslatedText>
-                    Does this adverse event require a treatment?  - &lt;font color=red&gt;If yes, please fill an CCM/MML CRF&lt;/font color&gt;
+                    Does this adverse event require a treatment?  - If yes, please fill an CCM/MML CRF
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_375"/>
                 <OpenClinica:ItemDetails ItemOID="I_AEAD_AE_ITTTV">
                     <OpenClinica:ItemPresentInForm FormOID="F_AEAD_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Does this adverse event require a treatment?</OpenClinica:LeftItemText>
-                        <OpenClinica:RightItemText>&lt;font color=red&gt;If yes, please fill an CCM/MML CRF&lt;/font color&gt;</OpenClinica:RightItemText>
+                        <OpenClinica:RightItemText>If yes, please fill an CCM/MML CRF</OpenClinica:RightItemText>
                         <OpenClinica:SectionLabel>AE</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -12778,21 +12498,21 @@
             <ItemDef OID="I_SAES_SAE_I_TTT" Name="SAE_I_TTT" DataType="integer" Length="1" SASFieldName="SAE_I_TT" Comment="Treatment" OpenClinica:FormOIDs="F_SAES_2,F_SAES_1">
                 <Question OpenClinica:QuestionNumber="Q6_">
                     <TranslatedText>
-                    Does this serious adverse event require a treatment?  - &lt;font color=red&gt;If yes, please fill an CCM/MML CRF&lt;/font color&gt;
+                    Does this serious adverse event require a treatment?  - If yes, please fill an CCM/MML CRF
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_384"/>
                 <OpenClinica:ItemDetails ItemOID="I_SAES_SAE_I_TTT">
                     <OpenClinica:ItemPresentInForm FormOID="F_SAES_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Does this serious adverse event require a treatment?</OpenClinica:LeftItemText>
-                        <OpenClinica:RightItemText>&lt;font color=red&gt;If yes, please fill an CCM/MML CRF&lt;/font color&gt;</OpenClinica:RightItemText>
+                        <OpenClinica:RightItemText>If yes, please fill an CCM/MML CRF</OpenClinica:RightItemText>
                         <OpenClinica:ItemSubHeader>If yes, please fill an CCM/MML CRF</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>SAE</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
                     <OpenClinica:ItemPresentInForm FormOID="F_SAES_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Does this serious adverse event require a treatment?</OpenClinica:LeftItemText>
-                        <OpenClinica:RightItemText>&lt;font color=red&gt;If yes, please fill an CCM/MML CRF&lt;/font color&gt;</OpenClinica:RightItemText>
+                        <OpenClinica:RightItemText>If yes, please fill an CCM/MML CRF</OpenClinica:RightItemText>
                         <OpenClinica:ItemSubHeader>If yes, please fill an CCM/MML CRF</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>SAE</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
@@ -13458,20 +13178,20 @@
             <ItemDef OID="I_MMLM_MML_SLV_T" Name="MML_SLV_T" DataType="integer" Length="1" SASFieldName="MML_S07w" Comment="Medication taken since last visit" OpenClinica:FormOIDs="F_MMLM_2,F_MMLM_1">
                 <Question>
                     <TranslatedText>
-                    Drugs taken since last visit&lt;br/&gt;(beside drugs prescribed by study staff)  - Has the mother taken medication since last visit?
+                    Drugs taken since last visit(beside drugs prescribed by study staff)  - Has the mother taken medication since last visit?
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_223"/>
                 <OpenClinica:ItemDetails ItemOID="I_MMLM_MML_SLV_T">
                     <OpenClinica:ItemPresentInForm FormOID="F_MMLM_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Has the mother taken medication since last visit?</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>Drugs taken since last visit&lt;br/&gt;(beside drugs prescribed by study staff)</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemHeader>Drugs taken since last visit(beside drugs prescribed by study staff)</OpenClinica:ItemHeader>
                         <OpenClinica:SectionLabel>MML</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
                     <OpenClinica:ItemPresentInForm FormOID="F_MMLM_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Has the mother taken medication since last visit?</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>Drugs taken since last visit&lt;br/&gt;(beside drugs prescribed by study staff)</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemHeader>Drugs taken since last visit(beside drugs prescribed by study staff)</OpenClinica:ItemHeader>
                         <OpenClinica:SectionLabel>MML</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -15870,7 +15590,7 @@
                     <OpenClinica:ItemPresentInForm FormOID="F_MBA1_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Are you currently using any contraceptives?</OpenClinica:LeftItemText>
                         <OpenClinica:ItemHeader>Initial description of event since last visit/ since delivery</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>&lt;b&gt;General questions&lt;/b&gt;</OpenClinica:ItemSubHeader>
+                        <OpenClinica:ItemSubHeader>General questions</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>MBA 1</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
@@ -15947,7 +15667,7 @@
                     <OpenClinica:ItemPresentInForm FormOID="F_MBA1_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:LeftItemText>Have you had, or do you have any breast event such as pain, redness, feeling of heat, pus, swellings or other problem related to your breasts?</OpenClinica:LeftItemText>
                         <OpenClinica:ItemHeader>Breast health</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>&lt;sup&gt; 1 &lt;/sup &gt; ( If death, hospitalisation, grade IV, fill in a SAE CRF and report SAE according to SOPs)&lt;br&gt; &lt;sup&gt; 2 &lt;/sup &gt; (If yes, please enter a MML CRF)</OpenClinica:ItemSubHeader>
+                        <OpenClinica:ItemSubHeader> 1  ( If death, hospitalisation, grade IV, fill in a SAE CRF and report SAE according to SOPs)  2  (If yes, please enter a MML CRF)</OpenClinica:ItemSubHeader>
                         <OpenClinica:SectionLabel>MBA 1</OpenClinica:SectionLabel>
                         <OpenClinica:ItemResponse ResponseType="single-select"/>
                     </OpenClinica:ItemPresentInForm>
