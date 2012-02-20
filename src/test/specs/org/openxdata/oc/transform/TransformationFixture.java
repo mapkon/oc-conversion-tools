@@ -1,27 +1,42 @@
 package org.openxdata.oc.transform;
 
-import groovy.util.slurpersupport.NodeChild;
-
 import org.concordion.api.extension.Extensions;
-import org.concordion.ext.LoggingTooltipExtension;
 import org.concordion.ext.TimestampFormatterExtension;
-import org.concordion.integration.junit3.ConcordionTestCase;
-import org.openxdata.oc.Transform;
-import org.openxdata.oc.util.TransformUtil;
+import org.concordion.integration.junit4.ConcordionRunner;
+import org.junit.runner.RunWith;
+import org.openxdata.oc.service.OpenclinicaService;
+import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.server.admin.model.StudyDef;
 
-@Extensions({TimestampFormatterExtension.class, LoggingTooltipExtension.class})
-public class TransformationFixture extends ConcordionTestCase {
+@RunWith(ConcordionRunner.class)
+@Extensions(TimestampFormatterExtension.class)
+public class TransformationFixture {
 
+	private StudyDef getStudy() {
+		OpenclinicaService openclinicaService = new OpenclinicaServiceImpl();
+		
+		StudyDef study = openclinicaService.importOpenClinicaStudy("S_DEFAULTS1");
+		
+		return study;
+	}
+	
 	public String getStudyName() {
 		
-		TransformUtil util = new TransformUtil();
-		Object odmFileStream = (String) util.loadFileContents("test-odm.xml");
+		return getStudy().getName();
+	}
+	
+	public String getStudyKey() {
 		
-		Transform transformer = Transform.getTransformer();
-		NodeChild convertedXform = (NodeChild) transformer.ConvertODMToXform(odmFileStream);
+		return getStudy().getStudyKey();
+	}
+	
+	public int getForms() {
 		
-		String name = util.getStudyName(convertedXform);
-		
-		return name;
+		return getStudy().getForms().size();
+	}
+	
+	public String getFormName(String formName) {
+
+		return getStudy().getForm(formName).getName();
 	}
 }
