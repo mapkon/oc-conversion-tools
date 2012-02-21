@@ -57,13 +57,17 @@ public class OpenclinicaServlet extends HttpServlet {
     	
     	log.info("Fetching study for oid: " + oid);
     	if(DOWNLOAD_AND_CONVERT.equals(action)) {
-    		study = downloadAndConvertOpenclinicaStudy(oid);
+    		study = fetchAndSaveStudy(oid);
     	}
     	
     	request.getSession().setAttribute("study", study);
     }
     
-	private StudyDef downloadAndConvertOpenclinicaStudy(String oid) {
-		return openclinicaService.importOpenClinicaStudy(oid);
+	private StudyDef fetchAndSaveStudy(String oid) {
+		
+		StudyDef study = openclinicaService.importOpenClinicaStudy(oid);
+		studyService.saveStudy(study);
+		
+		return study;
 	}
 }
