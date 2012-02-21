@@ -19,7 +19,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	void setUp(){
 		
-		latestCRFVersions = TestData.getReturnXml()
+		latestCRFVersions = TestData.getCRFWebServiceResponse()
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXmlWithCorrectStudyName() {
@@ -33,7 +33,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def forms = convertedStudyXml.children()
 			def version = forms.children()
 			
-			assertEquals  "Uganda", convertedStudyXml.@name.text()
+			assertEquals  "Default Study", convertedStudyXml.@name.text()
 						
 		}
 	}
@@ -50,18 +50,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetOpenxdataFormReturnsValidXformWithStudyName() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
-		play {
-
-			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-
-			def convertedStudyXml = client.getOpenxdataForm("oid")
-
-			assertEquals 'Uganda', convertedStudyXml.@name.text()
-		}
-	}
-	
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyStudyKey() {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
@@ -70,7 +58,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			def convertedStudyXml = client.getOpenxdataForm("oid")
 
-			assertEquals 'S_12175', convertedStudyXml.@studyKey.text()
+			assertEquals 'S_DEFAULTS1', convertedStudyXml.@studyKey.text()
 		}
 	}
 	
@@ -147,7 +135,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def forms = convertedStudyXml.children()
 			def version = forms.children()[0]
 
-			assertEquals  "Converted from ODM", version.@description.text()
+			assertEquals  "Converted from ODM using the oc-conversion-tools", version.@description.text()
 		}
 	}
 	
@@ -212,7 +200,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)
-			def reponse = client.importData(TestData.instanceData)
+			def reponse = client.importData(TestData.getOpenXdataInstanceData())
 			
 			assertNotNull reponse
 			assertEquals 'Success', reponse
@@ -225,7 +213,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			shouldFail(ImportException){
 				def client = new OpenClinicaSoapClientImpl(connectionFactory)
-				def reponse = client.importData(TestData.instanceData)
+				def reponse = client.importData(TestData.getOpenXdataInstanceData())
 			}
 		}
 	}
@@ -242,14 +230,38 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	@Test void testFindAllCRFSDoesNotReturnNull() {
 		
-		def connectionFactory = setUpConnectionFactoryMock(TestData.getReturnXml())
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play{
 			
 			def client = new OpenClinicaSoapClientImpl(connectionFactory)
 			
-			def subjectKeys = client.findAllCRFS("oid")
+			def response = client.findAllCRFS("oid")
 			
-			assertNotNull subjectKeys
+			assertNotNull response
+		}
+	}
+	
+	@Test void testFindEventsByStudyOIDDoesNotReturnNull() {
+		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
+		play{
+			
+			def client = new OpenClinicaSoapClientImpl(connectionFactory)
+			
+			def studyEvents = client.findEventsByStudyOID("oid")
+			
+			assertNotNull "Should never return null", studyEvents
+		}
+	}
+	
+	@Test void testFindEventsByStudyOIDReturnsCorrectNumberOfEvents() {
+		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
+		play{
+			
+			def client = new OpenClinicaSoapClientImpl(connectionFactory)
+			
+			def studyEvents = client.findEventsByStudyOID("oid")
+			
+			assertEquals "The events should be 71", 71, studyEvents.children().size()
 		}
 	}
 	
@@ -269,6 +281,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = mock(ConnectionFactory.class)
 		connectionFactory.getCRFConnection().returns(connection).atMostOnce()
 		connectionFactory.getStudyConnection().returns(connection).atMostOnce()
+		connectionFactory.getEventConnection().returns(connection).atMostOnce()
 		connectionFactory.getStudySubjectConnection().returns(connection).atMostOnce()
 		
 		return connectionFactory

@@ -4,7 +4,7 @@ import groovy.util.logging.Log
 
 import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.model.ODMDefinition
+import org.openxdata.oc.model.ODMInstanceDataDefinition
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
@@ -14,32 +14,27 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 	def envelope
 	def importXml
 
-	def getSoapEnvelope() {
-		getEnvelope(importXml)
-	}
-	
-	def importData(def instanceData){
-
-		log.info("Starting import to Openclinca.")
-
-		def odm = new ODMDefinition()
-		importXml = odm.appendInstanceData(instanceData)
-
-		envelope = getEnvelope(importXml)
-
-		def transportHandler = new HttpTransportHandler(envelope:envelope)
-		def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
-
-		return getImportMessage(response)
-	}
-
-	private def getEnvelope(def importXml){
+	def getSoapEnvelope(def importXml){
 		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
 							${getHeader()}
 						<soapenv:Body>
 							<v1:importRequest>${importXml}</v1:importRequest>
 						</soapenv:Body>
 					 </soapenv:Envelope>"""
+	}
+	
+	def importData(def instanceData){
+
+		log.info("Starting import to Openclinca.")
+
+		importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
+
+		envelope = getSoapEnvelope(importXml)
+
+		def transportHandler = new HttpTransportHandler(envelope:envelope)
+		def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
+
+		return getImportMessage(response)
 	}
 	
 	private def getImportMessage(response) {

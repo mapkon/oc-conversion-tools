@@ -15,5 +15,4 @@ public class TransformUtil {
 			throw new IllegalArgumentException('File name cannot be null or empty.')
 		}
 	}
-
 }

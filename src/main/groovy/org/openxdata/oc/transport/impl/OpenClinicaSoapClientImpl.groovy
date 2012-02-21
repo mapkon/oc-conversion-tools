@@ -9,6 +9,7 @@ import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.ParseException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
+import org.openxdata.oc.transport.proxy.EventWebServiceProxy;
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllSubjectsByStudyWebServiceProxy
 import org.openxdata.oc.util.PropertiesUtil
@@ -23,6 +24,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	def connectionFactory
 	
 	private def importProxy
+	private def eventsProxy
 	private def listAllByStudyProxy
 	private def crfMetaDataVersionProxy
 			
@@ -43,6 +45,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	}
 	
 	void init() {
+		
+		eventsProxy = new EventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		crfMetaDataVersionProxy = new CRFMetaDataVersionProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
@@ -83,5 +87,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		def convertedXform = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
 		return convertedXform
+	}
+	
+	def findEventsByStudyOID(def studyOID) {
+		return eventsProxy.findEventsByStudyOID(studyOID)
 	}
 }

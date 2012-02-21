@@ -1,8 +1,8 @@
 package org.openxdata.oc.servlet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -10,20 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.openxdata.oc.handler.AccessDeniedHandler;
-import org.openxdata.oc.handler.ErrorWhileProcessHandler;
-import org.openxdata.oc.handler.ProcessorCreator;
-import org.openxdata.oc.handler.RequestHandler;
 import org.openxdata.oc.service.OpenclinicaService;
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.server.admin.model.FormDef;
+import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
-import org.openxdata.server.admin.model.User;
-import org.openxdata.server.service.AuthenticationService;
 import org.openxdata.server.service.FormService;
 import org.openxdata.server.service.StudyManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -34,8 +29,6 @@ public class OpenclinicaServlet extends HttpServlet {
 	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
 	
 
-	private ProcessorCreator processorCreator;
-	@Autowired private AuthenticationService authSrv;
 	private FormService formService;
 	private StudyManagerService studyService;
 	
@@ -61,7 +54,6 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
-		processorCreator = new ProcessorCreator(ctx);
 
 	}
     
@@ -74,54 +66,78 @@ public class OpenclinicaServlet extends HttpServlet {
     	
     	log.info("Fetching study for oid: " + oid);
     	if(DOWNLOAD_AND_CONVERT.equals(action)) {
-    		study = downloadAndConvertOpenclinicaStudy(oid);
+    		study = fetchAndSaveStudy(oid);
     	}
     	
     	request.getSession().setAttribute("study", study);
     }
     
-	private StudyDef downloadAndConvertOpenclinicaStudy(String oid) {
-		return openclinicaService.importOpenClinicaStudy(oid);
+	private StudyDef fetchAndSaveStudy(String oid) {
+		
+		StudyDef study = openclinicaService.importOpenClinicaStudy(oid);
+		study = validateAndSaveStudy(study);
+		
+		return study;
+	}
+
+	private StudyDef validateAndSaveStudy(StudyDef study) {
+
+		if (studyService != null) {
+			
+			StudyDef existingStudy = studyService.getStudyByKey(study.getStudyKey());
+			
+			if (existingStudy != null) {
+				
+				List<FormDefVersion> existingStudyFormVersions = getStudyFormVersions(existingStudy);
+
+				for (FormDefVersion version : existingStudyFormVersions) {
+					inspectStudyFormVersions(version, study);
+				}
+
+				studyService.saveStudy(study);
+			}
+		}
+
+		return study;
+	}
+
+	private void inspectStudyFormVersions(FormDefVersion version, StudyDef study) {
+
+		List<FormDefVersion> studyFormVersions = getStudyFormVersions(study);
+		for (FormDefVersion x : studyFormVersions) {
+			if (x.getName().equals(version.getName())) {
+				incrementAndMakeDefault(x, version);
+			}
+		}
+
 	}
 	
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	try {
-	    RequestParams params = readType(req, resp);
-	    RequestHandler reqHandler = processorCreator.buildRequestHandler(params.type);
-	    ByteArrayOutputStream tempOS = new ByteArrayOutputStream();
-	    reqHandler.handleRequest(params.user, req.getInputStream(), tempOS);
-	    resp.getOutputStream().write(tempOS.toByteArray());
-	    resp.getOutputStream().flush();
-	} catch (Exception ex) {
-	    log.error("Problem while processing request from mobile: ", ex);
-	    new ErrorWhileProcessHandler(ex).handleRequest(null, null, resp.getOutputStream());
+	private List<FormDefVersion> getStudyFormVersions(StudyDef study) {
+		List<FormDefVersion> versions = new ArrayList<FormDefVersion>();
+		for(FormDef form : study.getForms()) {
+			versions.add(form.getDefaultVersion());
+		}
+		return versions;
 	}
-    }
 
-    private RequestParams readType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-	RequestParams params = new RequestParams();
-	DataInputStream dis = new DataInputStream(req.getInputStream());
-	User user = authenticatedBinaryStream(dis);
-	if (user != null) {
-	    params.user = user;
-	    params.type = dis.readUTF();
-	} else {
-	    params.type = AccessDeniedHandler.class.getName();
+	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDefVersion version) {
+		
+		String versionName = version.getName();
+		String versionNumber = versionName.substring(versionName.length() - 1);
+		
+		int number = Integer.valueOf(versionNumber) + 1;
+		
+		String newVersionName = versionToIncrement.getName();
+		String newVersionNumber = newVersionName.substring(newVersionName.length() - 1);
+		
+		newVersionName.replace(newVersionNumber, number+"");
+		
+		versionToIncrement.setName(newVersionName.trim());
+		
+		FormDef form = version.getFormDef();
+		form.addVersion(versionToIncrement);
+		
+		form.turnOffOtherDefaults(versionToIncrement);
+		
 	}
-	return params;
-    }
-
-    private User authenticatedBinaryStream(DataInputStream dis) throws IOException {
-	String userName = dis.readUTF();
-	String password = dis.readUTF();
-	User user = authSrv.authenticate(userName, password);
-	return user;
-    }
-
-    private class RequestParams {
-
-	private User user;
-	private String type;
-    }
 }

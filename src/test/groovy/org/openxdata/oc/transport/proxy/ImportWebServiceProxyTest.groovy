@@ -43,7 +43,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 	@Test void testImportShouldNotReturnNull(){
 
 		play{
-			def message = importProxy.importData(TestData.instanceData)
+			def message = importProxy.importData(TestData.getOpenXdataInstanceData())
 			assertNotNull message
 		}
 	}
@@ -51,7 +51,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 	@Test void testImportShouldSuccessOnCorrectInstanceData(){
 
 		play{
-			def message = importProxy.importData(TestData.instanceData)
+			def message = importProxy.importData(TestData.getOpenXdataInstanceData())
 			assertEquals 'Success', message
 		}
 	}
@@ -61,7 +61,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 		play{
 			shouldFail(ImportException){
 				def importProxy2 = new ImportWebServiceProxy(connectionFactory:connectionFactory2)
-				def message = importProxy2.importData(TestData.instanceData)
+				def message = importProxy2.importData(TestData.getOpenXdataInstanceData())
 				assertEquals 'Error', message
 			}
 		}

@@ -154,6 +154,87 @@ class TransformTest extends GroovyTestCase {
 		assertEquals "${convertedXform.form[0].'@description'}-v1", version.'@name'.text()
 	}
 	
+	@Test void testODMDataBindsHaveFormOIDAttribute() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each { 
+			it.model.instance.ODM.children().each { element ->
+				if(element.children().size() == 0) {
+					def text = element.@FormOID.text()
+					assertTrue "Should have attribute FormOID", text.size() > 0
+				}
+			}
+		}
+	}
+	
+	@Test void testODMDataBindsHaveItemGroupOIDAttribute() {
+
+		def xformNodes = getXformNodes()
+
+		xformNodes.each {
+			it.model.instance.ODM.children().each { element ->
+
+				if(element.children().size() == 0) {
+					def text = element.@ItemGroupOID.text()
+					assertTrue "Should have attribute ItemGroupOID", text.size() > 0
+				}
+			}
+		}
+	}
+	
+	@Test void testConvertedXmlShouldHaveSubjectkeyAttributeInTheInstanceODMElement() {
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			def odmNode = it.model.instance.ODM
+			
+			assertEquals "", odmNode.'@SubjectKey'.text()
+		}
+	}
+	
+	@Test void testRepeatingGroupQuestionHasACorrectlyConstructedQuestionWithDashes() {
+		xformNodes.each {
+
+			it.group.group.children().each { child ->
+				if(child.name() == 'repeat') {
+
+					if(child.@bind.equals('I_MSA1_MSA1_COMPLYREAS'))
+						assertTrue child.text().contains('-')
+				}
+			}
+		}
+	}
+	
+	@Test void testRepeatingGroupQuestionHasACorrectlyConstructedQuestionLabelIncludingItemHeaderAndItemSubHeader() {
+		xformNodes.each {
+
+			it.group.group.children().each { child ->
+				if(child.name() == 'repeat') {
+
+					def qName = 'Test ItemHeader-Test ItemSubHeader-Test Left Item Text'
+					def input = child.input.label.text()
+
+					if(child.@bind.equals('I_MSA1_MSA1_COMPLYREAS'))
+						assertEquals qName, input
+				}
+			}
+		}
+	}
+	
+	def getXformNodes() {
+
+		def nodes = []
+		convertedXform.form.each {
+			
+			def xformNode = new XmlSlurper().parseText(it.version.xform.text()).declareNamespace(xf:"http://www.w3.org/2002/xforms")
+			
+			nodes.add(xformNode)
+		}
+		
+		return nodes
+	}
+	
 	def getItemRefs() {
 
 		def itemRefs = []

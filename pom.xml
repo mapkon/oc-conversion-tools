@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openxdata</groupId>
 	<artifactId>oc-conversion-tools</artifactId>
-	<version>0.3-BETA-6-SNAPSHOT</version>
+	<version>0.3-BETA-7-SNAPSHOT</version>
 	<name>OpenXdata OpenClinica Conversion Tools</name>
 	<url>http://openxdata.org</url>
 
@@ -71,8 +71,11 @@
 
 	<repositories>
 		<repository>
-			<id>org.codehaus</id>
-			<url>http://snapshots.repository.codehaus.org</url>
+			<id>openxdata</id>
+			<url>http://nexus.openxdata.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 			   <repository>
 			<id>openxdata-releases</id>
@@ -89,7 +92,7 @@
 		<dependency>
 			<artifactId>junit</artifactId>
 			<groupId>junit</groupId>
-			<version>4.4</version>
+			<version>4.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.gmock</groupId>
@@ -154,15 +157,11 @@
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>server</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.8</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-webmvc</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.security</groupId>
-					<artifactId>spring-security-core</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.springframework.security</groupId>
@@ -290,6 +289,25 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>org.concordion</groupId>
+			<artifactId>concordion</artifactId>
+			<version>1.4.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit-dep</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.concordion</groupId>
+			<artifactId>concordion-extensions</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -308,6 +326,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.11</version>
 				<configuration>
 					<forkMode>pertest</forkMode>
 					<argLine>-Xms1024m -Xmx1024m</argLine>
@@ -361,6 +380,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.1</version>
 			</plugin>
+
 		</plugins>
 	</build>
 
@@ -381,6 +401,67 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>acceptance-test</id>
+			<activation>
+				<property>
+					<name>type</name>
+					<value>acceptance</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>add-specs-source</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>${basedir}/src/test/specs</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.3.1</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<source>1.5</source>
+							<target>1.5</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.11</version>
+						<configuration>
+							<forkMode>pertest</forkMode>
+							<argLine>-Xms1024m -Xmx1024m</argLine>
+							<testFailureIgnore>false</testFailureIgnore>
+							<skip>false</skip>
+							<testSourceDirectory>src/test/specs</testSourceDirectory>
+							<includes>
+								<include>**/*Fixture.java</include>
+							</includes>
+							<systemPropertyVariables>
+								<propertyName>concordion.output.dir</propertyName>
+								<buildDirectory>target/concordion</buildDirectory>
+							</systemPropertyVariables>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>

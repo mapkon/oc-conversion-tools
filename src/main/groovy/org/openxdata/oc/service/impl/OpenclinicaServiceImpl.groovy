@@ -8,6 +8,7 @@ import java.util.Collection
 import java.util.Date
 import java.util.List
 
+import org.openxdata.oc.model.Event
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -17,6 +18,7 @@ import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.User
+import org.openxdata.server.admin.model.exception.OpenXDataSessionExpiredException
 import org.openxdata.server.admin.model.exception.UnexpectedException
 import org.openxdata.server.admin.model.paging.PagingLoadConfig
 import org.openxdata.server.security.util.OpenXDataSecurityUtil
@@ -43,7 +45,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			
 			def host = props.getAt('host')
 			
-			ConnectionFactory connectionFactory = new ConnectionFactory(host:host)
+			def connectionFactory = new ConnectionFactory(host:host)
 			client = new OpenClinicaSoapClientImpl(connectionFactory)
 		}
 		
@@ -65,16 +67,14 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		StudyImporter importer = new StudyImporter(xml)
 		StudyDef study = createStudy(importer)
 		
-		log.info("OXD: Saving converted study definition.")
-		studyService.saveStudy(study)
-		
 		return study
 	}
 
 	private StudyDef createStudy(StudyImporter importer) {
 		
 		Date dateCreated = new Date()
-		User creator = OpenXDataSecurityUtil.getLoggedInUser()
+		
+		User creator = getUser();
 		
 		StudyDef study = (StudyDef) importer.extractStudy()
 		study.setCreator(creator)
@@ -92,6 +92,17 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		}
 		
 		return study
+	}
+	
+	private User getUser() {
+		User user = null;
+		try {
+			user = OpenXDataSecurityUtil.getLoggedInUser()
+		}catch(OpenXDataSessionExpiredException ex){
+			user = new User('admin')
+		}
+		
+		return user
 	}
 	
 	private void setFormVersionProperties(FormDef form, Date dateCreated, User creator) {
@@ -142,6 +153,20 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			}
 		}
 		return (String) getClient().importData(allData)	
+	}
+	
+	List<Event> getEvents(String studyOID){
+		
+		def events = []
+		def xml = client.findEventsByStudyOID(studyOID)
+		
+		def eventNode = new XmlSlurper().parseText(xml)
+		eventNode.event.each {
+			def event = new Event(it)
+			events.add(event)
+		}
+		
+		return events
 	}
 	
 	void setStudyService(StudyManagerService studyService) {

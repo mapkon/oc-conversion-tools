@@ -45,4 +45,5 @@ class TransformUtilTest extends GroovyTestCase {
 			assertEquals 'File name cannot be null or empty.', ex.getMessage()
 		}
 	}
+	
 }

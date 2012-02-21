@@ -13,6 +13,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
+import org.openxdata.oc.data.TestData;
+import org.openxdata.oc.model.Event
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.Editable
@@ -27,7 +29,7 @@ import org.openxdata.server.service.StudyManagerService
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class OpenClinicaServiceImplTest {
+public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 	@Mock private FormService formService
 
@@ -36,7 +38,6 @@ public class OpenClinicaServiceImplTest {
 	@Mock private OpenClinicaSoapClient client
 
 	@InjectMocks private def openClinicaService = new OpenclinicaServiceImpl()
-
 
 	def studies = []
 	def subjects = []
@@ -60,9 +61,11 @@ public class OpenClinicaServiceImplTest {
 
 		Mockito.when(formService.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
+		
+		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(TestData.eventNode)
 
 	}
-
+	
 	private void initFormDataList() {
 
 		FormData formData = new FormData()
@@ -102,7 +105,6 @@ public class OpenClinicaServiceImplTest {
 
 	}
 
-
 	@Test public void testHasStudyData(){
 
 		String studyKey = studyService.getStudyKey(1)
@@ -141,5 +143,22 @@ public class OpenClinicaServiceImplTest {
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Fail")
 		String message = openClinicaService.exportOpenClinicaStudyData("oid")
 		assertEquals("Fail", message)
+	}
+	
+	@Test public void testGetEventsDoesNotReturnNull() {
+		def returnedEvents = openClinicaService.getEvents("OID")
+		assertNotNull returnedEvents
+	}
+	
+	@Test public void testGetEventsReturnsCorrectNumberOfEvents() {
+		def returnedEvents = openClinicaService.getEvents("OID")
+		assertEquals 71, returnedEvents.size()
+	}
+	
+	@Test void testGetEventsReturnsEventsWithSubjectKeys() {
+		def returnedEvents = openClinicaService.getEvents("OID")
+		returnedEvents.each {
+			assertTrue "Each event should have at least one subject attached", it.getSubjectKeys().size() >= 1
+		}
 	}
 }
