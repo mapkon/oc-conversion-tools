@@ -64,7 +64,6 @@ public class OpenclinicaServlet extends HttpServlet {
     	String oid = request.getParameter("oid");
     	String action = request.getParameter("action");
     	
-    	log.info("Fetching study for oid: " + oid);
     	if(DOWNLOAD_AND_CONVERT.equals(action)) {
     		study = fetchAndSaveStudy(oid);
     	}
@@ -74,6 +73,7 @@ public class OpenclinicaServlet extends HttpServlet {
     
 	private StudyDef fetchAndSaveStudy(String oid) {
 		
+		log.info("Fetching study for oid: " + oid);
 		StudyDef study = openclinicaService.importOpenClinicaStudy(oid);
 		study = validateAndSaveStudy(study);
 		
@@ -84,6 +84,7 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		if (studyService != null) {
 			
+			log.info("Validating Converted Study: " + study.getName());
 			StudyDef existingStudy = studyService.getStudyByKey(study.getStudyKey());
 			
 			if (existingStudy != null) {
@@ -103,13 +104,14 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private void inspectStudyFormVersions(FormDefVersion version, StudyDef study) {
 
+		log.info("Inspect for conflicting Study Form Versions: " + study.getName());
+
 		List<FormDefVersion> studyFormVersions = getStudyFormVersions(study);
 		for (FormDefVersion x : studyFormVersions) {
 			if (x.getName().equals(version.getName())) {
 				incrementAndMakeDefault(x, version);
 			}
 		}
-
 	}
 	
 	private List<FormDefVersion> getStudyFormVersions(StudyDef study) {
@@ -122,6 +124,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDefVersion version) {
 		
+		log.info("Incrementing the latest Version: " + versionToIncrement.getName());
+
 		String versionName = version.getName();
 		String versionNumber = versionName.substring(versionName.length() - 1);
 		
