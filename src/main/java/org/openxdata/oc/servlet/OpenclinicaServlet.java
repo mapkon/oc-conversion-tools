@@ -91,8 +91,9 @@ public class OpenclinicaServlet extends HttpServlet {
 					inspectStudyFormVersions(version, study);
 				}
 
-				studyService.saveStudy(study);
 			}
+			
+			studyService.saveStudy(study);
 		}
 
 		return study;
