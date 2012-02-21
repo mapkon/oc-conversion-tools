@@ -90,10 +90,17 @@ public class OpenclinicaServlet extends HttpServlet {
 				for (FormDefVersion version : existingStudyFormVersions) {
 					inspectStudyFormVersions(version, study);
 				}
+				
+				log.info("Saving Converted Study: " + study.getName());
 
+				studyService.saveStudy(study);
+
+			}else {
+				
+				log.info("First time download - Saving new converted study: " + study.getName());
+
+				studyService.saveStudy(study);
 			}
-			
-			studyService.saveStudy(study);
 		}
 
 		return study;
