@@ -1,5 +1,8 @@
 package org.openxdata.oc.servlet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.openxdata.oc.service.OpenclinicaService;
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.server.admin.model.FormDef;
+import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.service.FormService;
 import org.openxdata.server.service.StudyManagerService;
@@ -66,8 +71,69 @@ public class OpenclinicaServlet extends HttpServlet {
 	private StudyDef fetchAndSaveStudy(String oid) {
 		
 		StudyDef study = openclinicaService.importOpenClinicaStudy(oid);
-		studyService.saveStudy(study);
+		study = validateAndSaveStudy(study);
 		
 		return study;
+	}
+
+	private StudyDef validateAndSaveStudy(StudyDef study) {
+
+		if (studyService != null) {
+			
+			StudyDef existingStudy = studyService.getStudyByKey(study.getStudyKey());
+			
+			if (existingStudy != null) {
+				
+				List<FormDefVersion> existingStudyFormVersions = getStudyFormVersions(existingStudy);
+
+				for (FormDefVersion version : existingStudyFormVersions) {
+					inspectStudyFormVersions(version, study);
+				}
+
+				studyService.saveStudy(study);
+			}
+		}
+
+		return study;
+	}
+
+	private void inspectStudyFormVersions(FormDefVersion version, StudyDef study) {
+
+		List<FormDefVersion> studyFormVersions = getStudyFormVersions(study);
+		for (FormDefVersion x : studyFormVersions) {
+			if (x.getName().equals(version.getName())) {
+				incrementAndMakeDefault(x, version);
+			}
+		}
+
+	}
+	
+	private List<FormDefVersion> getStudyFormVersions(StudyDef study) {
+		List<FormDefVersion> versions = new ArrayList<FormDefVersion>();
+		for(FormDef form : study.getForms()) {
+			versions.add(form.getDefaultVersion());
+		}
+		return versions;
+	}
+
+	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDefVersion version) {
+		
+		String versionName = version.getName();
+		String versionNumber = versionName.substring(versionName.length() - 1);
+		
+		int number = Integer.valueOf(versionNumber) + 1;
+		
+		String newVersionName = versionToIncrement.getName();
+		String newVersionNumber = newVersionName.substring(newVersionName.length() - 1);
+		
+		newVersionName.replace(newVersionNumber, number+"");
+		
+		versionToIncrement.setName(newVersionName.trim());
+		
+		FormDef form = version.getFormDef();
+		form.addVersion(versionToIncrement);
+		
+		form.turnOffOtherDefaults(versionToIncrement);
+		
 	}
 }
