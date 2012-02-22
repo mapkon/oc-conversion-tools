@@ -71,8 +71,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 			return xform
 		}catch(def ex){
-			log.info("Failed with Exception: ${ex.getMessage()}")
-			throw new TransformationException("Failed with Exception:" + ex.getMessage())
+			log.info(ex.getMessage())
+			throw new TransformationException(ex.getMessage())
 		}
 	}
 

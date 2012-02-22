@@ -37,8 +37,8 @@ public class Transform {
 			
 		}catch(def ex){
 		
-			log.info("Incomplete Transformation due to: ${ex.getMessage()}")
-			throw new TransformationException("Incomplete Transformation due to: ${ex.getMessage()}")
+			log.info(ex.getMessage())
+			throw new TransformationException(ex.getMessage())
 		}
 	}
 
