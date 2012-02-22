@@ -2,7 +2,7 @@ package org.openxdata.oc.exception
 
 public class ImportException extends Exception {
 
-	def ImportException(def message){
+	def ImportException(String message){
 		super(message)
 	}
 }
