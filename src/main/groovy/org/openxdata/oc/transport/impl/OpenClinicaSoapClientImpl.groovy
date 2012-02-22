@@ -5,8 +5,7 @@ import groovy.util.logging.Log
 import java.util.Collection
 
 import org.openxdata.oc.Transform
-import org.openxdata.oc.exception.ErrorCode
-import org.openxdata.oc.exception.ParseException
+import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
@@ -73,7 +72,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			return xform
 		}catch(def ex){
 			log.info("Failed with Exception: ${ex.getMessage()}")
-			throw new ParseException(ErrorCode.XML_PARSE_EXCEPTION)
+			throw new TransformationException("Failed with Exception:" + ex.getMessage())
 		}
 	}
 

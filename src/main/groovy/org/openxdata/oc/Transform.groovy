@@ -8,8 +8,7 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
-import org.openxdata.oc.exception.ErrorCode
-import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.util.TransformUtil
 
 
@@ -39,7 +38,7 @@ public class Transform {
 		}catch(def ex){
 		
 			log.info("Incomplete Transformation due to: ${ex.getMessage()}")
-			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
+			throw new TransformationException("Incomplete Transformation due to: ${ex.getMessage()}")
 		}
 	}
 

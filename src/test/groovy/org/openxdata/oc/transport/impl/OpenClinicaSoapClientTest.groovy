@@ -7,7 +7,7 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.exception.ParseException
+import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.util.PropertiesUtil
 
@@ -238,10 +238,10 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatInvalidXmlThrowsParseException(){
+	@Test void testThatInvalidXmlThrowsRaisesTransformationException(){
 		def connectionFactory = setUpConnectionFactoryMock('''<////ODM>''')
 		play{
-			shouldFail(ParseException){
+			shouldFail(TransformationException){
 				
 				def client = new OpenClinicaSoapClientImpl(props)
 				client.setConnectionFactory(connectionFactory)

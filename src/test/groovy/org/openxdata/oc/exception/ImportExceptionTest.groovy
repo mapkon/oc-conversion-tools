@@ -6,28 +6,19 @@ import org.junit.Test
 
 class ImportExceptionTest {
 
-	@Test void testImportExceptionThrowsExceptionOnOKErrorCode(){
-		def ex = new ImportException(ErrorCode.OK)
-		try{
-			ex.errorMessage()
-		}catch(def exception){
-			assertEquals 'Should never branch to this case.', exception.getMessage()
-		}
-	}
-
 	@Test void testImportExceptionRendersCorrectEmptyInstanceErrorMessage(){
 
-		def ex = new ImportException(ErrorCode.EMPTY_INSTANCE_DATA)
+		def ex = new ImportException('Cannot process empty instance data.')
 
 		def actual = 'Cannot process empty instance data.'
-		assertEquals actual, ex.errorMessage()
+		assertEquals actual, ex.getLocalizedMessage()
 	}
 
 	@Test void testImportExceptionRendersCorrectImportError(){
 
-		def ex = new ImportException(ErrorCode.IMPORT_ERROR)
+		def ex = new ImportException('The Import to OpenClinica didnot complete successfully. Check logs for more information.')
 
 		def actual = 'The Import to OpenClinica didnot complete successfully. Check logs for more information.'
-		assertEquals actual, ex.errorMessage()
+		assertEquals actual, ex.getLocalizedMessage()
 	}
 }
