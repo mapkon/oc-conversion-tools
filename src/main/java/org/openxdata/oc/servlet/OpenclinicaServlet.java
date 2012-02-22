@@ -1,7 +1,10 @@
 package org.openxdata.oc.servlet;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -46,14 +49,30 @@ public class OpenclinicaServlet extends HttpServlet {
 		formService = (FormService) ctx.getBean("formService");
 		studyService = (StudyManagerService) ctx.getBean("studyManagerService");
 
-		openclinicaService = new OpenclinicaServiceImpl();
+    	Properties props = loadProperties();
+		openclinicaService = new OpenclinicaServiceImpl(props);
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
 
 	}
     
-    @Override
+    private Properties loadProperties() {
+    	
+    	Properties props = new Properties();
+    	try {
+    		
+    		InputStream fileName = getServletContext().getResourceAsStream("openclinica.properties");
+			props.load(fileName);
+			
+		} catch (IOException e) {
+			log.error(e.getLocalizedMessage());
+		}
+    	
+		return props;
+	}
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     	
     	StudyDef study = null;

@@ -7,11 +7,10 @@ import java.util.ArrayList
 import java.util.Collection
 import java.util.Date
 import java.util.List
+import java.util.Properties
 
 import org.openxdata.oc.model.Event
 import org.openxdata.oc.service.OpenclinicaService
-import org.openxdata.oc.transport.OpenClinicaSoapClient
-import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 import org.openxdata.oc.util.PropertiesUtil
 import org.openxdata.server.admin.model.FormDef
@@ -35,21 +34,15 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			
 	private def studyService	
 	
-	private OpenClinicaSoapClient getClient() {
-		
-		if(client == null){
-			
-			log.info("OXD: Initializing client for first time use.")
-			
-			def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
-			
-			def host = props.getAt('host')
-			
-			def connectionFactory = new ConnectionFactory(host:host)
-			client = new OpenClinicaSoapClientImpl(connectionFactory)
+	public OpenclinicaServiceImpl(Properties props) {
+
+		log.info("OXD: Initializing client...")
+
+		if(!props) {
+			props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
 		}
-		
-		return client
+
+		client = new OpenClinicaSoapClientImpl(props)
 	}
 	
 	@Override
@@ -61,7 +54,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	@Override
 	public StudyDef importOpenClinicaStudy(String identifier) throws UnexpectedException {
 				
-		NodeChild xml = (NodeChild) getClient().getOpenxdataForm(identifier)
+		NodeChild xml = (NodeChild) client.getOpenxdataForm(identifier)
 		
 		log.info("OXD: Converting Xform to study definition.")
 		StudyImporter importer = new StudyImporter(xml)
@@ -132,7 +125,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 
 		log.info("OXD: Fetching subjects.")
 		
-		Collection<String> returnedSubjects = getClient().getSubjectKeys(studyOID)
+		Collection<String> returnedSubjects = client.getSubjectKeys(studyOID)
 		for(String x : returnedSubjects){
 			subjects.add(x)
 		}
@@ -152,7 +145,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 				allData.add(it)
 			}
 		}
-		return (String) getClient().importData(allData)	
+		return (String) client.importData(allData)	
 	}
 	
 	List<Event> getEvents(String studyOID){
