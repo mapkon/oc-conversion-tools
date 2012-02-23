@@ -18,6 +18,9 @@ import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
+import org.openxdata.server.admin.model.User;
+import org.openxdata.server.admin.model.exception.OpenXdataDataAccessException;
+import org.openxdata.server.service.AuthenticationService;
 import org.openxdata.server.service.FormService;
 import org.openxdata.server.service.StudyManagerService;
 import org.slf4j.Logger;
@@ -31,10 +34,12 @@ public class OpenclinicaServlet extends HttpServlet {
 		
 	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
 	
+	private Properties props;
 	private FormService formService;
 	private StudyManagerService studyService;
 	
 	private OpenclinicaService openclinicaService;
+	private AuthenticationService authenticationService;
 	
 	private static final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
 	
@@ -48,15 +53,17 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		formService = (FormService) ctx.getBean("formService");
 		studyService = (StudyManagerService) ctx.getBean("studyManagerService");
-
-    	Properties props = loadProperties();
+		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
+		
+    	props = loadProperties();
+    	
 		openclinicaService = new OpenclinicaServiceImpl(props);
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
 
 	}
-    
+	
     private Properties loadProperties() {
     	
     	Properties props = new Properties();
@@ -78,13 +85,34 @@ public class OpenclinicaServlet extends HttpServlet {
     	StudyDef study = null;
     	String oid = request.getParameter("oid");
     	String action = request.getParameter("action");
-    	
+
+    	User user = authenticate();
+
     	if(DOWNLOAD_AND_CONVERT.equals(action)) {
     		study = fetchAndSaveStudy(oid);
     	}
     	
     	request.getSession().setAttribute("study", study);
+    	request.getSession().setAttribute("oxdUser", user);
     }
+	
+	private User authenticate() {
+		
+		User user = null;
+		if(authenticationService != null) {
+			
+			String oxdUserName = props.getProperty("oxdUserName");
+			String oxdPassword = props.getProperty("oxdPassword");
+			
+			log.info("Authenticating User: " + oxdUserName);
+
+			user = authenticationService.authenticate(oxdUserName, oxdPassword);
+			if(user == null)
+	    		throw new OpenXdataDataAccessException("Access Denied");
+			
+		}
+		return user;
+	}
     
 	private StudyDef fetchAndSaveStudy(String oid) {
 		
