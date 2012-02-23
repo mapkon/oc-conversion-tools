@@ -9,7 +9,7 @@ class TestData {
 
 	static def getCRFWebServiceResponse() {
 		
-		def response = new TransformUtil().loadFileContents('crf-metadata-response.xml')
+		def response = new TransformUtil().loadFileContents("crf-metadata-response.xml")
 	}
 	
 	static def getOpenXdataInstanceData() {
