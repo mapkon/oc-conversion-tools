@@ -1,10 +1,17 @@
 package org.openxdata.oc.transport.factory
 
+import org.junit.Before
 import org.junit.Test
 
 class ConnectionFactoryTest extends GroovyTestCase {
 	
-	def factory = new ConnectionFactory()
+	
+	def factory
+	
+	@Before void setUp() {
+		def host = "http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT"
+		factory = new ConnectionFactory(host:host)
+	}
 	
 	@Test void testHostNameEqualsPropertiesFileHostName() {
 		
