@@ -65,11 +65,8 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		try{
 
-			log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
+			return getXform(studyOID)
 
-			def xform = getXform(studyOID)
-
-			return xform
 		}catch(def ex){
 			log.info(ex.getMessage())
 			throw new TransformationException(ex.getMessage())
@@ -78,7 +75,10 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	private getXform(def studyOID) {
 
+		log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
+		
 		def odmMetaData = findAllCRFS(studyOID)
+		
 		def convertedXform = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
 		return convertedXform

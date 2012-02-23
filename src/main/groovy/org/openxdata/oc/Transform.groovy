@@ -31,7 +31,6 @@ public class Transform {
 		try{
 			
 			def xform = transformODMToXform(odm)
-			log.info("Transformation complete. Returning...")
 			
 			return xform
 			
@@ -58,6 +57,8 @@ public class Transform {
 
 		parseMeasurementUnits(doc)
 		serializeXformNode(doc)
+		
+		log.info("Transformation complete. Returning...")
 		
 		return doc
 	}

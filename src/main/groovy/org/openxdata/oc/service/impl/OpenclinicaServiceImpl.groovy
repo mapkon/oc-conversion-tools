@@ -36,8 +36,6 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	
 	public OpenclinicaServiceImpl(Properties props) {
 
-		log.info("OXD: Initializing client...")
-
 		if(!props) {
 			props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
 		}
