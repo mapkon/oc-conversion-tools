@@ -175,24 +175,19 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDefVersion version) {
 		
-		log.info("Incrementing the latest Version: " + versionToIncrement.getName());
+		log.info("Incrementing to latest Version: " + versionToIncrement.getName());
 
-		String versionName = version.getName();
-		String versionNumber = versionName.substring(versionName.length() - 1);
+		String incrementVersionName = versionToIncrement.getName();
+		String nextVersion = version.getFormDef().getNextVersionName();
+		String newVersionName = incrementVersionName.replace(incrementVersionName.substring(incrementVersionName.length() -  2), nextVersion);
 		
-		int number = Integer.valueOf(versionNumber) + 1;
-		
-		String newVersionName = versionToIncrement.getName();
-		String newVersionNumber = newVersionName.substring(newVersionName.length() - 1);
-		
-		newVersionName.replace(newVersionNumber, number+"");
-		
-		versionToIncrement.setName(newVersionName.trim());
+		versionToIncrement.setName(newVersionName);
 		
 		FormDef form = version.getFormDef();
 		form.addVersion(versionToIncrement);
 		
 		form.turnOffOtherDefaults(versionToIncrement);
+		form.setDirty(true);
 		
 	}
 }
