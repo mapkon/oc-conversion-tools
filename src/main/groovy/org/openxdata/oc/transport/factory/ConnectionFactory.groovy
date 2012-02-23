@@ -1,7 +1,5 @@
 package org.openxdata.oc.transport.factory
 
-import org.openxdata.oc.util.PropertiesUtil
-
 
 /**
  * Builds a connection for accessing OpenClinca web services end-point.
@@ -11,12 +9,6 @@ public class ConnectionFactory {
 
 	def url
 	def host
-	
-	def ConnectionFactory() {
-		
-		def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
-		host = props.getAt('host')
-	}
 	
 	def getCRFConnection() {
 		
