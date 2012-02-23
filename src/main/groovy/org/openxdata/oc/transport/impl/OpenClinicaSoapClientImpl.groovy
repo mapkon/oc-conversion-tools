@@ -31,7 +31,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			
 	def OpenClinicaSoapClientImpl(Properties props) {
 
-		log.info("Initializing Openclinica Soap Client...")
+		log.info("Initializing Soap Client...")
 		
 		this.props = props
 		
