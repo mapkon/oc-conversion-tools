@@ -46,7 +46,7 @@ public class Transform {
 		
 		log.info("Starting transformation of file...")
 		
-		def xslt = util.loadFileContents("transform-v0.1.xsl")
+		def xslt = util.loadFileContents("META-INF/transform-v0.1.xsl")
 
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
