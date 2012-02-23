@@ -64,6 +64,7 @@ public class Transform {
 	}
 	
 	def parseMeasurementUnits(def doc){
+		
 		log.info("Parsing Measurement units...")
 
 		def parsedMeasurementUnits = [:]
@@ -79,6 +80,7 @@ public class Transform {
 	}
 	
 	private replaceHintNodeText(def hintNode) {
+		
 		def text = hintNode.text()
 		text = text.replace("<SUP>", "^")
 		text = text.replace("</SUP>", "")
@@ -89,12 +91,13 @@ public class Transform {
 	}
 
 	def serializeXformNode(def doc){
+		
 		log.info("Transforming the xform tag to string...")
 
 		doc.form.version.xform.each { xform ->
 			def xformText = ""
 			xform.children().each { xformText += XmlUtil.asString(it) }
-			def textNode = new TextNode("""${xformText}""")
+			def textNode = new TextNode(xformText)
 			xform.replaceBody(textNode)
 		}
 	}
