@@ -88,6 +88,7 @@
 			<artifactId>junit</artifactId>
 			<groupId>junit</groupId>
 			<version>4.10</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.gmock</groupId>
@@ -274,7 +275,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.concordion</groupId>
 			<artifactId>concordion</artifactId>
@@ -291,8 +291,8 @@
 			<groupId>org.concordion</groupId>
 			<artifactId>concordion-extensions</artifactId>
 			<version>1.1.0</version>
+			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
