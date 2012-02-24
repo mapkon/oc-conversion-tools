@@ -8,7 +8,7 @@ class PropertiesUtil {
 	Properties loadProperties(def fileName) {
 		if(fileName){
 			
-			def stream = getClass().getClassLoader().getResourceAsStream(fileName)
+			def stream = this.getClass().getClassLoader().getResourceAsStream(fileName)
 			props.load(stream)
 			return props
 		}else {

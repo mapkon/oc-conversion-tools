@@ -1,5 +1,6 @@
 package org.openxdata.oc.servlet;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.openxdata.oc.service.OpenclinicaService;
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.oc.util.TransformUtil;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
@@ -34,9 +36,9 @@ public class OpenclinicaServlet extends HttpServlet {
 		
 	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
 	
-	private Properties props;
 	private FormService formService;
 	private StudyManagerService studyService;
+	private Properties props = new Properties();
 	
 	private OpenclinicaService openclinicaService;
 	private AuthenticationService authenticationService;
@@ -66,17 +68,32 @@ public class OpenclinicaServlet extends HttpServlet {
 	
     private Properties loadProperties() {
     	
-    	Properties props = new Properties();
     	try {
     		
-    		InputStream fileName = getServletContext().getResourceAsStream("openclinica.properties");
-			props.load(fileName);
+			log.debug("Attempting to load properties file from Web Context");
+			InputStream propFileStream = getServletContext().getResourceAsStream("openclinica.properties");
+			props.load(propFileStream);
 			
-		} catch (IOException e) {
-			log.error(e.getLocalizedMessage());
+		} catch (Exception e) {
+			
+			loadInternalProperties();
 		}
     	
 		return props;
+	}
+
+	private void loadInternalProperties() {
+		
+		try {
+			
+			log.debug("File not found in Web context. Attempting to load internal properties file");
+			
+			String propFileContent = new TransformUtil().loadFileContents("META-INF/openclinica.properties");
+			props.load(new ByteArrayInputStream(propFileContent.getBytes()));
+			
+		} catch (IOException e) {
+			log.debug(e.getLocalizedMessage());
+		}
 	}
 
 	@Override
@@ -138,9 +155,9 @@ public class OpenclinicaServlet extends HttpServlet {
 					inspectStudyFormVersions(version, study);
 				}
 				
-				log.info("Saving Converted Study: " + study.getName());
+				log.info("Saving existing [converted] Study: " + existingStudy.getName());
 
-				studyService.saveStudy(study);
+				studyService.saveStudy(existingStudy);
 
 			}else {
 				
@@ -179,7 +196,9 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		String incrementVersionName = versionToIncrement.getName();
 		String nextVersion = version.getFormDef().getNextVersionName();
-		String newVersionName = incrementVersionName.replace(incrementVersionName.substring(incrementVersionName.length() -  2), nextVersion);
+		
+		String newVersionName = incrementVersionName.
+				replace(incrementVersionName.substring(incrementVersionName.length() -  2), nextVersion);
 		
 		versionToIncrement.setName(newVersionName);
 		
