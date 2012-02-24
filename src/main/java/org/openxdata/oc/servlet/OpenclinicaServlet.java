@@ -203,6 +203,7 @@ public class OpenclinicaServlet extends HttpServlet {
 		versionToIncrement.setName(newVersionName);
 		
 		FormDef form = version.getFormDef();
+		versionToIncrement.setFormDef(form);
 		form.addVersion(versionToIncrement);
 		
 		form.turnOffOtherDefaults(versionToIncrement);
