@@ -58,13 +58,18 @@
 						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of
 							select="../@OID" /></xsl:attribute>
 
-						<xsl:attribute name="SubjectKey" />
 
 						<xsl:for-each select="odm:FormRef">
 
 							<xsl:variable name="formId" select="@FormOID" />
 							<xsl:for-each select="../../odm:FormDef[@OID=$formId]/odm:ItemGroupRef">
 								<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
+
+								<xsl:element name="SubjectKey">
+							
+									<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
+									<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
+								</xsl:element>
 								<xsl:choose>
 									<xsl:when
 										test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
@@ -103,6 +108,13 @@
 				</xsl:call-template>
 
 			</model>
+			<group id="1">
+				<label>Subject key</label>
+				<input bind="subjectKeyBind">
+					<label>Subject Key</label>
+				</input>
+			</group>
+			
 			<xsl:for-each select="odm:FormRef">
 				<xsl:call-template name="createGroup" />
 			</xsl:for-each>
@@ -112,6 +124,7 @@
 	<xsl:template name="createBinds">
 		<xsl:param name="studyEventId" />
 
+		<bind id="subjectKeyBind" nodeset="/ODM/SubjectKey" type="xsd:string"></bind>
 		<xsl:for-each select="odm:FormRef">
 			<xsl:variable name="formId" select="@FormOID" />
 			<xsl:for-each select="../../odm:FormDef[@OID=$formId]/odm:ItemGroupRef">
@@ -202,7 +215,7 @@
 
 	<xsl:template name="createGroup">
 		<group>
-			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
+			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
 			<xsl:variable name="formId" select="@FormOID" />
 			<label>
 				<xsl:value-of select="../../odm:FormDef[@OID = $formId]/@Name" />

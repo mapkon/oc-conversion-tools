@@ -54,10 +54,10 @@ class TransformTest extends GroovyTestCase {
 	
 	@Test void testThatTheNumberOfBindsAre47Given45ItemRefsInODM() {
 		
-		def binds = getBinds();
+		def binds = getBinds()
 		
 		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 47, binds.size()
+		assertEquals 49, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
