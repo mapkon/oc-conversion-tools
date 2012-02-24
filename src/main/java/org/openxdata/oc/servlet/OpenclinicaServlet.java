@@ -176,8 +176,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		List<FormDefVersion> studyFormVersions = getStudyFormVersions(study);
 		for (FormDefVersion x : studyFormVersions) {
-			if (x.getName().equals(version.getName())) {
-				incrementAndMakeDefault(x, version);
+			if (x.getFormDef().getName().equals(version.getFormDef().getName())) {
+				incrementAndMakeDefault(x, version.getFormDef());
 			}
 		}
 	}
@@ -190,19 +190,18 @@ public class OpenclinicaServlet extends HttpServlet {
 		return versions;
 	}
 
-	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDefVersion version) {
+	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDef form) {
 		
 		log.info("Incrementing to latest Version: " + versionToIncrement.getName());
 
 		String incrementVersionName = versionToIncrement.getName();
-		String nextVersion = version.getFormDef().getNextVersionName();
+		String nextVersion = form.getNextVersionName();
 		
 		String newVersionName = incrementVersionName.
 				replace(incrementVersionName.substring(incrementVersionName.length() -  2), nextVersion);
 		
 		versionToIncrement.setName(newVersionName);
 		
-		FormDef form = version.getFormDef();
 		versionToIncrement.setFormDef(form);
 		form.addVersion(versionToIncrement);
 		
