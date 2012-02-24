@@ -34,7 +34,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6577932874016086164L;
 		
-	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
+	private static final String IMPORT = "Import";
+	private static final String EXPORT = "Export";
 	
 	private FormService formService;
 	private StudyManagerService studyService;
@@ -99,13 +100,25 @@ public class OpenclinicaServlet extends HttpServlet {
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     	
+    	try {
+			request.getRequestDispatcher("openclinica.jsp").forward(request, response);
+		} catch (ServletException e) {
+			log.info(e.getLocalizedMessage());
+		} catch (IOException e) {
+			log.info(e.getLocalizedMessage());
+		}
+    }
+	
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    	
     	StudyDef study = null;
     	String oid = request.getParameter("oid");
     	String action = request.getParameter("action");
 
     	User user = authenticate();
 
-    	if(DOWNLOAD_AND_CONVERT.equals(action)) {
+    	if(IMPORT.equals(action)) {
     		study = fetchAndSaveStudy(oid);
     	}
     	
