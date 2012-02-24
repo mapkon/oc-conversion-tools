@@ -103,9 +103,9 @@ public class OpenclinicaServlet extends HttpServlet {
     	try {
 			request.getRequestDispatcher("openclinica.jsp").forward(request, response);
 		} catch (ServletException e) {
-			log.info(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 		} catch (IOException e) {
-			log.info(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 		}
     }
 	
