@@ -36,6 +36,7 @@ public class OpenclinicaServlet extends HttpServlet {
 		
 	private static final String IMPORT = "Import";
 	private static final String EXPORT = "Export";
+	private final String JSP_LOCATION = "openclinica.jsp";
 	
 	private FormService formService;
 	private StudyManagerService studyService;
@@ -101,7 +102,7 @@ public class OpenclinicaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     	
     	try {
-			request.getRequestDispatcher("openclinica.jsp").forward(request, response);
+			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
 		} catch (ServletException e) {
 			log.error(e.getLocalizedMessage());
 		} catch (IOException e) {
@@ -111,19 +112,26 @@ public class OpenclinicaServlet extends HttpServlet {
 	
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-    	
-    	StudyDef study = null;
-    	String oid = request.getParameter("oid");
-    	String action = request.getParameter("action");
+		
+		try {
+			
+	    	StudyDef study = null;
+	    	String oid = request.getParameter("oid");
+	    	String action = request.getParameter("action");
 
-    	User user = authenticate();
+	    	User user = authenticate();
 
-    	if(IMPORT.equals(action)) {
-    		study = fetchAndSaveStudy(oid);
-    	}
-    	
-    	request.getSession().setAttribute("study", study);
-    	request.getSession().setAttribute("oxdUser", user);
+	    	if(IMPORT.equals(action)) {
+	    		study = fetchAndSaveStudy(oid);
+	    	}
+	    	
+	    	request.getSession().setAttribute("study", study);
+	    	request.getSession().setAttribute("oxdUser", user);
+	    	response.sendRedirect(JSP_LOCATION);
+	    	
+		}catch (Exception ex) {
+			log.error(ex.getLocalizedMessage());
+		}
     }
 	
 	private User authenticate() {
