@@ -5,7 +5,7 @@ class PropertiesUtil {
 
 	def props = new Properties()
 	
-	def loadProperties(def fileName) {
+	Properties loadProperties(def fileName) {
 		if(fileName){
 			
 			def stream = getClass().getClassLoader().getResourceAsStream(fileName)

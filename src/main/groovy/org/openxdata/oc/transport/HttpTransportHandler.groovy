@@ -2,7 +2,6 @@ package org.openxdata.oc.transport
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.exception.ErrorCode
 import org.openxdata.oc.exception.UnAvailableException
 
 @Log
@@ -28,7 +27,7 @@ class HttpTransportHandler {
 			return establishConnection()
 		}catch (def ex){
 			log.info("Error Processing connection to: ${connection.getURL()}. Exception: ${ex.getMessage()}")
-			throw new UnAvailableException(ErrorCode.SERVER_UNAVAILABLE)
+			throw new UnAvailableException("Error Processing connection to: ${connection.getURL()} with exception: ${ex.getMessage()}")
 		}
 	}
 

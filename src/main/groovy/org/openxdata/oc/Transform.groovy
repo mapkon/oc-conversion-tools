@@ -8,8 +8,7 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
-import org.openxdata.oc.exception.ErrorCode
-import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.util.TransformUtil
 
 
@@ -32,23 +31,21 @@ public class Transform {
 		try{
 			
 			def xform = transformODMToXform(odm)
-			log.info("Transformation complete. Returning...")
 			
 			return xform
 			
 		}catch(def ex){
 		
-			log.info("Incomplete Transformation due to: ${ex.getMessage()}")
-			throw new ImportException(ErrorCode.XML_PARSE_EXCEPTION)
+			log.info(ex.getMessage())
+			throw new TransformationException(ex.getMessage())
 		}
 	}
 
 	private def transformODMToXform(odm) {
-		
-		def xslt = util.loadFileContents("/org/openxdata/oc/transform-v0.1.xsl")
 
 		log.info("Starting transformation of file...")
 		
+		def xslt = util.loadFileContents("META-INF/transform-v0.1.xsl")
 
 		def factory = TransformerFactory.newInstance()
 		def transformer = factory.newTransformer(new StreamSource(new StringReader(xslt)))
@@ -60,6 +57,8 @@ public class Transform {
 
 		parseMeasurementUnits(doc)
 		serializeXformNode(doc)
+		
+		log.info("Transformation complete. Returning...")
 		
 		return doc
 	}

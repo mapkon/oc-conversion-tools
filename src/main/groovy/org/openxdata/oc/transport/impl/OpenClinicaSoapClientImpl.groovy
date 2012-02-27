@@ -5,20 +5,20 @@ import groovy.util.logging.Log
 import java.util.Collection
 
 import org.openxdata.oc.Transform
-import org.openxdata.oc.exception.ErrorCode
-import org.openxdata.oc.exception.ParseException
+import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
+import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
-import org.openxdata.oc.transport.proxy.EventWebServiceProxy;
+import org.openxdata.oc.transport.proxy.EventWebServiceProxy
 import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.proxy.ListAllSubjectsByStudyWebServiceProxy
-import org.openxdata.oc.util.PropertiesUtil
 
 
 @Log
 public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 	
+	def props
 	def username
 	def password
 	def connectionFactory
@@ -27,42 +27,37 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def eventsProxy
 	private def listAllByStudyProxy
 	private def crfMetaDataVersionProxy
+	
 			
-	def OpenClinicaSoapClientImpl(def connectionFactory){
+	def OpenClinicaSoapClientImpl(Properties props) {
+
+		log.info("Initializing Openclinica Soap Client...")
 		
-		log.info("Initializing Openclinica Soap Client.")
+		this.props = props
 		
-		this.connectionFactory = connectionFactory
-			
-		def util = new PropertiesUtil()
-		def props = util.loadProperties('META-INF/openclinica.properties')
-		
+		def host = props.getAt('host')
 		username = props.getAt('username')
 		password = props.getAt('password')
 		
-		init()
-		
-	}
-	
-	void init() {
-		
-		eventsProxy = new EventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		crfMetaDataVersionProxy = new CRFMetaDataVersionProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		connectionFactory = new ConnectionFactory(host:host)
+
 	}
 
 	def findAllCRFS(def studyOID) {
+		
+		crfMetaDataVersionProxy = new CRFMetaDataVersionProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
 	public def importData(Collection<String> instanceData){
 		
+		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData);
 	}
 		
 	public Collection<String> getSubjectKeys(def identifier){
 		
+		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return listAllByStudyProxy.listAllByStudy(identifier)
 	}
 
@@ -70,26 +65,28 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		
 		try{
 
-			log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
+			return getXform(studyOID)
 
-			def xform = getXform(studyOID)
-
-			return xform
 		}catch(def ex){
-			log.info("Failed with Exception: ${ex.getMessage()}")
-			throw new ParseException(ErrorCode.XML_PARSE_EXCEPTION)
+			log.info(ex.getMessage())
+			throw new TransformationException(ex.getMessage())
 		}
 	}
 
 	private getXform(def studyOID) {
 
+		log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
+		
 		def odmMetaData = findAllCRFS(studyOID)
+		
 		def convertedXform = Transform.getTransformer().ConvertODMToXform(odmMetaData)
 
 		return convertedXform
 	}
 	
 	def findEventsByStudyOID(def studyOID) {
+		
+		eventsProxy = new EventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return eventsProxy.findEventsByStudyOID(studyOID)
 	}
 }

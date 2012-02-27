@@ -50,8 +50,11 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		study.setName('Test Study')
 
 		def form = new FormDef()
+		form.setName('Test Form')
+		
 		def version = new FormDefVersion()
-
+		version.setName('Test Version')
+		
 		form.addVersion(version)
 
 		study.addForm(form)
@@ -90,5 +93,16 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		def convertedStudy = request.getSession().getAttribute('study')
 		assertEquals 1, convertedStudy.getForm(0).getVersions().size()
 	}
+	
+	@Test public void testDownloadStudyReturnsValidWithLatestVersionsAsDefault() {
+		
+		servlet.doGet(request, response)
 
+		def convertedStudy = request.getSession().getAttribute('study')
+		
+		FormDef form = convertedStudy.getForm("Test Form")
+		FormDefVersion version = form.getVersion("Test Version")
+		
+		assertTrue version.getIsDefault()
+	}
 }
