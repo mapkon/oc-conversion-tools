@@ -138,15 +138,6 @@ public class OpenclinicaServlet extends HttpServlet {
 		}
     }
 	
-	private void exportStudyData(String oid) throws ImportException {
-		
-		log.info("Initiating Export of Study Data to OpenClinica");
-		
-		String result = openclinicaService.exportOpenClinicaStudyData(oid);
-		if("Error".equals(result))
-			throw new ImportException("Exception during export of data to openclinica. Check log for details.");
-	}
-
 	private User authenticate() {
 		
 		User user = null;
@@ -164,6 +155,16 @@ public class OpenclinicaServlet extends HttpServlet {
 		}
 		return user;
 	}
+	
+	private void exportStudyData(String oid) throws ImportException {
+		
+		log.info("Initiating Export of Study Data to OpenClinica");
+		
+		String result = openclinicaService.exportOpenClinicaStudyData(oid);
+		if("Error".equals(result))
+			throw new ImportException("Exception during export of data to openclinica. Check log for details.");
+	}
+
     
 	private StudyDef fetchAndSaveStudy(String oid) {
 		
