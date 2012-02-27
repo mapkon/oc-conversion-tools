@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openxdata.oc.exception.ImportException;
 import org.openxdata.oc.service.OpenclinicaService;
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
 import org.openxdata.oc.util.TransformUtil;
@@ -124,6 +125,9 @@ public class OpenclinicaServlet extends HttpServlet {
 	    	if(IMPORT.equals(action)) {
 	    		study = fetchAndSaveStudy(oid);
 	    	}
+	    	else if(EXPORT.equals(action)) {
+	    		exportStudyData(oid);
+	    	}
 	    	
 	    	request.getSession().setAttribute("study", study);
 	    	request.getSession().setAttribute("oxdUser", user);
@@ -134,6 +138,15 @@ public class OpenclinicaServlet extends HttpServlet {
 		}
     }
 	
+	private void exportStudyData(String oid) throws ImportException {
+		
+		log.info("Initiating Export of Study Data to OpenClinica");
+		
+		String result = openclinicaService.exportOpenClinicaStudyData(oid);
+		if("Error".equals(result))
+			throw new ImportException("Exception during export of data to openclinica. Check log for details.");
+	}
+
 	private User authenticate() {
 		
 		User user = null;
