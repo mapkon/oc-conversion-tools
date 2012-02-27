@@ -1,0 +1,99 @@
+body {
+	font-family: Arial, sans-serif;
+	font-family: 12px;
+	color: #6E6E6E;
+	background: #fff url('../images/bg.png') repeat-x;
+	margin: 0px;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.header {
+	font-weight: bold;
+	font-family: 13px;
+	width: 100%;
+	height: 60px;
+	margin: 10px 0px 0px 20px;
+	clear: both;
+	background: url('../images/openxdata-logo.png') no-repeat;
+}
+
+.bodyDiv {
+	margin: 0px;
+	width: 100%;
+	min-height: 350px;
+	width: 100%;
+}
+
+.bodyDiv .heading {
+	font-size: 13px;
+	color: #E0C424;
+	font-weight: bold;
+	color: #E0C424;
+	font-weight: bold;
+	margin: 15px 0px 10px 40px;
+	text-align:center;
+}
+
+.bodyDiv .studies-table {
+	margin: auto;
+	width: 800px;
+	border: double 1px #0288F5;
+	text-align:center;
+}
+
+.bodyDiv .studies-table .studies-table-label {
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px;
+	background: #6D92AB;
+}
+
+.bodyDiv .study-table {
+	min-height: 300px;
+}
+
+.bodyDiv .study-table th {
+	text-align: center;
+	white-space: nowrap;
+	font-size: 11px;
+	font-weight: bold;
+	border-left: solid 1px #D4D4D4;
+	border-bottom: solid 1px #D4D4D4;
+	background: #EBEEF0;
+	height: 20px;
+	width: 200px;
+}
+
+.bodyDiv .study-table td {
+	text-align: center;
+	white-space: nowrap;
+	font-size: 10px;
+	border-left: solid 1px #D4D4D4;
+	border-bottom: solid 1px #D4D4D4;
+}
+
+.bodyDiv .studies-table .buttonStrip {
+	height: 30px;
+	background: #EBEEF0;
+	padding: 2px 0px 0px 20px;
+}
+
+.bodyDiv .button-style {
+	font-size: 12px;
+	width: 80px;
+}
+
+.footer {
+	font-size: 11px;
+	font-weight: bold; 
+	text-align : center;
+	width: 80%;
+	height: 30px;
+	margin: 3px 5px 0px 40px;
+	text-align: center;
+}
