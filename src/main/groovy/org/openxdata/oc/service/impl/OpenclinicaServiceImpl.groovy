@@ -14,14 +14,16 @@ import org.openxdata.oc.model.Event
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 import org.openxdata.oc.util.PropertiesUtil
+import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.User
 import org.openxdata.server.admin.model.exception.OpenXDataSessionExpiredException
 import org.openxdata.server.admin.model.exception.UnexpectedException
-import org.openxdata.server.admin.model.paging.PagingLoadConfig
+import org.openxdata.server.export.ExportConstants
 import org.openxdata.server.security.util.OpenXDataSecurityUtil
+import org.openxdata.server.service.DataExportService
 import org.openxdata.server.service.FormService
 import org.openxdata.server.service.StudyManagerService
 import org.openxdata.xform.StudyImporter
@@ -32,8 +34,8 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	private def client
 	
 	private def formService
-			
-	private def studyService	
+	private def studyService
+	private DataExportService dataExportService	
 	
 	public OpenclinicaServiceImpl(Properties props) {
 
@@ -132,19 +134,26 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	}
 
 	@Override
-	public String exportOpenClinicaStudyData(String studyKey) {
-		
-		def allData = []
-		def config = new PagingLoadConfig(0, 5);
-		StudyDef study = studyService.getStudyByKey(studyKey)
-		
-		for (FormDef form : study.getForms()) {
-			def dataList = formService.getFormDataList(form.getDefaultVersion(), config)
-			dataList.getData().each {
-				allData.add(it)
+	public String exportOpenClinicaStudyData() {
+
+		List<FormData> dataList = dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
+
+		log.info("Running OpenClinica Export Routine to export " + dataList.size()	+ " form data items")
+
+		String exportResponse = client.importData(dataList)
+
+		if("Success".equals(exportResponse)) {
+			
+			dataList.each {
+
+				log.info("Resetting Export Flag for: " + it.getId()	+ " form data items")
+
+				dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
+				it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
 			}
 		}
-		return (String) client.importData(allData)	
+
+		return exportResponse
 	}
 	
 	List<Event> getEvents(String studyOID){
@@ -167,5 +176,9 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	
 	void setFormService(FormService formService) {
 		this.formService = formService
+	}
+	
+	public void setDataExportService(DataExportService dataExportService) {
+		this.dataExportService = dataExportService
 	}
 }

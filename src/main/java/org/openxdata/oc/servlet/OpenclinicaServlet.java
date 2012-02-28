@@ -24,6 +24,7 @@ import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.admin.model.User;
 import org.openxdata.server.admin.model.exception.OpenXdataDataAccessException;
 import org.openxdata.server.service.AuthenticationService;
+import org.openxdata.server.service.DataExportService;
 import org.openxdata.server.service.FormService;
 import org.openxdata.server.service.StudyManagerService;
 import org.slf4j.Logger;
@@ -43,6 +44,7 @@ public class OpenclinicaServlet extends HttpServlet {
 	private StudyManagerService studyService;
 	private Properties props = new Properties();
 	
+	private DataExportService dataExportService;
 	private OpenclinicaService openclinicaService;
 	private AuthenticationService authenticationService;
 	
@@ -58,6 +60,7 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		formService = (FormService) ctx.getBean("formService");
 		studyService = (StudyManagerService) ctx.getBean("studyManagerService");
+		dataExportService = (DataExportService) ctx.getBean("dataExportService");
 		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
 		
     	props = loadProperties();
@@ -66,6 +69,7 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
+		openclinicaService.setDataExportService(dataExportService);
 
 	}
 	
@@ -79,6 +83,7 @@ public class OpenclinicaServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			
+			// We imagine the absence of an external properties file in openxdata/WEB-INF
 			loadInternalProperties();
 		}
     	
@@ -126,7 +131,7 @@ public class OpenclinicaServlet extends HttpServlet {
 	    		study = fetchAndSaveStudy(oid);
 	    	}
 	    	else if(EXPORT.equals(action)) {
-	    		exportStudyData(oid);
+	    		exportStudyData();
 	    	}
 	    	
 	    	request.getSession().setAttribute("study", study);
@@ -156,15 +161,14 @@ public class OpenclinicaServlet extends HttpServlet {
 		return user;
 	}
 	
-	private void exportStudyData(String oid) throws ImportException {
+	private void exportStudyData() throws ImportException {
 		
 		log.info("Initiating Export of Study Data to OpenClinica");
 		
-		String result = openclinicaService.exportOpenClinicaStudyData(oid);
+		String result = openclinicaService.exportOpenClinicaStudyData();
 		if("Error".equals(result))
 			throw new ImportException("Exception during export of data to openclinica. Check log for details.");
 	}
-
     
 	private StudyDef fetchAndSaveStudy(String oid) {
 		
