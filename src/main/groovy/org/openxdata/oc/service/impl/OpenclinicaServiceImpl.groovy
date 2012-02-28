@@ -1,3 +1,4 @@
+
 package org.openxdata.oc.service.impl
 
 import groovy.util.logging.Log
@@ -65,7 +66,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		
 		Date dateCreated = new Date()
 		
-		User creator = getUser();
+		User creator = getUser()
 		
 		StudyDef study = (StudyDef) importer.extractStudy()
 		study.setCreator(creator)
@@ -86,7 +87,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	}
 	
 	private User getUser() {
-		User user = null;
+		User user = null
 		try {
 			user = OpenXDataSecurityUtil.getLoggedInUser()
 		}catch(OpenXDataSessionExpiredException ex){
