@@ -67,7 +67,9 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 	private void initFormDataList() {
 
 		FormData formData = new FormData()
+		formData.setId(1)
 		FormData formData2 = new FormData()
+		formData2.setId(2)
 
 		formDataList.add(formData)
 		formDataList.add(formData2)
