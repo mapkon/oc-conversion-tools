@@ -146,7 +146,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			
 			dataList.each {
 
-				log.info("Resetting Export Flag for: " + it.getId()	+ " form data items")
+				log.info("Resetting Export Flag for form data with id: " + it.getId())
 
 				dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
 				it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
