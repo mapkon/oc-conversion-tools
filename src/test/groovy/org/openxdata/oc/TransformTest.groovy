@@ -160,7 +160,8 @@ class TransformTest extends GroovyTestCase {
 		
 		xformNodes.each { 
 			it.model.instance.ODM.children().each { element ->
-				if(element.children().size() == 0) {
+				
+				if(element.children().size() == 0 && !element.name().toString() == 'SubjectKey') {
 					def text = element.@FormOID.text()
 					assertTrue "Should have attribute FormOID", text.size() > 0
 				}
@@ -175,7 +176,7 @@ class TransformTest extends GroovyTestCase {
 		xformNodes.each {
 			it.model.instance.ODM.children().each { element ->
 
-				if(element.children().size() == 0) {
+				if(element.children().size() == 0 && !element.name().toString() == 'SubjectKey') {
 					def text = element.@ItemGroupOID.text()
 					assertTrue "Should have attribute ItemGroupOID", text.size() > 0
 				}

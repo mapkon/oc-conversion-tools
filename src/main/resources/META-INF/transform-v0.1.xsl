@@ -58,18 +58,14 @@
 						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of
 							select="../@OID" /></xsl:attribute>
 
-
+						<xsl:element name="SubjectKey" />
+						
 						<xsl:for-each select="odm:FormRef">
 
 							<xsl:variable name="formId" select="@FormOID" />
 							<xsl:for-each select="../../odm:FormDef[@OID=$formId]/odm:ItemGroupRef">
 								<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 
-								<xsl:element name="SubjectKey">
-							
-									<xsl:attribute name="FormOID"><xsl:value-of select="$formId" /></xsl:attribute>
-									<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupId" /></xsl:attribute>
-								</xsl:element>
 								<xsl:choose>
 									<xsl:when
 										test="//odm:ItemGroupDef[@OID=$itemGroupId]/@Repeating = 'Yes'">
