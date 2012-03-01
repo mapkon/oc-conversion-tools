@@ -199,13 +199,6 @@
 		<xsl:param name="itemDef" />
 		<xsl:param name="formId" />
 
-		<xsl:variable name="questionText">
-			<xsl:call-template name="createQuestionText">
-				<xsl:with-param name="itemDef" select="$itemDef" />
-				<xsl:with-param name="formId" select="$formId" />
-			</xsl:call-template>
-		</xsl:variable>
-
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:CodeListRef">
 				<select1>
@@ -215,15 +208,7 @@
 						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
 					</xsl:variable>
 					<label>
-						<xsl:choose>
-							<xsl:when test="$questionText = '- -'">
-								<xsl:value-of
-									select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$questionText" />
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 					</label>
 					<xsl:for-each
 						select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
@@ -245,15 +230,7 @@
 					<xsl:attribute name="bind"><xsl:value-of
 						select="$itemOID" /></xsl:attribute>
 					<label>
-						<xsl:choose>
-							<xsl:when test="$questionText = '- -'">
-								<xsl:value-of
-									select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$questionText" />
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 					</label>
 					<xsl:if test="$itemDef/odm:MeasurementUnitRef">
 						<hint>
@@ -269,25 +246,5 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
-	<xsl:template name="createQuestionText">
-
-		<xsl:param name="itemDef" />
-		<xsl:param name="formId" />
-
-		<xsl:variable name="constructedQuestionText">
-			<xsl:value-of
-				select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:ItemHeader" />
-			-
-			<xsl:value-of
-				select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:ItemSubHeader" />
-			-
-			<xsl:value-of
-				select="$itemDef/OpenClinica:ItemDetails[@ItemOID=$itemDef/@OID]/OpenClinica:ItemPresentInForm[@FormOID=$formId]/OpenClinica:LeftItemText" />
-		</xsl:variable>
-
-		<xsl:value-of select="normalize-space($constructedQuestionText)" />
-
-	</xsl:template>
-
+	
 </xsl:stylesheet>
