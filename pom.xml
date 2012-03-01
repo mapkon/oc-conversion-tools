@@ -93,6 +93,7 @@
 			<artifactId>junit</artifactId>
 			<groupId>junit</groupId>
 			<version>4.10</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.gmock</groupId>
@@ -121,7 +122,7 @@
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>xform-study-import</artifactId>
-			<version>0.3</version>
+			<version>0.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
@@ -289,7 +290,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.concordion</groupId>
 			<artifactId>concordion</artifactId>
@@ -306,8 +306,8 @@
 			<groupId>org.concordion</groupId>
 			<artifactId>concordion-extensions</artifactId>
 			<version>1.1.0</version>
+			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>

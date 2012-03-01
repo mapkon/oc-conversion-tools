@@ -1,5 +1,6 @@
 package org.openxdata.oc.servlet;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,9 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.openxdata.oc.service.OpenclinicaService;
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.oc.util.TransformUtil;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
+import org.openxdata.server.admin.model.User;
+import org.openxdata.server.admin.model.exception.OpenXdataDataAccessException;
+import org.openxdata.server.service.AuthenticationService;
 import org.openxdata.server.service.FormService;
 import org.openxdata.server.service.StudyManagerService;
 import org.slf4j.Logger;
@@ -29,13 +34,17 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6577932874016086164L;
 		
-	private static final String DOWNLOAD_AND_CONVERT = "downloadAndConvert";
+	private static final String IMPORT = "Import";
+	private static final String EXPORT = "Export";
+	private final String JSP_LOCATION = "openclinica.jsp";
 	
 
 	private FormService formService;
 	private StudyManagerService studyService;
+	private Properties props = new Properties();
 	
 	private OpenclinicaService openclinicaService;
+	private AuthenticationService authenticationService;
 	
 	private static final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
 	
@@ -52,43 +61,100 @@ public class OpenclinicaServlet extends HttpServlet {
 		
 		formService = (FormService) ctx.getBean("formService");
 		studyService = (StudyManagerService) ctx.getBean("studyManagerService");
-
-    	Properties props = loadProperties();
+		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
+		
+    	props = loadProperties();
+    	
 		openclinicaService = new OpenclinicaServiceImpl(props);
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
 
 	}
-    
+	
     private Properties loadProperties() {
     	
-    	Properties props = new Properties();
     	try {
     		
-    		InputStream fileName = getServletContext().getResourceAsStream("openclinica.properties");
-			props.load(fileName);
+			log.debug("Attempting to load properties file from Web Context");
+			InputStream propFileStream = getServletContext().getResourceAsStream("openclinica.properties");
+			props.load(propFileStream);
 			
-		} catch (IOException e) {
-			log.error(e.getLocalizedMessage());
+		} catch (Exception e) {
+			
+			loadInternalProperties();
 		}
     	
 		return props;
 	}
 
+	private void loadInternalProperties() {
+		
+		try {
+			
+			log.debug("File not found in Web context. Attempting to load internal properties file");
+			
+			String propFileContent = new TransformUtil().loadFileContents("META-INF/openclinica.properties");
+			props.load(new ByteArrayInputStream(propFileContent.getBytes()));
+			
+		} catch (IOException e) {
+			log.debug(e.getLocalizedMessage());
+		}
+	}
+
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     	
-    	StudyDef study = null;
-    	String oid = request.getParameter("oid");
-    	String action = request.getParameter("action");
-    	
-    	if(DOWNLOAD_AND_CONVERT.equals(action)) {
-    		study = fetchAndSaveStudy(oid);
-    	}
-    	
-    	request.getSession().setAttribute("study", study);
+    	try {
+			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
+		} catch (ServletException e) {
+			log.error(e.getLocalizedMessage());
+		} catch (IOException e) {
+			log.error(e.getLocalizedMessage());
+		}
     }
+	
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			
+	    	StudyDef study = null;
+	    	String oid = request.getParameter("oid");
+	    	String action = request.getParameter("action");
+
+	    	User user = authenticate();
+
+	    	if(IMPORT.equals(action)) {
+	    		study = fetchAndSaveStudy(oid);
+	    	}
+	    	
+	    	request.getSession().setAttribute("study", study);
+	    	request.getSession().setAttribute("oxdUser", user);
+	    	response.sendRedirect(JSP_LOCATION);
+	    	
+		}catch (Exception ex) {
+			log.error(ex.getLocalizedMessage());
+		}
+    }
+	
+	private User authenticate() {
+		
+		User user = null;
+		if(authenticationService != null) {
+			
+			String oxdUserName = props.getProperty("oxdUserName");
+			String oxdPassword = props.getProperty("oxdPassword");
+			
+			log.info("Authenticating User: " + oxdUserName);
+
+			user = authenticationService.authenticate(oxdUserName, oxdPassword);
+			if(user == null)
+	    		throw new OpenXdataDataAccessException("Access Denied");
+			
+		}
+		return user;
+	}
     
 	private StudyDef fetchAndSaveStudy(String oid) {
 		
@@ -114,9 +180,9 @@ public class OpenclinicaServlet extends HttpServlet {
 					inspectStudyFormVersions(version, study);
 				}
 				
-				log.info("Saving Converted Study: " + study.getName());
+				log.info("Saving existing [converted] Study: " + existingStudy.getName());
 
-				studyService.saveStudy(study);
+				studyService.saveStudy(existingStudy);
 
 			}else {
 				
@@ -135,8 +201,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		List<FormDefVersion> studyFormVersions = getStudyFormVersions(study);
 		for (FormDefVersion x : studyFormVersions) {
-			if (x.getName().equals(version.getName())) {
-				incrementAndMakeDefault(x, version);
+			if (x.getFormDef().getName().equals(version.getFormDef().getName())) {
+				incrementAndMakeDefault(x, version.getFormDef());
 			}
 		}
 	}
@@ -149,26 +215,23 @@ public class OpenclinicaServlet extends HttpServlet {
 		return versions;
 	}
 
-	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDefVersion version) {
+	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDef form) {
 		
-		log.info("Incrementing the latest Version: " + versionToIncrement.getName());
+		log.info("Incrementing to latest Version: " + versionToIncrement.getName());
 
-		String versionName = version.getName();
-		String versionNumber = versionName.substring(versionName.length() - 1);
+		String incrementVersionName = versionToIncrement.getName();
+		String nextVersion = form.getNextVersionName();
 		
-		int number = Integer.valueOf(versionNumber) + 1;
+		String newVersionName = incrementVersionName.
+				replace(incrementVersionName.substring(incrementVersionName.length() -  2), nextVersion);
 		
-		String newVersionName = versionToIncrement.getName();
-		String newVersionNumber = newVersionName.substring(newVersionName.length() - 1);
+		versionToIncrement.setName(newVersionName);
 		
-		newVersionName.replace(newVersionNumber, number+"");
-		
-		versionToIncrement.setName(newVersionName.trim());
-		
-		FormDef form = version.getFormDef();
+		versionToIncrement.setFormDef(form);
 		form.addVersion(versionToIncrement);
 		
 		form.turnOffOtherDefaults(versionToIncrement);
+		form.setDirty(true);
 		
 	}
 }

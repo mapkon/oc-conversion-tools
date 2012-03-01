@@ -9,7 +9,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
-import org.openxdata.oc.data.TestData;
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.service.OpenclinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.FormDef
@@ -41,7 +41,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		response = new MockHttpServletResponse()
 
 		request.setParameter('oid', 'oid')
-		request.setParameter('action', 'downloadAndConvert')
+		request.setParameter('action', 'Import')
 	}
 
 	private def createStudy() {
@@ -64,7 +64,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	@Test public void testDownloadStudyDoesNotReturnNull() {
 
-		servlet.doGet(request, response)
+		servlet.doPost(request, response)
 
 		def study = request.getSession().getAttribute('study')
 		assertNotNull study
@@ -72,7 +72,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	@Test public void testDownloadStudyReturnsValidStudyWithCorrectName() {
 
-		servlet.doGet(request, response)
+		servlet.doPost(request, response)
 
 		def convertedStudy = request.getSession().getAttribute('study')
 		assertEquals 'Test Study', convertedStudy.getName()
@@ -80,7 +80,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	@Test public void testDownloadStudyReturnsValidStudyWithForms() {
 
-		servlet.doGet(request, response)
+		servlet.doPost(request, response)
 
 		def convertedStudy = request.getSession().getAttribute('study')
 		assertEquals 1, convertedStudy.getForms().size()
@@ -88,7 +88,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	@Test public void testDownloadStudyReturnsValidStudyWithFormVersion() {
 
-		servlet.doGet(request, response)
+		servlet.doPost(request, response)
 
 		def convertedStudy = request.getSession().getAttribute('study')
 		assertEquals 1, convertedStudy.getForm(0).getVersions().size()
@@ -96,7 +96,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 	
 	@Test public void testDownloadStudyReturnsValidWithLatestVersionsAsDefault() {
 		
-		servlet.doGet(request, response)
+		servlet.doPost(request, response)
 
 		def convertedStudy = request.getSession().getAttribute('study')
 		

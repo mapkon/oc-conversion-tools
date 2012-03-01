@@ -5,7 +5,7 @@ import groovy.util.logging.Log
 @Log
 public class TransformUtil {
 
-	public def loadFileContents(def fileName){
+	public String loadFileContents(def fileName){
 		
 		if(fileName){
 			log.info("Loading file: ${fileName}")
