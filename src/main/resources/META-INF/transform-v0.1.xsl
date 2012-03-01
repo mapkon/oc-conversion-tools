@@ -167,7 +167,7 @@
 			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
 			<xsl:variable name="formId" select="@FormOID" />
 			<label>
-				<xsl:value-of select="../../odm:FormDef[@OID = $formId]/@Name" />
+				<xsl:value-of select="@FormOID" />
 			</label>
 			<xsl:for-each select="../../odm:FormDef[@OID=$formId]/odm:ItemGroupRef">
 				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
