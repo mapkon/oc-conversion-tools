@@ -13,17 +13,15 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
-import org.openxdata.oc.data.TestData;
-import org.openxdata.oc.model.Event
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
-import org.openxdata.server.admin.model.FormDefVersion
 import org.openxdata.server.admin.model.StudyDef
-import org.openxdata.server.admin.model.paging.PagingLoadConfig
-import org.openxdata.server.admin.model.paging.PagingLoadResult
+import org.openxdata.server.export.ExportConstants
+import org.openxdata.server.service.DataExportService
 import org.openxdata.server.service.FormService
 import org.openxdata.server.service.StudyManagerService
 
@@ -32,16 +30,15 @@ import org.openxdata.server.service.StudyManagerService
 public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 	@Mock private FormService formService
-
-	@Mock private StudyManagerService studyService
-
 	@Mock private OpenClinicaSoapClient client
-
+	@Mock private StudyManagerService studyService
+	@Mock private DataExportService dataExportService
+	
 	@InjectMocks private def openClinicaService = new OpenclinicaServiceImpl()
 
 	def studies = []
 	def subjects = []
-	def formDataListResult
+	def formDataList = []
 	def openClinicaConvertedStudies = []
 
 	@Before public void setUp() throws Exception {
@@ -59,22 +56,23 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 		Mockito.when(client.getSubjectKeys(Mockito.anyString())).thenReturn(subjects)
 
-		Mockito.when(formService.getFormDataList(Mockito.any(FormDefVersion.class), Mockito.any(PagingLoadConfig.class))).thenReturn(formDataListResult)
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
 		
 		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(TestData.eventNode)
+		
+		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
 
 	}
 	
 	private void initFormDataList() {
 
 		FormData formData = new FormData()
+		formData.setId(1)
 		FormData formData2 = new FormData()
+		formData2.setId(2)
 
-		def formDataList = []
 		formDataList.add(formData)
 		formDataList.add(formData2)
-		formDataListResult = new PagingLoadResult<FormData>(formDataList, 0, 0)
 	}
 
 	private StudyDef createStudy() {
@@ -134,15 +132,25 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 	@Test public void testExportDataShouldReturnSuccessMessage() {
 
-		String message = openClinicaService.exportOpenClinicaStudyData("oid")
+		String message = openClinicaService.exportOpenClinicaStudyData()
 		assertEquals("Success", message)
 	}
 
 	@Test public void testExportDataShouldShouldFailOnEmptyInstanceDataWithMessage() {
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Fail")
-		String message = openClinicaService.exportOpenClinicaStudyData("oid")
+		String message = openClinicaService.exportOpenClinicaStudyData()
 		assertEquals("Fail", message)
+	}
+	
+	@Test public void testExportDataShouldSetFormDataWithOpenclinicaExportBitFlag() {
+		
+		openClinicaService.exportOpenClinicaStudyData()
+		
+		formDataList.each {
+			
+			assertTrue "Should be marked as Exported with openclinica export bit flag", it.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
+		}
 	}
 	
 	@Test public void testGetEventsDoesNotReturnNull() {

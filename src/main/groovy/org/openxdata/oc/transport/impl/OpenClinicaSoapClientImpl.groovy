@@ -49,10 +49,10 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public def importData(Collection<String> instanceData){
+	public String importData(Collection<String> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		return importProxy.importData(instanceData);
+		return importProxy.importData(instanceData)
 	}
 		
 	public Collection<String> getSubjectKeys(def identifier){

@@ -57,7 +57,7 @@ class TransformTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 49, binds.size()
+		assertEquals 47, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -160,7 +160,8 @@ class TransformTest extends GroovyTestCase {
 		
 		xformNodes.each { 
 			it.model.instance.ODM.children().each { element ->
-				if(element.children().size() == 0) {
+				
+				if(element.children().size() == 0 && !element.name().toString() == 'SubjectKey') {
 					def text = element.@FormOID.text()
 					assertTrue "Should have attribute FormOID", text.size() > 0
 				}
@@ -175,7 +176,7 @@ class TransformTest extends GroovyTestCase {
 		xformNodes.each {
 			it.model.instance.ODM.children().each { element ->
 
-				if(element.children().size() == 0) {
+				if(element.children().size() == 0 && !element.name().toString() == 'SubjectKey') {
 					def text = element.@ItemGroupOID.text()
 					assertTrue "Should have attribute ItemGroupOID", text.size() > 0
 				}
