@@ -1,5 +1,8 @@
 package org.openxdata.oc
 
+import groovy.util.XmlParser
+import groovy.util.XmlSlurper
+
 import org.junit.Test
 import org.openxdata.oc.util.TransformUtil
 
@@ -191,35 +194,6 @@ class TransformTest extends GroovyTestCase {
 			def odmNode = it.model.instance.ODM
 			
 			assertEquals "", odmNode.'@SubjectKey'.text()
-		}
-	}
-	
-	@Test void testRepeatingGroupQuestionHasACorrectlyConstructedQuestionWithDashes() {
-		xformNodes.each {
-
-			it.group.group.children().each { child ->
-				if(child.name() == 'repeat') {
-
-					if(child.@bind.equals('I_MSA1_MSA1_COMPLYREAS'))
-						assertTrue child.text().contains('-')
-				}
-			}
-		}
-	}
-	
-	@Test void testRepeatingGroupQuestionHasACorrectlyConstructedQuestionLabelIncludingItemHeaderAndItemSubHeader() {
-		xformNodes.each {
-
-			it.group.group.children().each { child ->
-				if(child.name() == 'repeat') {
-
-					def qName = 'Test ItemHeader-Test ItemSubHeader-Test Left Item Text'
-					def input = child.input.label.text()
-
-					if(child.@bind.equals('I_MSA1_MSA1_COMPLYREAS'))
-						assertEquals qName, input
-				}
-			}
 		}
 	}
 	

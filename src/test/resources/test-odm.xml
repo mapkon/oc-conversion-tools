@@ -465,7 +465,6 @@
                 </Question>
             </ItemDef>
             
-            
             <CodeList OID="CL_372" Name="basis" DataType="integer" SASFormatName="BASIS">
                 <CodeListItem CodedValue="1">
                     <Decode>
