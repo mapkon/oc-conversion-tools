@@ -9,174 +9,9 @@
             <ProtocolName>default-study - 12175</ProtocolName>
         </GlobalVariables>
         <BasicDefinitions>
-            <MeasurementUnit OID="MU_%" Name="%">
-                <Symbol>
-                    <TranslatedText>%</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
             <MeasurementUnit OID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;">
                 <Symbol>
                     <TranslatedText>10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;.MM&lt;SUP&gt;-3&lt;/SUP&gt;" Name="10&lt;SUP&gt;3&lt;/SUP&gt;.MM&lt;SUP&gt;-3&lt;/SUP&gt;">
-                <Symbol>
-                    <TranslatedText>10&lt;SUP&gt;3&lt;/SUP&gt;.MM&lt;SUP&gt;-3&lt;/SUP&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_10&lt;SUP&gt;6&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="10&lt;SUP&gt;6&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;">
-                <Symbol>
-                    <TranslatedText>10&lt;SUP&gt;6&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_10&lt;SUP&gt;6&lt;/SUP&gt;MM&lt;SUP&gt;-3&lt;/SUP&gt;" Name="10&lt;SUP&gt;6&lt;/SUP&gt;MM&lt;SUP&gt;-3&lt;/SUP&gt;">
-                <Symbol>
-                    <TranslatedText>10&lt;SUP&gt;6&lt;/SUP&gt;MM&lt;SUP&gt;-3&lt;/SUP&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_10&lt;SUP&gt;9&lt;/SUP&gt;/L" Name="10&lt;SUP&gt;9&lt;/SUP&gt;/L">
-                <Symbol>
-                    <TranslatedText>10&lt;SUP&gt;9&lt;/SUP&gt;/L</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_BOTTLE(S)" Name="BOTTLE(S)">
-                <Symbol>
-                    <TranslatedText>BOTTLE(S)</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_CELLS/MM3" Name="cells/MM3">
-                <Symbol>
-                    <TranslatedText>cells/MM3</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_CHILDREN" Name="CHILDREN">
-                <Symbol>
-                    <TranslatedText>CHILDREN</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_CM" Name="CM">
-                <Symbol>
-                    <TranslatedText>CM</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_COPIES/ML" Name="COPIES/ML">
-                <Symbol>
-                    <TranslatedText>COPIES/ML</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_DAYS" Name="DAYS">
-                <Symbol>
-                    <TranslatedText>DAYS</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_DAY(S)" Name="DAY(S)">
-                <Symbol>
-                    <TranslatedText>DAY(S)</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_G" Name="G">
-                <Symbol>
-                    <TranslatedText>G</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_G/DL" Name="G/DL">
-                <Symbol>
-                    <TranslatedText>G/DL</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_IF_DEATH,_HOSPITALISATION,_GRA17" Name="IF DEATH, HOSPITALISATION, GRADE III OR IV , FILL IN A SAE CRF">
-                <Symbol>
-                    <TranslatedText>IF DEATH, HOSPITALISATION, GRADE III OR IV , FILL IN A SAE CRF</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_IF_YES,_PLEASE_FILL_IN_A_IML/MML_CR" Name="IF YES, PLEASE FILL IN A IML/MML CRF">
-                <Symbol>
-                    <TranslatedText>IF YES, PLEASE FILL IN A IML/MML CRF</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_IN_T4_CELLS/&#924;L" Name="IN T4 CELLS/&#924;L">
-                <Symbol>
-                    <TranslatedText>IN T4 CELLS/&#924;L</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_KG" Name="KG">
-                <Symbol>
-                    <TranslatedText>KG</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_MG/DAY" Name="MG/DAY">
-                <Symbol>
-                    <TranslatedText>MG/DAY</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_MMOL/L" Name="MMOL/L">
-                <Symbol>
-                    <TranslatedText>MMOL/L</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_/MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="/mm&lt;sup&gt;3&lt;/sup&gt;">
-                <Symbol>
-                    <TranslatedText>/mm&lt;sup&gt;3&lt;/sup&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_MM&lt;SUP&gt;-3&lt;/SUP&gt;" Name="MM&lt;SUP&gt;-3&lt;/SUP&gt;">
-                <Symbol>
-                    <TranslatedText>MM&lt;SUP&gt;-3&lt;/SUP&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_MM&lt;SUP&gt;3&lt;/SUP&gt;" Name="MM&lt;SUP&gt;3&lt;/SUP&gt;">
-                <Symbol>
-                    <TranslatedText>MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_NB_OF_DAYS_TAKEN" Name="NB OF DAYS TAKEN">
-                <Symbol>
-                    <TranslatedText>NB OF DAYS TAKEN</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_NB_OF_WEEKS_TAKEN" Name="NB OF WEEKS TAKEN">
-                <Symbol>
-                    <TranslatedText>NB OF WEEKS TAKEN</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_PG" Name="PG">
-                <Symbol>
-                    <TranslatedText>PG</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_UI/L" Name="UI/L">
-                <Symbol>
-                    <TranslatedText>UI/L</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_U/L" Name="U/L">
-                <Symbol>
-                    <TranslatedText>U/L</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_WEEKS" Name="WEEKS">
-                <Symbol>
-                    <TranslatedText>WEEKS</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_YEARS" Name="YEARS">
-                <Symbol>
-                    <TranslatedText>YEARS</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_&#924;MOL/L" Name="&#924;MOL/L">
-                <Symbol>
-                    <TranslatedText>&#924;MOL/L</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_&#924;M&lt;SUP&gt;3&lt;/SUP&gt;" Name="&#181;m&lt;sup&gt;3&lt;/sup&gt;">
-                <Symbol>
-                    <TranslatedText>&#181;m&lt;sup&gt;3&lt;/sup&gt;</TranslatedText>
-                </Symbol>
-            </MeasurementUnit>
-            <MeasurementUnit OID="MU_&#924;&lt;SUP&gt;3&lt;/SUP&gt;" Name="&#924;&lt;SUP&gt;3&lt;/SUP&gt;">
-                <Symbol>
-                    <TranslatedText>&#924;&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
                 </Symbol>
             </MeasurementUnit>
         </BasicDefinitions>
@@ -231,13 +66,6 @@
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA1_MSA1_COMPLYREASG" Name="MSA1_complyreasG" Repeating="Yes" SASDatasetName="MSA1_COM">
                 <ItemRef ItemOID="I_MSA1_MSA1_COMPLYREAS" OrderNumber="1" Mandatory="No"/>
-                
-                <OpenClinica:ItemGroupDetails ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" ItemGroupName="MSA1_complyreasG">
-                    <OpenClinica:PresentInForm FormOID="F_MSA1_2" ShowGroup="Yes" FormName="Extra Medication" FormVersionName="2">
-                        <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="50"/>
-                        <OpenClinica:ItemGroupHeader>Q9_ Follow up</OpenClinica:ItemGroupHeader>
-                    </OpenClinica:PresentInForm>
-                </OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="IG_MSA2_UNGROUPED" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO031">
                 <ItemRef ItemOID="I_MSA2_INIT" OrderNumber="1" Mandatory="Yes"/>
@@ -276,7 +104,6 @@
                     </TranslatedText>
                     
                 </Question>
-                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_FORMD" Name="FormD" DataType="date" SASFieldName="FormD582" Comment="Date of form">
                 <Question>
@@ -423,15 +250,6 @@
                     Q10a_ If yes, what could that be?
                     </TranslatedText>
                 </Question>
-                <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_COMPLYREAS">
-                    <OpenClinica:ItemPresentInForm FormOID="F_MSA1_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
-                        <OpenClinica:LeftItemText>Test Left Item Text</OpenClinica:LeftItemText>
-                        <OpenClinica:ItemHeader>Test ItemHeader</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>Test ItemSubHeader</OpenClinica:ItemSubHeader>
-                        <OpenClinica:SectionLabel>Test Section Label</OpenClinica:SectionLabel>
-                        <OpenClinica:ItemResponse ResponseType="text"/>
-                    </OpenClinica:ItemPresentInForm>
-                </OpenClinica:ItemDetails>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_NOELIGREAS" Name="MSA1_noeligreas" DataType="text" Length="41" SASFieldName="MSA1_noe" Comment="Reason why mother not eligible">
                 <Question>
@@ -466,7 +284,6 @@
                     <TranslatedText>
                     Patient ID
                     </TranslatedText>
-                    <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA2_MSA2_INITBF" Name="MSA2_INITBF" DataType="integer" Length="1" SASFieldName="MSA2_INI" Comment="Initiation of breastfeeding">
@@ -529,6 +346,7 @@
                     <TranslatedText>
                     Single-dose nevirapine
                     </TranslatedText>
+                    <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
             </ItemDef>
@@ -600,6 +418,7 @@
                     <TranslatedText>
                     Drug  - Drug
                     </TranslatedText>
+                    <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA2_MSA2_POARTNBV" Name="MSA2_POARTNBV" DataType="integer" Length="10" SASFieldName="MSA2_593" Comment="Number of weeks under other ART">
@@ -645,7 +464,6 @@
                     </TranslatedText>
                 </Question>
             </ItemDef>
-            
             
             <CodeList OID="CL_372" Name="basis" DataType="integer" SASFormatName="BASIS">
                 <CodeListItem CodedValue="1">
