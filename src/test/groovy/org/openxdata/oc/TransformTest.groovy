@@ -28,7 +28,7 @@ class TransformTest extends GroovyTestCase {
 	
 	@Test void testconvertedXformHasCorrectNumberOfForms(){
 		
-		assertEquals 2, convertedXform.children().size()
+		assertEquals 4, convertedXform.children().size()
 	}
 	
 	@Test void testThatConvertedXformHasFormsWithFormVersions(){
@@ -40,7 +40,7 @@ class TransformTest extends GroovyTestCase {
 
 	@Test void testConvertedXformShouldContainCorrectNumberOfFormElementsAsInODM() {
 		
-		def studyEventRefs = inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef
+		def studyEventRefs = inputDoc.Study.MetaDataVersion.StudyEventDef.FormRef
 		assertEquals studyEventRefs.size(), convertedXform.form.children().size() 
 	}
 
@@ -60,7 +60,7 @@ class TransformTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 47, binds.size()
+		assertEquals 49, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -82,11 +82,13 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 
-	@Test void testExistenceOfFormDefGivenStudyEventRef() {
-		inputDoc.Study.MetaDataVersion.Protocol.StudyEventRef.each {
-			def eventOID = it.@StudyEventOID
-			def form = convertedXform.form.find{it.@name==eventOID}
-			assertEquals eventOID, form.@name.text()
+	@Test void testExistenceOfFormDefGivenFormRef() {
+		inputDoc.Study.MetaDataVersion.StudyEventDef.FormRef.each {
+			
+			def formOID = it.@FormOID
+			def form = convertedXform.form.find{it.@description == formOID}
+			
+			assertEquals formOID, form.@description.text()
 		}
 	}
 	
@@ -107,54 +109,67 @@ class TransformTest extends GroovyTestCase {
 
 	@Test void testConvertedXformShouldHaveCorrectFormNameAttribute(){
 
-		assertEquals 'SE_SC1', convertedXform.form[0].'@name'.text()
+		assertEquals 'MSA1: Mother Screening Assessment 1 - 3', convertedXform.form[0].'@name'.text()
 	}
 	
 	@Test void testConvertedXformShouldHaveCorrectFormDescriptionAttribute(){
 
-		assertEquals 'SC1', convertedXform.form[0].'@description'.text()
+		assertEquals 'F_MSA1_3', convertedXform.form[0].'@description'.text()
 	}
 	
 	@Test void testConvertedXformShouldHaveCorrectFormNameAttributeForSecondForm(){
 
-		assertEquals 'SE_SC2', convertedXform.form[1].'@name'.text()
+		assertEquals 'MSA1: Mother Screening Assessment 1 - 2', convertedXform.form[1].'@name'.text()
 	}
 	
 	@Test void testConvertedXformShouldHaveCorrectFormDescriptionAttributeForSecondForm(){
 
-		assertEquals 'SC2', convertedXform.form[1].'@description'.text()
+		assertEquals 'F_MSA1_2', convertedXform.form[1].@description.text()
 	}
 
-	@Test void testConvertedXformShouldHaveCorrectNumberOfFormsGivenStudyEventDefs(){
+	@Test void testConvertedXformShouldHaveCorrectNumberOfFormsGivenFormefs(){
 
-		assertEquals inputDoc.depthFirst().StudyEventDef.size(), convertedXform.form.size()
+		assertEquals inputDoc.depthFirst().FormRef.size(), convertedXform.form.size()
 	}
 
-	@Test void testConvertedXformShouldHaveFormWithNameEquallingTheOIDOfTheStudyEventDef(){
+	@Test void testConvertedXformShouldHaveFormWithNameEquallingTheOIDOfTheFormRef(){
 
-		assertEquals inputDoc.depthFirst().StudyEventDef[0].'@OID', convertedXform.form[0].'@name'.text()
+		def formOID = inputDoc.depthFirst().StudyEventDef[0].children()[0].@FormOID
+		def formDef = inputDoc.depthFirst().FormDef.find {it.@OID == formOID }
+		
+		assertEquals formDef.@Name, convertedXform.form[0].'@name'.text()
 	}
 
-	@Test void testConvertedXformShouldHaveFormWithNameEquallingTheOIDOfTheStudyEventDef2(){
+	@Test void testConvertedXformShouldHaveFormWithNameEquallingTheOIDOfTheFormRef2(){
 
-		assertEquals inputDoc.depthFirst().StudyEventDef[1].'@OID', convertedXform.form[1].'@name'.text()
+		def formOID = inputDoc.depthFirst().StudyEventDef[0].children()[1].@FormOID
+		def formDef = inputDoc.depthFirst().FormDef.find {it.@OID == formOID }
+		
+		assertEquals formDef.@Name, convertedXform.form[1].'@name'.text()
 	}
 
-	@Test void testConvertedXformShouldFormWithDescriptionEqualsToNameOfStudyEventDef(){
+	@Test void testConvertedXformShouldFormWithDescriptionEqualsToNameOfFormDef(){
 
-		assertEquals inputDoc.depthFirst().StudyEventDef[0].'@Name', convertedXform.form[0].'@description'.text()
+		def formOID = inputDoc.depthFirst().StudyEventDef[0].children()[0].@FormOID
+		def formDef = inputDoc.depthFirst().FormDef.find {it.@OID == formOID }
+		
+		assertEquals formDef.@Name, convertedXform.form[0].@name.text()
 	}
 
-	@Test void testConvertedXformShouldFormWithDescriptionEqualsToNameOfStudyEventDef2(){
+	@Test void testConvertedXformShouldFormWithDescriptionEqualsToNameOfFormDef2(){
 
-		assertEquals inputDoc.depthFirst().StudyEventDef[1].'@Name', convertedXform.form[1].'@description'.text()
+		def formOID = inputDoc.depthFirst().StudyEventDef[0].children()[1].@FormOID
+		def formDef = inputDoc.depthFirst().FormDef.find {it.@OID == formOID }
+		
+		assertEquals formDef.@Name, convertedXform.form[1].@name.text()
+		
 	}
 
 	@Test void testVersionNameHasVNumberSequence(){
 
 		def version = convertedXform.form[0].children()
 
-		assertEquals "${convertedXform.form[0].'@description'}-v1", version.'@name'.text()
+		assertEquals "${convertedXform.form[0].'@name'}-v1", version.'@name'.text()
 	}
 	
 	@Test void testODMDataBindsHaveFormOIDAttribute() {
@@ -240,11 +255,11 @@ class TransformTest extends GroovyTestCase {
 		
 		def binds = []
 		def versionNode = inputDoc.Study.MetaDataVersion
-		versionNode.Protocol.StudyEventRef.each {
-			def studyEventId = it.@StudyEventOID
-			def studyEventDef = versionNode.StudyEventDef.find { it.@OID == studyEventId }
+		versionNode.StudyEventDef.FormRef.each {
+			def formOID = it.@FormOID
+			def formDef = versionNode.FormDef.find { it.@OID == formOID }
 			
-			def form = convertedXform.form.find { it.@name == studyEventDef.@OID }
+			def form = convertedXform.form.find { it.@description == formDef.@OID }
 			def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 			
 			def formBinds = xformNode.depthFirst().findAll{ it.name().toString() == 'bind'}

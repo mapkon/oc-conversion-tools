@@ -77,10 +77,8 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def convertedStudyXml = client.getOpenxdataForm("oid")
 
 			def forms = convertedStudyXml.children()
-			def version = forms.children()
 
-
-			assertEquals 8, forms.size()
+			assertEquals 21, forms.size()
 		}
 	}
 	
@@ -97,7 +95,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def version = forms.children()
 
 
-			assertEquals  "SE_INTERCUR", forms[0].@name.text()
+			assertEquals  "CCA: Child Clinical Assessment - 2", forms[0].@name.text()
 		}
 	}
 	
@@ -129,7 +127,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def forms = convertedStudyXml.children()
 			def version = forms.children()[0]
 
-			assertEquals  "Intercurrent visit-v1", version.@name.text()
+			assertEquals  "CCA: Child Clinical Assessment - 2-v1", version.@name.text()
 		}
 	}
 	
