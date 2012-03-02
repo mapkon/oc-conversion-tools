@@ -26,7 +26,7 @@
 							select="@Name" />-v1</xsl:attribute>
 						<xsl:attribute name="description">Converted from ODM using the oc-conversion-tools</xsl:attribute>
 						<xform>
-							<xsl:call-template name="createForm" />
+							<xsl:call-template name="createXForm" />
 						</xform>
 					</version>
 				</form>
@@ -34,7 +34,7 @@
 		</study>
 	</xsl:template>
 
-	<xsl:template name="createForm">
+	<xsl:template name="createXForm">
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			<model>
 				<xsl:variable name="instanceElementName">
