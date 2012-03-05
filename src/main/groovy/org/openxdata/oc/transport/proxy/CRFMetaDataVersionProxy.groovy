@@ -1,6 +1,7 @@
 package org.openxdata.oc.transport.proxy
 
 import groovy.util.logging.Log
+
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
@@ -24,7 +25,7 @@ class CRFMetaDataVersionProxy extends SoapRequestProperties {
 	
 	def findAllCRFS(def studyOID) {
 
-		log.info("Fetching CRF- Metadata for Openclinica study with ID: ${studyOID}")
+		log.info("Fetching CRF - Metadata for Openclinica study with ID: ${studyOID}")
 
 		envelope = getSoapEnvelope(studyOID)
 
