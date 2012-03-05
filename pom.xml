@@ -20,8 +20,8 @@
 	</organization>
 
 	<issueManagement>
-		<system>trac</system>
-		<url>http://trac.openxdata.org</url>
+		<system>github</system>
+		<url>https://github.com/mapkon/oc-conversion-tools/issues</url>
 	</issueManagement>
 
 	<mailingLists>
