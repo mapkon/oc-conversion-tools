@@ -157,7 +157,6 @@
 			</label>
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 			<xsl:for-each select="../../odm:ItemGroupDef[@OID=$itemGroupOID]/odm:ItemRef">
-				<xsl:variable name="itemGroupId" select="@ItemGroupOID" />
 				<xsl:call-template name="createQuestions" />
 			</xsl:for-each>
 		</group>

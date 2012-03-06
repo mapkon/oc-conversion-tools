@@ -40,8 +40,8 @@ class TransformTest extends GroovyTestCase {
 
 	@Test void testConvertedXformShouldContainCorrectNumberOfFormElementsAsInODM() {
 		
-		def studyEventRefs = inputDoc.Study.MetaDataVersion.StudyEventDef.FormRef
-		assertEquals studyEventRefs.size(), convertedXform.form.children().size() 
+		def formRefs = inputDoc.Study.MetaDataVersion.StudyEventDef.FormRef
+		assertEquals formRefs.size(), convertedXform.form.children().size() 
 	}
 
 	@Test void testConvertedXformShouldHaveFormsContainingOneVersionElement() {
