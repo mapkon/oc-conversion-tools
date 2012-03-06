@@ -40,7 +40,7 @@ body {
 
 .bodyDiv .studies-table {
 	margin: auto;
-	width: 800px;
+	width: 700px;
 	border: double 1px #0288F5;
 	text-align:center;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .bodyDiv .study-table {
-	min-height: 300px;
+	min-height: 100px;
 }
 
 .bodyDiv .study-table th {
@@ -86,14 +86,4 @@ body {
 .bodyDiv .button-style {
 	font-size: 12px;
 	width: 80px;
-}
-
-.footer {
-	font-size: 11px;
-	font-weight: bold; 
-	text-align : center;
-	width: 80%;
-	height: 30px;
-	margin: 3px 5px 0px 40px;
-	text-align: center;
 }

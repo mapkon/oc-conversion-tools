@@ -128,18 +128,33 @@ public class OpenclinicaServlet extends HttpServlet {
 	    	User user = authenticate();
 
 	    	if(IMPORT.equals(action)) {
+	    		
 	    		study = fetchAndSaveStudy(oid);
+	    		
+	    		request.setAttribute("message", "Successful Import");
+	    		
+	    		request.setAttribute("study", study);
+		    	request.setAttribute("name", study.getName());
+		    	request.setAttribute("key", study.getStudyKey());
 	    	}
 	    	else if(EXPORT.equals(action)) {
+	    		
 	    		exportStudyData();
+	    		request.setAttribute("message", "Successful Export");
 	    	}
 	    	
-	    	request.getSession().setAttribute("study", study);
-	    	request.getSession().setAttribute("oxdUser", user);
-	    	response.sendRedirect(JSP_LOCATION);
+	    	request.setAttribute("user", user);
+	    	
+	    	request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
 	    	
 		}catch (Exception ex) {
 			log.error(ex.getLocalizedMessage());
+	    	try {
+	    		request.setAttribute("message", ex.getLocalizedMessage());
+				response.sendRedirect(JSP_LOCATION);
+			} catch (IOException e) {
+				log.error(ex.getLocalizedMessage());
+			}
 		}
     }
 	
