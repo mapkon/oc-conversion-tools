@@ -1,4 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,7 +17,10 @@
 		   <div class="studies-table">
 		   		<div class = "studies-table-label">Study</div>
 		   		<div class="study-table">
-					<c:if test="${request.getParameter("study") != null}">
+					<%
+						Object name = request.getAttribute("name");
+					%>
+					<c:if test="${!empty name}">
 						<table cellpadding="0" cellspacing="0" width="800px">
 							<thead>
 								<tr>
@@ -26,15 +30,13 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>study.name</td>
-								</tr>
-								<tr>
-									<td>study.studyKey</td>
+									<td><%= request.getAttribute("name") %></td>
+									<td><%= request.getAttribute("key") %></td>
 								</tr>
 								<tr></tr>
 							</tbody>
 						</table>
-					</c:if test>
+					</c:if>
 
 		   		</div>
 				
