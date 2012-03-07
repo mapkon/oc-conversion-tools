@@ -4,7 +4,7 @@ import static org.junit.Assert.*
 
 import org.junit.Before
 import org.junit.Test
-import org.openxdata.oc.data.TestData;
+import org.openxdata.oc.data.TestData
 
 class EventTest {
 
@@ -22,7 +22,7 @@ class EventTest {
 	
 	@Test void testNewEventHasCorrectOrdinal() {
 		
-		assertEquals 1, Integer.valueOf(event.ordinal.toString())	
+		assertEquals 1, Integer.valueOf(event.ordinal)	
 	}
 	
 	@Test void testNewEventHasEventDefinitionOID() {
@@ -32,7 +32,7 @@ class EventTest {
 
 	@Test void testNewEventHasCorrectEventDefinitionOID() {
 
-		assertEquals "SE_ADVERSEE", event.eventDefinitionOID.toString()
+		assertEquals "SE_ADVERSEE", event.eventDefinitionOID
 	}
 
 	@Test void testNewEventHasFormOID() {
@@ -41,7 +41,7 @@ class EventTest {
 	}
 
 	@Test void testNewEventHasCorrectFormOID() {
-		assertEquals "F_AEAD_3", event.formOID.toString()
+		assertEquals "F_AEAD_3", event.formOID
 	}
 	
 	@Test void testNewEventHasSubjectKeys() {

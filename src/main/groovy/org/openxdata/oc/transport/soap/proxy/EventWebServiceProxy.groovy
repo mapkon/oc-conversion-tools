@@ -2,7 +2,7 @@ package org.openxdata.oc.transport.soap.proxy
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.transport.HttpTransportHandler;
+import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
 @Log
@@ -20,6 +20,7 @@ class EventWebServiceProxy extends SoapRequestProperties {
 	}
 	
 	def findEventsByStudyOID(def studyOID) {
+		
 		log.info("Fetching events for Openclinica study with ID: ${studyOID}")
 		
 		def envelope = getSoapEnvelope(studyOID)

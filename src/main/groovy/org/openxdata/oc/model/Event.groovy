@@ -10,9 +10,9 @@ class Event {
 
 	def Event(def eventXml) {
 
-		ordinal = eventXml.ordinal
-		formOID = eventXml.formOID
-		eventDefinitionOID = eventXml.eventDefinitionOID
+		ordinal = eventXml.ordinal.text()
+		formOID = eventXml.formOID.text()
+		eventDefinitionOID = eventXml.eventDefinitionOID.text()
 
 		this.eventXml = eventXml
 	}
