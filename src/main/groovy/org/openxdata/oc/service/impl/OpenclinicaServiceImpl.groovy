@@ -142,8 +142,10 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 
 		String exportResponse
 		
-		if(dataList.size == 0)
+		if(dataList.size == 0) {
 			exportResponse = "No data to export. Collect Data and then export."
+			log.info("No data items found to export. Aborting...")
+		}
 		else
 			exportResponse = client.importData(dataList)
 

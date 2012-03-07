@@ -83,7 +83,7 @@ public class OpenclinicaServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			
-			// We imagine the absence of an external properties file in openxdata/WEB-INF
+			// We assume the absence of an external properties file in openxdata/WEB-INF
 			loadInternalProperties();
 		}
     	
