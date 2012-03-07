@@ -44,7 +44,7 @@ public class OpenclinicaServlet extends HttpServlet {
 	private FormService formService;
 	private StudyManagerService studyService;
 	private Properties props = new Properties();
-	
+	private MultiProtocolSubmissionServlet mobileServlet; 
 	private DataExportService dataExportService;
 	private OpenclinicaService openclinicaService;
 	private AuthenticationService authenticationService;
@@ -74,6 +74,8 @@ public class OpenclinicaServlet extends HttpServlet {
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
 		openclinicaService.setDataExportService(dataExportService);
+                
+                mobileServlet= new MultiProtocolSubmissionServlet(config, sctx, openclinicaService);
 
 	}
 	
@@ -128,6 +130,10 @@ public class OpenclinicaServlet extends HttpServlet {
 	    	StudyDef study = null;
 	    	String oid = request.getParameter("oid");
 	    	String action = request.getParameter("action");
+                if(oid== null || action == null ){
+                      mobileServlet.doPost(request, response);
+                      return;
+                }
 
 	    	User user = authenticate();
 
@@ -252,4 +258,6 @@ public class OpenclinicaServlet extends HttpServlet {
 		form.setDirty(true);
 		
 	}
+
+ 
 }
