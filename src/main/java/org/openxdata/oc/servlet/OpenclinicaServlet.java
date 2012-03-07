@@ -36,8 +36,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6577932874016086164L;
 		
-	private static final String IMPORT = "Import";
-	private static final String EXPORT = "Export";
+	private final String IMPORT = "Import";
+	private final String EXPORT = "Export";
 	private final String JSP_LOCATION = "openclinica.jsp";
 	
 	private FormService formService;
@@ -48,7 +48,7 @@ public class OpenclinicaServlet extends HttpServlet {
 	private OpenclinicaService openclinicaService;
 	private AuthenticationService authenticationService;
 	
-	private static final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
+	private final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
