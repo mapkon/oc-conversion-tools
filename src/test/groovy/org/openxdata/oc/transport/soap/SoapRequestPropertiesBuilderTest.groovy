@@ -2,7 +2,7 @@ package org.openxdata.oc.transport.soap
 
 import org.junit.Before
 import org.junit.Test
-import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
+import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
 
 
 class SoapRequestPropertiesBuilderTest extends GroovyTestCase {
