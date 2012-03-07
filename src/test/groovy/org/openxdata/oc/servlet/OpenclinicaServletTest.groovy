@@ -36,6 +36,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
 		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(study)
+		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn("No data to export. Collect Data and then export.")
 
 		request = new MockHttpServletRequest()
 		response = new MockHttpServletResponse()
@@ -129,5 +130,17 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		FormDefVersion version = form.getVersion("Test Version")
 		
 		assertTrue version.getIsDefault()
+	}
+	
+	@Test public void testExportStudyReturnsCorrectMessageOnEmptyData() {
+		
+		request.setParameter('action', 'Export')
+
+		servlet.doPost(request, response)
+
+		def message = request.getAttribute('message')
+
+
+		assertEquals 'No data to export. Collect Data and then export.', message
 	}
 }

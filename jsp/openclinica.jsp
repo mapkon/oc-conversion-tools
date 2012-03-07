@@ -15,13 +15,17 @@
 	   <div class = "bodyDiv">
 		   <div class = "heading">OpenClinica Study Management</div>
 		   <div class="studies-table">
-		   		<div class = "studies-table-label">Study</div>
-		   		<div class="study-table">
-					<%
-						Object name = request.getAttribute("name");
-					%>
+		   		<div class = "studies-table-label">Study</div>				
+				<div class="message-div"><%= request.getAttribute("message")%></div>
+				<%	Object name = request.getAttribute("name");%>
+				<div class="input-div">Study OID: <input type="text" name="oid"/></div>
+				<div class="buttonStrip">
+		   			<input class="button-style" type="submit" value="Import" name="action" title="Import"/>
+		   			<input class="button-style" type="submit" value="Export" name="action" title="Export"/>
+		   		</div>
+		   		<div class="study-table">					
 					<c:if test="${!empty name}">
-						<table cellpadding="0" cellspacing="0" width="800px">
+						<table cellpadding="0" cellspacing="0" width="600px">
 							<thead>
 								<tr>
 									<th>Name</th>
@@ -30,21 +34,13 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><%= request.getAttribute("name") %></td>
-									<td><%= request.getAttribute("key") %></td>
+									<td><%= request.getAttribute("name")%></td>
+									<td><%= request.getAttribute("key")%></td>
 								</tr>
-								<tr></tr>
 							</tbody>
 						</table>
 					</c:if>
-
-		   		</div>
-				
-				Study OID: <input type="text" name="oid"/>
-		   		<div class="buttonStrip">
-		   			<input class="button-style" type="submit" value="Import" name="action"/>
-		   			<input class="button-style" type="submit" value="Export" name="action"/>
-		   		</div>
+		   		</div>		   		
 		   </div>
 		</div>
 	 </div>
