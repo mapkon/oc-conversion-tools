@@ -108,7 +108,10 @@ public class OpenclinicaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     	
     	try {
+    		
+    		request.setAttribute("message", "No studies downlaoded during this session.");
 			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
+			
 		} catch (ServletException e) {
 			log.error(e.getLocalizedMessage());
 		} catch (IOException e) {
