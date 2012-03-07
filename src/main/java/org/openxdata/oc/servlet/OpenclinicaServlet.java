@@ -139,8 +139,8 @@ public class OpenclinicaServlet extends HttpServlet {
 	    	}
 	    	else if(EXPORT.equals(action)) {
 	    		
-	    		exportStudyData();
-	    		request.setAttribute("message", "Successful Export");
+	    		String message = exportStudyData();
+	    		request.setAttribute("message", message);
 	    	}
 	    	
 	    	request.setAttribute("user", user);
