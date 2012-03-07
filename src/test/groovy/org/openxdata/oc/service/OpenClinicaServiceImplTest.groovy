@@ -58,7 +58,7 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
 		
-		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(TestData.eventNode)
+		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(getEventNode())
 		
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
 
@@ -101,6 +101,10 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 		studies.add(study)
 
+	}
+	
+	private def getEventNode() {
+		def eventNode = new XmlSlurper().parseText(TestData.eventNode)
 	}
 
 	@Test public void testHasStudyData(){

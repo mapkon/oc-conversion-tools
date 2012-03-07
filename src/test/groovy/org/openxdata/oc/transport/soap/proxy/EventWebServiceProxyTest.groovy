@@ -8,7 +8,6 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.transport.factory.ConnectionFactory
-import org.openxdata.oc.transport.soap.proxy.EventWebServiceProxy;
 
 
 @WithGMock

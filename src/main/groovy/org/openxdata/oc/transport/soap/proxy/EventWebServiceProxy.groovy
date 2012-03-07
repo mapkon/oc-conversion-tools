@@ -20,6 +20,7 @@ class EventWebServiceProxy extends SoapRequestProperties {
 	}
 	
 	def findEventsByStudyOID(def studyOID) {
+		
 		log.info("Fetching events for Openclinica study with ID: ${studyOID}")
 		
 		def envelope = getSoapEnvelope(studyOID)

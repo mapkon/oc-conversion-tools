@@ -166,9 +166,8 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	List<Event> getEvents(String studyOID){
 		
 		def events = []
-		def xml = client.findEventsByStudyOID(studyOID)
+		def eventNode = client.findEventsByStudyOID(studyOID)
 		
-		def eventNode = new XmlSlurper().parseText(xml)
 		eventNode.event.each {
 			def event = new Event(it)
 			events.add(event)
