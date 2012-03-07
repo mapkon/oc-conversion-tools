@@ -1,4 +1,4 @@
-package org.openxdata.oc.transport.proxy;
+package org.openxdata.oc.transport.soap.proxy;
 
 import static org.hamcrest.Matchers.*
 
@@ -8,6 +8,7 @@ import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.transport.factory.ConnectionFactory
+import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy;
 
 
 @WithGMock

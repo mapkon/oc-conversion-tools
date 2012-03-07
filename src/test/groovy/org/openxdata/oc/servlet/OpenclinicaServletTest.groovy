@@ -36,6 +36,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
 		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(study)
+		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn("No data to export. Collect Data and then export.")
 
 		request = new MockHttpServletRequest()
 		response = new MockHttpServletResponse()
@@ -48,7 +49,8 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		
 		study = new StudyDef()
 		study.setName('Test Study')
-
+		study.setStudyKey('Test Key')
+		
 		def form = new FormDef()
 		form.setName('Test Form')
 		
@@ -66,15 +68,39 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		servlet.doPost(request, response)
 
-		def study = request.getSession().getAttribute('study')
-		assertNotNull study
+		def study = request.getAttribute('study')
+		assertNotNull 'Study should not be null after successful Import', study
 	}
 
+	@Test public void testDownloadStudySetSuccessMessageOnSuccessfulImport() {
+
+		servlet.doPost(request, response)
+
+		def message = request.getAttribute('message')
+		assertEquals 'Successful Import', message
+	}
+	
+	@Test public void testDownloadStudyReturnsValidStudyWithCorrectNameInAttribute() {
+
+		servlet.doPost(request, response)
+
+		def name = request.getAttribute('name')
+		assertEquals 'Test Study', name
+	}
+
+	@Test public void testDownloadStudyReturnsValidStudyWithCorrectKeyInAttribute() {
+
+		servlet.doPost(request, response)
+
+		def key = request.getAttribute('key')
+		assertEquals 'Test Key', key
+	}
+	
 	@Test public void testDownloadStudyReturnsValidStudyWithCorrectName() {
 
 		servlet.doPost(request, response)
 
-		def convertedStudy = request.getSession().getAttribute('study')
+		def convertedStudy = request.getAttribute('study')
 		assertEquals 'Test Study', convertedStudy.getName()
 	}
 
@@ -82,7 +108,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		servlet.doPost(request, response)
 
-		def convertedStudy = request.getSession().getAttribute('study')
+		def convertedStudy = request.getAttribute('study')
 		assertEquals 1, convertedStudy.getForms().size()
 	}
 
@@ -90,7 +116,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		servlet.doPost(request, response)
 
-		def convertedStudy = request.getSession().getAttribute('study')
+		def convertedStudy = request.getAttribute('study')
 		assertEquals 1, convertedStudy.getForm(0).getVersions().size()
 	}
 	
@@ -98,11 +124,23 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		
 		servlet.doPost(request, response)
 
-		def convertedStudy = request.getSession().getAttribute('study')
+		def convertedStudy = request.getAttribute('study')
 		
 		FormDef form = convertedStudy.getForm("Test Form")
 		FormDefVersion version = form.getVersion("Test Version")
 		
 		assertTrue version.getIsDefault()
+	}
+	
+	@Test public void testExportStudyReturnsCorrectMessageOnEmptyData() {
+		
+		request.setParameter('action', 'Export')
+
+		servlet.doPost(request, response)
+
+		def message = request.getAttribute('message')
+
+
+		assertEquals 'No data to export. Collect Data and then export.', message
 	}
 }

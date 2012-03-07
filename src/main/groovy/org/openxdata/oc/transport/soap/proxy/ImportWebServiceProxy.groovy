@@ -1,4 +1,4 @@
-package org.openxdata.oc.transport.proxy
+package org.openxdata.oc.transport.soap.proxy
 
 import groovy.util.logging.Log
 

@@ -8,10 +8,10 @@ import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
-import org.openxdata.oc.transport.proxy.CRFMetaDataVersionProxy
-import org.openxdata.oc.transport.proxy.EventWebServiceProxy
-import org.openxdata.oc.transport.proxy.ImportWebServiceProxy
-import org.openxdata.oc.transport.proxy.ListAllSubjectsByStudyWebServiceProxy
+import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
+import org.openxdata.oc.transport.soap.proxy.EventWebServiceProxy
+import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
+import org.openxdata.oc.transport.soap.proxy.ListAllSubjectsByStudyWebServiceProxy
 
 
 @Log
