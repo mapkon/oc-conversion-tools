@@ -55,14 +55,14 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		if (oCStudyID == null)
 			return workitems;
 		for (Event event : events) {
-			Object[] workitem = new Object[4];
+			Object[] workitem = new Object[5];
 			workitem[0] = event.getFormOID();
 			workitem[1] = getKey(event);
-			workitem[2] = oCStudyID;
+			workitem[2] = oCStudyID.getId();
 			FormDef formDef = getFormByDescription(oCStudyID, event.getFormOID().toString());
 			if (formDef == null)
 				continue;
-			workitem[3] = formDef.getId();
+			workitem[3] = formDef.getDefaultVersion().getId();
 			List<String[]> prefills = new ArrayList<String[]>();
 			workitem[4] = prefills;
 			workitems.add(workitem);
