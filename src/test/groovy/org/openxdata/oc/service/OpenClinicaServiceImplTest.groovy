@@ -36,7 +36,6 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 
 	def studies = []
 	def formDataList = []
-	def openClinicaConvertedStudies = []
 
 	@Before public void setUp() throws Exception {
 
