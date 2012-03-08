@@ -1,7 +1,6 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
-import groovy.xml.XmlUtil
 
 import org.junit.Before
 import org.junit.Test
@@ -163,6 +162,7 @@ class SubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWithItemDataNodesHavingItemOIDAttribute() {
 		def itemDataNodes = getItemDataNodes()
 		itemDataNodes.each {
+			
 			def itemOID = it.@ItemOID
 			
 			assertNotNull "Should have ItemOID Attribute", itemOID

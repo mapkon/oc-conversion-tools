@@ -23,7 +23,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def importProxy
 	private def eventsProxy
 	private def crfMetaDataVersionProxy
-	
 			
 	def OpenClinicaSoapClientImpl(Properties props) {
 
