@@ -51,9 +51,9 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	}
 
 	@Override
-	public StudyDef importOpenClinicaStudy(String identifier) throws UnexpectedException {
+	public StudyDef importOpenClinicaStudy(String studyOID) throws UnexpectedException {
 				
-		NodeChild xml = (NodeChild) client.getOpenxdataForm(identifier)
+		NodeChild xml = (NodeChild) client.getOpenxdataForm(studyOID)
 		
 		log.info("OXD: Converting Xform to study definition.")
 		StudyImporter importer = new StudyImporter(xml)
