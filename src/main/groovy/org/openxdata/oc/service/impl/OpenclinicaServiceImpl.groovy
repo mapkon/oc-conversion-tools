@@ -113,7 +113,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 
 		List<FormData> dataList = dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 
-		log.info("Running OpenClinica Export Routine to export " + dataList.size()	+ " form data items")
+		log.info("Running OpenClinica Export Routine to export [" + dataList.size()	+ "] form data items")
 
 		String exportResponseMessage = buildResponseMessage(dataList)
 
