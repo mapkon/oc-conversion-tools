@@ -22,7 +22,6 @@ import org.springframework.mock.web.MockHttpServletResponse
 @RunWith(MockitoJUnitRunner.class)
 class OpenclinicaServletTest extends GroovyTestCase {
 
-	def study
 	def request
 	def response
 
@@ -32,13 +31,11 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	@Before void setUp() {
 
-		study = createStudy()
-
-		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
-		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(study)
-
-		Mockito.when(client.importData(Mockito.anyList())).thenReturn("Success")
+		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(createStudy())
 		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn("No data to export. Collect Data and then export.")
+		
+		Mockito.when(client.importData(Mockito.anyList())).thenReturn("Success")
+		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
 		
 		request = new MockHttpServletRequest()
 		response = new MockHttpServletResponse()
@@ -49,7 +46,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	private def createStudy() {
 		
-		study = new StudyDef()
+		def study = new StudyDef()
 		study.setName('Test Study')
 		study.setStudyKey('Test Key')
 		
