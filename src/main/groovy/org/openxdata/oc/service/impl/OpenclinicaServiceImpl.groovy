@@ -115,31 +115,46 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 
 		log.info("Running OpenClinica Export Routine to export " + dataList.size()	+ " form data items")
 
-		String exportResponse
+		String exportResponseMessage = buildResponseMessage(dataList)
+
+		if("Success".equals(exportResponseMessage)) {
+			
+			updateExportedDataItems(dataList)
+		}
+
+		return exportResponseMessage
+	}
+
+	private String buildResponseMessage(List dataList) {
+		
+		def exportResponseMessage
 		
 		if(dataList.size == 0) {
+
+			def message = "No data items found to export."
 			
-			exportResponse = "No data to export. Collect Data and then export."
-			log.info("No data items found to export. Aborting...")
+			log.info(message)
+			exportResponseMessage = message
 		}
-		else
-			exportResponse = client.importData(dataList)
-
-		if("Success".equals(exportResponse)) {
+		else {
+			exportResponseMessage = client.importData(dataList)
+		}
 			
-			dataList.each {
+		return exportResponseMessage
+	}
 
-				log.info("Resetting Export Flag for form data with id: " + it.getId())
+	private updateExportedDataItems(List dataList) {
+		
+		dataList.each {
 
-				dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
-				it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
-			}
+			log.info("Resetting Export Flag for form data with id: " + it.getId())
+
+			dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
+			it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		}
-
-		return exportResponse
 	}
 	
-	List<Event> getEvents(String studyOID){
+	public List<Event> getEvents(String studyOID){
 		
 		def events = []
 		def eventNode = client.findEventsByStudyOID(studyOID)
@@ -152,11 +167,11 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		return events
 	}
 	
-	void setStudyService(StudyManagerService studyService) {
+	public void setStudyService(StudyManagerService studyService) {
 		this.studyService = studyService
 	}
 	
-	void setFormService(FormService formService) {
+	public void setFormService(FormService formService) {
 		this.formService = formService
 	}
 	
