@@ -11,7 +11,6 @@ import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
 import org.openxdata.oc.transport.soap.proxy.EventWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
-import org.openxdata.oc.transport.soap.proxy.ListAllSubjectsByStudyWebServiceProxy
 
 
 @Log
@@ -25,7 +24,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	
 	private def importProxy
 	private def eventsProxy
-	private def listAllByStudyProxy
 	private def crfMetaDataVersionProxy
 	
 			
@@ -55,12 +53,6 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return importProxy.importData(instanceData)
 	}
 		
-	public Collection<String> getSubjectKeys(def identifier){
-		
-		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		return listAllByStudyProxy.listAllByStudy(identifier)
-	}
-
 	public def getOpenxdataForm(def studyOID) {
 		
 		try{

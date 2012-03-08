@@ -4,8 +4,6 @@ package org.openxdata.oc.service.impl
 import groovy.util.logging.Log
 import groovy.util.slurpersupport.NodeChild
 
-import java.util.ArrayList
-import java.util.Collection
 import java.util.Date
 import java.util.List
 import java.util.Properties
@@ -111,29 +109,6 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	}
 
 	@Override
-	public List<String> getStudySubjects(String studyOID) throws UnexpectedException {
-		try{
-			List<String> subjects = fetchSubjects(studyOID)
-			return subjects
-		}catch(Exception ex){
-			throw new UnexpectedException(ex)
-		}
-	}
-
-	private List<String> fetchSubjects(String studyOID) {
-		
-		List<String> subjects = new ArrayList<String>()
-
-		log.info("OXD: Fetching subjects.")
-		
-		Collection<String> returnedSubjects = client.getSubjectKeys(studyOID)
-		for(String x : returnedSubjects){
-			subjects.add(x)
-		}
-		return subjects
-	}
-
-	@Override
 	public String exportOpenClinicaStudyData() {
 
 		List<FormData> dataList = dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
@@ -143,6 +118,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		String exportResponse
 		
 		if(dataList.size == 0) {
+			
 			exportResponse = "No data to export. Collect Data and then export."
 			log.info("No data items found to export. Aborting...")
 		}

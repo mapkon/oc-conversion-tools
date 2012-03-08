@@ -25,12 +25,6 @@ class ConnectionFactoryTest extends GroovyTestCase {
 		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/study/v1', url
 	}
 	
-	@Test void testGetStudySubjectConnectionShouldReturnCorrectURL(){		
-		
-		def url = factory.getStudySubjectConnection().getURL().toString()
-		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT/ws/studySubject/v1', url
-	}
-	
 	@Test void testGetCRFConnectionURLDoesNotReturnNull() {
 		def url = factory.getCRFConnection().getURL().toString()
 		assertNotNull url
