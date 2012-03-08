@@ -25,7 +25,7 @@ import org.openxdata.server.service.StudyManagerService
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class OpenClinicaServiceImplTest extends GroovyTestCase {
+public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Mock private FormService formService
 	@Mock private OpenClinicaSoapClient client
