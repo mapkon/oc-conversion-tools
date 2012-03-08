@@ -110,6 +110,14 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 		assertEquals("Success", message)
 	}
 
+	@Test public void testExportDataShouldReturnMessageOnEmptyInstanceData() {
+
+		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn([])
+		
+		String message = openClinicaService.exportOpenClinicaStudyData()
+		assertEquals("No data items found to export.", message)
+	}
+	
 	@Test public void testExportDataShouldShouldFailOnEmptyInstanceDataWithMessage() {
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Fail")
@@ -137,10 +145,11 @@ public class OpenClinicaServiceImplTest extends GroovyTestCase {
 		assertEquals 71, returnedEvents.size()
 	}
 	
-	@Test void testGetEventsReturnsEventsWithSubjectKeys() {
+	@Test public void testGetEventsReturnsEventsWithSubjectKeys() {
 		def returnedEvents = openClinicaService.getEvents("OID")
 		returnedEvents.each {
 			assertTrue "Each event should have at least one subject attached", it.getSubjectKeys().size() >= 1
 		}
 	}
+
 }

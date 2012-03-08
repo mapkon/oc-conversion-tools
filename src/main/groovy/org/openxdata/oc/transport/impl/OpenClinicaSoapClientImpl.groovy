@@ -2,8 +2,6 @@ package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
 
-import java.util.Collection
-
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
@@ -47,7 +45,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public String importData(Collection<String> instanceData){
+	public String importData(List<String> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData)
