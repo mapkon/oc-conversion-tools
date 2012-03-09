@@ -11,7 +11,9 @@ class SubmissionProtocol {
 		def xml
 		instanceDataXml = new XmlSlurper().parseText(openXdataInstanceData)
 
-		def formOIDS = getFormOIDS()
+		def subjectKey = getSubjectKey()
+
+		// TODO How does openclinica handle repeat data?
 		def itemGroupOIDS = getItemGroupOIDS()
 
 		instanceDataXml.each {
@@ -22,35 +24,20 @@ class SubmissionProtocol {
 
 					ClinicalData (StudyOID:instanceDataXml.@StudyOID, MetaDataVersionOID:instanceDataXml.@MetaDataVersionOID) {
 
-						SubjectData(SubjectKey:instanceDataXml.@SubjectKey) {
+						SubjectData(SubjectKey:subjectKey) {
 
 							StudyEventData(StudyEventOID:instanceDataXml.@StudyEventOID){
 
-								formOIDS.each { formOID ->
+								FormData(FormOID:instanceDataXml.@formKey) {
 
-									FormData(FormOID:formOID) {
+									itemGroupOIDS.each { itemGroupOID ->
+										
+										ItemGroupData(ItemGroupOID:itemGroupOID) {
 
-										def tempOID
-										def itemNodes = instanceDataXml.children()
+											def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
+											itemDataNodes.each { itemData ->
 
-										itemNodes.each {
-
-											String itemFormOID = getItemFormOIDForRepeat(it)
-											String itemGroupOID = getItemGroupOIDForRepeat(it)
-
-											if(itemFormOID.equals(formOID.toString())) {
-
-												if(!tempOID.equals(itemFormOID)) {
-													ItemGroupData (ItemGroupOID:itemGroupOID) {
-
-														def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
-														itemDataNodes.each {
-
-															ItemData (ItemOID:it.name(), Value:"$it"){
-															}
-														}
-													}
-													tempOID = itemFormOID
+												ItemData (ItemOID:itemData.name(), Value:"$itemData"){
 												}
 											}
 										}
@@ -66,47 +53,20 @@ class SubmissionProtocol {
 		return xml.toString()
 	}
 
-	def getItemFormOIDForRepeat(def item) {
+	def getSubjectKey() {
+		
+		def subjectDataNode = instanceDataXml.depthFirst().find { it.name().equals("SubjectKey")}
+		return subjectDataNode.text()
 
-		def itemFormOID
-
-		// Assumption is that this is an instance definition for a repeat question
-		if(item.children().size() > 0) {
-			item.children().each {
-				itemFormOID = it.@FormOID
-			}
-		}
-		else {
-			itemFormOID = item.@FormOID
-		}
-
-		return itemFormOID
-	}
-
-	def getItemGroupOIDForRepeat(def item) {
-
-		def itemGroupOID
-
-		// Assumption is that this is an instance definition for a repeat question
-		if(item.children().size() > 0) {
-			item.children().each {
-				itemGroupOID = it.@ItemGroupOID
-			}
-		}
-		else {
-			itemGroupOID = item.@ItemGroupOID
-		}
-
-		return itemGroupOID
 	}
 
 	def getItemGroupItemDataNodes(String itemGroupOID) {
 
-		def itemNodes = [] 
-		
+		def itemNodes = []
+
 		instanceDataXml.children().each {
-			
-		// Assumption is that this is an instance definition for a repeat question
+
+			// Assumption is that this is an instance definition for a repeat question
 			if(it.@ItemGroupOID == "") {
 				if(it.children().size() > 0) {
 					it.children().each { item ->
@@ -117,34 +77,15 @@ class SubmissionProtocol {
 				}
 			}
 		}
-		
+
 		def matchingItemNodes = instanceDataXml.children().findAll { it.@ItemGroupOID == itemGroupOID}
-		
+
 		matchingItemNodes.each {
 			if(it.children().size() == 0){
 				itemNodes.add(it)
 			}
 		}
 		return itemNodes
-	}
-
-	def getFormOIDS() {
-
-		def formOIDS = []as Set
-		instanceDataXml.children().each {
-
-			def childNodes = it.children()
-			if (childNodes.size() > 0) {
-				childNodes.each {
-					formOIDS.add(it.@FormOID.toString())
-				}
-			}
-			else {
-				formOIDS.add(it.@FormOID.toString())
-			}
-		}
-
-		return formOIDS
 	}
 
 	def getItemGroupOIDS() {
@@ -158,7 +99,9 @@ class SubmissionProtocol {
 				}
 			}
 			else {
-				itemGroupOIDS.add(it.@ItemGroupOID.toString())
+				if(!it.name().equals("SubjectKey")) {
+					itemGroupOIDS.add(it.@ItemGroupOID.toString())
+				}
 			}
 		}
 

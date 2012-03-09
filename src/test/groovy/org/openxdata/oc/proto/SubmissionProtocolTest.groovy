@@ -1,6 +1,7 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
+import groovy.xml.XmlUtil
 
 import org.junit.Before
 import org.junit.Test
@@ -33,7 +34,7 @@ class SubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWithODMAsRootWithFormKeyAttribute() {
 
 		def formKey = xml.@formKey
-		assertEquals 'SE_SC2', formKey
+		assertEquals 'F_MSA2_1', formKey
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithODMAsRootWithNameAttribute() {
@@ -106,25 +107,15 @@ class SubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWith2FormDataNodes() {
 		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
 		
-		assertEquals 3, formDataNodes.size()
+		assertEquals 1, formDataNodes.size()
 	}
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute() {
+		
+		println XmlUtil.serialize(xml)
 		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
 		
-		assertEquals "F_MSA2_1_2", formDataNodes[0].@FormOID
-	}
-	
-	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute1() {
-		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
-		
-		assertEquals "F_MSA2_1", formDataNodes[1].@FormOID
-	}
-	
-	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute2() {
-		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
-		
-		assertEquals "F_MSA2_2", formDataNodes[2].@FormOID
+		assertEquals "F_MSA2_1", formDataNodes[0].@FormOID
 	}
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWith3ItemGroupDataNodes() {
