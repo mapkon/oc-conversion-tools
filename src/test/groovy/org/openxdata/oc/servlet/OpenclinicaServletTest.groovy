@@ -71,7 +71,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		assertNotNull 'Study should not be null after successful Import', study
 	}
 
-	@Test public void testDownloadStudySetSuccessMessageOnSuccessfulImport() {
+	@Test public void testDownloadStudySetsSuccessMessageOnSuccessfulImport() {
 
 		servlet.doPost(request, response)
 

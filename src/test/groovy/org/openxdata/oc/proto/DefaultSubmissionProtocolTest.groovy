@@ -177,7 +177,7 @@ class DefaultSubmissionProtocolTest {
 		assertEquals 3, itemGroupDataNodes[2].children().size()
 	}
 	
-	@Test void testThatFormDataOIDEqualsFormKey() {
+	@Test void testCreateInstanceDataReturnsXmlWithFormDataOIDEqualingFormKey() {
 		
 		def formOID = xml.depthFirst().FormData[0]
 		
