@@ -1,7 +1,6 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
-import groovy.xml.XmlUtil
 
 import org.junit.Before
 import org.junit.Test
@@ -112,7 +111,6 @@ class SubmissionProtocolTest {
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute() {
 		
-		println XmlUtil.serialize(xml)
 		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
 		
 		assertEquals "F_MSA2_1", formDataNodes[0].@FormOID
