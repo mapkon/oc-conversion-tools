@@ -177,6 +177,13 @@ class DefaultSubmissionProtocolTest {
 		assertEquals 3, itemGroupDataNodes[2].children().size()
 	}
 	
+	@Test void testThatFormDataOIDEqualsFormKey() {
+		
+		def formOID = xml.depthFirst().FormData[0]
+		
+		assertEquals formOID.@FormOID, xml.@formKey
+	}
+	
 	def getItemDataNodes() {
 		def itemDataNodes = []
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
