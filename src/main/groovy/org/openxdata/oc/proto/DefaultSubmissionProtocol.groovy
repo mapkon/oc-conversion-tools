@@ -2,7 +2,7 @@ package org.openxdata.oc.proto
 
 import groovy.xml.StreamingMarkupBuilder
 
-class SubmissionProtocol {
+class DefaultSubmissionProtocol {
 
 	def instanceDataXml
 	

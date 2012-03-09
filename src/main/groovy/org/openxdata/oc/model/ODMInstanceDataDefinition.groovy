@@ -4,7 +4,7 @@ import groovy.util.logging.Log
 import groovy.xml.XmlUtil
 
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.proto.SubmissionProtocol;
+import org.openxdata.oc.proto.DefaultSubmissionProtocol;
 
 @Log
 class ODMInstanceDataDefinition {
@@ -22,7 +22,7 @@ class ODMInstanceDataDefinition {
 
 		instanceData.each {
 			
-			def convertedInstanceData = new SubmissionProtocol().createOpenClinicaInstanceData(it)
+			def convertedInstanceData = new DefaultSubmissionProtocol().createOpenClinicaInstanceData(it)
 			
 			log.info("Processing converted instance data: \n ${convertedInstanceData}")
 			

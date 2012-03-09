@@ -6,14 +6,14 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 
-class SubmissionProtocolTest {
+class DefaultSubmissionProtocolTest {
 
 	def xml
 	def instanceData
 
 	@Before void setUp() {
 
-		def proto = new SubmissionProtocol()
+		def proto = new DefaultSubmissionProtocol()
 		instanceData = proto.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
 
 		xml = new XmlParser().parseText(instanceData)
