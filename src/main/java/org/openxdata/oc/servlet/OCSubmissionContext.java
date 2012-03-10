@@ -23,20 +23,25 @@ import org.openxdata.server.servlet.DefaultSubmissionContext;
  *
  * @author kay
  */
-public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext {
+public class OCSubmissionContext extends DefaultSubmissionContext implements
+		WFSubmissionContext {
 
 	private OpenclinicaService ocService;
 	private StudyManagerService studyManagerService;
 
-	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
-			UserService userService, FormDownloadService formService, StudyManagerService studyManagerService,
+	public OCSubmissionContext(DataInputStream input, DataOutputStream output,
+			byte action, String locale, UserService userService,
+			FormDownloadService formService,
+			StudyManagerService studyManagerService,
 			OpenclinicaService ocService) {
-		super(input, output, action, locale, userService, formService, studyManagerService);
+		super(input, output, action, locale, userService, formService,
+				studyManagerService);
 		this.studyManagerService = studyManagerService;
 		this.ocService = ocService;
 	}
 
-	public Map<String, String> getOutParamsQuestionMapping(int formId, String caseId) {
+	public Map<String, String> getOutParamsQuestionMapping(int formId,
+			String caseId) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
@@ -56,15 +61,26 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 			return workitems;
 		for (Event event : events) {
 			Object[] workitem = new Object[5];
-			workitem[0] = event.getFormOID();
-			workitem[1] = getKey(event);
-			workitem[2] = oCStudyID.getId();
-			FormDef formDef = getFormByDescription(oCStudyID, event.getFormOID().toString());
+
+			List<Object[]> formReferences = new ArrayList<Object[]>();
+			FormDef formDef = getFormByDescription(oCStudyID, event
+					.getFormOID().toString());
 			if (formDef == null)
 				continue;
-			workitem[3] = formDef.getDefaultVersion().getId();
-			List<String[]> prefills = new ArrayList<String[]>();
-			workitem[4] = prefills;
+			String[] subjectKeys = (String[]) event.getSubjectKeys();
+			for (String string : subjectKeys) {
+				Object[] frmRfrnc = new Object[3];
+				frmRfrnc[0] = oCStudyID.getId();
+				frmRfrnc[1] = formDef.getDefaultVersion().getId();
+				List<String[]> prefills = new ArrayList<String[]>();
+				prefills.add(new String[] { "SubjectKey", "SubjectKey", string,
+						"false" });
+				frmRfrnc[2] = prefills;
+				formReferences.add(frmRfrnc);
+			}
+			workitem[0] = event.getFormOID();
+			workitem[1] = getKey(event);
+			workitem[2] = formReferences;
 			workitems.add(workitem);
 		}
 		return workitems;
@@ -85,7 +101,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	private StudyDef getOCStudyID() {
-		List<StudyDef> studyByName = studyManagerService.getStudyByName("Default Study");
+		List<StudyDef> studyByName = studyManagerService
+				.getStudyByName("Default Study");
 		if (studyByName != null) {
 			StudyDef study = studyByName.get(0);
 			return study;
