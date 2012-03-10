@@ -48,7 +48,8 @@ public class OpenclinicaServlet extends HttpServlet {
 	private OpenclinicaService openclinicaService;
 	private AuthenticationService authenticationService;
 
-	private final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
+	private final Logger log = LoggerFactory
+			.getLogger(OpenclinicaServlet.class);
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -56,14 +57,17 @@ public class OpenclinicaServlet extends HttpServlet {
 		super.init(config);
 
 		ServletContext sctx = this.getServletContext();
-		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
+		WebApplicationContext ctx = WebApplicationContextUtils
+				.getRequiredWebApplicationContext(sctx);
 
 		ctx.getAutowireCapableBeanFactory().autowireBean(this);
 
 		formService = (FormService) ctx.getBean("formService");
 		studyService = (StudyManagerService) ctx.getBean("studyManagerService");
-		dataExportService = (DataExportService) ctx.getBean("dataExportService");
-		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
+		dataExportService = (DataExportService) ctx
+				.getBean("dataExportService");
+		authenticationService = (AuthenticationService) ctx
+				.getBean("authenticationService");
 
 		props = loadProperties();
 
@@ -73,7 +77,8 @@ public class OpenclinicaServlet extends HttpServlet {
 		openclinicaService.setFormService(formService);
 		openclinicaService.setDataExportService(dataExportService);
 
-		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx, openclinicaService);
+		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx,
+				openclinicaService);
 
 	}
 
@@ -82,7 +87,8 @@ public class OpenclinicaServlet extends HttpServlet {
 		try {
 
 			log.debug("Attempting to load properties file from Web Context");
-			InputStream propFileStream = getServletContext().getResourceAsStream("openclinica.properties");
+			InputStream propFileStream = getServletContext()
+					.getResourceAsStream("openclinica.properties");
 			props.load(propFileStream);
 
 		} catch (Exception e) {
@@ -98,9 +104,11 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		try {
 
-			log.debug("File not found in Web context. Attempting to load internal properties file");
+			log
+					.debug("File not found in Web context. Attempting to load internal properties file");
 
-			String propFileContent = new TransformUtil().loadFileContents("META-INF/openclinica.properties");
+			String propFileContent = new TransformUtil()
+					.loadFileContents("META-INF/openclinica.properties");
 			props.load(new ByteArrayInputStream(propFileContent.getBytes()));
 
 		} catch (IOException e) {
@@ -109,10 +117,12 @@ public class OpenclinicaServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		try {
-			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
+			request.getRequestDispatcher(JSP_LOCATION).forward(request,
+					response);
 
 		} catch (ServletException e) {
 			log.error(e.getLocalizedMessage());
@@ -122,7 +132,8 @@ public class OpenclinicaServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		try {
 
@@ -152,7 +163,8 @@ public class OpenclinicaServlet extends HttpServlet {
 				request.setAttribute("message", message);
 				request.setAttribute("user", user);
 
-				request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
+				request.getRequestDispatcher(JSP_LOCATION).forward(request,
+						response);
 			}
 
 			request.getSession().setAttribute("study", study);
@@ -196,7 +208,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		String result = openclinicaService.exportOpenClinicaStudyData();
 		if ("Error".equals(result))
-			throw new ImportException("Exception occurred during export of data to openclinica. Check log for details.");
+			throw new ImportException(
+					"Exception occurred during export of data to openclinica. Check log for details.");
 
 		return result;
 	}
@@ -215,7 +228,8 @@ public class OpenclinicaServlet extends HttpServlet {
 		if (studyService != null) {
 
 			log.info("Validating Converted Study: " + study.getName());
-			StudyDef existingStudy = studyService.getStudyByKey(study.getStudyKey());
+			StudyDef existingStudy = studyService.getStudyByKey(study
+					.getStudyKey());
 
 			if (existingStudy != null) {
 
@@ -225,13 +239,15 @@ public class OpenclinicaServlet extends HttpServlet {
 					inspectStudyFormVersions(version, study);
 				}
 
-				log.info("Saving existing [converted] Study: " + existingStudy.getName());
+				log.info("Saving existing [converted] Study: "
+						+ existingStudy.getName());
 
 				studyService.saveStudy(existingStudy);
 
 			} else {
 
-				log.info("First time download - Saving new converted study: " + study.getName());
+				log.info("First time download - Saving new converted study: "
+						+ study.getName());
 
 				studyService.saveStudy(study);
 			}
@@ -242,7 +258,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 	private void inspectStudyFormVersions(FormDefVersion version, StudyDef study) {
 
-		log.info("Inspect for conflicting Study Form Versions: " + study.getName());
+		log.info("Inspect for conflicting Study Form Versions: "
+				+ study.getName());
 
 		List<FormDefVersion> studyFormVersions = getStudyFormVersions(study);
 		for (FormDefVersion x : studyFormVersions) {
@@ -260,15 +277,19 @@ public class OpenclinicaServlet extends HttpServlet {
 		return versions;
 	}
 
-	private void incrementAndMakeDefault(FormDefVersion versionToIncrement, FormDef form) {
+	private void incrementAndMakeDefault(FormDefVersion versionToIncrement,
+			FormDef form) {
 
-		log.info("Incrementing to latest Version: " + versionToIncrement.getName());
+		log.info("Incrementing to latest Version: "
+				+ versionToIncrement.getName());
 
 		String incrementVersionName = versionToIncrement.getName();
 		String nextVersion = form.getNextVersionName();
 
-		String newVersionName = incrementVersionName.replace(incrementVersionName.substring(incrementVersionName
-				.length() - 2), nextVersion);
+		String newVersionName = incrementVersionName.replace(
+				incrementVersionName
+						.substring(incrementVersionName.length() - 2),
+				nextVersion);
 
 		versionToIncrement.setName(newVersionName);
 
