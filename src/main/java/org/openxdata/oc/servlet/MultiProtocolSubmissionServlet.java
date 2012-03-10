@@ -46,7 +46,8 @@ import org.openxdata.oc.service.OpenclinicaService;
 public class MultiProtocolSubmissionServlet {
 
 	private static final long serialVersionUID = -8555135998272736140L;
-	private static final Logger log = LoggerFactory.getLogger(MultiProtocolSubmissionServlet.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(MultiProtocolSubmissionServlet.class);
 
 	private byte ACTION_NONE = -1;
 	public static final byte RESPONSE_STATUS_ERROR = 0;
@@ -61,22 +62,27 @@ public class MultiProtocolSubmissionServlet {
 	private ServletContext sctx;
 	private OpenclinicaService openclinicaService;
 
-	public MultiProtocolSubmissionServlet(ServletConfig config, ServletContext sctx,
-			OpenclinicaService openclinicaService) throws ServletException {
+	public MultiProtocolSubmissionServlet(ServletConfig config,
+			ServletContext sctx, OpenclinicaService openclinicaService)
+			throws ServletException {
 
 		this.sctx = sctx;
 		ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
 
 		// Manual Injection
 		userService = (UserService) ctx.getBean("userService");
-		formDownloadService = (FormDownloadService) ctx.getBean("formDownloadService");
-		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
-		studyManagerService = (StudyManagerService) ctx.getBean("studyManagerService");
+		formDownloadService = (FormDownloadService) ctx
+				.getBean("formDownloadService");
+		authenticationService = (AuthenticationService) ctx
+				.getBean("authenticationService");
+		studyManagerService = (StudyManagerService) ctx
+				.getBean("studyManagerService");
 		this.openclinicaService = openclinicaService;
 
 	}
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 
 		log.info("incoming request");
 
@@ -97,14 +103,16 @@ public class MultiProtocolSubmissionServlet {
 		ClassLoader origCl = Thread.currentThread().getContextClassLoader();
 
 		try {
-			Thread.currentThread().setContextClassLoader(MultiProtocolSubmissionServlet.class.getClassLoader());
+			Thread.currentThread().setContextClassLoader(
+					MultiProtocolSubmissionServlet.class.getClassLoader());
 
 			log.debug("reading request details");
 			String username = dataIn.readUTF();
 			String password = dataIn.readUTF();
 			String serializer = dataIn.readUTF();
 			String locale = dataIn.readUTF();
-			String action = req.getParameter(OpenXDataConstants.REQUEST_PARAMETER_ACTION);
+			String action = req
+					.getParameter(OpenXDataConstants.REQUEST_PARAMETER_ACTION);
 
 			log.debug("authenticating user");
 			if (authenticationService.authenticate(username, password) == null) {
@@ -117,7 +125,8 @@ public class MultiProtocolSubmissionServlet {
 			String protoJarPath = resolvePluginName(serializer);
 			URL protoLocation = getServletContext().getResource(protoJarPath);
 			if (protoLocation == null) {
-				throw new ProtocolNotFoundException("Could not load protocol jar '" + protoJarPath + "'");
+				throw new ProtocolNotFoundException(
+						"Could not load protocol jar '" + protoJarPath + "'");
 			}
 			if (log.isDebugEnabled())
 				log.debug("loading protocol plugins from " + protoLocation);
@@ -129,9 +138,10 @@ public class MultiProtocolSubmissionServlet {
 			log.debug("creating submission context");
 			SubmissionContext submitCtx = null;
 			try {
-				submitCtx = new OCSubmissionContext(dataIn, dataOut, action == null ? ACTION_NONE : Byte
-						.parseByte(action), locale, userService, formDownloadService, studyManagerService,
-						openclinicaService);
+				submitCtx = new OCSubmissionContext(dataIn, dataOut,
+						action == null ? ACTION_NONE : Byte.parseByte(action),
+						locale, userService, formDownloadService,
+						studyManagerService, openclinicaService);
 				ctx.getAutowireCapableBeanFactory().autowireBean(submitCtx);
 			} catch (Throwable numberFormatException) {
 				numberFormatException.printStackTrace();
@@ -142,11 +152,17 @@ public class MultiProtocolSubmissionServlet {
 			handler.handleRequest(submitCtx);
 			resp.setStatus(HttpServletResponse.SC_OK);
 		} catch (ProtocolAccessDeniedException e) {
-			log.error("protocol access denied while handling request from client", e);
+			log
+					.error(
+							"protocol access denied while handling request from client",
+							e);
 			dataOut.writeByte(RESPONSE_ACCESS_DENIED);
 			resp.setStatus(HttpServletResponse.SC_OK);
 		} catch (ProtocolInvalidSessionReferenceException e) {
-			log.error("protocol invalid session reference errror while handling request from client", e);
+			log
+					.error(
+							"protocol invalid session reference errror while handling request from client",
+							e);
 			dataOut.writeByte(RESPONSE_INVALID_SESSION_REFERENCE);
 			resp.setStatus(HttpServletResponse.SC_OK);
 		} catch (ProtocolException e) {
@@ -212,18 +228,22 @@ public class MultiProtocolSubmissionServlet {
 	 * @return a suggested path to a protocol plugin
 	 * @throws IOException
 	 */
-	private String resolvePluginName(String requestedVersion) throws IOException {
+	private String resolvePluginName(String requestedVersion)
+			throws IOException {
 
 		log.debug("checking to see if protocol is explicitly defined");
 		Properties protoMap = getProtoMap();
 		if (protoMap.containsKey(requestedVersion)) {
 			String mappedVersion = protoMap.getProperty(requestedVersion);
 			if (log.isDebugEnabled())
-				log.debug("found mapping: " + requestedVersion + " -> " + mappedVersion);
+				log.debug("found mapping: " + requestedVersion + " -> "
+						+ mappedVersion);
 			requestedVersion = mappedVersion;
 		}
 
-		String protoJarPath = MessageFormat.format("/WEB-INF/protocol-jars/{0}.jar", new Object[] { requestedVersion });
+		String protoJarPath = MessageFormat.format(
+				"/WEB-INF/protocol-jars/{0}.jar",
+				new Object[] { requestedVersion });
 
 		if (log.isDebugEnabled())
 			log.debug("resolved " + requestedVersion + " to " + protoJarPath);
