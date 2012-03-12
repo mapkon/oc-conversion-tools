@@ -21,7 +21,7 @@ class Event {
 
 		def subjectKeys = []
 
-		def keys = eventXml.studySubjectOIDs.toString()
+		def keys = eventXml.studySubjectOIDs.text()
 
 		subjectKeys = keys.split()
 
