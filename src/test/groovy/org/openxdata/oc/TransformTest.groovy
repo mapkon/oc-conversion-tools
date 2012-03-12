@@ -1,10 +1,10 @@
 package org.openxdata.oc
 
-import groovy.util.XmlParser
-import groovy.util.XmlSlurper
-
 import org.junit.Test
 import org.openxdata.oc.util.TransformUtil
+import groovy.util.XmlParser
+import groovy.util.XmlSlurper
+import groovy.xml.XmlUtil
 
 
 class TransformTest extends GroovyTestCase {
@@ -60,7 +60,7 @@ class TransformTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 49, binds.size()
+		assertEquals 51, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -232,6 +232,48 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testConvertedXformShouldHaveRepeatItems() {
+		
+		def repeats = getRepeats()
+		
+		assertEquals 4, repeats.size()
+	}
+	
+	@Test void testConvertedXformHasInnerGroupWhenThereIsARepeat() {
+		
+		def form = convertedXform.form.find {
+			it.@description.toString().equals("F_MSA2_1")
+		}
+		
+		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
+		def group = xformNode.group.find {it.@id == "3"}
+		
+		assertEquals "group", group.children()[1].name()
+	}
+	
+	@Test void testConvertedXformHasRepeatInGroupWithId3() {
+		
+		def form = convertedXform.form.find {
+			it.@description.toString().equals("F_MSA2_1")
+		}
+		
+		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
+		def group = xformNode.group.find {it.@id == "3"}
+		
+		assertEquals "repeat", group.children()[1].children()[1].name()
+	}
+	
+	def getRepeats() {
+		
+		def repeats = []
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			def rpt = it.depthFirst().findAll{ it.name().toString() == 'repeat'}
+			repeats.addAll(rpt)
+		}
+	}
+	
 	def getXformNodes() {
 
 		def nodes = []
@@ -239,6 +281,7 @@ class TransformTest extends GroovyTestCase {
 			
 			def xformNode = new XmlSlurper().parseText(it.version.xform.text()).declareNamespace(xf:"http://www.w3.org/2002/xforms")
 			
+			println XmlUtil.serialize(xformNode)
 			nodes.add(xformNode)
 		}
 		

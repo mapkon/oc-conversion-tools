@@ -13,7 +13,7 @@ class DefaultSubmissionProtocol {
 
 		def subjectKey = getSubjectKey()
 
-		// TODO How does openclinica handle repeat data?
+		//TODO: How does openclinica handle repeat data?
 		def itemGroupOIDS = getItemGroupOIDS()
 
 		instanceDataXml.each {

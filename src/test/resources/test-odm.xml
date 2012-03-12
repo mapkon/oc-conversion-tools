@@ -39,7 +39,8 @@
                 <ItemGroupRef ItemGroupOID="IG_MSA2_MSA2_POARTPRECG" Mandatory="No"/>
             </FormDef>
             <FormDef OID="F_MSA2_1" Name="MSA2: Mother Screening Assessment 2 - 1" Repeating="No">
-                <ItemGroupRef ItemGroupOID="IG_MSA2_UNGROUPED" Mandatory="Yes"/>
+            	<ItemGroupRef ItemGroupOID="IG_MSA1_UNGROUPED" Mandatory="Yes"/>
+                <ItemGroupRef ItemGroupOID="IG_MSA1_MSA1_COMPLYREASG" Mandatory="Yes"/>
             </FormDef>
             
             <ItemGroupDef OID="IG_MSA1_UNGROUPED" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO030">
