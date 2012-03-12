@@ -1,10 +1,10 @@
 package org.openxdata.oc
 
-import org.junit.Test
-import org.openxdata.oc.util.TransformUtil
 import groovy.util.XmlParser
 import groovy.util.XmlSlurper
-import groovy.xml.XmlUtil
+
+import org.junit.Test
+import org.openxdata.oc.util.TransformUtil
 
 
 class TransformTest extends GroovyTestCase {
@@ -281,7 +281,6 @@ class TransformTest extends GroovyTestCase {
 			
 			def xformNode = new XmlSlurper().parseText(it.version.xform.text()).declareNamespace(xf:"http://www.w3.org/2002/xforms")
 			
-			println XmlUtil.serialize(xformNode)
 			nodes.add(xformNode)
 		}
 		
