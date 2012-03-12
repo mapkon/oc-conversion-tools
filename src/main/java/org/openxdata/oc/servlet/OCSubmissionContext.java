@@ -73,8 +73,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 				frmRfrnc[0] = oCStudyID.getId();
 				frmRfrnc[1] = formDef.getDefaultVersion().getId();
 				List<String[]> prefills = new ArrayList<String[]>();
-				prefills.add(new String[] { "SubjectKey", "SubjectKey", string,
-						"false" });
+				prefills.add(new String[] { "SubjectKey_", "SubjectKey",
+						string, "false" });
 				frmRfrnc[2] = prefills;
 				formReferences.add(frmRfrnc);
 			}
