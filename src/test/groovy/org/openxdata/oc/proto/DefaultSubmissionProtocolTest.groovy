@@ -1,20 +1,19 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
-import groovy.xml.XmlUtil
 
 import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 
-class SubmissionProtocolTest {
+class DefaultSubmissionProtocolTest {
 
 	def xml
 	def instanceData
 
 	@Before void setUp() {
 
-		def proto = new SubmissionProtocol()
+		def proto = new DefaultSubmissionProtocol()
 		instanceData = proto.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
 
 		xml = new XmlParser().parseText(instanceData)
@@ -34,7 +33,7 @@ class SubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWithODMAsRootWithFormKeyAttribute() {
 
 		def formKey = xml.@formKey
-		assertEquals 'SE_SC2', formKey
+		assertEquals 'F_MSA2_1', formKey
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithODMAsRootWithNameAttribute() {
@@ -107,25 +106,14 @@ class SubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWith2FormDataNodes() {
 		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
 		
-		assertEquals 3, formDataNodes.size()
+		assertEquals 1, formDataNodes.size()
 	}
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute() {
+		
 		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
 		
-		assertEquals "F_MSA2_1_2", formDataNodes[0].@FormOID
-	}
-	
-	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute1() {
-		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
-		
-		assertEquals "F_MSA2_1", formDataNodes[1].@FormOID
-	}
-	
-	@Test void testCreateInstanceDataReturnsValidXmlWithFormDataElementHavingFormOIDAttribute2() {
-		def formDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData
-		
-		assertEquals "F_MSA2_2", formDataNodes[2].@FormOID
+		assertEquals "F_MSA2_1", formDataNodes[0].@FormOID
 	}
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWith3ItemGroupDataNodes() {
@@ -163,6 +151,7 @@ class SubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWithItemDataNodesHavingItemOIDAttribute() {
 		def itemDataNodes = getItemDataNodes()
 		itemDataNodes.each {
+			
 			def itemOID = it.@ItemOID
 			
 			assertNotNull "Should have ItemOID Attribute", itemOID
@@ -186,6 +175,13 @@ class SubmissionProtocolTest {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
 		assertEquals 3, itemGroupDataNodes[2].children().size()
+	}
+	
+	@Test void testCreateInstanceDataReturnsXmlWithFormDataOIDEqualingFormKey() {
+		
+		def formOID = xml.depthFirst().FormData[0]
+		
+		assertEquals formOID.@FormOID, xml.@formKey
 	}
 	
 	def getItemDataNodes() {

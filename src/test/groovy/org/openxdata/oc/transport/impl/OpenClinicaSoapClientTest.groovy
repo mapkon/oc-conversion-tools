@@ -194,19 +194,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetSubjectKeysSHOULDReturnSubjectKeys(){
-		def connectionFactory = setUpConnectionFactoryMock(TestData.studySubjectListSOAPResponse)
-		play{
-			
-			def client = new OpenClinicaSoapClientImpl(props)
-			client.setConnectionFactory(connectionFactory)
-			
-			def subjectKeys = client.getSubjectKeys("default-study")
-			
-			assertEquals 4, subjectKeys.size()
-		}
-	}
-	
 	@Test void testThatImportDataReturnsSuccessResponseOnCorrectODMFormat(){
 		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
@@ -307,7 +294,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		connectionFactory.getCRFConnection().returns(connection).atMostOnce()
 		connectionFactory.getStudyConnection().returns(connection).atMostOnce()
 		connectionFactory.getEventConnection().returns(connection).atMostOnce()
-		connectionFactory.getStudySubjectConnection().returns(connection).atMostOnce()
 		
 		return connectionFactory
 	}

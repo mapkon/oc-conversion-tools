@@ -2,8 +2,6 @@ package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
 
-import java.util.Collection
-
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.OpenClinicaSoapClient
@@ -11,7 +9,6 @@ import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
 import org.openxdata.oc.transport.soap.proxy.EventWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
-import org.openxdata.oc.transport.soap.proxy.ListAllSubjectsByStudyWebServiceProxy
 
 
 @Log
@@ -25,9 +22,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	
 	private def importProxy
 	private def eventsProxy
-	private def listAllByStudyProxy
 	private def crfMetaDataVersionProxy
-	
 			
 	def OpenClinicaSoapClientImpl(Properties props) {
 
@@ -49,18 +44,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public String importData(Collection<String> instanceData){
+	public String importData(List<String> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData)
 	}
 		
-	public Collection<String> getSubjectKeys(def identifier){
-		
-		listAllByStudyProxy = new ListAllSubjectsByStudyWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		return listAllByStudyProxy.listAllByStudy(identifier)
-	}
-
 	public def getOpenxdataForm(def studyOID) {
 		
 		try{

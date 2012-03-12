@@ -13,8 +13,6 @@ public interface OpenclinicaService {
 
 	Boolean hasStudyData(String studyKey)
 		
-	List<String> getStudySubjects(String studyOID) throws UnexpectedException
-
 	StudyDef importOpenClinicaStudy(String identifier) throws UnexpectedException
 
 	String exportOpenClinicaStudyData()

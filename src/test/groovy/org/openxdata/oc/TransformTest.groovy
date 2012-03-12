@@ -212,6 +212,26 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectGroup() {
+		
+		def xformNodes = getXformNodes()
+		xformNodes.each {
+			
+			def subjectGroup = it.depthFirst().find { it.@id == '1'}
+			assertNotNull subjectGroup
+		}
+	}
+	
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectGroupWithSubjectKeyLabel() {
+		
+		def xformNodes = getXformNodes()
+		xformNodes.each {
+			
+			def subjectGroup = it.depthFirst().find { it.@id == '1'}
+			assertEquals "Subject key", subjectGroup.children()[0].text()
+		}
+	}
+	
 	def getXformNodes() {
 
 		def nodes = []

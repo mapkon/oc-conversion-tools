@@ -4,8 +4,6 @@ package org.openxdata.oc.service.impl
 import groovy.util.logging.Log
 import groovy.util.slurpersupport.NodeChild
 
-import java.util.ArrayList
-import java.util.Collection
 import java.util.Date
 import java.util.List
 import java.util.Properties
@@ -53,9 +51,9 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	}
 
 	@Override
-	public StudyDef importOpenClinicaStudy(String identifier) throws UnexpectedException {
+	public StudyDef importOpenClinicaStudy(String studyOID) throws UnexpectedException {
 				
-		NodeChild xml = (NodeChild) client.getOpenxdataForm(identifier)
+		NodeChild xml = (NodeChild) client.getOpenxdataForm(studyOID)
 		
 		log.info("OXD: Converting Xform to study definition.")
 		StudyImporter importer = new StudyImporter(xml)
@@ -111,59 +109,52 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	}
 
 	@Override
-	public List<String> getStudySubjects(String studyOID) throws UnexpectedException {
-		try{
-			List<String> subjects = fetchSubjects(studyOID)
-			return subjects
-		}catch(Exception ex){
-			throw new UnexpectedException(ex)
-		}
-	}
-
-	private List<String> fetchSubjects(String studyOID) {
-		
-		List<String> subjects = new ArrayList<String>()
-
-		log.info("OXD: Fetching subjects.")
-		
-		Collection<String> returnedSubjects = client.getSubjectKeys(studyOID)
-		for(String x : returnedSubjects){
-			subjects.add(x)
-		}
-		return subjects
-	}
-
-	@Override
 	public String exportOpenClinicaStudyData() {
 
 		List<FormData> dataList = dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 
-		log.info("Running OpenClinica Export Routine to export " + dataList.size()	+ " form data items")
+		log.info("Running OpenClinica Export Routine to export «" + dataList.size()	+ "» form data item(s)")
 
-		String exportResponse
+		String exportResponseMessage = buildResponseMessage(dataList)
+
+		if("Success".equals(exportResponseMessage)) {
+			
+			updateExportedDataItems(dataList)
+		}
+
+		return exportResponseMessage
+	}
+
+	private String buildResponseMessage(List dataList) {
+		
+		def exportResponseMessage
 		
 		if(dataList.size == 0) {
-			exportResponse = "No data to export. Collect Data and then export."
-			log.info("No data items found to export. Aborting...")
-		}
-		else
-			exportResponse = client.importData(dataList)
 
-		if("Success".equals(exportResponse)) {
+			def message = "No data items found to export."
 			
-			dataList.each {
-
-				log.info("Resetting Export Flag for form data with id: " + it.getId())
-
-				dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
-				it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
-			}
+			log.info(message)
+			exportResponseMessage = message
 		}
+		else {
+			exportResponseMessage = client.importData(dataList)
+		}
+			
+		return exportResponseMessage
+	}
 
-		return exportResponse
+	private updateExportedDataItems(List dataList) {
+		
+		dataList.each {
+
+			log.info("Resetting Export Flag for form data with id: " + it.getId())
+
+			dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
+			it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
+		}
 	}
 	
-	List<Event> getEvents(String studyOID){
+	public List<Event> getEvents(String studyOID){
 		
 		def events = []
 		def eventNode = client.findEventsByStudyOID(studyOID)
@@ -176,11 +167,11 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		return events
 	}
 	
-	void setStudyService(StudyManagerService studyService) {
+	public void setStudyService(StudyManagerService studyService) {
 		this.studyService = studyService
 	}
 	
-	void setFormService(FormService formService) {
+	public void setFormService(FormService formService) {
 		this.formService = formService
 	}
 	

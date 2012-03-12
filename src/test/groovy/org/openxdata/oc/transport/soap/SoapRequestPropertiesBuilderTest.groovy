@@ -7,43 +7,33 @@ import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
 
 class SoapRequestPropertiesBuilderTest extends GroovyTestCase {
 	
-	def crfMetaDataProxy 
-	def parser = new XmlSlurper() 
+	def headerNode
 	
 	@Before public void setUp(){
-		crfMetaDataProxy = new CRFMetaDataVersionProxy(username:"uname", hashedPassword:"pass", connectionFactory:null)
+		def crfMetaDataProxy = new CRFMetaDataVersionProxy(username:"uname", hashedPassword:"pass", connectionFactory:null)
+		
+		def header = crfMetaDataProxy.getHeader()
+		headerNode = new XmlSlurper().parseText(header)		
 	}
 	
 	@Test void testGetHeaderShouldReturnValidHeader(){
 		
-		def header = crfMetaDataProxy.getHeader()
-		def headerXml = parser.parseText(header)
-		
-		assertEquals 'Header', headerXml.name()
+		assertEquals 'Header', headerNode.name()
 	}
 	
 	@Test void testGetHeaderShouldReturnValidSecurityElement(){
 		
-		def header = crfMetaDataProxy.getHeader()
-		def headerXml = parser.parseText(header)
-		
-		assertEquals 'Security', headerXml.children()[0].name()
+		assertEquals 'Security', headerNode.children()[0].name()
 	}
 	
 	@Test void testGetHeaderShouldReturnValidUsername(){
 		
-		def header = crfMetaDataProxy.getHeader()
-		def headerXml = parser.parseText(header)
-		
-		assertEquals 'uname', headerXml.depthFirst().find{it.name().equals('Username')}.text()
+		assertEquals 'uname', headerNode.depthFirst().find{it.name().equals('Username')}.text()
 	}
 	
 	@Test void testGetHeaderShouldReturnValidPassword(){
 		
-		def header = crfMetaDataProxy.getHeader()
-		def headerXml = parser.parseText(header)
-		
-		assertEquals 'pass', headerXml.depthFirst().find{it.name().equals('Password')}.text()
+		assertEquals 'pass', headerNode.depthFirst().find{it.name().equals('Password')}.text()
 	}
 
 }
