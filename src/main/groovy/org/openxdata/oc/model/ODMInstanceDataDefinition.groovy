@@ -4,7 +4,7 @@ import groovy.util.logging.Log
 import groovy.xml.XmlUtil
 
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.proto.DefaultSubmissionProtocol;
+import org.openxdata.oc.proto.DefaultSubmissionProtocol
 
 @Log
 class ODMInstanceDataDefinition {
