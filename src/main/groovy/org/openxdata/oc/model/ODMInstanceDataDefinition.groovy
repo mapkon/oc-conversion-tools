@@ -9,15 +9,11 @@ import org.openxdata.oc.proto.DefaultSubmissionProtocol
 @Log
 class ODMInstanceDataDefinition {
 	
-	def instanceData
-	
 	def appendInstanceData(def instanceData){
 
 		if(instanceData.isEmpty())
 			throw new ImportException('Cannot process empty instance data.')
 					
-		this.instanceData = instanceData
-
 		def ocInstanceData
 
 		instanceData.each {
