@@ -54,14 +54,14 @@ class DefaultSubmissionProtocol {
 		return xml.toString()
 	}
 
-	def getSubjectKey() {
+	private def getSubjectKey() {
 		
 		def subjectDataNode = instanceDataXml.depthFirst().find { it.name().equals("SubjectKey")}
 		return subjectDataNode.text()
 
 	}
 
-	def getItemGroupItemDataNodes(String itemGroupOID) {
+	private def getItemGroupItemDataNodes(String itemGroupOID) {
 
 		def itemNodes = []
 
@@ -87,7 +87,7 @@ class DefaultSubmissionProtocol {
 		return itemNodes
 	}
 
-	def getItemGroupOIDS() {
+	private def getItemGroupOIDS() {
 
 		def itemGroupOIDS = [] as Set
 		
