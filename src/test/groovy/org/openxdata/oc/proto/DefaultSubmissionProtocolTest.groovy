@@ -184,6 +184,22 @@ class DefaultSubmissionProtocolTest {
 		assertEquals formOID.@FormOID, xml.@formKey
 	}
 	
+	@Test void testCreateInstanceDataReturnsXmlWithItemGroupDataElementsHavingTransactionTyeAttribute() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			assertNotNull "TransactionType Attribute should not be null", it.@TransactionType
+		}
+	}
+	
+	@Test void testCreateInstanceReturnsXmlWithItemGroupDataElementsHavingTransactionTypeAttributeEqualsToInsert() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			assertEquals "TransactionType Attribute should be Insert", "Insert", it.@TransactionType
+		}
+	}
+	
 	def getItemDataNodes() {
 		def itemDataNodes = []
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData

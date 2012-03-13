@@ -32,7 +32,7 @@ class DefaultSubmissionProtocol {
 
 								itemGroupOIDS.each { itemGroupOID ->
 
-									ItemGroupData(ItemGroupOID:itemGroupOID) {
+									ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
 
 										def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
 										itemDataNodes.each { itemData ->
