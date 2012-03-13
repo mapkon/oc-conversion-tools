@@ -20,27 +20,24 @@ class DefaultSubmissionProtocol {
 
 		xml = new StreamingMarkupBuilder().bind {
 
-			xml = new StreamingMarkupBuilder().bind{
+			ODM(Description:instanceDataXml.@Description, formKey:instanceDataXml.@formKey, name:instanceDataXml.@name) {
 
-				ODM(Description:instanceDataXml.@Description, formKey:instanceDataXml.@formKey, name:instanceDataXml.@name) {
+				ClinicalData (StudyOID:instanceDataXml.@StudyOID, MetaDataVersion:instanceDataXml.@MetaDataVersionOID) {
 
-					ClinicalData (StudyOID:instanceDataXml.@StudyOID, MetaDataVersion:instanceDataXml.@MetaDataVersionOID) {
+					SubjectData(SubjectKey:subjectKey) {
 
-						SubjectData(SubjectKey:subjectKey) {
+						StudyEventData(StudyEventOID:instanceDataXml.@StudyEventOID){
 
-							StudyEventData(StudyEventOID:instanceDataXml.@StudyEventOID){
+							FormData(FormOID:instanceDataXml.@formKey) {
 
-								FormData(FormOID:instanceDataXml.@formKey) {
+								itemGroupOIDS.each { itemGroupOID ->
 
-									itemGroupOIDS.each { itemGroupOID ->
-										
-										ItemGroupData(ItemGroupOID:itemGroupOID) {
+									ItemGroupData(ItemGroupOID:itemGroupOID) {
 
-											def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
-											itemDataNodes.each { itemData ->
+										def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
+										itemDataNodes.each { itemData ->
 
-												ItemData (ItemOID:itemData.name(), Value:"$itemData"){
-												}
+											ItemData (ItemOID:itemData.name(), Value:"$itemData"){
 											}
 										}
 									}
@@ -50,6 +47,7 @@ class DefaultSubmissionProtocol {
 					}
 				}
 			}
+		}
 
 		log.info("Successfully converted from oxd-instance data to odm-instance data")
 		
