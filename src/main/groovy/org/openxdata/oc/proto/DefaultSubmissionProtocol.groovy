@@ -18,7 +18,7 @@ class DefaultSubmissionProtocol {
 		//TODO: How does openclinica handle repeat data?
 		def itemGroupOIDS = getItemGroupOIDS()
 
-		instanceDataXml.each {
+		xml = new StreamingMarkupBuilder().bind {
 
 			xml = new StreamingMarkupBuilder().bind{
 
@@ -50,7 +50,6 @@ class DefaultSubmissionProtocol {
 					}
 				}
 			}
-		}
 
 		log.info("Successfully converted from oxd-instance data to odm-instance data")
 		
