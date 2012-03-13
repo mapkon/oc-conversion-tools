@@ -67,13 +67,11 @@ class DefaultSubmissionProtocol {
 
 		instanceDataXml.children().each {
 
-			// Assumption is that this is an instance definition for a repeat question
-			if(it.@ItemGroupOID == "") {
-				if(it.children().size() > 0) {
-					it.children().each { item ->
-						if(item.@ItemGroupOID.equals(itemGroupOID)) {
-							itemNodes.add(item)
-						}
+			if(isItemGroupRepeat(it)) {
+
+				it.children().each { item ->
+					if(item.@ItemGroupOID.equals(itemGroupOID)) {
+						itemNodes.add(item)
 					}
 				}
 			}
@@ -91,12 +89,14 @@ class DefaultSubmissionProtocol {
 
 	def getItemGroupOIDS() {
 
-		def itemGroupOIDS = []as Set
+		def itemGroupOIDS = [] as Set
+		
 		instanceDataXml.children().each {
-			def childNodes = it.children()
-			if(childNodes.size() > 0) {
-				childNodes.each {
-					itemGroupOIDS.add(it.@ItemGroupOID.toString())
+			
+			if(isItemGroupRepeat(it)) {
+				
+				it.children().each { item ->
+					itemGroupOIDS.add(item.@ItemGroupOID.toString())
 				}
 			}
 			else {
@@ -107,5 +107,9 @@ class DefaultSubmissionProtocol {
 		}
 
 		return itemGroupOIDS
+	}
+	
+	private def isItemGroupRepeat(def itemGroup) {
+		return itemGroup.children().size() > 0
 	}
 }
