@@ -15,7 +15,7 @@ class DefaultSubmissionProtocol {
 
 		def subjectKey = getSubjectKey()
 
-		//TODO: How does openclinica handle repeat data?
+		//TODO: Add the ItemGroupRepeatKey attribute to repeating groups.
 		def itemGroupOIDS = getItemGroupOIDS()
 
 		xml = new StreamingMarkupBuilder().bind {
