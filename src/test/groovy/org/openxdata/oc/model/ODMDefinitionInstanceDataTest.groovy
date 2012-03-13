@@ -24,7 +24,7 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 	@Test void testInstanceDataHasMetaDataVersionOID() {
 		
 		def xml = new XmlParser().parseText(exportedInstanceData)
-		assertEquals "v1.0.0", xml.@MetaDataVersion
+		assertEquals "v1.0.0", xml.ClinicalData.@MetaDataVersion[0]
 	}
 	
 	@Test void testAppendInstanceDataAppendsTheInstanceData(){
@@ -36,6 +36,7 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 	}
 	
 	@Test void testAppendInstanceDataShouldThrowExceptionOnNullInstanceData(){
+		
 		def emptyInstanceData = new ArrayList<String>()
 		shouldFail(ImportException.class){
 			new ODMInstanceDataDefinition().appendInstanceData(emptyInstanceData)

@@ -9,45 +9,21 @@ import org.openxdata.oc.proto.DefaultSubmissionProtocol
 @Log
 class ODMInstanceDataDefinition {
 	
+	def submissionProtocol = new DefaultSubmissionProtocol()
+	
 	def appendInstanceData(def instanceData){
 
 		if(instanceData.isEmpty())
 			throw new ImportException('Cannot process empty instance data.')
 					
-		def ocInstanceData
+		def odmInstanceData
 
-		instanceData.each {
+		instanceData.each { 
 			
-			def convertedInstanceData = new DefaultSubmissionProtocol().createOpenClinicaInstanceData(it)
-			
-			log.info("Processing converted instance data: \n ${convertedInstanceData}")
-			
-			def instanceXml = new XmlParser().parseText(convertedInstanceData)
-			ocInstanceData = addSubjectData(instanceXml)
+			odmInstanceData = submissionProtocol.createOpenClinicaInstanceData(it)
+			log.info("Processing converted instance data: ${XmlUtil.serialize(odmInstanceData)}")
 		}
 
-		log.info("Successfully converted from oxd-instance data to odm-instance data")
-		
-		return XmlUtil.asString(ocInstanceData)
-	}
-	
-	private def addSubjectData(def instanceNode) {
-		
-		log.info("Adding subject Data.")
-		
-		def odmTag = new XmlParser().parseText("""<ODM></ODM>""")
-		
-		def studyOID = instanceNode.ClinicalData.@StudyOID[0]
-		def metadataVersion = instanceNode.ClinicalData.@MetaDataVersionOID[0]
-		def clinicalDataNode = odmTag.ClinicalData.find {it.@StudyOID == studyOID && it.@MetaDataVersionOID == metadataVersion}
-		if (clinicalDataNode == null) {
-			clinicalDataNode = new Node(odmTag, "ClinicalData", ['StudyOID':studyOID, 'MetaDataVersion':metadataVersion])
-		}
-		
-		clinicalDataNode.append(instanceNode.ClinicalData.SubjectData)
-		
-		return clinicalDataNode
-		
-		log.info("<<Successfully added subject data ODM file.>>")
+		return odmInstanceData
 	}
 }
