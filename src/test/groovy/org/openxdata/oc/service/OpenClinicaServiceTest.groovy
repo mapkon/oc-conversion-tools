@@ -139,7 +139,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	
 	@Test public void testGetEventsReturnsCorrectNumberOfEvents() {
 		def returnedEvents = openClinicaService.getEvents("OID")
-		assertEquals 71, returnedEvents.size()
+		assertEquals 64, returnedEvents.size()
 	}
 	
 	@Test public void testGetEventsReturnsEventsWithSubjectKeys() {

@@ -272,7 +272,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			def studyEvents = client.findEventsByStudyOID("oid")
 			
-			assertEquals "The events should be 71", 71, studyEvents.children().size()
+			assertEquals "The events should be 64", 64, studyEvents.children().size()
 		}
 	}
 	

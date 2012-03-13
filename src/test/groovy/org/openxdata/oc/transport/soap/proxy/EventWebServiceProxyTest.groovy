@@ -55,7 +55,7 @@ class EventWebServiceProxyTest extends GroovyTestCase {
 		play {
 
 			def response = eventWebServiceProxy.findEventsByStudyOID('OID')
-			assertEquals "The events should 71", 71, response.children().size()
+			assertEquals "The events should 64", 64, response.children().size()
 		}
 	}
 
