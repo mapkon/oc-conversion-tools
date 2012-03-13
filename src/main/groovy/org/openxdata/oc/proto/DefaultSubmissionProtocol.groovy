@@ -1,8 +1,9 @@
 package org.openxdata.oc.proto
 
+import groovy.util.logging.Log
 import groovy.xml.StreamingMarkupBuilder
 
-
+@Log
 class DefaultSubmissionProtocol {
 
 	def instanceDataXml
@@ -51,6 +52,8 @@ class DefaultSubmissionProtocol {
 			}
 		}
 
+		log.info("Successfully converted from oxd-instance data to odm-instance data")
+		
 		return xml.toString()
 	}
 
