@@ -26,7 +26,7 @@ class ODMInstanceDataDefinition {
 			ocInstanceData = addSubjectData(instanceXml)
 		}
 
-		log.info("<<Successfully appended instance data to ODM file.>>")
+		log.info("Successfully converted from oxd-instance data to odm-instance data")
 		
 		return XmlUtil.asString(ocInstanceData)
 	}
