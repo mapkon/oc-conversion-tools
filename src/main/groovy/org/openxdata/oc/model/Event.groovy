@@ -2,6 +2,7 @@ package org.openxdata.oc.model
 
 class Event {
 
+	def name
 	def ordinal
 	def eventDefinitionOID
 
@@ -9,6 +10,7 @@ class Event {
 
 	def Event(def eventXml) {
 
+		name = eventXml.eventName.text()
 		ordinal = eventXml.ordinal.text()
 		eventDefinitionOID = eventXml.eventDefinitionOID.text()
 

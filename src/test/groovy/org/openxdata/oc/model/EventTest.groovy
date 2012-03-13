@@ -74,4 +74,12 @@ class EventTest {
 		
 		assertEquals "SS_3M9779A", subjects[2]
 	}
+	
+	@Test void testEventHasName() {
+		assertNotNull "Event name should not be null", event.name
+	}
+	
+	@Test void testEventHasCorrectName() {
+		assertEquals "Adverse Event Reporting", event.name
+	}
 }
