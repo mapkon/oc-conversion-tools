@@ -62,8 +62,8 @@ class DefaultSubmissionProtocolTest {
 
 	@Test void testCreateInstanceDataReturnXmlWithClinicalDataNodeHavingMetaVersionOIDAttribute() {
 
-		def metaVersionOIDAttribute = xml.ClinicalData
-		assertEquals 'v1.0.0', metaVersionOIDAttribute[0].@MetaDataVersionOID
+		def clinicalDataNode = xml.ClinicalData
+		assertEquals 'v1.0.0', clinicalDataNode[0].@MetaDataVersion
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithSubjectDataNode() {

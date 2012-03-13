@@ -24,7 +24,7 @@ class DefaultSubmissionProtocol {
 
 				ODM(Description:instanceDataXml.@Description, formKey:instanceDataXml.@formKey, name:instanceDataXml.@name) {
 
-					ClinicalData (StudyOID:instanceDataXml.@StudyOID, MetaDataVersionOID:instanceDataXml.@MetaDataVersionOID) {
+					ClinicalData (StudyOID:instanceDataXml.@StudyOID, MetaDataVersion:instanceDataXml.@MetaDataVersionOID) {
 
 						SubjectData(SubjectKey:subjectKey) {
 
