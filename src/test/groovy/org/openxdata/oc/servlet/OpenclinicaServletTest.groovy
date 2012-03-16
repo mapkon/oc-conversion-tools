@@ -68,6 +68,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def study = request.getAttribute('study')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertNotNull 'Study should not be null after successful Import', study
 	}
 
@@ -76,6 +79,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def message = request.getAttribute('message')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertEquals 'Successful Import', message
 	}
 	
@@ -84,6 +90,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def name = request.getAttribute('name')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertEquals 'Test Study', name
 	}
 
@@ -92,6 +101,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def key = request.getAttribute('key')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertEquals 'Test Key', key
 	}
 	
@@ -100,6 +112,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def convertedStudy = request.getAttribute('study')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertEquals 'Test Study', convertedStudy.getName()
 	}
 
@@ -108,6 +123,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def convertedStudy = request.getAttribute('study')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertEquals 1, convertedStudy.getForms().size()
 	}
 
@@ -116,6 +134,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def convertedStudy = request.getAttribute('study')
+		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertEquals 1, convertedStudy.getForm(0).getVersions().size()
 	}
 	
@@ -128,6 +149,8 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		FormDef form = convertedStudy.getForm("Test Form")
 		FormDefVersion version = form.getVersion("Test Version")
 		
+		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
+		
 		assertTrue version.getIsDefault()
 	}
 	
@@ -139,7 +162,8 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 		def message = request.getAttribute('message')
 
-
+		Mockito.verify(service).exportOpenClinicaStudyData()
+		
 		assertEquals 'No data to export. Collect Data and then export.', message
 	}
 	
@@ -152,8 +176,9 @@ class OpenclinicaServletTest extends GroovyTestCase {
 		servlet.doPost(request, response)
 
 		def message = request.getAttribute('message')
-
-
+		
+		Mockito.verify(service).exportOpenClinicaStudyData()
+		
 		assertEquals 'Success', message
 	}
 }
