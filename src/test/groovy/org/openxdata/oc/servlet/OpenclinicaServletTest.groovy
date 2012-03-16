@@ -27,7 +27,7 @@ class OpenclinicaServletTest extends GroovyTestCase {
 
 	@Mock OpenclinicaService service
 	@Mock OpenClinicaSoapClient client
-	@InjectMocks def servlet = new OpenclinicaServlet(openclinicaService:service)
+	@InjectMocks def servlet = new OpenclinicaServlet()
 
 	@Before void setUp() {
 
