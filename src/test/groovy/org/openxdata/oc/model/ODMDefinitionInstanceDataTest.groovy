@@ -28,12 +28,12 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 		assertEquals "v1.0.0", xml.ClinicalData.@MetaDataVersion[0]
 	}
 	
-	@Test void testAppendInstanceDataAppendsTheInstanceData(){
+	@Test void testAppendInstanceReturnsCorrectNumberOfItemDatas(){
 		
 		
 		def xml = new XmlParser().parseText(exportedInstanceData)
 		
-		assertEquals xml.depthFirst().ItemData.size(), 26
+		assertEquals "ItemData Nodes should equal number of child elements in the oxd instance data xml (including child elements of repeats)", 30, xml.depthFirst().ItemData.size()
 	}
 	
 	@Test void testAppendInstanceDataShouldThrowExceptionOnNullInstanceData(){

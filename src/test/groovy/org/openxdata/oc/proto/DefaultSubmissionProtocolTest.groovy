@@ -1,6 +1,7 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
+import groovy.xml.XmlUtil
 
 import org.junit.Before
 import org.junit.Test
@@ -117,6 +118,8 @@ class DefaultSubmissionProtocolTest {
 	}
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWith3ItemGroupDataNodes() {
+		
+		println XmlUtil.serialize(xml)
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
 		assertEquals 3, itemGroupDataNodes.size()
@@ -171,10 +174,11 @@ class DefaultSubmissionProtocolTest {
 		assertEquals 22, itemGroupDataNodes[1].children().size()
 	}
 	
-	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingThreeItemDataNodes() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingSevenItemDataNodes() {
+		
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
-		assertEquals 3, itemGroupDataNodes[2].children().size()
+		assertEquals 7, itemGroupDataNodes[2].children().size()
 	}
 	
 	@Test void testCreateInstanceDataReturnsXmlWithFormDataOIDEqualingFormKey() {
@@ -197,6 +201,26 @@ class DefaultSubmissionProtocolTest {
 		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
 		itemGroupDatas.each {
 			assertEquals "TransactionType Attribute should be Insert", "Insert", it.@TransactionType
+		}
+	}
+	
+	@Test void testCreateInstanceDataReturnsXmlWithItemGroupDataElementsHavingItemGroupRepeatKeyAttribute() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			
+			if(protocol.isRepeat(it.@ItemGroupOID) == true)
+				assertNotNull "ItemGroupRepeatKey Attribute should not be null", it.@ItemGroupRepeatKey
+		}
+	}
+	
+	@Test void testCreateInstanceDataReturnsXmlWithRepeatItemGroupDataHavingCorrectItemGroupRepeatKey() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			
+			if(protocol.isRepeat(it.@ItemGroupOID) == true)
+				assertEquals "ItemGroupRepeatKey Attribute should be 2", 2, Integer.valueOf(it.@ItemGroupRepeatKey)
 		}
 	}
 	

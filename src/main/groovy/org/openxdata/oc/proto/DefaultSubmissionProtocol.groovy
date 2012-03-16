@@ -30,14 +30,30 @@ class DefaultSubmissionProtocol {
 
 							FormData(FormOID:instanceDataXml.@formKey) {
 
-								itemGroupOIDS.each { itemGroupOID ->
+								itemGroupOIDS.eachWithIndex { itemGroupOID, idx ->
 
-									ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
+									def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
+									def node = instanceDataXml.children().find { it.name().equals(itemGroupOID) }
 
-										def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
-										itemDataNodes.each { itemData ->
+									if(isRepeat(node)) {
 
-											ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+
+										ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
+
+											itemDataNodes.each { itemData ->
+
+												ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+												}
+											}
+										}
+									}
+									else {
+										ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
+
+											itemDataNodes.each { itemData ->
+
+												ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+												}
 											}
 										}
 									}
@@ -46,6 +62,7 @@ class DefaultSubmissionProtocol {
 						}
 					}
 				}
+
 			}
 		}
 

@@ -21,6 +21,10 @@ class TestData {
 								  <IG_MSA2_MSA2_POARTPRECG>
 								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
 								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">3</xf:I_MSA2_MSA2_POARTNBV>
+								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Quinin</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">2</xf:I_MSA2_MSA2_POARTNBV>
+								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Panadol</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">4</xf:I_MSA2_MSA2_POARTNBV>
 								  </IG_MSA2_MSA2_POARTPRECG>
 								  <I_MSA2_INIT ItemGroupOID="IG_MSA2_UNGROUPED">CTK</I_MSA2_INIT>
 								  <I_MSA2_FROMD ItemGroupOID="IG_MSA2_UNGROUPED">2012-02-07</I_MSA2_FROMD>
