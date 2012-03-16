@@ -7,7 +7,7 @@ import groovy.xml.StreamingMarkupBuilder
 class DefaultSubmissionProtocol {
 
 	def instanceDataXml
-	
+
 	def createOpenClinicaInstanceData(def openXdataInstanceData) {
 
 		def xml
@@ -36,7 +36,6 @@ class DefaultSubmissionProtocol {
 									def node = instanceDataXml.children().find { it.name().equals(itemGroupOID) }
 
 									if(isRepeat(node)) {
-
 
 										ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
 
@@ -67,12 +66,12 @@ class DefaultSubmissionProtocol {
 		}
 
 		log.info("Successfully converted from oxd-instance data to odm-instance data")
-		
+
 		return xml.toString()
 	}
 
 	private def getSubjectKey() {
-		
+
 		return instanceDataXml.depthFirst().find { it.name().equals("SubjectKey")}.text()
 
 	}
@@ -105,12 +104,12 @@ class DefaultSubmissionProtocol {
 
 	private def getItemGroupOIDS() {
 
-		def itemGroupOIDS = [] as Set
-		
+		def itemGroupOIDS = []as Set
+
 		instanceDataXml.children().each {
-			
+
 			if(isRepeat(it)) {
-				
+
 				it.children().each { item ->
 					itemGroupOIDS.add(item.@ItemGroupOID.toString())
 				}
@@ -124,7 +123,7 @@ class DefaultSubmissionProtocol {
 
 		return itemGroupOIDS
 	}
-	
+
 	public boolean isRepeat(def item) {
 
 		if(item instanceof String) {
