@@ -128,7 +128,7 @@ class DefaultSubmissionProtocol {
 
 		if(item instanceof String) {
 
-			def node = instanceDataXml.children().find { it.name() == item }
+			def node = instanceDataXml.children().find { it.name().is(item) }
 
 			if(node.children() != null)
 				return node.children().size() > 0
