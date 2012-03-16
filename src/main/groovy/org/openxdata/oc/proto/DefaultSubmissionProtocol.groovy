@@ -15,7 +15,6 @@ class DefaultSubmissionProtocol {
 
 		def subjectKey = getSubjectKey()
 
-		//TODO: Add the ItemGroupRepeatKey attribute to repeating groups.
 		def itemGroupOIDS = getItemGroupOIDS()
 
 		xml = new StreamingMarkupBuilder().bind {
