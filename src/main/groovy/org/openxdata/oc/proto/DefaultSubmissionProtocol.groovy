@@ -56,8 +56,7 @@ class DefaultSubmissionProtocol {
 
 	private def getSubjectKey() {
 		
-		def subjectDataNode = instanceDataXml.depthFirst().find { it.name().equals("SubjectKey")}
-		return subjectDataNode.text()
+		return instanceDataXml.depthFirst().find { it.name().equals("SubjectKey")}.text()
 
 	}
 
