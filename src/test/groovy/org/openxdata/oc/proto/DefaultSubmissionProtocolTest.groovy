@@ -212,6 +212,7 @@ class DefaultSubmissionProtocolTest {
 		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
 	}
 	
+	
 	@Test void testIsRepeatReturnsTrueWhenNodeHasTwoChildren() {
 		
 		def xml = """<test><repeat><child></child></repeat></test>"""
@@ -220,11 +221,13 @@ class DefaultSubmissionProtocolTest {
 		assertTrue "Node is Repeat", protocol.isRepeat(node.repeat)
 	}
 	
+	
 	@Test void testIsRepeatReturnsFalseWhenNodeIsNotRepeat() {
 		
 		def xml = """<test></test>"""
 		assertFalse "Node is not Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
 	}
+	
 	
 	@Test void testIsRepeatReturnsFalseWhenNodeHasTwoChildren() {
 		
@@ -233,6 +236,7 @@ class DefaultSubmissionProtocolTest {
 		
 		assertFalse "Node is not Repeat", protocol.isRepeat(node.repeat.child)
 	}
+	
 	
 	def getItemDataNodes() {
 		def itemDataNodes = []

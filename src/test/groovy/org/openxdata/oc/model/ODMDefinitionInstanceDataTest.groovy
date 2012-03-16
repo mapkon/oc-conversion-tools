@@ -16,6 +16,7 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 	}
 	
 	@Test void testAppendInstanceDataShouldConvertedOpenXDataInstanceDataUsingCorrectProtocol(){
+		
 		def xml = new XmlParser().parseText(exportedInstanceData)
 		
 		assertNotNull xml
