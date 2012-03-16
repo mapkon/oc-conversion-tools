@@ -10,11 +10,11 @@ class DefaultSubmissionProtocolTest {
 
 	def xml
 	def instanceData
+	def protocol = new DefaultSubmissionProtocol()
 
 	@Before void setUp() {
 
-		def proto = new DefaultSubmissionProtocol()
-		instanceData = proto.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
+		instanceData = protocol.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
 
 		xml = new XmlParser().parseText(instanceData)
 	}
@@ -198,6 +198,40 @@ class DefaultSubmissionProtocolTest {
 		itemGroupDatas.each {
 			assertEquals "TransactionType Attribute should be Insert", "Insert", it.@TransactionType
 		}
+	}
+	
+	@Test void testIsRepeatReturnsTrueWhenNodeIsRepeat() {
+		
+		def xml = """<test><repeat></repeat></test>"""
+		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+	}
+	
+	@Test void testIsRepeatReturnsTrueWhenNodeWithTwoChildren() {
+		
+		def xml = """<test><repeat><child></child></repeat></test>"""
+		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+	}
+	
+	@Test void testIsRepeatReturnsTrueWhenNodeHasTwoChildren() {
+		
+		def xml = """<test><repeat><child></child></repeat></test>"""
+		def node = new XmlSlurper().parseText(xml)
+		
+		assertTrue "Node is Repeat", protocol.isRepeat(node.repeat)
+	}
+	
+	@Test void testIsRepeatReturnsFalseWhenNodeIsNotRepeat() {
+		
+		def xml = """<test></test>"""
+		assertFalse "Node is not Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+	}
+	
+	@Test void testIsRepeatReturnsFalseWhenNodeHasTwoChildren() {
+		
+		def xml = """<test><repeat><child></child></repeat></test>"""
+		def node = new XmlSlurper().parseText(xml)
+		
+		assertFalse "Node is not Repeat", protocol.isRepeat(node.repeat.child)
 	}
 	
 	def getItemDataNodes() {

@@ -66,7 +66,7 @@ class DefaultSubmissionProtocol {
 
 		instanceDataXml.children().each {
 
-			if(isItemGroupRepeat(it)) {
+			if(isRepeat(it)) {
 
 				it.children().each { item ->
 					if(item.@ItemGroupOID.equals(itemGroupOID)) {
@@ -92,7 +92,7 @@ class DefaultSubmissionProtocol {
 		
 		instanceDataXml.children().each {
 			
-			if(isItemGroupRepeat(it)) {
+			if(isRepeat(it)) {
 				
 				it.children().each { item ->
 					itemGroupOIDS.add(item.@ItemGroupOID.toString())
@@ -108,7 +108,17 @@ class DefaultSubmissionProtocol {
 		return itemGroupOIDS
 	}
 	
-	private def isItemGroupRepeat(def itemGroup) {
-		return itemGroup.children().size() > 0
+	public boolean isRepeat(def item) {
+
+		if(item instanceof String) {
+
+			def node = instanceDataXml.children().find { it.name() == item }
+
+			if(node.children() != null)
+				return node.children().size() > 0
+
+		}else {
+			return item.children().size() > 0
+		}
 	}
 }
