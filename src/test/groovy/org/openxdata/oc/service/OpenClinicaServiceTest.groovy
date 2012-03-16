@@ -97,14 +97,23 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		assertTrue(openClinicaService.hasStudyData(studyKey))
 
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
+		
 		String studyKey2 = studyService.getStudyKey(2)
+		
 		assertFalse(openClinicaService.hasStudyData(studyKey2))
+		
+		Mockito.verify(studyService, Mockito.atLeastOnce()).hasEditableData(Mockito.any(Editable.class))
 	}
 
 	@Test public void testExportDataShouldReturnSuccessMessage() {
 
 		String message = openClinicaService.exportOpenClinicaStudyData()
+		
 		assertEquals("Success", message)
+		
+		Mockito.verify(client).importData(Mockito.anyList())
+		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
+		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
 
 	@Test public void testExportDataShouldReturnMessageOnEmptyInstanceData() {
@@ -112,41 +121,70 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn([])
 		
 		String message = openClinicaService.exportOpenClinicaStudyData()
+		
 		assertEquals("No data items found to export.", message)
+		
+		Mockito.verify(client, Mockito.atLeast(0)).importData(Mockito.anyList())
+		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
+		Mockito.verify(dataExportService, Mockito.atLeast(0)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
 	
 	@Test public void testExportDataShouldShouldFailOnEmptyInstanceDataWithMessage() {
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Fail")
+		
 		String message = openClinicaService.exportOpenClinicaStudyData()
 		assertEquals("Fail", message)
+		
+		Mockito.verify(client).importData(Mockito.anyList())
+		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
+		Mockito.verify(dataExportService, Mockito.atLeast(0)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
 	
 	@Test public void testExportDataShouldSetFormDataWithOpenclinicaExportBitFlag() {
 		
 		openClinicaService.exportOpenClinicaStudyData()
 		
+		
 		formDataList.each {
 			
 			assertTrue "Should be marked as Exported with openclinica export bit flag", it.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		}
+		
+		Mockito.verify(client).importData(Mockito.anyList())
+		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
+		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
+		
 	}
 	
 	@Test public void testGetEventsDoesNotReturnNull() {
+		
 		def returnedEvents = openClinicaService.getEvents("OID")
+		
+		Mockito.verify(client).findEventsByStudyOID(Mockito.anyString())
+		
 		assertNotNull returnedEvents
 	}
 	
 	@Test public void testGetEventsReturnsCorrectNumberOfEvents() {
+		
 		def returnedEvents = openClinicaService.getEvents("OID")
+		
+		Mockito.verify(client).findEventsByStudyOID(Mockito.anyString())
+		
 		assertEquals 64, returnedEvents.size()
 	}
 	
 	@Test public void testGetEventsReturnsEventsWithSubjectKeys() {
+		
 		def returnedEvents = openClinicaService.getEvents("OID")
+		
 		returnedEvents.each {
+			
 			assertTrue "Each event should have at least one subject attached", it.getSubjectKeys().size() >= 1
 		}
+		
+		Mockito.verify(client, Mockito.atLeastOnce()).findEventsByStudyOID(Mockito.anyString())
+		
 	}
-
 }
