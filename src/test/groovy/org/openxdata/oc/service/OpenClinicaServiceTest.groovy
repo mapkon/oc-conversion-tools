@@ -12,7 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 import org.openxdata.oc.data.TestData
-import org.openxdata.oc.service.impl.OpenclinicaServiceImpl
+import org.openxdata.oc.service.impl.OpenClinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
@@ -34,7 +34,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	@Mock private StudyManagerService studyService
 	@Mock private DataExportService dataExportService
 	
-	@InjectMocks private def openClinicaService = new OpenclinicaServiceImpl()
+	@InjectMocks private def openClinicaService = new OpenClinicaServiceImpl()
 
 	@Before public void setUp() throws Exception {
 

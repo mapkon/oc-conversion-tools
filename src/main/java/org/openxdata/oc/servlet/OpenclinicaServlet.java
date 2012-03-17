@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.openxdata.oc.exception.ImportException;
-import org.openxdata.oc.service.OpenclinicaService;
-import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.oc.service.OpenClinicaService;
+import org.openxdata.oc.service.impl.OpenClinicaServiceImpl;
 import org.openxdata.oc.util.TransformUtil;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class OpenclinicaServlet extends HttpServlet {
+public class OpenClinicaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6577932874016086164L;
 		
@@ -45,10 +45,10 @@ public class OpenclinicaServlet extends HttpServlet {
 	private Properties props = new Properties();
 	
 	private DataExportService dataExportService;
-	private OpenclinicaService openclinicaService;
+	private OpenClinicaService openclinicaService;
 	private AuthenticationService authenticationService;
 	
-	private final Logger log = LoggerFactory.getLogger(OpenclinicaServlet.class);
+	private final Logger log = LoggerFactory.getLogger(OpenClinicaServlet.class);
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -65,7 +65,7 @@ public class OpenclinicaServlet extends HttpServlet {
 		
     	props = loadProperties();
     	
-		openclinicaService = new OpenclinicaServiceImpl(props);
+		openclinicaService = new OpenClinicaServiceImpl(props);
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);

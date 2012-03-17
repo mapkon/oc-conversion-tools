@@ -10,7 +10,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 import org.openxdata.oc.data.TestData
-import org.openxdata.oc.service.OpenclinicaService
+import org.openxdata.oc.service.OpenClinicaService
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.FormDefVersion
@@ -20,14 +20,14 @@ import org.springframework.mock.web.MockHttpServletResponse
 
 
 @RunWith(MockitoJUnitRunner.class)
-class OpenclinicaServletTest extends GroovyTestCase {
+class OpenClinicaServletTest extends GroovyTestCase {
 
 	def request
 	def response
 
-	@Mock OpenclinicaService service
+	@Mock OpenClinicaService service
 	@Mock OpenClinicaSoapClient client
-	@InjectMocks def servlet = new OpenclinicaServlet()
+	@InjectMocks def servlet = new OpenClinicaServlet()
 
 	@Before void setUp() {
 

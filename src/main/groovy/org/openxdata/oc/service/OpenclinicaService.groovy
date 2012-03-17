@@ -9,7 +9,7 @@ import org.openxdata.server.service.DataExportService
 import org.openxdata.server.service.FormService
 import org.openxdata.server.service.StudyManagerService
 
-public interface OpenclinicaService {
+public interface OpenClinicaService {
 
 	Boolean hasStudyData(String studyKey)
 		
