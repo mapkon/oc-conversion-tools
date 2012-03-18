@@ -22,6 +22,20 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 		assertNotNull xml
 	}
 	
+	@Test void testAppendInstacenDataReturnsXmlWithODMAsRootElement() {
+		
+		def xml = new XmlParser().parseText(exportedInstanceData)
+		
+		assertEquals "Root should be ODM", "ODM", xml.name()
+	}
+	
+	@Test void testAppendInstacenDataReturnsXmlWithClinicalDataElement() {
+		
+		def xml = new XmlParser().parseText(exportedInstanceData)
+		
+		assertEquals "Second Node should be ClinicalData", "ClinicalData", xml.children()[0].name()
+	}
+	
 	@Test void testInstanceDataHasMetaDataVersionOID() {
 		
 		def xml = new XmlParser().parseText(exportedInstanceData)
