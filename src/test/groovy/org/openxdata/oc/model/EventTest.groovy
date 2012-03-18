@@ -35,13 +35,20 @@ class EventTest {
 		assertEquals "SE_ADVERSEE", event.eventDefinitionOID
 	}
 
+	@Test void testThatEventHasAFormOIDList() {
+		
+		def formOIDs = event.getFormOIDs()
+		
+		assertEquals 1, formOIDs.size()
+	}
+	
 	@Test void testNewEventHasFormOID() {
 
-		assertNotNull "Event Should Have a FormOID", event.formOID
+		assertNotNull "Event Should Have a FormOID", event.getFormOIDs()[0]
 	}
 
 	@Test void testNewEventHasCorrectFormOID() {
-		assertEquals "F_AEAD_3", event.formOID
+		assertEquals "F_AEAD_3", event.getFormOIDs()[0]
 	}
 	
 	@Test void testNewEventHasSubjectKeys() {
@@ -66,5 +73,13 @@ class EventTest {
 		def subjects = event.getSubjectKeys()
 		
 		assertEquals "SS_3M9779A", subjects[2]
+	}
+	
+	@Test void testEventHasName() {
+		assertNotNull "Event name should not be null", event.name
+	}
+	
+	@Test void testEventHasCorrectName() {
+		assertEquals "Adverse Event Reporting", event.name
 	}
 }

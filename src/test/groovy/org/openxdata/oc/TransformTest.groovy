@@ -60,7 +60,7 @@ class TransformTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 49, binds.size()
+		assertEquals 51, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -229,6 +229,48 @@ class TransformTest extends GroovyTestCase {
 			
 			def subjectGroup = it.depthFirst().find { it.@id == '1'}
 			assertEquals "Subject key", subjectGroup.children()[0].text()
+		}
+	}
+	
+	@Test void testConvertedXformShouldHaveRepeatItems() {
+		
+		def repeats = getRepeats()
+		
+		assertEquals 4, repeats.size()
+	}
+	
+	@Test void testConvertedXformHasInnerGroupWhenThereIsARepeat() {
+		
+		def form = convertedXform.form.find {
+			it.@description.toString().equals("F_MSA2_1")
+		}
+		
+		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
+		def group = xformNode.group.find {it.@id == "3"}
+		
+		assertEquals "group", group.children()[1].name()
+	}
+	
+	@Test void testConvertedXformHasRepeatInGroupWithId3() {
+		
+		def form = convertedXform.form.find {
+			it.@description.toString().equals("F_MSA2_1")
+		}
+		
+		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
+		def group = xformNode.group.find {it.@id == "3"}
+		
+		assertEquals "repeat", group.children()[1].children()[1].name()
+	}
+	
+	def getRepeats() {
+		
+		def repeats = []
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			def rpt = it.depthFirst().findAll{ it.name().toString() == 'repeat'}
+			repeats.addAll(rpt)
 		}
 	}
 	

@@ -2,16 +2,16 @@ package org.openxdata.oc.model
 
 class Event {
 
+	def name
 	def ordinal
-	def formOID
 	def eventDefinitionOID
 
 	def eventXml
 
 	def Event(def eventXml) {
 
+		name = eventXml.eventName.text()
 		ordinal = eventXml.ordinal.text()
-		formOID = eventXml.formOID.text()
 		eventDefinitionOID = eventXml.eventDefinitionOID.text()
 
 		this.eventXml = eventXml
@@ -26,5 +26,16 @@ class Event {
 		subjectKeys = keys.split()
 
 		return subjectKeys
+	}
+	
+	def getFormOIDs() {
+		
+		def formOIDs = []
+		
+		def oids = eventXml.formOID.text()
+		
+		formOIDs = oids.split()
+		
+		return formOIDs
 	}
 }

@@ -1,6 +1,7 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
+import groovy.xml.XmlUtil
 
 import org.junit.Before
 import org.junit.Test
@@ -10,11 +11,11 @@ class DefaultSubmissionProtocolTest {
 
 	def xml
 	def instanceData
+	def protocol = new DefaultSubmissionProtocol()
 
 	@Before void setUp() {
 
-		def proto = new DefaultSubmissionProtocol()
-		instanceData = proto.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
+		instanceData = protocol.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
 
 		xml = new XmlParser().parseText(instanceData)
 	}
@@ -62,8 +63,8 @@ class DefaultSubmissionProtocolTest {
 
 	@Test void testCreateInstanceDataReturnXmlWithClinicalDataNodeHavingMetaVersionOIDAttribute() {
 
-		def metaVersionOIDAttribute = xml.ClinicalData
-		assertEquals 'v1.0.0', metaVersionOIDAttribute[0].@MetaDataVersionOID
+		def clinicalDataNode = xml.ClinicalData
+		assertEquals 'v1.0.0', clinicalDataNode[0].@MetaDataVersion
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithSubjectDataNode() {
@@ -117,6 +118,8 @@ class DefaultSubmissionProtocolTest {
 	}
 	
 	@Test void testCreateInstanceDataReturnsValidXmlWith3ItemGroupDataNodes() {
+		
+		println XmlUtil.serialize(xml)
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
 		assertEquals 3, itemGroupDataNodes.size()
@@ -171,10 +174,11 @@ class DefaultSubmissionProtocolTest {
 		assertEquals 22, itemGroupDataNodes[1].children().size()
 	}
 	
-	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingThreeItemDataNodes() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingSevenItemDataNodes() {
+		
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 		
-		assertEquals 3, itemGroupDataNodes[2].children().size()
+		assertEquals 7, itemGroupDataNodes[2].children().size()
 	}
 	
 	@Test void testCreateInstanceDataReturnsXmlWithFormDataOIDEqualingFormKey() {
@@ -183,6 +187,80 @@ class DefaultSubmissionProtocolTest {
 		
 		assertEquals formOID.@FormOID, xml.@formKey
 	}
+	
+	@Test void testCreateInstanceDataReturnsXmlWithItemGroupDataElementsHavingTransactionTyeAttribute() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			assertNotNull "TransactionType Attribute should not be null", it.@TransactionType
+		}
+	}
+	
+	@Test void testCreateInstanceReturnsXmlWithItemGroupDataElementsHavingTransactionTypeAttributeEqualsToInsert() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			assertEquals "TransactionType Attribute should be Insert", "Insert", it.@TransactionType
+		}
+	}
+	
+	@Test void testCreateInstanceDataReturnsXmlWithItemGroupDataElementsHavingItemGroupRepeatKeyAttribute() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			
+			if(protocol.isRepeat(it.@ItemGroupOID) == true)
+				assertNotNull "ItemGroupRepeatKey Attribute should not be null", it.@ItemGroupRepeatKey
+		}
+	}
+	
+	@Test void testCreateInstanceDataReturnsXmlWithRepeatItemGroupDataHavingCorrectItemGroupRepeatKey() {
+		
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+		itemGroupDatas.each {
+			
+			if(protocol.isRepeat(it.@ItemGroupOID) == true)
+				assertEquals "ItemGroupRepeatKey Attribute should be 2", 2, Integer.valueOf(it.@ItemGroupRepeatKey)
+		}
+	}
+	
+	@Test void testIsRepeatReturnsTrueWhenNodeIsRepeat() {
+		
+		def xml = """<test><repeat></repeat></test>"""
+		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+	}
+	
+	@Test void testIsRepeatReturnsTrueWhenNodeWithTwoChildren() {
+		
+		def xml = """<test><repeat><child></child></repeat></test>"""
+		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+	}
+	
+	
+	@Test void testIsRepeatReturnsTrueWhenNodeHasTwoChildren() {
+		
+		def xml = """<test><repeat><child></child></repeat></test>"""
+		def node = new XmlSlurper().parseText(xml)
+		
+		assertTrue "Node is Repeat", protocol.isRepeat(node.repeat)
+	}
+	
+	
+	@Test void testIsRepeatReturnsFalseWhenNodeIsNotRepeat() {
+		
+		def xml = """<test></test>"""
+		assertFalse "Node is not Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+	}
+	
+	
+	@Test void testIsRepeatReturnsFalseWhenNodeHasTwoChildren() {
+		
+		def xml = """<test><repeat><child></child></repeat></test>"""
+		def node = new XmlSlurper().parseText(xml)
+		
+		assertFalse "Node is not Repeat", protocol.isRepeat(node.repeat.child)
+	}
+	
 	
 	def getItemDataNodes() {
 		def itemDataNodes = []
