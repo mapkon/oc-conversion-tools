@@ -151,17 +151,23 @@ public class OpenClinicaServlet extends HttpServlet {
 	    	request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
 	    	
 		}catch (Exception ex) {
+			
 			log.error(ex.getLocalizedMessage());
-	    	try {
-	    		
-	    		request.setAttribute("message", ex.getLocalizedMessage());
-				response.sendRedirect(JSP_LOCATION);
-				
-			} catch (IOException e) {
-				log.error(ex.getLocalizedMessage());
-			}
+			request.setAttribute("message", ex.getLocalizedMessage());
+			
+	    	redirectToOpenClinicaPage(request, response);
 		}
     }
+
+	private void redirectToOpenClinicaPage(HttpServletRequest request,HttpServletResponse response) {
+		try {
+			
+			response.sendRedirect(JSP_LOCATION);
+			
+		} catch (IOException ex) {
+			log.error(ex.getLocalizedMessage());
+		}
+	}
 	
 	private User authenticate() {
 		
