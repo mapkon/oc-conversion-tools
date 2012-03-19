@@ -335,7 +335,7 @@ class TransformTest extends GroovyTestCase {
 			def form = convertedXform.form.find { it.@description == formDef.@OID }
 			def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 			
-			def formBinds = xformNode.depthFirst().findAll{ it.name().toString() == 'bind'}
+			def formBinds = xformNode.depthFirst().findAll{ it.name() == 'bind'}
 			formBinds.each {
 				binds.add(it.@id)
 			}
@@ -345,11 +345,13 @@ class TransformTest extends GroovyTestCase {
 	}
 	
 	def getBind(def itemOID) {
-		
+
 		def bind
 		def binds = getBinds()
+		
 		binds.each {
-			if(it.toString() == itemOID) {
+
+			if(it.@id == itemOID) {
 				bind = it
 			}
 		}
