@@ -125,6 +125,10 @@
 							<xsl:call-template name="determineBindQuestionType">
 								<xsl:with-param name="itemDef" select="../../odm:ItemDef[@OID=@ItemOID]" />
 							</xsl:call-template>
+							
+							<xsl:if test="./Mandatory = 'Yes'">
+								<xsl:attribute name="required">true()</xsl:attribute>
+							</xsl:if>
 						</bind>
 					</xsl:for-each>
 				</xsl:when>
@@ -149,6 +153,10 @@
 				<xsl:call-template name="determineBindQuestionType">
 					<xsl:with-param name="itemDef" select="$itemDef" />
 				</xsl:call-template>
+				
+				<xsl:if test="./@Mandatory = 'Yes'">
+					<xsl:attribute name="required">true()</xsl:attribute>
+				</xsl:if>
 			</bind>
 		</xsl:for-each>
 	</xsl:template>

@@ -274,6 +274,30 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testThatThereAreEqualNumberOfRequiredBindsAsMandatoryItemRefsInODM() {
+		
+		def requiredQtns = getRequiredQuestions()
+		
+		assertEquals "Required questions should equals Mandatory questions in ODM file.", 36, requiredQtns.size()
+
+	}
+	
+	def getRequiredQuestions() {
+
+		def qtns = []
+
+		getXformNodes().each {
+			
+			def binds = it.model.bind.each {
+				if(it.@required.equals("true()")) {
+					qtns.add(it)
+				}
+			}
+		}
+		
+		return qtns
+	}
+	
 	def getRepeats() {
 		
 		def repeats = []
