@@ -23,13 +23,6 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 
 	}
 
-	@Test void testImportShouldFailOnEmptyInstanceData(){
-
-		shouldFail(ImportException){
-			def message = importProxy.importData([])
-		}
-	}
-
 	@Test void testGetEnvelopeHasCorrectDataPath(){
 
 		def envelope = importProxy.getSoapEnvelope()
@@ -39,6 +32,13 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 		def namespaceList = envelopeXml.'**'.collect { it.namespaceURI() }.unique()
 
 		assertEquals actual, namespaceList[2].toString()
+	}
+	
+	@Test void testImportShouldFailOnEmptyInstanceData(){
+
+		shouldFail(ImportException){
+			def message = importProxy.importData([])
+		}
 	}
 
 	@Test void testImportShouldNotReturnNull(){
