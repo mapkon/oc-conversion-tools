@@ -102,7 +102,7 @@
 
 	<xsl:template name="createBinds">
 	
-		<bind id="subjectKeyBind" nodeset="/ODM/SubjectKey" type="xsd:string"></bind>
+		<bind id="subjectKeyBind" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()"></bind>
 		
 		<xsl:for-each select="odm:ItemGroupRef">
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />

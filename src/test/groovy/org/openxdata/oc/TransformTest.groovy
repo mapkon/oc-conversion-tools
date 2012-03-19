@@ -263,6 +263,17 @@ class TransformTest extends GroovyTestCase {
 		assertEquals "repeat", group.children()[1].children()[1].name()
 	}
 	
+	@Test void testThatConvertedXmlHasSubjectKeySetToRequired() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def subjectKeyBind = it.model.bind.find{ it.@id.equals("subjectKeyBind")}
+			assertEquals "SubjectKey should be required", "true()", subjectKeyBind.@required.text()
+		}
+	}
+	
 	def getRepeats() {
 		
 		def repeats = []
