@@ -18,7 +18,7 @@ class HttpTransportHandler {
 
 		def is = readStream()
 
-		return parseSoapXml(is.text)
+		return new XmlParser().parseText(is.text)
 	}
 
 	private def readStream() {
@@ -56,37 +56,5 @@ class HttpTransportHandler {
 		def bytes = envelope.getBytes()
 		def outputStream = connection.getOutputStream()
 		outputStream.write(bytes)
-	}
-
-	private def parseSoapXml(def response){
-
-		def validXml
-
-		if(response.startsWith("--") && response.endsWith("--")){
-			validXml = cleanXML(response)
-		}
-		else{
-			validXml = response
-		}
-
-		return new XmlParser().parseText(validXml)
-	}
-
-	private String cleanXML(def response) {
-		
-		def validXml
-		
-		log.info("Parsing returned XML to remove characters not allowed in prolong.")
-
-		def beginIndex = response.indexOf("""<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">""")
-		def endIndex = response.indexOf("</SOAP-ENV:Envelope>")
-
-		validXml = response.substring(beginIndex, endIndex)
-		validXml = buildSoapResponseXML(validXml)
-		return validXml
-	}
-
-	private def buildSoapResponseXML(def validXML) {
-		"${validXML}</SOAP-ENV:Envelope>"
 	}
 }
