@@ -7,6 +7,7 @@ package org.openxdata.oc.servlet;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.openxdata.oc.model.Event;
@@ -57,28 +58,33 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 		List<Event> events = ocService.getEvents("S_DEFAULTS1");
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		StudyDef oCStudyID = getOCStudyID();
-		if (oCStudyID == null)
+		if (oCStudyID == null) {
 			return workitems;
+		}
 		for (Event event : events) {
 			Object[] workitem = new Object[5];
 
 			List<Object[]> formReferences = new ArrayList<Object[]>();
-			FormDef formDef = getFormByDescription(oCStudyID, event
-					.getFormOID().toString());
-			if (formDef == null)
-				continue;
-			String[] subjectKeys = (String[]) event.getSubjectKeys();
-			for (String string : subjectKeys) {
-				Object[] frmRfrnc = new Object[3];
-				frmRfrnc[0] = oCStudyID.getId();
-				frmRfrnc[1] = formDef.getDefaultVersion().getId();
-				List<String[]> prefills = new ArrayList<String[]>();
-				prefills.add(new String[] { "SubjectKey_", "SubjectKey",
-						string, "false" });
-				frmRfrnc[2] = prefills;
-				formReferences.add(frmRfrnc);
+			List<String> formOIDs = (List) event.getFormOIDs();
+
+			for (String formOID : formOIDs) {
+				FormDef formDef = getFormByDescription(oCStudyID, formOID);
+				if (formDef == null) {
+					continue;
+				}
+				String[] subjectKeys = (String[]) event.getSubjectKeys();
+				for (String string : subjectKeys) {
+					Object[] frmRfrnc = new Object[3];
+					frmRfrnc[0] = oCStudyID.getId();
+					frmRfrnc[1] = formDef.getDefaultVersion().getId();
+					List<String[]> prefills = new ArrayList<String[]>();
+					prefills.add(new String[] { "SubjectKey_", "SubjectKey",
+							string, "false" });
+					frmRfrnc[2] = prefills;
+					formReferences.add(frmRfrnc);
+				}
 			}
-			workitem[0] = event.getFormOID();
+			workitem[0] = event.getName().toString();
 			workitem[1] = getKey(event);
 			workitem[2] = formReferences;
 			workitems.add(workitem);
@@ -91,7 +97,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 	}
 
 	private String getKey(Event event) {
-		String key = event.getFormOID() + "-";
+		String key = event.getFormOIDs().toString() + "-";
 		Object[] subjectKeys = (Object[]) event.getSubjectKeys();
 		for (int i = 0; i < subjectKeys.length; i++) {
 			Object object = subjectKeys[i];
@@ -113,10 +119,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 	private FormDef getFormByDescription(StudyDef def, String description) {
 		List<FormDef> forms = def.getForms();
 		for (FormDef formDef1 : forms) {
-			if (formDef1.getDescription().equalsIgnoreCase(description))
+			if (formDef1.getDescription().equalsIgnoreCase(description)) {
 				return formDef1;
+			}
 		}
 		return null;
 	}
-
 }
