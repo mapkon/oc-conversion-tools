@@ -9,6 +9,7 @@ import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
 import org.openxdata.oc.transport.soap.proxy.EventWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
+import org.openxdata.server.admin.model.FormData
 
 
 @Log
@@ -44,7 +45,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public String importData(List<String> instanceData){
+	public String importData(List<FormData> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData)

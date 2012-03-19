@@ -10,6 +10,7 @@ import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.util.PropertiesUtil
+import org.openxdata.server.admin.model.FormData
 
 
 @WithGMock
@@ -194,7 +195,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatImportDataReturnsSuccessResponseOnCorrectODMFormat(){
+	@Test void testThatImportDataDoesNotReturnNull(){
 		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
 		play{
@@ -202,9 +203,22 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
-			def reponse = client.importData(TestData.getOpenXdataInstanceData())
+			def reponse = client.importData(TestData.getInstanceData())
 			
 			assertNotNull reponse
+		}
+	}
+	
+	@Test void testThatSuccessfulImportReturnsCorrectMessage() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
+		play{
+			
+			def client = new OpenClinicaSoapClientImpl(props)
+			client.setConnectionFactory(connectionFactory)
+			
+			def reponse = client.importData(TestData.getInstanceData())
+			
 			assertEquals 'Success', reponse
 		}
 	}
@@ -218,7 +232,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 				def client = new OpenClinicaSoapClientImpl(props)
 				client.setConnectionFactory(connectionFactory)
 				
-				def reponse = client.importData(TestData.getOpenXdataInstanceData())
+				def reponse = client.importData([])
 			}
 		}
 	}
@@ -279,15 +293,15 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)
-		connection.setRequestMethod("POST")
-		connection.setRequestProperty("Content-Type", "text/xml")
-		connection.setRequestProperty("Content-Length", is(instanceOf(String.class)))
-		connection.setDoOutput(true)
+		connection.setRequestMethod("POST").atMostOnce()
+		connection.setRequestProperty("Content-Type", "text/xml").atMostOnce()
+		connection.setRequestProperty("Content-Length", is(instanceOf(String.class))).atMostOnce()
+		connection.setDoOutput(true).atMostOnce()
 		connection.getURL().returns("mock url").atMostOnce()
 
 		def outputStream = new ByteArrayOutputStream()
-		connection.getOutputStream().returns(outputStream)
-		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
+		connection.getOutputStream().returns(outputStream).atMostOnce()
+		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes())).atMostOnce()
 		
 		def connectionFactory = mock(ConnectionFactory.class)
 		

@@ -1,7 +1,10 @@
 package org.openxdata.oc.data
 
+import java.util.List
+
 import org.junit.Ignore
 import org.openxdata.oc.util.TransformUtil
+import org.openxdata.server.admin.model.FormData
 
 
 @Ignore("Some maven installations will attempt to run this as a test")
@@ -14,8 +17,7 @@ class TestData {
 	
 	static def getOpenXdataInstanceData() {
 		
-		def instanceData = []
-		def oxdInstanceData = '''
+		def instanceData = '''
 								<ODM StudyOID="S_12175" MetaDataVersionOID="v1.0.0" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="F_MSA2_1" name="SC2" StudyEventOID="SE_SC2" id="7" xmlns:xf="http://www.w3.org/2002/xforms">
 								  <SubjectKey>Foo_Key</SubjectKey>
 								  <IG_MSA2_MSA2_POARTPRECG>
@@ -51,14 +53,22 @@ class TestData {
 								  <I_MSA2_MSA2_L3TCNB2 ItemGroupOID="IG_MSA2_UNGROUPED_2">4</I_MSA2_MSA2_L3TCNB2>
 								  <I_MSA2_MSA2_HAART_T ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">0</I_MSA2_MSA2_HAART_T>
 
-								</ODM>
-								 '''
+								</ODM>'''
 		
-		instanceData.add(oxdInstanceData)
-
 		return instanceData
 	}
 
+	static List<FormData> getInstanceData() {
+		
+		def formData = new FormData()
+		formData.setData(TestData.getOpenXdataInstanceData())
+
+		def instanceDataList = []
+		instanceDataList.add(formData)
+		
+		return instanceDataList
+	}
+	
 	static def event1Xml = """<event>
 								<studySubjectOIDs>SS_20100200 SS_2M89098L SS_3M9779A</studySubjectOIDs>
 								<formOID>F_AEAD_3</formOID>

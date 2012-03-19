@@ -125,7 +125,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		return exportResponseMessage
 	}
 
-	private String buildResponseMessage(List dataList) {
+	private String buildResponseMessage(List<FormData> dataList) {
 		
 		def exportResponseMessage
 		
@@ -143,7 +143,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		return exportResponseMessage
 	}
 
-	private updateExportedDataItems(List dataList) {
+	private updateExportedDataItems(List<FormData> dataList) {
 		
 		dataList.each {
 
