@@ -18,13 +18,13 @@ class Event {
 		this.eventXml = eventXml
 	}
 	
-	def getFormOIDs() {
+	List<String> getFormOIDs() {
 		
 		def formOIDs = []
 		
-		def oids = eventXml.formOID.text()
-		
-		formOIDs = oids.split()
+		def oids = eventXml.formOIDs.formOID.each {
+			formOIDs.add(it.text())
+		}
 		
 		return formOIDs
 	}
