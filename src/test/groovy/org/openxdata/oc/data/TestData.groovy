@@ -69,6 +69,11 @@ class TestData {
 		return instanceDataList
 	}
 	
+	static def getSubjectEvents() {
+		
+		def events = new TransformUtil().loadFileContents("subject-event-response.xml")
+	}
+	
 	static def event1Xml = """<event>
 								<studySubjectOIDs>SS_20100200 SS_2M89098L SS_3M9779A</studySubjectOIDs>
 								<formOID>F_AEAD_3</formOID>

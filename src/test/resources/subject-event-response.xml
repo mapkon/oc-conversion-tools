@@ -1,0 +1,1752 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header />
+	<SOAP-ENV:Body>
+		<findStudySubjectEventsByStudyOidResponse
+			xmlns="http://openclinica.org/ws/event/v1">
+			<result>Success</result>
+			<studySubjects>
+				<studySubject>
+					<studySubjectOID>SS_000A</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-28 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_2072</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-20 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_6999</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M9999X</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-03 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M1234A</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-02-28 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CEAC_4</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0003Z</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-28 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MBA1_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-05 00:00</startDate>
+							<endDate>2010-04-15 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_3931</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M0003B</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2009-12-18 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CSDI_1</formOID>
+								<formOID>F_MBA1_1</formOID>
+								<formOID>F_MEAM_2</formOID>
+								<formOID>F_CCAC_2</formOID>
+								<formOID>F_CEAC_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_IMMUNISA</eventDefinitionOID>
+							<eventName>Immunisation Visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-14 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CILC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-01 00:00</startDate>
+							<endDate>2010-02-08 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-11-25 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-22 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CBLC_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0003T</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-25 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_3197</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_1M0059F</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-08 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CCAC_1</formOID>
+								<formOID>F_CCMC_1</formOID>
+								<formOID>F_CSDI_1</formOID>
+								<formOID>F_MHIV_1</formOID>
+								<formOID>F_MMLM_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-04 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MHIV_1</formOID>
+								<formOID>F_MLLM_1</formOID>
+								<formOID>F_MSA1_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-09 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_0003</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-09 00:00</startDate>
+							<endDate>2010-09-09 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_0004</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-13 00:00</startDate>
+							<endDate>2010-09-13 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-17 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_0001</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-09 00:00</startDate>
+							<endDate>2010-09-09 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_0002</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-09 00:00</startDate>
+							<endDate>2010-09-09 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3R1020L</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-12 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MMLM_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-04 00:00</startDate>
+							<endDate>2010-02-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M5678B</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-06 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CCMC_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_FINALSTA</eventDefinitionOID>
+							<eventName>Final Status</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-09-20 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CFSC_1</formOID>
+								<formOID>F_BC_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0032G</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_W14</eventDefinitionOID>
+							<eventName>W14</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-21 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M1013Q</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2009-12-17 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M1004B</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-01-07 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-30 00:00</startDate>
+							<endDate>2011-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_1</formOID>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CSAC_2</formOID>
+								<formOID>F_CLLC_4</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_5664</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-28 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_5678</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-13 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_2350</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-22 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M4651E</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-02-28 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_00120</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-09 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_5589</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+							<eventName>Intercurrent visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-23 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MHIV_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-15 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M00022F</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_BOTTLE</eventDefinitionOID>
+							<eventName>Bottle</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-09-20 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_BC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-07 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_2M0230K</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-22 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CCAC_1</formOID>
+								<formOID>F_CEAC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-29 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-22 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CLLC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W50</eventDefinitionOID>
+							<eventName>W50</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-22 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_5</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_3638</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-07 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_M20002Y</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-19 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MMLM_2</formOID>
+								<formOID>F_CCMC_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_CSDI_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_M001</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-06 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CSDC_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_9575</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-11 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_8245</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-13 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_6947</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-22 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-07 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_4364</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3C0006S</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-26 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_007</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-06 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_2M89098L</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+							<eventName>Adverse Event Reporting</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-07-12 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_AEAD_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-07-12 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CCMC_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M1014M</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2009-12-29 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0061H</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_W6</eventDefinitionOID>
+							<eventName>W6</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-11-01 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CMIC_1</formOID>
+								<formOID>F_CBLC_2</formOID>
+								<formOID>F_CLLC_4</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3C000LM</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+							<eventName>Adverse Event Reporting</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-02-24 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_SAES_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-04 00:00</startDate>
+							<endDate>2010-02-08 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-05 00:00</startDate>
+							<endDate>2010-02-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CSAC_1</formOID>
+								<formOID>F_MSA2_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0051T</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-08 00:00</startDate>
+							<endDate>2010-04-08 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0004F</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-26 00:00</startDate>
+							<endDate>2010-04-15 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-13 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_9269</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_2465</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M1012W</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2009-12-10 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MHIV_1</formOID>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M9779A</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-03-01 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MMLM_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+							<eventName>Intercurrent visit</eventName>
+							<ordinal>2</ordinal>
+							<startDate>2011-03-01 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CCMC_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0020P</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-25 00:00</startDate>
+							<endDate>2010-03-30 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_8076</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_IMMUNISA</eventDefinitionOID>
+							<eventName>Immunisation Visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-10 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CILC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-15 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_9805</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-12 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_6935</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+							<eventName>Intercurrent visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-23 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MHIV_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-14 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3COO50M</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-08 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0011Q</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-02-28 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_5457</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+							<eventName>Intercurrent visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-10 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CMIC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-15 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_4960</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-28 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-08 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0001B</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+							<eventName>Adverse Event Reporting</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-02-24 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_SAES_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-22 00:00</startDate>
+							<endDate>2010-02-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CEAC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-04 00:00</startDate>
+							<endDate>2010-02-08 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-02-22 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CSDC_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_336</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-29 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_5643</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-08 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MBA1_1</formOID>
+								<formOID>F_MEAM_2</formOID>
+								<formOID>F_MMLM_2</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_CCMC_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CCAC_2</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_CEAC_4</formOID>
+								<formOID>F_CSDI_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-01 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-04 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W10</eventDefinitionOID>
+							<eventName>W10</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-07 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MBA1_1</formOID>
+								<formOID>F_CCAC_2</formOID>
+								<formOID>F_CBLC_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-14 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0005L</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-26 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-26 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_1</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_9838</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-07 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0002T</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-25 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_8693</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-07 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0050M</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-08 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_5306</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-30 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3C0052A</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-08 00:00</startDate>
+							<endDate>2011-05-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_6288</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-06 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0016S</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-03-16 00:00</startDate>
+							<endDate>2010-03-22 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_2</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
+							<eventName>Adverse Event Reporting</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-12-10 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_AEAD_3</formOID>
+								<formOID>F_AEAD_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-13 00:00</startDate>
+							<endDate>2010-09-13 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M1235D</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_BOTTLE</eventDefinitionOID>
+							<eventName>Bottle</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-09-20 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_BC_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M1001N</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2009-10-19 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2009-12-28 00:00</startDate>
+							<endDate>2010-03-25 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA2_1</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M1234A</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_FINALSTA</eventDefinitionOID>
+							<eventName>Final Status</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-09-20 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CFSC_1</formOID>
+								<formOID>F_BC_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_3763</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_D7</eventDefinitionOID>
+							<eventName>D7</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-06 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MBA1_1</formOID>
+								<formOID>F_MEAM_2</formOID>
+								<formOID>F_MMLM_2</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_CCMC_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CCAC_2</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_CEAC_4</formOID>
+								<formOID>F_CSDI_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_IMMUNISA</eventDefinitionOID>
+							<eventName>Immunisation Visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-05 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CILC_1</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-16 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-28 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W2</eventDefinitionOID>
+							<eventName>W2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-10-11 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CMIC_1</formOID>
+								<formOID>F_MBA1_1</formOID>
+								<formOID>F_MMLM_2</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_CCMC_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CCAC_2</formOID>
+								<formOID>F_CBLC_2</formOID>
+								<formOID>F_CSDC_2</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_3M0082T</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-04-08 00:00</startDate>
+							<endDate>2010-04-15 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+								<formOID>F_CLLC_4</formOID>
+								<formOID>F_MSA2_2</formOID>
+								<formOID>F_CSAC_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_8748</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_INTERCUR</eventDefinitionOID>
+							<eventName>Intercurrent visit</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-23 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-13 00:00</startDate>
+							<endDate>2010-09-13 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W18</eventDefinitionOID>
+							<eventName>W18</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-23 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CCAC_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>SE_W6</eventDefinitionOID>
+							<eventName>W6</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-01-13 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CBLC_2</formOID>
+								<formOID>F_CLLC_4</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_4M9889Z</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_FINALSTA</eventDefinitionOID>
+							<eventName>Final Status</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2011-09-20 00:00</startDate>
+							<endDate>2011-12-07 00:00</endDate>
+							<formOIDs>
+								<formOID>F_CFSC_1</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+				<studySubject>
+					<studySubjectOID>SS_20100200_897</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>SE_SC1</eventDefinitionOID>
+							<eventName>SC1</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-21 00:00</startDate>
+							<endDate>2010-09-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_MSA1_3</formOID>
+								<formOID>F_MHIV_2</formOID>
+								<formOID>F_MLLM_3</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+			</studySubjects>
+		</findStudySubjectEventsByStudyOidResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
