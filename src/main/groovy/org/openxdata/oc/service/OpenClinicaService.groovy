@@ -3,6 +3,7 @@ package org.openxdata.oc.service
 import java.util.List
 
 import org.openxdata.oc.model.Event
+import org.openxdata.oc.model.StudySubject
 import org.openxdata.server.admin.model.StudyDef
 import org.openxdata.server.admin.model.exception.UnexpectedException
 import org.openxdata.server.service.DataExportService
@@ -17,6 +18,8 @@ public interface OpenClinicaService {
 
 	String exportOpenClinicaStudyData()
 
+	List<StudySubject> getStudySubjectEvents(String studyOID)
+	
 	void setFormService(FormService formService)
 	
 	void setStudyService(StudyManagerService studyService)

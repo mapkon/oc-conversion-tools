@@ -12,7 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 import org.openxdata.oc.data.TestData
-import org.openxdata.oc.model.Event
+import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.service.impl.OpenClinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.Editable
@@ -45,7 +45,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.when(studyService.getStudyKey(Mockito.anyInt())).thenReturn("key")
 		Mockito.when(studyService.getStudyByKey(Mockito.anyString())).thenReturn(createStudy())
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
-
+		Mockito.when(client.findStudySubjectEventsByStudyOID(Mockito.anyString())).thenReturn(createStudySubjectEvents())
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
 		
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
@@ -87,6 +87,20 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		return studies
 	}
 
+	private List<StudySubject> createStudySubjectEvents(){
+		
+		def subjects = []
+		
+		def studySubjectEventNode = TestData.getStudySubjects()
+		
+		studySubjectEventNode.studySubject.each {
+			def subject = new StudySubject(it)
+			subjects.add(subject)
+		}
+		
+		return subjects
+	}
+	
 	@Test public void testHasStudyData(){
 
 		String studyKey = studyService.getStudyKey(1)
@@ -151,5 +165,42 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 		
+	}
+	
+	@Test public void testGetStudySubjectEventsDoesNotReturnNull() {
+		
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		
+		assertNotNull "Should never return null on valid studyOID", studySubjectEvents
+	}
+	
+	@Test public void testGetStudysubjectEventReturnsCorrectNumberOfStudySubjectEvents() {
+		
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		
+		assertEquals 76, studySubjectEvents.size()
+	}
+	
+	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEvents() {
+		
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		
+		studySubjectEvents.each {
+			
+			assertTrue "StudySubjectEvent should have at least one event definition", it.getEvents().size() > 0
+		}
+	}
+	
+	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingFormOIDs() {
+		
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		
+		studySubjectEvents.each {
+			
+			it.getEvents().each { event ->
+				
+				assertTrue "StudySubject event definition should have at least one formOID", event.getFormOIDs().size() > 0
+			}
+		}
 	}
 }

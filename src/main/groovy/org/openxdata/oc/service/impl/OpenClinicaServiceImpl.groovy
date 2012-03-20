@@ -9,6 +9,7 @@ import java.util.List
 import java.util.Properties
 
 import org.openxdata.oc.model.Event
+import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.service.OpenClinicaService
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 import org.openxdata.oc.util.PropertiesUtil
@@ -108,6 +109,11 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		}
 	}
 
+	public List<StudySubject> getStudySubjectEvents(String studyOID) {
+		
+		return client.findStudySubjectEventsByStudyOID(studyOID)
+	}
+	
 	@Override
 	public String exportOpenClinicaStudyData() {
 
@@ -165,4 +171,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 	public void setDataExportService(DataExportService dataExportService) {
 		this.dataExportService = dataExportService
 	}
+	
+
+
 }
