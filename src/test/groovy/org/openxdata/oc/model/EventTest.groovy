@@ -12,8 +12,7 @@ class EventTest {
 	def event
 	@Before public void setUp() {
 		
-		def eventXml = new XmlSlurper().parseText(TestData.eventNode)
-		event = new Event(eventXml.children()[0])
+		event = new Event(TestData.getEvents().children()[0])
 	}
 
 	@Test void testNewEventHasOrdinal() {

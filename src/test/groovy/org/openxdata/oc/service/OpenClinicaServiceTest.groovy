@@ -92,9 +92,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		def events = []
 
-		def eventXml = new XmlSlurper().parseText(TestData.eventNode)
-
-		eventXml.event.each {
+		TestData.getEvents().event.each {
 			
 			def event = new Event(it)
 			events.add(event)
