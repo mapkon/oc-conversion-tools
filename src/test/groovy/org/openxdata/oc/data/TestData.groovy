@@ -69,18 +69,10 @@ class TestData {
 		return instanceDataList
 	}
 	
-	static def getSubjectEvents() {
+	static def getStudySubjectEventWebServiceResponse() {
 		
 		def events = new TransformUtil().loadFileContents("subject-event-response.xml")
 	}
-	
-	static def event1Xml = """<event>
-								<studySubjectOIDs>SS_20100200 SS_2M89098L SS_3M9779A</studySubjectOIDs>
-								<formOID>F_AEAD_3</formOID>
-								<eventDefinitionOID>SE_ADVERSEE</eventDefinitionOID>
-								<eventName>Adverse Event Reporting</eventName>
-								<ordinal>1</ordinal>
-							  </event>"""
 	
 	static def eventProxyResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 									   <SOAP-ENV:Header/>
