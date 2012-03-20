@@ -69,10 +69,10 @@ class EventTest {
 	}
 	
 	@Test void testEventHasName() {
-		assertNotNull "Event name should not be null", event.name
+		assertNotNull "Event name should not be null", event.eventName
 	}
 	
 	@Test void testEventHasCorrectName() {
-		assertEquals "Adverse Event Reporting", event.name
+		assertEquals "SC2", event.eventName
 	}
 }

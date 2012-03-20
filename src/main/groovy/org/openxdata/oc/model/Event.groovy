@@ -12,7 +12,7 @@ class Event {
 
 	def Event(def eventXml) {
 
-		name = eventXml.eventName.text()
+		eventName = eventXml.eventName.text()
 		ordinal = eventXml.ordinal.text()
 		eventDefinitionOID = eventXml.eventDefinitionOID.text()
 
