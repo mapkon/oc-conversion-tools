@@ -4,6 +4,7 @@ import groovy.util.logging.Log
 
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.TransformationException
+import org.openxdata.oc.model.Event
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
@@ -77,6 +78,15 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	def findEventsByStudyOID(def studyOID) {
 		
 		eventsProxy = new EventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		return eventsProxy.findEventsByStudyOID(studyOID)
+		def eventNode = eventsProxy.findEventsByStudyOID(studyOID)
+		
+		def events = []
+		
+		eventNode.event.each {
+			def event = new Event(it)
+			events.add(event)
+		}
+		
+		return events
 	}
 }

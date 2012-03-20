@@ -258,9 +258,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def studyEvents = client.findEventsByStudyOID("oid")
+			def events = client.findEventsByStudyOID("oid")
 			
-			assertNotNull "Should never return null", studyEvents
+			assertNotNull "Should never return null", events
 		}
 	}
 	
@@ -270,9 +270,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def studyEvents = client.findEventsByStudyOID("oid")
+			def events = client.findEventsByStudyOID("oid")
 			
-			assertEquals "The events should be 64", 64, studyEvents.children().size()
+			assertEquals "The events should be 64", 64, events.size()
 		}
 	}
 	

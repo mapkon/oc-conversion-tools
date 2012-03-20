@@ -156,15 +156,8 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 	
 	public List<Event> getEvents(String studyOID){
 		
-		def events = []
-		def eventNode = client.findEventsByStudyOID(studyOID)
+		return client.findEventsByStudyOID(studyOID)
 		
-		eventNode.event.each {
-			def event = new Event(it)
-			events.add(event)
-		}
-		
-		return events
 	}
 	
 	public void setStudyService(StudyManagerService studyService) {

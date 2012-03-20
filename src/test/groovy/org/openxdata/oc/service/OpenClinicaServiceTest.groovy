@@ -12,6 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 import org.openxdata.oc.data.TestData
+import org.openxdata.oc.model.Event
 import org.openxdata.oc.service.impl.OpenClinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.server.admin.model.Editable
@@ -46,7 +47,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
-		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(getEventNode())
+		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(createEvents())
 		
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
 
@@ -87,8 +88,19 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		return studies
 	}
 	
-	private def getEventNode() {
-		def eventNode = new XmlSlurper().parseText(TestData.eventNode)
+	private def createEvents() {
+
+		def events = []
+
+		def eventXml = new XmlSlurper().parseText(TestData.eventNode)
+
+		eventXml.event.each {
+			
+			def event = new Event(it)
+			events.add(event)
+		}
+
+		return events
 	}
 
 	@Test public void testHasStudyData(){
@@ -182,6 +194,19 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		returnedEvents.each {
 			
 			assertTrue "Each event should have at least one subject attached", it.getSubjectKeys().size() >= 1
+		}
+		
+		Mockito.verify(client, Mockito.atLeastOnce()).findEventsByStudyOID(Mockito.anyString())
+		
+	}
+	
+	@Test public void testGetEventsReturnsEventsWithFormOIDs() {
+		
+		def returnedEvents = openClinicaService.getEvents("OID")
+		
+		returnedEvents.each {
+			
+			assertTrue "Each event should have at least one subject attached", it.getFormOIDs().size() >= 1
 		}
 		
 		Mockito.verify(client, Mockito.atLeastOnce()).findEventsByStudyOID(Mockito.anyString())
