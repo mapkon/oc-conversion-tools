@@ -180,7 +180,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsIsSerialized() {
+	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsElementSerializedAsAString() {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
