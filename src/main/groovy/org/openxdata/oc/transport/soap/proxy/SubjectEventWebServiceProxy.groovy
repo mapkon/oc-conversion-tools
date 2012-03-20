@@ -20,7 +20,7 @@ class SubjectEventWebServiceProxy extends SoapRequestProperties{
 			</soapenv:Envelope>"""
 	}
 	
-	def findStudySubjectEventsByStudyOidRequest(def studyOID) {
+	def findStudySubjectEventsByStudyOIDRequest(def studyOID) {
 		
 		log.info("Fetching subject events for Openclinica study with ID: ${studyOID}")
 		

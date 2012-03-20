@@ -35,7 +35,7 @@ class SubjectEventWebServiceProxyTest {
 	@Test void testFindStudySubjectEventsByStudyOIDRequestDoesNotReturnNullOnValidOID() {
 
 		play {
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			assertNotNull "Should never return null on valid studyOID", response
 		}
@@ -44,7 +44,7 @@ class SubjectEventWebServiceProxyTest {
 	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsResponseWithStudySubjectsNodes() {
 
 		play {
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			assertEquals "Root should be StudySubjects", "studySubjects", response.name().localPart
 		}
@@ -53,7 +53,7 @@ class SubjectEventWebServiceProxyTest {
 	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsResponseWithCorrectNumberOfStudySubjects() {
 
 		play {
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			assertEquals 76, response.children().size()
 		}
@@ -63,7 +63,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 
@@ -76,7 +76,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			assertEquals "SS_000A", response.children()[0].studySubjectOID.text()
 		}
@@ -86,7 +86,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			assertEquals "SS_20100200_897", response.children()[75].studySubjectOID.text()
 		}
@@ -96,7 +96,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 				assertEquals "Each subject must have events defined for them.", "events", it.children()[1].name().localPart
@@ -108,7 +108,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 				assertNotNull "Events must have eventDefinitionOID", it.children()[1].children()[0].text()
@@ -120,7 +120,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def eventOID = response.children()[0].events.event.eventDefinitionOID.text()
 
@@ -132,7 +132,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def eventOID = response.children()[75].events.event.eventDefinitionOID.text()
 
@@ -144,7 +144,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 
@@ -159,7 +159,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def eventName = response.children()[0].events.event.eventName.text()
 
@@ -171,7 +171,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def eventName = response.children()[75].events.event.eventName.text()
 
@@ -183,7 +183,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 
@@ -198,7 +198,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def ordinal = response.children()[0].events.event.ordinal.text()
 
@@ -210,7 +210,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def ordinal = response.children()[75].events.event.ordinal.text()
 
@@ -222,7 +222,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 
@@ -237,7 +237,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def startDate = response.children()[0].events.event.startDate.text()
 
@@ -249,7 +249,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def startDate = response.children()[75].events.event.startDate.text()
 
@@ -261,7 +261,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 
@@ -276,7 +276,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			response.children().each {
 
@@ -291,7 +291,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def formOIDs = response.children()[0].events.event.formOIDs[0]
 
@@ -303,7 +303,7 @@ class SubjectEventWebServiceProxyTest {
 
 		play {
 
-			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOidRequest("oid")
+			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
 			def formOIDs = response.children()[75].events.event.formOIDs[0]
 
