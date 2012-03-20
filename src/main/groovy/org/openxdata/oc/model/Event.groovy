@@ -2,11 +2,13 @@ package org.openxdata.oc.model
 
 class Event {
 
-	def name
-	def ordinal
-	def eventDefinitionOID
+class Event {
 
-	def eventXml
+	private def eventXml
+	
+	private def ordinal
+	private def eventName
+	private def eventDefinitionOID
 
 	def Event(def eventXml) {
 
