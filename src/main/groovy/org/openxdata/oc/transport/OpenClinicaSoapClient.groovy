@@ -15,6 +15,5 @@ public interface OpenClinicaSoapClient {
 
 	String importData(List<FormData> instanceData)
 	
-	def findEventsByStudyOID(def studyOID)
-		
+	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID)
 }

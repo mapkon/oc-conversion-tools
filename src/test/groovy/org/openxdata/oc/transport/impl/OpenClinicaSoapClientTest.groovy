@@ -252,30 +252,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testFindEventsByStudyOIDDoesNotReturnNull() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
-		play{
-			
-			client.setConnectionFactory(connectionFactory)
-			
-			def events = client.findEventsByStudyOID("oid")
-			
-			assertNotNull "Should never return null", events
-		}
-	}
-	
-	@Test void testFindEventsByStudyOIDReturnsCorrectNumberOfEvents() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
-		play{
-			
-			client.setConnectionFactory(connectionFactory)
-			
-			def events = client.findEventsByStudyOID("oid")
-			
-			assertEquals "The events should be 64", 64, events.size()
-		}
-	}
-	
 	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)

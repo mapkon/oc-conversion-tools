@@ -154,12 +154,6 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		}
 	}
 	
-	public List<Event> getEvents(String studyOID){
-		
-		return client.findEventsByStudyOID(studyOID)
-		
-	}
-	
 	public void setStudyService(StudyManagerService studyService) {
 		this.studyService = studyService
 	}

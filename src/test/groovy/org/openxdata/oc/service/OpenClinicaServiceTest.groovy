@@ -47,7 +47,6 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
-		Mockito.when(client.findEventsByStudyOID(Mockito.anyString())).thenReturn(createEvents())
 		
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
 
@@ -86,19 +85,6 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		studies.add(study)
 		
 		return studies
-	}
-	
-	private def createEvents() {
-
-		def events = []
-
-		TestData.getEvents().event.each {
-			
-			def event = new Event(it)
-			events.add(event)
-		}
-
-		return events
 	}
 
 	@Test public void testHasStudyData(){
@@ -164,50 +150,6 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.verify(client).importData(Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
-		
-	}
-	
-	@Test public void testGetEventsDoesNotReturnNull() {
-		
-		def returnedEvents = openClinicaService.getEvents("OID")
-		
-		Mockito.verify(client).findEventsByStudyOID(Mockito.anyString())
-		
-		assertNotNull returnedEvents
-	}
-	
-	@Test public void testGetEventsReturnsCorrectNumberOfEvents() {
-		
-		def returnedEvents = openClinicaService.getEvents("OID")
-		
-		Mockito.verify(client).findEventsByStudyOID(Mockito.anyString())
-		
-		assertEquals 64, returnedEvents.size()
-	}
-	
-	@Test public void testGetEventsReturnsEventsWithSubjectKeys() {
-		
-		def returnedEvents = openClinicaService.getEvents("OID")
-		
-		returnedEvents.each {
-			
-			assertTrue "Each event should have at least one subject attached", it.getSubjectKeys().size() >= 1
-		}
-		
-		Mockito.verify(client, Mockito.atLeastOnce()).findEventsByStudyOID(Mockito.anyString())
-		
-	}
-	
-	@Test public void testGetEventsReturnsEventsWithFormOIDs() {
-		
-		def returnedEvents = openClinicaService.getEvents("OID")
-		
-		returnedEvents.each {
-			
-			assertTrue "Each event should have at least one subject attached", it.getFormOIDs().size() >= 1
-		}
-		
-		Mockito.verify(client, Mockito.atLeastOnce()).findEventsByStudyOID(Mockito.anyString())
 		
 	}
 }

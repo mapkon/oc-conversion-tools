@@ -17,8 +17,6 @@ public interface OpenClinicaService {
 
 	String exportOpenClinicaStudyData()
 
-	List<Event> getEvents(String studyOID)
-	
 	void setFormService(FormService formService)
 	
 	void setStudyService(StudyManagerService studyService)
