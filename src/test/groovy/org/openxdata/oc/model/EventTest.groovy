@@ -12,7 +12,8 @@ class EventTest {
 	def event
 	@Before public void setUp() {
 		
-		event = new Event(TestData.getEvents().children()[0])
+		def eventNode = TestData.getStudySubjects().children()[0]
+		event = new Event(eventNode.children()[1].event)
 	}
 
 	@Test void testNewEventHasOrdinal() {
@@ -31,7 +32,7 @@ class EventTest {
 
 	@Test void testNewEventHasCorrectEventDefinitionOID() {
 
-		assertEquals "SE_ADVERSEE", event.eventDefinitionOID
+		assertEquals "SE_SC2", event.eventDefinitionOID
 	}
 
 	@Test void testThatEventHasAFormOIDList() {
@@ -47,25 +48,7 @@ class EventTest {
 	}
 
 	@Test void testNewEventHasCorrectFormOID() {
-		assertEquals "F_AEAD_3", event.getFormOIDs()[0]
-	}
-	
-	@Test void testNewEventHasSubjectKeys() {
-		def subjectKeys = event.subjectKeys
-		
-		assertEquals "There should be 3 Study Subjects attached to this event.", 2, event.getSubjectKeys().size()
-	}
-	
-	@Test void testNewEventHas_SS_20100200_SubjectKey() {
-		def subjects = event.getSubjectKeys()
-		
-		assertEquals "SS_2M89098L", subjects[0]
-	}
-	
-	@Test void testNewEventHas_SS_2M89098L_SubjectKey() {
-		def subjects = event.getSubjectKeys()
-		
-		assertEquals "SS_20100200", subjects[1]
+		assertEquals "F_MSA2_2", event.getFormOIDs()[0]
 	}
 	
 	@Test void testEventHasName() {
