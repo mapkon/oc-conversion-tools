@@ -25,6 +25,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def importProxy
 	private def eventsProxy
 	private def crfMetaDataVersionProxy
+	private def studySubjectEventsProxy
 			
 	def OpenClinicaSoapClientImpl(Properties props) {
 
@@ -75,5 +76,19 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return convertedXform
 	}
 	
+	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID){
 
+		studySubjectEventsProxy = new SubjectEventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		def eventNode = studySubjectEventsProxy.findStudySubjectEventsByStudyOIDRequest(studyOID)
+
+		def subjects = []
+		
+		eventNode.studySubject.each {
+			
+			def subject = new StudySubject(it)
+			subjects.add(subject)
+		}
+
+		return subjects
+	}
 }

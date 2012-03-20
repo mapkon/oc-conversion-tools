@@ -10,7 +10,6 @@ import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.util.PropertiesUtil
-import org.openxdata.server.admin.model.FormData
 
 
 @WithGMock
@@ -249,6 +248,47 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			def response = client.findAllCRFS("oid")
 			
 			assertNotNull response
+		}
+	}
+	
+	@Test void testFindStudySubjectEventsByStudyOIDRequestDoesNotReturnNull() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			assertNotNull "findStudySubjectEventByStudyOID should never return null on valid studyOID", subjects
+		}
+	}
+	
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnCorrectNumberOfSubjects() {
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			assertEquals 76, subjects.size()
+		}
+	}
+
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsValidSubjectsWithEvents(){
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			subjects.each {
+				assertTrue it.getEvents().size() > 0
+			}
 		}
 	}
 	

@@ -74,6 +74,16 @@ class TestData {
 		def events = new TransformUtil().loadFileContents("subject-event-response.xml")
 	}
 	
+	static def getStudySubjects() {
+		
+		def response = new TransformUtil().loadFileContents("subject-event-response.xml")
+		
+		def xml = new XmlSlurper().parseText(response)
+		
+		return xml.depthFirst().find{ it.name().equals("studySubjects") }
+		
+	}
+	
 	static def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 										   <SOAP-ENV:Header/>
 										   <SOAP-ENV:Body>
