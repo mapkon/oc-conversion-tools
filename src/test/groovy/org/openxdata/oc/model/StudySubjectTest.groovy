@@ -38,4 +38,18 @@ class StudySubjectTest {
 	@Test void testThatStudySubjectHasSE_SC1Event() {
 		assertEquals "SC1", studySubject.getEvents()[1].eventName
 	}
+	
+	@Test void testThatStudySubjectHasEventWithStartDates() {
+		def events = studySubject.getEvents()
+		events.each {
+			assertNotNull it.startDate
+		}
+	}
+	
+	@Test void testThatStudySubjectHasEventWithEndDates() {
+		def events = studySubject.getEvents()
+		events.each {
+			assertNotNull it.endDate
+		}
+	}
 }

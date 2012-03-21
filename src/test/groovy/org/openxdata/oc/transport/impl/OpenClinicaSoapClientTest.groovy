@@ -292,6 +292,42 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsValidSubjectsWithEventsHavingStartDate(){
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			subjects.each {
+				
+				it.getEvents().each { event ->
+					assertNotNull "Event startDate should not be null", event.startDate
+				}
+			}
+		}
+	}
+	
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsValidSubjectsWithEventsHavingEndDate(){
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			subjects.each {
+
+				it.getEvents().each { event ->
+					assertNotNull "Event endDate should not be null", event.endDate
+				}
+			}
+		}
+	}
+	
 	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)

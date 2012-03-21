@@ -203,4 +203,30 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 			}
 		}
 	}
+	
+	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingStartDate() {
+		
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		
+		studySubjectEvents.each {
+			
+			it.getEvents().each { event ->
+				
+				assertNotNull "StudySubject event definition should have at least one formOID", event.startDate
+			}
+		}
+	}
+	
+	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingEndDate() {
+		
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		
+		studySubjectEvents.each {
+			
+			it.getEvents().each { event ->
+				
+				assertNotNull "StudySubject event definition should have at least one formOID", event.endDate
+			}
+		}
+	}
 }

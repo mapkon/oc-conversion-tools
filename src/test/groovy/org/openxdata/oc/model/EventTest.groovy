@@ -58,4 +58,20 @@ class EventTest {
 	@Test void testEventHasCorrectName() {
 		assertEquals "SC2", event.eventName
 	}
+	
+	@Test void testEventHasStartDate() {
+		assertNotNull "Event should have startData", event.startDate
+	}
+	
+	@Test void testEventHasCorrectStartDate() {
+		assertEquals "2010-09-28 00:00", event.startDate
+	}
+	
+	@Test void testEventHasEndDate() {
+		assertNotNull "Event should have endDate", event.endDate
+	}
+	
+	@Test void testEventHasCorrectEndDate() {
+		assertEquals "2010-12-14 00:00", event.endDate
+	}
 }
