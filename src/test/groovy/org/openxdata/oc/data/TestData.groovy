@@ -15,6 +15,14 @@ class TestData {
 		def response = new TransformUtil().loadFileContents("crf-metadata-response.xml")
 	}
 	
+	static def getConvertedXform() {
+		
+		def response = new TransformUtil().loadFileContents("test-converted-xform.xml")
+		
+		return new XmlSlurper().parseText(response)
+		
+	}
+	
 	static def getOpenXdataInstanceData() {
 		
 		def instanceData = '''

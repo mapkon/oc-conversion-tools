@@ -41,12 +41,14 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		createFormDataList()
 
+		Mockito.when(client.findStudySubjectEventsByStudyOID(Mockito.anyString())).thenReturn(createStudySubjectEvents())
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
+		Mockito.when(client.getOpenxdataForm(Mockito.anyString())).thenReturn(TestData.getConvertedXform())
+		
 		Mockito.when(studyService.getStudies()).thenReturn(createStudyList())
 		Mockito.when(studyService.getStudyKey(Mockito.anyInt())).thenReturn("key")
 		Mockito.when(studyService.getStudyByKey(Mockito.anyString())).thenReturn(createStudy())
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.TRUE)
-		Mockito.when(client.findStudySubjectEventsByStudyOID(Mockito.anyString())).thenReturn(createStudySubjectEvents())
-		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
 		
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
 
@@ -227,6 +229,72 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 				
 				assertNotNull "StudySubject event definition should have at least one formOID", event.endDate
 			}
+		}
+	}
+	
+	@Test public void testImportOpenClinicaStudyDoesNotReturnNull() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertNotNull "Should never return null on valid studyOID", study
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectName() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals "Default Study - Uganda", study.getName()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectStudyKey() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals "S_12175", study.getStudyKey()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectNumberOfForms() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals 4, study.getForms().size()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals "MSA1: Mother Screening Assessment 1 - 3", study.getForms()[0].getName()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName1() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals "MSA1: Mother Screening Assessment 1 - 2", study.getForms()[1].getName()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName2() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals "MSA2: Mother Screening Assessment 2 - 2", study.getForms()[2].getName()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName3() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		assertEquals "MSA2: Mother Screening Assessment 2 - 1", study.getForms()[3].getName()
+	}
+	
+	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingFormVersions() {
+		
+		def study = openClinicaService.importOpenClinicaStudy("oid")
+		
+		study.getForms().each {
+			
+			assertTrue "Forms must have versions", it.getVersions().size() > 0
 		}
 	}
 }
