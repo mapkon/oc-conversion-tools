@@ -5,12 +5,12 @@ class Event {
 
 	private def eventXml
 	
-	private def ordinal
-	private def eventName
-	private def eventDefinitionOID
+	def ordinal
+	def eventName
+	def eventDefinitionOID
 	
-	private def startDate
-	private def endDate
+	def startDate
+	def endDate
 
 	def Event(def eventXml) {
 
