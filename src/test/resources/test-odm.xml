@@ -99,7 +99,7 @@
 
       
             <ItemDef OID="I_MSA1_INIT" Name="Init" DataType="text" Length="7" SASFieldName="Init581" Comment="Researchers initials">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q1_">
                     <TranslatedText>
                     Fill in your initials (Given Name (G), Surname (S))
                     </TranslatedText>
@@ -107,14 +107,14 @@
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA1_FORMD" Name="FormD" DataType="date" SASFieldName="FormD582" Comment="Date of form">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q2_">
                     <TranslatedText>
                     Date of form
                     </TranslatedText>
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_CONS" Name="MSA1_cons" DataType="integer" Length="1" SASFieldName="MSA1_con" Comment="Informed consent for screening">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q3_">
                     <TranslatedText>
                     Inclusion/Exclusion criteria  - Has the woman understood/read and signed the informed consent for screening?
                     </TranslatedText>
@@ -122,7 +122,7 @@
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_PGT" Name="MSA1_pgt" DataType="integer" Length="1" SASFieldName="MSA1_pgt" Comment="Pregnancy">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q4_">
                     <TranslatedText>
                     Is she pregnant?
                     </TranslatedText>
@@ -130,21 +130,21 @@
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_BIRTHD" Name="MSA1_BirthD" DataType="date" SASFieldName="MSA1_Bir" Comment="M Birth date">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q5_">
                     <TranslatedText>
                     What is her birth date?
                     </TranslatedText>
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_OLD" Name="MSA1_old" DataType="integer" Length="10" SASFieldName="MSA1_old" Comment="Legal age">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q6_">
                     <TranslatedText>
                     If birth date not documented, how old is she?
                     </TranslatedText>
                 </Question>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_KHIV" Name="MSA1_KHIV" DataType="integer" Length="1" SASFieldName="MSA1_KHI" Comment="HIV status">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q7_">
                     <TranslatedText>
                     Is her HIV status documented from the antenatal clinic (or other centre)?
                     </TranslatedText>
@@ -161,7 +161,7 @@
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_ELHAART" Name="MSA1_elHAART" DataType="integer" Length="1" SASFieldName="MSA1_elH" Comment="Eligibility for HAART">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q8_">
                     <TranslatedText>
                     If not, is she eligible for HAART?
                     </TranslatedText>
@@ -169,7 +169,7 @@
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_BEFPEP" Name="MSA1_befPEP" DataType="integer" Length="1" SASFieldName="MSA1_bef" Comment="Promise PEP participation">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q10_">
                     <TranslatedText>
                     Has she participated in the Promise PEP study during a previous pregnancy?
                     </TranslatedText>
@@ -177,7 +177,7 @@
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_OTRIAL" Name="MSA1_Otrial" DataType="integer" Length="1" SASFieldName="MSA1_Otr" Comment="Participation to other trial">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q11_">
                     <TranslatedText>
                     Is she currently in any other trial ?
                     </TranslatedText>
@@ -193,7 +193,7 @@
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_MOVE" Name="MSA1_move" DataType="integer" Length="1" SASFieldName="MSA1_mov" Comment="Remain in catchment area">
-                <Question>
+                <Question OpenClinica:QuestionNumber="Q13_">
                     <TranslatedText>
                     Does she intend to move out of the area of the study in the next year?
                     </TranslatedText>

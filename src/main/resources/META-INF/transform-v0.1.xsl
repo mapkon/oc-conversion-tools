@@ -257,7 +257,9 @@
 						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
 					</xsl:variable>
 					<label>
-						<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+						<xsl:call-template name="questionText">
+							<xsl:with-param name="itemDef" select="$itemDef" />
+						</xsl:call-template>
 					</label>
 					<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
 						<item>
@@ -282,22 +284,37 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<input>
-					<xsl:attribute name="bind"><xsl:value-of
-						select="$itemOID" /></xsl:attribute>
+					<xsl:attribute name="bind"><xsl:value-of select="$itemOID" /></xsl:attribute>
 					<label>
-						<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+						<xsl:call-template name="questionText">
+							<xsl:with-param name="itemDef" select="$itemDef" />
+						</xsl:call-template>
 					</label>
 					<xsl:if test="$itemDef/odm:MeasurementUnitRef">
 						<hint>
 							<xsl:variable name="unitId">
-								<xsl:value-of
-									select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
+								<xsl:value-of select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
 							</xsl:variable>
-							<xsl:value-of
-								select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
+							<xsl:value-of select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
 						</hint>
 					</xsl:if>
 				</input>
+				</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="questionText">
+	
+		<xsl:param name="itemDef" />
+
+		<xsl:choose>
+			<xsl:when test="$itemDef/odm:Question/@OpenClinica:QuestionNumber">
+				<xsl:variable name="questionNumber" select="$itemDef/odm:Question/@OpenClinica:QuestionNumber" />
+				<xsl:value-of select="$questionNumber" />
+				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
