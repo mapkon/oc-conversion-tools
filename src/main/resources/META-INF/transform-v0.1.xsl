@@ -270,6 +270,14 @@
 							</value>
 						</item>
 					</xsl:for-each>
+						<hint>
+							<xsl:variable name="unitId">
+								<xsl:value-of
+									select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
+							</xsl:variable>
+							<xsl:value-of
+								select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
+						</hint>
 				</select1>
 			</xsl:when>
 			<xsl:otherwise>
