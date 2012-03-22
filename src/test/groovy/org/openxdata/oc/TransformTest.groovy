@@ -282,7 +282,55 @@ class TransformTest extends GroovyTestCase {
 
 	}
 	
-	def getRequiredQuestions() {
+	@Test void testThatEveryQuestionHasAHint() {
+
+		getGroups().each {
+
+			def hintNode = getHintNode(it)
+			assertEquals "Every question must have a hint", "hint", hintNode.name()
+		}
+	}
+	
+	@Test void testThatHintTextIsNotNull() {
+		
+		getGroups().each {
+
+			def hintNode = getHintNode(it)
+			assertNotNull "Hint text should not be null", hintNode.text()
+		}
+	}
+	
+	@Test void testThatHintTextForSubjectKeyIsCorrect() {
+		
+		def subjectGroup = getGroups()[0]
+		
+		def subjectGroupHintNode = getHintNode(subjectGroup)
+		
+		assertEquals "The subject key for whom you are collecting data for.", subjectGroupHintNode.text()
+	}
+	
+	private def getGroups() {
+		
+		def groups = []
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def xGroups = it.depthFirst().findAll { it.name().is("group")}
+			xGroups.each { group ->
+				groups.add(group)
+			}
+		}
+		
+		return groups
+	}
+
+	private def getHintNode(def group) {
+		
+		return group.depthFirst().find{it.name().is("hint")}
+	}
+	
+	private def getRequiredQuestions() {
 
 		def qtns = []
 
