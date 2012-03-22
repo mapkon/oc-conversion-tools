@@ -304,7 +304,7 @@ class TransformTest extends GroovyTestCase {
 		def xformNodes = getXformNodes()
 		
 		xformNodes.each {
-			def rpt = it.depthFirst().findAll{ it.name().toString() == 'repeat'}
+			def rpt = it.depthFirst().findAll{ it.name().is('repeat')}
 			repeats.addAll(rpt)
 		}
 	}
@@ -328,17 +328,17 @@ class TransformTest extends GroovyTestCase {
 		def versionNode = inputDoc.Study.MetaDataVersion
 		versionNode.Protocol.StudyEventRef.each {
 			def studyEventId = it.@StudyEventOID
-			def studyEventDef = versionNode.StudyEventDef.find { it.@OID == studyEventId }
+			def studyEventDef = versionNode.StudyEventDef.find { it.@OID.equals(studyEventId) }
 
 			studyEventDef.FormRef.each {
 
 				def formId = it.@FormOID
-				def formDef = versionNode.FormDef.find { it.@OID == formId }
+				def formDef = versionNode.FormDef.find { it.@OID.equals(formId) }
 
 				formDef.ItemGroupRef.each {
 
 					def itemGroupOID = it.@ItemGroupOID
-					def itemGroupDef = versionNode.ItemGroupDef.find { it.@OID == itemGroupOID }
+					def itemGroupDef = versionNode.ItemGroupDef.find { it.@OID.equals(itemGroupOID) }
 					
 					itemRefs.addAll(itemGroupDef.children())
 				}
@@ -354,12 +354,12 @@ class TransformTest extends GroovyTestCase {
 		def versionNode = inputDoc.Study.MetaDataVersion
 		versionNode.StudyEventDef.FormRef.each {
 			def formOID = it.@FormOID
-			def formDef = versionNode.FormDef.find { it.@OID == formOID }
+			def formDef = versionNode.FormDef.find { it.@OID.equals(formOID) }
 			
-			def form = convertedXform.form.find { it.@description == formDef.@OID }
+			def form = convertedXform.form.find { it.@description.equals(formDef.@OID) }
 			def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 			
-			def formBinds = xformNode.depthFirst().findAll{ it.name() == 'bind'}
+			def formBinds = xformNode.depthFirst().findAll{ it.name().is('bind')}
 			formBinds.each {
 				binds.add(it.@id)
 			}
@@ -375,7 +375,7 @@ class TransformTest extends GroovyTestCase {
 		
 		binds.each {
 
-			if(it.@id == itemOID) {
+			if(it.@id.equals(itemOID)) {
 				bind = it
 			}
 		}
