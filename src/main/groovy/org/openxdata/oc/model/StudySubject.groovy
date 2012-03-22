@@ -3,8 +3,8 @@ package org.openxdata.oc.model
 class StudySubject {
 
 	private def subjectXml
-	private def subjectOID
-	private def subjectEvents = []
+	
+	def subjectOID
 	
 	def StudySubject(def subjectXml) {
 		
@@ -15,6 +15,8 @@ class StudySubject {
 	}
 	
 	List<Event> getEvents() {
+		
+		def subjectEvents = []
 		
 		def eventNode = subjectXml.events
 		
