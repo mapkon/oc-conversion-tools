@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.openxdata.oc.exception.ImportException;
-import org.openxdata.oc.service.OpenclinicaService;
-import org.openxdata.oc.service.impl.OpenclinicaServiceImpl;
+import org.openxdata.oc.service.OpenClinicaService;
+import org.openxdata.oc.service.impl.OpenClinicaServiceImpl;
 import org.openxdata.oc.util.TransformUtil;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class OpenclinicaServlet extends HttpServlet {
+public class OpenClinicaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6577932874016086164L;
 
@@ -45,11 +45,11 @@ public class OpenclinicaServlet extends HttpServlet {
 	private Properties props = new Properties();
 	private MultiProtocolSubmissionServlet mobileServlet;
 	private DataExportService dataExportService;
-	private OpenclinicaService openclinicaService;
+	private OpenClinicaService OpenClinicaService;
 	private AuthenticationService authenticationService;
 
 	private final Logger log = LoggerFactory
-			.getLogger(OpenclinicaServlet.class);
+			.getLogger(OpenClinicaServlet.class);
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -71,14 +71,14 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		props = loadProperties();
 
-		openclinicaService = new OpenclinicaServiceImpl(props);
+		OpenClinicaService = new OpenClinicaServiceImpl(props);
 
-		openclinicaService.setStudyService(studyService);
-		openclinicaService.setFormService(formService);
-		openclinicaService.setDataExportService(dataExportService);
+		OpenClinicaService.setStudyService(studyService);
+		OpenClinicaService.setFormService(formService);
+		OpenClinicaService.setDataExportService(dataExportService);
 
 		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx,
-				openclinicaService);
+				OpenClinicaService);
 
 	}
 
@@ -145,12 +145,8 @@ public class OpenclinicaServlet extends HttpServlet {
 				return;
 			}
 
-			User user = authenticate();
-
 			if (IMPORT.equals(action)) {
-				study = fetchAndSaveStudy(oid);
-			} else if (EXPORT.equals(action)) {
-				exportStudyData();
+
 				study = fetchAndSaveStudy(oid);
 
 				request.setAttribute("message", "Successful Import");
@@ -158,29 +154,34 @@ public class OpenclinicaServlet extends HttpServlet {
 				request.setAttribute("study", study);
 				request.setAttribute("name", study.getName());
 				request.setAttribute("key", study.getStudyKey());
+			} else if (EXPORT.equals(action)) {
 
 				String message = exportStudyData();
 				request.setAttribute("message", message);
-				request.setAttribute("user", user);
-
-				request.getRequestDispatcher(JSP_LOCATION).forward(request,
-						response);
 			}
 
-			request.getSession().setAttribute("study", study);
-			request.getSession().setAttribute("oxdUser", user);
-			response.sendRedirect(JSP_LOCATION);
+			request.setAttribute("user", authenticate());
+
+			request.getRequestDispatcher(JSP_LOCATION).forward(request,
+					response);
 
 		} catch (Exception ex) {
+
 			log.error(ex.getLocalizedMessage());
-			try {
+			request.setAttribute("message", ex.getLocalizedMessage());
 
-				request.setAttribute("message", ex.getLocalizedMessage());
-				response.sendRedirect(JSP_LOCATION);
+			redirectToOpenClinicaPage(request, response);
+		}
+	}
 
-			} catch (IOException e) {
-				log.error(ex.getLocalizedMessage());
-			}
+	private void redirectToOpenClinicaPage(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+
+			response.sendRedirect(JSP_LOCATION);
+
+		} catch (IOException ex) {
+			log.error(ex.getLocalizedMessage());
 		}
 	}
 
@@ -196,7 +197,8 @@ public class OpenclinicaServlet extends HttpServlet {
 
 			user = authenticationService.authenticate(oxdUserName, oxdPassword);
 			if (user == null)
-				throw new OpenXdataDataAccessException("Access Denied");
+				throw new OpenXdataDataAccessException(
+						"Access to OpenXData Services Denied");
 
 		}
 		return user;
@@ -206,7 +208,7 @@ public class OpenclinicaServlet extends HttpServlet {
 
 		log.info("Initiating Export of Study Data to OpenClinica...");
 
-		String result = openclinicaService.exportOpenClinicaStudyData();
+		String result = OpenClinicaService.exportOpenClinicaStudyData();
 		if ("Error".equals(result))
 			throw new ImportException(
 					"Exception occurred during export of data to openclinica. Check log for details.");
@@ -217,7 +219,7 @@ public class OpenclinicaServlet extends HttpServlet {
 	private StudyDef fetchAndSaveStudy(String oid) {
 
 		log.info("Fetching study for oid: " + oid);
-		StudyDef study = openclinicaService.importOpenClinicaStudy(oid);
+		StudyDef study = OpenClinicaService.importOpenClinicaStudy(oid);
 		study = validateAndSaveStudy(study);
 
 		return study;

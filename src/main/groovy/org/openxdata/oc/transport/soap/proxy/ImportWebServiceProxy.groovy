@@ -11,7 +11,6 @@ import org.openxdata.oc.transport.soap.SoapRequestProperties
 class ImportWebServiceProxy extends SoapRequestProperties {
 
 	def envelope
-	def importXml
 
 	def getSoapEnvelope(def importXml){
 		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
@@ -26,17 +25,24 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 
 		log.info("Starting import to Openclinca.")
 
-		importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
+		def message
+		def importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
 
-		envelope = getSoapEnvelope(importXml)
+		importXml.each {
+			
+			envelope = getSoapEnvelope(it)
 
-		def transportHandler = new HttpTransportHandler(envelope:envelope)
-		def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
+			def transportHandler = new HttpTransportHandler(envelope:envelope)
+			def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
 
-		return getImportMessage(response)
+			message = getImportWebServiceResponse(response)
+			
+		}
+		
+		return message
 	}
 	
-	private def getImportMessage(response) {
+	private def getImportWebServiceResponse(response) {
 		
 		def result = response.depthFirst().result[0].text()
 		if(result == "Success"){

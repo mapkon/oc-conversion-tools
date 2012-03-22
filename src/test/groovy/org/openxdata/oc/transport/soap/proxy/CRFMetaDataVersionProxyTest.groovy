@@ -8,7 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.transport.factory.ConnectionFactory
-import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy;
+import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
 
 
 @WithGMock
@@ -313,7 +313,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
 			def xml = new XmlSlurper().parseText(response)
 
-			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[2].children()[0]
+			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[2].children()[1]
 
 			assertEquals 'F_SAES_2', formRefs.@FormOID.text()
 		}
@@ -325,7 +325,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
 			def xml = new XmlSlurper().parseText(response)
 
-			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[2].children()[1]
+			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[2].children()[0]
 
 			assertEquals 'F_AEAD_3', formRefs.@FormOID.text()
 		}
@@ -537,25 +537,26 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 	
 	@Test void testFindCRFSReturnsResponseWithEIGTHStudyEventDefHavingFormRefWithFormOID_F_MMLM_2() {
 		play{
-
+			
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
 			def xml = new XmlSlurper().parseText(response)
 
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[6]
 
-			assertEquals 'F_CBLC_2', formRefs.@FormOID.text()
+			assertEquals 'F_MMLM_2', formRefs.@FormOID.text()
 		}
 	}
 	
 	@Test void testFindCRFSReturnsResponseWithEIGTHStudyEventDefHavingFormRefWithFormOID_F_CBLC_2() {
 		play{
-
+			
 			def response = crfMetaDataVersionProxy.findAllCRFS('OID')
 			def xml = new XmlSlurper().parseText(response)
 
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[7]
 
-			assertEquals 'F_CSDC_2', formRefs.@FormOID.text()
+			assertEquals 'F_CBLC_2', formRefs.@FormOID.text()
+
 		}
 	}
 	
@@ -567,7 +568,7 @@ class CRFMetaDataVersionProxyTest extends GroovyTestCase {
 
 			def formRefs = xml.Study.MetaDataVersion.StudyEventDef[7].children()[8]
 
-			assertEquals 'F_MMLM_2', formRefs.@FormOID.text()
+			assertEquals 'F_CSDC_2', formRefs.@FormOID.text()
 		}
 	}
 	

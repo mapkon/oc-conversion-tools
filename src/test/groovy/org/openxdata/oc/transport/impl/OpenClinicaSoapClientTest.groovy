@@ -15,12 +15,15 @@ import org.openxdata.oc.util.PropertiesUtil
 @WithGMock
 class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
-	def props
+	def client
 	def latestCRFVersions
 	
 	@Before public void setUp(){
 		
-		props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
+		def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
+		
+		client = new OpenClinicaSoapClientImpl(props)
+		
 		latestCRFVersions = TestData.getCRFWebServiceResponse()
 	}
 	
@@ -29,7 +32,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		
 		play {
 			
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			def convertedStudyXml = client.getOpenxdataForm("oid")
 
@@ -45,7 +47,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -58,7 +59,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -71,7 +71,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -86,7 +85,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -103,7 +101,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -119,7 +116,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -135,7 +131,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -152,7 +147,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		play {
 
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -168,7 +162,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -179,11 +172,11 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsIsSerialized() {
+	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsElementSerializedAsAString() {
+		
 		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
 		play {
 
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def convertedStudyXml = client.getOpenxdataForm("oid")
@@ -194,17 +187,28 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatImportDataReturnsSuccessResponseOnCorrectODMFormat(){
+	@Test void testThatImportDataDoesNotReturnNull(){
 		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
 		play{
 			
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
-			def reponse = client.importData(TestData.getOpenXdataInstanceData())
+			def reponse = client.importData(TestData.getInstanceData())
 			
 			assertNotNull reponse
+		}
+	}
+	
+	@Test void testThatSuccessfulImportReturnsCorrectMessage() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
+		play{
+			
+			client.setConnectionFactory(connectionFactory)
+			
+			def reponse = client.importData(TestData.getInstanceData())
+			
 			assertEquals 'Success', reponse
 		}
 	}
@@ -215,10 +219,9 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			shouldFail(ImportException){
 				
-				def client = new OpenClinicaSoapClientImpl(props)
 				client.setConnectionFactory(connectionFactory)
 				
-				def reponse = client.importData(TestData.getOpenXdataInstanceData())
+				def reponse = client.importData([])
 			}
 		}
 	}
@@ -228,7 +231,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		play{
 			shouldFail(TransformationException){
 				
-				def client = new OpenClinicaSoapClientImpl(props)
 				client.setConnectionFactory(connectionFactory)
 				
 				def xml = client.getOpenxdataForm("001")
@@ -241,7 +243,6 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play{
 			
-			def client = new OpenClinicaSoapClientImpl(props)
 			client.setConnectionFactory(connectionFactory)
 			
 			def response = client.findAllCRFS("oid")
@@ -250,44 +251,95 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testFindEventsByStudyOIDDoesNotReturnNull() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
+	@Test void testFindStudySubjectEventsByStudyOIDRequestDoesNotReturnNull() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
 		play{
-			
-			def client = new OpenClinicaSoapClientImpl(props)
+
 			client.setConnectionFactory(connectionFactory)
-			
-			def studyEvents = client.findEventsByStudyOID("oid")
-			
-			assertNotNull "Should never return null", studyEvents
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			assertNotNull "findStudySubjectEventByStudyOID should never return null on valid studyOID", subjects
 		}
 	}
 	
-	@Test void testFindEventsByStudyOIDReturnsCorrectNumberOfEvents() {
-		def connectionFactory = setUpConnectionFactoryMock(TestData.eventProxyResponse)
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnCorrectNumberOfSubjects() {
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
 		play{
-			
-			def client = new OpenClinicaSoapClientImpl(props)
+
 			client.setConnectionFactory(connectionFactory)
-			
-			def studyEvents = client.findEventsByStudyOID("oid")
-			
-			assertEquals "The events should be 64", 64, studyEvents.children().size()
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			assertEquals 76, subjects.size()
+		}
+	}
+
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsValidSubjectsWithEvents(){
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			subjects.each {
+				assertTrue it.getEvents().size() > 0
+			}
+		}
+	}
+	
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsValidSubjectsWithEventsHavingStartDate(){
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			subjects.each {
+				
+				it.getEvents().each { event ->
+					assertNotNull "Event startDate should not be null", event.startDate
+				}
+			}
+		}
+	}
+	
+	@Test void testFindStudySubjectEventsByStudyOIDRequestReturnsValidSubjectsWithEventsHavingEndDate(){
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getStudySubjectEventWebServiceResponse())
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+
+			def subjects = client.findStudySubjectEventsByStudyOID("oid")
+
+			subjects.each {
+
+				it.getEvents().each { event ->
+					assertNotNull "Event endDate should not be null", event.endDate
+				}
+			}
 		}
 	}
 	
 	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)
-		connection.setRequestMethod("POST")
-		connection.setRequestProperty("Content-Type", "text/xml")
-		connection.setRequestProperty("Content-Length", is(instanceOf(String.class)))
-		connection.setDoOutput(true)
+		connection.setRequestMethod("POST").atMostOnce()
+		connection.setRequestProperty("Content-Type", "text/xml").atMostOnce()
+		connection.setRequestProperty("Content-Length", is(instanceOf(String.class))).atMostOnce()
+		connection.setDoOutput(true).atMostOnce()
 		connection.getURL().returns("mock url").atMostOnce()
 
 		def outputStream = new ByteArrayOutputStream()
-		connection.getOutputStream().returns(outputStream)
-		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes()))
+		connection.getOutputStream().returns(outputStream).atMostOnce()
+		connection.getInputStream().returns(new ByteArrayInputStream(returnXml.getBytes())).atMostOnce()
 		
 		def connectionFactory = mock(ConnectionFactory.class)
 		

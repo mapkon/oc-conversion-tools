@@ -9,7 +9,8 @@ import java.util.List
 import java.util.Properties
 
 import org.openxdata.oc.model.Event
-import org.openxdata.oc.service.OpenclinicaService
+import org.openxdata.oc.model.StudySubject
+import org.openxdata.oc.service.OpenClinicaService
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
 import org.openxdata.oc.util.PropertiesUtil
 import org.openxdata.server.admin.model.FormData
@@ -27,7 +28,7 @@ import org.openxdata.server.service.StudyManagerService
 import org.openxdata.xform.StudyImporter
 
 @Log
-public class OpenclinicaServiceImpl implements OpenclinicaService {
+public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 	private def client
 	
@@ -35,7 +36,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	private def studyService
 	private DataExportService dataExportService	
 	
-	public OpenclinicaServiceImpl(Properties props) {
+	public OpenClinicaServiceImpl(Properties props) {
 
 		if(!props) {
 			props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
@@ -108,6 +109,11 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		}
 	}
 
+	public List<StudySubject> getStudySubjectEvents(String studyOID) {
+		
+		return client.findStudySubjectEventsByStudyOID(studyOID)
+	}
+	
 	@Override
 	public String exportOpenClinicaStudyData() {
 
@@ -125,7 +131,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		return exportResponseMessage
 	}
 
-	private String buildResponseMessage(List dataList) {
+	private String buildResponseMessage(List<FormData> dataList) {
 		
 		def exportResponseMessage
 		
@@ -143,7 +149,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 		return exportResponseMessage
 	}
 
-	private updateExportedDataItems(List dataList) {
+	private updateExportedDataItems(List<FormData> dataList) {
 		
 		dataList.each {
 
@@ -152,19 +158,6 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 			dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
 			it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		}
-	}
-	
-	public List<Event> getEvents(String studyOID){
-		
-		def events = []
-		def eventNode = client.findEventsByStudyOID(studyOID)
-		
-		eventNode.event.each {
-			def event = new Event(it)
-			events.add(event)
-		}
-		
-		return events
 	}
 	
 	public void setStudyService(StudyManagerService studyService) {
@@ -178,4 +171,7 @@ public class OpenclinicaServiceImpl implements OpenclinicaService {
 	public void setDataExportService(DataExportService dataExportService) {
 		this.dataExportService = dataExportService
 	}
+	
+
+
 }

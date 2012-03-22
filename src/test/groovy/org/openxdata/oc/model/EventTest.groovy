@@ -12,8 +12,8 @@ class EventTest {
 	def event
 	@Before public void setUp() {
 		
-		def eventXml = new XmlSlurper().parseText(TestData.event1Xml)
-		event = new Event(eventXml)
+		def eventNode = TestData.getStudySubjects().children()[0]
+		event = new Event(eventNode.children()[1].event)
 	}
 
 	@Test void testNewEventHasOrdinal() {
@@ -32,7 +32,7 @@ class EventTest {
 
 	@Test void testNewEventHasCorrectEventDefinitionOID() {
 
-		assertEquals "SE_ADVERSEE", event.eventDefinitionOID
+		assertEquals "SE_SC2", event.eventDefinitionOID
 	}
 
 	@Test void testThatEventHasAFormOIDList() {
@@ -48,38 +48,30 @@ class EventTest {
 	}
 
 	@Test void testNewEventHasCorrectFormOID() {
-		assertEquals "F_AEAD_3", event.getFormOIDs()[0]
-	}
-	
-	@Test void testNewEventHasSubjectKeys() {
-		def subjectKeys = event.subjectKeys
-		
-		assertEquals "There should be 3 Study Subjects attached to this event.", 3, event.getSubjectKeys().size()
-	}
-	
-	@Test void testNewEventHas_SS_20100200_SubjectKey() {
-		def subjects = event.getSubjectKeys()
-		
-		assertEquals "SS_20100200", subjects[0]
-	}
-	
-	@Test void testNewEventHas_SS_2M89098L_SubjectKey() {
-		def subjects = event.getSubjectKeys()
-		
-		assertEquals "SS_2M89098L", subjects[1]
-	}
-	
-	@Test void testNewEventHas_SS_3M9779A_SubjectKey() {
-		def subjects = event.getSubjectKeys()
-		
-		assertEquals "SS_3M9779A", subjects[2]
+		assertEquals "F_MSA2_2", event.getFormOIDs()[0]
 	}
 	
 	@Test void testEventHasName() {
-		assertNotNull "Event name should not be null", event.name
+		assertNotNull "Event name should not be null", event.eventName
 	}
 	
 	@Test void testEventHasCorrectName() {
-		assertEquals "Adverse Event Reporting", event.name
+		assertEquals "SC2", event.eventName
+	}
+	
+	@Test void testEventHasStartDate() {
+		assertNotNull "Event should have startData", event.startDate
+	}
+	
+	@Test void testEventHasCorrectStartDate() {
+		assertEquals "2010-09-28 00:00", event.startDate
+	}
+	
+	@Test void testEventHasEndDate() {
+		assertNotNull "Event should have endDate", event.endDate
+	}
+	
+	@Test void testEventHasCorrectEndDate() {
+		assertEquals "2010-12-14 00:00", event.endDate
 	}
 }

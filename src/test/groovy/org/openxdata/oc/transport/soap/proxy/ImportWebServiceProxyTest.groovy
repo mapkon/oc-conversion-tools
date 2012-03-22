@@ -1,4 +1,4 @@
-package org.openxdata.oc.transport.soap.proxy;
+package org.openxdata.oc.transport.soap.proxy
 
 import static org.hamcrest.Matchers.*
 
@@ -8,7 +8,7 @@ import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.transport.factory.ConnectionFactory
-import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy;
+import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
 
 
 @WithGMock
@@ -23,13 +23,6 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 
 	}
 
-	@Test void testImportShouldFailOnEmptyInstanceData(){
-
-		shouldFail(ImportException){
-			def message = importProxy.importData([])
-		}
-	}
-
 	@Test void testGetEnvelopeHasCorrectDataPath(){
 
 		def envelope = importProxy.getSoapEnvelope()
@@ -40,11 +33,18 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 
 		assertEquals actual, namespaceList[2].toString()
 	}
+	
+	@Test void testImportShouldFailOnEmptyInstanceData(){
+
+		shouldFail(ImportException){
+			def message = importProxy.importData([])
+		}
+	}
 
 	@Test void testImportShouldNotReturnNull(){
 
 		play{
-			def message = importProxy.importData(TestData.getOpenXdataInstanceData())
+			def message = importProxy.importData(TestData.getInstanceData())
 			assertNotNull message
 		}
 	}
@@ -52,7 +52,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 	@Test void testImportShouldSuccessOnCorrectInstanceData(){
 
 		play{
-			def message = importProxy.importData(TestData.getOpenXdataInstanceData())
+			def message = importProxy.importData(TestData.getInstanceData())
 			assertEquals 'Success', message
 		}
 	}
@@ -62,7 +62,7 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 		play{
 			shouldFail(ImportException){
 				def importProxy2 = new ImportWebServiceProxy(connectionFactory:connectionFactory2)
-				def message = importProxy2.importData(TestData.getOpenXdataInstanceData())
+				def message = importProxy2.importData([])
 				assertEquals 'Error', message
 			}
 		}

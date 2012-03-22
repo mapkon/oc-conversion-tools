@@ -263,6 +263,41 @@ class TransformTest extends GroovyTestCase {
 		assertEquals "repeat", group.children()[1].children()[1].name()
 	}
 	
+	@Test void testThatConvertedXmlHasSubjectKeySetToRequired() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def subjectKeyBind = it.model.bind.find{ it.@id.equals("subjectKeyBind")}
+			assertEquals "SubjectKey should be required", "true()", subjectKeyBind.@required.text()
+		}
+	}
+	
+	@Test void testThatThereAreEqualNumberOfRequiredBindsAsMandatoryItemRefsInODM() {
+		
+		def requiredQtns = getRequiredQuestions()
+		
+		assertEquals "Required questions should equals Mandatory questions in ODM file.", 36, requiredQtns.size()
+
+	}
+	
+	def getRequiredQuestions() {
+
+		def qtns = []
+
+		getXformNodes().each {
+			
+			def binds = it.model.bind.each {
+				if(it.@required.equals("true()")) {
+					qtns.add(it)
+				}
+			}
+		}
+		
+		return qtns
+	}
+	
 	def getRepeats() {
 		
 		def repeats = []
@@ -324,7 +359,7 @@ class TransformTest extends GroovyTestCase {
 			def form = convertedXform.form.find { it.@description == formDef.@OID }
 			def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 			
-			def formBinds = xformNode.depthFirst().findAll{ it.name().toString() == 'bind'}
+			def formBinds = xformNode.depthFirst().findAll{ it.name() == 'bind'}
 			formBinds.each {
 				binds.add(it.@id)
 			}
@@ -334,11 +369,13 @@ class TransformTest extends GroovyTestCase {
 	}
 	
 	def getBind(def itemOID) {
-		
+
 		def bind
 		def binds = getBinds()
+		
 		binds.each {
-			if(it.toString() == itemOID) {
+
+			if(it.@id == itemOID) {
 				bind = it
 			}
 		}

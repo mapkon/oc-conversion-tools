@@ -5,23 +5,27 @@ import groovy.xml.XmlUtil
 
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.proto.DefaultSubmissionProtocol
+import org.openxdata.server.admin.model.FormData
 
 @Log
 class ODMInstanceDataDefinition {
 	
 	def submissionProtocol = new DefaultSubmissionProtocol()
 	
-	def appendInstanceData(def instanceData){
+	List<String> appendInstanceData(List<FormData> instanceData){
 
 		if(instanceData.isEmpty())
 			throw new ImportException('Cannot process empty instance data.')
 					
-		def odmInstanceData
+		def odmInstanceData = []
 
-		instanceData.each { 
+		instanceData.each {
 			
-			odmInstanceData = submissionProtocol.createOpenClinicaInstanceData(it)
-			log.info("Processing converted instance data: ${XmlUtil.serialize(odmInstanceData)}")
+			def ocData = submissionProtocol.createOpenClinicaInstanceData(it.getData())
+			
+			odmInstanceData.add(ocData)
+			
+			log.info("Processing converted instance data: ${XmlUtil.serialize(ocData)}")
 		}
 
 		return odmInstanceData

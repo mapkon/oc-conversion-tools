@@ -15,7 +15,6 @@ class DefaultSubmissionProtocol {
 
 		def subjectKey = getSubjectKey()
 
-		//TODO: Add the ItemGroupRepeatKey attribute to repeating groups.
 		def itemGroupOIDS = getItemGroupOIDS()
 
 		xml = new StreamingMarkupBuilder().bind {
@@ -128,7 +127,7 @@ class DefaultSubmissionProtocol {
 
 		if(item instanceof String) {
 
-			def node = instanceDataXml.children().find { it.name() == item }
+			def node = instanceDataXml.children().find { it.name().is(item) }
 
 			if(node.children() != null)
 				return node.children().size() > 0

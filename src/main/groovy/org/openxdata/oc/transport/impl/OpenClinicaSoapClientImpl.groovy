@@ -4,11 +4,13 @@ import groovy.util.logging.Log
 
 import org.openxdata.oc.Transform
 import org.openxdata.oc.exception.TransformationException
+import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
-import org.openxdata.oc.transport.soap.proxy.EventWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
+import org.openxdata.oc.transport.soap.proxy.SubjectEventWebServiceProxy
+import org.openxdata.server.admin.model.FormData
 
 
 @Log
@@ -23,6 +25,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	private def importProxy
 	private def eventsProxy
 	private def crfMetaDataVersionProxy
+	private def studySubjectEventsProxy
 			
 	def OpenClinicaSoapClientImpl(Properties props) {
 
@@ -44,7 +47,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public String importData(List<String> instanceData){
+	public String importData(List<FormData> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData)
@@ -73,9 +76,19 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return convertedXform
 	}
 	
-	def findEventsByStudyOID(def studyOID) {
+	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID){
+
+		studySubjectEventsProxy = new SubjectEventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		def eventNode = studySubjectEventsProxy.findStudySubjectEventsByStudyOIDRequest(studyOID)
+
+		def subjects = []
 		
-		eventsProxy = new EventWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		return eventsProxy.findEventsByStudyOID(studyOID)
+		eventNode.studySubject.each {
+			
+			def subject = new StudySubject(it)
+			subjects.add(subject)
+		}
+
+		return subjects
 	}
 }

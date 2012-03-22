@@ -34,7 +34,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZOutputStream;
-import org.openxdata.oc.service.OpenclinicaService;
+import org.openxdata.oc.service.OpenClinicaService;
 
 /**
  * An example of how to support multiple upload protocols based on similar (or
@@ -60,10 +60,10 @@ public class MultiProtocolSubmissionServlet {
 	private StudyManagerService studyManagerService;
 	private WebApplicationContext ctx;
 	private ServletContext sctx;
-	private OpenclinicaService openclinicaService;
+	private OpenClinicaService openclinicaService;
 
 	public MultiProtocolSubmissionServlet(ServletConfig config,
-			ServletContext sctx, OpenclinicaService openclinicaService)
+			ServletContext sctx, OpenClinicaService openclinicaService)
 			throws ServletException {
 
 		this.sctx = sctx;

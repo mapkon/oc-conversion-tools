@@ -1,40 +1,35 @@
 package org.openxdata.oc.model
 
+
 class Event {
 
-	def name
-	def ordinal
-	def eventDefinitionOID
-
-	def eventXml
+	private def eventXml
+	
+	private def ordinal
+	private def eventName
+	private def eventDefinitionOID
+	
+	private def startDate
+	private def endDate
 
 	def Event(def eventXml) {
 
-		name = eventXml.eventName.text()
+		eventName = eventXml.eventName.text()
 		ordinal = eventXml.ordinal.text()
 		eventDefinitionOID = eventXml.eventDefinitionOID.text()
+		startDate = eventXml.startDate.text()
+		endDate = eventXml.endDate.text()
 
 		this.eventXml = eventXml
 	}
-
-	def getSubjectKeys() {
-
-		def subjectKeys = []
-
-		def keys = eventXml.studySubjectOIDs.text()
-
-		subjectKeys = keys.split()
-
-		return subjectKeys
-	}
 	
-	def getFormOIDs() {
+	List<String> getFormOIDs() {
 		
 		def formOIDs = []
 		
-		def oids = eventXml.formOID.text()
-		
-		formOIDs = oids.split()
+		def oids = eventXml.formOIDs.formOID.each {
+			formOIDs.add(it.text())
+		}
 		
 		return formOIDs
 	}
