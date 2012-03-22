@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
@@ -65,40 +67,44 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 		}
 
 		for (StudySubject studySubject : sbjEvents) {
-			List<Event> events = studySubject.getEvents();
-			for (Event event : events) {
-                               
+			List<Event> allEvents = studySubject.getEvents();
+			Hashtable<String, List<Event>> eventGroups = groupEventByName(allEvents);
+			Set<Entry<String, List<Event>>> entrySet = eventGroups.entrySet();
+
+			for (Entry<String, List<Event>> entry : entrySet) {
+				List<Event> events = entry.getValue();
+				for (Event event : events) {
+					Object[] workitem = new Object[5];
+
+					List<Object[]> formReferences = new ArrayList<Object[]>();
+					List<String> formOIDs = (List) event.getFormOIDs();
+
+					for (String formOID : formOIDs) {
+						FormDef formDef = getFormByDescription(oCStudyID,
+								formOID);
+						if (formDef == null) {
+							continue;
+						}
+
+						Object[] frmRfrnc = new Object[3];
+						frmRfrnc[0] = oCStudyID.getId();
+						frmRfrnc[1] = formDef.getDefaultVersion().getId();
+						List<String[]> prefills = new ArrayList<String[]>();
+						prefills.add(new String[] { "SubjectKey_",
+								"SubjectKey", entry.getKey(), "false" });
+						frmRfrnc[2] = prefills;
+						formReferences.add(frmRfrnc);
+
+					}
+					workitem[0] = entry.getKey() + "-" + event.getEventName();
+					workitem[1] = getKey(event);
+					workitem[2] = formReferences;
+					workitems.add(workitem);
+				}
+
 			}
 		}
 
-		//		for (StudySubject event : events) {
-		//			Object[] workitem = new Object[5];
-		//
-		//			List<Object[]> formReferences = new ArrayList<Object[]>();
-		//			List<String> formOIDs = (List) event.getFormOIDs();
-		//
-		//			for (String formOID : formOIDs) {
-		//				FormDef formDef = getFormByDescription(oCStudyID, formOID);
-		//				if (formDef == null) {
-		//					continue;
-		//				}
-		//				String[] subjectKeys = (String[]) event.getSubjectKeys();
-		//				for (String string : subjectKeys) {
-		//					Object[] frmRfrnc = new Object[3];
-		//					frmRfrnc[0] = oCStudyID.getId();
-		//					frmRfrnc[1] = formDef.getDefaultVersion().getId();
-		//					List<String[]> prefills = new ArrayList<String[]>();
-		//					prefills.add(new String[] { "SubjectKey_", "SubjectKey",
-		//							string, "false" });
-		//					frmRfrnc[2] = prefills;
-		//					formReferences.add(frmRfrnc);
-		//				}
-		//			}
-		//			workitem[0] = event.getName().toString();
-		//			workitem[1] = getKey(event);
-		//			workitem[2] = formReferences;
-		//			workitems.add(workitem);
-		//		}
 		return workitems;
 	}
 
@@ -128,11 +134,33 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 
 	private FormDef getFormByDescription(StudyDef def, String description) {
 		List<FormDef> forms = def.getForms();
+
+		description = description.substring(0, description.lastIndexOf("_"));
 		for (FormDef formDef1 : forms) {
-			if (formDef1.getDescription().equalsIgnoreCase(description)) {
+			String frmDefDescr = formDef1.getDescription();
+			frmDefDescr = frmDefDescr
+					.substring(0, frmDefDescr.lastIndexOf("_"));
+			if (frmDefDescr.equalsIgnoreCase(description)) {
 				return formDef1;
 			}
 		}
 		return null;
+	}
+
+	private Hashtable<String, List<Event>> groupEventByName(List<Event> events) {
+		Hashtable<String, List<Event>> eventGroups = new Hashtable<String, List<Event>>();
+		for (Event event : events) {
+			String evntOID = (String) event.getEventDefinitionOID();
+
+			List<Event> grpEvnts = eventGroups.get(evntOID);
+			if (grpEvnts == null) {
+				grpEvnts = new ArrayList<Event>();
+				eventGroups.put(evntOID, events);
+			}
+
+			grpEvnts.add(event);
+		}
+
+		return eventGroups;
 	}
 }

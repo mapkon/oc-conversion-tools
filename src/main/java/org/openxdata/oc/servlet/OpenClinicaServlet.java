@@ -144,7 +144,7 @@ public class OpenClinicaServlet extends HttpServlet {
 				mobileServlet.doPost(request, response);
 				return;
 			}
-
+			User user = authenticate();
 			if (IMPORT.equals(action)) {
 
 				study = fetchAndSaveStudy(oid);
@@ -160,7 +160,7 @@ public class OpenClinicaServlet extends HttpServlet {
 				request.setAttribute("message", message);
 			}
 
-			request.setAttribute("user", authenticate());
+			request.setAttribute("user", user);
 
 			request.getRequestDispatcher(JSP_LOCATION).forward(request,
 					response);
