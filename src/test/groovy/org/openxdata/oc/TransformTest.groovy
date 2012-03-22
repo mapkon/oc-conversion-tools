@@ -298,7 +298,7 @@ class TransformTest extends GroovyTestCase {
 		return qtns
 	}
 	
-	def getRepeats() {
+	private def getRepeats() {
 		
 		def repeats = []
 		def xformNodes = getXformNodes()
@@ -309,7 +309,7 @@ class TransformTest extends GroovyTestCase {
 		}
 	}
 	
-	def getXformNodes() {
+	private def getXformNodes() {
 
 		def nodes = []
 		convertedXform.form.each {
@@ -322,7 +322,7 @@ class TransformTest extends GroovyTestCase {
 		return nodes
 	}
 	
-	def getItemRefs() {
+	private def getItemRefs() {
 
 		def itemRefs = []
 		def versionNode = inputDoc.Study.MetaDataVersion
@@ -348,7 +348,7 @@ class TransformTest extends GroovyTestCase {
 		return itemRefs
 	}
 	
-	def getBinds() {
+	private def getBinds() {
 		
 		def binds = []
 		def versionNode = inputDoc.Study.MetaDataVersion
@@ -368,7 +368,7 @@ class TransformTest extends GroovyTestCase {
 		return binds
 	}
 	
-	def getBind(def itemOID) {
+	private def getBind(def itemOID) {
 
 		def bind
 		def binds = getBinds()
