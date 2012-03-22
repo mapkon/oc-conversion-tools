@@ -257,7 +257,7 @@
 						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
 					</xsl:variable>
 					<label>
-						<xsl:call-template name="questionText">
+						<xsl:call-template name="createQuestionText">
 							<xsl:with-param name="itemDef" select="$itemDef" />
 						</xsl:call-template>
 					</label>
@@ -286,7 +286,7 @@
 				<input>
 					<xsl:attribute name="bind"><xsl:value-of select="$itemOID" /></xsl:attribute>
 					<label>
-						<xsl:call-template name="questionText">
+						<xsl:call-template name="createQuestionText">
 							<xsl:with-param name="itemDef" select="$itemDef" />
 						</xsl:call-template>
 					</label>
@@ -303,13 +303,14 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="questionText">
+	<xsl:template name="createQuestionText">
 	
 		<xsl:param name="itemDef" />
 
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:Question/@OpenClinica:QuestionNumber">
 				<xsl:variable name="questionNumber" select="$itemDef/odm:Question/@OpenClinica:QuestionNumber" />
+				
 				<xsl:value-of select="$questionNumber" />
 				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 			</xsl:when>
