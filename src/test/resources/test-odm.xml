@@ -157,6 +157,7 @@
                     Is she currently on HAART?
                     </TranslatedText>
                 </Question>
+                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <CodeListRef CodeListOID="CL_203"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_ELHAART" Name="MSA1_elHAART" DataType="integer" Length="1" SASFieldName="MSA1_elH" Comment="Eligibility for HAART">
@@ -251,6 +252,7 @@
                     Q10a_ If yes, what could that be?
                     </TranslatedText>
                 </Question>
+                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
             </ItemDef>
             <ItemDef OID="I_MSA1_MSA1_NOELIGREAS" Name="MSA1_noeligreas" DataType="text" Length="41" SASFieldName="MSA1_noe" Comment="Reason why mother not eligible">
                 <Question>
@@ -326,6 +328,7 @@
                     </TranslatedText>
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
+                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
             </ItemDef>
             <ItemDef OID="I_MSA2_MSA2_PAZTNB" Name="MSA2_PAZTNB" DataType="integer" Length="10" SASFieldName="MSA2_590" Comment="Number of weeks under AZT">
                 <Question>
