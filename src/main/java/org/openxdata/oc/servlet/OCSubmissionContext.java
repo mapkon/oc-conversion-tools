@@ -65,7 +65,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 			Object[] workitem = new Object[5];
 
 			List<Object[]> formReferences = new ArrayList<Object[]>();
-			List<String> formOIDs = (List) event.getFormOIDs();
+			String[] formOIDs = (String[]) event.getFormOIDs();
 
 			for (String formOID : formOIDs) {
 				FormDef formDef = getFormByDescription(oCStudyID, formOID);
@@ -84,6 +84,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 					formReferences.add(frmRfrnc);
 				}
 			}
+			if (formReferences.isEmpty())
+				continue;
 			workitem[0] = event.getName().toString();
 			workitem[1] = getKey(event);
 			workitem[2] = formReferences;
