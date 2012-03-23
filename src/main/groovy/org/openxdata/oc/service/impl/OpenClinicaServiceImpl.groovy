@@ -138,7 +138,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		
 		def exportResponseMessages = [:]
 		
-		if(dataList.size == 0) {
+		if(dataList.size() == 0) {
 
 			def message = "No data items found to export."
 			
