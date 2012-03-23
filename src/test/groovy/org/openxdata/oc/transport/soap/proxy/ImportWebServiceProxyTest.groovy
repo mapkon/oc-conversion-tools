@@ -52,18 +52,30 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 	@Test void testImportShouldSuccessOnCorrectInstanceData(){
 
 		play{
-			def message = importProxy.importData(TestData.getInstanceData())
-			assertEquals 'Success', message
+			
+			def messages = importProxy.importData(TestData.getInstanceData())
+			assertEquals 'Success', messages.get("F_MSA2_1")
+		}
+	}
+	
+	@Test void testImportShouldReturnFailOnErraticImport(){
+
+		def connectionFactory2 = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
+		
+		play{
+
+			def importProxy2 = new ImportWebServiceProxy(connectionFactory:connectionFactory2)
+			def messages = importProxy2.importData(TestData.getInstanceData())
+			assertEquals 'Fail: Subject key not found', messages.get("F_MSA2_1")
 		}
 	}
 
-	@Test void testImportShouldFailOnIncorrectImport(){
-		def connectionFactory2 = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
+	@Test void testImportShouldFailOnWithCorrectExceptionOnEmptyInstanceData(){
+		
 		play{
 			shouldFail(ImportException){
-				def importProxy2 = new ImportWebServiceProxy(connectionFactory:connectionFactory2)
-				def message = importProxy2.importData([])
-				assertEquals 'Error', message
+				def message = importProxy.importData([])
+				assertEquals 'Error', message[0]
 			}
 		}
 	}

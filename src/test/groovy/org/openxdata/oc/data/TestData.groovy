@@ -10,6 +10,18 @@ import org.openxdata.server.admin.model.FormData
 @Ignore("Some maven installations will attempt to run this as a test")
 class TestData {
 
+	static def createImportMessages(){
+		
+		def messages = [:]
+		
+		messages.put("F_MSA2_1",'Success')
+		messages.put("key1", "Fail: Incorrect FormData OID")
+		messages.put("F_MSA2_2", 'Success')
+		messages.put("key3", 'Fail: Subject key not found')
+		
+		return messages
+	}
+	
 	static def getCRFWebServiceResponse() {
 		
 		def response = new TransformUtil().loadFileContents("crf-metadata-response.xml")
@@ -161,7 +173,7 @@ class TestData {
 									   <SOAP-ENV:Body>
 									      <importDataResponse xmlns="http://openclinica.org/ws/data/v1">
 									         <result>Fail</result>
-									         <error>Error.</error>
+									         <error>Subject key not found</error>
 									      </importDataResponse>
 									   </SOAP-ENV:Body>
 									</SOAP-ENV:Envelope>'''

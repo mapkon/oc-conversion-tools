@@ -115,48 +115,55 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 	}
 	
 	@Override
-	public String exportOpenClinicaStudyData() {
+	public HashMap<String, String> exportOpenClinicaStudyData() {
 
 		List<FormData> dataList = dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 
 		log.info("Running OpenClinica Export Routine to export «" + dataList.size()	+ "» form data item(s)")
 
-		String exportResponseMessage = buildResponseMessage(dataList)
+		def exportResponseMessages = buildResponseMessage(dataList)
 
-		if("Success".equals(exportResponseMessage)) {
+		for(Map.Entry<String, String> entry : exportResponseMessages.entrySet()) {
 			
-			updateExportedDataItems(dataList)
+			def key = entry.key
+			if(exportResponseMessages.get(key).is("Success")) {
+				updateExportedDataItems(dataList, key)
+			}
 		}
 
-		return exportResponseMessage
+		return exportResponseMessages
 	}
 
-	private String buildResponseMessage(List<FormData> dataList) {
+	private def buildResponseMessage(def dataList) {
 		
-		def exportResponseMessage
+		def exportResponseMessages = [:]
 		
 		if(dataList.size == 0) {
 
 			def message = "No data items found to export."
 			
 			log.info(message)
-			exportResponseMessage = message
+			exportResponseMessages.put("", message)
 		}
 		else {
-			exportResponseMessage = client.importData(dataList)
+			exportResponseMessages = client.importData(dataList)
 		}
 			
-		return exportResponseMessage
+		return exportResponseMessages
 	}
 
-	private updateExportedDataItems(List<FormData> dataList) {
-		
+	private updateExportedDataItems(def dataList, def key) {
+
 		dataList.each {
 
-			log.info("Resetting Export Flag for form data with id: " + it.getId())
+			def xml = new XmlSlurper().parseText(it.getData())
+			
+			if(key.equals(xml.@formKey.text())) {
+				log.info("Resetting Export Flag for form data with id: " + it.getId())
 
-			dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
-			it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
+				dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
+				it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
+			}
 		}
 	}
 	

@@ -16,8 +16,10 @@
 		   <div class = "heading">OpenClinica Study Management</div>
 		   <div class="studies-table">
 		   		<div class = "studies-table-label">Study</div>				
-				<div class="message-div"><%= request.getAttribute("message")%></div>
-				<%	Object name = request.getAttribute("name");%>
+				<div class="studies-table-label">Study</div>
+					<c:forEach items="${message}" var="msg">
+						<div class="message-div">${msg.key}  ${msg.value}</div>
+					</c:forEach>
 				<div class="input-div">Study OID: <input type="text" name="oid"/></div>
 				<div class="buttonStrip">
 		   			<input class="button-style" type="submit" value="Import" name="action" title="Import"/>

@@ -16,7 +16,7 @@ public interface OpenClinicaService {
 		
 	StudyDef importOpenClinicaStudy(String oid) throws UnexpectedException
 
-	String exportOpenClinicaStudyData()
+	HashMap<String, String> exportOpenClinicaStudyData()
 
 	List<StudySubject> getStudySubjectEvents(String studyOID)
 	

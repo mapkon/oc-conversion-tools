@@ -47,7 +47,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public String importData(List<FormData> instanceData){
+	public HashMap<String, String> importData(List<FormData> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData)

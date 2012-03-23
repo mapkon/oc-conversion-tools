@@ -200,16 +200,29 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatSuccessfulImportReturnsCorrectMessage() {
+	@Test void testThatSuccessfulImportReturnsCorrectMessageOnSuccessfulImport() {
 		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
 		play{
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def reponse = client.importData(TestData.getInstanceData())
+			def importMessages = client.importData(TestData.getInstanceData())
 			
-			assertEquals 'Success', reponse
+			assertEquals 'Success', importMessages.get("F_MSA2_1")
+		}
+	}
+	
+	@Test void testThatSuccessfulImportReturnsCorrectMessageOnErraticImport() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
+		play{
+			
+			client.setConnectionFactory(connectionFactory)
+			
+			def importMessages = client.importData(TestData.getInstanceData())
+			
+			assertEquals 'Fail: Subject key not found', importMessages.get("F_MSA2_1")
 		}
 	}
 	

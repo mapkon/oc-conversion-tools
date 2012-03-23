@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -109,7 +110,10 @@ public class OpenClinicaServlet extends HttpServlet {
     	
     	try {
     		
-    		request.setAttribute("message", "No studies downlaoded during this session.");
+    		HashMap<String, String> map = new HashMap<String, String>();
+    		map.put(" ", "No studies downlaoded during this session.");
+    		
+    		request.setAttribute("message", map);
 			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
 			
 		} catch (ServletException e) {
@@ -122,6 +126,7 @@ public class OpenClinicaServlet extends HttpServlet {
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		
+		HashMap<String, String> map = new HashMap<String, String>();
 		try {
 			
 	    	StudyDef study = null;
@@ -134,7 +139,9 @@ public class OpenClinicaServlet extends HttpServlet {
 	    		
 	    		study = fetchAndSaveStudy(oid);
 	    		
-	    		request.setAttribute("message", "Successful Import");
+	    		map.put("", "OpenClinica Study successfully converted and Imported");
+	    		
+	    		request.setAttribute("message", map);
 	    		
 	    		request.setAttribute("study", study);
 		    	request.setAttribute("name", study.getName());
@@ -142,8 +149,8 @@ public class OpenClinicaServlet extends HttpServlet {
 	    	}
 	    	else if(EXPORT.equals(action)) {
 	    		
-	    		String message = exportStudyData();
-	    		request.setAttribute("message", message);
+	    		HashMap<String, String> messages = exportStudyData();
+	    		request.setAttribute("message", messages);
 	    	}
 	    	
 	    	request.setAttribute("user", user);
@@ -153,7 +160,8 @@ public class OpenClinicaServlet extends HttpServlet {
 		}catch (Exception ex) {
 			
 			log.error(ex.getLocalizedMessage());
-			request.setAttribute("message", ex.getLocalizedMessage());
+			map.clear();
+			request.setAttribute("message", map.put("", ex.getLocalizedMessage()));
 			
 	    	redirectToOpenClinicaPage(request, response);
 		}
@@ -187,15 +195,15 @@ public class OpenClinicaServlet extends HttpServlet {
 		return user;
 	}
 	
-	private String exportStudyData() throws ImportException {
+	private HashMap<String, String> exportStudyData() throws ImportException {
 		
 		log.info("Initiating Export of Study Data to OpenClinica...");
 		
-		String result = openclinicaService.exportOpenClinicaStudyData();
-		if("Error".equals(result))
+		HashMap<String, String> exportMessages = openclinicaService.exportOpenClinicaStudyData();
+		if("Error".equals(exportMessages))
 			throw new ImportException("Exception occurred during export of data to openclinica. Check log for details.");
 		
-		return result;
+		return exportMessages;
 	}
     
 	private StudyDef fetchAndSaveStudy(String oid) {

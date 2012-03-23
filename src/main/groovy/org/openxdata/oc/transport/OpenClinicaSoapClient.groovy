@@ -15,7 +15,7 @@ public interface OpenClinicaSoapClient {
 		
 	def getOpenxdataForm(def studyIdentifier)
 
-	String importData(List<FormData> instanceData)
+	HashMap<String, String> importData(List<FormData> instanceData)
 	
 	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID)
 }
