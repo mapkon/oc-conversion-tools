@@ -25,8 +25,9 @@
 		   			<input class="button-style" type="submit" value="Import" name="action" title="Import"/>
 		   			<input class="button-style" type="submit" value="Export" name="action" title="Export"/>
 		   		</div>
-		   		<div class="study-table">					
-					<c:if test="${!empty name}">
+		   		<div class="study-table">
+
+					<c:if test="${not empty name }">
 						<table cellpadding="0" cellspacing="0" width="600px">
 							<thead>
 								<tr>
@@ -36,13 +37,13 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><%= request.getAttribute("name")%></td>
-									<td><%= request.getAttribute("key")%></td>
+									<td>${name}</td>
+									<td>${key}</td>
 								</tr>
 							</tbody>
 						</table>
 					</c:if>
-		   		</div>		   		
+				</div>   		
 		   </div>
 		</div>
 	 </div>
