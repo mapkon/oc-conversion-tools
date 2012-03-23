@@ -96,8 +96,11 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 						formReferences.add(frmRfrnc);
 
 					}
-					workitem[0] = entry.getKey() + "-" + event.getEventName();
-					workitem[1] = getKey(event);
+					if (formReferences.isEmpty())
+						continue;
+					workitem[0] = studySubject.getSubjectOID() + "-"
+							+ event.getEventName();
+					workitem[1] = getKey(studySubject, event);
 					workitem[2] = formReferences;
 					workitems.add(workitem);
 				}
@@ -112,13 +115,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	private String getKey(Event event) {
-		String key = event.getFormOIDs().toString() + "-";
-		//Object[] subjectKeys = (Object[]) event.getSubjectKeys();
-		//		for (int i = 0; i < subjectKeys.length; i++) {
-		//			Object object = subjectKeys[i];
-		//			key = key + ":" + object;
-		//		}
+	private String getKey(StudySubject studySubject, Event event) {
+		String key = studySubject.getSubjectOID().toString();
+		key = key + "&" + event.getEventDefinitionOID();
 		return key;
 	}
 
