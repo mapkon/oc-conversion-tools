@@ -111,7 +111,7 @@ public class OpenClinicaServlet extends HttpServlet {
     	try {
     		
     		HashMap<String, String> map = new HashMap<String, String>();
-    		map.put(" ", "No studies downlaoded during this session.");
+    		map.put(" ", "No studies downloaded during this session.");
     		
     		request.setAttribute("message", map);
 			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
