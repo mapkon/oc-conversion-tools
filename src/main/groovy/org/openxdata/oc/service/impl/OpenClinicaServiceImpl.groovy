@@ -127,7 +127,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 			
 			def key = entry.key
 			if(exportResponseMessages.get(key).is("Success")) {
-				updateExportedDataItems(dataList, key)
+				setFormDataExportedForKey(dataList, key)
 			}
 		}
 
@@ -152,7 +152,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		return exportResponseMessages
 	}
 
-	private updateExportedDataItems(def dataList, def key) {
+	private setFormDataExportedForKey(def dataList, def key) {
 
 		dataList.each {
 
