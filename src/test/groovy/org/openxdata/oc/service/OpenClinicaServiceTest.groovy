@@ -166,7 +166,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		
 		Mockito.verify(client).importData(Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
-		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
+		Mockito.verify(dataExportService, Mockito.atMost(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 		
 	}
 	
