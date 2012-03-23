@@ -26,7 +26,6 @@ class OpenClinicaServletTest extends GroovyTestCase {
 	def response
 
 	@Mock OpenClinicaService service
-	@Mock OpenClinicaSoapClient client
 	@InjectMocks def servlet = new OpenClinicaServlet()
 
 	@Before void setUp() {
@@ -34,8 +33,6 @@ class OpenClinicaServletTest extends GroovyTestCase {
 		def map = new HashMap()
 		map.put(null, "No data items found to export.")
 		
-		Mockito.when(client.importData(Mockito.anyList())).thenReturn("Success")
-		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
 		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(createStudy())
 		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn(map)
 		
