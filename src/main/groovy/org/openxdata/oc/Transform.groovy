@@ -16,16 +16,14 @@ import org.openxdata.oc.util.TransformUtil
 public class Transform {
 	
 	def util
-	private static def INSTANCE = new Transform()
 	
 	private Transform() {
+		
+		log.info("Creating transformer for this session.")
+		
 		util = new TransformUtil()
 	}
 	
-	public static Transform getTransformer() {
-		return INSTANCE
-	}
-
 	def ConvertODMToXform(def odm){
 
 		try{
