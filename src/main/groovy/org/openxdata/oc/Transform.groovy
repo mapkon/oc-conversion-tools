@@ -63,7 +63,7 @@ public class Transform {
 		return doc
 	}
 	
-	def parseMeasurementUnits(def doc){
+	private def parseMeasurementUnits(def doc){
 		
 		log.info("Parsing Measurement units...")
 
@@ -90,7 +90,7 @@ public class Transform {
 		return text
 	}
 
-	def serializeXformNode(def doc){
+	private def serializeXformNode(def doc){
 		
 		log.info("Transforming the xform tag to string...")
 
