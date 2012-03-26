@@ -124,13 +124,11 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	@Test void testUnAvailableExceptionShouldBeThrownWhenServerCannotBeReached(){
 		def mock = new MockFor(HttpTransportHandler)
 		mock.demand.sendRequest { throw new UnAvailableException("Server is unreacheable!") }
-		
+
 		def handler = mock.proxyInstance()
-		
-		play{
-			shouldFail(UnAvailableException) {
-				def response = handler.sendRequest(null)
-			}
+
+		shouldFail(UnAvailableException) {
+			def response = handler.sendRequest(null)
 		}
 	}
 	

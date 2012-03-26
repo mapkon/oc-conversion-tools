@@ -227,19 +227,19 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testThatImportDataReturnsErrorOnIncorrectODM(){
+		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
-		play{
 
-			shouldFail(ImportException){
-				
-				client.setConnectionFactory(connectionFactory)
-				
-				def reponse = client.importData([])
-			}
+		shouldFail(ImportException){
+
+			client.setConnectionFactory(connectionFactory)
+
+			def reponse = client.importData([])
 		}
 	}
 	
 	@Test void testThatInvalidXmlThrowsRaisesTransformationException(){
+		
 		def connectionFactory = setUpConnectionFactoryMock('''<////ODM>''')
 		
 		shouldFail(ImportException){
