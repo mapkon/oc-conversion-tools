@@ -24,7 +24,7 @@ public class Transform {
 		util = new TransformUtil()
 	}
 	
-	def ConvertODMToXform(def odm){
+	def convert(def odm){
 
 		try{
 			
