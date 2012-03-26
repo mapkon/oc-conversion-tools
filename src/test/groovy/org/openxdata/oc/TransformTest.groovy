@@ -14,9 +14,10 @@ class TransformTest extends GroovyTestCase {
 	def subjectKeyGroup
 
 	public void setUp(){
+		
 		def inputString = new TransformUtil().loadFileContents("test-odm.xml")
 		
-		convertedXform = new Transform().ConvertODMToXform(inputString)
+		convertedXform = new Transform().convert(inputString)
 		inputDoc = new XmlParser().parseText(inputString)
 		
 	}
