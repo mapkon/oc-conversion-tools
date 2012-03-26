@@ -1,4 +1,4 @@
-package org.openxdata.oc.transport;
+package org.openxdata.oc.transport
 
 import static org.hamcrest.Matchers.*
 import groovy.mock.interceptor.MockFor
