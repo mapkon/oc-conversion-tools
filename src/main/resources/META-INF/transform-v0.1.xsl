@@ -336,13 +336,13 @@
 
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:MeasurementUnitRef">
-				<xsl:variable name="unitId">
+				<xsl:variable name="measurementUnitOID">
 					<xsl:value-of select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
 				</xsl:variable>
 				<xsl:value-of
-					select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
+					select="//odm:MeasurementUnit[@OID=$measurementUnitOID]/odm:Symbol/odm:TranslatedText" />
 			</xsl:when>
-			<xsl:otherwise>
+			<xsl:otherwise >
 				<xsl:value-of select="$itemDef/@Comment" />
 			</xsl:otherwise>
 		</xsl:choose>
