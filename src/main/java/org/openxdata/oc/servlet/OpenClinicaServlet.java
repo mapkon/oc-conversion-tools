@@ -146,6 +146,7 @@ public class OpenClinicaServlet extends HttpServlet {
 				request.setAttribute("study", study);
 				request.setAttribute("name", study.getName());
 				request.setAttribute("key", study.getStudyKey());
+
 			} else if (EXPORT.equals(action)) {
 
 				HashMap<String, String> messages = exportStudyData();
@@ -229,7 +230,7 @@ public class OpenClinicaServlet extends HttpServlet {
 					inspectStudyFormVersions(version, study);
 				}
 
-				log.info("Saving existing [converted] Study: " + existingStudy.getName());
+				log.info("Saving existing «converted» Study: " + existingStudy.getName());
 
 				studyService.saveStudy(existingStudy);
 

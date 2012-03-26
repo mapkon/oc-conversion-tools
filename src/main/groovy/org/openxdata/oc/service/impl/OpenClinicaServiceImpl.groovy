@@ -178,7 +178,4 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 	public void setDataExportService(DataExportService dataExportService) {
 		this.dataExportService = dataExportService
 	}
-	
-
-
 }
