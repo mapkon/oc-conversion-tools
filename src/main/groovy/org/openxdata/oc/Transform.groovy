@@ -28,9 +28,7 @@ public class Transform {
 
 		try{
 			
-			def xform = transformODMToXform(odm)
-			
-			return xform
+			return transformODMToXform(odm)
 			
 		}catch(def ex){
 		
