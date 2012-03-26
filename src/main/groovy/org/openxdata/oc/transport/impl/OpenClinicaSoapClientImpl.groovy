@@ -3,7 +3,7 @@ package org.openxdata.oc.transport.impl
 import groovy.util.logging.Log
 
 import org.openxdata.oc.Transform
-import org.openxdata.oc.exception.TransformationException
+import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -61,7 +61,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 		}catch(def ex){
 			log.info(ex.getMessage())
-			throw new TransformationException(ex.getMessage())
+			throw new ImportException(ex.getMessage())
 		}
 	}
 

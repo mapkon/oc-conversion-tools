@@ -241,13 +241,12 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	@Test void testThatInvalidXmlThrowsRaisesTransformationException(){
 		def connectionFactory = setUpConnectionFactoryMock('''<////ODM>''')
-		play{
-			shouldFail(TransformationException){
-				
-				client.setConnectionFactory(connectionFactory)
-				
-				def xml = client.getOpenxdataForm("001")
-			}
+		
+		shouldFail(ImportException){
+
+			client.setConnectionFactory(connectionFactory)
+
+			def xml = client.getOpenxdataForm("001")
 		}
 	}
 	
