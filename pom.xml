@@ -386,7 +386,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                <configFile>./eclipse.default.codestyle.xml</configFile>
+                <configFile>./openxdata-eclipse-codestyle.xml.rb.xml</configFile>
 <!--                <includes>
                     <include>**/*.xml</include>
                     </includes>-->
