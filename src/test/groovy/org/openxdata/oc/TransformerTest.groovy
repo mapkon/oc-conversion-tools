@@ -7,7 +7,7 @@ import org.junit.Test
 import org.openxdata.oc.util.TransformUtil
 
 
-class TransformTest extends GroovyTestCase {
+class TransformerTest extends GroovyTestCase {
 
 	def inputDoc
 	def convertedXform
@@ -17,7 +17,7 @@ class TransformTest extends GroovyTestCase {
 		
 		def inputString = new TransformUtil().loadFileContents("test-odm.xml")
 		
-		convertedXform = new Transform().convert(inputString)
+		convertedXform = new Transformer().convert(inputString)
 		inputDoc = new XmlParser().parseText(inputString)
 		
 	}
