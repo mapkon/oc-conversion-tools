@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -45,7 +46,7 @@ public class OpenClinicaServlet extends HttpServlet {
 	private Properties props = new Properties();
 	private MultiProtocolSubmissionServlet mobileServlet;
 	private DataExportService dataExportService;
-	private OpenClinicaService OpenClinicaService;
+	private OpenClinicaService openclinicaService;
 	private AuthenticationService authenticationService;
 
 	private final Logger log = LoggerFactory.getLogger(OpenClinicaServlet.class);
@@ -67,11 +68,11 @@ public class OpenClinicaServlet extends HttpServlet {
 
 		props = loadProperties();
 
-		OpenClinicaService = new OpenClinicaServiceImpl(props);
+		openclinicaService = new OpenClinicaServiceImpl(props);
 
-		OpenClinicaService.setStudyService(studyService);
-		OpenClinicaService.setFormService(formService);
-		OpenClinicaService.setDataExportService(dataExportService);
+		openclinicaService.setStudyService(studyService);
+		openclinicaService.setFormService(formService);
+		openclinicaService.setDataExportService(dataExportService);
 
 		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx, OpenClinicaService);
 
@@ -112,6 +113,11 @@ public class OpenClinicaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put(" ", "No studies downloaded during this session.");
+
+			request.setAttribute("message", map);
 			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
 
 		} catch (ServletException e) {
@@ -124,6 +130,7 @@ public class OpenClinicaServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
+		HashMap<String, String> map = new HashMap<String, String>();
 		try {
 
 			StudyDef study = null;
@@ -138,15 +145,18 @@ public class OpenClinicaServlet extends HttpServlet {
 
 				study = fetchAndSaveStudy(oid);
 
-				request.setAttribute("message", "Successful Import");
+				map.put("", "OpenClinica Study successfully converted and Imported");
+
+				request.setAttribute("message", map);
 
 				request.setAttribute("study", study);
 				request.setAttribute("name", study.getName());
 				request.setAttribute("key", study.getStudyKey());
+
 			} else if (EXPORT.equals(action)) {
 
-				String message = exportStudyData();
-				request.setAttribute("message", message);
+				HashMap<String, String> messages = exportStudyData();
+				request.setAttribute("message", messages);
 			}
 
 			request.setAttribute("user", user);
@@ -194,17 +204,15 @@ public class OpenClinicaServlet extends HttpServlet {
 
 		log.info("Initiating Export of Study Data to OpenClinica...");
 
-		String result = OpenClinicaService.exportOpenClinicaStudyData();
-		if ("Error".equals(result))
-			throw new ImportException("Exception occurred during export of data to openclinica. Check log for details.");
+		HashMap<String, String> exportMessages = openclinicaService.exportOpenClinicaStudyData();
 
-		return result;
+		return exportMessages;
 	}
 
 	private StudyDef fetchAndSaveStudy(String oid) {
 
 		log.info("Fetching study for oid: " + oid);
-		StudyDef study = OpenClinicaService.importOpenClinicaStudy(oid);
+		StudyDef study = openclinicaService.importOpenClinicaStudy(oid);
 		study = validateAndSaveStudy(study);
 
 		return study;
@@ -267,8 +275,8 @@ public class OpenClinicaServlet extends HttpServlet {
 		String incrementVersionName = versionToIncrement.getName();
 		String nextVersion = form.getNextVersionName();
 
-		String newVersionName = incrementVersionName.replace(incrementVersionName.substring(incrementVersionName
-				.length() - 2), nextVersion);
+		String newVersionName = incrementVersionName.replace(
+				incrementVersionName.substring(incrementVersionName.length() - 2), nextVersion);
 
 		versionToIncrement.setName(newVersionName);
 

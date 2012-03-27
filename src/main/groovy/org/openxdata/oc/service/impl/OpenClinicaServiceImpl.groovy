@@ -129,6 +129,8 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 			if(exportResponseMessages.get(key).is("Success")) {
 				setFormDataExportedForKey(dataList, key)
 			}
+			
+			log.info("Export of data item with id: ${key} finished with message: ${exportResponseMessages.get(key)}")
 		}
 
 		return exportResponseMessages
