@@ -200,8 +200,6 @@ public class OpenClinicaServlet extends HttpServlet {
 		log.info("Initiating Export of Study Data to OpenClinica...");
 
 		HashMap<String, String> exportMessages = openclinicaService.exportOpenClinicaStudyData();
-		if ("Error".equals(exportMessages))
-			throw new ImportException("Exception occurred during export of data to openclinica. Check log for details.");
 
 		return exportMessages;
 	}
