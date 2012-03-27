@@ -74,7 +74,7 @@ public class OpenClinicaServlet extends HttpServlet {
 		openclinicaService.setFormService(formService);
 		openclinicaService.setDataExportService(dataExportService);
 
-		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx, OpenClinicaService);
+		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx, openclinicaService);
 
 	}
 
@@ -200,7 +200,7 @@ public class OpenClinicaServlet extends HttpServlet {
 		return user;
 	}
 
-	private String exportStudyData() throws ImportException {
+	private HashMap<String, String> exportStudyData() throws ImportException {
 
 		log.info("Initiating Export of Study Data to OpenClinica...");
 
@@ -275,8 +275,8 @@ public class OpenClinicaServlet extends HttpServlet {
 		String incrementVersionName = versionToIncrement.getName();
 		String nextVersion = form.getNextVersionName();
 
-		String newVersionName = incrementVersionName.replace(
-				incrementVersionName.substring(incrementVersionName.length() - 2), nextVersion);
+		String newVersionName = incrementVersionName.replace(incrementVersionName.substring(incrementVersionName
+				.length() - 2), nextVersion);
 
 		versionToIncrement.setName(newVersionName);
 
