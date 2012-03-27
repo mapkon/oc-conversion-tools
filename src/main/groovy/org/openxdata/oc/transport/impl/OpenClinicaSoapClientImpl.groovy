@@ -2,7 +2,7 @@ package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.Transform
+import org.openxdata.oc.Transformer
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.transport.OpenClinicaSoapClient
@@ -70,13 +70,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 		log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
 		
-		def transformer = new Transform()
+		def transformer = new Transformer()
 		
 		def odmMetaData = findAllCRFS(studyOID)
 		
-		def convertedXform = transformer.convert(odmMetaData)
+		return transformer.convert(odmMetaData)
 
-		return convertedXform
 	}
 	
 	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID){

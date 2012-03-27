@@ -13,11 +13,11 @@ import org.openxdata.oc.util.TransformUtil
 
 
 @Log
-public class Transform {
+public class Transformer {
 	
 	def util
 	
-	private Transform() {
+	private Transformer() {
 		
 		log.info("Creating transformer for this session.")
 		
