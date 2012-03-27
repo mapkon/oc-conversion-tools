@@ -7,7 +7,6 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.oc.exception.TransformationException
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.util.PropertiesUtil
 
@@ -200,41 +199,53 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatSuccessfulImportReturnsCorrectMessage() {
+	@Test void testThatSuccessfulImportReturnsCorrectMessageOnSuccessfulImport() {
 		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
 		play{
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def reponse = client.importData(TestData.getInstanceData())
+			def importMessages = client.importData(TestData.getInstanceData())
 			
-			assertEquals 'Success', reponse
+			assertEquals 'Success', importMessages.get("F_MSA2_1")
+		}
+	}
+	
+	@Test void testThatSuccessfulImportReturnsCorrectMessageOnErraticImport() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
+		play{
+			
+			client.setConnectionFactory(connectionFactory)
+			
+			def importMessages = client.importData(TestData.getInstanceData())
+			
+			assertEquals 'Fail: Subject key not found', importMessages.get("F_MSA2_1")
 		}
 	}
 	
 	@Test void testThatImportDataReturnsErrorOnIncorrectODM(){
+		
 		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPErrorResponse)
-		play{
 
-			shouldFail(ImportException){
-				
-				client.setConnectionFactory(connectionFactory)
-				
-				def reponse = client.importData([])
-			}
+		shouldFail(ImportException){
+
+			client.setConnectionFactory(connectionFactory)
+
+			def reponse = client.importData([])
 		}
 	}
 	
 	@Test void testThatInvalidXmlThrowsRaisesTransformationException(){
+		
 		def connectionFactory = setUpConnectionFactoryMock('''<////ODM>''')
-		play{
-			shouldFail(TransformationException){
-				
-				client.setConnectionFactory(connectionFactory)
-				
-				def xml = client.getOpenxdataForm("001")
-			}
+		
+		shouldFail(ImportException){
+
+			client.setConnectionFactory(connectionFactory)
+
+			def xml = client.getOpenxdataForm("001")
 		}
 	}
 	

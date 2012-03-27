@@ -42,7 +42,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createFormDataList()
 
 		Mockito.when(client.findStudySubjectEventsByStudyOID(Mockito.anyString())).thenReturn(createStudySubjectEvents())
-		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Success")
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(TestData.createImportMessages())
 		Mockito.when(client.getOpenxdataForm(Mockito.anyString())).thenReturn(TestData.getConvertedXform())
 		
 		Mockito.when(studyService.getStudies()).thenReturn(createStudyList())
@@ -58,8 +58,11 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		FormData formData = new FormData()
 		formData.setId(1)
+		formData.setData("""<ODM formKey="F_MSA2_1"></ODM>""")
+		
 		FormData formData2 = new FormData()
 		formData2.setId(2)
+		formData2.setData("""<ODM formKey="F_MSA2_2"></ODM>""")
 
 		formDataList.add(formData)
 		formDataList.add(formData2)
@@ -117,11 +120,11 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.verify(studyService, Mockito.atLeastOnce()).hasEditableData(Mockito.any(Editable.class))
 	}
 
-	@Test public void testExportDataShouldReturnSuccessMessage() {
+	@Test public void testExportDataShouldReturnsCorrectNumberOfMessages() {
 
-		String message = openClinicaService.exportOpenClinicaStudyData()
+		def messages = openClinicaService.exportOpenClinicaStudyData()
 		
-		assertEquals("Success", message)
+		assertEquals 4, messages.size()
 		
 		Mockito.verify(client).importData(Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
@@ -132,21 +135,19 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn([])
 		
-		String message = openClinicaService.exportOpenClinicaStudyData()
+		def messages = openClinicaService.exportOpenClinicaStudyData()
 		
-		assertEquals("No data items found to export.", message)
+		assertEquals("No data items found to export.", messages.get(""))
 		
 		Mockito.verify(client, Mockito.atLeast(0)).importData(Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atLeast(0)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
 	
-	@Test public void testExportDataShouldShouldFailOnEmptyInstanceDataWithMessage() {
+	@Test public void testExportDataShouldReturnFailureMessageOnErraticExport() {
 
-		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn("Fail")
-		
-		String message = openClinicaService.exportOpenClinicaStudyData()
-		assertEquals("Fail", message)
+		def messages = openClinicaService.exportOpenClinicaStudyData()
+		assertEquals("Fail: Incorrect FormData OID", messages.get("key1"))
 		
 		Mockito.verify(client).importData(Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
@@ -165,7 +166,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		
 		Mockito.verify(client).importData(Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
-		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
+		Mockito.verify(dataExportService, Mockito.atMost(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 		
 	}
 	

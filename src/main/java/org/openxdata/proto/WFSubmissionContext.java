@@ -5,8 +5,7 @@ import java.util.Map;
 
 public interface WFSubmissionContext extends SubmissionContext {
 
-	public Map<String, String> getOutParamsQuestionMapping(int formId,
-			String caseId);
+	public Map<String, String> getOutParamsQuestionMapping(int formId, String caseId);
 
 	/**
 	 *TaskName = objects[0]

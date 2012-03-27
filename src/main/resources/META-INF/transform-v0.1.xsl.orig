@@ -284,11 +284,22 @@
 							</value>
 						</item>
 					</xsl:for-each>
+<<<<<<< HEAD
+						<hint>
+							<xsl:variable name="unitId">
+								<xsl:value-of
+									select="$itemDef/odm:MeasurementUnitRef/@MeasurementUnitOID" />
+							</xsl:variable>
+							<xsl:value-of
+								select="//odm:MeasurementUnit[@OID=$unitId]/odm:Symbol/odm:TranslatedText" />
+						</hint>
+=======
 					<hint>
 						<xsl:call-template name="createHintText">
 							<xsl:with-param name="itemDef" select="$itemDef" />
 						</xsl:call-template>
 					</hint>
+>>>>>>> upstream/master
 				</select1>
 			</xsl:when>
 			<xsl:otherwise>

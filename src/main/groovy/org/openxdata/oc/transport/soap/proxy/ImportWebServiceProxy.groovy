@@ -7,6 +7,7 @@ import org.openxdata.oc.model.ODMInstanceDataDefinition
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
+
 @Log
 class ImportWebServiceProxy extends SoapRequestProperties {
 
@@ -21,11 +22,11 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 					 </soapenv:Envelope>"""
 	}
 	
-	def importData(def instanceData){
+	HashMap<String, String> importData(def instanceData){
 
 		log.info("Starting import to Openclinca.")
 
-		def message
+		def messages = [:]
 		def importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
 
 		importXml.each {
@@ -35,24 +36,32 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 			def transportHandler = new HttpTransportHandler(envelope:envelope)
 			def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
 
-			message = getImportWebServiceResponse(response)
+			def message = getImportWebServiceResponse(response)
+			
+			def xml = new XmlSlurper().parseText(it)
+			
+			def formKey = xml.@formKey.text()
+			
+			messages.put(formKey, message)
 			
 		}
 		
-		return message
+		return messages
 	}
 	
 	private def getImportWebServiceResponse(response) {
 		
 		def result = response.depthFirst().result[0].text()
+		
 		if(result == "Success"){
 			log.info("Data successfully exported to OpenClinica.")
-			return result
 		}
 		else{
 			
+			result = result + ":" + " ${response.depthFirst().error[0].text() }"
 			log.info("Data Export to OpenClinica Failed with Error: ${result}")
-			throw new ImportException('The Import to OpenClinica didnot complete successfully. Check logs for more information.')
 		}
+		
+		return result
 	}
 }

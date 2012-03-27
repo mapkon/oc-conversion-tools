@@ -7,16 +7,17 @@ import org.junit.Test
 import org.openxdata.oc.util.TransformUtil
 
 
-class TransformTest extends GroovyTestCase {
+class TransformerTest extends GroovyTestCase {
 
 	def inputDoc
 	def convertedXform
 	def subjectKeyGroup
 
 	public void setUp(){
+		
 		def inputString = new TransformUtil().loadFileContents("test-odm.xml")
 		
-		convertedXform = new Transform().ConvertODMToXform(inputString)
+		convertedXform = new Transformer().convert(inputString)
 		inputDoc = new XmlParser().parseText(inputString)
 		
 	}
@@ -282,7 +283,55 @@ class TransformTest extends GroovyTestCase {
 
 	}
 	
-	def getRequiredQuestions() {
+	@Test void testThatEveryQuestionHasAHint() {
+
+		getGroups().each {
+
+			def hintNode = getHintNode(it)
+			assertEquals "Every question must have a hint", "hint", hintNode.name()
+		}
+	}
+	
+	@Test void testThatHintTextIsNotNull() {
+		
+		getGroups().each {
+
+			def hintNode = getHintNode(it)
+			assertNotNull "Hint text should not be null", hintNode.text()
+		}
+	}
+	
+	@Test void testThatHintTextForSubjectKeyIsCorrect() {
+		
+		def subjectGroup = getGroups()[0]
+		
+		def subjectGroupHintNode = getHintNode(subjectGroup)
+		
+		assertEquals "The subject key for whom you are collecting data for.", subjectGroupHintNode.text()
+	}
+	
+	private def getGroups() {
+		
+		def groups = []
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def xGroups = it.depthFirst().findAll { it.name().is("group")}
+			xGroups.each { group ->
+				groups.add(group)
+			}
+		}
+		
+		return groups
+	}
+
+	private def getHintNode(def group) {
+		
+		return group.depthFirst().find{it.name().is("hint")}
+	}
+	
+	private def getRequiredQuestions() {
 
 		def qtns = []
 
@@ -298,18 +347,18 @@ class TransformTest extends GroovyTestCase {
 		return qtns
 	}
 	
-	def getRepeats() {
+	private def getRepeats() {
 		
 		def repeats = []
 		def xformNodes = getXformNodes()
 		
 		xformNodes.each {
-			def rpt = it.depthFirst().findAll{ it.name().toString() == 'repeat'}
+			def rpt = it.depthFirst().findAll{ it.name().is('repeat')}
 			repeats.addAll(rpt)
 		}
 	}
 	
-	def getXformNodes() {
+	private def getXformNodes() {
 
 		def nodes = []
 		convertedXform.form.each {
@@ -322,23 +371,23 @@ class TransformTest extends GroovyTestCase {
 		return nodes
 	}
 	
-	def getItemRefs() {
+	private def getItemRefs() {
 
 		def itemRefs = []
 		def versionNode = inputDoc.Study.MetaDataVersion
 		versionNode.Protocol.StudyEventRef.each {
 			def studyEventId = it.@StudyEventOID
-			def studyEventDef = versionNode.StudyEventDef.find { it.@OID == studyEventId }
+			def studyEventDef = versionNode.StudyEventDef.find { it.@OID.equals(studyEventId) }
 
 			studyEventDef.FormRef.each {
 
 				def formId = it.@FormOID
-				def formDef = versionNode.FormDef.find { it.@OID == formId }
+				def formDef = versionNode.FormDef.find { it.@OID.equals(formId) }
 
 				formDef.ItemGroupRef.each {
 
 					def itemGroupOID = it.@ItemGroupOID
-					def itemGroupDef = versionNode.ItemGroupDef.find { it.@OID == itemGroupOID }
+					def itemGroupDef = versionNode.ItemGroupDef.find { it.@OID.equals(itemGroupOID) }
 					
 					itemRefs.addAll(itemGroupDef.children())
 				}
@@ -348,18 +397,18 @@ class TransformTest extends GroovyTestCase {
 		return itemRefs
 	}
 	
-	def getBinds() {
+	private def getBinds() {
 		
 		def binds = []
 		def versionNode = inputDoc.Study.MetaDataVersion
 		versionNode.StudyEventDef.FormRef.each {
 			def formOID = it.@FormOID
-			def formDef = versionNode.FormDef.find { it.@OID == formOID }
+			def formDef = versionNode.FormDef.find { it.@OID.equals(formOID) }
 			
-			def form = convertedXform.form.find { it.@description == formDef.@OID }
+			def form = convertedXform.form.find { it.@description.equals(formDef.@OID) }
 			def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 			
-			def formBinds = xformNode.depthFirst().findAll{ it.name() == 'bind'}
+			def formBinds = xformNode.depthFirst().findAll{ it.name().is('bind')}
 			formBinds.each {
 				binds.add(it.@id)
 			}
@@ -368,14 +417,14 @@ class TransformTest extends GroovyTestCase {
 		return binds
 	}
 	
-	def getBind(def itemOID) {
+	private def getBind(def itemOID) {
 
 		def bind
 		def binds = getBinds()
 		
 		binds.each {
 
-			if(it.@id == itemOID) {
+			if(it.@id.equals(itemOID)) {
 				bind = it
 			}
 		}

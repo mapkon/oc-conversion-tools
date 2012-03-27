@@ -27,25 +27,20 @@ import org.openxdata.server.servlet.DefaultSubmissionContext;
  *
  * @author kay
  */
-public class OCSubmissionContext extends DefaultSubmissionContext implements
-		WFSubmissionContext {
+public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext {
 
 	private OpenClinicaService ocService;
 	private StudyManagerService studyManagerService;
 
-	public OCSubmissionContext(DataInputStream input, DataOutputStream output,
-			byte action, String locale, UserService userService,
-			FormDownloadService formService,
-			StudyManagerService studyManagerService,
+	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
+			UserService userService, FormDownloadService formService, StudyManagerService studyManagerService,
 			OpenClinicaService ocService) {
-		super(input, output, action, locale, userService, formService,
-				studyManagerService);
+		super(input, output, action, locale, userService, formService, studyManagerService);
 		this.studyManagerService = studyManagerService;
 		this.ocService = ocService;
 	}
 
-	public Map<String, String> getOutParamsQuestionMapping(int formId,
-			String caseId) {
+	public Map<String, String> getOutParamsQuestionMapping(int formId, String caseId) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
@@ -58,8 +53,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 	}
 
 	public List<Object[]> availableWorkitems() {
-		List<StudySubject> sbjEvents = ocService
-				.getStudySubjectEvents("S_DEFAULTS1");
+		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents("S_DEFAULTS1");
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		StudyDef oCStudyID = getOCStudyID();
 		if (oCStudyID == null) {
@@ -80,8 +74,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 					List<String> formOIDs = (List) event.getFormOIDs();
 
 					for (String formOID : formOIDs) {
-						FormDef formDef = getFormByDescription(oCStudyID,
-								formOID);
+						FormDef formDef = getFormByDescription(oCStudyID, formOID);
 						if (formDef == null) {
 							continue;
 						}
@@ -90,16 +83,14 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 						frmRfrnc[0] = oCStudyID.getId();
 						frmRfrnc[1] = formDef.getDefaultVersion().getId();
 						List<String[]> prefills = new ArrayList<String[]>();
-						prefills.add(new String[] { "SubjectKey_",
-								"SubjectKey", entry.getKey(), "false" });
+						prefills.add(new String[] { "SubjectKey_", "SubjectKey", entry.getKey(), "false" });
 						frmRfrnc[2] = prefills;
 						formReferences.add(frmRfrnc);
 
 					}
 					if (formReferences.isEmpty())
 						continue;
-					workitem[0] = studySubject.getSubjectOID() + "-"
-							+ event.getEventName();
+					workitem[0] = studySubject.getSubjectOID() + "-" + event.getEventName();
 					workitem[1] = getKey(studySubject, event);
 					workitem[2] = formReferences;
 					workitems.add(workitem);
@@ -122,8 +113,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 	}
 
 	private StudyDef getOCStudyID() {
-		List<StudyDef> studyByName = studyManagerService
-				.getStudyByName("Default Study");
+		List<StudyDef> studyByName = studyManagerService.getStudyByName("Default Study");
 		if (studyByName != null) {
 			StudyDef study = studyByName.get(0);
 			return study;
@@ -137,8 +127,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements
 		description = description.substring(0, description.lastIndexOf("_"));
 		for (FormDef formDef1 : forms) {
 			String frmDefDescr = formDef1.getDescription();
-			frmDefDescr = frmDefDescr
-					.substring(0, frmDefDescr.lastIndexOf("_"));
+			frmDefDescr = frmDefDescr.substring(0, frmDefDescr.lastIndexOf("_"));
 			if (frmDefDescr.equalsIgnoreCase(description)) {
 				return formDef1;
 			}

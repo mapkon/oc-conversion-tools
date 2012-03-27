@@ -2,8 +2,8 @@ package org.openxdata.oc.transport.impl
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.Transform
-import org.openxdata.oc.exception.TransformationException
+import org.openxdata.oc.Transformer
+import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
@@ -47,7 +47,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public String importData(List<FormData> instanceData){
+	public HashMap<String, String> importData(List<FormData> instanceData){
 		
 		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
 		return importProxy.importData(instanceData)
@@ -60,8 +60,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			return getXform(studyOID)
 
 		}catch(def ex){
+		
 			log.info(ex.getMessage())
-			throw new TransformationException(ex.getMessage())
+			throw new ImportException(ex.getMessage())
 		}
 	}
 
@@ -69,11 +70,12 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 
 		log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
 		
+		def transformer = new Transformer()
+		
 		def odmMetaData = findAllCRFS(studyOID)
 		
-		def convertedXform = Transform.getTransformer().ConvertODMToXform(odmMetaData)
+		return transformer.convert(odmMetaData)
 
-		return convertedXform
 	}
 	
 	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID){

@@ -16,30 +16,30 @@ import org.openxdata.server.admin.model.StudyDef;
 public class TransformationFixture {
 
 	private StudyDef getStudy() {
-		
+
 		Properties props = new PropertiesUtil().loadProperties("META-INF/openclinica.properties");
 		OpenClinicaService openclinicaService = new OpenClinicaServiceImpl(props);
-		
+
 		StudyDef study = openclinicaService.importOpenClinicaStudy("S_DEFAULTS1");
-		
+
 		return study;
 	}
-	
+
 	public String getStudyName() {
-		
+
 		return getStudy().getName();
 	}
-	
+
 	public String getStudyKey() {
-		
+
 		return getStudy().getStudyKey();
 	}
-	
+
 	public int getForms() {
-		
+
 		return getStudy().getForms().size();
 	}
-	
+
 	public String getFormName(String formName) {
 
 		return getStudy().getForm(formName).getName();

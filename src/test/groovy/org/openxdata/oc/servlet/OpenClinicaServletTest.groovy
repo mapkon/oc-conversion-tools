@@ -26,16 +26,15 @@ class OpenClinicaServletTest extends GroovyTestCase {
 	def response
 
 	@Mock OpenClinicaService service
-	@Mock OpenClinicaSoapClient client
 	@InjectMocks def servlet = new OpenClinicaServlet()
 
 	@Before void setUp() {
 
-		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(createStudy())
-		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn("No data to export. Collect Data and then export.")
+		def map = new HashMap()
+		map.put(null, "No data items found to export.")
 		
-		Mockito.when(client.importData(Mockito.anyList())).thenReturn("Success")
-		Mockito.when(client.getOpenxdataForm('oid')).thenReturn(TestData.getCRFWebServiceResponse())
+		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(createStudy())
+		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn(map)
 		
 		request = new MockHttpServletRequest()
 		response = new MockHttpServletResponse()
@@ -82,7 +81,7 @@ class OpenClinicaServletTest extends GroovyTestCase {
 		
 		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
 		
-		assertEquals 'Successful Import', message
+		assertEquals 'OpenClinica Study successfully converted and Imported', message.get("")
 	}
 	
 	@Test public void testDownloadStudyReturnsValidStudyWithCorrectNameInAttribute() {
@@ -160,16 +159,16 @@ class OpenClinicaServletTest extends GroovyTestCase {
 
 		servlet.doPost(request, response)
 
-		def message = request.getAttribute('message')
+		def messages = request.getAttribute('message')
 
 		Mockito.verify(service).exportOpenClinicaStudyData()
 		
-		assertEquals 'No data to export. Collect Data and then export.', message
+		assertEquals 'No data items found to export.', messages.get(null)
 	}
 	
-	@Test public void testExportStudyReturnsCorrectMessageOnSuccessfulExport() {
+	@Test public void testExportStudyHasCorrectMessageOnSuccessfulExport() {
 		
-		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn("Success")
+		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn(TestData.createImportMessages())
 		
 		request.setParameter('action', 'Export')
 
@@ -179,6 +178,21 @@ class OpenClinicaServletTest extends GroovyTestCase {
 		
 		Mockito.verify(service).exportOpenClinicaStudyData()
 		
-		assertEquals 'Success', message
+		assertEquals 'Success', message.get("F_MSA2_1")
+	}
+	
+	@Test public void testExportStudyHasCorrectMessageOnErraticExport() {
+		
+		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn(TestData.createImportMessages())
+		
+		request.setParameter('action', 'Export')
+
+		servlet.doPost(request, response)
+
+		def message = request.getAttribute('message')
+		
+		Mockito.verify(service).exportOpenClinicaStudyData()
+		
+		assertEquals 'Fail: Incorrect FormData OID', message.get("key1")
 	}
 }
