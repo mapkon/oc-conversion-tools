@@ -105,7 +105,7 @@
 	<xsl:template name="createBinds">
 
 		<bind id="subjectKeyBind" nodeset="/ODM/SubjectKey" type="xsd:string"
-			required="true()"></bind>
+			required="true()" locked="true()" visible="false()"></bind>
 
 		<xsl:for-each select="odm:ItemGroupRef">
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
@@ -203,7 +203,7 @@
 
 	<xsl:template name="createGroup">
 		<group>
-
+		
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 			<xsl:variable name="itemGroupDef"
 				select="../../odm:ItemGroupDef[@OID=$itemGroupOID]" />
@@ -213,6 +213,11 @@
 				<xsl:value-of select="$itemGroupDef/@Name" />
 			</label>
 
+			<input bind="subjectKeyBind">
+				<label>Subject Key</label>
+				<hint>The subject key for whom you are collecting data for.</hint>
+			</input>
+			
 			<xsl:variable name="repeating" select="$itemGroupDef/@Repeating" />
 
 			<xsl:choose>

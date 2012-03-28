@@ -249,7 +249,7 @@ class TransformerTest extends GroovyTestCase {
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 		def group = xformNode.group.find {it.@id == "3"}
 		
-		assertEquals "group", group.children()[1].name()
+		assertEquals "group", group.children()[2].name()
 	}
 	
 	@Test void testConvertedXformHasRepeatInGroupWithId3() {
@@ -261,7 +261,7 @@ class TransformerTest extends GroovyTestCase {
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
 		def group = xformNode.group.find {it.@id == "3"}
 		
-		assertEquals "repeat", group.children()[1].children()[1].name()
+		assertEquals "repeat", group.children()[2].children()[1].name()
 	}
 	
 	@Test void testThatConvertedXmlHasSubjectKeySetToRequired() {
