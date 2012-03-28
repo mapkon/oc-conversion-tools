@@ -88,14 +88,7 @@
 				<xsl:call-template name="createBinds" />
 
 			</model>
-			<group id="1">
-				<label>Subject key</label>
-				<input bind="subjectKeyBind">
-					<label>Subject Key</label>
-					<hint>The subject key for whom you are collecting data for.</hint>
-				</input>
-			</group>
-
+			
 			<xsl:for-each select="odm:ItemGroupRef">
 				<xsl:call-template name="createGroup" />
 			</xsl:for-each>
