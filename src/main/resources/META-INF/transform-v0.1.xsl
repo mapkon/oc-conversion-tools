@@ -201,7 +201,7 @@
 			<xsl:variable name="itemGroupDef"
 				select="../../odm:ItemGroupDef[@OID=$itemGroupOID]" />
 
-			<xsl:attribute name="id"><xsl:value-of select="position()+1" /></xsl:attribute>
+			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
 			<label>
 				<xsl:value-of select="$itemGroupDef/@Name" />
 			</label>

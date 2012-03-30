@@ -11,7 +11,6 @@ class TransformerTest extends GroovyTestCase {
 
 	def inputDoc
 	def convertedXform
-	def subjectKeyGroup
 
 	public void setUp(){
 		
@@ -213,23 +212,43 @@ class TransformerTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectGroup() {
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectQuestionWithCorrectBind() {
 		
 		def xformNodes = getXformNodes()
+		
 		xformNodes.each {
 			
-			def subjectGroup = it.depthFirst().find { it.@id == '1'}
-			assertNotNull subjectGroup
+			def firstGroup = it.depthFirst().find { it.@id == '1'}
+			
+			assertEquals "subjectKeyBind", firstGroup.children()[1].@bind.text()
 		}
 	}
 	
-	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectGroupWithSubjectKeyLabel() {
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectQuestionWithCorrectLabel() {
 		
 		def xformNodes = getXformNodes()
+		
 		xformNodes.each {
 			
-			def subjectGroup = it.depthFirst().find { it.@id == '1'}
-			assertEquals "Subject key", subjectGroup.children()[0].text()
+			def firstGroup = it.depthFirst().find { it.@id == '1'}
+			
+			def label = firstGroup.children()[1].depthFirst().find{it.name().equals('label')}
+			
+			assertEquals "Subject Key", label.text()
+		}
+	}
+	
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectQuestionWithCorrectHint() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def firstGroup = it.depthFirst().find { it.@id == '1'}
+			
+			def label = firstGroup.children()[1].depthFirst().find{it.name().equals('hint')}
+			
+			assertEquals "The subject key for whom you are collecting data for.", label.text()
 		}
 	}
 	
@@ -247,7 +266,7 @@ class TransformerTest extends GroovyTestCase {
 		}
 		
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
-		def group = xformNode.group.find {it.@id == "3"}
+		def group = xformNode.group.find {it.@id == "2"}
 		
 		assertEquals "group", group.children()[2].name()
 	}
@@ -259,7 +278,7 @@ class TransformerTest extends GroovyTestCase {
 		}
 		
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
-		def group = xformNode.group.find {it.@id == "3"}
+		def group = xformNode.group.find {it.@id == "2"}
 		
 		assertEquals "repeat", group.children()[2].children()[1].name()
 	}
