@@ -220,7 +220,7 @@ class TransformerTest extends GroovyTestCase {
 			
 			def firstGroup = it.depthFirst().find { it.@id == '1'}
 			
-			assertEquals "subjectKeyBind", firstGroup.children()[1].@bind.text()
+			assertEquals "subjectKey", firstGroup.children()[1].@bind.text()
 		}
 	}
 	
@@ -289,8 +289,8 @@ class TransformerTest extends GroovyTestCase {
 		
 		xformNodes.each {
 			
-			def subjectKeyBind = it.model.bind.find{ it.@id.equals("subjectKeyBind")}
-			assertEquals "SubjectKey should be required", "true()", subjectKeyBind.@required.text()
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			assertEquals "SubjectKey should be required", "true()", subjectKey.@required.text()
 		}
 	}
 	
