@@ -294,6 +294,28 @@ class TransformerTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testThatSubjectQuestionIsLocked() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			assertEquals "SubjectKey should be locked", "true()", subjectKey.@locked.text()
+		}
+	}
+	
+	@Test void testThatSubjectQuestionIsHidden() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			assertEquals "SubjectKey should be Hidden", "false()", subjectKey.@visible.text()
+		}
+	}
+	
 	@Test void testThatThereAreEqualNumberOfRequiredBindsAsMandatoryItemRefsInODM() {
 		
 		def requiredQtns = getRequiredQuestions()
