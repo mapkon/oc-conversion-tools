@@ -4,7 +4,7 @@
 	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1"
 	xmlns:xf="http://www.w3.org/2002/xforms">
 
-	<xsl:output method="xml" />
+	<xsl:output method="xml" version='1.0' encoding='UTF-8' indent="yes" />
 
 	<xsl:template match="/">
 		<study>
