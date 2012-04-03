@@ -4,7 +4,6 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
-import org.openxdata.server.admin.model.FormData
 
 
 class ODMDefinitionInstanceDataTest extends GroovyTestCase {
