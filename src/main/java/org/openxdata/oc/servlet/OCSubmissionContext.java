@@ -22,6 +22,8 @@ import org.openxdata.server.service.FormDownloadService;
 import org.openxdata.server.service.StudyManagerService;
 import org.openxdata.server.service.UserService;
 import org.openxdata.server.servlet.DefaultSubmissionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -31,6 +33,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	private OpenClinicaService ocService;
 	private StudyManagerService studyManagerService;
+	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
 
 	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
 			UserService userService, FormDownloadService formService, StudyManagerService studyManagerService,
@@ -76,6 +79,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 					for (String formOID : formOIDs) {
 						FormDef formDef = getFormByDescription(oCStudyID, formOID);
 						if (formDef == null) {
+							log
+									.warn("FormOID[" + formOID + "] Event:[" + event.getEventDefinitionOID()
+											+ "] not found");
 							continue;
 						}
 
@@ -83,7 +89,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 						frmRfrnc[0] = oCStudyID.getId();
 						frmRfrnc[1] = formDef.getDefaultVersion().getId();
 						List<String[]> prefills = new ArrayList<String[]>();
-						prefills.add(new String[] { "SubjectKey_", "SubjectKey", entry.getKey(), "false" });
+						prefills.add(new String[] { "SubjectKey_", "SubjectKey", studySubject.getSubjectOID() + "",
+								"false" });
 						frmRfrnc[2] = prefills;
 						formReferences.add(frmRfrnc);
 
@@ -124,10 +131,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private FormDef getFormByDescription(StudyDef def, String description) {
 		List<FormDef> forms = def.getForms();
 
-		description = description.substring(0, description.lastIndexOf("_"));
+		//description = description.substring(0, description.lastIndexOf("_"));
 		for (FormDef formDef1 : forms) {
 			String frmDefDescr = formDef1.getDescription();
-			frmDefDescr = frmDefDescr.substring(0, frmDefDescr.lastIndexOf("_"));
+			//	frmDefDescr = frmDefDescr.substring(0, frmDefDescr.lastIndexOf("_"));
 			if (frmDefDescr.equalsIgnoreCase(description)) {
 				return formDef1;
 			}
