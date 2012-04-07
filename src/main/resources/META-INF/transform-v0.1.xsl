@@ -206,10 +206,13 @@
 				<xsl:value-of select="$itemGroupDef/@Name" />
 			</label>
 
-			<input bind="subjectKey">
-				<label>Subject Key</label>
-				<hint>The subject key for whom you are collecting data for.</hint>
-			</input>
+			<!-- Add the subject key input field only to the first group. -->
+			<xsl:if test="position() = '1'">
+				<input bind="subjectKey">
+					<label>Subject Key</label>
+					<hint>The subject key for whom you are collecting data for.</hint>
+				</input>
+			</xsl:if>
 			
 			<xsl:variable name="repeating" select="$itemGroupDef/@Repeating" />
 
