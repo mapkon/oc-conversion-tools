@@ -64,6 +64,7 @@
                 <ItemRef ItemOID="I_MSA1_ID" OrderNumber="20" Mandatory="Yes"/>
             </ItemGroupDef>
             <ItemGroupDef OID="TEST_GROUP_2" Name="MSA1_complyreasG" Repeating="Yes" SASDatasetName="MSA1_COM">
+                <ItemRef ItemOID="I_MSA1_MSA1_NOELIGREAS" OrderNumber="1" Mandatory="No"/>
                 <ItemRef ItemOID="I_MSA1_MSA1_COMPLYREAS" OrderNumber="1" Mandatory="No"/>
             </ItemGroupDef>
             <ItemGroupDef OID="TEST_GROUP_3" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO031">
@@ -89,10 +90,12 @@
                 <ItemRef ItemOID="I_MSA2_MSA2_PMTCT" OrderNumber="20" Mandatory="Yes"/>
                 <ItemRef ItemOID="I_MSA2_MSA2_LAZTNBV" OrderNumber="21" Mandatory="No"/>
                 <ItemRef ItemOID="I_MSA2_MSA2_L3TCNB" OrderNumber="22" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LOARTNB" OrderNumber="22" Mandatory="No"/>
             </ItemGroupDef>
             <ItemGroupDef OID="TEST_GROUP_4" Name="MSA2_POARTprecG" Repeating="Yes" SASDatasetName="MSA2_POA" Comment="Q3a2a_ If yes,">
                 <ItemRef ItemOID="I_MSA2_MSA2_POARTPREC" OrderNumber="1" Mandatory="No"/>
                 <ItemRef ItemOID="I_MSA2_MSA2_POARTNBV" OrderNumber="2" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LOARTPREC" OrderNumber="2" Mandatory="No"/>
             </ItemGroupDef>
       
             <ItemDef OID="I_MSA1_INIT" Name="Init" DataType="text" Length="7" SASFieldName="Init581" Comment="Researchers initials">
