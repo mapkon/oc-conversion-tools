@@ -12,7 +12,7 @@
 			<xsl:attribute name="studyKey"><xsl:value-of select="//odm:Study/@OID" /></xsl:attribute>
 			<xsl:attribute name="description"><xsl:value-of
 				select="normalize-space(//odm:StudyDescription)" /></xsl:attribute>
-			<xsl:for-each select="odm:ODM/odm:Study/odm:MetaDataVersion/odm:FormDef">
+			<xsl:for-each select="//*[local-name()='FormDef']">
 				<form>
 					<xsl:attribute name="name">
 						<xsl:value-of select="@Name" />
@@ -61,13 +61,12 @@
 
 						<xsl:for-each select="odm:ItemGroupRef">
 
-							<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 							<xsl:variable name="itemGroupDef"
-								select="../../odm:ItemGroupDef[@OID=$itemGroupOID]" />
+								select="//*[local-name()='ItemGroupDef' and @OID=@ItemGroupOID]" />
 
 							<xsl:choose>
 								<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
-									<xsl:element name="{$itemGroupOID}">
+									<xsl:element name="{@ItemGroupOID}">
 										<xsl:for-each select="$itemGroupDef/odm:ItemRef">
 											<xsl:element name="{@ItemOID}" />
 										</xsl:for-each>
@@ -77,7 +76,7 @@
 									<xsl:for-each select="$itemGroupDef/odm:ItemRef">
 										<xsl:element name="{@ItemOID}">
 											<xsl:attribute name="ItemGroupOID"><xsl:value-of
-												select="$itemGroupOID" /></xsl:attribute>
+												select="@ItemGroupOID" /></xsl:attribute>
 										</xsl:element>
 									</xsl:for-each>
 								</xsl:otherwise>
@@ -103,7 +102,7 @@
 		<xsl:for-each select="odm:ItemGroupRef">
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 			<xsl:variable name="itemGroupDef"
-				select="../../odm:ItemGroupDef[@OID=$itemGroupOID]" />
+				select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID]" />
 			<xsl:choose>
 				<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
 
@@ -123,7 +122,7 @@
 								select="$itemGroupOID" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 							<xsl:call-template name="determineBindQuestionType">
 								<xsl:with-param name="itemDef"
-									select="../../odm:ItemDef[@OID=@ItemOID]" />
+									select="//*[local-name()='ItemDef' and @OID=@ItemOID]" />
 							</xsl:call-template>
 
 							<xsl:if test="./Mandatory = 'Yes'">
@@ -145,11 +144,10 @@
 		<xsl:param name="itemGroupDef" />
 		<xsl:for-each select="$itemGroupDef/odm:ItemRef">
 			<bind>
-				<xsl:variable name="itemId" select="@ItemOID" />
-				<xsl:variable name="itemDef" select="../../odm:ItemDef[@OID=$itemId]" />
-				<xsl:attribute name="id"><xsl:value-of select="$itemId" /></xsl:attribute>
+				<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=@ItemOID]" />
+				<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 				<xsl:attribute name="nodeset">/ODM/<xsl:value-of
-					select="$itemId" /></xsl:attribute>
+					select="@ItemOID" /></xsl:attribute>
 				<xsl:call-template name="determineBindQuestionType">
 					<xsl:with-param name="itemDef" select="$itemDef" />
 				</xsl:call-template>
@@ -199,7 +197,7 @@
 		
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 			<xsl:variable name="itemGroupDef"
-				select="../../odm:ItemGroupDef[@OID=$itemGroupOID]" />
+				select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID]" />
 
 			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
 			<label>
@@ -247,7 +245,7 @@
 	<xsl:template name="createQuestions">
 
 		<xsl:variable name="itemId" select="@ItemOID" />
-		<xsl:variable name="itemDef" select="../../odm:ItemDef[@OID=$itemId]" />
+		<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemId]" />
 		<xsl:call-template name="insertQuestionsTextAndBind">
 			<xsl:with-param name="itemOID" select="$itemId" />
 			<xsl:with-param name="itemDef" select="$itemDef" />
