@@ -3,6 +3,8 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:odm="http://www.cdisc.org/ns/odm/v1.3"
 	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1"
 	xmlns:xf="http://www.w3.org/2002/xforms">
+	
+	<xsl:output method="xml" version='1.0' encoding='UTF-8' indent="yes" omit-xml-declaration="yes" />
 
 	<xsl:output method="xml" version='1.0' encoding='UTF-8' indent="yes" />
 
