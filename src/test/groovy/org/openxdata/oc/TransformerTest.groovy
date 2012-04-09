@@ -55,12 +55,12 @@ class TransformerTest extends GroovyTestCase {
 		assertTrue version.'@name'.text().contains('-v1')
 	}
 	
-	@Test void testThatTheNumberOfBindsAre47Given45ItemRefsInODM() {
+	@Test void testThatTheNumberOfBindsAre61Given48ItemRefsInODM() {
 		
 		def binds = getBinds()
 		
-		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 57, binds.size()
+		// The extra bindings are because of the repeat parent bindings
+		assertEquals 61, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -278,9 +278,9 @@ class TransformerTest extends GroovyTestCase {
 		}
 		
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
-		def group = xformNode.group.find {it.@id == "2"}
+		def group = xformNode.group.find {it.@id == "1"}
 		
-		assertEquals "repeat", group.children()[1].children()[1].name()
+		assertEquals "repeat", group.children()[2].children()[1].name()
 	}
 	
 	@Test void testThatConvertedXmlHasSubjectKeySetToRequired() {
