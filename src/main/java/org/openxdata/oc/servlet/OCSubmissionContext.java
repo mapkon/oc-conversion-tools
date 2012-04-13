@@ -58,55 +58,78 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	public List<Object[]> availableWorkitems() {
 		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents("S_DEFAULTS1");
 		List<Object[]> workitems = new ArrayList<Object[]>();
-		StudyDef oCStudyID = getOCStudyID();
-		if (oCStudyID == null) {
+		StudyDef ocStudy = getOCStudyID();
+		if (ocStudy == null) {
 			return workitems;
 		}
 
 		for (StudySubject studySubject : sbjEvents) {
-			List<Event> allEvents = studySubject.getEvents();
-			Hashtable<String, List<Event>> eventGroups = groupEventByName(allEvents);
-			Set<Entry<String, List<Event>>> entrySet = eventGroups.entrySet();
+			List<Object[]> studySubjWorkitems = studySubjectToWorkItems(studySubject, ocStudy);
+			workitems.addAll(studySubjWorkitems);
+		}
 
-			for (Entry<String, List<Event>> entry : entrySet) {
-				List<Event> events = entry.getValue();
-				for (Event event : events) {
-					Object[] workitem = new Object[5];
+		return workitems;
+	}
 
-					List<Object[]> formReferences = new ArrayList<Object[]>();
-					List<String> formOIDs = (List) event.getFormOIDs();
+	private List<Object[]> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
+		List<Object[]> workitems = new ArrayList<Object[]>();
+		List<Event> allEvents = studySubject.getEvents();
+		Hashtable<String, List<Event>> eventGroups = groupEventByName(allEvents);
+		Set<Entry<String, List<Event>>> entrySet = eventGroups.entrySet();
 
-					for (String formOID : formOIDs) {
-						FormDef formDef = getFormByDescription(oCStudyID, formOID);
-						if (formDef == null) {
-							log
-									.warn("FormOID[" + formOID + "] Event:[" + event.getEventDefinitionOID()
-											+ "] not found");
-							continue;
-						}
-
-						Object[] frmRfrnc = new Object[3];
-						frmRfrnc[0] = oCStudyID.getId();
-						frmRfrnc[1] = formDef.getDefaultVersion().getId();
-						List<String[]> prefills = new ArrayList<String[]>();
-						prefills.add(new String[] { "SubjectKey_", "SubjectKey", studySubject.getSubjectOID() + "",
-								"false" });
-						frmRfrnc[2] = prefills;
-						formReferences.add(frmRfrnc);
-
-					}
-					if (formReferences.isEmpty())
-						continue;
-					workitem[0] = studySubject.getSubjectOID() + "-" + event.getEventName();
-					workitem[1] = getKey(studySubject, event);
-					workitem[2] = formReferences;
+		for (Entry<String, List<Event>> entry : entrySet) {
+			List<Event> events = entry.getValue();
+			for (Event event : events) {
+				Object[] workitem = eventToWIR(event, ocStudy, studySubject);
+				if (workitem != null) {
 					workitems.add(workitem);
 				}
 
 			}
+
+		}
+		return workitems;
+	}
+
+	private Object[] eventToWIR(Event event, StudyDef oCStudyID, StudySubject studySubject) {
+
+		List<Object[]> formReferences = new ArrayList<Object[]>();
+		List<String> formOIDs = (List) event.getFormOIDs();
+
+		for (String formOID : formOIDs) {
+			Object[] formRef = formDefToFormReferece(formOID, oCStudyID, event, studySubject);
+			if (formRef != null) {
+				formReferences.add(formRef);
+			}
 		}
 
-		return workitems;
+		if (formReferences.isEmpty()) {
+			return null;
+		}
+
+		Object[] workitem = new Object[5];
+		workitem[0] = studySubject.getSubjectOID() + "-" + event.getEventName();
+		workitem[1] = getKey(studySubject, event);
+		workitem[2] = formReferences;
+		return workitem;
+	}
+
+	private Object[] formDefToFormReferece(String formOID, StudyDef oCStudyID, Event event, StudySubject studySubject) {
+		FormDef formDef = getFormByDescription(oCStudyID, formOID);
+
+		if (formDef == null) {
+			log.warn("FormOID[" + formOID + "] Event:[" + event.getEventDefinitionOID() + "] not found");
+			return null;
+		}
+
+		List<String[]> prefills = new ArrayList<String[]>();
+		prefills.add(new String[] { "SubjectKey_", "SubjectKey", studySubject.getSubjectOID() + "", "false" });
+
+		Object[] formRef = new Object[3];
+		formRef[0] = oCStudyID.getId();
+		formRef[1] = formDef.getDefaultVersion().getId();
+		formRef[2] = prefills;
+		return formRef;
 	}
 
 	public List<Object[]> getWorkItems(String... caseIds) {
@@ -120,8 +143,13 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	private StudyDef getOCStudyID() {
-		List<StudyDef> studyByName = studyManagerService.getStudyByName("Default Study");
-		if (studyByName != null) {
+		List<StudyDef> studyByName = null;
+		try {
+			studyByName = studyManagerService.getStudyByName("Default Study");
+		} catch (Exception e) {
+			log.error("Failed to get openclinica study", e);
+		}
+		if (studyByName != null && !studyByName.isEmpty()) {
 			StudyDef study = studyByName.get(0);
 			return study;
 		}
