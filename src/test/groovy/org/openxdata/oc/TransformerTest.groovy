@@ -60,7 +60,7 @@ class TransformerTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra bindings are because of the repeat parent bindings
-		assertEquals 61, binds.size()
+		assertEquals 65, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -358,7 +358,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		xformNodes.each {
 			
-			def xGroups = it.depthFirst().findAll { it.name().is("group")}
+			def xGroups = it.group.findAll { it.name().is("group")}
 			xGroups.each { group ->
 				groups.add(group)
 			}

@@ -66,7 +66,8 @@
             </ItemGroupDef>
             <ItemGroupDef OID="TEST_GROUP_2" Name="MSA1_complyreasG" Repeating="Yes" SASDatasetName="MSA1_COM">
                 <ItemRef ItemOID="I_MSA1_MSA1_NOELIGREAS" OrderNumber="1" Mandatory="No"/>
-                <ItemRef ItemOID="I_MSA1_MSA1_COMPLYREAS" OrderNumber="2" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_COMPLYREAS" OrderNumber="3" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA1_MSA1_MOELIGREAS" OrderNumber="2" Mandatory="No"/>
             </ItemGroupDef>
             <ItemGroupDef OID="TEST_GROUP_3" Name="Ungrouped" Repeating="No" SASDatasetName="UNGRO031">
                 <ItemRef ItemOID="I_MSA2_INIT" OrderNumber="1" Mandatory="Yes"/>
@@ -96,6 +97,7 @@
             <ItemGroupDef OID="TEST_GROUP_4" Name="MSA2_POARTprecG" Repeating="Yes" SASDatasetName="MSA2_POA" Comment="Q3a2a_ If yes,">
                 <ItemRef ItemOID="I_MSA2_MSA2_POARTPREC" OrderNumber="1" Mandatory="No"/>
                 <ItemRef ItemOID="I_MSA2_MSA2_POARTNBV" OrderNumber="2" Mandatory="No"/>
+            	<ItemRef ItemOID="I_MSA1_MSA1_MOELIGREAS" OrderNumber="2" Mandatory="No"/>
                 <ItemRef ItemOID="I_MSA2_MSA2_LOARTPREC" OrderNumber="3" Mandatory="No"/>
             </ItemGroupDef>
       
@@ -357,6 +359,21 @@
                 <Question>
                     <TranslatedText>
                     Q11a_ If not and reason not listed above, specify why she is not eligible
+                    </TranslatedText>
+                </Question>
+                <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_NOELIGREAS">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
+						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
+					</OpenClinica:ItemPresentInForm>
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
+					</OpenClinica:ItemPresentInForm>
+				</OpenClinica:ItemDetails>
+            </ItemDef>
+            <ItemDef OID="I_MSA1_MSA1_MOELIGREAS" Name="MSA1_noeligreas" DataType="text" Length="41" Comment="Test Comment">
+                <Question>
+                    <TranslatedText>
+                    This is Just a test question to exercise repeats with in the same ItemGroupRef and Section
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_NOELIGREAS">
