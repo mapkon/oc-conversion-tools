@@ -31,16 +31,4 @@ public class Fixtures {
 		}
 	}
 
-	public static List<StudySubject> getStudySubjectEvents() {
-		try {
-			InputStream resourceAsStream = Fixtures.class.getClassLoader().getResourceAsStream(
-					"subject-event-response.xml");
-			String studySubjectResponse = IOUtils.toString(resourceAsStream);
-			return null;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}
-
 }
