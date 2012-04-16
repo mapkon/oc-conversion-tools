@@ -25,6 +25,7 @@ class OpenClinicaServletTest extends GroovyTestCase {
 	def response
 
 	@Mock OpenClinicaService service
+        @Mock MultiProtocolSubmissionServlet multiProtoSubmissionServlet
 	@InjectMocks def servlet = new OpenClinicaServlet()
 
 	@Before void setUp() {
@@ -193,5 +194,25 @@ class OpenClinicaServletTest extends GroovyTestCase {
 		Mockito.verify(service).exportOpenClinicaStudyData()
 		
 		assertEquals 'Fail: Incorrect FormData OID', message.get("key1")
+	}
+        
+    	@Test public void testDelegatesToMobileProcessWhenOIDAndActionIsNull() {
+
+                request.setParameter('action', '')
+     
+                servlet.doPost(request, response)
+                
+                Mockito.verify(multiProtoSubmissionServlet, Mockito.times(1)).doPost(request, response)
+		
+	}
+        
+        @Test public void testDoesNoDelegateToMobileProcessWhenActionIsNotNull() {
+
+                request.setParameter('action', 'blah blah')
+     
+                servlet.doPost(request, response)
+                
+                Mockito.verify(multiProtoSubmissionServlet, Mockito.times(0)).doPost(request, response)
+		
 	}
 }

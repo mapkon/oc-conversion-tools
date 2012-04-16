@@ -136,7 +136,7 @@ public class OpenClinicaServlet extends HttpServlet {
 			StudyDef study = null;
 			String oid = request.getParameter("oid");
 			String action = request.getParameter("action");
-			if (oid == null || action == null) {
+			if (action == null || action.isEmpty()) {
 				mobileServlet.doPost(request, response);
 				return;
 			}
