@@ -11,7 +11,6 @@ class TransformerTest extends GroovyTestCase {
 
 	def inputDoc
 	def convertedXform
-	def subjectKeyGroup
 
 	public void setUp(){
 		
@@ -24,7 +23,7 @@ class TransformerTest extends GroovyTestCase {
 
 	@Test void testconvertedXformHasCorrectName(){	
 				
-		assertEquals "Default Study - Uganda", convertedXform.@name.text()
+		assertEquals "Test Study", convertedXform.@name.text()
 	}
 	
 	@Test void testconvertedXformHasCorrectNumberOfForms(){
@@ -56,12 +55,12 @@ class TransformerTest extends GroovyTestCase {
 		assertTrue version.'@name'.text().contains('-v1')
 	}
 	
-	@Test void testThatTheNumberOfBindsAre47Given45ItemRefsInODM() {
+	@Test void testThatTheNumberOfBindsAre61Given48ItemRefsInODM() {
 		
 		def binds = getBinds()
 		
-		// The extra two bindings are because of the repeat parent bindings
-		assertEquals 51, binds.size()
+		// The extra bindings are because of the repeat parent bindings
+		assertEquals 65, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -115,7 +114,7 @@ class TransformerTest extends GroovyTestCase {
 	
 	@Test void testConvertedXformShouldHaveCorrectFormDescriptionAttribute(){
 
-		assertEquals 'F_MSA1_3', convertedXform.form[0].'@description'.text()
+		assertEquals 'F_TEST_1', convertedXform.form[0].'@description'.text()
 	}
 	
 	@Test void testConvertedXformShouldHaveCorrectFormNameAttributeForSecondForm(){
@@ -125,7 +124,7 @@ class TransformerTest extends GroovyTestCase {
 	
 	@Test void testConvertedXformShouldHaveCorrectFormDescriptionAttributeForSecondForm(){
 
-		assertEquals 'F_MSA1_2', convertedXform.form[1].@description.text()
+		assertEquals 'F_TEST_2', convertedXform.form[1].@description.text()
 	}
 
 	@Test void testConvertedXformShouldHaveCorrectNumberOfFormsGivenFormefs(){
@@ -213,23 +212,43 @@ class TransformerTest extends GroovyTestCase {
 		}
 	}
 	
-	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectGroup() {
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectQuestionWithCorrectBind() {
 		
 		def xformNodes = getXformNodes()
+		
 		xformNodes.each {
 			
-			def subjectGroup = it.depthFirst().find { it.@id == '1'}
-			assertNotNull subjectGroup
+			def firstGroup = it.depthFirst().find { it.@id == '1'}
+			
+			assertEquals "subjectKey", firstGroup.children()[1].@bind.text()
 		}
 	}
 	
-	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectGroupWithSubjectKeyLabel() {
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectQuestionWithCorrectLabel() {
 		
 		def xformNodes = getXformNodes()
+		
 		xformNodes.each {
 			
-			def subjectGroup = it.depthFirst().find { it.@id == '1'}
-			assertEquals "Subject key", subjectGroup.children()[0].text()
+			def firstGroup = it.depthFirst().find { it.@id == '1'}
+			
+			def label = firstGroup.children()[1].depthFirst().find{it.name().equals('label')}
+			
+			assertEquals "Subject Key", label.text()
+		}
+	}
+	
+	@Test void testThatEveryXformNodeInTheConvertedXformHasTheSubjectQuestionWithCorrectHint() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def firstGroup = it.depthFirst().find { it.@id == '1'}
+			
+			def label = firstGroup.children()[1].depthFirst().find{it.name().equals('hint')}
+			
+			assertEquals "The subject key for whom you are collecting data for.", label.text()
 		}
 	}
 	
@@ -243,23 +262,23 @@ class TransformerTest extends GroovyTestCase {
 	@Test void testConvertedXformHasInnerGroupWhenThereIsARepeat() {
 		
 		def form = convertedXform.form.find {
-			it.@description.toString().equals("F_MSA2_1")
+			it.@description.toString().equals("F_TEST_2")
 		}
 		
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
-		def group = xformNode.group.find {it.@id == "3"}
+		def group = xformNode.group.find {it.@id == "1"}
 		
 		assertEquals "group", group.children()[2].name()
 	}
 	
-	@Test void testConvertedXformHasRepeatInGroupWithId3() {
+	@Test void testConvertedXformHasRepeatInGroupWithId2() {
 		
 		def form = convertedXform.form.find {
-			it.@description.toString().equals("F_MSA2_1")
+			it.@description.toString().equals("F_TEST_4")
 		}
 		
 		def xformNode = new XmlSlurper().parseText(form.version.xform.text())
-		def group = xformNode.group.find {it.@id == "3"}
+		def group = xformNode.group.find {it.@id == "1"}
 		
 		assertEquals "repeat", group.children()[2].children()[1].name()
 	}
@@ -270,8 +289,30 @@ class TransformerTest extends GroovyTestCase {
 		
 		xformNodes.each {
 			
-			def subjectKeyBind = it.model.bind.find{ it.@id.equals("subjectKeyBind")}
-			assertEquals "SubjectKey should be required", "true()", subjectKeyBind.@required.text()
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			assertEquals "SubjectKey should be required", "true()", subjectKey.@required.text()
+		}
+	}
+	
+	@Test void testThatSubjectQuestionIsLocked() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			assertEquals "SubjectKey should be locked", "true()", subjectKey.@locked.text()
+		}
+	}
+	
+	@Test void testThatSubjectQuestionIsHidden() {
+		
+		def xformNodes = getXformNodes()
+		
+		xformNodes.each {
+			
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			assertEquals "SubjectKey should be Hidden", "false()", subjectKey.@visible.text()
 		}
 	}
 	
@@ -279,7 +320,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		def requiredQtns = getRequiredQuestions()
 		
-		assertEquals "Required questions should equals Mandatory questions in ODM file.", 36, requiredQtns.size()
+		assertEquals "Required questions should equals Mandatory questions in ODM file.", 30, requiredQtns.size()
 
 	}
 	
@@ -317,7 +358,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		xformNodes.each {
 			
-			def xGroups = it.depthFirst().findAll { it.name().is("group")}
+			def xGroups = it.group.findAll { it.name().is("group")}
 			xGroups.each { group ->
 				groups.add(group)
 			}

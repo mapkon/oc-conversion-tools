@@ -244,14 +244,14 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		
 		def study = openClinicaService.importOpenClinicaStudy("oid")
 		
-		assertEquals "Default Study - Uganda", study.getName()
+		assertEquals "Test Study", study.getName()
 	}
 	
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectStudyKey() {
 		
 		def study = openClinicaService.importOpenClinicaStudy("oid")
 		
-		assertEquals "S_12175", study.getStudyKey()
+		assertEquals "Test-OID", study.getStudyKey()
 	}
 	
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectNumberOfForms() {

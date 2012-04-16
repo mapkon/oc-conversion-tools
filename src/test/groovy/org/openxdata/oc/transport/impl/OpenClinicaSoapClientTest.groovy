@@ -15,7 +15,6 @@ import org.openxdata.oc.util.PropertiesUtil
 class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	def client
-	def latestCRFVersions
 	
 	@Before public void setUp(){
 		
@@ -23,11 +22,10 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		
 		client = new OpenClinicaSoapClientImpl(props)
 		
-		latestCRFVersions = TestData.getCRFWebServiceResponse()
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXmlWithCorrectStudyName() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		
 		play {
 			
@@ -43,7 +41,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyRootElement() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -55,7 +53,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithStudyStudyKey() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -67,7 +65,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithCorrectNumberOfForms() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -81,7 +79,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithCorrectFormName() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -97,7 +95,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithVersionElement() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -112,7 +110,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithVersionName() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -127,7 +125,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsValidXformWithVersionDescription() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -142,7 +140,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformElement() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 
@@ -158,7 +156,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	}
 	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsElement() {
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)
@@ -173,7 +171,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	@Test void testGetOpenxdataFormReturnsCorrectXformWithXformsElementSerializedAsAString() {
 		
-		def connectionFactory = setUpConnectionFactoryMock(latestCRFVersions)
+		def connectionFactory = setUpConnectionFactoryMock(TestData.getCRFWebServiceResponse())
 		play {
 
 			client.setConnectionFactory(connectionFactory)

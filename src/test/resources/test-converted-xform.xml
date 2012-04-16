@@ -1,37 +1,38 @@
-<study description="test instance - Site of Uganda" name="Default Study - Uganda"
-	studyKey="S_12175">
-	<form description="F_MSA1_3" name="MSA1: Mother Screening Assessment 1 - 3">
+<study description="Test Study Description" name="Test Study"
+	studyKey="Test-OID">
+	<form description="F_TEST_1" name="MSA1: Mother Screening Assessment 1 - 3">
 		<version description="Converted from ODM using the oc-conversion-tools"
 			name="MSA1: Mother Screening Assessment 1 - 3-v1">
 			<xform>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 				&lt;xf:xforms
 				xmlns:xf='http://www.w3.org/2002/xforms'&gt;&lt;xf:model&gt;&lt;xf:instance
-				id='S_12175 - F_MSA1_3'&gt;&lt;xf:ODM StudyOID='S_12175'
+				id='Test-OID - F_TEST_1'&gt;&lt;xf:ODM StudyOID='Test-OID'
 				MetaDataVersionOID='v1.0.0' Description='This Xform was converted
-				from an ODM file using the oc-conversion-tools' formKey='F_MSA1_3'
+				from an ODM file using the oc-conversion-tools' formKey='F_TEST_1'
 				name='MSA1: Mother Screening Assessment 1 - 3'
-				StudyEventOID='F_MSA1_3'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:I_MSA1_INIT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_INIT&gt;&lt;xf:I_MSA1_FORMD
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_FORMD&gt;&lt;xf:I_MSA1_MSA1_CONS
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_CONS&gt;&lt;xf:I_MSA1_MSA1_PGT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_PGT&gt;&lt;xf:I_MSA1_MSA1_BIRTHD
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_BIRTHD&gt;&lt;xf:I_MSA1_MSA1_OLD
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_OLD&gt;&lt;xf:I_MSA1_MSA1_KHIV
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_KHIV&gt;&lt;xf:I_MSA1_MSA1_HAART
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_HAART&gt;&lt;xf:I_MSA1_MSA1_ELHAART
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_ELHAART&gt;&lt;xf:I_MSA1_MSA1_BEFPEP
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_BEFPEP&gt;&lt;xf:I_MSA1_MSA1_OTRIAL
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_OTRIAL&gt;&lt;xf:I_MSA1_MSA1_OTRIAL_S
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_OTRIAL_S&gt;&lt;xf:I_MSA1_MSA1_MOVE
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_MOVE&gt;&lt;xf:I_MSA1_MSA1_PMTCT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_PMTCT&gt;&lt;xf:I_MSA1_MSA1_COMPLY
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_COMPLY&gt;&lt;xf:I_MSA1_MSA1_ELIG
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_ELIG&gt;&lt;xf:I_MSA1_MSA1_DELIVERY
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_DELIVERY&gt;&lt;xf:I_MSA1_MSA1_CONSELLING
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_CONSELLING&gt;&lt;xf:I_MSA1_IDPAT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_IDPAT&gt;&lt;xf:I_MSA1_ID
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_ID&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
-				id='subjectKeyBind' nodeset='/ODM/SubjectKey' type='xsd:string'
+				StudyEventOID='F_TEST_1'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:I_MSA1_INIT
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_INIT&gt;&lt;xf:I_MSA1_FORMD
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_FORMD&gt;&lt;xf:I_MSA1_MSA1_CONS
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_CONS&gt;&lt;xf:I_MSA1_MSA1_PGT
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_PGT&gt;&lt;xf:I_MSA1_MSA1_BIRTHD
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_BIRTHD&gt;&lt;xf:I_MSA1_MSA1_OLD
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_OLD&gt;&lt;xf:I_MSA1_MSA1_KHIV
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_KHIV&gt;&lt;xf:I_MSA1_MSA1_HAART
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_HAART&gt;&lt;xf:I_MSA1_MSA1_ELHAART
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_ELHAART&gt;&lt;xf:I_MSA1_MSA1_BEFPEP
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_BEFPEP&gt;&lt;xf:I_MSA1_MSA1_OTRIAL
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_OTRIAL&gt;&lt;xf:I_MSA1_MSA1_OTRIAL_S
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_OTRIAL_S&gt;&lt;xf:I_MSA1_MSA1_MOVE
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_MOVE&gt;&lt;xf:I_MSA1_MSA1_PMTCT
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_PMTCT&gt;&lt;xf:I_MSA1_MSA1_COMPLY
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_COMPLY&gt;&lt;xf:I_MSA1_MSA1_ELIG
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_ELIG&gt;&lt;xf:I_MSA1_MSA1_DELIVERY
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_DELIVERY&gt;&lt;xf:I_MSA1_MSA1_CONSELLING
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_MSA1_CONSELLING&gt;&lt;xf:I_MSA1_IDPAT
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_IDPAT&gt;&lt;xf:I_MSA1_ID
+				ItemGroupOID='TEST_GROUP_1'&gt;&lt;/xf:I_MSA1_ID&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
+				id='subjectKey' visible='false()' nodeset='/ODM/SubjectKey'
+				locked='true()' type='xsd:string'
 				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_INIT'
 				nodeset='/ODM/I_MSA1_INIT' type='xsd:string'
 				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_FORMD'
@@ -73,317 +74,376 @@
 				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_ID'
 				nodeset='/ODM/I_MSA1_ID' type='xsd:int'
 				required='true()'&gt;&lt;/xf:bind&gt;&lt;/xf:model&gt;&lt;xf:group
-				id='1'&gt;&lt;xf:label&gt;Subject key&lt;/xf:label&gt;&lt;xf:input
-				bind='subjectKeyBind'&gt;&lt;xf:label&gt;Subject
-				Key&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;xf:group
-				id='2'&gt;&lt;xf:label&gt;Ungrouped&lt;/xf:label&gt;&lt;xf:input
-				bind='I_MSA1_INIT'&gt;&lt;xf:label&gt;Fill in your initials (Given
-				Name (G), Surname (S))&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
-				bind='I_MSA1_FORMD'&gt;&lt;xf:label&gt;Date of
-				form&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_CONS'&gt;&lt;xf:label&gt;Inclusion/Exclusion
+				id='1'&gt;&lt;xf:label&gt;Ungrouped&lt;/xf:label&gt;&lt;xf:input
+				bind='subjectKey'&gt;&lt;xf:label&gt;Subject
+				Key&lt;/xf:label&gt;&lt;xf:hint&gt;The subject key for whom you are
+				collecting data for.&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA1_INIT'&gt;&lt;xf:label&gt;Q1_Fill in your initials
+				(Given Name (G), Surname
+				(S))&lt;/xf:label&gt;&lt;xf:hint&gt;Researchers
+				initials&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA1_FORMD'&gt;&lt;xf:label&gt;Q2_Date of
+				form&lt;/xf:label&gt;&lt;xf:hint&gt;Date of
+				form&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_CONS'&gt;&lt;xf:label&gt;Q3_Inclusion/Exclusion
 				criteria - Has the woman understood/read and signed the informed
 				consent for screening?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_PGT'&gt;&lt;xf:label&gt;Is she
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Informed
+				consent for
+				screening&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_PGT'&gt;&lt;xf:label&gt;Q4_Is she
 				pregnant?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:input
-				bind='I_MSA1_MSA1_BIRTHD'&gt;&lt;xf:label&gt;What is her birth
-				date?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
-				bind='I_MSA1_MSA1_OLD'&gt;&lt;xf:label&gt;If birth date not
-				documented, how old is
-				she?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_KHIV'&gt;&lt;xf:label&gt;Is her HIV status
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Pregnancy&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:input
+				bind='I_MSA1_MSA1_BIRTHD'&gt;&lt;xf:label&gt;Q5_What is her birth
+				date?&lt;/xf:label&gt;&lt;xf:hint&gt;M Birth
+				date&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA1_MSA1_OLD'&gt;&lt;xf:label&gt;Q6_If birth date not
+				documented, how old is she?&lt;/xf:label&gt;&lt;xf:hint&gt;Legal
+				age&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_KHIV'&gt;&lt;xf:label&gt;Q7_Is her HIV status
 				documented from the antenatal clinic (or other
 				centre)?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;HIV
+				status&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
 				bind='I_MSA1_MSA1_HAART'&gt;&lt;xf:label&gt;Is she currently on
 				HAART?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_ELHAART'&gt;&lt;xf:label&gt;If not, is she
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;10^3/MM^3&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_ELHAART'&gt;&lt;xf:label&gt;Q8_If not, is she
 				eligible for HAART?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_BEFPEP'&gt;&lt;xf:label&gt;Has she participated in
-				the Promise PEP study during a previous
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Eligibility
+				for HAART&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_BEFPEP'&gt;&lt;xf:label&gt;Q10_Has she
+				participated in the Promise PEP study during a previous
 				pregnancy?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_OTRIAL'&gt;&lt;xf:label&gt;Is she currently in any
-				other trial ?&lt;/xf:label&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Promise
+				PEP participation&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_OTRIAL'&gt;&lt;xf:label&gt;Q11_Is she currently in
+				any other trial ?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Participation
+				to other trial&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
 				bind='I_MSA1_MSA1_OTRIAL_S'&gt;&lt;xf:label&gt;If yes, will she
 				still be participating in this trial one week after
 				delivery?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_MOVE'&gt;&lt;xf:label&gt;Does she intend to move
-				out of the area of the study in the next
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;End
+				of participation to other
+				trial&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA1_MSA1_MOVE'&gt;&lt;xf:label&gt;Q13_Does she intend to
+				move out of the area of the study in the next
 				year?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Remain
+				in catchment area&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
 				bind='I_MSA1_MSA1_PMTCT'&gt;&lt;xf:label&gt;Is she included in a
 				PMTCT program?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;PMTCT&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
 				bind='I_MSA1_MSA1_COMPLY'&gt;&lt;xf:label&gt;Is there anything that
 				could prevent her from complying with study procedures? (probe
 				according to SOP)&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Comply
+				with study
+				procedures&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
 				bind='I_MSA1_MSA1_ELIG'&gt;&lt;xf:label&gt;Based on the screening
 				procedures and questions so far: Is the mother eligible for further
 				participation&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:input
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Eligibility&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:input
 				bind='I_MSA1_MSA1_DELIVERY'&gt;&lt;xf:label&gt;Mother related -
 				Where does she intend to
-				deliver?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:select1
+				deliver?&lt;/xf:label&gt;&lt;xf:hint&gt;Site of planned
+				delivery&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:select1
 				bind='I_MSA1_MSA1_CONSELLING'&gt;&lt;xf:label&gt;Is she willing to
 				accept infant feeding option counselling from a designated research
 				counsellor?&lt;/xf:label&gt;&lt;xf:item
 				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:input
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Accept
+				counselling&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:input
 				bind='I_MSA1_IDPAT'&gt;&lt;xf:label&gt;Patient
-				ID&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
+				ID&lt;/xf:label&gt;&lt;xf:hint&gt;Patient
+				ID&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
 				bind='I_MSA1_ID'&gt;&lt;xf:label&gt;Patient
-				ID&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
+				ID&lt;/xf:label&gt;&lt;xf:hint&gt;Patient
+				ID&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
 			</xform>
 		</version>
 	</form>
-	<form description="F_MSA1_2" name="MSA1: Mother Screening Assessment 1 - 2">
+	<form description="F_TEST_2" name="MSA1: Mother Screening Assessment 1 - 2">
 		<version description="Converted from ODM using the oc-conversion-tools"
 			name="MSA1: Mother Screening Assessment 1 - 2-v1">
 			<xform>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 				&lt;xf:xforms
 				xmlns:xf='http://www.w3.org/2002/xforms'&gt;&lt;xf:model&gt;&lt;xf:instance
-				id='S_12175 - F_MSA1_2'&gt;&lt;xf:ODM StudyOID='S_12175'
+				id='Test-OID - F_TEST_2'&gt;&lt;xf:ODM StudyOID='Test-OID'
 				MetaDataVersionOID='v1.0.0' Description='This Xform was converted
-				from an ODM file using the oc-conversion-tools' formKey='F_MSA1_2'
+				from an ODM file using the oc-conversion-tools' formKey='F_TEST_2'
 				name='MSA1: Mother Screening Assessment 1 - 2'
-				StudyEventOID='F_MSA1_2'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:IG_MSA1_MSA1_COMPLYREASG&gt;&lt;xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:IG_MSA1_MSA1_COMPLYREASG&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
-				id='subjectKeyBind' nodeset='/ODM/SubjectKey' type='xsd:string'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='IG_MSA1_MSA1_COMPLYREASG'
-				nodeset='/ODM/IG_MSA1_MSA1_COMPLYREASG'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				StudyEventOID='F_TEST_2'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:TEST_GROUP_2&gt;&lt;xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:TEST_GROUP_2&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
+				id='subjectKey' visible='false()' nodeset='/ODM/SubjectKey'
+				locked='true()' type='xsd:string'
+				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='TEST_GROUP_2'
+				nodeset='/ODM/TEST_GROUP_2'&gt;&lt;/xf:bind&gt;&lt;xf:bind
 				id='I_MSA1_MSA1_COMPLYREAS'
-				nodeset='/ODM/IG_MSA1_MSA1_COMPLYREASG/I_MSA1_MSA1_COMPLYREAS'
+				nodeset='/ODM/TEST_GROUP_2/I_MSA1_MSA1_COMPLYREAS'
 				type='xsd:string'&gt;&lt;/xf:bind&gt;&lt;/xf:model&gt;&lt;xf:group
-				id='1'&gt;&lt;xf:label&gt;Subject key&lt;/xf:label&gt;&lt;xf:input
-				bind='subjectKeyBind'&gt;&lt;xf:label&gt;Subject
-				Key&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;xf:group
-				id='2'&gt;&lt;xf:label&gt;MSA1_complyreasG&lt;/xf:label&gt;&lt;xf:group
-				id='IG_MSA1_MSA1_COMPLYREASG'&gt;&lt;xf:label&gt;IG_MSA1_MSA1_COMPLYREASG&lt;/xf:label&gt;&lt;xf:repeat
-				bind='IG_MSA1_MSA1_COMPLYREASG'&gt;&lt;xf:input
+				id='1'&gt;&lt;xf:label&gt;MSA1_complyreasG&lt;/xf:label&gt;&lt;xf:input
+				bind='subjectKey'&gt;&lt;xf:label&gt;Subject
+				Key&lt;/xf:label&gt;&lt;xf:hint&gt;The subject key for whom you are
+				collecting data for.&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:group
+				id='TEST_GROUP_2'&gt;&lt;xf:label&gt;TEST_GROUP_2&lt;/xf:label&gt;&lt;xf:repeat
+				bind='TEST_GROUP_2'&gt;&lt;xf:input
 				bind='I_MSA1_MSA1_COMPLYREAS'&gt;&lt;xf:label&gt;Q10a_ If yes, what
 				could that
-				be?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:repeat&gt;&lt;/xf:group&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
+				be?&lt;/xf:label&gt;&lt;xf:hint&gt;10^3/MM^3&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;/xf:repeat&gt;&lt;/xf:group&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
 			</xform>
 		</version>
 	</form>
-	<form description="F_MSA2_2" name="MSA2: Mother Screening Assessment 2 - 2">
+	<form description="F_TEST_3" name="MSA2: Mother Screening Assessment 2 - 2">
 		<version description="Converted from ODM using the oc-conversion-tools"
 			name="MSA2: Mother Screening Assessment 2 - 2-v1">
 			<xform>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 				&lt;xf:xforms
 				xmlns:xf='http://www.w3.org/2002/xforms'&gt;&lt;xf:model&gt;&lt;xf:instance
-				id='S_12175 - F_MSA2_2'&gt;&lt;xf:ODM StudyOID='S_12175'
+				id='Test-OID - F_TEST_3'&gt;&lt;xf:ODM StudyOID='Test-OID'
 				MetaDataVersionOID='v1.0.0' Description='This Xform was converted
-				from an ODM file using the oc-conversion-tools' formKey='F_MSA2_2'
+				from an ODM file using the oc-conversion-tools' formKey='F_TEST_3'
 				name='MSA2: Mother Screening Assessment 2 - 2'
-				StudyEventOID='F_MSA2_2'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:IG_MSA2_MSA2_POARTPRECG&gt;&lt;xf:I_MSA2_MSA2_POARTPREC&gt;&lt;/xf:I_MSA2_MSA2_POARTPREC&gt;&lt;xf:I_MSA2_MSA2_POARTNBV&gt;&lt;/xf:I_MSA2_MSA2_POARTNBV&gt;&lt;/xf:IG_MSA2_MSA2_POARTPRECG&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
-				id='subjectKeyBind' nodeset='/ODM/SubjectKey' type='xsd:string'
+				StudyEventOID='F_TEST_3'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:I_MSA2_INIT
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_INIT&gt;&lt;xf:I_MSA2_FROMD
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_FROMD&gt;&lt;xf:I_MSA2_IDV
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_IDV&gt;&lt;xf:I_MSA2_MSA2_INITBF
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_INITBF&gt;&lt;xf:I_MSA2_MSA2_INTBF
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_INTBF&gt;&lt;xf:I_MSA2_MSA2_HAART
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_HAART&gt;&lt;xf:I_MSA2_MSA2_ELHAART
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_ELHAART&gt;&lt;xf:I_MSA2_MSA2_PAZT
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_PAZT&gt;&lt;xf:I_MSA2_MSA2_PAZTNB
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_PAZTNB&gt;&lt;xf:I_MSA2_MSA2_POART
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_POART&gt;&lt;xf:I_MSA2_MSA2_LNVPV
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_LNVPV&gt;&lt;xf:I_MSA2_MSA2_LAZTV
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_LAZTV&gt;&lt;xf:I_MSA2_MSA2_L3TC
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_L3TC&gt;&lt;xf:I_MSA2_MSA2_LOART
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_LOART&gt;&lt;xf:I_MSA2_MSA2_LOCATB
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_LOCATB&gt;&lt;xf:I_MSA2_MSA2_OLOCATBPREC
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_OLOCATBPREC&gt;&lt;xf:I_MSA2_MSA2_TRANSF
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_TRANSF&gt;&lt;xf:I_MSA2_MSA2_TYPED
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_TYPED&gt;&lt;xf:I_MSA2_MSA2_PMTCTV
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_PMTCTV&gt;&lt;xf:I_MSA2_MSA2_PMTCT
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_PMTCT&gt;&lt;xf:I_MSA2_MSA2_LAZTNBV
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_LAZTNBV&gt;&lt;xf:I_MSA2_MSA2_L3TCNB
+				ItemGroupOID='TEST_GROUP_3'&gt;&lt;/xf:I_MSA2_MSA2_L3TCNB&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
+				id='subjectKey' visible='false()' nodeset='/ODM/SubjectKey'
+				locked='true()' type='xsd:string'
+				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_INIT'
+				nodeset='/ODM/I_MSA2_INIT' type='xsd:string'
+				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_FROMD'
+				nodeset='/ODM/I_MSA2_FROMD' type='xsd:date'
+				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_IDV'
+				nodeset='/ODM/I_MSA2_IDV' type='xsd:string'
 				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='IG_MSA2_MSA2_POARTPRECG'
-				nodeset='/ODM/IG_MSA2_MSA2_POARTPRECG'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA2_MSA2_POARTPREC'
-				nodeset='/ODM/IG_MSA2_MSA2_POARTPRECG/I_MSA2_MSA2_POARTPREC'
+				id='I_MSA2_MSA2_INITBF' nodeset='/ODM/I_MSA2_MSA2_INITBF'
+				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_INTBF' nodeset='/ODM/I_MSA2_MSA2_INTBF'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_HAART'
+				nodeset='/ODM/I_MSA2_MSA2_HAART' type='xsd:int'
+				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_ELHAART' nodeset='/ODM/I_MSA2_MSA2_ELHAART'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_PAZT'
+				nodeset='/ODM/I_MSA2_MSA2_PAZT'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_PAZTNB' nodeset='/ODM/I_MSA2_MSA2_PAZTNB'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_POART'
+				nodeset='/ODM/I_MSA2_MSA2_POART'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_LNVPV'
+				nodeset='/ODM/I_MSA2_MSA2_LNVPV'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_LAZTV'
+				nodeset='/ODM/I_MSA2_MSA2_LAZTV'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_L3TC'
+				nodeset='/ODM/I_MSA2_MSA2_L3TC'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA2_MSA2_LOART'
+				nodeset='/ODM/I_MSA2_MSA2_LOART'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_LOCATB' nodeset='/ODM/I_MSA2_MSA2_LOCATB'
+				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_OLOCATBPREC' nodeset='/ODM/I_MSA2_MSA2_OLOCATBPREC'
 				type='xsd:string'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA2_MSA2_POARTNBV'
-				nodeset='/ODM/IG_MSA2_MSA2_POARTPRECG/I_MSA2_MSA2_POARTNBV'
-				type='xsd:string'&gt;&lt;/xf:bind&gt;&lt;/xf:model&gt;&lt;xf:group
-				id='1'&gt;&lt;xf:label&gt;Subject key&lt;/xf:label&gt;&lt;xf:input
-				bind='subjectKeyBind'&gt;&lt;xf:label&gt;Subject
-				Key&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;xf:group
-				id='2'&gt;&lt;xf:label&gt;MSA2_POARTprecG&lt;/xf:label&gt;&lt;xf:group
-				id='IG_MSA2_MSA2_POARTPRECG'&gt;&lt;xf:label&gt;IG_MSA2_MSA2_POARTPRECG&lt;/xf:label&gt;&lt;xf:repeat
-				bind='IG_MSA2_MSA2_POARTPRECG'&gt;&lt;xf:input
-				bind='I_MSA2_MSA2_POARTPREC'&gt;&lt;xf:label&gt;Drug -
-				Drug&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
-				bind='I_MSA2_MSA2_POARTNBV'&gt;&lt;xf:label&gt;For how many
-				weeks?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:repeat&gt;&lt;/xf:group&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
+				id='I_MSA2_MSA2_TRANSF' nodeset='/ODM/I_MSA2_MSA2_TRANSF'
+				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_TYPED' nodeset='/ODM/I_MSA2_MSA2_TYPED'
+				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_PMTCTV' nodeset='/ODM/I_MSA2_MSA2_PMTCTV'
+				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_PMTCT' nodeset='/ODM/I_MSA2_MSA2_PMTCT'
+				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_LAZTNBV' nodeset='/ODM/I_MSA2_MSA2_LAZTNBV'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_L3TCNB' nodeset='/ODM/I_MSA2_MSA2_L3TCNB'
+				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;/xf:model&gt;&lt;xf:group
+				id='1'&gt;&lt;xf:label&gt;Ungrouped&lt;/xf:label&gt;&lt;xf:input
+				bind='subjectKey'&gt;&lt;xf:label&gt;Subject
+				Key&lt;/xf:label&gt;&lt;xf:hint&gt;The subject key for whom you are
+				collecting data for.&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA2_INIT'&gt;&lt;xf:label&gt;Fill in your initials (Given
+				Name (G), Surname (S))&lt;/xf:label&gt;&lt;xf:hint&gt;Researchers
+				initials&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA2_FROMD'&gt;&lt;xf:label&gt;Date of
+				form&lt;/xf:label&gt;&lt;xf:hint&gt;Date of
+				form&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA2_IDV'&gt;&lt;xf:label&gt;Patient
+				ID&lt;/xf:label&gt;&lt;xf:hint&gt;Patient
+				ID&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_INITBF'&gt;&lt;xf:label&gt;Inclusion/Exclusion
+				criteria - Have you initiated
+				breastfeeding?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Initiation
+				of breastfeeding&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_INTBF'&gt;&lt;xf:label&gt;If not, do you intend to
+				breastfeed your infant?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='3'&gt;&lt;xf:label&gt;Unsure&lt;/xf:label&gt;&lt;xf:value&gt;3&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Intention
+				to breastfeed&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_HAART'&gt;&lt;xf:label&gt;Is the mother currently
+				on HAART?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Currently
+				HAART&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_ELHAART'&gt;&lt;xf:label&gt;If not, is the mother
+				eligible for HAART?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Eligibility
+				for HAART&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_PAZT'&gt;&lt;xf:label&gt;If yes specify which
+				regimen - AZT&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;10^3/MM^3&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:input
+				bind='I_MSA2_MSA2_PAZTNB'&gt;&lt;xf:label&gt;If yes, for how many
+				weeks?&lt;/xf:label&gt;&lt;xf:hint&gt;Number of weeks under
+				AZT&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_POART'&gt;&lt;xf:label&gt;Other
+				ART&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Other
+				ART during
+				pregnancy&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_LNVPV'&gt;&lt;xf:label&gt;Single-dose
+				nevirapine&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Single-
+				dose nevirapine&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_LAZTV'&gt;&lt;xf:label&gt;AZT&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;AZT&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_L3TC'&gt;&lt;xf:label&gt;3TC&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;3TC
+				during labour&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_LOART'&gt;&lt;xf:label&gt;Other
+				ART&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Other
+				ART during labour&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_LOCATB'&gt;&lt;xf:label&gt;Mother delivery - Where
+				did you give birth to your baby?&lt;/xf:label&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Health care
+				centre&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='2'&gt;&lt;xf:label&gt;Home
+				assisted&lt;/xf:label&gt;&lt;xf:value&gt;2&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='3'&gt;&lt;xf:label&gt;Home non
+				assisted&lt;/xf:label&gt;&lt;xf:value&gt;3&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='4'&gt;&lt;xf:label&gt;Other&lt;/xf:label&gt;&lt;xf:value&gt;4&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Place
+				of birth&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:input
+				bind='I_MSA2_MSA2_OLOCATBPREC'&gt;&lt;xf:label&gt;If other,
+				specify&lt;/xf:label&gt;&lt;xf:hint&gt;Other place of
+				birth&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_TRANSF'&gt;&lt;xf:label&gt;Did you receive a blood
+				transfusion?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Blood
+				transfusion&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_TYPED'&gt;&lt;xf:label&gt;What kind of delivery
+				did you have with this baby?&lt;/xf:label&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Vaginal&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='2'&gt;&lt;xf:label&gt;Vacuum&lt;/xf:label&gt;&lt;xf:value&gt;2&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='3'&gt;&lt;xf:label&gt;Forceps&lt;/xf:label&gt;&lt;xf:value&gt;3&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='4'&gt;&lt;xf:label&gt;Elective-caesarean
+				section&lt;/xf:label&gt;&lt;xf:value&gt;4&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='5'&gt;&lt;xf:label&gt;Emergency caesarean
+				section&lt;/xf:label&gt;&lt;xf:value&gt;5&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='6'&gt;&lt;xf:label&gt;Other&lt;/xf:label&gt;&lt;xf:value&gt;6&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;Type
+				of delivery&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_PMTCTV'&gt;&lt;xf:label&gt;Has the mother received
+				any ART during pregnancy OR labour?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;PMTCT
+				during pregnancy and
+				labour&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:select1
+				bind='I_MSA2_MSA2_PMTCT'&gt;&lt;xf:label&gt;Has the mother received
+				any ART during pregnancy and labour?&lt;/xf:label&gt;&lt;xf:item
+				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
+				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:hint&gt;PMTCT
+				during pregnancy and
+				labour&lt;/xf:hint&gt;&lt;/xf:select1&gt;&lt;xf:input
+				bind='I_MSA2_MSA2_LAZTNBV'&gt;&lt;xf:label&gt;If yes, for how many
+				days?&lt;/xf:label&gt;&lt;xf:hint&gt;If yes, for how many
+				days?&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA2_MSA2_L3TCNB'&gt;&lt;xf:label&gt;If yes, for how many
+				days?&lt;/xf:label&gt;&lt;xf:hint&gt;Number of days on 3TC during
+				labour&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
 			</xform>
 		</version>
 	</form>
-	<form description="F_MSA2_1" name="MSA2: Mother Screening Assessment 2 - 1">
+	<form description="F_TEST_4" name="MSA2: Mother Screening Assessment 2 - 1">
 		<version description="Converted from ODM using the oc-conversion-tools"
 			name="MSA2: Mother Screening Assessment 2 - 1-v1">
 			<xform>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 				&lt;xf:xforms
 				xmlns:xf='http://www.w3.org/2002/xforms'&gt;&lt;xf:model&gt;&lt;xf:instance
-				id='S_12175 - F_MSA2_1'&gt;&lt;xf:ODM StudyOID='S_12175'
+				id='Test-OID - F_TEST_4'&gt;&lt;xf:ODM StudyOID='Test-OID'
 				MetaDataVersionOID='v1.0.0' Description='This Xform was converted
-				from an ODM file using the oc-conversion-tools' formKey='F_MSA2_1'
+				from an ODM file using the oc-conversion-tools' formKey='F_TEST_4'
 				name='MSA2: Mother Screening Assessment 2 - 1'
-				StudyEventOID='F_MSA2_1'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:I_MSA1_INIT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_INIT&gt;&lt;xf:I_MSA1_FORMD
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_FORMD&gt;&lt;xf:I_MSA1_MSA1_CONS
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_CONS&gt;&lt;xf:I_MSA1_MSA1_PGT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_PGT&gt;&lt;xf:I_MSA1_MSA1_BIRTHD
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_BIRTHD&gt;&lt;xf:I_MSA1_MSA1_OLD
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_OLD&gt;&lt;xf:I_MSA1_MSA1_KHIV
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_KHIV&gt;&lt;xf:I_MSA1_MSA1_HAART
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_HAART&gt;&lt;xf:I_MSA1_MSA1_ELHAART
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_ELHAART&gt;&lt;xf:I_MSA1_MSA1_BEFPEP
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_BEFPEP&gt;&lt;xf:I_MSA1_MSA1_OTRIAL
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_OTRIAL&gt;&lt;xf:I_MSA1_MSA1_OTRIAL_S
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_OTRIAL_S&gt;&lt;xf:I_MSA1_MSA1_MOVE
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_MOVE&gt;&lt;xf:I_MSA1_MSA1_PMTCT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_PMTCT&gt;&lt;xf:I_MSA1_MSA1_COMPLY
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_COMPLY&gt;&lt;xf:I_MSA1_MSA1_ELIG
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_ELIG&gt;&lt;xf:I_MSA1_MSA1_DELIVERY
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_DELIVERY&gt;&lt;xf:I_MSA1_MSA1_CONSELLING
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_MSA1_CONSELLING&gt;&lt;xf:I_MSA1_IDPAT
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_IDPAT&gt;&lt;xf:I_MSA1_ID
-				ItemGroupOID='IG_MSA1_UNGROUPED'&gt;&lt;/xf:I_MSA1_ID&gt;&lt;xf:IG_MSA1_MSA1_COMPLYREASG&gt;&lt;xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:IG_MSA1_MSA1_COMPLYREASG&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
-				id='subjectKeyBind' nodeset='/ODM/SubjectKey' type='xsd:string'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_INIT'
-				nodeset='/ODM/I_MSA1_INIT' type='xsd:string'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_FORMD'
-				nodeset='/ODM/I_MSA1_FORMD' type='xsd:date'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_CONS' nodeset='/ODM/I_MSA1_MSA1_CONS' type='xsd:int'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_PGT' nodeset='/ODM/I_MSA1_MSA1_PGT' type='xsd:int'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_BIRTHD' nodeset='/ODM/I_MSA1_MSA1_BIRTHD'
-				type='xsd:date'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_MSA1_OLD'
-				nodeset='/ODM/I_MSA1_MSA1_OLD'
-				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_MSA1_KHIV'
-				nodeset='/ODM/I_MSA1_MSA1_KHIV' type='xsd:int'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_HAART' nodeset='/ODM/I_MSA1_MSA1_HAART'
-				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_ELHAART' nodeset='/ODM/I_MSA1_MSA1_ELHAART'
-				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_BEFPEP' nodeset='/ODM/I_MSA1_MSA1_BEFPEP'
-				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_OTRIAL' nodeset='/ODM/I_MSA1_MSA1_OTRIAL'
-				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_OTRIAL_S' nodeset='/ODM/I_MSA1_MSA1_OTRIAL_S'
-				type='xsd:int'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_MSA1_MOVE'
-				nodeset='/ODM/I_MSA1_MSA1_MOVE' type='xsd:int'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_PMTCT' nodeset='/ODM/I_MSA1_MSA1_PMTCT'
-				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_COMPLY' nodeset='/ODM/I_MSA1_MSA1_COMPLY'
-				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_ELIG' nodeset='/ODM/I_MSA1_MSA1_ELIG' type='xsd:int'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_DELIVERY' nodeset='/ODM/I_MSA1_MSA1_DELIVERY'
-				type='xsd:string' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_MSA1_CONSELLING' nodeset='/ODM/I_MSA1_MSA1_CONSELLING'
-				type='xsd:int' required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='I_MSA1_IDPAT' nodeset='/ODM/I_MSA1_IDPAT' type='xsd:string'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='I_MSA1_ID'
-				nodeset='/ODM/I_MSA1_ID' type='xsd:int'
-				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind
-				id='IG_MSA1_MSA1_COMPLYREASG'
-				nodeset='/ODM/IG_MSA1_MSA1_COMPLYREASG'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				StudyEventOID='F_TEST_4'&gt;&lt;xf:SubjectKey&gt;&lt;/xf:SubjectKey&gt;&lt;xf:TEST_GROUP_4&gt;&lt;xf:I_MSA2_MSA2_POARTPREC&gt;&lt;/xf:I_MSA2_MSA2_POARTPREC&gt;&lt;xf:I_MSA2_MSA2_POARTNBV&gt;&lt;/xf:I_MSA2_MSA2_POARTNBV&gt;&lt;/xf:TEST_GROUP_4&gt;&lt;xf:TEST_GROUP_2&gt;&lt;xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:I_MSA1_MSA1_COMPLYREAS&gt;&lt;/xf:TEST_GROUP_2&gt;&lt;/xf:ODM&gt;&lt;/xf:instance&gt;&lt;xf:bind
+				id='subjectKey' visible='false()' nodeset='/ODM/SubjectKey'
+				locked='true()' type='xsd:string'
+				required='true()'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='TEST_GROUP_4'
+				nodeset='/ODM/TEST_GROUP_4'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_POARTPREC'
+				nodeset='/ODM/TEST_GROUP_4/I_MSA2_MSA2_POARTPREC'
+				type='xsd:string'&gt;&lt;/xf:bind&gt;&lt;xf:bind
+				id='I_MSA2_MSA2_POARTNBV'
+				nodeset='/ODM/TEST_GROUP_4/I_MSA2_MSA2_POARTNBV'
+				type='xsd:string'&gt;&lt;/xf:bind&gt;&lt;xf:bind id='TEST_GROUP_2'
+				nodeset='/ODM/TEST_GROUP_2'&gt;&lt;/xf:bind&gt;&lt;xf:bind
 				id='I_MSA1_MSA1_COMPLYREAS'
-				nodeset='/ODM/IG_MSA1_MSA1_COMPLYREASG/I_MSA1_MSA1_COMPLYREAS'
+				nodeset='/ODM/TEST_GROUP_2/I_MSA1_MSA1_COMPLYREAS'
 				type='xsd:string'&gt;&lt;/xf:bind&gt;&lt;/xf:model&gt;&lt;xf:group
-				id='1'&gt;&lt;xf:label&gt;Subject key&lt;/xf:label&gt;&lt;xf:input
-				bind='subjectKeyBind'&gt;&lt;xf:label&gt;Subject
-				Key&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;xf:group
-				id='2'&gt;&lt;xf:label&gt;Ungrouped&lt;/xf:label&gt;&lt;xf:input
-				bind='I_MSA1_INIT'&gt;&lt;xf:label&gt;Fill in your initials (Given
-				Name (G), Surname (S))&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
-				bind='I_MSA1_FORMD'&gt;&lt;xf:label&gt;Date of
-				form&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_CONS'&gt;&lt;xf:label&gt;Inclusion/Exclusion
-				criteria - Has the woman understood/read and signed the informed
-				consent for screening?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_PGT'&gt;&lt;xf:label&gt;Is she
-				pregnant?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:input
-				bind='I_MSA1_MSA1_BIRTHD'&gt;&lt;xf:label&gt;What is her birth
-				date?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
-				bind='I_MSA1_MSA1_OLD'&gt;&lt;xf:label&gt;If birth date not
-				documented, how old is
-				she?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_KHIV'&gt;&lt;xf:label&gt;Is her HIV status
-				documented from the antenatal clinic (or other
-				centre)?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_HAART'&gt;&lt;xf:label&gt;Is she currently on
-				HAART?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_ELHAART'&gt;&lt;xf:label&gt;If not, is she
-				eligible for HAART?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_BEFPEP'&gt;&lt;xf:label&gt;Has she participated in
-				the Promise PEP study during a previous
-				pregnancy?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_OTRIAL'&gt;&lt;xf:label&gt;Is she currently in any
-				other trial ?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_OTRIAL_S'&gt;&lt;xf:label&gt;If yes, will she
-				still be participating in this trial one week after
-				delivery?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_MOVE'&gt;&lt;xf:label&gt;Does she intend to move
-				out of the area of the study in the next
-				year?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_PMTCT'&gt;&lt;xf:label&gt;Is she included in a
-				PMTCT program?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_COMPLY'&gt;&lt;xf:label&gt;Is there anything that
-				could prevent her from complying with study procedures? (probe
-				according to SOP)&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_ELIG'&gt;&lt;xf:label&gt;Based on the screening
-				procedures and questions so far: Is the mother eligible for further
-				participation&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:input
-				bind='I_MSA1_MSA1_DELIVERY'&gt;&lt;xf:label&gt;Mother related -
-				Where does she intend to
-				deliver?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:select1
-				bind='I_MSA1_MSA1_CONSELLING'&gt;&lt;xf:label&gt;Is she willing to
-				accept infant feeding option counselling from a designated research
-				counsellor?&lt;/xf:label&gt;&lt;xf:item
-				id='0'&gt;&lt;xf:label&gt;No&lt;/xf:label&gt;&lt;xf:value&gt;0&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;xf:item
-				id='1'&gt;&lt;xf:label&gt;Yes&lt;/xf:label&gt;&lt;xf:value&gt;1&lt;/xf:value&gt;&lt;/xf:item&gt;&lt;/xf:select1&gt;&lt;xf:input
-				bind='I_MSA1_IDPAT'&gt;&lt;xf:label&gt;Patient
-				ID&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;xf:input
-				bind='I_MSA1_ID'&gt;&lt;xf:label&gt;Patient
-				ID&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:group&gt;&lt;xf:group
-				id='3'&gt;&lt;xf:label&gt;MSA1_complyreasG&lt;/xf:label&gt;&lt;xf:group
-				id='IG_MSA1_MSA1_COMPLYREASG'&gt;&lt;xf:label&gt;IG_MSA1_MSA1_COMPLYREASG&lt;/xf:label&gt;&lt;xf:repeat
-				bind='IG_MSA1_MSA1_COMPLYREASG'&gt;&lt;xf:input
+				id='1'&gt;&lt;xf:label&gt;MSA2_POARTprecG&lt;/xf:label&gt;&lt;xf:input
+				bind='subjectKey'&gt;&lt;xf:label&gt;Subject
+				Key&lt;/xf:label&gt;&lt;xf:hint&gt;The subject key for whom you are
+				collecting data for.&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:group
+				id='TEST_GROUP_4'&gt;&lt;xf:label&gt;TEST_GROUP_4&lt;/xf:label&gt;&lt;xf:repeat
+				bind='TEST_GROUP_4'&gt;&lt;xf:input
+				bind='I_MSA2_MSA2_POARTPREC'&gt;&lt;xf:label&gt;Drug -
+				Drug&lt;/xf:label&gt;&lt;xf:hint&gt;Other ART regimen
+				specify&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;xf:input
+				bind='I_MSA2_MSA2_POARTNBV'&gt;&lt;xf:label&gt;For how many
+				weeks?&lt;/xf:label&gt;&lt;xf:hint&gt;Number of weeks under other
+				ART&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;/xf:repeat&gt;&lt;/xf:group&gt;&lt;/xf:group&gt;&lt;xf:group
+				id='2'&gt;&lt;xf:label&gt;MSA1_complyreasG&lt;/xf:label&gt;&lt;xf:group
+				id='TEST_GROUP_2'&gt;&lt;xf:label&gt;TEST_GROUP_2&lt;/xf:label&gt;&lt;xf:repeat
+				bind='TEST_GROUP_2'&gt;&lt;xf:input
 				bind='I_MSA1_MSA1_COMPLYREAS'&gt;&lt;xf:label&gt;Q10a_ If yes, what
 				could that
-				be?&lt;/xf:label&gt;&lt;/xf:input&gt;&lt;/xf:repeat&gt;&lt;/xf:group&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
+				be?&lt;/xf:label&gt;&lt;xf:hint&gt;10^3/MM^3&lt;/xf:hint&gt;&lt;/xf:input&gt;&lt;/xf:repeat&gt;&lt;/xf:group&gt;&lt;/xf:group&gt;&lt;/xf:xforms&gt;
 			</xform>
 		</version>
 	</form>

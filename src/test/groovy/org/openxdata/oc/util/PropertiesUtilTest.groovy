@@ -44,7 +44,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 	@Test void testLoadPropertiesReturnsValidHostProperty() {
 
 		def host = props.getAt('host')
-		assertEquals 'http://158.37.6.165/OpenClinica-ws-SNAPSHOT', host
+		assertEquals 'http://10.10.3.217:8080/OpenClinica-ws-SNAPSHOT', host
 	}
 
 	@Test void testLoadPropertiesReturnsUserNameProperty() {

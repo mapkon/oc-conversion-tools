@@ -2,7 +2,6 @@ package org.openxdata.oc.transport.soap.proxy
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.model.ODMInstanceDataDefinition
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
