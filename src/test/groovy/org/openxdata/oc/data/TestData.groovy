@@ -5,6 +5,7 @@ import java.util.List
 import org.junit.Ignore
 import org.openxdata.oc.util.TransformUtil
 import org.openxdata.server.admin.model.FormData
+import org.openxdata.oc.model.StudySubject
 
 
 @Ignore("Some maven installations will attempt to run this as a test")
@@ -101,6 +102,23 @@ class TestData {
 		def xml = new XmlSlurper().parseText(response)
 		
 		return xml.depthFirst().find{ it.name().equals("studySubjects") }
+		
+	}
+        
+        static List<StudySubject> getStudySubjectsObjects() {
+		
+		def response = new XmlParser().parseText(new TransformUtil().loadFileContents("subject-event-response.xml"))
+	
+               def eventNode =  response.depthFirst().studySubjects[0]
+        
+                def subjects = []
+		eventNode.studySubject.each {
+			
+			def subject = new StudySubject(it)
+			subjects.add(subject)
+		}
+
+		return subjects
 		
 	}
 	
