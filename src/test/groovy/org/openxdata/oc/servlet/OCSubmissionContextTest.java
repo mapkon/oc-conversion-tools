@@ -18,7 +18,7 @@ import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.service.StudyManagerService;
 import static org.junit.Assert.*;
-import org.openxdata.oc.TestData;
+import org.openxdata.oc.data.TestData;
 import static org.mockito.Mockito.*;
 
 /**

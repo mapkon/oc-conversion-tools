@@ -147,7 +147,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		try {
 			studyByName = studyManagerService.getStudyByName("Default Study");
 		} catch (Exception e) {
-			log.error("Failed to get openclinica study", e);
+			log.error("Failed to get openclinica study" + e.getMessage());
+			log.trace("Failed to get openclinica study", e);
 		}
 		if (studyByName != null && !studyByName.isEmpty()) {
 			StudyDef study = studyByName.get(0);

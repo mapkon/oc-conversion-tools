@@ -242,10 +242,6 @@
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-core</artifactId>
 				</exclusion>
-<!--				<exclusion>
-					<groupId>org.openxdata</groupId>
-					<artifactId>protocol-api</artifactId>
-				</exclusion>-->
 				<exclusion>
 					<groupId>net.jcip</groupId>
 					<artifactId>jcip-annotations</artifactId>
@@ -292,30 +288,12 @@
 			</exclusions>
 			<scope>test</scope>
 		</dependency>
-                        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>1.4.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-easymock</artifactId>
-            <version>1.4.9</version>
-            <scope>test</scope>
-        </dependency>
 		<dependency>
 			<groupId>org.concordion</groupId>
 			<artifactId>concordion-extensions</artifactId>
 			<version>1.1.0</version>
 			<scope>test</scope>
 		</dependency>
-                        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>3.0</version>
-            <scope>test</scope>
-        </dependency>
 	</dependencies>
 
 	<build>
