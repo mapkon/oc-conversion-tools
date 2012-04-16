@@ -220,7 +220,9 @@
 
 			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
 			<label>
-				<xsl:value-of select="$section" />
+		
+				<xsl:value-of
+					select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$section]" />
 			</label>
 
 			<!-- Add the subject key input field only to the first group. -->
