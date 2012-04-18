@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.openxdata.oc.servlet;
 
 import java.io.DataInputStream;
@@ -25,10 +21,6 @@ import org.openxdata.server.servlet.DefaultSubmissionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author kay
- */
 public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext {
 
 	private OpenClinicaService ocService;
