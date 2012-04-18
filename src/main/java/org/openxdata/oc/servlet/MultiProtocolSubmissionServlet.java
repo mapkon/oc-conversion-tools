@@ -45,7 +45,6 @@ import org.openxdata.oc.service.OpenClinicaService;
  */
 public class MultiProtocolSubmissionServlet {
 
-	private static final long serialVersionUID = -8555135998272736140L;
 	private static final Logger log = LoggerFactory.getLogger(MultiProtocolSubmissionServlet.class);
 
 	private byte ACTION_NONE = -1;

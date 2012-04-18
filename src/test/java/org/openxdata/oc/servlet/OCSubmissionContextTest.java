@@ -56,8 +56,10 @@ public class OCSubmissionContextTest {
 	 */
 	@Test
 	public void testAvailableWorkitems() {
-		System.out.println("availableWorkitems");
 		when(studyManagerService.getStudyByName("Default Study")).thenReturn(new ArrayList<StudyDef>() {
+			
+			private static final long serialVersionUID = 1L;
+
 			{
 				add(oXDStudy);
 			}
@@ -65,9 +67,7 @@ public class OCSubmissionContextTest {
 
 		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
 
-		List result = instance.availableWorkitems();
-                
-                System.out.println("Got "+result.size()+" Workitems");
+		List<?> result = instance.availableWorkitems();
 
 		assertFalse("A list of workitems were expected but none were returned", result.isEmpty());
 
@@ -76,7 +76,7 @@ public class OCSubmissionContextTest {
 	@Test
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
 		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
-		when(studyManagerService.getStudyByName("Default Study")).thenReturn(Collections.EMPTY_LIST);
+		when(studyManagerService.getStudyByName("Default Study")).thenReturn(Collections.<StudyDef> emptyList());
 		List<Object[]> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());

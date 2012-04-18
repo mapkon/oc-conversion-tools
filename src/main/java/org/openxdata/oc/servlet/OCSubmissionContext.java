@@ -86,7 +86,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private Object[] eventToWIR(Event event, StudyDef oCStudyID, StudySubject studySubject) {
 
 		List<Object[]> formReferences = new ArrayList<Object[]>();
-		List<String> formOIDs = (List) event.getFormOIDs();
+		List<String> formOIDs = (List<String>) event.getFormOIDs();
 
 		for (String formOID : formOIDs) {
 			Object[] formRef = formDefToFormReferece(formOID, oCStudyID, event, studySubject);
