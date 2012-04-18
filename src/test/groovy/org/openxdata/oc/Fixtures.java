@@ -6,11 +6,10 @@ package org.openxdata.oc;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+
 import org.apache.commons.io.IOUtils;
 import org.openxdata.server.admin.model.Editable;
 import org.openxdata.server.admin.model.StudyDef;
-import org.openxdata.oc.model.StudySubject;
 
 /**
  *
