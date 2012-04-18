@@ -56,7 +56,6 @@ public class OCSubmissionContextTest {
 	 */
 	@Test
 	public void testAvailableWorkitems() {
-		System.out.println("availableWorkitems");
 		when(studyManagerService.getStudyByName("Default Study")).thenReturn(new ArrayList<StudyDef>() {
 			
 			private static final long serialVersionUID = 1L;
