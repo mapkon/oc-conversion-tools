@@ -221,8 +221,7 @@
 			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
 			<label>
 		
-				<xsl:value-of
-					select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$section]" />
+				<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$section]" />
 			</label>
 
 			<!-- Add the subject key input field only to the first group. -->
@@ -305,9 +304,13 @@
 						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
 					</xsl:variable>
 					<label>
-						<xsl:call-template name="createQuestionText">
-							<xsl:with-param name="itemDef" select="$itemDef" />
-						</xsl:call-template>
+						<xsl:variable name="lText">
+							<xsl:call-template name="createQuestionText">
+								<xsl:with-param name="itemDef" select="$itemDef" />
+							</xsl:call-template>
+						</xsl:variable>
+						
+						<xsl:value-of select="normalize-space($lText)" />
 					</label>
 					<xsl:for-each
 						select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
@@ -331,12 +334,15 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<input>
-					<xsl:attribute name="bind"><xsl:value-of
-						select="$itemOID" /></xsl:attribute>
+					<xsl:attribute name="bind"><xsl:value-of select="$itemOID" /></xsl:attribute>
 					<label>
-						<xsl:call-template name="createQuestionText">
-							<xsl:with-param name="itemDef" select="$itemDef" />
-						</xsl:call-template>
+						<xsl:variable name="lText">
+							<xsl:call-template name="createQuestionText">
+								<xsl:with-param name="itemDef" select="$itemDef" />
+							</xsl:call-template>
+						</xsl:variable>
+						
+						<xsl:value-of select="normalize-space($lText)" />
 					</label>
 					<hint>
 						<xsl:call-template name="createHintText">
@@ -354,16 +360,29 @@
 
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:Question/@OpenClinica:QuestionNumber">
-				<xsl:variable name="questionNumber"
-					select="$itemDef/odm:Question/@OpenClinica:QuestionNumber" />
 
-				<xsl:value-of select="$questionNumber" />
-				<xsl:value-of
-					select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+				<xsl:choose>
+					<xsl:when test="$itemDef/*/*/*[local-name()='ItemHeader']">
+						<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemHeader'])" /> -
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="normalize-space($itemDef/odm:Question/@OpenClinica:QuestionNumber)" />
+					</xsl:otherwise>
+				</xsl:choose>
+				
+				<xsl:if test="$itemDef/*/*/*[local-name()='ItemSubHeader']">
+					<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemSubHeader'])" /> -
+				</xsl:if>
+				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of
-					select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
+				<xsl:if test="$itemDef/*/*/*[local-name()='ItemHeader']">
+					<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemHeader'])" /> -
+				</xsl:if>
+				<xsl:if test="$itemDef/*/*/*[local-name()='ItemSubHeader']">
+					<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemSubHeader'])" /> -
+				</xsl:if>
+				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
