@@ -66,8 +66,8 @@ public class OCSubmissionContextTest {
 		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
 
 		List result = instance.availableWorkitems();
-                
-                System.out.println("Got "+result.size()+" Workitems");
+
+		System.out.println("Got " + result.size() + " Workitems");
 
 		assertFalse("A list of workitems were expected but none were returned", result.isEmpty());
 
