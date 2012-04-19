@@ -28,6 +28,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private StudyManagerService studyManagerService;
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
 	private final Properties props;
+	private List<Event> orphanedEvents = new ArrayList<Event>();
 
 	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
 			UserService userService, FormDownloadService formService, StudyManagerService studyManagerService,
@@ -51,6 +52,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	public List<Object[]> availableWorkitems() {
+		clearOphanedEvents();
 		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents("S_DEFAULTS1");
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		StudyDef ocStudy = getOCStudyID();
@@ -64,6 +66,14 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		}
 
 		return workitems;
+	}
+
+	public void clearOphanedEvents() {
+		orphanedEvents.clear();
+	}
+
+	public List<Event> getOrphanedEvents() {
+		return orphanedEvents;
 	}
 
 	private List<Object[]> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
@@ -113,6 +123,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		FormDef formDef = getFormByDescription(oCStudyID, formOID);
 
 		if (formDef == null) {
+			orphanedEvents.add(event);
 			log.warn("FormOID[" + formOID + "] Event:[" + event.getEventDefinitionOID() + "] not found");
 			return null;
 		}
@@ -159,7 +170,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		for (FormDef formDef1 : forms) {
 			String frmDefDescr = formDef1.getDescription();
 			//	frmDefDescr = frmDefDescr.substring(0, frmDefDescr.lastIndexOf("_"));
-			if (frmDefDescr.equalsIgnoreCase(description)) {
+			if (frmDefDescr != null && frmDefDescr.equalsIgnoreCase(description)) {
 				return formDef1;
 			}
 		}

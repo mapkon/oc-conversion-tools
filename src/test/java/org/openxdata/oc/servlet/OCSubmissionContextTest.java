@@ -15,15 +15,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.Fixtures;
-import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.service.StudyManagerService;
-import static org.junit.Assert.*;
 import org.openxdata.oc.data.TestData;
+import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.xform.StudyImporter;
-import static org.mockito.Mockito.*;
 
 public class OCSubmissionContextTest {
 
@@ -60,7 +58,7 @@ public class OCSubmissionContextTest {
 	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(new ArrayList<StudyDef>() {
 
-			private static final long serialVersionUID = 1L; 
+			private static final long serialVersionUID = 1L;
 			{
 				add(oXDStudy);
 			}
@@ -75,6 +73,26 @@ public class OCSubmissionContextTest {
 	}
 
 	@Test
+	public void testAvailableWorkitemsReturnsEmptyListOfWorkitemsIfEventsDontMatchStudy() {
+		final StudyDef dummyStudy = new StudyDef(0, getStudyName());
+		dummyStudy.addForm(new FormDef(0, "FunnyForm", dummyStudy));
+		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(new ArrayList<StudyDef>() {
+
+			private static final long serialVersionUID = 1L;
+			{
+				add(dummyStudy);
+			}
+		});
+
+		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
+
+		List<?> result = instance.availableWorkitems();
+
+		assertThat("Workitems list Should be empty", result.isEmpty(), is(true));
+		assertThat("Opharned Events Should not be Empty", instance.getOrphanedEvents().isEmpty(), is(false));
+	}
+
+	@Test
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
 		when(ocService.getStudySubjectEvents(getStudyName())).thenReturn(studySubjectsObjects);
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(Collections.<StudyDef> emptyList());
@@ -85,10 +103,11 @@ public class OCSubmissionContextTest {
 		when(studyManagerService.getStudyByName(getStudyName()))
 				.thenThrow(new RuntimeException("Deliberate Exception"));
 		List<Object[]> availableWorkitems1 = instance.availableWorkitems();
-		
+
 		assertThat("Workitems are expected to be empty", availableWorkitems1.isEmpty(), is(true));
 
 	}
+
 	private String getStudyName() {
 		return props.getProperty("ocStudy");
 	}
