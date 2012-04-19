@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
@@ -26,13 +27,15 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private OpenClinicaService ocService;
 	private StudyManagerService studyManagerService;
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
+	private final Properties props;
 
 	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
 			UserService userService, FormDownloadService formService, StudyManagerService studyManagerService,
-			OpenClinicaService ocService) {
+			OpenClinicaService ocService, Properties props) {
 		super(input, output, action, locale, userService, formService, studyManagerService);
 		this.studyManagerService = studyManagerService;
 		this.ocService = ocService;
+		this.props = props;
 	}
 
 	public Map<String, String> getOutParamsQuestionMapping(int formId, String caseId) {
@@ -137,7 +140,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private StudyDef getOCStudyID() {
 		List<StudyDef> studyByName = null;
 		try {
-			studyByName = studyManagerService.getStudyByName("Default Study");
+			studyByName = studyManagerService.getStudyByName(props.getProperty("ocStudy"));
 		} catch (Exception e) {
 			log.error("Failed to get openclinica study" + e.getMessage());
 			log.trace("Failed to get openclinica study", e);

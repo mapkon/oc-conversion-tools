@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import org.openxdata.oc.model.StudySubject;
 import java.util.List;
+import java.util.Properties;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,6 +20,7 @@ import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.service.StudyManagerService;
 import static org.junit.Assert.*;
 import org.openxdata.oc.data.TestData;
+import org.openxdata.xform.StudyImporter;
 import static org.mockito.Mockito.*;
 
 /**
@@ -34,6 +36,7 @@ public class OCSubmissionContextTest {
 	private static List<StudySubject> studySubjectsObjects = TestData.getStudySubjectsObjects();
 	private static StudyDef oXDStudy = Fixtures.getOXDStudy();
 	private OCSubmissionContext instance;
+	private Properties props;
 
 	public OCSubmissionContextTest() {
 	}
@@ -41,13 +44,17 @@ public class OCSubmissionContextTest {
 	@BeforeClass
 	public static void initTestData() {
 		studySubjectsObjects = TestData.getStudySubjectsObjects();
-		oXDStudy = Fixtures.getOXDStudy();
+		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
+		oXDStudy = (StudyDef) importer.extractStudy();
 	}
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		instance = new OCSubmissionContext(null, null, (byte) 1, null, null, null, studyManagerService, ocService);
+		props = new Properties();
+		props.setProperty("ocStudy", "Test Study");
+		instance = new OCSubmissionContext(null, null, (byte) 1, null, null, null, studyManagerService, ocService,
+				props);
 
 	}
 
@@ -56,8 +63,8 @@ public class OCSubmissionContextTest {
 	 */
 	@Test
 	public void testAvailableWorkitems() {
-		when(studyManagerService.getStudyByName("Default Study")).thenReturn(new ArrayList<StudyDef>() {
-			
+		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(new ArrayList<StudyDef>() {
+
 			private static final long serialVersionUID = 1L;
 
 			{
@@ -75,17 +82,21 @@ public class OCSubmissionContextTest {
 
 	@Test
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
-		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
-		when(studyManagerService.getStudyByName("Default Study")).thenReturn(Collections.<StudyDef> emptyList());
+		when(ocService.getStudySubjectEvents(getStudyName())).thenReturn(studySubjectsObjects);
+		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(Collections.<StudyDef> emptyList());
 		List<Object[]> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
-		when(studyManagerService.getStudyByName("Default Study")).thenThrow(
-				new RuntimeException("Deliberate Exception"));
+		when(studyManagerService.getStudyByName(getStudyName()))
+				.thenThrow(new RuntimeException("Deliberate Exception"));
 		List<Object[]> availableWorkitems1 = instance.availableWorkitems();
 		assertTrue("Workitems are expected to be empty", availableWorkitems1.isEmpty());
 
+	}
+
+	private String getStudyName() {
+		return props.getProperty("ocStudy");
 	}
 
 }

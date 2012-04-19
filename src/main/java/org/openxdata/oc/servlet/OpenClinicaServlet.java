@@ -74,7 +74,7 @@ public class OpenClinicaServlet extends HttpServlet {
 		openclinicaService.setFormService(formService);
 		openclinicaService.setDataExportService(dataExportService);
 
-		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx, openclinicaService);
+		mobileServlet = new MultiProtocolSubmissionServlet(config, sctx, openclinicaService, props);
 
 	}
 
