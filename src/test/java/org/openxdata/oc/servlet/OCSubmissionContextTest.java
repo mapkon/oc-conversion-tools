@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.openxdata.oc.servlet;
 
 import org.mockito.MockitoAnnotations;
@@ -21,10 +17,6 @@ import static org.junit.Assert.*;
 import org.openxdata.oc.data.TestData;
 import static org.mockito.Mockito.*;
 
-/**
- *
- * @author kay
- */
 public class OCSubmissionContextTest {
 
 	@Mock
