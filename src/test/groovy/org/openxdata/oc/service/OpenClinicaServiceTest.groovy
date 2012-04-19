@@ -181,7 +181,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		
 		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
 		
-		assertEquals 76, studySubjectEvents.size()
+		assertEquals 77, studySubjectEvents.size()
 	}
 	
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEvents() {

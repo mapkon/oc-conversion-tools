@@ -14,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.openxdata.oc.Fixtures;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.server.admin.model.StudyDef;
@@ -30,7 +29,7 @@ public class OCSubmissionContextTest {
 	@Mock
 	private StudyManagerService studyManagerService;
 	private static List<StudySubject> studySubjectsObjects = TestData.getStudySubjectsObjects();
-	private static StudyDef oXDStudy = Fixtures.getOXDStudy();
+	private static StudyDef oXDStudy;
 	private OCSubmissionContext instance;
 	private Properties props;
 

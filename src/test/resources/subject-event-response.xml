@@ -5,22 +5,6 @@
 			xmlns="http://openclinica.org/ws/event/v1">
 			<result>Success</result>
 			<studySubjects>
-                            	<studySubject>
-					<studySubjectOID>SS_000A</studySubjectOID>
-					<events>
-						<event>
-							<eventDefinitionOID>SE_SC2</eventDefinitionOID>
-							<eventName>SC2</eventName>
-							<ordinal>1</ordinal>
-							<startDate>2010-09-28 00:00</startDate>
-							<endDate>2010-12-14 00:00</endDate>
-							<formOIDs>
-								<formOID>F_TEST_1</formOID>
-                                                                <formOID>F_TEST_2</formOID>
-							</formOIDs>
-						</event>
-					</events>
-				</studySubject>
 				<studySubject>
 					<studySubjectOID>SS_000A</studySubjectOID>
 					<events>
@@ -1758,6 +1742,22 @@
 								<formOID>F_MSA1_3</formOID>
 								<formOID>F_MHIV_2</formOID>
 								<formOID>F_MLLM_5</formOID>
+							</formOIDs>
+						</event>
+					</events>
+				</studySubject>
+                            	<studySubject>
+					<studySubjectOID>TEST_SUBJECT</studySubjectOID>
+					<events>
+						<event>
+							<eventDefinitionOID>TEST_EVENT</eventDefinitionOID>
+							<eventName>SC2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-28 00:00</startDate>
+							<endDate>2010-12-14 00:00</endDate>
+							<formOIDs>
+								<formOID>F_TEST_1</formOID>
+                                                                <formOID>F_TEST_2</formOID>
 							</formOIDs>
 						</event>
 					</events>

@@ -55,7 +55,7 @@ class SubjectEventWebServiceProxyTest {
 		play {
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			assertEquals 76, response.children().size()
+			assertEquals 77, response.children().size()
 		}
 	}
 
