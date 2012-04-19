@@ -366,25 +366,6 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.1</version>
 			</plugin>
-            <plugin>
-                <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
-                <artifactId>maven-java-formatter-plugin</artifactId>
-                <version>0.3.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                <configFile>./openxdata-eclipse-codestyle.xml.rb.xml</configFile>
-<!--                <includes>
-                    <include>**/*.xml</include>
-                    </includes>-->
-                </configuration>
-            </plugin>
-      
 		</plugins>
 	</build>
 
