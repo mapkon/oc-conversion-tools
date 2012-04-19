@@ -59,9 +59,10 @@ public class MultiProtocolSubmissionServlet {
 	private WebApplicationContext ctx;
 	private ServletContext sctx;
 	private OpenClinicaService openclinicaService;
+	private Properties props;
 
 	public MultiProtocolSubmissionServlet(ServletConfig config, ServletContext sctx,
-			OpenClinicaService openclinicaService) throws ServletException {
+			OpenClinicaService openclinicaService, Properties props) throws ServletException {
 
 		this.sctx = sctx;
 		ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
@@ -72,6 +73,7 @@ public class MultiProtocolSubmissionServlet {
 		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
 		studyManagerService = (StudyManagerService) ctx.getBean("studyManagerService");
 		this.openclinicaService = openclinicaService;
+		this.props = props;
 
 	}
 
@@ -130,7 +132,7 @@ public class MultiProtocolSubmissionServlet {
 			try {
 				submitCtx = new OCSubmissionContext(dataIn, dataOut, action == null ? ACTION_NONE : Byte
 						.parseByte(action), locale, userService, formDownloadService, studyManagerService,
-						openclinicaService);
+						openclinicaService, props);
 				ctx.getAutowireCapableBeanFactory().autowireBean(submitCtx);
 			} catch (Throwable numberFormatException) {
 				numberFormatException.printStackTrace();
