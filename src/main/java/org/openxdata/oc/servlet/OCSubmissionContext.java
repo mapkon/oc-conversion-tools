@@ -152,10 +152,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private FormDef getFormByDescription(StudyDef def, String description) {
 		List<FormDef> forms = def.getForms();
 
-		//description = description.substring(0, description.lastIndexOf("_"));
 		for (FormDef formDef1 : forms) {
 			String frmDefDescr = formDef1.getDescription();
-			//	frmDefDescr = frmDefDescr.substring(0, frmDefDescr.lastIndexOf("_"));
 			if (frmDefDescr.equalsIgnoreCase(description)) {
 				return formDef1;
 			}
