@@ -1,20 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.openxdata.oc.servlet;
 
-import org.mockito.MockitoAnnotations;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import org.openxdata.oc.model.StudySubject;
 import java.util.List;
 import java.util.Properties;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.Fixtures;
+import org.openxdata.oc.data.TestData;
+import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.service.StudyManagerService;
@@ -23,10 +25,6 @@ import org.openxdata.oc.data.TestData;
 import org.openxdata.xform.StudyImporter;
 import static org.mockito.Mockito.*;
 
-/**
- *
- * @author kay
- */
 public class OCSubmissionContextTest {
 
 	@Mock
@@ -58,15 +56,11 @@ public class OCSubmissionContextTest {
 
 	}
 
-	/**
-	 * Test of availableWorkitems method, of class OCSubmissionContext.
-	 */
 	@Test
-	public void testAvailableWorkitems() {
+	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(new ArrayList<StudyDef>() {
 
-			private static final long serialVersionUID = 1L;
-
+			private static final long serialVersionUID = 1L; 
 			{
 				add(oXDStudy);
 			}
@@ -76,7 +70,7 @@ public class OCSubmissionContextTest {
 
 		List<?> result = instance.availableWorkitems();
 
-		assertFalse("A list of workitems were expected but none were returned", result.isEmpty());
+		assertThat("A list of workitems were expected but none were returned", result.isEmpty(), is(false));
 
 	}
 
@@ -91,10 +85,10 @@ public class OCSubmissionContextTest {
 		when(studyManagerService.getStudyByName(getStudyName()))
 				.thenThrow(new RuntimeException("Deliberate Exception"));
 		List<Object[]> availableWorkitems1 = instance.availableWorkitems();
-		assertTrue("Workitems are expected to be empty", availableWorkitems1.isEmpty());
+		
+		assertThat("Workitems are expected to be empty", availableWorkitems1.isEmpty(), is(true));
 
 	}
-
 	private String getStudyName() {
 		return props.getProperty("ocStudy");
 	}
