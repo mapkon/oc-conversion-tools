@@ -107,6 +107,21 @@ public class OCSubmissionContextTest {
 
 	}
 
+	@Test
+	public void testAvailableWorkitemReturnEmptListIfOCStudyPropertyIsNullOrEmpty() {
+		props.setProperty("ocStudy", "");
+		List<Object[]> availableWorkitems = instance.availableWorkitems();
+
+		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
+
+		props = new Properties();
+		instance.setProps(props);
+		List<Object[]> availableWorkitems2 = instance.availableWorkitems();
+
+		assertTrue("Workitems are expected to be empty", availableWorkitems2.isEmpty());
+
+	}
+
 	private String getStudyName() {
 		return props.getProperty("ocStudy");
 	}
