@@ -152,6 +152,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		List<StudyDef> studyByName = null;
 		try {
 			String property = props.getProperty("ocStudy");
+                        log.debug("Reading study from properties file: "+property);
 			if (property == null || property.isEmpty()){
                             log.error("The ocStudy Property has not been set");
 				return null;
