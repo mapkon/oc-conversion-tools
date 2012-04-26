@@ -53,8 +53,6 @@
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			<model>
 				<xsl:variable name="instanceElementName">
-					<xsl:value-of select="../../@OID" />
-					-
 					<xsl:value-of select="@OID" />
 				</xsl:variable>
 				<instance>
