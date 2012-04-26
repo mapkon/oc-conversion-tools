@@ -60,7 +60,7 @@
 					<ODM>
 						<xsl:attribute name="Description">This Xform was converted from an ODM file using the oc-conversion-tools</xsl:attribute>
 						<xsl:attribute name="name"><xsl:value-of select="@Name" /></xsl:attribute>
-						<xsl:attribute name="formKey"><xsl:value-of select="normalize-space(@OID)" /></xsl:attribute>
+						<xsl:attribute name="formKey"><xsl:value-of select="@OID" /></xsl:attribute>
 						<xsl:attribute name="StudyOID"><xsl:value-of select="../../@OID" /></xsl:attribute>
 						<xsl:attribute name="StudyEventOID"><xsl:value-of select="@OID" /></xsl:attribute>
 						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of select="../@OID" /></xsl:attribute>
