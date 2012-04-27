@@ -27,7 +27,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private OpenClinicaService ocService;
 	private StudyManagerService studyManagerService;
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
-	private final Properties props;
+	private Properties props;
 	private List<Event> orphanedEvents = new ArrayList<Event>();
 
 	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
@@ -151,7 +151,13 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private StudyDef getOCStudyID() {
 		List<StudyDef> studyByName = null;
 		try {
-			studyByName = studyManagerService.getStudyByName(props.getProperty("ocStudy"));
+			String property = props.getProperty("ocStudy");
+                        log.debug("Reading study from properties file: "+property);
+			if (property == null || property.isEmpty()){
+                            log.error("The ocStudy Property has not been set");
+				return null;
+                        }
+			studyByName = studyManagerService.getStudyByName(property);
 		} catch (Exception e) {
 			log.error("Failed to get openclinica study" + e.getMessage());
 			log.trace("Failed to get openclinica study", e);
@@ -191,4 +197,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		return eventGroups;
 	}
+
+	public void setProps(Properties props) {
+		this.props = props;
+	}
+
 }

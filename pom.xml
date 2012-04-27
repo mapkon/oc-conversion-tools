@@ -76,10 +76,18 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-			   <repository>
+		<repository>
 			<id>openxdata-releases</id>
 			<name>Name</name>
 			<url>https://nexus.openxdata.org/content/repositories/releases</url>
+		</repository>
+		<repository>
+			<id>kayr.repo.snapshots</id>
+			<url>https://dl.dropbox.com/u/3038882/p/m2/snapshots</url>
+		</repository>
+		<repository>
+			<id>kayr.repo.releases</id>
+			<url>https://dl.dropbox.com/u/3038882/p/m2/releases</url>
 		</repository>
 	</repositories>
 
@@ -148,6 +156,11 @@
 		    <groupId>com.jcraft</groupId>
 		    <artifactId>jzlib</artifactId>
 		    <version>1.0.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openxdata</groupId>
+		    <artifactId>wf-protocol-api</artifactId>
+		    <version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
@@ -365,6 +378,26 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>org.openxdata:wf-protocol-api</include>
+								</includes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
