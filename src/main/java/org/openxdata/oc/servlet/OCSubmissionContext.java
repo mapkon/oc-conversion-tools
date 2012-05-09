@@ -124,7 +124,6 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		if (formDef == null) {
 			orphanedEvents.add(event);
-			log.warn("FormOID[" + formOID + "] Event:[" + event.getEventDefinitionOID() + "] not found");
 			return null;
 		}
 
