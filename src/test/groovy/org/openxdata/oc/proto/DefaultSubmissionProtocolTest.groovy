@@ -126,7 +126,7 @@ class DefaultSubmissionProtocolTest {
 	@Test void testCreateInsanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemGroupOIDAttribute() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 'IG_MSA2_UNGROUPED_2', itemGroupDataNodes[0].@ItemGroupOID.toString()
+		assertEquals 'IG_MSA2_MSA2_POARTPRECG', itemGroupDataNodes[0].@ItemGroupOID.toString()
 	}
 
 	@Test void testCreateInsanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemGroupOIDAttribute1() {
@@ -138,7 +138,7 @@ class DefaultSubmissionProtocolTest {
 	@Test void testCreateInsanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemGroupOIDAttribute2() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 'IG_MSA2_MSA2_POARTPRECG', itemGroupDataNodes[2].@ItemGroupOID.toString()
+		assertEquals 'IG_MSA2_UNGROUPED_2', itemGroupDataNodes[2].@ItemGroupOID.toString()
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemDataNodes() {
@@ -162,7 +162,7 @@ class DefaultSubmissionProtocolTest {
 	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHavingOneItemDataNode() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 1, itemGroupDataNodes[0].children().size()
+		assertEquals 7, itemGroupDataNodes[0].children().size()
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithSecondItemGroupDataHavingTwentyTwoItemDataNodes() {
@@ -175,7 +175,7 @@ class DefaultSubmissionProtocolTest {
 
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 7, itemGroupDataNodes[2].children().size()
+		assertEquals 1, itemGroupDataNodes[2].children().size()
 	}
 
 	@Test void testCreateInstanceDataReturnsXmlWithFormDataOIDEqualingFormKey() {
