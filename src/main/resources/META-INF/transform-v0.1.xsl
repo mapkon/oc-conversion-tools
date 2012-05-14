@@ -219,7 +219,7 @@
 
 				<xsl:choose>
 					<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
-						<xsl:if test="$itemGroupDef/*/*[local-name()='PresentInForm' and @SectionLabel=$section]">
+						<xsl:if test="$itemGroupDef/*/*/@SectionLabel=$section">
 							<group>
 								<xsl:attribute name="id"><xsl:value-of select="$itemGroupDef/@OID" /></xsl:attribute>
 								<label>
