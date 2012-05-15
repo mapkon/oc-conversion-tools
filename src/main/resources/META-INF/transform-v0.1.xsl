@@ -223,7 +223,7 @@
 							<group>
 								<xsl:attribute name="id"><xsl:value-of select="$itemGroupDef/@OID" /></xsl:attribute>
 								<label>
-									<xsl:value-of select="$itemGroupDef/@OID" />
+									<xsl:value-of select="$itemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
 								</label>
 					
 								<xf:repeat>
