@@ -89,7 +89,9 @@
 						</xsl:for-each>
 					</ODM>
 				</instance>
-				<xsl:call-template name="createBinds" />
+				<xsl:call-template name="createBinds">
+					<xsl:with-param name="form" select="$form" />
+				</xsl:call-template>
 
 			</model>
 
@@ -103,11 +105,12 @@
 
 	<xsl:template name="createBinds">
 
+		<xsl:param name="form" />
 		<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()" locked="true()" visible="false()"></bind>
 
 		<xsl:for-each select="odm:ItemGroupRef">
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
-			<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID]" />
+			<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
 			<xsl:choose>
 				<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
 
