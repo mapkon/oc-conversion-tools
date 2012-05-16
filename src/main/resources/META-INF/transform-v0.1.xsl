@@ -23,6 +23,7 @@
 					select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($formOID, '+', .))[1])]">
 
 					<xsl:value-of select="concat(., ' ')" />
+					
 				</xsl:variable>
 
 				<form>
@@ -50,6 +51,7 @@
 
 		<xsl:param name="sections" />
 		<xsl:variable name="form" select="current()" />
+		
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			<model>
 				<xsl:variable name="instanceElementName">
@@ -67,8 +69,9 @@
 						<xsl:element name="SubjectKey" />
 
 						<xsl:for-each select="odm:ItemGroupRef">
-
-							<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=@ItemGroupOID]" />
+							
+							<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
+							<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
 
 							<xsl:choose>
 								<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
@@ -81,7 +84,7 @@
 								<xsl:otherwise>
 									<xsl:for-each select="$itemGroupDef/odm:ItemRef">
 										<xsl:element name="{@ItemOID}">
-											<xsl:attribute name="ItemGroupOID"><xsl:value-of select="@ItemGroupOID" /></xsl:attribute>
+											<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupOID" /></xsl:attribute>
 										</xsl:element>
 									</xsl:for-each>
 								</xsl:otherwise>
