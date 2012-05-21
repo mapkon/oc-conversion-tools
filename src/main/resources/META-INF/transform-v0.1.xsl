@@ -270,7 +270,7 @@
 
 	</xsl:template>
 
-	<!-- Create question text and bind -->
+	<!-- Create question text and attributes -->
 	<xsl:template match="//*[local-name()='ItemRef']">
 
 		<xsl:param name="itemDef" />
