@@ -109,7 +109,7 @@
 	</xsl:template>
 
 	<!-- Create Binds for the questions -->
-	<xsl:template match="//*[local-name()='FormDef']/*">
+	<xsl:template match="//*[local-name()='ItemGroupRef']">
 
 		<xsl:param name="form" />
 
@@ -271,7 +271,7 @@
 	</xsl:template>
 
 	<!-- Create question text and bind -->
-	<xsl:template match="//*[local-name()='ItemGroupDef']/*[local-name()='ItemRef']">
+	<xsl:template match="//*[local-name()='ItemRef']">
 
 		<xsl:param name="itemDef" />
 
