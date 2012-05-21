@@ -21,9 +21,7 @@
 
 				<xsl:variable name="sections"
 					select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($formOID, '+', .))[1])]">
-
 					<xsl:value-of select="concat(., ' ')" />
-					
 				</xsl:variable>
 
 				<form>
@@ -37,9 +35,9 @@
 						<xsl:attribute name="name"><xsl:value-of select="@Name" />-v1</xsl:attribute>
 						<xsl:attribute name="description">Converted from ODM using the oc-conversion-tools</xsl:attribute>
 						<xform>
-							<xsl:call-template name="createXForm">
+							<xsl:apply-templates select="current()">
 								<xsl:with-param name="sections" select="$sections"></xsl:with-param>
-							</xsl:call-template>
+							</xsl:apply-templates>
 						</xform>
 					</version>
 				</form>
@@ -47,7 +45,8 @@
 		</study>
 	</xsl:template>
 
-	<xsl:template name="createXForm">
+	<!-- Create data nodes for the question answers -->
+	<xsl:template match="//*[local-name()='FormDef']">
 
 		<xsl:param name="sections" />
 		<xsl:variable name="form" select="current()" />
@@ -92,9 +91,12 @@
 						</xsl:for-each>
 					</ODM>
 				</instance>
-				<xsl:call-template name="createBinds">
+				
+				<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()" locked="true()" visible="false()" />
+				
+				<xsl:apply-templates select="child::node()">
 					<xsl:with-param name="form" select="$form" />
-				</xsl:call-template>
+				</xsl:apply-templates>
 
 			</model>
 
@@ -106,19 +108,18 @@
 		</xforms>
 	</xsl:template>
 
-	<xsl:template name="createBinds">
+	<!-- Create Binds for the questions -->
+	<xsl:template match="//*[local-name()='FormDef']/*">
 
 		<xsl:param name="form" />
-		<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()" locked="true()" visible="false()"></bind>
-
-		<xsl:for-each select="odm:ItemGroupRef">
+		
 			<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 			<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
+			
 			<xsl:choose>
 				<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
 
 					<bind>
-
 						<xsl:attribute name="id"><xsl:value-of select="$itemGroupOID" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$itemGroupOID" /></xsl:attribute>
 					</bind>
@@ -143,11 +144,12 @@
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
-		</xsl:for-each>
 	</xsl:template>
 
 	<xsl:template name="createItemBinds">
+	
 		<xsl:param name="itemGroupDef" />
+		
 		<xsl:for-each select="$itemGroupDef/odm:ItemRef">
 			<bind>
 				<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=@ItemOID]" />
@@ -206,7 +208,6 @@
 
 			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
 			<label>
-
 				<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$section]" />
 			</label>
 
@@ -242,7 +243,9 @@
 										<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemOID]" />
 					
 										<xsl:if test="$itemDef/*/*[@FormOID=$form/@OID]/*[local-name()='SectionLabel']=$section">
-											<xsl:call-template name="createQuestions" />
+											<xsl:apply-templates select="." >	
+												<xsl:with-param name="itemDef" select="$itemDef" />
+											</xsl:apply-templates>
 										</xsl:if>
 									</xsl:for-each>
 								</xf:repeat>
@@ -255,7 +258,9 @@
 							<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemOID]" />
 
 							<xsl:if test="$itemDef/*/*[@FormOID=$form/@OID]/*[local-name()='SectionLabel']=$section">
-								<xsl:call-template name="createQuestions" />
+								<xsl:apply-templates select="." >	
+									<xsl:with-param name="itemDef" select="$itemDef" />
+								</xsl:apply-templates>
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:otherwise>
@@ -265,26 +270,15 @@
 
 	</xsl:template>
 
-	<xsl:template name="createQuestions">
+	<!-- Create question text and bind -->
+	<xsl:template match="//*[local-name()='ItemGroupDef']/*[local-name()='ItemRef']">
 
-		<xsl:variable name="itemId" select="@ItemOID" />
-		<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemId]" />
-		<xsl:call-template name="insertQuestionsTextAndBind">
-			<xsl:with-param name="itemOID" select="$itemId" />
-			<xsl:with-param name="itemDef" select="$itemDef" />
-		</xsl:call-template>
-	</xsl:template>
-
-	<xsl:template name="insertQuestionsTextAndBind">
-
-		<xsl:param name="itemOID" />
 		<xsl:param name="itemDef" />
 
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:CodeListRef">
 				<select1>
-					<xsl:attribute name="bind"><xsl:value-of
-						select="$itemOID" /></xsl:attribute>
+					<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
 					<xsl:variable name="codeListID">
 						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
 					</xsl:variable>
@@ -317,7 +311,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<input>
-					<xsl:attribute name="bind"><xsl:value-of select="$itemOID" /></xsl:attribute>
+					<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
 					<label>
 						<xsl:variable name="lText">
 							<xsl:call-template name="createQuestionText">
