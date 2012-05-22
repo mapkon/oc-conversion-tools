@@ -39,7 +39,7 @@ public class Transformer {
 
 	private def transformODMToXform(odm) {
 		
-		log.info("Transforming «odm meta data» to «OXD:Xform»...")
+		log.info("Transforming odm meta data to OXD:Xform...")
 		
 		def xslt = util.loadFileContents("META-INF/transform-v0.1.xsl")
 
