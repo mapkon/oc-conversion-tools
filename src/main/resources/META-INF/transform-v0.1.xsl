@@ -5,7 +5,8 @@
 	xmlns:xf="http://www.w3.org/2002/xforms">
 
 	<xsl:output method="xml" version='1.0' encoding='UTF-8' indent="yes" omit-xml-declaration="yes" />
-
+	<xsl:strip-space elements="*"/>
+	
 	<xsl:key name="kLabelsInForm" match="OpenClinica:SectionLabel" use="concat(../@FormOID, '+', .)" />
 
 	<xsl:template match="/">
