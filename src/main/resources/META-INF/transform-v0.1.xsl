@@ -369,7 +369,7 @@
 		</select1>
 	</xsl:template>
 	
-	<!-- Append question number to the label text -->
+	<!-- Append question number to the label text if it exists, else use translated text-->
 	<xsl:template match="//*[local-name()='ItemDef']">
 
 		<xsl:param name="itemDef" />
