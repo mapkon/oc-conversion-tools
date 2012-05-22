@@ -225,50 +225,68 @@
 				<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
 				<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
 
-				<xsl:choose>
-					<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
-						<xsl:if test="$itemGroupDef/*/*/@SectionLabel=$section">
-							<group>
-								<xsl:attribute name="id"><xsl:value-of select="$itemGroupDef/@OID" /></xsl:attribute>
-								<label>
-									<xsl:value-of select="$itemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
-								</label>
-					
-								<xf:repeat>
-					
-									<xsl:attribute name="bind"><xsl:value-of select="$itemGroupDef/@OID" /></xsl:attribute>
-					
-									<xsl:for-each select="$itemGroupDef/odm:ItemRef">
-					
-										<xsl:variable name="itemOID" select="@ItemOID"></xsl:variable>
-										<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemOID]" />
-					
-										<xsl:if test="$itemDef/*/*[@FormOID=$form/@OID]/*[local-name()='SectionLabel']=$section">
-											<xsl:apply-templates select="." >	
-												<xsl:with-param name="itemDef" select="$itemDef" />
-											</xsl:apply-templates>
-										</xsl:if>
-									</xsl:for-each>
-								</xf:repeat>
-							</group>
-						</xsl:if>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:for-each select="$itemGroupDef/odm:ItemRef">
-							<xsl:variable name="itemOID" select="@ItemOID"></xsl:variable>
-							<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemOID]" />
-
-							<xsl:if test="$itemDef/*/*[@FormOID=$form/@OID]/*[local-name()='SectionLabel']=$section">
-								<xsl:apply-templates select="." >	
-									<xsl:with-param name="itemDef" select="$itemDef" />
-								</xsl:apply-templates>
-							</xsl:if>
-						</xsl:for-each>
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:apply-templates select="$itemGroupDef">
+					<xsl:with-param name="form" select="$form" />
+					<xsl:with-param name="section" select="$section" />
+					<xsl:with-param name="itemGroupDef" select="$itemGroupDef" />
+				</xsl:apply-templates>
+				
 			</xsl:for-each>
 		</group>
 
+	</xsl:template>
+
+	<!-- Create repeat questions -->
+	<xsl:template match="//*[local-name()='ItemGroupDef' and @Repeating='Yes']">
+		
+		<xsl:param name="form" />
+		<xsl:param name="section" />
+		<xsl:param name="itemGroupDef" />
+		
+		<xsl:if test="$itemGroupDef/*/*/@SectionLabel=$section">
+			<group>
+				<xsl:attribute name="id"><xsl:value-of select="$itemGroupDef/@OID" /></xsl:attribute>
+				<label>
+					<xsl:value-of select="$itemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
+				</label>
+
+				<xf:repeat>
+
+					<xsl:attribute name="bind"><xsl:value-of select="$itemGroupDef/@OID" /></xsl:attribute>
+
+					<xsl:for-each select="$itemGroupDef/odm:ItemRef">
+
+						<xsl:variable name="itemOID" select="@ItemOID"></xsl:variable>
+						<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemOID]" />
+
+						<xsl:if test="$itemDef/*/*[@FormOID=$form/@OID]/*[local-name()='SectionLabel']=$section">
+							<xsl:apply-templates select=".">
+								<xsl:with-param name="itemDef" select="$itemDef" />
+							</xsl:apply-templates>
+						</xsl:if>
+					</xsl:for-each>
+				</xf:repeat>
+			</group>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Create non-repeat questions -->
+	<xsl:template match="//*[local-name()='ItemGroupDef' and @Repeating='No']">
+
+		<xsl:param name="form" />
+		<xsl:param name="section" />
+		<xsl:param name="itemGroupDef" />
+
+		<xsl:for-each select="$itemGroupDef/odm:ItemRef">
+			<xsl:variable name="itemOID" select="@ItemOID"></xsl:variable>
+			<xsl:variable name="itemDef" select="//*[local-name()='ItemDef' and @OID=$itemOID]" />
+
+			<xsl:if test="$itemDef/*/*[@FormOID=$form/@OID]/*[local-name()='SectionLabel']=$section">
+				<xsl:apply-templates select=".">
+					<xsl:with-param name="itemDef" select="$itemDef" />
+				</xsl:apply-templates>
+			</xsl:if>
+		</xsl:for-each>
 	</xsl:template>
 
 	<!-- Create question text and attributes -->
