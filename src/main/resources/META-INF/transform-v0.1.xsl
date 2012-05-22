@@ -295,34 +295,39 @@
 		<xsl:param name="itemDef" />
 
 		<xsl:choose>
-			 
 			<xsl:when test="$itemDef/odm:CodeListRef">
-			
-			<xsl:apply-templates select="$itemDef/*[local-name()='CodeListRef']">
-				<xsl:with-param name="itemDef" select="$itemDef" />
-			</xsl:apply-templates>
-
+				<xsl:apply-templates select="$itemDef/*[local-name()='CodeListRef']">
+					<xsl:with-param name="itemDef" select="$itemDef" />
+				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
-				<input>
-					<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
-					<label>
-						<xsl:variable name="lText">
-							<xsl:apply-templates select="$itemDef">
-								<xsl:with-param name="itemDef" select="$itemDef" />
-							</xsl:apply-templates>
-						</xsl:variable>
-
-						<xsl:value-of select="normalize-space($lText)" />
-					</label>
-					<hint>
-						<xsl:call-template name="createHintText">
-							<xsl:with-param name="itemDef" select="$itemDef" />
-						</xsl:call-template>
-					</hint>
-				</input>
+				<xsl:apply-templates select="$itemDef" mode="createInputQuestions">
+					<xsl:with-param name="itemDef" select="$itemDef" />
+				</xsl:apply-templates>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="//*[local-name()='ItemDef']" mode="createInputQuestions">
+
+		<xsl:param name="itemDef" />
+
+		<input>
+			<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
+			<label>
+				<xsl:variable name="lText">
+					<xsl:apply-templates select="$itemDef">
+						<xsl:with-param name="itemDef" select="$itemDef" />
+					</xsl:apply-templates>
+				</xsl:variable>
+				<xsl:value-of select="normalize-space($lText)" />
+			</label>
+			<hint>
+				<xsl:apply-templates select="$itemDef" mode="createHintText">
+					<xsl:with-param name="itemDef" select="$itemDef" />
+				</xsl:apply-templates>
+			</hint>
+		</input>
 	</xsl:template>
 
 	<!-- Create single select questions -->
@@ -357,9 +362,9 @@
 				</item>
 			</xsl:for-each>
 			<hint>
-				<xsl:call-template name="createHintText">
+				<xsl:apply-templates select="$itemDef" mode="createHintText">
 					<xsl:with-param name="itemDef" select="$itemDef" />
-				</xsl:call-template>
+				</xsl:apply-templates>
 			</hint>
 		</select1>
 	</xsl:template>
@@ -380,7 +385,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="createHintText">
+	<xsl:template match="//*[local-name()='ItemDef']" mode="createHintText">
 
 		<xsl:param name="itemDef" />
 
