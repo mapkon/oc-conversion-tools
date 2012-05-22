@@ -337,32 +337,10 @@
 
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:Question/@OpenClinica:QuestionNumber">
-
-				<xsl:choose>
-					<xsl:when test="$itemDef/*/*/*[local-name()='ItemHeader']">
-						<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemHeader'])" />
-						-
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="normalize-space($itemDef/odm:Question/@OpenClinica:QuestionNumber)" />
-					</xsl:otherwise>
-				</xsl:choose>
-
-				<xsl:if test="$itemDef/*/*/*[local-name()='ItemSubHeader']">
-					<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemSubHeader'])" />
-					-
-				</xsl:if>
+				<xsl:value-of select="normalize-space($itemDef/odm:Question/@OpenClinica:QuestionNumber)" />
 				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:if test="$itemDef/*/*/*[local-name()='ItemHeader']">
-					<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemHeader'])" />
-					-
-				</xsl:if>
-				<xsl:if test="$itemDef/*/*/*[local-name()='ItemSubHeader']">
-					<xsl:value-of select="normalize-space($itemDef/*/*/*[local-name()='ItemSubHeader'])" />
-					-
-				</xsl:if>
 				<xsl:value-of select="normalize-space($itemDef/odm:Question/odm:TranslatedText)" />
 			</xsl:otherwise>
 		</xsl:choose>
