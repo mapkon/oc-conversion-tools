@@ -278,37 +278,11 @@
 
 		<xsl:choose>
 			<xsl:when test="$itemDef/odm:CodeListRef">
-				<select1>
-					<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
-					<xsl:variable name="codeListID">
-						<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
-					</xsl:variable>
-					<label>
-						<xsl:variable name="lText">
-							<xsl:call-template name="createQuestionText">
-								<xsl:with-param name="itemDef" select="$itemDef" />
-							</xsl:call-template>
-						</xsl:variable>
+			
+			<xsl:apply-templates select="$itemDef/*[local-name()='CodeListRef']">
+				<xsl:with-param name="itemDef" select="$itemDef" />
+			</xsl:apply-templates>
 
-						<xsl:value-of select="normalize-space($lText)" />
-					</label>
-					<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
-						<item>
-							<xsl:attribute name="id"><xsl:value-of select="@CodedValue" /></xsl:attribute>
-							<label>
-								<xsl:value-of select="odm:Decode/odm:TranslatedText"></xsl:value-of>
-							</label>
-							<value>
-								<xsl:value-of select="@CodedValue"></xsl:value-of>
-							</value>
-						</item>
-					</xsl:for-each>
-					<hint>
-						<xsl:call-template name="createHintText">
-							<xsl:with-param name="itemDef" select="$itemDef" />
-						</xsl:call-template>
-					</hint>
-				</select1>
 			</xsl:when>
 			<xsl:otherwise>
 				<input>
@@ -332,6 +306,45 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Create single select questions -->
+	<xsl:template match="//*[local-name()='ItemDef']/*[local-name()='CodeListRef']">
+	
+		<xsl:param name="itemDef" />
+		
+		<select1>
+			<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
+			<xsl:variable name="codeListID">
+				<xsl:value-of select="$itemDef/odm:CodeListRef/@CodeListOID" />
+			</xsl:variable>
+			<label>
+				<xsl:variable name="lText">
+					<xsl:call-template name="createQuestionText">
+						<xsl:with-param name="itemDef" select="$itemDef" />
+					</xsl:call-template>
+				</xsl:variable>
+
+				<xsl:value-of select="normalize-space($lText)" />
+			</label>
+			<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
+				<item>
+					<xsl:attribute name="id"><xsl:value-of
+						select="@CodedValue" /></xsl:attribute>
+					<label>
+						<xsl:value-of select="odm:Decode/odm:TranslatedText"></xsl:value-of>
+					</label>
+					<value>
+						<xsl:value-of select="@CodedValue"></xsl:value-of>
+					</value>
+				</item>
+			</xsl:for-each>
+			<hint>
+				<xsl:call-template name="createHintText">
+					<xsl:with-param name="itemDef" select="$itemDef" />
+				</xsl:call-template>
+			</hint>
+		</select1>
+	</xsl:template>
+	
 	<xsl:template name="createQuestionText">
 
 		<xsl:param name="itemDef" />
