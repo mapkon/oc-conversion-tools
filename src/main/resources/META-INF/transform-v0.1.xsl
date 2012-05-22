@@ -289,12 +289,13 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<!-- Create question text and attributes -->
+	<!-- Create either single select or input type of questions. -->
 	<xsl:template match="//*[local-name()='ItemRef']">
 
 		<xsl:param name="itemDef" />
 
 		<xsl:choose>
+			 
 			<xsl:when test="$itemDef/odm:CodeListRef">
 			
 			<xsl:apply-templates select="$itemDef/*[local-name()='CodeListRef']">
