@@ -307,9 +307,9 @@
 					<xsl:attribute name="bind"><xsl:value-of select="$itemDef/@OID" /></xsl:attribute>
 					<label>
 						<xsl:variable name="lText">
-							<xsl:call-template name="createQuestionText">
+							<xsl:apply-templates select="$itemDef">
 								<xsl:with-param name="itemDef" select="$itemDef" />
-							</xsl:call-template>
+							</xsl:apply-templates>
 						</xsl:variable>
 
 						<xsl:value-of select="normalize-space($lText)" />
@@ -336,9 +336,9 @@
 			</xsl:variable>
 			<label>
 				<xsl:variable name="lText">
-					<xsl:call-template name="createQuestionText">
+					<xsl:apply-templates select="$itemDef">
 						<xsl:with-param name="itemDef" select="$itemDef" />
-					</xsl:call-template>
+					</xsl:apply-templates>
 				</xsl:variable>
 
 				<xsl:value-of select="normalize-space($lText)" />
@@ -363,7 +363,8 @@
 		</select1>
 	</xsl:template>
 	
-	<xsl:template name="createQuestionText">
+	<!-- Append question number to the label text -->
+	<xsl:template match="//*[local-name()='ItemDef']">
 
 		<xsl:param name="itemDef" />
 
