@@ -18,10 +18,9 @@
 
 			<xsl:for-each select="//*[local-name()='FormDef']">
 
-				<xsl:variable name="formOID" select="@OID" />
+				<xsl:variable name="vFormOID" select="@OID" />
 
-				<xsl:variable name="sections"
-					select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($formOID, '+', .))[1])]">
+				<xsl:variable name="vSections" select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($vFormOID, '+', .))[1])]">
 					<xsl:value-of select="concat(., ' ')" />
 				</xsl:variable>
 
@@ -37,7 +36,7 @@
 						<xsl:attribute name="description">Converted from ODM using the oc-conversion-tools</xsl:attribute>
 						<xform>
 							<xsl:apply-templates select="current()">
-								<xsl:with-param name="sections" select="$sections"></xsl:with-param>
+								<xsl:with-param name="pSections" select="$vSections"></xsl:with-param>
 							</xsl:apply-templates>
 						</xform>
 					</version>
@@ -49,20 +48,20 @@
 	<!-- Create data nodes for the question answers -->
 	<xsl:template match="//*[local-name()='FormDef']">
 
-		<xsl:param name="sections" />
-		<xsl:variable name="form" select="current()" />
+		<xsl:param name="pSections" />
+		<xsl:variable name="vForm" select="current()" />
 
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			
-			<xsl:apply-templates select="$form" mode="createModel">
-				<xsl:with-param name="pForm" select="$form" />
+			<xsl:apply-templates select="$vForm" mode="createModel">
+				<xsl:with-param name="pForm" select="$vForm" />
 			</xsl:apply-templates>
 
-			<xsl:for-each select="$sections">
-				<xsl:call-template name="createGroup">
-					<xsl:with-param name="form" select="$form" />
-				</xsl:call-template>
-			</xsl:for-each>
+			<xsl:call-template name="createGroup">
+				<xsl:with-param name="form" select="$vForm" />
+				<xsl:with-param name="pSections" select="$pSections" />
+			</xsl:call-template>
+			
 		</xforms>
 	</xsl:template>
 
@@ -213,39 +212,47 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- Create Groups from OpenClinica Section Labels -->
 	<xsl:template name="createGroup">
 
 		<xsl:param name="form" />
-		<xsl:variable name="section" select="current()" />
-
-		<group>
-
-			<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
-			<label>
-				<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$section]" />
-			</label>
-
-			<!-- Add the subject key input field only to the first group. -->
-			<xsl:if test="position() = '1'">
-				<input bind="subjectKey">
-					<label>Subject Key</label>
-					<hint>The subject key for whom you are collecting data for.</hint>
-				</input>
-			</xsl:if>
-
-			<xsl:for-each select="$form/odm:ItemGroupRef">
-
-				<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
-				<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
-
-				<xsl:apply-templates select="$itemGroupDef">
-					<xsl:with-param name="form" select="$form" />
-					<xsl:with-param name="section" select="$section" />
-					<xsl:with-param name="itemGroupDef" select="$itemGroupDef" />
-				</xsl:apply-templates>
+		<xsl:param name="pSections" />
+		
+		<xsl:for-each select="$pSections">
+		
+			<xsl:variable name="vSection" select="current()" />
+			
+			<group>
+	
+				<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
+				<label>
+					<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$vSection]" />
+				</label>
+	
+				<!-- Add the subject key input field only to the first group. -->
+				<xsl:if test="position() = '1'">
+					<input bind="subjectKey">
+						<label>Subject Key</label>
+						<hint>The subject key for whom you are collecting data for.</hint>
+					</input>
+				</xsl:if>
+	
+				<xsl:for-each select="$form/odm:ItemGroupRef">
+	
+					<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
+					<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
+	
+					<xsl:apply-templates select="$itemGroupDef">
+						<xsl:with-param name="form" select="$form" />
+						<xsl:with-param name="section" select="$vSection" />
+						<xsl:with-param name="itemGroupDef" select="$itemGroupDef" />
+					</xsl:apply-templates>
+	
+				</xsl:for-each>
 				
-			</xsl:for-each>
-		</group>
+			</group>
+			
+		</xsl:for-each>
 
 	</xsl:template>
 
