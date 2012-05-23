@@ -57,7 +57,7 @@
 				<xsl:with-param name="pForm" select="$vForm" />
 			</xsl:apply-templates>
 
-			<xsl:call-template name="createGroup">
+			<xsl:call-template name="createGroups">
 				<xsl:with-param name="form" select="$vForm" />
 				<xsl:with-param name="pSections" select="$pSections" />
 			</xsl:call-template>
@@ -213,7 +213,7 @@
 	</xsl:template>
 
 	<!-- Create Groups from OpenClinica Section Labels -->
-	<xsl:template name="createGroup">
+	<xsl:template name="createGroups">
 
 		<xsl:param name="form" />
 		<xsl:param name="pSections" />
