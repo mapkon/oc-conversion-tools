@@ -53,53 +53,10 @@
 		<xsl:variable name="form" select="current()" />
 
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-			<model>
-				<xsl:variable name="instanceElementName">
-					<xsl:value-of select="@OID" />
-				</xsl:variable>
-				<instance>
-					<xsl:attribute name="id"><xsl:value-of select="normalize-space($instanceElementName)" /></xsl:attribute>
-					<ODM>
-						<xsl:attribute name="Description">This Xform was converted from an ODM file using the oc-conversion-tools</xsl:attribute>
-						<xsl:attribute name="name"><xsl:value-of select="@Name" /></xsl:attribute>
-						<xsl:attribute name="formKey"><xsl:value-of select="@OID" /></xsl:attribute>
-						<xsl:attribute name="StudyOID"><xsl:value-of select="../../@OID" /></xsl:attribute>
-						<xsl:attribute name="MetaDataVersionOID"><xsl:value-of select="../@OID" /></xsl:attribute>
-
-						<xsl:element name="SubjectKey" />
-
-						<xsl:for-each select="odm:ItemGroupRef">
-
-							<xsl:variable name="itemGroupOID" select="@ItemGroupOID" />
-							<xsl:variable name="itemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$itemGroupOID and */*/@FormOID=$form/@OID]" />
-
-							<xsl:choose>
-								<xsl:when test="$itemGroupDef/@Repeating = 'Yes'">
-									<xsl:element name="{@ItemGroupOID}">
-										<xsl:for-each select="$itemGroupDef/odm:ItemRef">
-											<xsl:element name="{@ItemOID}" />
-										</xsl:for-each>
-									</xsl:element>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:for-each select="$itemGroupDef/odm:ItemRef">
-										<xsl:element name="{@ItemOID}">
-											<xsl:attribute name="ItemGroupOID"><xsl:value-of select="$itemGroupOID" /></xsl:attribute>
-										</xsl:element>
-									</xsl:for-each>
-								</xsl:otherwise>
-							</xsl:choose>
-						</xsl:for-each>
-					</ODM>
-				</instance>
-				
-				<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()" locked="true()" visible="false()" />
-				
-				<xsl:apply-templates select="child::node()">
-					<xsl:with-param name="form" select="$form" />
-				</xsl:apply-templates>
-
-			</model>
+			
+			<xsl:apply-templates select="$form" mode="createModel">
+				<xsl:with-param name="pForm" select="$form" />
+			</xsl:apply-templates>
 
 			<xsl:for-each select="$sections">
 				<xsl:call-template name="createGroup">
@@ -107,6 +64,62 @@
 				</xsl:call-template>
 			</xsl:for-each>
 		</xforms>
+	</xsl:template>
+
+	<!-- Create the Model element -->
+	<xsl:template match="//*[local-name()='FormDef']" mode="createModel">
+
+		<xsl:param name="pForm" />
+
+		<model>
+			<xsl:variable name="vInstanceElementName">
+				<xsl:value-of select="@OID" />
+			</xsl:variable>
+			<instance>
+				<xsl:attribute name="id"><xsl:value-of select="normalize-space($vInstanceElementName)" /></xsl:attribute>
+				<ODM>
+					<xsl:attribute name="Description">This Xform was converted from an ODM file using the oc-conversion-tools</xsl:attribute>
+					<xsl:attribute name="name"><xsl:value-of select="@Name" /></xsl:attribute>
+					<xsl:attribute name="formKey"><xsl:value-of select="@OID" /></xsl:attribute>
+					<xsl:attribute name="StudyOID"><xsl:value-of select="../../@OID" /></xsl:attribute>
+					<xsl:attribute name="MetaDataVersionOID"><xsl:value-of select="../@OID" /></xsl:attribute>
+
+					<xsl:element name="SubjectKey" />
+
+					<xsl:for-each select="odm:ItemGroupRef">
+
+						<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
+						<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
+
+						<xsl:choose>
+							<xsl:when test="$vItemGroupDef/@Repeating = 'Yes'">
+								<xsl:element name="{@ItemGroupOID}">
+									<xsl:for-each select="$vItemGroupDef/odm:ItemRef">
+										<xsl:element name="{@ItemOID}" />
+									</xsl:for-each>
+								</xsl:element>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:for-each select="$vItemGroupDef/odm:ItemRef">
+									<xsl:element name="{@ItemOID}">
+										<xsl:attribute name="ItemGroupOID">
+										<xsl:value-of select="$vItemGroupOID" />
+									</xsl:attribute>
+									</xsl:element>
+								</xsl:for-each>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:for-each>
+				</ODM>
+			</instance>
+
+			<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()" locked="true()" visible="false()" />
+
+			<xsl:apply-templates select="child::node()">
+				<xsl:with-param name="form" select="$pForm" />
+			</xsl:apply-templates>
+		</model>
+
 	</xsl:template>
 
 	<!-- Create Binds for the questions -->
