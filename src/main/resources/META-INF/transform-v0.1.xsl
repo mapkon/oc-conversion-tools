@@ -224,19 +224,10 @@
 			
 			<group>
 	
-				<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
-				<label>
-					<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$vSection]" />
-				</label>
-	
-				<!-- Add the subject key input field only to the first group. -->
-				<xsl:if test="position() = '1'">
-					<input bind="subjectKey">
-						<label>Subject Key</label>
-						<hint>The subject key for whom you are collecting data for.</hint>
-					</input>
-				</xsl:if>
-	
+				<xsl:apply-templates select="$vSection">
+					<xsl:with-param name="pSection" select="$vSection" />
+				</xsl:apply-templates>
+				
 				<xsl:for-each select="$pForm/odm:ItemGroupRef">
 	
 					<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
@@ -254,6 +245,23 @@
 			
 		</xsl:for-each>
 
+	</xsl:template>
+
+	<xsl:template match="text()">
+	
+		<xsl:param name="pSection" />
+		<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
+		<label>
+			<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$pSection]" />
+		</label>
+
+		<!-- Add the subject key input field only to the first group. -->
+		<xsl:if test="position() = '1'">
+			<input bind="subjectKey">
+				<label>Subject Key</label>
+				<hint>The subject key for whom you are collecting data for.</hint>
+			</input>
+		</xsl:if>
 	</xsl:template>
 
 	<!-- Create repeat questions -->
