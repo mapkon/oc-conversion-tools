@@ -55,12 +55,12 @@ class TransformerTest extends GroovyTestCase {
 		assertTrue version.'@name'.text().contains('-v1')
 	}
 	
-	@Test void testThatTheNumberOfBindsAre61Given48ItemRefsInODM() {
+	@Test void testThatTheNumberOfBindsAreEqualsTOtemRefsInODM() {
 		
 		def binds = getBinds()
 		
-		// The extra bindings are because of the repeat parent bindings
-		assertEquals 60, binds.size()
+		// The extra bindings are because of the repeat parent bindings and Header/Sub Header locked questions
+		assertEquals 68, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {

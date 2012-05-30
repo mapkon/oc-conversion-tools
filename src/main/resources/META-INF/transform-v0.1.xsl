@@ -395,6 +395,7 @@
 		<xsl:param name="pItemGroupDef" />
 
 		<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
+		
 			<xsl:variable name="vItemOID" select="@ItemOID" />
 			<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
 
@@ -433,7 +434,8 @@
 
 		<xsl:param name="pItemDef" />
 
-		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
+		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
+	
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
 				<label>
@@ -445,8 +447,7 @@
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
 				<label>
-					<xsl:value-of
-						select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" />
+					<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" />
 				</label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
@@ -475,7 +476,7 @@
 	
 		<xsl:param name="pItemDef" />
 		
-		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
+		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
 				<label>
