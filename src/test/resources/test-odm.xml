@@ -434,6 +434,8 @@
 						<OpenClinica:SectionTitle>Title 2</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
+                        <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 2</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
