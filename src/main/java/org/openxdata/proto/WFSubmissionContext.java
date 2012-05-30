@@ -8,12 +8,8 @@ public interface WFSubmissionContext extends SubmissionContext {
 	public Map<String, String> getOutParamsQuestionMapping(int formId, String caseId);
 
 	/**
-	 *TaskName = objects[0]
-	 *CaseID = objects[1]
-	 *StudyId = objects[2]
-	 *FormId = objects[3]
-	 *Prefills = objects[4]
-	 *Prefills = List<String[Parameter,Question,Value,Output]>
+	 * TaskName = objects[0] CaseID = objects[1] StudyId = objects[2] FormId = objects[3] Prefills = objects[4] Prefills
+	 * = List<String[Parameter,Question,Value,Output]>
 	 */
 	public Object[] getWorkitem(String caseId);
 

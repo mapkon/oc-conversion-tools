@@ -275,8 +275,8 @@ public class OpenClinicaServlet extends HttpServlet {
 		String incrementVersionName = versionToIncrement.getName();
 		String nextVersion = form.getNextVersionName();
 
-		String newVersionName = incrementVersionName.replace(incrementVersionName.substring(incrementVersionName
-				.length() - 2), nextVersion);
+		String newVersionName = incrementVersionName.replace(
+				incrementVersionName.substring(incrementVersionName.length() - 2), nextVersion);
 
 		versionToIncrement.setName(newVersionName);
 

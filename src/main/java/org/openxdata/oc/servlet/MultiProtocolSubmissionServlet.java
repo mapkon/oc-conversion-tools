@@ -37,8 +37,7 @@ import com.jcraft.jzlib.ZOutputStream;
 import org.openxdata.oc.service.OpenClinicaService;
 
 /**
- * An example of how to support multiple upload protocols based on similar (or
- * the same) class.
+ * An example of how to support multiple upload protocols based on similar (or the same) class.
  * 
  * @author batkinson
  * 
@@ -130,8 +129,8 @@ public class MultiProtocolSubmissionServlet {
 			log.debug("creating submission context");
 			SubmissionContext submitCtx = null;
 			try {
-				submitCtx = new OCSubmissionContext(dataIn, dataOut, action == null ? ACTION_NONE : Byte
-						.parseByte(action), locale, userService, formDownloadService, studyManagerService,
+				submitCtx = new OCSubmissionContext(dataIn, dataOut, action == null ? ACTION_NONE
+						: Byte.parseByte(action), locale, userService, formDownloadService, studyManagerService,
 						openclinicaService, props);
 				ctx.getAutowireCapableBeanFactory().autowireBean(submitCtx);
 			} catch (Throwable numberFormatException) {
@@ -169,21 +168,18 @@ public class MultiProtocolSubmissionServlet {
 	}
 
 	/**
-	 * Loads a file that contains mappings from requested protocol versions and
-	 * the actual plugin version to use. This allows an administrator to change
-	 * the version of the protocol used to handle client requests without
-	 * updating the client or renaming the protocol plugins.
+	 * Loads a file that contains mappings from requested protocol versions and the actual plugin version to use. This
+	 * allows an administrator to change the version of the protocol used to handle client requests without updating the
+	 * client or renaming the protocol plugins.
 	 * 
 	 * The file contains entries like:
 	 * 
 	 * mforms-1.2=mforms-1.2.1
 	 * 
-	 * Which says that client requests suggesting use of mforms-1.2 should be
-	 * handled using mforms-1.2.1. This particular pattern is likely when making
-	 * a bugfix to a protocol.
+	 * Which says that client requests suggesting use of mforms-1.2 should be handled using mforms-1.2.1. This
+	 * particular pattern is likely when making a bugfix to a protocol.
 	 * 
-	 * @return a Properties object containing requestedVersion=actualVersion
-	 *         entries.
+	 * @return a Properties object containing requestedVersion=actualVersion entries.
 	 * @throws IOException
 	 */
 	private Properties getProtoMap() throws IOException {
@@ -205,8 +201,7 @@ public class MultiProtocolSubmissionServlet {
 	}
 
 	/**
-	 * Takes a protocol version name sent from a mobile client and attempts to
-	 * resolve it to a plugin to handle it.
+	 * Takes a protocol version name sent from a mobile client and attempts to resolve it to a plugin to handle it.
 	 * 
 	 * @param requestedVersion
 	 *            the serializer string sent from mobile client
