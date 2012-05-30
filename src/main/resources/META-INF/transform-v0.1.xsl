@@ -217,19 +217,20 @@
 
 		<xsl:param name="pForm" />
 		<xsl:param name="pSections" />
-		
+
 		<xsl:for-each select="$pSections">
-		
+
 			<xsl:variable name="vSection" select="current()" />
-			
+
 			<group>
-	
+
 				<xsl:apply-templates select="$vSection">
+					<xsl:with-param name="pos" select="position()" />
 					<xsl:with-param name="pSection" select="$vSection" />
 				</xsl:apply-templates>
-				
+
 				<xsl:for-each select="$pForm/odm:ItemGroupRef">
-	
+
 					<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
 					<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
 	
@@ -238,25 +239,25 @@
 						<xsl:with-param name="pSection" select="$vSection" />
 						<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
 					</xsl:apply-templates>
-	
+
 				</xsl:for-each>
-				
+
 			</group>
-			
+
 		</xsl:for-each>
 
 	</xsl:template>
 
 	<xsl:template match="text()">
-	
+
+		<xsl:param name="pos" />
 		<xsl:param name="pSection" />
-		<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
-		<label>
-			<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$pSection]" />
-		</label>
+		
+		<xsl:attribute name="id"><xsl:value-of select="$pos" /></xsl:attribute>
+		<label><xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$pSection]" /></label>
 
 		<!-- Add the subject key input field only to the first group. -->
-		<xsl:if test="position() = '1'">
+		<xsl:if test="$pos='1'">
 			<input bind="subjectKey">
 				<label>Subject Key</label>
 				<hint>The subject key for whom you are collecting data for.</hint>
