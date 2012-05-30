@@ -267,16 +267,31 @@
 
 	<!-- Create repeat questions -->
 	<xsl:template match="//*[local-name()='ItemGroupDef' and @Repeating='Yes']">
-		
+
 		<xsl:param name="pForm" />
 		<xsl:param name="pSection" />
 		<xsl:param name="pItemGroupDef" />
-		
+
 		<xsl:if test="$pItemGroupDef/*/*/@SectionLabel=$pSection">
 			<group>
 				<xsl:attribute name="id"><xsl:value-of select="$pItemGroupDef/@OID" /></xsl:attribute>
 				<label>
-					<xsl:value-of select="$pItemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
+					<xsl:choose>
+						<xsl:when test="$pItemGroupDef/*/*/*[local-name()='ItemGroupHeader']">
+							<xsl:value-of select="$pItemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:if test="position()=1">
+								<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
+									<xsl:variable name="vItemOID" select="@ItemOID" />
+									<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
+									<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
+										<xsl:value-of select="$vItemDef/@Comment" />
+									</xsl:if>
+								</xsl:for-each>
+							</xsl:if>
+						</xsl:otherwise>
+					</xsl:choose>
 				</label>
 
 				<xf:repeat>
