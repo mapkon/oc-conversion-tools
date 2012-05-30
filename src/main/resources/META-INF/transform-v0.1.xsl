@@ -165,7 +165,7 @@
 					<bind>
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemGroupOID" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
-						<xsl:call-template name="determineBindQuestionType">
+						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
 					</bind>
@@ -197,7 +197,7 @@
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
 						<xsl:attribute name="locked">true()</xsl:attribute>
 						
-						<xsl:call-template name="determineBindQuestionType">
+						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
 						
@@ -209,7 +209,7 @@
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
 						<xsl:attribute name="locked">true()</xsl:attribute>
 				
-						<xsl:call-template name="determineBindQuestionType">
+						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
 						
@@ -220,7 +220,7 @@
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 						
-						<xsl:call-template name="determineBindQuestionType">
+						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
 			
@@ -237,7 +237,7 @@
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 						
-						<xsl:call-template name="determineBindQuestionType">
+						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
 			
@@ -251,7 +251,7 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template name="determineBindQuestionType">
+	<xsl:template name="appendQuestionType">
 		<xsl:param name="pItemDef" />
 		<xsl:choose>
 			<xsl:when test="$pItemDef/@DataType = 'integer'">
