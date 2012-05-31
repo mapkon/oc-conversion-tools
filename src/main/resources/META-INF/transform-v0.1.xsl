@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:odm="http://www.cdisc.org/ns/odm/v1.3"
-	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1"
-	xmlns:xf="http://www.w3.org/2002/xforms">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:odm="http://www.cdisc.org/ns/odm/v1.3"
+	xmlns:OpenClinica="http://www.openclinica.org/ns/odm_ext_v130/v3.1" xmlns:xf="http://www.w3.org/2002/xforms">
 
 	<xsl:output method="xml" version='1.0' encoding='UTF-8' indent="yes" omit-xml-declaration="yes" />
-	<xsl:strip-space elements="*"/>
-	
+	<xsl:strip-space elements="*" />
+
 	<xsl:key name="kLabelsInForm" match="OpenClinica:SectionLabel" use="concat(../@FormOID, '+', .)" />
 
 	<xsl:template match="/">
@@ -45,7 +43,7 @@
 		<xsl:variable name="vForm" select="current()" />
 
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-			
+
 			<xsl:apply-templates select="$vForm" mode="createModel">
 				<xsl:with-param name="pForm" select="$vForm" />
 			</xsl:apply-templates>
@@ -53,7 +51,7 @@
 			<xsl:call-template name="createGroups">
 				<xsl:with-param name="pForm" select="$vForm" />
 			</xsl:call-template>
-			
+
 		</xforms>
 	</xsl:template>
 
@@ -85,12 +83,12 @@
 						<xsl:choose>
 							<xsl:when test="$vItemGroupDef/@Repeating = 'Yes'">
 								<xsl:element name="{@ItemGroupOID}">
-								
+
 									<xsl:for-each select="$vItemGroupDef/odm:ItemRef">
-										
+
 										<xsl:variable name="vItemOID" select="@ItemOID" />
 										<xsl:element name="{$vItemOID}" />
-										
+
 									</xsl:for-each>
 								</xsl:element>
 							</xsl:when>
@@ -103,11 +101,11 @@
 									<xsl:if test="$vItemDef/*/*/*[local-name()='ItemHeader'] and $vItemDef/*/*/*[local-name()='ItemSubHeader']">
 										<xsl:element name="{$vItemOID}_HEADER" />
 									</xsl:if>
-									
+
 									<xsl:if test="$vItemDef/*/*/*[local-name()='ItemSubHeader']">
 										<xsl:element name="{$vItemOID}_SUB_HEADER" />
 									</xsl:if>
-										
+
 									<xsl:element name="{$vItemOID}">
 										<xsl:attribute name="ItemGroupOID">
 										<xsl:value-of select="$vItemGroupOID" />
@@ -139,21 +137,21 @@
 
 		<xsl:choose>
 			<xsl:when test="$vItemGroupDef/@Repeating = 'Yes'">
-		
+
 				<bind>
 					<xsl:attribute name="id"><xsl:value-of select="$vItemGroupOID" /></xsl:attribute>
 					<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemGroupOID" /></xsl:attribute>
-		
+
 					<xsl:if test="./Mandatory = 'Yes'">
 						<xsl:attribute name="required">true()</xsl:attribute>
 					</xsl:if>
 				</bind>
-		
+
 				<xsl:for-each select="$vItemGroupDef/odm:ItemRef">
-		
+
 					<xsl:variable name="vItemOID" select="@ItemOID" />
 					<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
-		
+
 					<bind>
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemGroupOID" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
@@ -176,67 +174,67 @@
 		<xsl:param name="pItemGroupDef" />
 
 		<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
-		
+
 			<xsl:variable name="vItemOID" select="@ItemOID" />
 			<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
 
 			<xsl:choose>
 				<xsl:when test="$vItemDef/*/*/*[local-name()='ItemSubHeader']">
 
-				<xsl:if test="$vItemDef/*/*/*[local-name()='ItemHeader'] and $vItemDef/*/*/*[local-name()='ItemSubHeader']">
-					<bind>
-						<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
-						<xsl:attribute name="locked">true()</xsl:attribute>
-			
-						<xsl:call-template name="appendQuestionType">
-							<xsl:with-param name="pItemDef" select="$vItemDef" />
-						</xsl:call-template>
-					</bind>
-				</xsl:if>
+					<xsl:if test="$vItemDef/*/*/*[local-name()='ItemHeader'] and $vItemDef/*/*/*[local-name()='ItemSubHeader']">
+						<bind>
+							<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
+							<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
+							<xsl:attribute name="locked">true()</xsl:attribute>
 
-				<xsl:if test="$vItemDef/*/*/*[local-name()='ItemSubHeader']">
-			
-					<bind>
-						<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
-						<xsl:attribute name="locked">true()</xsl:attribute>
-			
-						<xsl:call-template name="appendQuestionType">
-							<xsl:with-param name="pItemDef" select="$vItemDef" />
-						</xsl:call-template>
-					</bind>
-				</xsl:if>
-
-
-				<bind>
-					<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
-					<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
-			
-					<xsl:call-template name="appendQuestionType">
-						<xsl:with-param name="pItemDef" select="$vItemDef" />
-					</xsl:call-template>
-			
-					<xsl:if test="./@Mandatory = 'Yes'">
-						<xsl:attribute name="required">true()</xsl:attribute>
+							<xsl:call-template name="appendQuestionType">
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</bind>
 					</xsl:if>
-				</bind>
-					
-				</xsl:when>
-				<xsl:otherwise>
+
+					<xsl:if test="$vItemDef/*/*/*[local-name()='ItemSubHeader']">
+
+						<bind>
+							<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
+							<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
+							<xsl:attribute name="locked">true()</xsl:attribute>
+
+							<xsl:call-template name="appendQuestionType">
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</bind>
+					</xsl:if>
+
+
 					<bind>
-					
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
 						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
-						
+
 						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
-			
+
 						<xsl:if test="./@Mandatory = 'Yes'">
 							<xsl:attribute name="required">true()</xsl:attribute>
 						</xsl:if>
-						
+					</bind>
+
+				</xsl:when>
+				<xsl:otherwise>
+					<bind>
+
+						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
+						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
+
+						<xsl:call-template name="appendQuestionType">
+							<xsl:with-param name="pItemDef" select="$vItemDef" />
+						</xsl:call-template>
+
+						<xsl:if test="./@Mandatory = 'Yes'">
+							<xsl:attribute name="required">true()</xsl:attribute>
+						</xsl:if>
+
 					</bind>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -281,8 +279,9 @@
 
 		<xsl:param name="pForm" />
 
- 		<xsl:variable name="vSections" select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($pForm/@OID, '+', .))[1])]"/>
-			
+		<xsl:variable name="vSections"
+			select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($pForm/@OID, '+', .))[1])]" />
+
 		<xsl:for-each select="$vSections">
 
 			<xsl:variable name="vSection" select="current()" />
@@ -298,7 +297,7 @@
 
 					<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
 					<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
-	
+
 					<xsl:apply-templates select="$vItemGroupDef">
 						<xsl:with-param name="pForm" select="$pForm" />
 						<xsl:with-param name="pSection" select="$vSection" />
@@ -317,9 +316,11 @@
 
 		<xsl:param name="pos" />
 		<xsl:param name="pSection" />
-		
+
 		<xsl:attribute name="id"><xsl:value-of select="$pos" /></xsl:attribute>
-		<label><xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$pSection]" /></label>
+		<label>
+			<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$pSection]" />
+		</label>
 
 		<!-- Add the subject key input field only to the first group. -->
 		<xsl:if test="$pos='1'">
@@ -369,7 +370,7 @@
 						<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
 
 						<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
-							
+
 							<xsl:apply-templates select=".">
 								<xsl:with-param name="pItemDef" select="$vItemDef" />
 							</xsl:apply-templates>
@@ -388,7 +389,7 @@
 		<xsl:param name="pItemGroupDef" />
 
 		<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
-		
+
 			<xsl:variable name="vItemOID" select="@ItemOID" />
 			<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
 
@@ -427,7 +428,8 @@
 
 		<xsl:param name="pItemDef" />
 
-		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
+		<xsl:if
+			test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
 				<label>
@@ -439,7 +441,7 @@
 		</xsl:if>
 
 		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
-	
+
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
 				<label>
@@ -447,9 +449,9 @@
 				</label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
-	
+
 		</xsl:if>
-		
+
 		<input>
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
 			<label>
@@ -470,10 +472,11 @@
 
 	<!-- Create single select questions -->
 	<xsl:template match="//*[local-name()='ItemDef']/*[local-name()='CodeListRef']">
-	
+
 		<xsl:param name="pItemDef" />
-		
-		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
+
+		<xsl:if
+			test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
 				<label>
@@ -485,7 +488,7 @@
 		</xsl:if>
 
 		<xsl:if test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
-	
+
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
 				<label>
@@ -493,9 +496,9 @@
 				</label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
-	
+
 		</xsl:if>
-		
+
 		<select1>
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
 			<xsl:variable name="codeListID">
@@ -512,8 +515,7 @@
 			</label>
 			<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
 				<item>
-					<xsl:attribute name="id"><xsl:value-of
-						select="@CodedValue" /></xsl:attribute>
+					<xsl:attribute name="id"><xsl:value-of select="@CodedValue" /></xsl:attribute>
 					<label>
 						<xsl:value-of select="odm:Decode/odm:TranslatedText"></xsl:value-of>
 					</label>
@@ -529,8 +531,8 @@
 			</hint>
 		</select1>
 	</xsl:template>
-	
-	<!-- Append question number to the label text if it exists, else use translated text-->
+
+	<!-- Append question number to the label text if it exists, else use translated text -->
 	<xsl:template match="//*[local-name()='ItemDef']">
 
 		<xsl:param name="pItemDef" />
