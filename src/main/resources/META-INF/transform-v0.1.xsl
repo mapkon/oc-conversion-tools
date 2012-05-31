@@ -20,10 +20,6 @@
 
 				<xsl:variable name="vFormOID" select="@OID" />
 
-				<xsl:variable name="vSections" select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($vFormOID, '+', .))[1])]">
-					<xsl:value-of select="concat(., ' ')" />
-				</xsl:variable>
-
 				<form>
 					<xsl:attribute name="name">
 						<xsl:value-of select="@Name" />
@@ -35,9 +31,7 @@
 						<xsl:attribute name="name"><xsl:value-of select="@Name" />-v1</xsl:attribute>
 						<xsl:attribute name="description">Converted from ODM using the oc-conversion-tools</xsl:attribute>
 						<xform>
-							<xsl:apply-templates select="current()">
-								<xsl:with-param name="pSections" select="$vSections"></xsl:with-param>
-							</xsl:apply-templates>
+							<xsl:apply-templates select="current()" />
 						</xform>
 					</version>
 				</form>
@@ -48,7 +42,6 @@
 	<!-- Create data nodes for the question answers -->
 	<xsl:template match="//*[local-name()='FormDef']">
 
-		<xsl:param name="pSections" />
 		<xsl:variable name="vForm" select="current()" />
 
 		<xforms xmlns="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -59,7 +52,6 @@
 
 			<xsl:call-template name="createGroups">
 				<xsl:with-param name="pForm" select="$vForm" />
-				<xsl:with-param name="pSections" select="$pSections" />
 			</xsl:call-template>
 			
 		</xforms>
@@ -288,9 +280,10 @@
 	<xsl:template name="createGroups">
 
 		<xsl:param name="pForm" />
-		<xsl:param name="pSections" />
 
-		<xsl:for-each select="$pSections">
+ 		<xsl:variable name="vSections" select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionLabel'][generate-id() = generate-id(key('kLabelsInForm', concat($pForm/@OID, '+', .))[1])]"/>
+			
+		<xsl:for-each select="$vSections">
 
 			<xsl:variable name="vSection" select="current()" />
 
