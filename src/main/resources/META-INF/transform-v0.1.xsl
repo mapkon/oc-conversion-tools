@@ -356,7 +356,7 @@
 					<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
 
 						<xsl:variable name="vItemOID" select="@ItemOID" />
-						<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
+						<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID][1]" />
 
 						<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
 
@@ -380,7 +380,7 @@
 		<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
 
 			<xsl:variable name="vItemOID" select="@ItemOID" />
-			<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
+			<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID][1]" />
 
 			<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
 				<xsl:apply-templates select=".">
