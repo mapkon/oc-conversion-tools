@@ -118,7 +118,7 @@
 				</ODM>
 			</instance>
 
-			<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" required="true()" locked="true()" visible="false()" />
+			<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" locked="true()" visible="false()" />
 
 			<xsl:apply-templates select="child::node()">
 				<xsl:with-param name="pForm" select="$pForm" />
