@@ -283,14 +283,14 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "repeat", group.children()[2].children()[1].name()
 	}
 	
-	@Test void testThatConvertedXmlHasSubjectKeySetToRequired() {
+	@Test void testThatConvertedXmlHasSubjectKeyQuestionNotSetToRequired() {
 		
 		def xformNodes = getXformNodes()
 		
 		xformNodes.each {
 			
 			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
-			assertEquals "SubjectKey should be required", "true()", subjectKey.@required.text()
+			assertEquals "SubjectKey should be required", "", subjectKey.@required.text()
 		}
 	}
 	
@@ -320,7 +320,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		def requiredQtns = getRequiredQuestions()
 		
-		assertEquals "Required questions should equals Mandatory questions in ODM file.", 30, requiredQtns.size()
+		assertEquals "Required questions should equals Mandatory questions in ODM file.", 26, requiredQtns.size()
 
 	}
 	
