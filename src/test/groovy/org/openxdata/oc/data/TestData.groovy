@@ -105,7 +105,7 @@ class TestData {
 		
 	}
         
-        static List<StudySubject> getStudySubjectsObjects() {
+    static List<StudySubject> getStudySubjectsObjects() {
 		
 		def response = new XmlParser().parseText(new TransformUtil().loadFileContents("subject-event-response.xml"))
 	
