@@ -73,7 +73,7 @@
 					<xsl:attribute name="StudyOID"><xsl:value-of select="../../@OID" /></xsl:attribute>
 					<xsl:attribute name="MetaDataVersionOID"><xsl:value-of select="../@OID" /></xsl:attribute>
 
-					<xsl:element name="SubjectKey" />
+					<xsl:element name="subjectkey" />
 
 					<xsl:for-each select="odm:ItemGroupRef">
 
@@ -118,7 +118,7 @@
 				</ODM>
 			</instance>
 
-			<bind id="subjectKey" nodeset="/ODM/SubjectKey" type="xsd:string" locked="true()" visible="false()" />
+			<bind id="subjectkey" nodeset="/ODM/SubjectKey" type="xsd:string" locked="true()" visible="false()" />
 
 			<xsl:apply-templates select="child::node()">
 				<xsl:with-param name="pForm" select="$pForm" />

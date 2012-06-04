@@ -300,7 +300,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		xformNodes.each {
 			
-			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectkey")}
 			assertEquals "SubjectKey should be locked", "true()", subjectKey.@locked.text()
 		}
 	}
@@ -311,7 +311,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		xformNodes.each {
 			
-			def subjectKey = it.model.bind.find{ it.@id.equals("subjectKey")}
+			def subjectKey = it.model.bind.find{ it.@id.equals("subjectkey")}
 			assertEquals "SubjectKey should be Hidden", "false()", subjectKey.@visible.text()
 		}
 	}

@@ -73,7 +73,7 @@ class DefaultSubmissionProtocol {
 
 	private def getSubjectKey() {
 
-		return instanceDataXml.depthFirst().find { it.name().equals("SubjectKey")}.text()
+		return instanceDataXml.depthFirst().find { it.name().equals("subjectkey")}.text()
 
 	}
 
@@ -116,7 +116,7 @@ class DefaultSubmissionProtocol {
 				}
 			}
 			else {
-				if(!it.name().equals("SubjectKey")) {
+				if(!it.name().equals("subjectkey")) {
 					itemGroupOIDS.add(it.@ItemGroupOID.toString())
 				}
 			}
