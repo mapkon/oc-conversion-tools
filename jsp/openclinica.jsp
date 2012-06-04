@@ -19,11 +19,8 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 					<div class="heading">OpenClinica OpenXdata Study Management</div>
 					<div class="studies-table">
 
-						<div class="studies-table-label">Study</div>
-						<c:forEach items="${message}" var="msg">
-							<div class="message-div">${msg.key}  ${msg.value}</div>
-						</c:forEach>
-
+					<div class="studies-table-label">Enter Details and Choose action to perform</div>
+						
 						<div class="input-div">
 							Study OID:
 							<input type="text" name="oid" />
@@ -53,6 +50,11 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 								</table>
 							</c:if>
 						</div>
+						
+						<div class="studies-table-label">Notification Center</div>
+						<c:forEach items="${message}" var="msg">
+							<div class="message-div">${msg.key}  ${msg.value}</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
