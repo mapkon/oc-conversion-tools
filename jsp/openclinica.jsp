@@ -16,7 +16,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 			<div class="container">
 				<div class="header"></div>
 				<div class="bodyDiv">
-					<div class="heading">OpenClinica Study Management</div>
+					<div class="heading">OpenClinica OpenXdata Study Management</div>
 					<div class="studies-table">
 
 						<div class="studies-table-label">Study</div>
