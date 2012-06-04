@@ -39,7 +39,6 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 
 			def message = getImportWebServiceResponse(response)
 			
-			println XmlUtil.serialize(xml)
 			def formKey = xml.@formKey
 			
 			messages.put(formKey.toString(), message)
