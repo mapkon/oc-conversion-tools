@@ -23,12 +23,14 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 	
 	HashMap<String, String> importData(def instanceData){
 
-		log.info("Starting import to Openclinca.")
-
 		def messages = [:]
 		def importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
 
 		importXml.each {
+			
+			def xml = new XmlSlurper().parseText(it)
+			
+			log.info("Exporting Form: " + xml.@formKey)
 			
 			envelope = getSoapEnvelope(it)
 
@@ -37,11 +39,10 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 
 			def message = getImportWebServiceResponse(response)
 			
-			def xml = new XmlSlurper().parseText(it)
+			println XmlUtil.serialize(xml)
+			def formKey = xml.@formKey
 			
-			def formKey = xml.@formKey.text()
-			
-			messages.put(formKey, message)
+			messages.put(formKey.toString(), message)
 			
 		}
 		

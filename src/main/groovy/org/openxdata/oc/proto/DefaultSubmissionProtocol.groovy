@@ -12,6 +12,8 @@ class DefaultSubmissionProtocol {
 
 		def xml
 		instanceDataXml = new XmlSlurper().parseText(openXdataInstanceData)
+		
+		log.info("Creating OpenClinica Instance Data for Form: " + instanceDataXml.@formKey)
 
 		def subjectKey = getSubjectKey()
 
