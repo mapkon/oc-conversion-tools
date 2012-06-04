@@ -37,8 +37,8 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 								<table cellpadding="0" cellspacing="0" width="600px">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>OID</th>
+											<th>Study Name</th>
+											<th>Study OID</th>
 										</tr>
 									</thead>
 									<tbody>
