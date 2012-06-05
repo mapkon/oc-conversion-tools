@@ -159,7 +159,8 @@ class DefaultSubmissionProtocolTest {
 		}
 	}
 
-	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHavingOneItemDataNode() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHaving6ItemDataNode() {
+		
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
 		assertEquals 6, itemGroupDataNodes[0].children().size()
@@ -171,7 +172,7 @@ class DefaultSubmissionProtocolTest {
 		assertEquals 22, itemGroupDataNodes[1].children().size()
 	}
 
-	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHavingSevenItemDataNodes() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHaving1ItemDataNodes() {
 
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
