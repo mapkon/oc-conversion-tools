@@ -37,11 +37,10 @@ class DefaultSubmissionProtocol {
 
 									if(isRepeat(itemGroupOID)) {
 
-										def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
-
 										// Make sure we don't iterate over the same repeat twice.
 										if(currentRepeat != itemGroupOID) {
 
+											def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
 											nodes.eachWithIndex { node, idx ->
 
 												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
