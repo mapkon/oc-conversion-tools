@@ -53,7 +53,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 						
 						<div class="studies-table-label">Notification Center</div>
 						<c:forEach items="${message}" var="msg">
-							<div class="message-div">${msg.value} For Form: ${msg.key}  </div>
+							<div class="message-div">${msg.value} ${msg.key}  </div>
 						</c:forEach>
 					</div>
 				</div>
