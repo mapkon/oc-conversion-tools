@@ -42,12 +42,12 @@ class TestData {
 								<ODM StudyOID="S_12175" MetaDataVersionOID="v1.0.0" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="F_MSA2_1" name="SC2" StudyEventOID="SE_SC2" id="7" xmlns:xf="http://www.w3.org/2002/xforms">
 								  <subjectkey>Foo_Key</subjectkey>
 								  <IG_MSA2_MSA2_POARTPRECG>
-								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">3</xf:I_MSA2_MSA2_POARTNBV>
-								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Quinin</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">2</xf:I_MSA2_MSA2_POARTNBV>
-								    <xf:I_MSA2_MSA2_POARTPREC xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">Panadol</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV xmlns:xf="http://www.w3.org/2002/xforms" ItemGroupOID="IG_MSA2_MSA2_POARTPRECG">4</xf:I_MSA2_MSA2_POARTNBV>
+								    <xf:I_MSA2_MSA2_POARTPREC>Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>3</xf:I_MSA2_MSA2_POARTNBV>
+								    <xf:I_MSA2_MSA2_POARTPREC>Quinin</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>2</xf:I_MSA2_MSA2_POARTNBV>
+								    <xf:I_MSA2_MSA2_POARTPREC>Panadol</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>4</xf:I_MSA2_MSA2_POARTNBV>
 								  </IG_MSA2_MSA2_POARTPRECG>
 								  <I_MSA2_INIT ItemGroupOID="IG_MSA2_UNGROUPED">CTK</I_MSA2_INIT>
 								  <I_MSA2_FROMD ItemGroupOID="IG_MSA2_UNGROUPED">2012-02-07</I_MSA2_FROMD>
