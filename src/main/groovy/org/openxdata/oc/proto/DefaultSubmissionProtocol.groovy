@@ -12,7 +12,7 @@ class DefaultSubmissionProtocol {
 
 		def xml
 		instanceDataXml = new XmlSlurper().parseText(openXdataInstanceData)
-		
+
 		log.info("Creating OpenClinica Instance Data for Form: " + instanceDataXml.@formKey)
 
 		def subjectKey = getSubjectKey()
@@ -32,33 +32,33 @@ class DefaultSubmissionProtocol {
 							FormData(FormOID:instanceDataXml.@formKey) {
 
 								def currentRepeat
-								
+
 								itemGroupOIDS.each { itemGroupOID ->
-									
+
 									if(isRepeat(itemGroupOID)) {
 
 										def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
-										
+
 										// Make sure we don't iterate over the same repeat twice.
 										if(currentRepeat != itemGroupOID) {
-											
+
 											nodes.eachWithIndex { node, idx ->
-												
+
 												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
-	
+
 													node.children().each { itemData ->
-	
+
 														ItemData (ItemOID:itemData.name(), Value:"$itemData"){
 														}
 													}
 												}
 											}
 										}
-										
+
 										currentRepeat = itemGroupOID
 									}
 									else {
-										
+
 										def itemDataNodes = getItemGroupDataNodes(itemGroupOID)
 										ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
 
