@@ -31,23 +31,35 @@ class DefaultSubmissionProtocol {
 
 							FormData(FormOID:instanceDataXml.@formKey) {
 
-								itemGroupOIDS.eachWithIndex { itemGroupOID, idx ->
+								def currentRepeat
+								
+								itemGroupOIDS.each { itemGroupOID ->
+									
+									if(isRepeat(itemGroupOID)) {
 
-									def itemDataNodes = getItemGroupItemDataNodes(itemGroupOID)
-									def node = instanceDataXml.children().find { it.name().equals(itemGroupOID) }
-
-									if(isRepeat(node)) {
-
-										ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
-
-											itemDataNodes.each { itemData ->
-
-												ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+										def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
+										
+										// Make sure we don't iterate over the same repeat twice.
+										if(currentRepeat != itemGroupOID) {
+											
+											nodes.eachWithIndex { node, idx ->
+												
+												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
+	
+													node.children().each { itemData ->
+	
+														ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+														}
+													}
 												}
 											}
 										}
+										
+										currentRepeat = itemGroupOID
 									}
 									else {
+										
+										def itemDataNodes = getItemGroupDataNodes(itemGroupOID)
 										ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
 
 											itemDataNodes.each { itemData ->
@@ -76,7 +88,7 @@ class DefaultSubmissionProtocol {
 
 	}
 
-	private def getItemGroupItemDataNodes(String itemGroupOID) {
+	private def getItemGroupDataNodes(String itemGroupOID) {
 
 		def itemNodes = []
 
