@@ -104,19 +104,17 @@ class DefaultSubmissionProtocol {
 
 	private def getItemGroupOIDS() {
 
-		def itemGroupOIDS = []as Set
+		def itemGroupOIDS = []
 
 		instanceDataXml.children().each {
 
 			if(isRepeat(it)) {
-
-				it.children().each { item ->
-					itemGroupOIDS.add(item.@ItemGroupOID.toString())
-				}
+				itemGroupOIDS.add(it.name())
 			}
 			else {
 				if(!it.name().equals("subjectkey")) {
-					itemGroupOIDS.add(it.@ItemGroupOID.toString())
+					if(!itemGroupOIDS.contains(it.@ItemGroupOID.toString()))
+						itemGroupOIDS.add(it.@ItemGroupOID.toString())
 				}
 			}
 		}
