@@ -5,17 +5,19 @@ import org.junit.Test
 import org.openxdata.oc.InstanceDataHandler;
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.util.TransformUtil;
 
 
 class InstanceDataHandlerTest extends GroovyTestCase {
 
+	def handler
 	List<String> exportedInstanceData
 	
 	@Before public void setUp(){
 		
-		def odmDef = new InstanceDataHandler()
+		handler = new InstanceDataHandler()
 		
-		exportedInstanceData = odmDef.processInstanceData(TestData.getInstanceData())
+		exportedInstanceData = handler.processInstanceData(TestData.getInstanceData())
 	}
 	
 	@Test void testAppendInstanceDataShouldConvertedOpenXDataInstanceDataUsingCorrectProtocol(){
@@ -61,12 +63,32 @@ class InstanceDataHandlerTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testThatUncleanedXmlHasHeaders() {
+		
+		def xmlWithHeaders = new TransformUtil().loadFileContents("data.xml")
+		
+		def dXml = new XmlSlurper().parseText(xmlWithHeaders)
+		
+		assertTrue "Xml has Headers", hasHeaders(dXml)
+	}
+	
 	@Test void testThatInstanceXmlWithHeaderQuestionsIsCleaned() {
+
+		def xmlWithHeaders = new TransformUtil().loadFileContents("data.xml")
 		
-		def xmlWithHeaders = ''''''
-		
-		def cleanXml = protocol.cleanXml(xmlWithHeaders)
-		
+		def xml = handler.cleanXml(xmlWithHeaders)
+		def cleanXml = new XmlSlurper().parseText(xml)
+
 		assertFalse "Xml Has no Headers", hasHeaders(cleanXml)
+	}
+	
+	private def hasHeaders(xml) {
+		
+		for(def node : xml.children())
+			if(node.name().endsWith("_HEADER")) {
+				return true
+			}
+			
+		return false
 	}
 }

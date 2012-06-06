@@ -14,7 +14,7 @@ class DefaultSubmissionProtocolTest {
 
 	@Before void setUp() {
 
-		instanceData = protocol.createOpenClinicaInstanceData(TestData.getOpenXdataInstanceData())
+		instanceData = protocol.createODMInstanceData(TestData.getOpenXdataInstanceData())
 
 		xml = new XmlParser().parseText(instanceData)
 	}
