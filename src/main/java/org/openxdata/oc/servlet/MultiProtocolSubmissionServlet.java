@@ -15,18 +15,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.proto.ProtocolHandler;
 import org.openxdata.proto.ProtocolLoader;
-import org.openxdata.proto.SubmissionContext;
 import org.openxdata.proto.exception.ProtocolAccessDeniedException;
 import org.openxdata.proto.exception.ProtocolException;
 import org.openxdata.proto.exception.ProtocolInvalidSessionReferenceException;
 import org.openxdata.proto.exception.ProtocolNotFoundException;
 import org.openxdata.server.OpenXDataConstants;
 import org.openxdata.server.service.AuthenticationService;
-import org.openxdata.server.service.FormDownloadService;
-import org.openxdata.server.service.StudyManagerService;
-import org.openxdata.server.service.UserService;
+import org.openxdata.server.servlet.DefaultSubmissionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
@@ -34,7 +32,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZOutputStream;
-import org.openxdata.oc.service.OpenClinicaService;
 
 /**
  * An example of how to support multiple upload protocols based on similar (or the same) class.
@@ -51,10 +48,7 @@ public class MultiProtocolSubmissionServlet {
 	public static final byte RESPONSE_ACCESS_DENIED = 2;
 	public static final byte RESPONSE_INVALID_SESSION_REFERENCE = 4;
 
-	private UserService userService;
-	private FormDownloadService formDownloadService;
 	private AuthenticationService authenticationService;
-	private StudyManagerService studyManagerService;
 	private WebApplicationContext ctx;
 	private ServletContext sctx;
 	private OpenClinicaService openclinicaService;
@@ -67,15 +61,13 @@ public class MultiProtocolSubmissionServlet {
 		ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(sctx);
 
 		// Manual Injection
-		userService = (UserService) ctx.getBean("userService");
-		formDownloadService = (FormDownloadService) ctx.getBean("formDownloadService");
 		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
-		studyManagerService = (StudyManagerService) ctx.getBean("studyManagerService");
 		this.openclinicaService = openclinicaService;
 		this.props = props;
 
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		log.info("incoming request");
@@ -127,11 +119,11 @@ public class MultiProtocolSubmissionServlet {
 			ProtocolHandler handler = protoLoader.loadHandler(protoLocation);
 
 			log.debug("creating submission context");
-			SubmissionContext submitCtx = null;
+			DefaultSubmissionContext submitCtx = null;
 			try {
-				submitCtx = new OCSubmissionContext(dataIn, dataOut, action == null ? ACTION_NONE
-						: Byte.parseByte(action), locale, userService, formDownloadService, studyManagerService,
-						openclinicaService, props);
+				submitCtx = new OCSubmissionContext(in, zOut, req, resp, null, openclinicaService, props);
+				submitCtx.setAction(action == null ? ACTION_NONE : Byte.parseByte(action));
+				submitCtx.setLocale(locale);
 				ctx.getAutowireCapableBeanFactory().autowireBean(submitCtx);
 			} catch (Throwable numberFormatException) {
 				numberFormatException.printStackTrace();

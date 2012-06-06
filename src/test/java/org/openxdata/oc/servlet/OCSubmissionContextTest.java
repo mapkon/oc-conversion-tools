@@ -33,9 +33,6 @@ public class OCSubmissionContextTest {
 	private OCSubmissionContext instance;
 	private Properties props;
 
-	public OCSubmissionContextTest() {
-	}
-
 	@BeforeClass
 	public static void initTestData() {
 		studySubjectsObjects = TestData.getStudySubjectsObjects();
@@ -48,8 +45,8 @@ public class OCSubmissionContextTest {
 		MockitoAnnotations.initMocks(this);
 		props = new Properties();
 		props.setProperty("ocStudy", "Test Study");
-		instance = new OCSubmissionContext(null, null, (byte) 1, null, null, null, studyManagerService, ocService,
-				props);
+		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
+		instance.setStudyManagerService(studyManagerService);
 
 	}
 

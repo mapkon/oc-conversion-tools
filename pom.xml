@@ -151,12 +151,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
+			<artifactId>model</artifactId>
+			<version>1.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openxdata</groupId>
 			<artifactId>server</artifactId>
-			<version>1.13</version>
+			<version>1.16</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-webmvc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openxdata</groupId>
+					<artifactId>model</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.springframework.security</groupId>

@@ -1,7 +1,7 @@
 package org.openxdata.oc.servlet;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -9,32 +9,35 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.proto.WFSubmissionContext;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.StudyDef;
-import org.openxdata.server.service.FormDownloadService;
 import org.openxdata.server.service.StudyManagerService;
-import org.openxdata.server.service.UserService;
 import org.openxdata.server.servlet.DefaultSubmissionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext {
 
-	private OpenClinicaService ocService;
+	@Autowired
 	private StudyManagerService studyManagerService;
+	private OpenClinicaService ocService;
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
 	private Properties props;
 	private List<Event> orphanedEvents = new ArrayList<Event>();
 
-	public OCSubmissionContext(DataInputStream input, DataOutputStream output, byte action, String locale,
-			UserService userService, FormDownloadService formService, StudyManagerService studyManagerService,
-			OpenClinicaService ocService, Properties props) {
-		super(input, output, action, locale, userService, formService, studyManagerService);
-		this.studyManagerService = studyManagerService;
+	public OCSubmissionContext(InputStream input, OutputStream output, HttpServletRequest httpReq,
+			HttpServletResponse httpRsp, Map<String, List<String>> metaData, OpenClinicaService ocService,
+			Properties props) {
+		super(input, output, httpReq, httpRsp, metaData);
 		this.ocService = ocService;
 		this.props = props;
 	}
@@ -199,6 +202,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	public void setProps(Properties props) {
 		this.props = props;
+	}
+
+	public void setStudyManagerService(StudyManagerService studyManagerService) {
+		this.studyManagerService = studyManagerService;
 	}
 
 }
