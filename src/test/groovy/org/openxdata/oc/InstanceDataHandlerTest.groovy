@@ -1,18 +1,19 @@
-package org.openxdata.oc.model
+package org.openxdata.oc
 
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.InstanceDataHandler;
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 
 
-class ODMDefinitionInstanceDataTest extends GroovyTestCase {
+class InstanceDataHandlerTest extends GroovyTestCase {
 
 	List<String> exportedInstanceData
 	
 	@Before public void setUp(){
 		
-		def odmDef = new ODMInstanceDataDefinition()
+		def odmDef = new InstanceDataHandler()
 		
 		exportedInstanceData = odmDef.processInstanceData(TestData.getInstanceData())
 	}
@@ -56,7 +57,16 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 		
 		def emptyInstanceData = new ArrayList<String>()
 		shouldFail(ImportException.class){
-			new ODMInstanceDataDefinition().processInstanceData(emptyInstanceData)
+			new InstanceDataHandler().processInstanceData(emptyInstanceData)
 		}
+	}
+	
+	@Test void testThatInstanceXmlWithHeaderQuestionsIsCleaned() {
+		
+		def xmlWithHeaders = ''''''
+		
+		def cleanXml = protocol.cleanXml(xmlWithHeaders)
+		
+		assertFalse "Xml Has no Headers", hasHeaders(cleanXml)
 	}
 }

@@ -8,7 +8,7 @@ class DefaultSubmissionProtocol {
 
 	def instanceDataXml
 
-	def createOpenClinicaInstanceData(def openXdataInstanceData) {
+	def createODMInstanceData(def openXdataInstanceData) {
 
 		def xml
 		instanceDataXml = new XmlSlurper().parseText(openXdataInstanceData)

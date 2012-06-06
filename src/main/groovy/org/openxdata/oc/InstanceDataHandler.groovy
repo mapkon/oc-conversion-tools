@@ -1,4 +1,4 @@
-package org.openxdata.oc.model
+package org.openxdata.oc
 
 import groovy.util.logging.Log
 import groovy.xml.XmlUtil
@@ -8,7 +8,7 @@ import org.openxdata.oc.proto.DefaultSubmissionProtocol
 import org.openxdata.server.admin.model.FormData
 
 @Log
-class ODMInstanceDataDefinition {
+class InstanceDataHandler {
 	
 	def submissionProtocol = new DefaultSubmissionProtocol()
 	

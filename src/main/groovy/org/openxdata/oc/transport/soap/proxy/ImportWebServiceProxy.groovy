@@ -2,7 +2,7 @@ package org.openxdata.oc.transport.soap.proxy
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.model.ODMInstanceDataDefinition
+import org.openxdata.oc.InstanceDataHandler;
 import org.openxdata.oc.transport.HttpTransportHandler
 import org.openxdata.oc.transport.soap.SoapRequestProperties
 
@@ -24,7 +24,7 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 	HashMap<String, String> importData(def instanceData){
 
 		def messages = [:]
-		def importXml = new ODMInstanceDataDefinition().processInstanceData(instanceData)
+		def importXml = new InstanceDataHandler().processInstanceData(instanceData)
 
 		importXml.each {
 			
