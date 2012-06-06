@@ -66,7 +66,8 @@
 			</xsl:variable>
 			<instance>
 				<xsl:attribute name="id"><xsl:value-of select="normalize-space($vInstanceElementName)" /></xsl:attribute>
-				<ODM>
+				
+				<xsl:element name="{$vInstanceElementName}">
 					<xsl:attribute name="Description">This Xform was converted from an ODM file using the oc-conversion-tools</xsl:attribute>
 					<xsl:attribute name="name"><xsl:value-of select="@Name" /></xsl:attribute>
 					<xsl:attribute name="formKey"><xsl:value-of select="@OID" /></xsl:attribute>
@@ -115,7 +116,8 @@
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:for-each>
-				</ODM>
+				</xsl:element>
+				
 			</instance>
 
 			<bind id="subjectkey" nodeset="/ODM/SubjectKey" type="xsd:string" locked="true()" visible="false()" />
