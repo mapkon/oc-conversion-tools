@@ -1746,18 +1746,30 @@
 						</event>
 					</events>
 				</studySubject>
-                            	<studySubject>
-					<studySubjectOID>TEST_SUBJECT</studySubjectOID>
+				<studySubject>
+					<studySubjectOID>TEST_SUBJECT_EVENT</studySubjectOID>
 					<events>
 						<event>
-							<eventDefinitionOID>TEST_EVENT</eventDefinitionOID>
+							<eventDefinitionOID>TEST_EVENT1_OID</eventDefinitionOID>
 							<eventName>SC2</eventName>
 							<ordinal>1</ordinal>
 							<startDate>2010-09-28 00:00</startDate>
 							<endDate>2010-12-14 00:00</endDate>
 							<formOIDs>
 								<formOID>F_TEST_1</formOID>
-                                                                <formOID>F_TEST_2</formOID>
+								<formOID>F_TEST_2</formOID>
+							</formOIDs>
+						</event>
+						<event>
+							<eventDefinitionOID>TEST_EVENT2_OID</eventDefinitionOID>
+							<eventName>TEST_EVENT2</eventName>
+							<ordinal>1</ordinal>
+							<startDate>2010-09-20 00:00</startDate>
+							<endDate>2010-12-3 00:00</endDate>
+							<formOIDs>
+								<formOID>F_TEST_1</formOID>
+								<formOID>F_TEST_2</formOID>
+								<formOID>F_TEST_3</formOID>
 							</formOIDs>
 						</event>
 					</events>

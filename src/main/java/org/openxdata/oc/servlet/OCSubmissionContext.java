@@ -79,7 +79,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return orphanedEvents;
 	}
 
-	private List<Object[]> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
+	List<Object[]> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		List<Event> allEvents = studySubject.getEvents();
 		Hashtable<String, List<Event>> eventGroups = groupEventByName(allEvents);
@@ -87,39 +87,34 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		for (Entry<String, List<Event>> entry : entrySet) {
 			List<Event> events = entry.getValue();
-			for (Event event : events) {
-				Object[] workitem = eventToWIR(event, ocStudy, studySubject);
-				if (workitem != null) {
-					workitems.add(workitem);
-				}
+			Object[] workitem = new Object[5];
+			workitem[0] = studySubject.getSubjectOID() + "-" + entry.getKey();
+			workitem[1] = getKey(studySubject, entry.getKey());
 
+			List<Object[]> formReferences = new ArrayList<Object[]>();
+			for (Event event : events) {
+				List<Object[]> formRefs = extractFormReferences(event, ocStudy, studySubject);
+				formReferences.addAll(formRefs);
+			}
+			if (!formReferences.isEmpty()){
+				workitem[2] = formReferences;
+				workitems.add(workitem);
 			}
 
 		}
 		return workitems;
 	}
 
-	private Object[] eventToWIR(Event event, StudyDef oCStudyID, StudySubject studySubject) {
-
+	private List<Object[]> extractFormReferences(Event even, StudyDef studyDef, StudySubject studySubject) {
 		List<Object[]> formReferences = new ArrayList<Object[]>();
-		List<String> formOIDs = (List<String>) event.getFormOIDs();
-
+		List<String> formOIDs = even.getFormOIDs();
 		for (String formOID : formOIDs) {
-			Object[] formRef = formDefToFormReferece(formOID, oCStudyID, event, studySubject);
+			Object[] formRef = formDefToFormReferece(formOID, studyDef, even, studySubject);
 			if (formRef != null) {
 				formReferences.add(formRef);
 			}
 		}
-
-		if (formReferences.isEmpty()) {
-			return null;
-		}
-
-		Object[] workitem = new Object[5];
-		workitem[0] = studySubject.getSubjectOID() + "-" + event.getEventName();
-		workitem[1] = getKey(studySubject, event);
-		workitem[2] = formReferences;
-		return workitem;
+		return formReferences;
 	}
 
 	private Object[] formDefToFormReferece(String formOID, StudyDef oCStudyID, Event event, StudySubject studySubject) {
@@ -144,9 +139,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	private String getKey(StudySubject studySubject, Event event) {
+	private String getKey(StudySubject studySubject, String eventOID) {
 		String key = studySubject.getSubjectOID().toString();
-		key = key + "&" + event.getEventDefinitionOID();
+		key = key + "&" + eventOID;
 		return key;
 	}
 
@@ -191,7 +186,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 			List<Event> grpEvnts = eventGroups.get(evntOID);
 			if (grpEvnts == null) {
 				grpEvnts = new ArrayList<Event>();
-				eventGroups.put(evntOID, events);
+				eventGroups.put(evntOID, grpEvnts);
 			}
 
 			grpEvnts.add(event);
