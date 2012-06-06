@@ -14,7 +14,7 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 		
 		def odmDef = new ODMInstanceDataDefinition()
 		
-		exportedInstanceData = odmDef.appendInstanceData(TestData.getInstanceData())
+		exportedInstanceData = odmDef.processInstanceData(TestData.getInstanceData())
 	}
 	
 	@Test void testAppendInstanceDataShouldConvertedOpenXDataInstanceDataUsingCorrectProtocol(){
@@ -56,7 +56,7 @@ class ODMDefinitionInstanceDataTest extends GroovyTestCase {
 		
 		def emptyInstanceData = new ArrayList<String>()
 		shouldFail(ImportException.class){
-			new ODMInstanceDataDefinition().appendInstanceData(emptyInstanceData)
+			new ODMInstanceDataDefinition().processInstanceData(emptyInstanceData)
 		}
 	}
 }

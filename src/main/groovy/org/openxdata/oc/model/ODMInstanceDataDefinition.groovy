@@ -12,7 +12,7 @@ class ODMInstanceDataDefinition {
 	
 	def submissionProtocol = new DefaultSubmissionProtocol()
 	
-	List<String> appendInstanceData(List<FormData> instanceData){
+	List<String> processInstanceData(List<FormData> instanceData){
 
 		if(instanceData.isEmpty())
 			throw new ImportException('Cannot process empty instance data.')

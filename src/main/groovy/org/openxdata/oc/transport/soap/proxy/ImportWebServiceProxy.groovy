@@ -24,7 +24,7 @@ class ImportWebServiceProxy extends SoapRequestProperties {
 	HashMap<String, String> importData(def instanceData){
 
 		def messages = [:]
-		def importXml = new ODMInstanceDataDefinition().appendInstanceData(instanceData)
+		def importXml = new ODMInstanceDataDefinition().processInstanceData(instanceData)
 
 		importXml.each {
 			
