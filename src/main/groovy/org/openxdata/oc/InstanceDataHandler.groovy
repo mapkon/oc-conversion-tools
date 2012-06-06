@@ -21,7 +21,7 @@ class InstanceDataHandler {
 
 		instanceData.each {
 			
-			def ocData = submissionProtocol.createOpenClinicaInstanceData(it.getData())
+			def ocData = submissionProtocol.createODMInstanceData(it.getData())
 			
 			odmInstanceData.add(ocData)
 			
