@@ -125,7 +125,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		for(Map.Entry<String, String> entry : exportResponseMessages.entrySet()) {
 			
 			def key = entry.key
-			if(exportResponseMessages.get(key).is("Success")) {
+			if(exportResponseMessages.get(key).equals("Success")) {
 				setFormDataExportedForKey(dataList, key)
 			}
 			
