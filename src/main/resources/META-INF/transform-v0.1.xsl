@@ -120,7 +120,13 @@
 				
 			</instance>
 
-			<bind id="subjectkey" nodeset="/ODM/subjectkey" type="xsd:string" locked="true()" visible="false()" />
+			<bind>
+				<xsl:attribute name="id">subjectkey</xsl:attribute>
+				<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/subjectkey</xsl:attribute>
+				<xsl:attribute name="type">xsd:string</xsl:attribute>
+				<xsl:attribute name="locked">true()</xsl:attribute>
+				<xsl:attribute name="visible">false()</xsl:attribute>
+			</bind>
 
 			<xsl:apply-templates select="child::node()">
 				<xsl:with-param name="pForm" select="$pForm" />
@@ -142,7 +148,7 @@
 
 				<bind>
 					<xsl:attribute name="id"><xsl:value-of select="$vItemGroupOID" /></xsl:attribute>
-					<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemGroupOID" /></xsl:attribute>
+					<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="$vItemGroupOID" /></xsl:attribute>
 
 					<xsl:if test="./Mandatory = 'Yes'">
 						<xsl:attribute name="required">true()</xsl:attribute>
@@ -156,7 +162,7 @@
 
 					<bind>
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemGroupOID" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
+						<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="$vItemGroupOID" />/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
@@ -165,6 +171,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="createItemBinds">
+					<xsl:with-param name="pForm" select="$pForm" />
 					<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
 				</xsl:call-template>
 			</xsl:otherwise>
@@ -173,6 +180,7 @@
 
 	<xsl:template name="createItemBinds">
 
+		<xsl:param name="pForm" />
 		<xsl:param name="pItemGroupDef" />
 
 		<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
@@ -186,7 +194,7 @@
 					<xsl:if test="$vItemDef/*/*/*[local-name()='ItemHeader'] and $vItemDef/*/*/*[local-name()='ItemSubHeader']">
 						<bind>
 							<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
-							<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
+							<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
 							<xsl:attribute name="locked">true()</xsl:attribute>
 
 							<xsl:call-template name="appendQuestionType">
@@ -199,7 +207,7 @@
 
 						<bind>
 							<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
-							<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
+							<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
 							<xsl:attribute name="locked">true()</xsl:attribute>
 
 							<xsl:call-template name="appendQuestionType">
@@ -211,7 +219,7 @@
 
 					<bind>
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
+						<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 
 						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
@@ -227,7 +235,7 @@
 					<bind>
 
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
-						<xsl:attribute name="nodeset">/ODM/<xsl:value-of select="@ItemOID" /></xsl:attribute>
+						<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="@ItemOID" /></xsl:attribute>
 
 						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
@@ -423,9 +431,7 @@
 			test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
-				<label>
-					|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" />
-				</label>
+				<label>|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" /></label>
 				<hint>This question is a header label for the next question. Do not ANSWER</hint>
 			</input>
 
@@ -435,9 +441,7 @@
 
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
-				<label>
-					|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" />
-				</label>
+				<label>|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" /></label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
 
@@ -470,9 +474,7 @@
 			test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
-				<label>
-					|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" />
-				</label>
+				<label>|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" /></label>
 				<hint>This question is a header label for the next question. Do not ANSWER</hint>
 			</input>
 
@@ -482,9 +484,7 @@
 
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
-				<label>
-					|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" />
-				</label>
+				<label>|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" /></label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
 
