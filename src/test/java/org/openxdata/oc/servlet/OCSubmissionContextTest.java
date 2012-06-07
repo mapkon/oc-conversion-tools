@@ -15,15 +15,14 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
+import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.service.StudyManagerService;
-import org.openxdata.oc.data.TestData;
-import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.xform.StudyImporter;
 
 public class OCSubmissionContextTest {
@@ -136,9 +135,9 @@ public class OCSubmissionContextTest {
 
 		for (Object[] objects : workitems) {
 			if (objects[0].equals("TEST_SUBJECT_EVENT-TEST_EVENT1_OID"))
-				assertThat("The number of form References Should be 2 ", ((List) objects[2]).size(), is(2));
+				assertThat("The number of form References Should be 2 ", ((List<?>) objects[2]).size(), is(2));
 			else if (objects[0].equals("TEST_SUBJECT_EVENT-TEST_EVENT2_OID"))
-				assertThat("The number of form References Should be 3 ", ((List) objects[2]).size(), is(3));
+				assertThat("The number of form References Should be 3 ", ((List<?>) objects[2]).size(), is(3));
 			else
 				Assert.fail("None of the expected Workitems were found");
 		}
