@@ -431,9 +431,7 @@
 			test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
-				<label>
-					|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" />
-				</label>
+				<label>|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" /></label>
 				<hint>This question is a header label for the next question. Do not ANSWER</hint>
 			</input>
 
@@ -443,9 +441,7 @@
 
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
-				<label>
-					|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" />
-				</label>
+				<label>|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" /></label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
 
@@ -478,9 +474,7 @@
 			test="$pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemHeader'] and $pItemDef/*/*[local-name()='ItemPresentInForm' and position()=1]/*[local-name()='ItemSubHeader']">
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
-				<label>
-					|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" />
-				</label>
+				<label>|-<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemHeader'])" /></label>
 				<hint>This question is a header label for the next question. Do not ANSWER</hint>
 			</input>
 
@@ -490,9 +484,7 @@
 
 			<input>
 				<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
-				<label>
-					|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" />
-				</label>
+				<label>|--<xsl:value-of select="normalize-space($pItemDef/*/*/*[local-name()='ItemSubHeader'])" /></label>
 				<hint>This question is a sub-header label for the next question. Do not ANSWER</hint>
 			</input>
 
