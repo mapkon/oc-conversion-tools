@@ -126,7 +126,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		}
 
 		List<String[]> prefills = new ArrayList<String[]>();
-		prefills.add(new String[] { "SubjectKey_", "SubjectKey", studySubject.getSubjectOID() + "", "false" });
+		prefills.add(new String[] { "SubjectKey_", "subjectkey", studySubject.getSubjectOID() + "", "false" });
 
 		Object[] formRef = new Object[3];
 		formRef[0] = oCStudyID.getId();
