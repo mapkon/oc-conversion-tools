@@ -220,7 +220,7 @@ class TransformerTest extends GroovyTestCase {
 			
 			def firstGroup = it.depthFirst().find { it.@id == '1'}
 			
-			assertEquals "subjectKey", firstGroup.children()[1].@bind.text()
+			assertEquals "subjectkey", firstGroup.children()[1].@bind.text()
 		}
 	}
 	

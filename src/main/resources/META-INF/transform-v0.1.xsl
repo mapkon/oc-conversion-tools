@@ -120,7 +120,7 @@
 				
 			</instance>
 
-			<bind id="subjectkey" nodeset="/ODM/SubjectKey" type="xsd:string" locked="true()" visible="false()" />
+			<bind id="subjectkey" nodeset="/ODM/subjectkey" type="xsd:string" locked="true()" visible="false()" />
 
 			<xsl:apply-templates select="child::node()">
 				<xsl:with-param name="pForm" select="$pForm" />
@@ -297,7 +297,7 @@
 		
 				<!-- Add the subject key input field only to the first group. -->
 				<xsl:if test="position()=1">
-					<input bind="subjectKey">
+					<input bind="subjectkey">
 						<label>Subject Key</label>
 						<hint>The subject key for whom you are collecting data for.</hint>
 					</input>
