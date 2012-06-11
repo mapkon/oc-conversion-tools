@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +35,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
 	private Properties props;
 	private List<Event> orphanedEvents = new ArrayList<Event>();
+	private ExecutorService ex = Executors.newSingleThreadExecutor();
 
 	public OCSubmissionContext(InputStream input, OutputStream output, HttpServletRequest httpReq,
 			HttpServletResponse httpRsp, Map<String, List<String>> metaData, OpenClinicaService ocService,
@@ -203,4 +206,20 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		this.studyManagerService = studyManagerService;
 	}
 
+	@Override
+	public String setUploadResult(String formInstance) {
+		String result = super.setUploadResult(formInstance);
+		exportDataToOC();
+		return result;
+	}
+
+	private void exportDataToOC() {
+		Runnable exporter = new Runnable() {
+
+			public void run() {
+				ocService.exportOpenClinicaStudyData();
+			}
+		};
+		ex.execute(exporter);
+	}
 }
