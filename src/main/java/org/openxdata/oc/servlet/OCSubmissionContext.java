@@ -96,7 +96,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 				List<Object[]> formRefs = extractFormReferences(event, ocStudy, studySubject);
 				formReferences.addAll(formRefs);
 			}
-			if (!formReferences.isEmpty()){
+			if (!formReferences.isEmpty()) {
 				workitem[2] = formReferences;
 				workitems.add(workitem);
 			}
