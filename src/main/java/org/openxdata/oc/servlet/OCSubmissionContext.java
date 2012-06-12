@@ -214,12 +214,16 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	private void exportDataToOC() {
+		
+		log.info("Picking up export to OpenClinica after Submitting to OpenXData");
 		Runnable exporter = new Runnable() {
 
 			public void run() {
 				ocService.exportOpenClinicaStudyData();
 			}
 		};
+		
+		log.info("Executing OpenClinica Export...");
 		ex.execute(exporter);
 	}
 }
