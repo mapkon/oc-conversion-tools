@@ -460,9 +460,7 @@
 
 		<select1>
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
-			<xsl:variable name="codeListID">
-				<xsl:value-of select="$pItemDef/odm:CodeListRef/@CodeListOID" />
-			</xsl:variable>
+			<xsl:variable name="codeListID" select="$pItemDef/odm:CodeListRef/@CodeListOID" />
 			<label>
 				<xsl:variable name="lText">
 					<xsl:apply-templates select="$pItemDef">
