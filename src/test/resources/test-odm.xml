@@ -854,7 +854,7 @@
                     Testing multi-select questions
                     </TranslatedText>
                 </Question>
-                <OpenClinica:MultiSelectListRef MultiSelectListID="TEST_MULT"/>
+                <MultiSelectListRef MultiSelectListID="TEST_MULT"/>
                 <OpenClinica:ItemDetails ItemOID="TEST_OID">
                 	<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>

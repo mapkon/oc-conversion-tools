@@ -254,7 +254,7 @@ class TransformerTest extends GroovyTestCase {
 	
 	@Test void testConvertedXformShouldHaveRepeatItems() {
 		
-		def repeats = getRepeats()
+		def repeats = getQuestionsOfType('repeat')
 		
 		assertEquals 3, repeats.size()
 	}
@@ -351,6 +351,42 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "The subject key for whom you are collecting data for.", subjectGroupHintNode.text()
 	}
 	
+	@Test void testThatConvertedFormHasSingleSelectQuestions() {
+		
+		def singleSelectQtns = getQuestionsOfType('select1')
+		
+		assertEquals 28, singleSelectQtns.size()
+	}
+	
+	@Test void testThatSingleSelectQuestionsEqualsNumberOfCodeListElements(){
+		
+		def codeListRefs = inputDoc.Study.MetaDataVersion.ItemDef.CodeListRef
+		
+		def singleSelectQtns = getQuestionsOfType('select1')
+		
+		assertEquals codeListRefs.size(), singleSelectQtns.size()
+		
+	}
+	
+	@Test void tesThatConvertedFormHasMultiSelectQuestions() {
+		
+		def multiSelectQuestions = getQuestionsOfType('select')
+		
+		assertEquals 2, multiSelectQuestions.size()
+	}
+	
+	@Test void testThatMultipleSelectQuestionsEqualsNumberOfMultSelectListElements(){
+		
+		def multiSelectLists = inputDoc.Study.MetaDataVersion.ItemDef.MultiSelectListRef
+		
+		def multiSelectQtns = getQuestionsOfType('select')
+		
+		// Same question, referenced twice
+		assertEquals multiSelectLists.size(), multiSelectQtns.size() -1 
+		
+	}
+	
+	
 	private def getGroups() {
 		
 		def groups = []
@@ -388,16 +424,16 @@ class TransformerTest extends GroovyTestCase {
 		return qtns
 	}
 	
-	private def getRepeats() {
+	private def getQuestionsOfType(def qType) {
 		
-		def repeats = []
+		def questions = []
 		
 		getXformNodes().each {
-			def rpt = it.depthFirst().findAll{ it.name().is('repeat')}
-			repeats.addAll(rpt)
+			def qn = it.depthFirst().findAll{ it.name().is(qType)}
+			questions.addAll(qn)
 		}
 		
-		return repeats
+		return questions
 	}
 	
 	private def getXformNodes() {
