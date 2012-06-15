@@ -256,7 +256,7 @@ class TransformerTest extends GroovyTestCase {
 		
 		def repeats = getRepeats()
 		
-		assertEquals 4, repeats.size()
+		assertEquals 3, repeats.size()
 	}
 	
 	@Test void testConvertedXformHasInnerGroupWhenThereIsARepeat() {
@@ -391,12 +391,13 @@ class TransformerTest extends GroovyTestCase {
 	private def getRepeats() {
 		
 		def repeats = []
-		def xformNodes = getXformNodes()
 		
-		xformNodes.each {
+		getXformNodes().each {
 			def rpt = it.depthFirst().findAll{ it.name().is('repeat')}
 			repeats.addAll(rpt)
 		}
+		
+		return repeats
 	}
 	
 	private def getXformNodes() {
