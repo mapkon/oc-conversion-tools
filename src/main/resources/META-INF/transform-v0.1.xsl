@@ -523,7 +523,7 @@
 				<item>
 					<xsl:attribute name="id"><xsl:value-of select="./*/*[local-name()='TranslatedText']" /></xsl:attribute>
 					<label><xsl:value-of select="./*/*[local-name()='TranslatedText']"></xsl:value-of></label>
-					<value><xsl:value-of select="./*/*[local-name()='TranslatedText']"></xsl:value-of></value>
+					<value><xsl:value-of select="@CodedOptionValue"></xsl:value-of></value>
 				</item>
 			</xsl:for-each>
 			<hint>
