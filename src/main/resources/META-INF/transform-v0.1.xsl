@@ -488,12 +488,8 @@
 			<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
 				<item>
 					<xsl:attribute name="id"><xsl:value-of select="@CodedValue" /></xsl:attribute>
-					<label>
-						<xsl:value-of select="odm:Decode/odm:TranslatedText"></xsl:value-of>
-					</label>
-					<value>
-						<xsl:value-of select="@CodedValue"></xsl:value-of>
-					</value>
+					<label><xsl:value-of select="odm:Decode/odm:TranslatedText" /></label>
+					<value><xsl:value-of select="@CodedValue" /></value>
 				</item>
 			</xsl:for-each>
 			<hint>
