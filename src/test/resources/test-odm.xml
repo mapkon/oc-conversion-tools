@@ -144,7 +144,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_INIT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -157,7 +157,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_FORMD">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -171,7 +171,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_CONS">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
@@ -187,7 +187,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_PGT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>						
@@ -201,7 +201,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_BIRTHD">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
@@ -215,7 +215,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_OLD">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
@@ -230,7 +230,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_KHIV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -245,7 +245,7 @@
                 <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_HAART">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
@@ -261,7 +261,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_ELHAART">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
@@ -276,7 +276,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_BEFPEP">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
@@ -291,7 +291,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_OTRIAL">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -305,7 +305,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_OTRIAL_S">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -319,7 +319,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_MOVE">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -333,7 +333,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_PMTCT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -347,7 +347,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_COMPLY">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
@@ -363,7 +363,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_ELIG">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -376,7 +376,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_DELIVERY">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -390,7 +390,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_203"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_CONSELLING">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -403,7 +403,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_IDPAT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -416,7 +416,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_ID">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -429,13 +429,13 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_NOELIGREAS">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 2</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
@@ -450,13 +450,13 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_NOELIGREAS">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 2</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
@@ -472,12 +472,12 @@
                 </Question>
                 <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_COMPLYREAS">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_2" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 2</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_2" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
 						<OpenClinica:SectionLabel>Section2</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 2</OpenClinica:SectionTitle>
@@ -491,7 +491,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_INIT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -504,7 +504,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_FROMD">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -517,7 +517,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_IDV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -531,7 +531,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_INITBF">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -545,7 +545,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_398"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_INTBF">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -559,7 +559,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_HAART">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -573,7 +573,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_ELHAART">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -588,7 +588,7 @@
                 <CodeListRef CodeListOID="CL_397"/>
                 <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_PAZT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -601,7 +601,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_PAZTNB">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -615,7 +615,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_POART">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -630,7 +630,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LNVPV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -644,7 +644,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LAZTV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -658,7 +658,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_L3TC">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -672,7 +672,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LOART">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -686,7 +686,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_401"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LOCATB">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -699,7 +699,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_OLOCATBPREC">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -713,7 +713,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_TRANSF">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -727,7 +727,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_402"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_TYPED">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -741,7 +741,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_397"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_PMTCTV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -755,7 +755,7 @@
                 </Question>
                 <CodeListRef CodeListOID="CL_129"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_PMTCT">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -768,7 +768,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LAZTNBV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -781,7 +781,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_L3TCNB">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 3</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
@@ -794,7 +794,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LOARTNB">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
@@ -810,7 +810,7 @@
                     <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_POARTPREC">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 4</OpenClinica:SectionTitle>
@@ -824,7 +824,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_POARTNBV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
@@ -839,7 +839,7 @@
                     </TranslatedText>
                 </Question>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LOARTPREC">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
@@ -856,11 +856,11 @@
                 </Question>
                 <MultiSelectListRef MultiSelectListID="TEST_MULT"/>
                 <OpenClinica:ItemDetails ItemOID="TEST_OID">
-                	<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" ColumnNumber="1" PHI="No" ShowItem="Yes">
+                	<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 4</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 4</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
