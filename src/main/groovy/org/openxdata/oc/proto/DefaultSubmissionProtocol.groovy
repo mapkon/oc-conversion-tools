@@ -43,7 +43,7 @@ class DefaultSubmissionProtocol {
 											def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
 											nodes.eachWithIndex { node, idx ->
 
-												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx, TransactionType:"Insert" ) {
+												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx + 1, TransactionType:"Insert" ) {
 
 													node.children().each { itemData ->
 
