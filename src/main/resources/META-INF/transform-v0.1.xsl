@@ -297,10 +297,12 @@
 			<xf:group>
 
 				<xsl:variable name="vSection" select="." />
-				
+
 				<xsl:attribute name="id"><xsl:value-of select="position()" /></xsl:attribute>
-				<xf:label><xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$vSection][1]" /></xf:label>
-		
+				<xf:label>
+					<xsl:value-of select="//*[local-name()='ItemDef']/*/*/*[local-name()='SectionTitle' and ../OpenClinica:SectionLabel=$vSection][1]" />
+				</xf:label>
+
 				<!-- Add the subject key input field only to the first group. -->
 				<xsl:if test="position()=1">
 					<xf:input bind="subjectkey">
@@ -309,18 +311,18 @@
 					</xf:input>
 				</xsl:if>
 
-					<xsl:for-each select="$pForm/odm:ItemGroupRef">
-	
-						<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
-						<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
-	
-						<xsl:apply-templates select="$vItemGroupDef">
-							<xsl:with-param name="pForm" select="$pForm" />
-							<xsl:with-param name="pSection" select="$vSection" />
-							<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
-						</xsl:apply-templates>
-	
-					</xsl:for-each>
+				<xsl:for-each select="$pForm/odm:ItemGroupRef">
+
+					<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
+					<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
+
+					<xsl:apply-templates select="$vItemGroupDef">
+						<xsl:with-param name="pForm" select="$pForm" />
+						<xsl:with-param name="pSection" select="$vSection" />
+						<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
+					</xsl:apply-templates>
+
+				</xsl:for-each>
 
 			</xf:group>
 
