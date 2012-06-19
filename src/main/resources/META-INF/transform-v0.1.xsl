@@ -309,18 +309,18 @@
 					</xf:input>
 				</xsl:if>
 
-				<xsl:for-each select="$pForm/odm:ItemGroupRef">
-
-					<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
-					<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
-
-					<xsl:apply-templates select="$vItemGroupDef">
-						<xsl:with-param name="pForm" select="$pForm" />
-						<xsl:with-param name="pSection" select="$vSection" />
-						<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
-					</xsl:apply-templates>
-
-				</xsl:for-each>
+					<xsl:for-each select="$pForm/odm:ItemGroupRef">
+	
+						<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
+						<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
+	
+						<xsl:apply-templates select="$vItemGroupDef">
+							<xsl:with-param name="pForm" select="$pForm" />
+							<xsl:with-param name="pSection" select="$vSection" />
+							<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
+						</xsl:apply-templates>
+	
+					</xsl:for-each>
 
 			</xf:group>
 
