@@ -400,13 +400,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>acceptance-test</id>
-			<activation>
-				<property>
-					<name>type</name>
-					<value>acceptance</value>
-				</property>
-			</activation>
+			<id>acceptance-tests</id>
 			<build>
 				<plugins>
 					<plugin>
