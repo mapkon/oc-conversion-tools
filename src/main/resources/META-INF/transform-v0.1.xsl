@@ -475,7 +475,6 @@
 
 		<xf:select1>
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
-			<xsl:variable name="codeListID" select="$pItemDef/odm:CodeListRef/@CodeListOID" />
 			<xf:label>
 				<xsl:variable name="lText">
 					<xsl:apply-templates select="$pItemDef">
@@ -485,7 +484,8 @@
 
 				<xsl:value-of select="normalize-space($lText)" />
 			</xf:label>
-			<xsl:for-each select="../../odm:CodeList[@OID = $codeListID]/odm:CodeListItem">
+			<xsl:variable name="vCodeListOID" select="$pItemDef/odm:CodeListRef/@CodeListOID" />
+			<xsl:for-each select="//*[local-name()='CodeList' and @OID = $vCodeListOID]/*[local-name()='CodeListItem']">
 				<xf:item>
 					<xsl:attribute name="id"><xsl:value-of select="@CodedValue" /></xsl:attribute>
 					<xf:label><xsl:value-of select="odm:Decode/odm:TranslatedText" /></xf:label>
