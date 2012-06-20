@@ -60,7 +60,7 @@ class TransformerTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra bindings are because of the repeat parent bindings and Header/Sub Header locked questions
-		assertEquals 72, binds.size()
+		assertEquals 71, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -382,10 +382,9 @@ class TransformerTest extends GroovyTestCase {
 		def multiSelectQtns = getQuestionsOfType('select')
 		
 		// Same question, referenced twice
-		assertEquals multiSelectLists.size(), multiSelectQtns.size() -1 
+		assertEquals multiSelectLists.size(), multiSelectQtns.size()
 		
 	}
-	
 	
 	private def getGroups() {
 		

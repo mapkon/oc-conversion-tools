@@ -311,68 +311,64 @@
 					</xf:input>
 				</xsl:if>
 
-				<xsl:for-each select="$pForm/odm:ItemGroupRef">
-
-					<xsl:variable name="vItemGroupOID" select="@ItemGroupOID" />
-					<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vItemGroupOID and */*/@FormOID=$pForm/@OID]" />
-
-					<xsl:apply-templates select="$vItemGroupDef">
-						<xsl:with-param name="pForm" select="$pForm" />
-						<xsl:with-param name="pSection" select="$vSection" />
-						<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
-					</xsl:apply-templates>
-
+				<xsl:for-each select="//*[local-name()='ItemDef']">
+					<xsl:choose>
+						<xsl:when test="./*/*[@FormOID=$pForm/@OID and @Repeating='Yes'] and ./*/*[@RepeatingGroupDef]">
+							<xsl:call-template name="createRepeatQuestion">
+								<xsl:with-param name="pForm" select="$pForm" />
+								<xsl:with-param name="pSection" select="$vSection" />
+								<xsl:with-param name="pItemDef" select="." />
+							</xsl:call-template>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:if test="not(./*/*[@RepeatingGroupDef])">
+								<xsl:call-template name="createNonRepeatQuestion">
+									<xsl:with-param name="pForm" select="$pForm" />
+									<xsl:with-param name="pSection" select="$vSection" />
+									<xsl:with-param name="pItemDef" select="." />
+								</xsl:call-template>
+							</xsl:if>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:for-each>
-
 			</xf:group>
-
 		</xsl:for-each>
 
 	</xsl:template>
 
 	<!-- Create repeat questions -->
-	<xsl:template match="//*[local-name()='ItemGroupDef' and @Repeating='Yes']">
+	<xsl:template name="createRepeatQuestion">
 
 		<xsl:param name="pForm" />
 		<xsl:param name="pSection" />
-		<xsl:param name="pItemGroupDef" />
+		<xsl:param name="pItemDef" />
 
-		<xsl:if test="$pItemGroupDef/*/*/@SectionLabel=$pSection">
+		<xsl:variable name="vRepeatingGroupDefOID" select="$pItemDef/*/*/@RepeatingGroupDef" />
+		<xsl:variable name="vItemGroupDef" select="//*[local-name()='ItemGroupDef' and @OID=$vRepeatingGroupDefOID and */*/@FormOID=$pForm/@OID][1]" />
+
+		<xsl:if test="$pItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
 			<xf:group>
-				<xsl:attribute name="id"><xsl:value-of select="$pItemGroupDef/@OID" /></xsl:attribute>
+
+				<xsl:attribute name="id"><xsl:value-of select="$vItemGroupDef/@OID" /></xsl:attribute>
 				<xf:label>
 					<xsl:choose>
-						<xsl:when test="$pItemGroupDef/*/*/*[local-name()='ItemGroupHeader']">
-							<xsl:value-of select="$pItemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
+						<xsl:when test="$vItemGroupDef/*/*/*[local-name()='ItemGroupHeader']">
+							<xsl:value-of select="$vItemGroupDef/*/*/*[local-name()='ItemGroupHeader']" />
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:if test="position()=1">
-								<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
-									<xsl:variable name="vItemOID" select="@ItemOID" />
-									<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
-									<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
-										<xsl:value-of select="$vItemDef/@Comment" />
-									</xsl:if>
-								</xsl:for-each>
-							</xsl:if>
+							<xsl:value-of select="$pItemDef/@Comment" />
 						</xsl:otherwise>
 					</xsl:choose>
 				</xf:label>
-
 				<xf:repeat>
-
-					<xsl:attribute name="bind"><xsl:value-of select="$pItemGroupDef/@OID" /></xsl:attribute>
-
-					<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
-
+					<xsl:attribute name="bind"><xsl:value-of select="$vItemGroupDef/@OID" /></xsl:attribute>
+					<xsl:for-each select="$vItemGroupDef/odm:ItemRef">
 						<xsl:variable name="vItemOID" select="@ItemOID" />
 						<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID][1]" />
 
-						<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
-							<xsl:apply-templates select=".">
-								<xsl:with-param name="pItemDef" select="$vItemDef" />
-							</xsl:apply-templates>
-						</xsl:if>
+						<xsl:call-template name="insertQuestions">
+							<xsl:with-param name="pItemDef" select="$vItemDef" />
+						</xsl:call-template>
 					</xsl:for-each>
 				</xf:repeat>
 			</xf:group>
@@ -380,48 +376,41 @@
 	</xsl:template>
 
 	<!-- Create non-repeat questions -->
-	<xsl:template match="//*[local-name()='ItemGroupDef' and @Repeating='No']">
+	<xsl:template name="createNonRepeatQuestion">
 
 		<xsl:param name="pForm" />
 		<xsl:param name="pSection" />
-		<xsl:param name="pItemGroupDef" />
+		<xsl:param name="pItemDef" />
 
-		<xsl:for-each select="$pItemGroupDef/odm:ItemRef">
-
-			<xsl:variable name="vItemOID" select="@ItemOID" />
-			<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID][1]" />
-
-			<xsl:if test="$vItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
-				<xsl:apply-templates select=".">
-					<xsl:with-param name="pForm" select="$pForm"></xsl:with-param>
-					<xsl:with-param name="pItemDef" select="$vItemDef" />
-				</xsl:apply-templates>
-			</xsl:if>
-		</xsl:for-each>
+		<xsl:if test="$pItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
+		<xsl:call-template name="insertQuestions">
+			<xsl:with-param name="pItemDef" select="$pItemDef" />
+		</xsl:call-template>
+		</xsl:if>
 
 	</xsl:template>
 
 	<!-- Create either select or input type questions. -->
-	<xsl:template match="//*[local-name()='ItemRef']">
+	<xsl:template name="insertQuestions">
 
 		<xsl:param name="pItemDef" />
 
 		<xsl:choose>
 			<xsl:when test="$pItemDef/odm:CodeListRef or $pItemDef/*[local-name()='MultiSelectListRef']">
-				<xsl:apply-templates select="$pItemDef" mode="createSelectQuestions">
+				<xsl:call-template name="createSelectQuestions">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:apply-templates select="$pItemDef" mode="createInputQuestions">
+				<xsl:call-template name="createInputQuestions">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 
 	</xsl:template>
 
-	<xsl:template match="//*[local-name()='ItemDef']" mode="createInputQuestions">
+	<xsl:template name="createInputQuestions">
 
 		<xsl:param name="pItemDef" />
 
@@ -433,39 +422,39 @@
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
 			<xf:label>
 				<xsl:variable name="vLText">
-					<xsl:apply-templates select="$pItemDef">
+					<xsl:call-template name="appendQuestionNumber">
 						<xsl:with-param name="pItemDef" select="$pItemDef" />
-					</xsl:apply-templates>
+					</xsl:call-template>
 				</xsl:variable>
 				<xsl:value-of select="normalize-space($vLText)" />
 			</xf:label>
 			<hint>
-				<xsl:apply-templates select="$pItemDef" mode="createHintText">
+				<xsl:call-template name="createHintText">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</hint>
 		</xf:input>
 	</xsl:template>
 
 	<!-- Create select questions -->
-	<xsl:template match="//*[local-name()='ItemDef']" mode="createSelectQuestions">
+	<xsl:template name="createSelectQuestions">
 		<xsl:param name="pItemDef" />
 		<xsl:choose>
 			<xsl:when test="$pItemDef/odm:CodeListRef">
-				<xsl:apply-templates select="$pItemDef/*[local-name()='CodeListRef']">
+				<xsl:call-template name="createSingleSelectQuestions">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise test="$pItemDef/*[local-name()='MultiSelectListRef']">
-				<xsl:apply-templates select="$pItemDef/*[local-name()='MultiSelectListRef']">
+				<xsl:call-template name="createMultiSelectQuestions">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 	
 	<!-- Create single select questions -->
-	<xsl:template match="//*[local-name()='ItemDef']/*[local-name()='CodeListRef']">
+	<xsl:template name="createSingleSelectQuestions">
 
 		<xsl:param name="pItemDef" />
 
@@ -477,9 +466,9 @@
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
 			<xf:label>
 				<xsl:variable name="lText">
-					<xsl:apply-templates select="$pItemDef">
+					<xsl:call-template name="appendQuestionNumber">
 						<xsl:with-param name="pItemDef" select="$pItemDef" />
-					</xsl:apply-templates>
+					</xsl:call-template>
 				</xsl:variable>
 
 				<xsl:value-of select="normalize-space($lText)" />
@@ -493,15 +482,15 @@
 				</xf:item>
 			</xsl:for-each>
 			<xf:hint>
-				<xsl:apply-templates select="$pItemDef" mode="createHintText">
+				<xsl:call-template name="createHintText">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</xf:hint>
 		</xf:select1>
 	</xsl:template>
 
 	<!-- Create multi select questions -->
-	<xsl:template match="//*[local-name()='ItemDef']/*[local-name()='MultiSelectListRef']">
+	<xsl:template name="createMultiSelectQuestions">
 		<xsl:param name="pItemDef" />
 		
 		<xsl:call-template name="createHeaderInfo">
@@ -512,9 +501,9 @@
 			<xsl:attribute name="bind"><xsl:value-of select="$pItemDef/@OID" /></xsl:attribute>
 			<xf:label>
 				<xsl:variable name="lText">
-					<xsl:apply-templates select="$pItemDef">
+					<xsl:call-template name="appendQuestionNumber">
 						<xsl:with-param name="pItemDef" select="$pItemDef" />
-					</xsl:apply-templates>
+					</xsl:call-template>
 				</xsl:variable>
 		
 				<xsl:value-of select="normalize-space($lText)" />
@@ -527,9 +516,9 @@
 				</xf:item>
 			</xsl:for-each>
 			<xf:hint>
-				<xsl:apply-templates select="$pItemDef" mode="createHintText">
+				<xsl:call-template name="createHintText">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:apply-templates>
+				</xsl:call-template>
 			</xf:hint>
 		</xf:select>
 	</xsl:template>
@@ -558,7 +547,7 @@
 	</xsl:template>
 
 	<!-- Append question number to the label text if it exists, else use translated text -->
-	<xsl:template match="//*[local-name()='ItemDef']">
+	<xsl:template name="appendQuestionNumber">
 
 		<xsl:param name="pItemDef" />
 
@@ -573,7 +562,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template match="//*[local-name()='ItemDef']" mode="createHintText">
+	<xsl:template name="createHintText">
 
 		<xsl:param name="pItemDef" />
 
