@@ -322,11 +322,11 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:if test="not(./*/*[@RepeatingGroupDef])">
-								<xsl:call-template name="createNonRepeatQuestion">
-									<xsl:with-param name="pForm" select="$pForm" />
-									<xsl:with-param name="pSection" select="$vSection" />
-									<xsl:with-param name="pItemDef" select="." />
-								</xsl:call-template>
+								<xsl:if test="./*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$vSection">
+									<xsl:call-template name="insertQuestions">
+										<xsl:with-param name="pItemDef" select="." />
+									</xsl:call-template>
+								</xsl:if>
 							</xsl:if>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -373,21 +373,6 @@
 				</xf:repeat>
 			</xf:group>
 		</xsl:if>
-	</xsl:template>
-
-	<!-- Create non-repeat questions -->
-	<xsl:template name="createNonRepeatQuestion">
-
-		<xsl:param name="pForm" />
-		<xsl:param name="pSection" />
-		<xsl:param name="pItemDef" />
-
-		<xsl:if test="$pItemDef/*/*[@FormOID=$pForm/@OID]/*[local-name()='SectionLabel']=$pSection">
-		<xsl:call-template name="insertQuestions">
-			<xsl:with-param name="pItemDef" select="$pItemDef" />
-		</xsl:call-template>
-		</xsl:if>
-
 	</xsl:template>
 
 	<!-- Create either select or input type questions. -->
