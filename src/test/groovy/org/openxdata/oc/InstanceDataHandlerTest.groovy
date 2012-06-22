@@ -52,7 +52,7 @@ class InstanceDataHandlerTest extends GroovyTestCase {
 		
 		def xml = new XmlParser().parseText(exportedInstanceData[0])
 		
-		assertEquals "ItemData Nodes should equal number of child elements in the oxd instance data xml (including child elements of repeats)", 30, xml.depthFirst().ItemData.size()
+		assertEquals "ItemData Nodes should equal number of child elements in the oxd instance data xml (including child elements of repeats)", 31, xml.depthFirst().ItemData.size()
 	}
 	
 	@Test void testAppendInstanceDataShouldThrowExceptionOnNullInstanceData(){

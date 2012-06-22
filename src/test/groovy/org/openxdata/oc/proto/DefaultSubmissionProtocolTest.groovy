@@ -2,6 +2,7 @@ package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
 
+import org.hamcrest.Matchers;
 import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
@@ -159,11 +160,11 @@ class DefaultSubmissionProtocolTest {
 		}
 	}
 
-	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHaving6ItemDataNode() {
+	@Test void testCreateInstanceDataReturnsValidXmlWithFirstItemGroupDataHaving7ItemDataNodes() {
 		
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 6, itemGroupDataNodes[0].children().size()
+		assertEquals 7, itemGroupDataNodes[0].children().size()
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithSecondItemGroupDataHavingTwentyTwoItemDataNodes() {
@@ -254,6 +255,21 @@ class DefaultSubmissionProtocolTest {
 		def node = new XmlSlurper().parseText(xml)
 
 		assertFalse "Node is not Repeat", protocol.isRepeat(node.repeat.child)
+	}
+	
+	@Test void testProcessDataAddsCommasToMultipleSelectAnswers() {
+		
+		def xml = protocol.processData("1 2 3 4")
+		
+		assertThat(xml, Matchers.containsString(','))
+		
+	}
+	
+	@Test void testThatProcessDoesNotAlterMultipleAnswersWhichAreNotNumbers() {
+		
+		def xml = protocol.processData("we all know remi is a kool dumb ass")
+		
+		assertFalse "Should not alter non-multiple select questions", xml.contains(",")
 	}
 
 	def getItemDataNodes() {

@@ -46,8 +46,9 @@ class DefaultSubmissionProtocol {
 												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx + 1, TransactionType:"Insert" ) {
 
 													node.children().each { itemData ->
-
-														ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+														
+														def data = processData(itemData.text().trim())
+														ItemData (ItemOID:itemData.name(), Value:"$data"){
 														}
 													}
 												}
@@ -62,8 +63,9 @@ class DefaultSubmissionProtocol {
 										ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
 
 											itemDataNodes.each { itemData ->
-
-												ItemData (ItemOID:itemData.name(), Value:"$itemData"){
+												
+												def data = processData(itemData.text().trim())
+												ItemData (ItemOID:itemData.name(), Value:"$data"){
 												}
 											}
 										}
@@ -84,7 +86,6 @@ class DefaultSubmissionProtocol {
 	private def getSubjectKey() {
 
 		return instanceDataXml.depthFirst().find { it.name().equals("subjectkey")}.text()
-
 	}
 
 	private def getItemGroupDataNodes(String itemGroupOID) {
@@ -145,5 +146,10 @@ class DefaultSubmissionProtocol {
 		}else {
 			return item.children().size() > 0
 		}
+	}
+	
+	def processData(def xml) {
+		
+		return xml.replaceAll("(?<=\\d) (?=\\d)", ",")
 	}
 }
