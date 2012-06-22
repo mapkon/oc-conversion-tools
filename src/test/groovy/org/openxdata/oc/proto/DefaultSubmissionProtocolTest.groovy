@@ -270,7 +270,7 @@ class DefaultSubmissionProtocolTest {
 		def xml = protocol.processData("1 2 3 4")
 		int commaCount = xml.replaceAll("[^,]", "").length()
 		
-		assertEquals "The commas should be equals to number of values - 1", 3, commaCount
+		assertEquals "The commas should be equal to number of values - 1", 3, commaCount
 		
 	}
 	
