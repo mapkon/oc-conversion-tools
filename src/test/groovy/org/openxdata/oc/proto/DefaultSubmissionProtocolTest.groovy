@@ -265,6 +265,15 @@ class DefaultSubmissionProtocolTest {
 		
 	}
 	
+	@Test void testProcessDataAdds3CommasWhenTheValuesAre4() {
+		
+		def xml = protocol.processData("1 2 3 4")
+		int commaCount = xml.replaceAll("[^,]", "").length()
+		
+		assertEquals "The commas should be equals to number of values - 1", 3, commaCount
+		
+	}
+	
 	@Test void testThatProcessDoesNotAlterMultipleAnswersWhichAreNotNumbers() {
 		
 		def xml = protocol.processData("we all know remi is a kool dumb ass")
