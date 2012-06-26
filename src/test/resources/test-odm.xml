@@ -12,6 +12,11 @@
                     <TranslatedText>10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;</TranslatedText>
                 </Symbol>
             </MeasurementUnit>
+            <MeasurementUnit OID="MU_9&lt;sup&gt;3&lt;/sup&gt;/MM&lt;sup&gt;3&lt;/sup&gt;" Name="9&lt;sup&gt;3&lt;/sup&gt;/MM&lt;sup&gt;3&lt;/sup&gt;">
+                <Symbol>
+                    <TranslatedText>9&lt;sup&gt;3&lt;/sup&gt;/MM&lt;sup&gt;3&lt;/sup&gt;</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
         </BasicDefinitions>
         <MetaDataVersion OID="v1.0.0" Name="MetaDataVersion_v1.0.0">
             <Protocol>
@@ -807,8 +812,8 @@
                     <TranslatedText>
                     Drug  - Drug
                     </TranslatedText>
-                    <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 </Question>
+                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_POARTPREC">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" Repeating="Yes" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
@@ -838,6 +843,7 @@
                     Drug  - Drug
                     </TranslatedText>
                 </Question>
+                <MeasurementUnitRef MeasurementUnitOID="MU_9&lt;sup&gt;3&lt;/sup&gt;/MM&lt;sup&gt;3&lt;/sup&gt;"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LOARTPREC">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
