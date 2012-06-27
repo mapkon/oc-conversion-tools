@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.model.StudySubject;
@@ -47,7 +48,7 @@ public class OCSubmissionContextTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		props = new Properties();
-		props.setProperty("ocStudy", "Test Study");
+		props.setProperty("studyOID", "Test Study");
 		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
 		instance.setStudyManagerService(studyManagerService);
 
@@ -63,7 +64,7 @@ public class OCSubmissionContextTest {
 			}
 		});
 
-		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
+		when(ocService.getStudySubjectEvents(Mockito.anyString())).thenReturn(studySubjectsObjects);
 
 		List<?> result = instance.availableWorkitems();
 
@@ -83,12 +84,12 @@ public class OCSubmissionContextTest {
 			}
 		});
 
-		when(ocService.getStudySubjectEvents("S_DEFAULTS1")).thenReturn(studySubjectsObjects);
+		when(ocService.getStudySubjectEvents(Mockito.anyString())).thenReturn(studySubjectsObjects);
 
 		List<?> result = instance.availableWorkitems();
 
 		assertThat("Workitems list Should be empty", result.isEmpty(), is(true));
-		assertThat("Opharned Events Should not be Empty", instance.getOrphanedEvents().isEmpty(), is(false));
+		assertThat("Orphaned Events Should not be Empty", instance.getOrphanedEvents().isEmpty(), is(false));
 	}
 
 	@Test
@@ -109,7 +110,7 @@ public class OCSubmissionContextTest {
 
 	@Test
 	public void testAvailableWorkitemReturnEmptListIfOCStudyPropertyIsNullOrEmpty() {
-		props.setProperty("ocStudy", "");
+		props.setProperty("studyOID", "");
 		List<Object[]> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
@@ -145,7 +146,7 @@ public class OCSubmissionContextTest {
 	}
 
 	private String getStudyName() {
-		return props.getProperty("ocStudy");
+		return props.getProperty("studyOID");
 	}
 
 }

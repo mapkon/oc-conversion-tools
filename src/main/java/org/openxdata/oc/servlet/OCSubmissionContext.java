@@ -59,7 +59,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	public List<Object[]> availableWorkitems() {
 		clearOphanedEvents();
-		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents("S_DEFAULTS1");
+		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents(props.getProperty("studyOID"));
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		StudyDef ocStudy = getOCStudyID();
 		if (ocStudy == null) {
@@ -151,10 +151,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private StudyDef getOCStudyID() {
 		List<StudyDef> studyByName = null;
 		try {
-			String property = props.getProperty("ocStudy");
+			String property = props.getProperty("studyOID");
 			log.debug("Reading study from properties file: " + property);
 			if (property == null || property.isEmpty()) {
-				log.error("The ocStudy Property has not been set");
+				log.error("The studyOID Property has not been set");
 				return null;
 			}
 			studyByName = studyManagerService.getStudyByName(property);
