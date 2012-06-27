@@ -99,7 +99,7 @@ public class OpenClinicaServlet extends HttpServlet {
 
 		try {
 
-			log.debug("File not found in Web context. Attempting to load internal properties file");
+			log.debug("Properties file not found in Web context. Attempting to load internal properties file");
 
 			String propFileContent = new TransformUtil().loadFileContents("META-INF/openclinica.properties");
 			props.load(new ByteArrayInputStream(propFileContent.getBytes()));
@@ -194,7 +194,7 @@ public class OpenClinicaServlet extends HttpServlet {
 
 			user = authenticationService.authenticate(oxdUserName, oxdPassword);
 			if (user == null)
-				throw new OpenXdataDataAccessException("Access to OpenXData Services Denied");
+				throw new OpenXdataDataAccessException("Access to OpenXData Services Denied. Check your login credentials.");
 
 		}
 		return user;
