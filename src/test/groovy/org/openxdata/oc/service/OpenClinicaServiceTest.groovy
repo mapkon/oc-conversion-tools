@@ -172,21 +172,21 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	
 	@Test public void testGetStudySubjectEventsDoesNotReturnNull() {
 		
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
 		
 		assertNotNull "Should never return null on valid studyOID", studySubjectEvents
 	}
 	
 	@Test public void testGetStudysubjectEventReturnsCorrectNumberOfStudySubjectEvents() {
 		
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
 		
 		assertEquals 77, studySubjectEvents.size()
 	}
 	
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEvents() {
 		
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
 		
 		studySubjectEvents.each {
 			
@@ -196,7 +196,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingFormOIDs() {
 		
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
 		
 		studySubjectEvents.each {
 			
@@ -209,7 +209,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingStartDate() {
 		
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
 		
 		studySubjectEvents.each {
 			
@@ -222,7 +222,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingEndDate() {
 		
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents("oid")
+		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
 		
 		studySubjectEvents.each {
 			

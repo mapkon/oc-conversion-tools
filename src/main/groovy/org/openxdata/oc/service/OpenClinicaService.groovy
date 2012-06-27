@@ -17,7 +17,7 @@ public interface OpenClinicaService {
 
 	HashMap<String, String> exportOpenClinicaStudyData()
 
-	List<StudySubject> getStudySubjectEvents(String studyOID)
+	List<StudySubject> getStudySubjectEvents()
 	
 	void setFormService(FormService formService)
 	

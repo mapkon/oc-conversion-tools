@@ -59,9 +59,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	public List<Object[]> availableWorkitems() {
 		clearOphanedEvents();
-		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents(props.getProperty("studyOID"));
+		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents();
 		List<Object[]> workitems = new ArrayList<Object[]>();
-		StudyDef ocStudy = getOCStudyID();
+		StudyDef ocStudy = loadConvertedOpenClinicaStudy();
 		if (ocStudy == null) {
 			return workitems;
 		}
@@ -148,8 +148,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return key;
 	}
 
-	private StudyDef getOCStudyID() {
-		List<StudyDef> studyByName = null;
+	// Loads the study that was converted.
+	private StudyDef loadConvertedOpenClinicaStudy() {
+		StudyDef study = null;
 		try {
 			String property = props.getProperty("studyOID");
 			log.debug("Reading study from properties file: " + property);
@@ -157,16 +158,14 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 				log.error("The studyOID Property has not been set");
 				return null;
 			}
-			studyByName = studyManagerService.getStudyByName(property);
+			study = studyManagerService.getStudyByKey(property);
 		} catch (Exception e) {
 			log.error("Failed to get openclinica study" + e.getMessage());
 			log.trace("Failed to get openclinica study", e);
 		}
-		if (studyByName != null && !studyByName.isEmpty()) {
-			StudyDef study = studyByName.get(0);
-			return study;
-		}
-		return null;
+		
+		return study;
+
 	}
 
 	private FormDef getFormByDescription(StudyDef def, String description) {
