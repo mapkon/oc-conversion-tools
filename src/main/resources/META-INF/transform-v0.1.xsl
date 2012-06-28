@@ -166,6 +166,13 @@
 						<xsl:call-template name="appendQuestionType">
 							<xsl:with-param name="pItemDef" select="$vItemDef" />
 						</xsl:call-template>
+						
+						<xsl:if test="$vItemDef/*/*/*[local-name()='SimpleConditionalDisplay']">
+							<xsl:call-template name="createSkipLogic">
+								<xsl:with-param name="pForm" select="$pForm" />
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</xsl:if>
 					</xf:bind>
 				</xsl:for-each>
 			</xsl:when>
@@ -207,6 +214,13 @@
 						<xsl:if test="./@Mandatory = 'Yes'">
 							<xsl:attribute name="required">true()</xsl:attribute>
 						</xsl:if>
+						
+						<xsl:if test="$vItemDef/*/*/*[local-name()='SimpleConditionalDisplay']">
+							<xsl:call-template name="createSkipLogic">
+								<xsl:with-param name="pForm" select="$pForm" />
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</xsl:if>
 					</xf:bind>
 
 				</xsl:when>
@@ -222,6 +236,13 @@
 
 						<xsl:if test="./@Mandatory = 'Yes'">
 							<xsl:attribute name="required">true()</xsl:attribute>
+						</xsl:if>
+						
+						<xsl:if test="$vItemDef/*/*/*[local-name()='SimpleConditionalDisplay']">
+							<xsl:call-template name="createSkipLogic">
+								<xsl:with-param name="pForm" select="$pForm" />
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
 						</xsl:if>
 
 					</xf:bind>
@@ -260,6 +281,20 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template name="createSkipLogic">
+
+		<xsl:param name="pForm" />
+		<xsl:param name="pItemDef" />
+
+		<xsl:variable name="vOption" select="$pItemDef/*/*/*/*[local-name()='OptionValue']" />
+		<xsl:variable name="vDeterminantQuestion" select="//*[local-name()='ItemDef' and @Name=$pItemDef/*/*/*/*[local-name()='ControlItemName']]" />
+
+		<xsl:attribute name="relevant">/<xsl:value-of select="$pForm/@OID" />/<xsl:value-of select="$vDeterminantQuestion/@OID" /> = '<xsl:value-of
+			select="$vOption" />'</xsl:attribute>
+		<xsl:attribute name="action">show</xsl:attribute>
+		<xsl:attribute name="required">false()</xsl:attribute>
+	</xsl:template>
+	
 	<xsl:template name="appendQuestionType">
 		<xsl:param name="pItemDef" />
 		<xsl:choose>

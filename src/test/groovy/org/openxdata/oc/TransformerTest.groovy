@@ -320,7 +320,8 @@ class TransformerTest extends GroovyTestCase {
 		
 		def requiredQtns = getRequiredQuestions()
 		
-		assertEquals "Required questions should equals Mandatory questions in ODM file.", 26, requiredQtns.size()
+		// This should factor in skip logic questions which are always marked as required=false(), and rightly so...
+		assertEquals "Required questions should equals Mandatory questions in ODM file.", 25, requiredQtns.size()
 
 	}
 	
@@ -386,6 +387,30 @@ class TransformerTest extends GroovyTestCase {
 		
 	}
 	
+	@Test void testThatConvertedXformHas2QuestionsWithSkipLogic() {
+		
+		def logicQtns = getSkipLogicBinds();
+		
+		assertEquals "There must be 2 questions with skip logic", 2, logicQtns.size()
+	}
+	
+	@Test void testThatSkipLogicQuestionsHaveActionAttribute() {
+
+		def logicQtns = getSkipLogicBinds();
+
+		logicQtns.each {
+			assertEquals "Skip Logic question should have action", 'show', it.@action.text()
+		}
+	}
+
+	@Test void testThatSkipLogicQuetionsAreNotRequired() {
+		def logicQtns = getSkipLogicBinds();
+
+		logicQtns.each {
+			assertEquals "Skip Logic question should not be required by default", 'false()', it.@required.text()
+		}
+	}
+		
 	private def getGroups() {
 		
 		def groups = []
@@ -421,6 +446,21 @@ class TransformerTest extends GroovyTestCase {
 		}
 		
 		return qtns
+	}
+	
+	private def getSkipLogicBinds() {
+		def qtns = []
+		
+				getXformNodes().each {
+					
+					def binds = it.model.bind.each { bind ->
+						if(bind.@relevant.text()) {
+							qtns.add(bind)
+						}
+					}
+				}
+				
+				return qtns
 	}
 	
 	private def getQuestionsOfType(def qType) {

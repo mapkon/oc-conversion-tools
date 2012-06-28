@@ -194,7 +194,12 @@
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
-						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>						
+						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
+						<OpenClinica:SimpleConditionalDisplay>
+							<OpenClinica:ControlItemName>MSA1_cons</OpenClinica:ControlItemName>
+							<OpenClinica:OptionValue>1</OpenClinica:OptionValue>
+							<OpenClinica:Message>Woman has not been included</OpenClinica:Message>
+						</OpenClinica:SimpleConditionalDisplay>						
 					</OpenClinica:ItemPresentInForm>
 				</OpenClinica:ItemDetails>
             </ItemDef>
@@ -209,6 +214,11 @@
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 1</OpenClinica:SectionTitle>
+						<OpenClinica:SimpleConditionalDisplay>
+							<OpenClinica:ControlItemName>MSA1_pgt</OpenClinica:ControlItemName>
+							<OpenClinica:OptionValue>1</OpenClinica:OptionValue>
+							<OpenClinica:Message>Do not Answer if woman is not pregnant</OpenClinica:Message>
+						</OpenClinica:SimpleConditionalDisplay>
 					</OpenClinica:ItemPresentInForm>
 				</OpenClinica:ItemDetails>
             </ItemDef>
