@@ -170,7 +170,7 @@
 				</xsl:for-each>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="createItemBinds">
+				<xsl:call-template name="createItemBindsForNoneRepeatQuestions">
 					<xsl:with-param name="pForm" select="$pForm" />
 					<xsl:with-param name="pItemGroupDef" select="$vItemGroupDef" />
 				</xsl:call-template>
@@ -178,7 +178,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="createItemBinds">
+	<xsl:template name="createItemBindsForNoneRepeatQuestions">
 
 		<xsl:param name="pForm" />
 		<xsl:param name="pItemGroupDef" />
