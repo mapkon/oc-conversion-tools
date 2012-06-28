@@ -191,31 +191,10 @@
 			<xsl:choose>
 				<xsl:when test="$vItemDef/*/*/*[local-name()='ItemSubHeader']">
 
-					<xsl:if test="$vItemDef/*/*/*[local-name()='ItemHeader'] and $vItemDef/*/*/*[local-name()='ItemSubHeader']">
-						<xf:bind>
-							<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
-							<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="$vItemOID" />_HEADER</xsl:attribute>
-							<xsl:attribute name="locked">true()</xsl:attribute>
-
-							<xsl:call-template name="appendQuestionType">
-								<xsl:with-param name="pItemDef" select="$vItemDef" />
-							</xsl:call-template>
-						</xf:bind>
-					</xsl:if>
-
-					<xsl:if test="$vItemDef/*/*/*[local-name()='ItemSubHeader']">
-
-						<xf:bind>
-							<xsl:attribute name="id"><xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
-							<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID"/>/<xsl:value-of select="$vItemOID" />_SUB_HEADER</xsl:attribute>
-							<xsl:attribute name="locked">true()</xsl:attribute>
-
-							<xsl:call-template name="appendQuestionType">
-								<xsl:with-param name="pItemDef" select="$vItemDef" />
-							</xsl:call-template>
-						</xf:bind>
-					</xsl:if>
-
+					<xsl:call-template name="createBindHeaderInfo">
+						<xsl:with-param name="pForm" select="$pForm" />
+						<xsl:with-param name="pItemDef" select="$vItemDef" />
+					</xsl:call-template>
 
 					<xf:bind>
 						<xsl:attribute name="id"><xsl:value-of select="@ItemOID" /></xsl:attribute>
@@ -249,6 +228,36 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template name="createBindHeaderInfo">
+
+		<xsl:param name="pForm" />
+		<xsl:param name="pItemDef" />
+		<xsl:if test="$pItemDef/*/*/*[local-name()='ItemHeader'] and $pItemDef/*/*/*[local-name()='ItemSubHeader']">
+			<xf:bind>
+				<xsl:attribute name="id"><xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
+				<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID" />/<xsl:value-of select="$pItemDef/@OID" />_HEADER</xsl:attribute>
+				<xsl:attribute name="locked">true()</xsl:attribute>
+
+				<xsl:call-template name="appendQuestionType">
+					<xsl:with-param name="pItemDef" select="$pItemDef" />
+				</xsl:call-template>
+			</xf:bind>
+		</xsl:if>
+
+		<xsl:if test="$pItemDef/*/*/*[local-name()='ItemSubHeader']">
+
+			<xf:bind>
+				<xsl:attribute name="id"><xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
+				<xsl:attribute name="nodeset">/<xsl:value-of select="$pForm/@OID" />/<xsl:value-of select="$pItemDef/@OID" />_SUB_HEADER</xsl:attribute>
+				<xsl:attribute name="locked">true()</xsl:attribute>
+
+				<xsl:call-template name="appendQuestionType">
+					<xsl:with-param name="pItemDef" select="$pItemDef" />
+				</xsl:call-template>
+			</xf:bind>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="appendQuestionType">
