@@ -31,6 +31,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 	private def client
 	
+	private def props
 	private def formService
 	private def studyService
 	private DataExportService dataExportService	
@@ -41,6 +42,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 			props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
 		}
 
+		this.props = props
 		client = new OpenClinicaSoapClientImpl(props)
 	}
 	
@@ -108,9 +110,9 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		}
 	}
 
-	public List<StudySubject> getStudySubjectEvents(String studyOID) {
+	public List<StudySubject> getStudySubjectEvents() {
 		
-		return client.findStudySubjectEventsByStudyOID(studyOID)
+		return client.findStudySubjectEventsByStudyOID(props.getProperty("studyOID"))
 	}
 	
 	@Override

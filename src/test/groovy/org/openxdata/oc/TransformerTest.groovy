@@ -60,7 +60,7 @@ class TransformerTest extends GroovyTestCase {
 		def binds = getBinds()
 		
 		// The extra bindings are because of the repeat parent bindings and Header/Sub Header locked questions
-		assertEquals 70, binds.size()
+		assertEquals 71, binds.size()
 	}
 	
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -254,9 +254,9 @@ class TransformerTest extends GroovyTestCase {
 	
 	@Test void testConvertedXformShouldHaveRepeatItems() {
 		
-		def repeats = getRepeats()
+		def repeats = getQuestionsOfType('repeat')
 		
-		assertEquals 4, repeats.size()
+		assertEquals 3, repeats.size()
 	}
 	
 	@Test void testConvertedXformHasInnerGroupWhenThereIsARepeat() {
@@ -320,7 +320,8 @@ class TransformerTest extends GroovyTestCase {
 		
 		def requiredQtns = getRequiredQuestions()
 		
-		assertEquals "Required questions should equals Mandatory questions in ODM file.", 26, requiredQtns.size()
+		// This should factor in skip logic questions which are always marked as required=false(), and rightly so...
+		assertEquals "Required questions should equals Mandatory questions in ODM file.", 25, requiredQtns.size()
 
 	}
 	
@@ -351,6 +352,65 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "The subject key for whom you are collecting data for.", subjectGroupHintNode.text()
 	}
 	
+	@Test void testThatConvertedFormHasSingleSelectQuestions() {
+		
+		def singleSelectQtns = getQuestionsOfType('select1')
+		
+		assertEquals 28, singleSelectQtns.size()
+	}
+	
+	@Test void testThatSingleSelectQuestionsEqualsNumberOfCodeListElements(){
+		
+		def codeListRefs = inputDoc.Study.MetaDataVersion.ItemDef.CodeListRef
+		
+		def singleSelectQtns = getQuestionsOfType('select1')
+		
+		assertEquals codeListRefs.size(), singleSelectQtns.size()
+		
+	}
+	
+	@Test void tesThatConvertedFormHasMultiSelectQuestions() {
+		
+		def multiSelectQuestions = getQuestionsOfType('select')
+		
+		assertEquals 2, multiSelectQuestions.size()
+	}
+	
+	@Test void testThatMultipleSelectQuestionsEqualsNumberOfMultSelectListElements(){
+		
+		def multiSelectLists = inputDoc.Study.MetaDataVersion.ItemDef.MultiSelectListRef
+		
+		def multiSelectQtns = getQuestionsOfType('select')
+		
+		// Same question, referenced twice
+		assertEquals multiSelectLists.size(), multiSelectQtns.size()
+		
+	}
+	
+	@Test void testThatConvertedXformHas2QuestionsWithSkipLogic() {
+		
+		def logicQtns = getSkipLogicBinds();
+		
+		assertEquals "There must be 2 questions with skip logic", 2, logicQtns.size()
+	}
+	
+	@Test void testThatSkipLogicQuestionsHaveActionAttribute() {
+
+		def logicQtns = getSkipLogicBinds();
+
+		logicQtns.each {
+			assertEquals "Skip Logic question should have action", 'show', it.@action.text()
+		}
+	}
+
+	@Test void testThatSkipLogicQuetionsAreNotRequired() {
+		def logicQtns = getSkipLogicBinds();
+
+		logicQtns.each {
+			assertEquals "Skip Logic question should not be required by default", 'false()', it.@required.text()
+		}
+	}
+		
 	private def getGroups() {
 		
 		def groups = []
@@ -388,15 +448,31 @@ class TransformerTest extends GroovyTestCase {
 		return qtns
 	}
 	
-	private def getRepeats() {
+	private def getSkipLogicBinds() {
+		def qtns = []
 		
-		def repeats = []
-		def xformNodes = getXformNodes()
+				getXformNodes().each {
+					
+					def binds = it.model.bind.each { bind ->
+						if(bind.@relevant.text()) {
+							qtns.add(bind)
+						}
+					}
+				}
+				
+				return qtns
+	}
+	
+	private def getQuestionsOfType(def qType) {
 		
-		xformNodes.each {
-			def rpt = it.depthFirst().findAll{ it.name().is('repeat')}
-			repeats.addAll(rpt)
+		def questions = []
+		
+		getXformNodes().each {
+			def qn = it.depthFirst().findAll{ it.name().is(qType)}
+			questions.addAll(qn)
 		}
+		
+		return questions
 	}
 	
 	private def getXformNodes() {

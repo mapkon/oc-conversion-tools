@@ -78,9 +78,15 @@ public class Transformer {
 	private replaceHintNodeText(def hintNode) {
 		
 		def text = hintNode.text()
+		
+		// Some are uppercase
 		text = text.replace("<SUP>", "^")
 		text = text.replace("</SUP>", "")
 
+		// Some are lowercase
+		text = text.replace("<sup>", "^")
+		text = text.replace("</sup>", "")
+		
 		hintNode.replaceBody(text)
 
 		return text

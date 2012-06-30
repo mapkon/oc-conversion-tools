@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openxdata</groupId>
 	<artifactId>oc-conversion-tools</artifactId>
-	<version>0.3-BETA-11-SNAPSHOT</version>
+	<version>0.3-BETA-12-SNAPSHOT</version>
 	<name>OpenXdata OpenClinica Conversion Tools</name>
 	<url>http://openxdata.org</url>
 
@@ -400,13 +400,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>acceptance-test</id>
-			<activation>
-				<property>
-					<name>type</name>
-					<value>acceptance</value>
-				</property>
-			</activation>
+			<id>acceptance-tests</id>
 			<build>
 				<plugins>
 					<plugin>
