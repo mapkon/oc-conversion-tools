@@ -76,9 +76,8 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-			   <repository>
+		<repository>
 			<id>openxdata-releases</id>
-			<name>Name</name>
 			<url>https://nexus.openxdata.org/content/repositories/releases</url>
 		</repository>
 	</repositories>
