@@ -91,7 +91,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		for (Entry<String, List<Event>> entry : entrySet) {
 			List<Event> events = entry.getValue();
 			Object[] workitem = new Object[5];
-			workitem[0] = studySubject.getSubjectOID() + "-" + entry.getKey();
+			workitem[0] = (studySubject.getSubjectOID() + "-" + entry.getKey()).replaceFirst("SS_", "");
 			workitem[1] = getKey(studySubject, entry.getKey());
 
 			List<Object[]> formReferences = new ArrayList<Object[]>();
