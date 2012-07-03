@@ -144,19 +144,19 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-		    <groupId>com.jcraft</groupId>
-		    <artifactId>jzlib</artifactId>
-		    <version>1.0.7</version>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jzlib</artifactId>
+			<version>1.0.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>model</artifactId>
-			<version>1.16</version>
+			<version>1.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
 			<artifactId>server</artifactId>
-			<version>1.16</version>
+			<version>1.18</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
