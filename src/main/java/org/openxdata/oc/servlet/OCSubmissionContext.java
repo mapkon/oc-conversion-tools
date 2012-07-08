@@ -163,7 +163,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 			log.error("Failed to get openclinica study" + e.getMessage());
 			log.trace("Failed to get openclinica study", e);
 		}
-		
+
 		return study;
 
 	}
@@ -213,7 +213,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	private void exportDataToOC() {
-		
+
 		log.info("Picking up export to OpenClinica after Submitting to OpenXData");
 		Runnable exporter = new Runnable() {
 
@@ -221,7 +221,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 				ocService.exportOpenClinicaStudyData();
 			}
 		};
-		
+
 		log.info("Executing OpenClinica Export...");
 		ex.execute(exporter);
 	}

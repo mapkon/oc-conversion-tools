@@ -85,8 +85,7 @@ public class OCSubmissionContextTest {
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
-		when(studyManagerService.getStudyByKey(getStudyName()))
-				.thenThrow(new RuntimeException("Deliberate Exception"));
+		when(studyManagerService.getStudyByKey(getStudyName())).thenThrow(new RuntimeException("Deliberate Exception"));
 		List<Object[]> availableWorkitems1 = instance.availableWorkitems();
 
 		assertThat("Workitems are expected to be empty", availableWorkitems1.isEmpty(), is(true));

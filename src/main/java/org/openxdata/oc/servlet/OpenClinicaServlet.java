@@ -194,7 +194,8 @@ public class OpenClinicaServlet extends HttpServlet {
 
 			user = authenticationService.authenticate(oxdUserName, oxdPassword);
 			if (user == null)
-				throw new OpenXdataDataAccessException("Access to OpenXData Services Denied. Check your login credentials.");
+				throw new OpenXdataDataAccessException(
+						"Access to OpenXData Services Denied. Check your login credentials.");
 
 		}
 		return user;
