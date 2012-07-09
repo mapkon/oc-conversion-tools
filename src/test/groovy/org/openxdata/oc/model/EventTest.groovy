@@ -6,8 +6,8 @@ import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 
-class EventTest {
 
+class EventTest {
 
 	def event
 	@Before public void setUp() {
@@ -73,5 +73,17 @@ class EventTest {
 	
 	@Test void testEventHasCorrectEndDate() {
 		assertEquals "2010-12-14 00:00", event.endDate
+	}
+	
+	@Test void testEventHasRepeatingField() {
+		assertEquals false, event.repeating
+	}
+	
+	@Test void testEventHasCorrectRepeatingType() {
+		
+		def eventNode = TestData.getStudySubjects().children()[1]
+		event = new Event(eventNode.children()[1].event)
+		
+		assertEquals true, event.repeating
 	}
 }

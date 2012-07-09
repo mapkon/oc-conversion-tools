@@ -6,20 +6,21 @@ class Event {
 	private def eventXml
 	
 	def ordinal
-	def eventName
-	def eventDefinitionOID
-	
-	def startDate
 	def endDate
+	def startDate
+	def eventName
+	def repeating = false
+	def eventDefinitionOID
 
 	def Event(def eventXml) {
 
-		eventName = eventXml.eventName.text()
 		ordinal = eventXml.ordinal.text()
-		eventDefinitionOID = eventXml.eventDefinitionOID.text()
-		startDate = eventXml.startDate.text()
 		endDate = eventXml.endDate.text()
-
+		eventName = eventXml.eventName.text()
+		startDate = eventXml.startDate.text()
+		eventDefinitionOID = eventXml.eventDefinitionOID.text()
+		repeating = Boolean.parseBoolean(eventXml.repeating.text())
+		
 		this.eventXml = eventXml
 	}
 	

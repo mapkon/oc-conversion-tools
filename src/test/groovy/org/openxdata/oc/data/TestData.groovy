@@ -102,7 +102,7 @@ class TestData {
 		
 		def xml = new XmlSlurper().parseText(response)
 		
-		return xml.depthFirst().find{ it.name().equals("studySubjects") }
+		return xml.depthFirst().find { it.name().equals("studySubjects") }
 		
 	}
         

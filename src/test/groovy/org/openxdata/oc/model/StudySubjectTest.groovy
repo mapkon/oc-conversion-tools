@@ -52,4 +52,12 @@ class StudySubjectTest {
 			assertNotNull it.endDate
 		}
 	}
+	
+	@Test void testThatStudySubjectHasEventWithRepeatingField() {
+		
+		def events = studySubject.getEvents()
+		events.each {
+			assertNotNull it.repeating
+		}
+	}
 }
