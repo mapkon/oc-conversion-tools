@@ -88,8 +88,21 @@
 									<xsl:for-each select="$vItemGroupDef/odm:ItemRef">
 
 										<xsl:variable name="vItemOID" select="@ItemOID" />
-										<xsl:element name="{$vItemOID}" />
+										<xsl:variable name="vItemDef" select="//*[local-name()='ItemDef' and @OID=$vItemOID]" />
 
+										<xsl:variable name="vDataType" select="$vItemDef/@DataType" />
+
+										<xsl:choose>
+											<xsl:when
+												test="$vDataType = 'date' or $vDataType = 'time' or $vDataType = 'datetime'">
+												
+												<xsl:element name="{$vItemOID}">now()</xsl:element>
+												
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:element name="{$vItemOID}" />
+											</xsl:otherwise>
+										</xsl:choose>
 									</xsl:for-each>
 								</xsl:element>
 							</xsl:when>
@@ -107,11 +120,24 @@
 										<xsl:element name="{$vItemOID}_SUB_HEADER" />
 									</xsl:if>
 
-									<xsl:element name="{$vItemOID}">
-										<xsl:attribute name="ItemGroupOID">
-										<xsl:value-of select="$vItemGroupOID" />
-									</xsl:attribute>
-									</xsl:element>
+									<xsl:variable name="vDataType" select="$vItemDef/@DataType" />
+									
+									<xsl:choose>
+										<xsl:when
+											test="$vDataType = 'date' or $vDataType = 'time' or $vDataType = 'datetime'">
+								
+											<xsl:element name="{$vItemOID}"><xsl:attribute name="ItemGroupOID" select="$vItemGroupOID" />
+												now()
+											</xsl:element>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:element name="{$vItemOID}">
+												<xsl:attribute name="ItemGroupOID">
+													<xsl:value-of select="$vItemGroupOID" />
+												</xsl:attribute>
+											</xsl:element>
+										</xsl:otherwise>
+									</xsl:choose>
 								</xsl:for-each>
 							</xsl:otherwise>
 						</xsl:choose>
