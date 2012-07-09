@@ -467,7 +467,7 @@
 		<xsl:param name="pItemDef" />
 
 		<xsl:choose>
-			<xsl:when test="$pItemDef/odm:CodeListRef">
+			<xsl:when test="$pItemDef/*[local-name()='CodeListRef']">
 				<xsl:call-template name="createSingleSelectQuestions">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
 				</xsl:call-template>
