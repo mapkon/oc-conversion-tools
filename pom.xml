@@ -152,6 +152,12 @@
 			<groupId>org.openxdata</groupId>
 			<artifactId>model</artifactId>
 			<version>1.18</version>
+			<exclusions>
+				<exclusion>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.openxdata</groupId>
