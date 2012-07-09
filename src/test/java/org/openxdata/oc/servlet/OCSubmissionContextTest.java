@@ -25,18 +25,20 @@ import org.openxdata.xform.StudyImporter;
 
 public class OCSubmissionContextTest {
 
-	@Mock
-	private OpenClinicaService ocService;
-	@Mock
-	private StudyManagerService studyManagerService;
-	private static List<StudySubject> studySubjectsObjects = TestData.getStudySubjectsObjects();
+	private Properties props;
 	private static StudyDef oXDStudy;
 	private OCSubmissionContext instance;
-	private Properties props;
+	
+	@Mock
+	private OpenClinicaService ocService;
+	
+	@Mock
+	private StudyManagerService studyManagerService;
+	private static List<StudySubject> studySubjectsObjects = TestData.getStudySubjectsAsJavaList();
 
 	@BeforeClass
 	public static void initTestData() {
-		studySubjectsObjects = TestData.getStudySubjectsObjects();
+		studySubjectsObjects = TestData.getStudySubjectsAsJavaList();
 		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
 		oXDStudy = (StudyDef) importer.extractStudy();
 	}

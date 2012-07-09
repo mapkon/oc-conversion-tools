@@ -106,14 +106,13 @@ class TestData {
 		
 	}
         
-	static List<StudySubject> getStudySubjectsObjects() {
-
-		def response = new XmlParser().parseText(new TransformUtil().loadFileContents("subject-event-response.xml"))
-
-		def eventNode =  response.depthFirst().studySubjects[0]
-
+	static List<StudySubject> getStudySubjectsAsJavaList() {
+		
 		def subjects = []
-		eventNode.studySubject.each {
+		
+		def subjectEventNode = getStudySubjects()
+		
+		subjectEventNode.studySubject.each {
 
 			def subject = new StudySubject(it)
 			subjects.add(subject)
