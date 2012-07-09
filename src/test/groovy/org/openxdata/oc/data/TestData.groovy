@@ -106,21 +106,20 @@ class TestData {
 		
 	}
         
-    static List<StudySubject> getStudySubjectsObjects() {
-		
+	static List<StudySubject> getStudySubjectsObjects() {
+
 		def response = new XmlParser().parseText(new TransformUtil().loadFileContents("subject-event-response.xml"))
-	
-               def eventNode =  response.depthFirst().studySubjects[0]
-        
-                def subjects = []
+
+		def eventNode =  response.depthFirst().studySubjects[0]
+
+		def subjects = []
 		eventNode.studySubject.each {
-			
+
 			def subject = new StudySubject(it)
 			subjects.add(subject)
 		}
 
 		return subjects
-		
 	}
 	
 	static def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
