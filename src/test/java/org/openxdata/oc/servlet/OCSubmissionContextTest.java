@@ -25,7 +25,7 @@ import org.openxdata.xform.StudyImporter;
 public class OCSubmissionContextTest {
 
 	private Properties props;
-	private StudyDef oXDStudy;
+	private StudyDef convertedStudy;
 	private OCSubmissionContext instance;
 	
 	@Mock
@@ -43,7 +43,7 @@ public class OCSubmissionContextTest {
 		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
 		
 		// Extract study
-		oXDStudy = (StudyDef) importer.extractStudy();
+		convertedStudy = (StudyDef) importer.extractStudy();
 		
 		MockitoAnnotations.initMocks(this);
 		
@@ -59,7 +59,7 @@ public class OCSubmissionContextTest {
 	@Test
 	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
 		
-		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(oXDStudy);
+		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(convertedStudy);
 
 		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
 
@@ -121,7 +121,7 @@ public class OCSubmissionContextTest {
 				studySubject = tmpStudySubj;
 		}
 		
-		List<Object[]> workitems = instance.studySubjectToWorkItems(studySubject, oXDStudy);
+		List<Object[]> workitems = instance.studySubjectToWorkItems(studySubject, convertedStudy);
 
 		assertThat("The number of workitems are supposed to be 2", workitems.size(), is(2));
 

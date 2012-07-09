@@ -29,11 +29,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext {
 
+	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
+	
+	private Properties props;
+	private OpenClinicaService ocService;
+	
 	@Autowired
 	private StudyManagerService studyManagerService;
-	private OpenClinicaService ocService;
-	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
-	private Properties props;
 	private List<Event> orphanedEvents = new ArrayList<Event>();
 	private ExecutorService ex = Executors.newSingleThreadExecutor();
 
