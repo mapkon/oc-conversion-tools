@@ -467,8 +467,13 @@
 		<xsl:param name="pItemDef" />
 
 		<xsl:choose>
-			<xsl:when test="$pItemDef/odm:CodeListRef or $pItemDef/*[local-name()='MultiSelectListRef']">
-				<xsl:call-template name="createSelectQuestions">
+			<xsl:when test="$pItemDef/odm:CodeListRef">
+				<xsl:call-template name="createSingleSelectQuestions">
+					<xsl:with-param name="pItemDef" select="$pItemDef" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test="$pItemDef/*[local-name()='MultiSelectListRef']">
+				<xsl:call-template name="createMultiSelectQuestions">
 					<xsl:with-param name="pItemDef" select="$pItemDef" />
 				</xsl:call-template>
 			</xsl:when>
@@ -507,23 +512,6 @@
 		</xf:input>
 	</xsl:template>
 
-	<!-- Create select questions -->
-	<xsl:template name="createSelectQuestions">
-		<xsl:param name="pItemDef" />
-		<xsl:choose>
-			<xsl:when test="$pItemDef/odm:CodeListRef">
-				<xsl:call-template name="createSingleSelectQuestions">
-					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise test="$pItemDef/*[local-name()='MultiSelectListRef']">
-				<xsl:call-template name="createMultiSelectQuestions">
-					<xsl:with-param name="pItemDef" select="$pItemDef" />
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	
 	<!-- Create single select questions -->
 	<xsl:template name="createSingleSelectQuestions">
 
