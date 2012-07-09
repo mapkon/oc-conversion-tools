@@ -400,7 +400,7 @@
 				<xsl:for-each select="//*[local-name()='ItemDef']">
 					<xsl:choose>
 						<xsl:when test="./*/*[@FormOID=$pForm/@OID and @Repeating='Yes'] and ./*/*[@RepeatingGroupDef]">
-							<xsl:call-template name="createRepeatQuestion">
+							<xsl:call-template name="createRepeatQuestions">
 								<xsl:with-param name="pForm" select="$pForm" />
 								<xsl:with-param name="pSection" select="$vSection" />
 								<xsl:with-param name="pItemDef" select="." />
@@ -423,7 +423,7 @@
 	</xsl:template>
 
 	<!-- Create repeat questions -->
-	<xsl:template name="createRepeatQuestion">
+	<xsl:template name="createRepeatQuestions">
 
 		<xsl:param name="pForm" />
 		<xsl:param name="pSection" />
