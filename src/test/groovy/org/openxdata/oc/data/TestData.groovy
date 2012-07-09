@@ -106,7 +106,7 @@ class TestData {
 		
 	}
         
-	static List<StudySubject> getStudySubjectsAsJavaList() {
+	static List<StudySubject> getStudySubjectsAsList() {
 		
 		def subjects = []
 		

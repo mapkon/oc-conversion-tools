@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -26,7 +25,7 @@ import org.openxdata.xform.StudyImporter;
 public class OCSubmissionContextTest {
 
 	private Properties props;
-	private static StudyDef oXDStudy;
+	private StudyDef oXDStudy;
 	private OCSubmissionContext instance;
 	
 	@Mock
@@ -34,21 +33,25 @@ public class OCSubmissionContextTest {
 	
 	@Mock
 	private StudyManagerService studyManagerService;
-	private static List<StudySubject> studySubjectsObjects = TestData.getStudySubjectsAsJavaList();
-
-	@BeforeClass
-	public static void initTestData() {
-		studySubjectsObjects = TestData.getStudySubjectsAsJavaList();
-		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
-		oXDStudy = (StudyDef) importer.extractStudy();
-	}
+	private static List<StudySubject> studySubjectsObjects;
 
 	@Before
 	public void setUp() {
+		
+		studySubjectsObjects = TestData.getStudySubjectsAsList();
+		
+		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
+		
+		// Extract study
+		oXDStudy = (StudyDef) importer.extractStudy();
+		
 		MockitoAnnotations.initMocks(this);
+		
 		props = new Properties();
 		props.setProperty("studyOID", "Test Study");
+		
 		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
+		
 		instance.setStudyManagerService(studyManagerService);
 
 	}
