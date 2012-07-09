@@ -55,7 +55,7 @@ class SubjectEventWebServiceProxyTest {
 		play {
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			assertEquals 77, response.children().size()
+			assertEquals 10, response.children().size()
 		}
 	}
 
@@ -88,7 +88,7 @@ class SubjectEventWebServiceProxyTest {
 
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			assertEquals "SS_20100200_897", response.children()[75].studySubjectOID.text()
+			assertEquals "SS_20100200_3197", response.children()[9].studySubjectOID.text()
 		}
 	}
 
@@ -134,7 +134,7 @@ class SubjectEventWebServiceProxyTest {
 
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			def eventOID = response.children()[75].events.event.eventDefinitionOID.text()
+			def eventOID = response.children()[9].events.event.eventDefinitionOID.text()
 
 			assertEquals "Must have correct Event OID", "SE_SC1", eventOID
 		}
@@ -173,7 +173,7 @@ class SubjectEventWebServiceProxyTest {
 
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			def eventName = response.children()[75].events.event.eventName.text()
+			def eventName = response.children()[9].events.event.eventName.text()
 
 			assertEquals "Must have correct Event Name", "SC1", eventName
 		}
@@ -212,7 +212,7 @@ class SubjectEventWebServiceProxyTest {
 
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			def ordinal = response.children()[75].events.event.ordinal.text()
+			def ordinal = response.children()[9].events.event.ordinal.text()
 
 			assertEquals "Must have correct Ordinal", "1", ordinal
 		}
@@ -251,9 +251,9 @@ class SubjectEventWebServiceProxyTest {
 
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			def startDate = response.children()[75].events.event.startDate.text()
+			def startDate = response.children()[9].events.event.startDate.text()
 
-			assertEquals "Must have correct startDate", "2010-09-21 00:00", startDate
+			assertEquals "Must have correct startDate", "2010-10-12 00:00", startDate
 		}
 	}
 
@@ -305,7 +305,7 @@ class SubjectEventWebServiceProxyTest {
 
 			def response = subjectEventWebserviceProxy.findStudySubjectEventsByStudyOIDRequest("oid")
 
-			def formOIDs = response.children()[75].events.event.formOIDs[0]
+			def formOIDs = response.children()[9].events.event.formOIDs[0]
 
 			assertEquals "Must have correct number of OIDS", 3, formOIDs.children().size()
 		}

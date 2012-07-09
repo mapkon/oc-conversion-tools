@@ -33,12 +33,12 @@ public class OCSubmissionContextTest {
 	
 	@Mock
 	private StudyManagerService studyManagerService;
-	private static List<StudySubject> studySubjectsObjects;
+	private static List<StudySubject> studySubjects;
 
 	@Before
 	public void setUp() {
 		
-		studySubjectsObjects = TestData.getStudySubjectsAsList();
+		studySubjects = TestData.getStudySubjectsAsList();
 		
 		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
 		
@@ -58,9 +58,10 @@ public class OCSubmissionContextTest {
 
 	@Test
 	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
+		
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(oXDStudy);
 
-		when(ocService.getStudySubjectEvents()).thenReturn(studySubjectsObjects);
+		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
 
 		List<?> result = instance.availableWorkitems();
 
@@ -74,7 +75,7 @@ public class OCSubmissionContextTest {
 		dummyStudy.addForm(new FormDef(0, "FunnyForm", dummyStudy));
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(dummyStudy);
 
-		when(ocService.getStudySubjectEvents()).thenReturn(studySubjectsObjects);
+		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
 
 		List<?> result = instance.availableWorkitems();
 
@@ -84,7 +85,7 @@ public class OCSubmissionContextTest {
 
 	@Test
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
-		when(ocService.getStudySubjectEvents()).thenReturn(studySubjectsObjects);
+		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(Collections.<StudyDef> emptyList());
 		List<Object[]> availableWorkitems = instance.availableWorkitems();
 
@@ -115,10 +116,11 @@ public class OCSubmissionContextTest {
 	@Test
 	public void testStudySubjectToWorkItemConversion() {
 		StudySubject studySubject = null;
-		for (StudySubject tmpStudySubj : studySubjectsObjects) {
+		for (StudySubject tmpStudySubj : studySubjects) {
 			if (tmpStudySubj.getSubjectOID().toString().equals("TEST_SUBJECT_EVENT"))
 				studySubject = tmpStudySubj;
 		}
+		
 		List<Object[]> workitems = instance.studySubjectToWorkItems(studySubject, oXDStudy);
 
 		assertThat("The number of workitems are supposed to be 2", workitems.size(), is(2));

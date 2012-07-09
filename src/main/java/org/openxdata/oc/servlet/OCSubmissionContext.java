@@ -58,7 +58,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	public List<Object[]> availableWorkitems() {
+		
 		clearOphanedEvents();
+		
 		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents();
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		StudyDef ocStudy = loadConvertedOpenClinicaStudy();
@@ -83,6 +85,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	List<Object[]> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
+		
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		List<Event> allEvents = studySubject.getEvents();
 		Hashtable<String, List<Event>> eventGroups = groupEventByName(allEvents);
