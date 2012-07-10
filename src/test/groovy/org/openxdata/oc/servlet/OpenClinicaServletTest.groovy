@@ -195,24 +195,22 @@ class OpenClinicaServletTest extends GroovyTestCase {
 		
 		assertEquals 'Fail: Incorrect FormData OID', message.get("key1")
 	}
-        
-    	@Test public void testDelegatesToMobileProcessWhenOIDAndActionIsNull() {
 
-                request.setParameter('action', '')
-     
-                servlet.doPost(request, response)
-                
-                Mockito.verify(multiProtoSubmissionServlet, Mockito.times(1)).doPost(request, response)
-		
+	@Test public void testDelegatesToMobileProcessWhenOIDAndActionIsNull() {
+
+		request.setParameter('action', '')
+
+		servlet.doPost(request, response)
+
+		Mockito.verify(multiProtoSubmissionServlet, Mockito.times(1)).doPost(request, response)
 	}
-        
-        @Test public void testDoesNoDelegateToMobileProcessWhenActionIsNotNull() {
 
-                request.setParameter('action', 'blah blah')
-     
-                servlet.doPost(request, response)
-                
-                Mockito.verify(multiProtoSubmissionServlet, Mockito.times(0)).doPost(request, response)
-		
+	@Test public void testDoesNoDelegateToMobileProcessWhenActionIsNotNull() {
+
+		request.setParameter('action', 'blah blah')
+
+		servlet.doPost(request, response)
+
+		Mockito.verify(multiProtoSubmissionServlet, Mockito.times(0)).doPost(request, response)
 	}
 }
