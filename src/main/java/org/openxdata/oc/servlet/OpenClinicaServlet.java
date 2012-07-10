@@ -36,20 +36,19 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class OpenClinicaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6577932874016086164L;
+	private final Logger log = LoggerFactory.getLogger(OpenClinicaServlet.class);
 
 	private final String IMPORT = "Import";
 	private final String EXPORT = "Export";
-	private final String JSP_LOCATION = "openclinica.jsp";
 
 	private FormService formService;
 	private StudyManagerService studyService;
 	private Properties props = new Properties();
-	private MultiProtocolSubmissionServlet mobileServlet;
 	private DataExportService dataExportService;
 	private OpenClinicaService openclinicaService;
 	private AuthenticationService authenticationService;
-
-	private final Logger log = LoggerFactory.getLogger(OpenClinicaServlet.class);
+	private MultiProtocolSubmissionServlet mobileServlet;
+	private final String JSP_FILE_NAME = "openclinica.jsp";
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -118,7 +117,7 @@ public class OpenClinicaServlet extends HttpServlet {
 			map.put(" ", "No studies downloaded during this session.");
 
 			request.setAttribute("message", map);
-			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
+			request.getRequestDispatcher(JSP_FILE_NAME).forward(request, response);
 
 		} catch (ServletException e) {
 			log.error(e.getLocalizedMessage());
@@ -161,7 +160,7 @@ public class OpenClinicaServlet extends HttpServlet {
 
 			request.setAttribute("user", user);
 
-			request.getRequestDispatcher(JSP_LOCATION).forward(request, response);
+			request.getRequestDispatcher(JSP_FILE_NAME).forward(request, response);
 
 		} catch (Exception ex) {
 
@@ -175,7 +174,7 @@ public class OpenClinicaServlet extends HttpServlet {
 	private void redirectToOpenClinicaPage(HttpServletRequest request, HttpServletResponse response) {
 		try {
 
-			response.sendRedirect(JSP_LOCATION);
+			response.sendRedirect(JSP_FILE_NAME);
 
 		} catch (IOException ex) {
 			log.error(ex.getLocalizedMessage());
