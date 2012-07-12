@@ -126,9 +126,7 @@
 										<xsl:when
 											test="$vDataType = 'date' or $vDataType = 'time' or $vDataType = 'datetime'">
 								
-											<xsl:element name="{$vItemOID}"><xsl:attribute name="ItemGroupOID" select="$vItemGroupOID" />
-												now()
-											</xsl:element>
+											<xsl:element name="{$vItemOID}"><xsl:attribute name="ItemGroupOID"><xsl:value-of select="$vItemGroupOID" /></xsl:attribute>now()</xsl:element>
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:element name="{$vItemOID}">
