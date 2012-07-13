@@ -782,6 +782,18 @@
                     If yes, for how many days?
                     </TranslatedText>
                 </Question>
+                <RangeCheck Comparator="GT" SoftHard="Hard">
+					<CheckValue>4</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a number greater than four but less than nine.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
+				<RangeCheck Comparator="LT" SoftHard="Hard">
+					<CheckValue>9</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a number greater than four but less than nine.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LAZTNBV">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>

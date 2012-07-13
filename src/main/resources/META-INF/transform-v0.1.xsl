@@ -367,6 +367,17 @@
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 		</xsl:if>
+		
+		<xsl:if test="$pItemDef/*[local-name()='RangeCheck'][position()=1]/@Comparator = 'GT' and $pItemDef/*[local-name()='RangeCheck'][position()=2]/@Comparator = 'LT'">
+		
+			<xsl:variable name="vLECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][2]/*[local-name()='CheckValue']" />
+			<xsl:variable name="vGECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][1]/*[local-name()='CheckValue']" />
+
+			<xsl:attribute name="constraint"><![CDATA[. &lt;]]> <xsl:value-of select="$vLECheckValue" /> and <![CDATA[. &gt;]]> <xsl:value-of select="$vGECheckValue" /> </xsl:attribute>
+			<xsl:attribute name="message"><xsl:value-of
+				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
+		</xsl:if>
+		
 	</xsl:template>
 	
 	<xsl:template name="appendQuestionType">
