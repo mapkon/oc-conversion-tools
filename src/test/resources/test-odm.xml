@@ -429,6 +429,12 @@
                     Patient ID
                     </TranslatedText>
                 </Question>
+                <RangeCheck Comparator="NE" SoftHard="Hard">
+					<CheckValue>0</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a value NOT equal to Zero.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_ID">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section1</OpenClinica:SectionLabel>
