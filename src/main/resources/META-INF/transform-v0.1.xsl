@@ -378,6 +378,15 @@
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 		</xsl:if>
 		
+		<xsl:if test="$pItemDef/*[local-name()='RangeCheck'][position()=1]/@Comparator = 'EQ'">
+		
+			<xsl:variable name="vEqualityValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
+
+			<xsl:attribute name="constraint"><![CDATA[. =]]> <xsl:value-of select="$vEqualityValue" /></xsl:attribute>
+			<xsl:attribute name="message"><xsl:value-of
+				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
+		</xsl:if>
+		
 	</xsl:template>
 	
 	<xsl:template name="appendQuestionType">
