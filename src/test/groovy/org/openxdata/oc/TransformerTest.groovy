@@ -411,14 +411,14 @@ class TransformerTest extends GroovyTestCase {
 		}
 	}
 
-	@Test void testThatQuestionWithRangeChecksHasConstraintGeneratedInTheXform() {
+	@Test void testThatQuestionWithRangeCheckHasConstraintGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_POARTNBV')
 
 		assertThat "An ItemDef with Range Check must have a constraint in the xform bind element", bind.attributes().toString(), Matchers.containsString('constraint')
 	}
 
-	@Test void testThatQuestionWithRangeChecksHasCorrespondingConstraintAttributeInTheXform() {
+	@Test void testThatQuestionWithRangeCheckHasCorrespondingConstraintAttributeInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_POARTNBV')
 
@@ -434,7 +434,7 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "The constraint should equal the range check in the odm", ". &lt;= 1 and . &gt;= 10", bind.@constraint.toString()
 	}
 
-	@Test void testThatQuestionWithRangeChecksHasAMessageGeneratedInTheXform() {
+	@Test void testThatQuestionWithGELERangeChecksHasAMessageGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_POARTNBV')
 
@@ -450,7 +450,7 @@ class TransformerTest extends GroovyTestCase {
 		assertThat "An ItemDef with Range Check must have a constraint attribute in the xform bind element", messageAttributeName, Matchers.equalTo('message')
 	}
 
-	@Test void testThatQuestionWithRangeCheckHasCorrectMessageGeneratedInTheXform() {
+	@Test void testThatQuestionWithRangeChecksHasCorrectMessageGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_POARTNBV')
 
@@ -464,14 +464,14 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "The constraint should equal the range check in the odm", ". &lt; 9 and . &gt; 4", bind.@constraint.toString()
 	}
 
-	@Test void testThatQuestionWithGTLTRangeCheckHasCorrectMessageGeneratedInTheXform() {
+	@Test void testThatQuestionWithGTLTRangeChecksHasCorrectMessageGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_LAZTNBV')
 
 		assertEquals "The message should be equal to the error message in the odm", "Please enter a number greater than four but less than nine.", bind.@message.text()
 	}
 
-	@Test void testThatQuestionWithEQRangeChecksHasCorrectConstraintGeneratedInTheXform() {
+	@Test void testThatQuestionWithEQRangeCheckHasCorrectConstraintGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_PAZTNB')
 
@@ -485,7 +485,7 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "The message should be equal to the error message in the odm", "Please enter a value equal to five.", bind.@message.text()
 	}
 
-	@Test void testThatQuestionWithNERangeChecksHasCorrectConstraintGeneratedInTheXform() {
+	@Test void testThatQuestionWithNERangeCheckHasCorrectConstraintGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA1_ID')
 
