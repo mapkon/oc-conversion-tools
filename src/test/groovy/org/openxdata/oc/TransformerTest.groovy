@@ -167,7 +167,7 @@ class TransformerTest extends GroovyTestCase {
 
 		def version = convertedXform.form[0].children()
 
-		assertEquals "${convertedXform.form[0].'@name'}-v1", version.'@name'.text()
+		assertEquals "${convertedXform.form[0].'@name'}-v1".toString(), version.'@name'.text()
 	}
 
 	@Test void testODMDataBindsHaveFormOIDAttribute() {
