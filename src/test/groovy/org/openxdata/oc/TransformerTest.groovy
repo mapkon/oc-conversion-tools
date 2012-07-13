@@ -427,11 +427,11 @@ class TransformerTest extends GroovyTestCase {
 		assertThat "An ItemDef with Range Check must have a constraint attribute in the xform bind element", constraintAttributeName, Matchers.equalTo('constraint')
 	}
 
-	@Test void testThatQuestionWithRangeCheckHasCorrectConstraintGeneratedInTheXform() {
+	@Test void testThatQuestionWithGELERangeCheckHasCorrectConstraintGeneratedInTheXform() {
 
 		def bind = getBind('I_MSA2_MSA2_POARTNBV')
 
-		assertEquals "The constraint should equal the range check in the odm", ". &lt; 1 and . &gt; 10", bind.@constraint.toString()
+		assertEquals "The constraint should equal the range check in the odm", ". &lt;= 1 and . &gt;= 10", bind.@constraint.toString()
 	}
 
 	@Test void testThatQuestionWithRangeChecksHasAMessageGeneratedInTheXform() {
