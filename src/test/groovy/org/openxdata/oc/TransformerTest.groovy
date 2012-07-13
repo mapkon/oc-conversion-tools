@@ -62,7 +62,7 @@ class TransformerTest extends GroovyTestCase {
 		def binds = getBinds()
 
 		// The extra bindings are because of the repeat parent bindings and Header/Sub Header locked questions
-		assertEquals 71, binds.size()
+		assertEquals 72, binds.size()
 	}
 
 	@Test void testThatNumberOfBindingsInXformIsGreaterOrEqualsToNumberOfItemRefsInODM() {
@@ -539,6 +539,20 @@ class TransformerTest extends GroovyTestCase {
 		def bind = getBind('I_MSA2_MSA2_LOARTNB')
 
 		assertEquals "The message should be equal to the error message in the odm", "Please enter a vale less than or equal to three.", bind.@message.text()
+	}
+
+	@Test void testThatQuestionWithGERangeCheckHasCorrectConstraintGeneratedInTheXform() {
+
+		def bind = getBind('TEST_OID_2')
+
+		assertEquals "The constraint should equal the range check in the odm", ". &gt;= 10", bind.@constraint.toString()
+	}
+
+	@Test void testThatQuestionWithGERangeCheckHasCorrectMessageGeneratedInTheXform() {
+
+		def bind = getBind('TEST_OID_2')
+
+		assertEquals "The message should be equal to the error message in the odm", "Please enter a number Greater than or Equal to Ten.", bind.@message.text()
 	}
 
 	private def getGroups() {

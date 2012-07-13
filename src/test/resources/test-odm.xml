@@ -128,11 +128,12 @@
             	</OpenClinica:ItemGroupDetails>
             </ItemGroupDef>
             <ItemGroupDef OID="TEST_GROUP_4" Name="MSA2_POARTprecG" Repeating="Yes" SASDatasetName="MSA2_POA" Comment="Q3a2a_ If yes,">
-                <ItemRef ItemOID="I_MSA2_MSA2_POARTPREC" OrderNumber="1" Mandatory="No"/>
-                <ItemRef ItemOID="I_MSA2_MSA2_POARTNBV" OrderNumber="2" Mandatory="No"/>
-            	<ItemRef ItemOID="I_MSA1_MSA1_MOELIGREAS" OrderNumber="2" Mandatory="No"/>
-                <ItemRef ItemOID="I_MSA2_MSA2_LOARTPREC" OrderNumber="3" Mandatory="No"/>
-                <ItemRef ItemOID="TEST_OID" OrderNumber="4" Mandatory="No" />
+                <ItemRef ItemOID="TEST_OID" OrderNumber="1" Mandatory="No" />
+                <ItemRef ItemOID="TEST_OID_2" OrderNumber="2" Mandatory="Yes" />
+                <ItemRef ItemOID="I_MSA2_MSA2_POARTPREC" OrderNumber="3" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_POARTNBV" OrderNumber="4" Mandatory="No"/>
+            	<ItemRef ItemOID="I_MSA1_MSA1_MOELIGREAS" OrderNumber="5" Mandatory="No"/>
+                <ItemRef ItemOID="I_MSA2_MSA2_LOARTPREC" OrderNumber="6" Mandatory="No"/>
                 <OpenClinica:ItemGroupDetails ItemGroupOID="TEST_GROUP_4" ItemGroupName="MSA2_POARTprecG">
 	                <OpenClinica:PresentInForm FormOID="F_TEST_4" ShowGroup="Yes" FormName="MSA2: Mother Screening Assessment 2 - 1" SectionLabel="Section4">
 	                    <OpenClinica:ItemGroupRepeat RepeatNumber="1" RepeatMax="5"/>
@@ -915,6 +916,26 @@
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
                         <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
+						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
+						<OpenClinica:SectionTitle>Title 4</OpenClinica:SectionTitle>
+					</OpenClinica:ItemPresentInForm>
+				</OpenClinica:ItemDetails>
+            </ItemDef>
+            
+            <ItemDef OID="TEST_OID_2" Name="TEST_NAME" DataType="integer" Length="7" SASFieldName="TEST_SAS" Comment="Another test question">
+                <Question>
+                    <TranslatedText>
+                    Another test question that has no meaning
+                    </TranslatedText>
+                </Question>
+                <RangeCheck Comparator="GE" SoftHard="Hard">
+					<CheckValue>10</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a number Greater than or Equal to Ten.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
+                <OpenClinica:ItemDetails ItemOID="TEST_OID_2">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 4</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
