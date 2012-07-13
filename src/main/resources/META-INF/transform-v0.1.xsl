@@ -368,6 +368,16 @@
 				
 		</xsl:if>
 		
+		<xsl:if test="$pItemDef/*[local-name()='RangeCheck'][position()=1]/@Comparator = 'GT'">
+		
+			<xsl:variable name="vGTValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
+	
+			<xsl:attribute name="constraint"><![CDATA[. &gt;]]> <xsl:value-of select="$vGTValue" /></xsl:attribute>
+			<xsl:attribute name="message"><xsl:value-of
+				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
+				
+		</xsl:if>
+		
 		<xsl:if test="$pItemDef/*[local-name()='RangeCheck'][position()=1]/@Comparator = 'GE' and $pItemDef/*[local-name()='RangeCheck'][position()=2]/@Comparator = 'LE'">
 		
 			<xsl:variable name="vLECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][1]/*[local-name()='CheckValue']" />

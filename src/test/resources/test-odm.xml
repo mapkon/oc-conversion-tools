@@ -825,6 +825,12 @@
                     If yes, for how many days?
                     </TranslatedText>
                 </Question>
+                <RangeCheck Comparator="GT" SoftHard="Hard">
+					<CheckValue>2</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a number greater than two.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_L3TCNB">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:SectionLabel>Section3</OpenClinica:SectionLabel>
