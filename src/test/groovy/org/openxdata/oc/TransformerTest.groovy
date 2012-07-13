@@ -499,6 +499,20 @@ class TransformerTest extends GroovyTestCase {
 		assertEquals "The message should be equal to the error message in the odm", "Please enter a value NOT equal to Zero.", bind.@message.text()
 	}
 
+	@Test void testThatQuestionWithLTRangeCheckHasCorrectConstraintGeneratedInTheXform() {
+
+		def bind = getBind('I_MSA1_MSA1_OLD')
+
+		assertEquals "The constraint should equal the range check in the odm", ". &lt; 50", bind.@constraint.toString()
+	}
+
+	@Test void testThatQuestionWithLTRangeCheckHasCorrectMessageGeneratedInTheXform() {
+
+		def bind = getBind('I_MSA1_MSA1_OLD')
+
+		assertEquals "The message should be equal to the error message in the odm", "Please enter a value less than fifty.", bind.@message.text()
+	}
+
 	private def getGroups() {
 
 		def groups = []

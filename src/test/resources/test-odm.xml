@@ -228,6 +228,12 @@
                     If birth date not documented, how old is she?
                     </TranslatedText>
                 </Question>
+                <RangeCheck Comparator="LT" SoftHard="Hard">
+					<CheckValue>50</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a value less than fifty.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_OLD">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
@@ -256,8 +262,8 @@
                     Is she currently on HAART?
                     </TranslatedText>
                 </Question>
-                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <CodeListRef CodeListOID="CL_203"/>
+                <MeasurementUnitRef MeasurementUnitOID="MU_10&lt;SUP&gt;3&lt;/SUP&gt;/MM&lt;SUP&gt;3&lt;/SUP&gt;"/>
                 <OpenClinica:ItemDetails ItemOID="I_MSA1_MSA1_HAART">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_1" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
