@@ -832,21 +832,36 @@
 					</OpenClinica:ItemPresentInForm>
 				</OpenClinica:ItemDetails>
             </ItemDef>
-            <ItemDef OID="I_MSA2_MSA2_POARTNBV" Name="MSA2_POARTNBV" DataType="integer" Length="10" SASFieldName="MSA2_593" Comment="Number of weeks under other ART">
-                <Question>
-                    <TranslatedText>
-                    For how many weeks?
-                    </TranslatedText>
-                </Question>
-                <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_POARTNBV">
-					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4" RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
+			<ItemDef OID="I_MSA2_MSA2_POARTNBV" Name="MSA2_POARTNBV"
+				DataType="integer" Length="10" SASFieldName="MSA2_593"
+				Comment="Number of weeks under other ART">
+				<Question>
+					<TranslatedText>
+						For how many weeks?
+					</TranslatedText>
+				</Question>
+				<RangeCheck Comparator="GE" SoftHard="Hard">
+					<CheckValue>1</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a number between one and ten.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
+				<RangeCheck Comparator="LE" SoftHard="Hard">
+					<CheckValue>10</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a number between one and ten.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
+				<OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_POARTNBV">
+					<OpenClinica:ItemPresentInForm FormOID="F_TEST_4"
+						RepeatingGroupDef="TEST_GROUP_4" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
-                        <OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
+						<OpenClinica:ItemSubHeader>Sub Header</OpenClinica:ItemSubHeader>
 						<OpenClinica:SectionLabel>Section4</OpenClinica:SectionLabel>
 						<OpenClinica:SectionTitle>Title 4</OpenClinica:SectionTitle>
 					</OpenClinica:ItemPresentInForm>
 				</OpenClinica:ItemDetails>
-            </ItemDef>
+			</ItemDef>
             <ItemDef OID="I_MSA2_MSA2_LOARTPREC" Name="MSA2_LOARTPREC" DataType="text" Length="7" SASFieldName="MSA2_594" Comment="Other ART regimen during labour">
                 <Question>
                     <TranslatedText>

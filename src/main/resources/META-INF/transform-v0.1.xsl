@@ -198,6 +198,12 @@
 								<xsl:with-param name="pItemGroupOID" select="$vItemGroupOID" />
 							</xsl:call-template>
 						</xsl:if>
+						
+						<xsl:if test="$vItemDef/*[local-name()='RangeCheck']">
+							<xsl:call-template name="createRangeConstrainsts">
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</xsl:if>
 					</xf:bind>
 				</xsl:for-each>
 			</xsl:when>
@@ -246,6 +252,12 @@
 								<xsl:with-param name="pItemDef" select="$vItemDef" />
 							</xsl:call-template>
 						</xsl:if>
+
+						<xsl:if test="$vItemDef/*[local-name()='RangeCheck']">
+							<xsl:call-template name="createRangeConstrainsts">
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</xsl:if>
 					</xf:bind>
 
 				</xsl:when>
@@ -270,6 +282,13 @@
 							</xsl:call-template>
 						</xsl:if>
 
+						<xsl:if test="$vItemDef/*[local-name()='RangeCheck']">
+						
+							<xsl:call-template name="createRangeConstrainsts">
+								<xsl:with-param name="pItemDef" select="$vItemDef" />
+							</xsl:call-template>
+						</xsl:if>
+						
 					</xf:bind>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -333,6 +352,21 @@
 			select="$vOption" />'</xsl:attribute>
 		<xsl:attribute name="action">show</xsl:attribute>
 		<xsl:attribute name="required">false()</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template name="createRangeConstrainsts">
+
+		<xsl:param name="pItemDef" />
+
+		<xsl:if test="$pItemDef/*[local-name()='RangeCheck'][position()=1]/@Comparator = 'GE' and $pItemDef/*[local-name()='RangeCheck'][position()=2]/@Comparator = 'LE'">
+		
+			<xsl:variable name="vLECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][1]/*[local-name()='CheckValue']" />
+			<xsl:variable name="vGECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][2]/*[local-name()='CheckValue']" />
+
+			<xsl:attribute name="constraint"><![CDATA[. &lt;]]> <xsl:value-of select="$vLECheckValue" /> and <![CDATA[. &gt;]]> <xsl:value-of select="$vGECheckValue" /> </xsl:attribute>
+			<xsl:attribute name="message"><xsl:value-of
+				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
+		</xsl:if>
 	</xsl:template>
 	
 	<xsl:template name="appendQuestionType">

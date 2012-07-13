@@ -1,8 +1,11 @@
 package org.openxdata.oc
 
+import static org.junit.Assert.*
+
 import groovy.util.XmlParser
 import groovy.util.XmlSlurper
 
+import org.hamcrest.Matchers
 import org.junit.Test
 import org.openxdata.oc.util.TransformUtil
 
@@ -407,7 +410,53 @@ class TransformerTest extends GroovyTestCase {
 			assertEquals "Skip Logic question should not be required by default", 'false()', it.@required.text()
 		}
 	}
-		
+
+	@Test void testThatQuestionWithRangeChecksHasConstraintGeneratedInTheXform() {
+
+		def bind = getBind('I_MSA2_MSA2_POARTNBV')
+
+		assertThat "An ItemDef with Range Check must have a constraint in the xform bind element", bind.attributes().toString(), Matchers.containsString('constraint')
+	}
+
+	@Test void testThatQuestionWithRangeChecksHasCorrespondingConstraintAttributeInTheXform() {
+
+		def bind = getBind('I_MSA2_MSA2_POARTNBV')
+
+		def constraintAttributeName = bind.@constraint.name()
+
+		assertThat "An ItemDef with Range Check must have a constraint attribute in the xform bind element", constraintAttributeName, Matchers.equalTo('constraint')
+	}
+
+	@Test void testThatQuestionWithRangeCheckHasCorrectConstraintGeneratedInTheXform() {
+
+		def bind = getBind('I_MSA2_MSA2_POARTNBV')
+
+		assertEquals "The constraint should equal the range check in the odm", ". &lt; 1 and . &gt; 10", bind.@constraint.toString()
+	}
+
+	@Test void testThatQuestionWithRangeChecksHasAMessageGeneratedInTheXform() {
+
+		def bind = getBind('I_MSA2_MSA2_POARTNBV')
+
+		assertThat "An ItemDef with Range Check must have a constraint in the xform bind element", bind.attributes().toString(), Matchers.containsString('message')
+	}
+
+	@Test void testThatQuestionWithRangeChecksHasCorrespondingMessageAttributeCreatedInTheXform() {
+
+		def bind = getBind('I_MSA2_MSA2_POARTNBV')
+
+		def messageAttributeName = bind.@message.name()
+
+		assertThat "An ItemDef with Range Check must have a constraint attribute in the xform bind element", messageAttributeName, Matchers.equalTo('message')
+	}
+
+	@Test void testThatQuestionWithRangeCheckHasCorrectMessageGeneratedInTheXform() {
+
+		def bind = getBind('I_MSA2_MSA2_POARTNBV')
+
+		assertEquals "The message should be equal to the error message in the odm", "Please enter a number between one and ten.", bind.@message.text()
+	}
+
 	private def getGroups() {
 
 		def groups = []
