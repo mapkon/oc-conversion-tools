@@ -844,6 +844,12 @@
                     For how many days?
                     </TranslatedText>
                 </Question>
+                <RangeCheck Comparator="LE" SoftHard="Hard">
+					<CheckValue>3</CheckValue>
+					<ErrorMessage>
+						<TranslatedText>Please enter a vale less than or equal to three.</TranslatedText>
+					</ErrorMessage>
+				</RangeCheck>
                 <OpenClinica:ItemDetails ItemOID="I_MSA2_MSA2_LOARTNB">
 					<OpenClinica:ItemPresentInForm FormOID="F_TEST_3" Repeating="No" ColumnNumber="1" PHI="No" ShowItem="Yes">
 						<OpenClinica:ItemHeader>Header</OpenClinica:ItemHeader>
