@@ -37,11 +37,13 @@ class DefaultSubmissionProtocol {
 
 									if(isRepeat(itemGroupOID)) {
 
-										// Make sure we don't iterate over the same repeat twice.
-										if(!currentRepeat.equals(itemGroupOID)) {
+										// Extract nodes for current repeat group
+										def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
 
-											def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
-											nodes.eachWithIndex { node, idx ->
+										nodes.eachWithIndex { node, idx ->
+
+											// Make sure we don't iterate over the same repeat twice.
+											if(!currentRepeat.equals(itemGroupOID)) {
 
 												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx + 1, TransactionType:"Insert" ) {
 
@@ -51,11 +53,12 @@ class DefaultSubmissionProtocol {
 														ItemData (ItemOID:itemData.name(), Value:"$data"){
 														}
 													}
+
+													// Set current repeat
+													currentRepeat = itemGroupOID
 												}
 											}
 										}
-
-										currentRepeat = itemGroupOID
 									}
 									else {
 
