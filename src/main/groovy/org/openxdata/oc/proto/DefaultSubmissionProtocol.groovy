@@ -38,7 +38,7 @@ class DefaultSubmissionProtocol {
 									if(isRepeat(itemGroupOID)) {
 
 										// Make sure we don't iterate over the same repeat twice.
-										if(currentRepeat != itemGroupOID) {
+										if(!currentRepeat.equals(itemGroupOID)) {
 
 											def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
 											nodes.eachWithIndex { node, idx ->
@@ -46,7 +46,7 @@ class DefaultSubmissionProtocol {
 												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx + 1, TransactionType:"Insert" ) {
 
 													node.children().each { itemData ->
-														
+
 														def data = processData(itemData.text().trim())
 														ItemData (ItemOID:itemData.name(), Value:"$data"){
 														}
@@ -63,7 +63,7 @@ class DefaultSubmissionProtocol {
 										ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
 
 											itemDataNodes.each { itemData ->
-												
+
 												def data = processData(itemData.text().trim())
 												ItemData (ItemOID:itemData.name(), Value:"$data"){
 												}
@@ -147,9 +147,9 @@ class DefaultSubmissionProtocol {
 			return item.children().size() > 0
 		}
 	}
-	
+
 	def processData(def xml) {
-		
+
 		return xml.replaceAll("(?<=\\d) (?=\\d)", ",")
 	}
 }
