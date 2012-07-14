@@ -44,9 +44,8 @@ class InstanceDataHandler {
 				it.replaceNode{}
 			}
 		}
-		
-		def newXml = new StreamingMarkupBuilder().bind { 
-			mkp.yield oxdInstanceData }.toString()
+
+		def newXml = new StreamingMarkupBuilder().bind {  mkp.yield oxdInstanceData }.toString()
 
 		return newXml
 	}
