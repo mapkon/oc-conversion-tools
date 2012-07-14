@@ -5,17 +5,21 @@ import static org.junit.Assert.*
 import org.hamcrest.Matchers
 import org.junit.Before
 import org.junit.Test
-import org.openxdata.oc.data.TestData
+import org.openxdata.oc.util.TransformUtil
 
 class DefaultSubmissionProtocolTest {
 
 	def xml
+	def protocol
 	def instanceData
-	def protocol = new DefaultSubmissionProtocol()
+	def transformUtil
 
 	@Before void setUp() {
 
-		instanceData = protocol.createODMInstanceData(TestData.getOpenXdataInstanceData())
+		transformUtil = new TransformUtil()
+		protocol = new DefaultSubmissionProtocol()
+
+		instanceData = protocol.createODMInstanceData(cleanXml)
 
 		xml = new XmlParser().parseText(instanceData)
 	}
@@ -215,7 +219,7 @@ class DefaultSubmissionProtocolTest {
 		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
 		itemGroupDatas.each {
 
-			if(protocol.isRepeat(it.@ItemGroupOID) == true)
+			if(transformUtil.isRepeat(xml, it.@ItemGroupOID))
 				assertNotNull "ItemGroupRepeatKey Attribute should not be null", it.@ItemGroupRepeatKey
 		}
 	}
@@ -225,7 +229,7 @@ class DefaultSubmissionProtocolTest {
 		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
 		itemGroupDatas.each {
 
-			if(protocol.isRepeat(it.@ItemGroupOID) == true)
+			if(transformUtil.isRepeat(xml, it.@ItemGroupOID) == true)
 				assertEquals "ItemGroupRepeatKey Attribute should be 2", 2, Integer.valueOf(it.@ItemGroupRepeatKey)
 		}
 	}
@@ -233,13 +237,13 @@ class DefaultSubmissionProtocolTest {
 	@Test void testIsRepeatReturnsTrueWhenNodeIsRepeat() {
 
 		def xml = """<test><repeat></repeat></test>"""
-		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+		assertTrue "Node is Repeat", transformUtil.isRepeat("", new XmlSlurper().parseText(xml))
 	}
 
 	@Test void testIsRepeatReturnsTrueWhenNodeWithTwoChildren() {
 
 		def xml = """<test><repeat><child></child></repeat></test>"""
-		assertTrue "Node is Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+		assertTrue "Node is Repeat", transformUtil.isRepeat("", new XmlSlurper().parseText(xml))
 	}
 
 	@Test void testIsRepeatReturnsTrueWhenNodeHasTwoChildren() {
@@ -247,13 +251,13 @@ class DefaultSubmissionProtocolTest {
 		def xml = """<test><repeat><child></child></repeat></test>"""
 		def node = new XmlSlurper().parseText(xml)
 
-		assertTrue "Node is Repeat", protocol.isRepeat(node.repeat)
+		assertTrue "Node is Repeat", transformUtil.isRepeat("", node.repeat)
 	}
 
 	@Test void testIsRepeatReturnsFalseWhenNodeIsNotRepeat() {
 
 		def xml = """<test></test>"""
-		assertFalse "Node is not Repeat", protocol.isRepeat(new XmlSlurper().parseText(xml))
+		assertFalse "Node is not Repeat", transformUtil.isRepeat("", new XmlSlurper().parseText(xml))
 	}
 
 	@Test void testIsRepeatReturnsFalseWhenNodeHasTwoChildren() {
@@ -261,7 +265,7 @@ class DefaultSubmissionProtocolTest {
 		def xml = """<test><repeat><child></child></repeat></test>"""
 		def node = new XmlSlurper().parseText(xml)
 
-		assertFalse "Node is not Repeat", protocol.isRepeat(node.repeat.child)
+		assertFalse "Node is not Repeat", transformUtil.isRepeat("", node.repeat.child)
 	}
 
 	@Test void testProcessDataAddsCommasToMultipleSelectAnswers() {

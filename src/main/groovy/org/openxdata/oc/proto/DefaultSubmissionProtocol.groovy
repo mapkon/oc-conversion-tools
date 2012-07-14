@@ -1,12 +1,20 @@
 package org.openxdata.oc.proto
 
+import org.openxdata.oc.util.TransformUtil
+
 import groovy.util.logging.Log
 import groovy.xml.StreamingMarkupBuilder
 
 @Log
 class DefaultSubmissionProtocol {
 
+	def transformUtil
 	def instanceDataXml
+
+	public DefaultSubmissionProtocol() {
+
+		transformUtil = new TransformUtil()
+	}
 
 	def createODMInstanceData(def openXdataInstanceData) {
 
@@ -35,7 +43,7 @@ class DefaultSubmissionProtocol {
 
 								itemGroupOIDS.each { itemGroupOID ->
 
-									if(isRepeat(itemGroupOID)) {
+									if(transformUtil.isRepeat(instanceDataXml, oid)) {
 
 										// Extract nodes for current repeat group
 										def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
@@ -97,7 +105,7 @@ class DefaultSubmissionProtocol {
 
 		instanceDataXml.children().each {
 
-			if(isRepeat(it)) {
+			if(transformUtil.isRepeat(instanceDataXml, it)) {
 
 				it.children().each { item ->
 					if(item.@ItemGroupOID.equals(itemGroupOID)) {
@@ -123,7 +131,7 @@ class DefaultSubmissionProtocol {
 
 		instanceDataXml.children().each {
 
-			if(isRepeat(it)) {
+			if(transformUtil.isRepeat(instanceDataXml, it)) {
 				itemGroupOIDS.add(it.name())
 			}
 			else {
