@@ -151,7 +151,7 @@ class DefaultSubmissionProtocolTest {
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithItemDataNodesHavingItemOIDAttribute() {
-		def itemDataNodes = getItemDataNodes()
+		def itemDataNodes = getItemDataNodes(xml)
 		itemDataNodes.each {
 
 			def itemOID = it.@ItemOID
@@ -185,6 +185,13 @@ class DefaultSubmissionProtocolTest {
 		def formOID = xml.depthFirst().FormData[0]
 
 		assertEquals formOID.@FormOID, xml.@formKey
+	}
+
+	@Test void testThatCreateInstanceDataReturnsValidXmlWithCorrectNumberOfItemGroupDataNodes() {
+
+		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
+
+		assertEquals 4, itemGroupDatas.size()
 	}
 
 	@Test void testCreateInstanceDataReturnsXmlWithItemGroupDataElementsHavingTransactionTyeAttribute() {
@@ -279,13 +286,10 @@ class DefaultSubmissionProtocolTest {
 		assertFalse "Should not alter non-multiple select questions", xml.contains(",")
 	}
 
-	def getItemDataNodes() {
-		def itemDataNodes = []
-		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
-		itemGroupDataNodes.each {
-			itemDataNodes.add(it.children())
-		}
+	def getItemDataNodes(processedData) {
 
-		return itemDataNodes
+		return processedData.depthFirst().findAll {
+			it.name().equals('ItemData')
+		}
 	}
 }
