@@ -340,7 +340,7 @@
 		
 			<xsl:variable name="vLTValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
 	
-			<xsl:attribute name="constraint"><![CDATA[. &lt;]]> <xsl:value-of select="$vLTValue" /></xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. &lt;]]> <xsl:value-of select="$vLTValue" /></xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 				
@@ -350,7 +350,7 @@
 		
 			<xsl:variable name="vGTValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
 	
-			<xsl:attribute name="constraint"><![CDATA[. &gt;]]> <xsl:value-of select="$vGTValue" /></xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. &gt;]]> <xsl:value-of select="$vGTValue" /></xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 				
@@ -361,7 +361,7 @@
 			<xsl:variable name="vLECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][2]/*[local-name()='CheckValue']" />
 			<xsl:variable name="vGECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][1]/*[local-name()='CheckValue']" />
 
-			<xsl:attribute name="constraint"><![CDATA[. &lt;]]> <xsl:value-of select="$vLECheckValue" /> and <![CDATA[. &gt;]]> <xsl:value-of select="$vGECheckValue" /> </xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. &lt;]]> <xsl:value-of select="$vLECheckValue" /> and <![CDATA[. &gt;]]> <xsl:value-of select="$vGECheckValue" /> </xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 		</xsl:if>
@@ -370,7 +370,7 @@
 		
 			<xsl:variable name="vLTEqValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
 	
-			<xsl:attribute name="constraint"><![CDATA[. &lt;=]]> <xsl:value-of select="$vLTEqValue" /></xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. &lt;=]]> <xsl:value-of select="$vLTEqValue" /></xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 				
@@ -380,7 +380,7 @@
 		
 			<xsl:variable name="vGTEqValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
 	
-			<xsl:attribute name="constraint"><![CDATA[. &gt;=]]> <xsl:value-of select="$vGTEqValue" /></xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. &gt;=]]> <xsl:value-of select="$vGTEqValue" /></xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 				
@@ -391,7 +391,7 @@
 			<xsl:variable name="vLECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][1]/*[local-name()='CheckValue']" />
 			<xsl:variable name="vGECheckValue" select="$pItemDef/*[local-name()='RangeCheck'][2]/*[local-name()='CheckValue']" />
 
-			<xsl:attribute name="constraint"><![CDATA[. &lt;=]]> <xsl:value-of select="$vLECheckValue" /> and <![CDATA[. &gt;=]]> <xsl:value-of select="$vGECheckValue" /> </xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. &lt;=]]> <xsl:value-of select="$vLECheckValue" /> and <![CDATA[. &gt;=]]> <xsl:value-of select="$vGECheckValue" /> </xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 		</xsl:if>
@@ -400,7 +400,7 @@
 		
 			<xsl:variable name="vEqualityValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
 
-			<xsl:attribute name="constraint"><![CDATA[. =]]> <xsl:value-of select="$vEqualityValue" /></xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. =]]> <xsl:value-of select="$vEqualityValue" /></xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 		</xsl:if>
@@ -409,7 +409,7 @@
 		
 			<xsl:variable name="vNotEqValue" select="$pItemDef/*[local-name()='RangeCheck']/*[local-name()='CheckValue']" />
 
-			<xsl:attribute name="constraint"><![CDATA[. !=]]> <xsl:value-of select="$vNotEqValue" /></xsl:attribute>
+			<xsl:attribute name="constraint" disable-output-escaping="yes"><![CDATA[. !=]]> <xsl:value-of select="$vNotEqValue" /></xsl:attribute>
 			<xsl:attribute name="message"><xsl:value-of
 				select="$pItemDef/*/*[local-name()='ErrorMessage']/*[local-name()='TranslatedText'][1]" /></xsl:attribute>
 		</xsl:if>
