@@ -49,7 +49,7 @@ class DefaultSubmissionProtocol {
 
 													node.children().each { itemData ->
 
-														def data = processData(itemData.text().trim())
+														def data = processMultipleSelectValues(itemData.text().trim())
 														ItemData (ItemOID:itemData.name(), Value:"$data"){
 														}
 													}
@@ -67,7 +67,7 @@ class DefaultSubmissionProtocol {
 
 											itemDataNodes.each { itemData ->
 
-												def data = processData(itemData.text().trim())
+												def data = processMultipleSelectValues(itemData.text().trim())
 												ItemData (ItemOID:itemData.name(), Value:"$data"){
 												}
 											}
@@ -151,7 +151,7 @@ class DefaultSubmissionProtocol {
 		}
 	}
 
-	def processData(def xml) {
+	def processMultipleSelectValues(def xml) {
 
 		return xml.replaceAll("(?<=\\d) (?=\\d)", ",")
 	}
