@@ -1,14 +1,15 @@
 package org.openxdata.oc.util
 
-import org.junit.Test
-import org.openxdata.oc.InstanceDataHandler
-import org.openxdata.server.admin.model.FormData
+import groovy.util.GroovyTestCase
+import groovy.util.XmlSlurper
 
+import org.junit.Test
 
 class TransformUtilTest extends GroovyTestCase {
 
 	def xml
 	def odmFileContent
+	def xmlWithHeaders
 
 	def util = new TransformUtil()
 
@@ -22,7 +23,10 @@ class TransformUtilTest extends GroovyTestCase {
 							</item2>
 						</root>"""
 
+
 		xml = new XmlSlurper().parseText(stream)
+
+		xmlWithHeaders = util.loadFileContents("data.xml")
 
 		odmFileContent = util.loadFileContents('test-odm.xml')
 	}
@@ -85,21 +89,48 @@ class TransformUtilTest extends GroovyTestCase {
 
 	@Test void testThatIsolateRepeatsMakesRepeatsUnique() {
 
-		def xmlWithHeaders = util.loadFileContents("data.xml")
 
 		// Isolate repeating groups so protocol does not ignore them
 		def uniqueXml = util.isolateRepeats(xmlWithHeaders)
 
-		FormData formData = new FormData()
-		formData.setData(uniqueXml)
+		def xml = new XmlSlurper().parseText(uniqueXml)
 
-		def formDataList = []
-		formDataList.add(formData)
+		xml.children().each {
+			if(util.isRepeat("", it)) {
+				assertNotNull it.@repeatKey
+			}
+		}
+	}
 
-		def exportList = new InstanceDataHandler().processInstanceData(formDataList)
+	@Test void testThatIsolateRepeatsAddsCorrectRepeakKeys(){
 
-		def xml = new XmlSlurper().parseText(exportList[0])
+		// Isolate repeating groups so protocol does not ignore them
+		def uniqueXml = util.isolateRepeats(xmlWithHeaders)
 
-		assertEquals 5, xml.depthFirst().findAll {it.name().equals("ItemGroupData")}.size()
+		def xml = new XmlSlurper().parseText(uniqueXml)
+
+		def repeats = xml.depthFirst().findAll {
+			it.name().equals("IG_CLLC_CLL_OTESTG")
+		}
+
+		repeats.eachWithIndex { rpt, idx ->
+
+			// Repeat keys are added in incremental order
+			assertEquals rpt.@repeatKey, idx.toString()
+		}
+	}
+
+	@Test void testThatIsolateRepeatsAddsCorrectRepeakKeyNumber(){
+
+		// Isolate repeating groups so protocol does not ignore them
+		def uniqueXml = util.isolateRepeats(xmlWithHeaders)
+
+		def xml = new XmlSlurper().parseText(uniqueXml)
+
+		def repeatKeys = xml.depthFirst().findAll {
+			it.name().equals("IG_CLLC_CLL_OTESTG") && it.@repeatKey != null
+		}
+
+		assertEquals 4, repeatKeys.size()
 	}
 }
