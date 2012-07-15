@@ -6,11 +6,13 @@ import groovy.xml.XmlUtil
 
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.proto.DefaultSubmissionProtocol
+import org.openxdata.oc.util.TransformUtil
 import org.openxdata.server.admin.model.FormData
 
 @Log
 class InstanceDataHandler {
 
+	def transformUtil = new TransformUtil()
 	def submissionProtocol = new DefaultSubmissionProtocol()
 
 	/**
@@ -53,19 +55,20 @@ class InstanceDataHandler {
 		return odmInstanceData
 	}
 
-	def cleanXml(def xml) {
+	def cleanXml(def input) {
 
-		def oxdInstanceData = new XmlSlurper().parseText(xml)
+		// Isolate repeats if any
+		def xml = transformUtil.isolateRepeats(input)
 
-		oxdInstanceData.children().each {
+		def instanceData = new XmlSlurper().parseText(xml)
+
+		instanceData.children().each {
 			String name = it.name()
 			if(name.endsWith("_HEADER")) {
 				it.replaceNode{}
 			}
 		}
 
-		def newXml = new StreamingMarkupBuilder().bind {  mkp.yield oxdInstanceData }.toString()
-
-		return newXml
+		return new StreamingMarkupBuilder().bind {  mkp.yield instanceData }.toString()
 	}
 }

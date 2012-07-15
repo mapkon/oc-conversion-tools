@@ -53,39 +53,47 @@ class DefaultSubmissionProtocol {
 
 							FormData(FormOID:instanceDataXml.@formKey) {
 
-								def currentRepeat
+								def currentRepeat = null
 
-								itemGroupOIDS.each { itemGroupOID ->
+								itemGroupOIDS.each { oid ->
 
 									if(transformUtil.isRepeat(instanceDataXml, oid)) {
 
-										// Extract nodes for current repeat group
-										def nodes = instanceDataXml.children().findAll { it.name().equals(itemGroupOID) }
+										// Use repeat only once since we return all nodes for a given repeat.
+										if(!currentRepeat.equals(oid)) {
 
-										nodes.eachWithIndex { node, idx ->
+											// Extract nodes for this repeat
+											def repeats = instanceDataXml.depthFirst().findAll {
+												it.name().equals(oid)
+											}
 
-											// Make sure we don't iterate over the same repeat twice.
-											if(!currentRepeat.equals(itemGroupOID)) {
+											repeats.eachWithIndex {repeatOID, id ->
 
-												ItemGroupData(ItemGroupOID:itemGroupOID, ItemGroupRepeatKey:idx + 1, TransactionType:"Insert" ) {
+												// Extract nodes for current repeat group (taking into account the repeat key)
+												def nodes = instanceDataXml.children().findAll { it.name().equals(oid) && it.@repeatKey.equals(id) }
 
-													node.children().each { itemData ->
+												nodes.eachWithIndex { node, idx ->
 
-														def data = processMultipleSelectValues(itemData.text().trim())
-														ItemData (ItemOID:itemData.name(), Value:"$data"){
+													ItemGroupData(ItemGroupOID:oid, ItemGroupRepeatKey:id + 1, TransactionType:"Insert" ) {
+
+														node.children().each { itemData ->
+
+															def data = processMultipleSelectValues(itemData.text().trim())
+															ItemData (ItemOID:itemData.name(), Value:"$data"){
+															}
 														}
 													}
-
-													// Set current repeat
-													currentRepeat = itemGroupOID
 												}
 											}
 										}
+
+										// Set current repeat so we dont iterate twice
+										currentRepeat = oid
 									}
 									else {
 
-										def itemDataNodes = getItemGroupDataNodes(itemGroupOID)
-										ItemGroupData(ItemGroupOID:itemGroupOID, TransactionType:"Insert" ) {
+										def itemDataNodes = getItemGroupDataNodes(oid)
+										ItemGroupData(ItemGroupOID:oid, TransactionType:"Insert" ) {
 
 											itemDataNodes.each { itemData ->
 
@@ -110,7 +118,9 @@ class DefaultSubmissionProtocol {
 
 	private def getSubjectKey() {
 
-		return instanceDataXml.depthFirst().find { it.name().equals("subjectkey")}.text()
+		return instanceDataXml.depthFirst().find {
+			it.name().equals("subjectkey")
+		}.text()
 	}
 
 	private def getItemGroupDataNodes(String itemGroupOID) {
@@ -129,7 +139,7 @@ class DefaultSubmissionProtocol {
 			}
 		}
 
-		def matchingItemNodes = instanceDataXml.children().findAll { it.@ItemGroupOID == itemGroupOID}
+		def matchingItemNodes = instanceDataXml.children().findAll { it.@ItemGroupOID == itemGroupOID }
 
 		matchingItemNodes.each {
 			if(it.children().size() == 0){
@@ -159,22 +169,8 @@ class DefaultSubmissionProtocol {
 		return itemGroupOIDS
 	}
 
-	public boolean isRepeat(def item) {
+	def processMultipleSelectValues(def data) {
 
-		if(item instanceof String) {
-
-			def node = instanceDataXml.children().find { it.name().is(item) }
-
-			if(node.children() != null)
-				return node.children().size() > 0
-
-		}else {
-			return item.children().size() > 0
-		}
-	}
-
-	def processMultipleSelectValues(def xml) {
-
-		return xml.replaceAll("(?<=\\d) (?=\\d)", ",")
+		return data.replaceAll("(?<=\\d) (?=\\d)", ",")
 	}
 }

@@ -12,44 +12,34 @@ import org.openxdata.oc.model.StudySubject
 class TestData {
 
 	static def createImportMessages(){
-		
+
 		def messages = [:]
-		
+
 		messages.put("F_MSA2_1",'Success')
 		messages.put("key1", "Fail: Incorrect FormData OID")
 		messages.put("F_MSA2_2", 'Success')
 		messages.put("key3", 'Fail: Subject key not found')
-		
+
 		return messages
 	}
-	
+
 	static def getCRFWebServiceResponse() {
-		
+
 		def response = new TransformUtil().loadFileContents("crf-metadata-response.xml")
 	}
-	
+
 	static def getConvertedXform() {
-		
+
 		def response = new TransformUtil().loadFileContents("test-converted-xform.xml")
-		
+
 		return new XmlSlurper().parseText(response)
-		
 	}
-	
+
 	static def getOpenXdataInstanceData() {
-		
+
 		def instanceData = '''
 								<ODM StudyOID="S_12175" MetaDataVersionOID="v1.0.0" Description="This Xform was converted from an ODM file using the oc-conversion-tools" formKey="F_MSA2_1" name="SC2" StudyEventOID="SE_SC2" id="7" xmlns:xf="http://www.w3.org/2002/xforms">
 								  <subjectkey>Foo_Key</subjectkey>
-								  <IG_MSA2_MSA2_POARTPRECG>
-								    <xf:I_MSA2_MSA2_POARTPREC>Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV>3</xf:I_MSA2_MSA2_POARTNBV>
-								    <xf:I_MSA2_MSA2_POARTPREC>Quinin</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV>2</xf:I_MSA2_MSA2_POARTNBV>
-								    <xf:I_MSA2_MSA2_POARTPREC>Panadol</xf:I_MSA2_MSA2_POARTPREC>
-								    <xf:I_MSA2_MSA2_POARTNBV>4</xf:I_MSA2_MSA2_POARTNBV>
-									<xf:I_MSA2_MSA2_POARTNBV_MULT>1 2 3 4</xf:I_MSA2_MSA2_POARTNBV_MULT>
-								  </IG_MSA2_MSA2_POARTPRECG>
 								  <I_MSA2_INIT ItemGroupOID="IG_MSA2_UNGROUPED">CTK</I_MSA2_INIT>
 								  <I_MSA2_FROMD ItemGroupOID="IG_MSA2_UNGROUPED">2012-02-07</I_MSA2_FROMD>
 								  <I_MSA2_IDV ItemGroupOID="IG_MSA2_UNGROUPED">009</I_MSA2_IDV>
@@ -75,43 +65,57 @@ class TestData {
 								  <I_MSA2_MSA2_L3TCNB2 ItemGroupOID="IG_MSA2_UNGROUPED_2">4</I_MSA2_MSA2_L3TCNB2>
 								  <I_MSA2_MSA2_HAART_T ItemGroupOID="IG_MSA2_MSA2_POARTPRECG2">0</I_MSA2_MSA2_HAART_T>
 
+								  <IG_MSA2_MSA2_POARTPRECG>
+								    <xf:I_MSA2_MSA2_POARTPREC>Chloroquine</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>3</xf:I_MSA2_MSA2_POARTNBV>
+									<xf:I_MSA2_MSA2_POARTNBV_MULT>1 2 3 4</xf:I_MSA2_MSA2_POARTNBV_MULT>
+								  </IG_MSA2_MSA2_POARTPRECG>
+								  <IG_MSA2_MSA2_POARTPRECG>
+									<xf:I_MSA2_MSA2_POARTPREC>Quinin</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>2</xf:I_MSA2_MSA2_POARTNBV>
+									<xf:I_MSA2_MSA2_POARTNBV_MULT>1 2 3 4</xf:I_MSA2_MSA2_POARTNBV_MULT>
+								  </IG_MSA2_MSA2_POARTPRECG>
+								  <IG_MSA2_MSA2_POARTPRECG>
+									<xf:I_MSA2_MSA2_POARTPREC>Panadol</xf:I_MSA2_MSA2_POARTPREC>
+								    <xf:I_MSA2_MSA2_POARTNBV>4</xf:I_MSA2_MSA2_POARTNBV>
+									<xf:I_MSA2_MSA2_POARTNBV_MULT>1 2 3 4</xf:I_MSA2_MSA2_POARTNBV_MULT>
+								  </IG_MSA2_MSA2_POARTPRECG>
 								</ODM>'''
-		
+
 		return instanceData
 	}
 
 	static List<FormData> getInstanceData() {
-		
+
 		def formData = new FormData()
 		formData.setData(TestData.getOpenXdataInstanceData())
 
 		def instanceDataList = []
 		instanceDataList.add(formData)
-		
+
 		return instanceDataList
 	}
-	
+
 	static def getStudySubjectEventWebServiceResponse() {
-		
+
 		def events = new TransformUtil().loadFileContents("subject-event-response.xml")
 	}
-	
+
 	static def getStudySubjects() {
-		
+
 		def response = new TransformUtil().loadFileContents("subject-event-response.xml")
-		
+
 		def xml = new XmlSlurper().parseText(response)
-		
+
 		return xml.depthFirst().find { it.name().equals("studySubjects") }
-		
 	}
-        
+
 	static List<StudySubject> getStudySubjectsAsList() {
-		
+
 		def subjects = []
-		
+
 		def subjectEventNode = getStudySubjects()
-		
+
 		subjectEventNode.studySubject.each {
 
 			def subject = new StudySubject(it)
@@ -120,7 +124,7 @@ class TestData {
 
 		return subjects
 	}
-	
+
 	static def studySubjectListSOAPResponse = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 										   <SOAP-ENV:Header/>
 										   <SOAP-ENV:Body>

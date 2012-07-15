@@ -5,6 +5,7 @@ import static org.junit.Assert.*
 import org.hamcrest.Matchers
 import org.junit.Before
 import org.junit.Test
+import org.openxdata.oc.data.TestData
 import org.openxdata.oc.util.TransformUtil
 
 class DefaultSubmissionProtocolTest {
@@ -18,6 +19,9 @@ class DefaultSubmissionProtocolTest {
 
 		transformUtil = new TransformUtil()
 		protocol = new DefaultSubmissionProtocol()
+
+		// Because we bypass the instance handler, we have to clean the xml manually
+		def cleanXml = transformUtil.isolateRepeats(TestData.getOpenXdataInstanceData())
 
 		instanceData = protocol.createODMInstanceData(cleanXml)
 
@@ -123,27 +127,29 @@ class DefaultSubmissionProtocolTest {
 
 	@Test void testCreateInstanceDataReturnsValidXmlWith3ItemGroupDataNodes() {
 
-		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
+		def itemGroupDataNodes = xml.depthFirst().findAll {
+			it.name().equals("ItemGroupData")
+		}
 
-		assertEquals 4, itemGroupDataNodes.size()
+		assertEquals 6, itemGroupDataNodes.size()
 	}
 
 	@Test void testCreateInsanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemGroupOIDAttribute() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 'IG_MSA2_MSA2_POARTPRECG', itemGroupDataNodes[0].@ItemGroupOID.toString()
+		assertEquals 'IG_MSA2_UNGROUPED', itemGroupDataNodes[0].@ItemGroupOID.toString()
 	}
 
 	@Test void testCreateInsanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemGroupOIDAttribute1() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 'IG_MSA2_UNGROUPED', itemGroupDataNodes[1].@ItemGroupOID.toString()
+		assertEquals 'IG_MSA2_UNGROUPED_2', itemGroupDataNodes[1].@ItemGroupOID.toString()
 	}
 
 	@Test void testCreateInsanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemGroupOIDAttribute2() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 'IG_MSA2_UNGROUPED_2', itemGroupDataNodes[2].@ItemGroupOID.toString()
+		assertEquals 'IG_MSA2_MSA2_POARTPRECG2', itemGroupDataNodes[2].@ItemGroupOID.toString()
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithItemGroupDataNodesHavingItemDataNodes() {
@@ -168,20 +174,20 @@ class DefaultSubmissionProtocolTest {
 
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 7, itemGroupDataNodes[0].children().size()
+		assertEquals 22, itemGroupDataNodes[0].children().size()
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithSecondItemGroupDataHavingTwentyTwoItemDataNodes() {
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 22, itemGroupDataNodes[1].children().size()
+		assertEquals 1, itemGroupDataNodes[1].children().size()
 	}
 
 	@Test void testCreateInstanceDataReturnsValidXmlWithThirdItemGroupDataHaving1ItemDataNodes() {
 
 		def itemGroupDataNodes = xml.ClinicalData.SubjectData.StudyEventData.FormData.ItemGroupData
 
-		assertEquals 1, itemGroupDataNodes[2].children().size()
+		assertEquals 3, itemGroupDataNodes[3].children().size()
 	}
 
 	@Test void testCreateInstanceDataReturnsXmlWithFormDataOIDEqualingFormKey() {
@@ -195,7 +201,7 @@ class DefaultSubmissionProtocolTest {
 
 		def itemGroupDatas = xml.depthFirst().FormData.ItemGroupData
 
-		assertEquals 4, itemGroupDatas.size()
+		assertEquals 6, itemGroupDatas.size()
 	}
 
 	@Test void testCreateInstanceDataReturnsXmlWithItemGroupDataElementsHavingTransactionTyeAttribute() {
@@ -270,14 +276,14 @@ class DefaultSubmissionProtocolTest {
 
 	@Test void testProcessDataAddsCommasToMultipleSelectAnswers() {
 
-		def xml = protocol.processData("1 2 3 4")
+		def xml = protocol.processMultipleSelectValues("1 2 3 4")
 
 		assertThat xml, Matchers.containsString(',')
 	}
 
 	@Test void testProcessDataAdds3CommasWhenTheValuesAre4() {
 
-		def xml = protocol.processData("1 2 3 4")
+		def xml = protocol.processMultipleSelectValues("1 2 3 4")
 		int commaCount = xml.replaceAll("[^,]", "").length()
 
 		assertEquals "The commas should be equal to number of values - 1", 3, commaCount
@@ -285,7 +291,7 @@ class DefaultSubmissionProtocolTest {
 
 	@Test void testThatProcessDoesNotAlterMultipleAnswersWhichAreNotNumbers() {
 
-		def xml = protocol.processData("we all know remi is a kool dumb ass")
+		def xml = protocol.processMultipleSelectValues("we all know remi is a kool dumb ass")
 
 		assertFalse "Should not alter non-multiple select questions", xml.contains(",")
 	}

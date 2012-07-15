@@ -1,6 +1,8 @@
 package org.openxdata.oc.util
 
 import org.junit.Test
+import org.openxdata.oc.InstanceDataHandler
+import org.openxdata.server.admin.model.FormData
 
 
 class TransformUtilTest extends GroovyTestCase {
@@ -76,8 +78,28 @@ class TransformUtilTest extends GroovyTestCase {
 
 	@Test void testThatIsRepeatReturnsFalseWhenPassedJustAnXMLNodeThatIsNotARepeat() {
 
-		def node = new XmlSlurper().parseText("<item/>")
+		def node = new XmlSlurper().parseText("<item>1</item>")
 
 		assertFalse util.isRepeat("", node)
+	}
+
+	@Test void testThatIsolateRepeatsMakesRepeatsUnique() {
+
+		def xmlWithHeaders = util.loadFileContents("data.xml")
+
+		// Isolate repeating groups so protocol does not ignore them
+		def uniqueXml = util.isolateRepeats(xmlWithHeaders)
+
+		FormData formData = new FormData()
+		formData.setData(uniqueXml)
+
+		def formDataList = []
+		formDataList.add(formData)
+
+		def exportList = new InstanceDataHandler().processInstanceData(formDataList)
+
+		def xml = new XmlSlurper().parseText(exportList[0])
+
+		assertEquals 5, xml.depthFirst().findAll {it.name().equals("ItemGroupData")}.size()
 	}
 }
