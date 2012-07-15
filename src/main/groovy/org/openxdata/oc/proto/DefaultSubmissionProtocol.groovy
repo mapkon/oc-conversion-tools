@@ -16,10 +16,24 @@ class DefaultSubmissionProtocol {
 		transformUtil = new TransformUtil()
 	}
 
-	def createODMInstanceData(def openXdataInstanceData) {
+	/**
+	 * Creates instance data that conforms to the ODM specification. 
+	 * 
+	 * <p>
+	 * 
+	 * <b>Note:</b>
+	 * <p>
+	 * 
+	 * This method assumes that the data (including repeating items) are unique or else it generates duplicate data.
+	 * 
+	 * @param instanceData the instance data to process
+	 * 
+	 * @return correctly formatted instance data conforming to the ODM specification.
+	 */
+	def createODMInstanceData(def instanceData) {
 
 		def xml
-		instanceDataXml = new XmlSlurper().parseText(openXdataInstanceData)
+		instanceDataXml = new XmlSlurper().parseText(instanceData)
 
 		log.info("Creating OpenClinica Instance Data for Form: " + instanceDataXml.@formKey)
 

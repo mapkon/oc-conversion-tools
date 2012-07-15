@@ -13,14 +13,33 @@ class InstanceDataHandler {
 
 	def submissionProtocol = new DefaultSubmissionProtocol()
 
-	List<String> processInstanceData(List<FormData> instanceData){
+	/**
+	 * Process a given list of {@link FormData} items. 
+	 * 
+	 * <p>
+	 * 
+	 * <b>Note:</b>
+	 * 
+	 * <p>
+	 * This method does a couple of other routines:
+	 * 
+	 * <ul>
+	 * <li>Cleaning the XML to remove the ItemHeader/SubHeader visual elements that were added during conversion)
+	 * <li>Isolating repeat groups so that they are unique by add a {@code repeatkey} attribute to xform repeating elements.
+	 * </ul>
+	 * 
+	 * @param instanceDataList List of {@link FormData} items with valid data as xml
+	 * 
+	 * @return List of processed ODM instance data elements conforming to the ODM spec.
+	 */
+	List<String> processInstanceData(List<FormData> instanceDataList){
 
-		if(instanceData.isEmpty())
+		if(instanceDataList.isEmpty())
 			throw new ImportException('Cannot process empty instance data.')
 
 		def odmInstanceData = []
 
-		instanceData.each {
+		instanceDataList.each {
 
 			def xml = cleanXml(it.getData())
 
