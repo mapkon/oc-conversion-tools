@@ -81,7 +81,7 @@ class OpenClinicaServletTest extends GroovyTestCase {
 
 		Mockito.verify(service, Mockito.atLeastOnce()).importOpenClinicaStudy("oid")
 
-		assertEquals 'OpenClinica Study successfully converted and Imported', message.get("")
+		assertEquals 'OpenClinica Study with oid: oid successfully converted and Imported', message.get("")
 	}
 
 	@Test public void testDownloadStudyReturnsValidStudyWithCorrectNameInAttribute() {
