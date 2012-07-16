@@ -144,7 +144,7 @@ public class OpenClinicaServlet extends HttpServlet {
 
 				study = fetchAndSaveStudy(oid);
 
-				map.put("", "OpenClinica Study successfully converted and Imported");
+				map.put("", "OpenClinica Study with oid: " + oid + " successfully converted and Imported");
 
 				request.setAttribute("message", map);
 
