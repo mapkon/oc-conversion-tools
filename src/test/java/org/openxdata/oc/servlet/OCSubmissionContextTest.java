@@ -27,38 +27,38 @@ public class OCSubmissionContextTest {
 	private Properties props;
 	private StudyDef convertedStudy;
 	private OCSubmissionContext instance;
-	
+
 	@Mock
 	private OpenClinicaService ocService;
-	
+
 	@Mock
 	private StudyManagerService studyManagerService;
 	private static List<StudySubject> studySubjects;
 
 	@Before
 	public void setUp() {
-		
+
 		studySubjects = TestData.getStudySubjectsAsList();
-		
+
 		StudyImporter importer = new StudyImporter(TestData.getConvertedXform());
-		
+
 		// Extract study
 		convertedStudy = (StudyDef) importer.extractStudy();
-		
+
 		MockitoAnnotations.initMocks(this);
-		
+
 		props = new Properties();
 		props.setProperty("studyOID", "Test Study");
-		
+
 		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
-		
+
 		instance.setStudyManagerService(studyManagerService);
 
 	}
 
 	@Test
 	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
-		
+
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(convertedStudy);
 
 		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
@@ -120,7 +120,7 @@ public class OCSubmissionContextTest {
 			if (tmpStudySubj.getSubjectOID().toString().equals("TEST_SUBJECT_EVENT"))
 				studySubject = tmpStudySubj;
 		}
-		
+
 		List<Object[]> workitems = instance.studySubjectToWorkItems(studySubject, convertedStudy);
 
 		assertThat("The number of workitems are supposed to be 2", workitems.size(), is(2));
