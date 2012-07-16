@@ -35,7 +35,6 @@ public class TransformUtil {
 
 		log.info("Checking xml for repeats")
 
-		def updatedXml
 		def xml = new XmlSlurper().parseText(input)
 
 		xml.children().each {
@@ -51,14 +50,14 @@ public class TransformUtil {
 				repeats.eachWithIndex {node, idx ->
 
 					node.@repeatKey = "${idx}"
-
-					// get the modified XML and check that it worked
-					def outputBuilder = new StreamingMarkupBuilder()
-
-					updatedXml = outputBuilder.bind{ mkp.yield xml }
 				}
 			}
 		}
+
+		// get the modified XML and check that it worked
+		def outputBuilder = new StreamingMarkupBuilder()
+
+		def updatedXml = outputBuilder.bind{ mkp.yield xml }
 
 		return updatedXml.toString()
 	}

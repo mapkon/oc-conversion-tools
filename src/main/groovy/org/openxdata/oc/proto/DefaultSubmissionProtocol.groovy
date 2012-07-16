@@ -53,14 +53,14 @@ class DefaultSubmissionProtocol {
 
 							FormData(FormOID:instanceDataXml.@formKey) {
 
-								def currentRepeat = null
+								def processedRepeats = []
 
 								itemGroupOIDS.each { oid ->
 
 									if(transformUtil.isRepeat(instanceDataXml, oid)) {
 
 										// Use repeat only once since we return all nodes for a given repeat.
-										if(!currentRepeat.equals(oid)) {
+										if(!processedRepeats.contains(oid)) {
 
 											// Extract nodes for this repeat
 											def repeats = instanceDataXml.depthFirst().findAll {
@@ -88,7 +88,7 @@ class DefaultSubmissionProtocol {
 										}
 
 										// Set current repeat so we dont iterate twice
-										currentRepeat = oid
+										processedRepeats.add(oid)
 									}
 									else {
 
