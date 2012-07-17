@@ -1,12 +1,14 @@
 package org.openxdata.oc.proto
 
 import static org.junit.Assert.*
+import groovy.xml.XmlUtil
 
 import org.hamcrest.Matchers
 import org.junit.Before
 import org.junit.Test
 import org.openxdata.oc.data.TestData
 import org.openxdata.oc.util.TransformUtil
+import org.springframework.util.StringUtils
 
 class DefaultSubmissionProtocolTest {
 
@@ -279,6 +281,29 @@ class DefaultSubmissionProtocolTest {
 		def xml = protocol.processMultipleSelectValues("1 2 3 4")
 
 		assertThat xml, Matchers.containsString(',')
+	}
+
+	@Test void testProcessDataAddsCorrectNumberCommasToMultipleSelectAnswers() {
+
+		def xml = protocol.processMultipleSelectValues("1 2 3 4")
+
+		assertEquals 3, StringUtils.countOccurrencesOf(xml, ",")
+	}
+
+	@Test void testProcessDataAddsCommasToMultipleSelectAnswersWithMultipleDigits() {
+
+		def xml = protocol.processMultipleSelectValues("11 22 33 44")
+
+		println XmlUtil.serialize(xml)
+
+		assertThat xml, Matchers.containsString(',')
+	}
+
+	@Test void testProcessDataAddsCorrectNumberCommasToMultipleSelectAnswers2() {
+
+		def xml = protocol.processMultipleSelectValues("11 22 33 44 55")
+
+		assertEquals 4, StringUtils.countOccurrencesOf(xml, ",")
 	}
 
 	@Test void testProcessDataAdds3CommasWhenTheValuesAre4() {

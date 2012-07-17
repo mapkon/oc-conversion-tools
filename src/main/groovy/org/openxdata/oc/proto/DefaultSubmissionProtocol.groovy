@@ -171,6 +171,7 @@ class DefaultSubmissionProtocol {
 
 	def processMultipleSelectValues(def data) {
 
+		// Replaces any space preceded by digit(s) AND followed by digit(s) with a comma.
 		return data.replaceAll("(?<=\\d) (?=\\d)", ",")
 	}
 }
