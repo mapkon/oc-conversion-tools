@@ -1,5 +1,6 @@
 package org.openxdata.oc.servlet;
 
+import java.util.Collection;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -7,12 +8,15 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.model.StudySubject;
@@ -53,6 +57,10 @@ public class OCSubmissionContextTest {
 		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
 
 		instance.setStudyManagerService(studyManagerService);
+
+		Map<Integer, String> mappedStudyNames = new HashMap<Integer, String>();
+		mappedStudyNames.put(convertedStudy.getId(), convertedStudy.getName());
+		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(mappedStudyNames);
 
 	}
 
@@ -134,6 +142,26 @@ public class OCSubmissionContextTest {
 				fail("None of the expected Workitems were found");
 		}
 
+	}
+
+	@Test
+	public void testAvailableWorkitemReturnsEmptListIfOCStudyAccessIsProhibited() {
+
+		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(convertedStudy);
+
+		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(null);
+		List<Object[]> availableWorkitems = instance.availableWorkitems();
+		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
+
+		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(Collections.EMPTY_MAP);
+		availableWorkitems = instance.availableWorkitems();
+		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
+
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		map.put(Integer.SIZE, "Blah Blah");
+		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(map);
+		availableWorkitems = instance.availableWorkitems();
+		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 	}
 
 	private String getStudyName() {

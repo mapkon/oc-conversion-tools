@@ -164,6 +164,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 				return null;
 			}
 			study = studyManagerService.getStudyByKey(property);
+			if (!isMappedToStudy(study)) {
+				log.info("**Access not allowed to OC Converted study hence no workitems will be created");
+				study = null;
+			}
 		} catch (Exception e) {
 			log.error("Failed to get openclinica study" + e.getMessage());
 			log.trace("Failed to get openclinica study", e);
@@ -171,6 +175,13 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		return study;
 
+	}
+
+	private boolean isMappedToStudy(StudyDef study) {
+		Map<Integer, String> studyNames = studyManagerService.getStudyNamesForCurrentUser();
+		if (study == null)
+			return false;
+		return studyNames != null && studyNames.containsKey(study.getId());
 	}
 
 	private FormDef getFormByDescription(StudyDef def, String description) {
