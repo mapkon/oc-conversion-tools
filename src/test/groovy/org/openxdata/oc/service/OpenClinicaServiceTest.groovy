@@ -297,22 +297,6 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		}
 	}
 
-	private createResponse(message) {
-
-		def responses = [:]
-		responses.put("Foo_Key", message)
-
-		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(responses)
-	}
-
-	private FormData createFormData() {
-
-		def formData = new FormData()
-		formData.setId(1)
-		formData.setData("""<ODM formKey="Foo_Key"/>""")
-		return formData
-	}
-
 	@Test public void testThatExportFormDataExportsAGivenFormDataWithCorrectSuccessMessage() {
 
 		createResponse("Success")
@@ -365,5 +349,21 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		def xml = """<ODM formKey="Foo_Key"/>"""
 
 		assertNotSame "Foo_Key", openClinicaService.extractKey(xml)
+	}
+
+	private createResponse(message) {
+
+		def responses = [:]
+		responses.put("Foo_Key", message)
+
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(responses)
+	}
+
+	private FormData createFormData() {
+
+		def formData = new FormData()
+		formData.setId(1)
+		formData.setData("""<ODM formKey="Foo_Key"/>""")
+		return formData
 	}
 }

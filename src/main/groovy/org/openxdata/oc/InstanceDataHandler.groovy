@@ -41,15 +41,20 @@ class InstanceDataHandler {
 
 		def odmInstanceData = []
 
-		instanceDataList.each {
+		for(FormData data : instanceDataList) {
 
-			def xml = cleanXml(it.getData())
+			try {
+				def xml = cleanXml(data.getData())
 
-			def ocData = submissionProtocol.createODMInstanceData(xml)
+				def ocData = submissionProtocol.createODMInstanceData(xml)
 
-			odmInstanceData.add(ocData)
+				odmInstanceData.add(ocData)
 
-			log.info("Processing converted instance data: ${XmlUtil.serialize(ocData)}")
+				log.info("Processing converted instance data: ${XmlUtil.serialize(ocData)}")
+			} catch(Exception ex) {
+
+				log.info("Error occurred while trying to process instance data with id: ${data.getId()} for export: ${ex.getLocalizedMessage()}")
+			}
 		}
 
 		return odmInstanceData
