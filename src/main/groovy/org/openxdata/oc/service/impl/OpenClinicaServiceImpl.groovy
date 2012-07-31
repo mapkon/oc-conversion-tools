@@ -120,7 +120,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 		List<FormData> dataList = dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 
-		log.info("Running OpenClinica Export Routine to export " + dataList.size()	+ " form data item(s)")
+		log.info("Running OpenClinica Export Routine to export ${dataList.size()} form data item(s)")
 
 		def exportResponseMessages = buildResponseMessage(dataList)
 
@@ -169,9 +169,11 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 	private resetExportFlag(formData) {
 
-		log.info("Resetting Export Flag for form data with id: " + formData.getId())
+		log.info("Resetting Export Flag for form data with id: ${formData.getId()}")
 
 		dataExportService.setFormDataExported(formData, ExportConstants.EXPORT_BIT_OPENCLINICA)
+
+		// To enable working with the form data during testing
 		formData.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
 
