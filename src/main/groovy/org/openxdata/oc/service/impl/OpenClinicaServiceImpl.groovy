@@ -162,12 +162,47 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 			def xml = new XmlSlurper().parseText(it.getData())
 
 			if(key.equals(xml.@formKey.text())) {
-				log.info("Resetting Export Flag for form data with id: " + it.getId())
-
-				dataExportService.setFormDataExported(it, ExportConstants.EXPORT_BIT_OPENCLINICA)
-				it.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
+				resetExportFlag(it)
 			}
 		}
+	}
+
+	private resetExportFlag(formData) {
+
+		log.info("Resetting Export Flag for form data with id: " + formData.getId())
+
+		dataExportService.setFormDataExported(formData, ExportConstants.EXPORT_BIT_OPENCLINICA)
+		formData.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
+	}
+
+	public String exportFormData(FormData formData) {
+
+		def formDataList = []
+
+		log.info("Exporting FormData with id: ${formData.getId()}")
+
+		formDataList.add(formData)
+
+		def response = buildResponseMessage(formDataList)
+
+		def formKey = extractKey(formData.getData())
+
+		def resp = response.get(formKey)
+
+		if(resp.equals("Success")) {
+			resetExportFlag(formData)
+		}
+
+		log.info("Export of Form Data with id: ${formData.getId()} finished with message: ${resp}")
+
+		return response.get(formKey)
+	}
+
+	def extractKey(def xml) {
+
+		def slurpedXml = new XmlSlurper().parseText(xml)
+
+		return slurpedXml.@formKey.toString()
 	}
 
 	public void setStudyService(StudyManagerService studyService) {
@@ -180,27 +215,5 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 	public void setDataExportService(DataExportService dataExportService) {
 		this.dataExportService = dataExportService
-	}
-
-	public String exportFormData(FormData formData) {
-
-		def formDataList = []
-
-		log.info("Exporting FormData with id: " + formData.getId())
-
-		formDataList.add(formData)
-
-		def response = buildResponseMessage(formDataList)
-
-		def formKey = extractKey(formData.getData())
-
-		return response.get(formKey)
-	}
-
-	def extractKey(def xml) {
-
-		def slurpedXml = new XmlSlurper().parseText(xml)
-
-		return slurpedXml.@formKey.toString()
 	}
 }

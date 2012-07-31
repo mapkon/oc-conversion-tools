@@ -297,16 +297,26 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		}
 	}
 
-	@Test public void testThatExportFormDataExportsAGivenFormDataWithCorrectSuccessMessage() {
+	private createResponse(message) {
 
 		def responses = [:]
-		responses.put("Foo_Key", "Success")
+		responses.put("Foo_Key", message)
 
 		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(responses)
+	}
+
+	private FormData createFormData() {
 
 		def formData = new FormData()
 		formData.setId(1)
 		formData.setData("""<ODM formKey="Foo_Key"/>""")
+		return formData
+	}
+
+	@Test public void testThatExportFormDataExportsAGivenFormDataWithCorrectSuccessMessage() {
+
+		createResponse("Success")
+		def formData = createFormData()
 
 		def response = openClinicaService.exportFormData(formData)
 
@@ -315,18 +325,32 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testThatExportFormDataExportsAGivenFormDataWithCorrectFailureMessage() {
 
-		def responses = [:]
-		responses.put("Foo_Key", "Some Failure Message")
-
-		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(responses)
-
-		def formData = new FormData()
-		formData.setId(1)
-		formData.setData("""<ODM formKey="Foo_Key"/>""")
+		createResponse("Some Failure Message")
+		def formData = createFormData()
 
 		def response = openClinicaService.exportFormData(formData)
 
 		assertEquals "Some Failure Message", response
+	}
+
+	@Test void testThatExportFormDataResetsExportFlagOnSuccessfulExportToOpenClinica() {
+
+		createResponse("Success")
+		def formData = createFormData()
+
+		openClinicaService.exportFormData(formData)
+
+		assertTrue "Should reset export flag", formData.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
+	}
+
+	@Test void testThatExportFormDataDoesNotResetExportFlagOnFailedExportToOpenClinica() {
+
+		createResponse("Some Failure Message")
+		def formData = createFormData()
+
+		openClinicaService.exportFormData(formData)
+
+		assertFalse "Should not reset export flag on failed OpenClinica Export", formData.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
 
 	@Test public void testExtractKeyExtractsCorrectKey() {
