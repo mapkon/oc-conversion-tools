@@ -132,15 +132,22 @@ public class OpenClinicaServlet extends HttpServlet {
 		HashMap<String, String> map = new HashMap<String, String>();
 		try {
 
+			User user = authenticate();
+
 			StudyDef study = null;
 			String oid = request.getParameter("oid");
 			String action = request.getParameter("action");
+
 			if (action == null || action.isEmpty()) {
 				mobileServlet.doPost(request, response);
 				return;
 			}
-			User user = authenticate();
+
 			if (IMPORT.equals(action)) {
+
+				// Load the oid from properties file
+				if (oid == null || oid.length() == 0)
+					oid = props.getProperty("studyOID");
 
 				study = fetchAndSaveStudy(oid);
 

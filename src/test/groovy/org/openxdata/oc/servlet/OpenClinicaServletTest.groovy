@@ -17,7 +17,6 @@ import org.openxdata.server.admin.model.StudyDef
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 
-
 @RunWith(MockitoJUnitRunner.class)
 class OpenClinicaServletTest extends GroovyTestCase {
 
