@@ -34,8 +34,8 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 	private def props
 	private def formService
 	private def studyService
-	private DataExportService dataExportService	
-	
+	private DataExportService dataExportService
+
 	public OpenClinicaServiceImpl(Properties props) {
 
 		if(!props) {
@@ -180,5 +180,27 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 	public void setDataExportService(DataExportService dataExportService) {
 		this.dataExportService = dataExportService
+	}
+
+	public String exportFormData(FormData formData) {
+
+		def formDataList = []
+
+		log.info("Exporting FormData with id: " + formData.getId())
+
+		formDataList.add(formData)
+
+		def response = buildResponseMessage(formDataList)
+
+		def formKey = extractKey(formData.getData())
+
+		return response.get(formKey)
+	}
+
+	def extractKey(def xml) {
+
+		def slurpedXml = new XmlSlurper().parseText(xml)
+
+		return slurpedXml.@formKey.toString()
 	}
 }

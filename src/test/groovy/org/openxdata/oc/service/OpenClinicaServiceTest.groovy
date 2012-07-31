@@ -296,4 +296,50 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 			assertTrue "Forms must have versions", it.getVersions().size() > 0
 		}
 	}
+
+	@Test public void testThatExportFormDataExportsAGivenFormDataWithCorrectSuccessMessage() {
+
+		def responses = [:]
+		responses.put("Foo_Key", "Success")
+
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(responses)
+
+		def formData = new FormData()
+		formData.setId(1)
+		formData.setData("""<ODM formKey="Foo_Key"/>""")
+
+		def response = openClinicaService.exportFormData(formData)
+
+		assertEquals "Success", response
+	}
+
+	@Test public void testThatExportFormDataExportsAGivenFormDataWithCorrectFailureMessage() {
+
+		def responses = [:]
+		responses.put("Foo_Key", "Some Failure Message")
+
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(responses)
+
+		def formData = new FormData()
+		formData.setId(1)
+		formData.setData("""<ODM formKey="Foo_Key"/>""")
+
+		def response = openClinicaService.exportFormData(formData)
+
+		assertEquals "Some Failure Message", response
+	}
+
+	@Test public void testExtractKeyExtractsCorrectKey() {
+
+		def xml = """<ODM formKey="Foo_Key"/>"""
+
+		assertEquals "Foo_Key", openClinicaService.extractKey(xml)
+	}
+
+	@Test public void testExtractKeyExtractsCorrectKey2() {
+
+		def xml = """<ODM formKey="Foo_Key"/>"""
+
+		assertNotSame "Foo_Key", openClinicaService.extractKey(xml)
+	}
 }
