@@ -3,15 +3,13 @@ package org.openxdata.oc.servlet;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,9 +17,12 @@ import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.proto.WFSubmissionContext;
+import org.openxdata.server.admin.model.FormData;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.StudyDef;
+import org.openxdata.server.service.FormDownloadService;
 import org.openxdata.server.service.StudyManagerService;
+import org.openxdata.server.service.UserService;
 import org.openxdata.server.servlet.DefaultSubmissionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +37,11 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	@Autowired
 	private StudyManagerService studyManagerService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private FormDownloadService formService;
 	private List<Event> orphanedEvents = new ArrayList<Event>();
-	private ExecutorService ex = Executors.newSingleThreadExecutor();
 
 	public OCSubmissionContext(InputStream input, OutputStream output, HttpServletRequest httpReq,
 			HttpServletResponse httpRsp, Map<String, List<String>> metaData, OpenClinicaService ocService,
@@ -223,22 +227,20 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	@Override
 	public String setUploadResult(String formInstance) {
-		String result = super.setUploadResult(formInstance);
-		exportDataToOC();
-		return result;
+		FormData formData = formService.saveFormData(formInstance, userService.getLoggedInUser(), new Date());
+		String exportFormData = ocService.exportFormData(formData);
+		if (exportFormData.equalsIgnoreCase("Success"))
+			return formData.getId() + "";
+		else
+			throw new RuntimeException("Upload Failed: " + exportFormData);
 	}
 
-	private void exportDataToOC() {
-
-		log.info("Picking up export to OpenClinica after Submitting to OpenXData");
-		Runnable exporter = new Runnable() {
-
-			public void run() {
-				ocService.exportOpenClinicaStudyData();
-			}
-		};
-
-		log.info("Executing OpenClinica Export...");
-		ex.execute(exporter);
+	public void setFormService(FormDownloadService formService) {
+		this.formService = formService;
 	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 }

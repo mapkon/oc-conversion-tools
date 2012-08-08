@@ -1,11 +1,15 @@
 package org.openxdata.oc.servlet;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.sql.Date;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +19,18 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
+import org.openxdata.server.admin.model.FormData;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.StudyDef;
+import org.openxdata.server.admin.model.User;
+import org.openxdata.server.service.FormDownloadService;
 import org.openxdata.server.service.StudyManagerService;
+import org.openxdata.server.service.UserService;
 import org.openxdata.xform.StudyImporter;
 
 public class OCSubmissionContextTest {
@@ -35,6 +44,12 @@ public class OCSubmissionContextTest {
 
 	@Mock
 	private StudyManagerService studyManagerService;
+
+	@Mock
+	private UserService userService;
+
+	@Mock
+	private FormDownloadService formService;
 	private static List<StudySubject> studySubjects;
 
 	@Before
@@ -55,6 +70,8 @@ public class OCSubmissionContextTest {
 		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
 
 		instance.setStudyManagerService(studyManagerService);
+		instance.setFormService(formService);
+		instance.setUserService(userService);
 
 		Map<Integer, String> mappedStudyNames = new HashMap<Integer, String>();
 		mappedStudyNames.put(convertedStudy.getId(), convertedStudy.getName());
@@ -164,6 +181,49 @@ public class OCSubmissionContextTest {
 
 	private String getStudyName() {
 		return props.getProperty("studyOID");
+	}
+
+	@Test
+	public void testsetUploadResultExportsData() {
+		FormData formData = new FormData();
+		formData.setId(1);
+		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
+				.thenReturn(formData);
+		when(ocService.exportFormData(formData)).thenReturn("Success");
+
+		instance.setUploadResult("<ANY_XML/>");
+
+		verify(ocService, atLeastOnce()).exportFormData(formData);
+
+	}
+
+	@Test
+	public void testsetUploadResultReturnsAnIntStringIfExportIsSuccessful() {
+		FormData formData = new FormData();
+		formData.setId(1);
+		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
+				.thenReturn(formData);
+		when(ocService.exportFormData(formData)).thenReturn("Success");
+
+		String result = instance.setUploadResult("<ANY_XML/>");
+		assertEquals("1", result);
+
+	}
+
+	@Test
+	public void testsetUploadResultThrowsExceptionWhenExportFails() {
+		FormData formData = new FormData();
+		formData.setId(1);
+		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
+				.thenReturn(formData);
+		when(ocService.exportFormData(formData)).thenReturn("This is an error message");
+
+		try {
+			instance.setUploadResult("<ANY_XML/>");
+			fail("An Exception Was Expected");
+		} catch (Exception e) {
+		}
+
 	}
 
 }
