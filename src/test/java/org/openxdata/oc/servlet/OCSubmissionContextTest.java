@@ -153,7 +153,7 @@ public class OCSubmissionContextTest {
 		List<Object[]> availableWorkitems = instance.availableWorkitems();
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
-		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(Collections.EMPTY_MAP);
+		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(Collections.<Integer, String> emptyMap());
 		availableWorkitems = instance.availableWorkitems();
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
