@@ -1,6 +1,5 @@
 package org.openxdata.oc.servlet;
 
-import java.util.Collection;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -16,7 +15,6 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.data.TestData;
 import org.openxdata.oc.model.StudySubject;
