@@ -94,18 +94,18 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		List<Object[]> workitems = new ArrayList<Object[]>();
 		List<Event> allEvents = studySubject.getEvents();
-		Hashtable<String, List<Event>> eventGroups = groupEventByName(allEvents);
-		Set<Entry<String, List<Event>>> entrySet = eventGroups.entrySet();
+		Hashtable<String, List<Event>> eventsGroupedByName = groupEventByName(allEvents);
+		Set<Entry<String, List<Event>>> eventGroupEntry = eventsGroupedByName.entrySet();
 
-		for (Entry<String, List<Event>> entry : entrySet) {
-			List<Event> events = entry.getValue();
+		for (Entry<String, List<Event>> entry : eventGroupEntry) {
+			List<Event> eventList = entry.getValue();
 			Object[] workitem = new Object[5];
 			workitem[0] = (studySubject.getSubjectOID() + "-" + entry.getKey()).replaceFirst("SS_", "");
-			workitem[1] = getKey(studySubject, entry.getKey());
+			workitem[1] = generateWorkitemID(studySubject, entry.getKey());
 
 			List<Object[]> formReferences = new ArrayList<Object[]>();
-			for (Event event : events) {
-				List<Object[]> formRefs = extractFormReferences(event, ocStudy, studySubject);
+			for (Event ocEvent : eventList) {
+				List<Object[]> formRefs = extractFormReferencesFromEvent(ocEvent, ocStudy, studySubject);
 				formReferences.addAll(formRefs);
 			}
 			if (!formReferences.isEmpty()) {
@@ -117,11 +117,11 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return workitems;
 	}
 
-	private List<Object[]> extractFormReferences(Event even, StudyDef studyDef, StudySubject studySubject) {
+	private List<Object[]> extractFormReferencesFromEvent(Event ocEvent, StudyDef studyDef, StudySubject studySubject) {
 		List<Object[]> formReferences = new ArrayList<Object[]>();
-		List<String> formOIDs = even.getFormOIDs();
+		List<String> formOIDs = ocEvent.getFormOIDs();
 		for (String formOID : formOIDs) {
-			Object[] formRef = formDefToFormReferece(formOID, studyDef, even, studySubject);
+			Object[] formRef = formDefToFormReferece(formOID, studyDef, ocEvent, studySubject);
 			if (formRef != null) {
 				formReferences.add(formRef);
 			}
@@ -151,7 +151,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	private String getKey(StudySubject studySubject, String eventOID) {
+	private String generateWorkitemID(StudySubject studySubject, String eventOID) {
 		String key = studySubject.getSubjectOID().toString();
 		key = key + "&" + eventOID;
 		return key;
