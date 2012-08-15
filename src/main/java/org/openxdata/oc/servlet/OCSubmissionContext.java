@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openxdata.oc.exception.ExportException;
 import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
@@ -228,11 +229,11 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	@Override
 	public String setUploadResult(String formInstance) {
 		FormData formData = formService.saveFormData(formInstance, userService.getLoggedInUser(), new Date());
-		String exportFormData = ocService.exportFormData(formData);
-		if (exportFormData.equalsIgnoreCase("Success"))
+		String exportResponse = ocService.exportFormData(formData);
+		if (exportResponse.equalsIgnoreCase("Success"))
 			return formData.getId() + "";
 		else
-			throw new RuntimeException("Upload Failed: " + exportFormData);
+			throw new ExportException("Upload Failed: " + exportResponse);
 	}
 
 	public void setFormService(FormDownloadService formService) {
