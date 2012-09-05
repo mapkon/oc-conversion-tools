@@ -110,12 +110,12 @@ public class OCSubmissionContextTest {
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
 		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(Collections.<StudyDef> emptyList());
-		List<Object[]> availableWorkitems = instance.availableWorkitems();
+		List<Map<String,Object>> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
 		when(studyManagerService.getStudyByKey(getStudyName())).thenThrow(new RuntimeException("Deliberate Exception"));
-		List<Object[]> availableWorkitems1 = instance.availableWorkitems();
+		List<Map<String,Object>> availableWorkitems1 = instance.availableWorkitems();
 
 		assertThat("Workitems are expected to be empty", availableWorkitems1.isEmpty(), is(true));
 
@@ -124,13 +124,13 @@ public class OCSubmissionContextTest {
 	@Test
 	public void testAvailableWorkitemReturnEmptListIfOCStudyPropertyIsNullOrEmpty() {
 		props.setProperty("studyOID", "");
-		List<Object[]> availableWorkitems = instance.availableWorkitems();
+		List<Map<String,Object>> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
 		props = new Properties();
 		instance.setProps(props);
-		List<Object[]> availableWorkitems2 = instance.availableWorkitems();
+		List<Map<String,Object>> availableWorkitems2 = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems2.isEmpty());
 
@@ -144,15 +144,15 @@ public class OCSubmissionContextTest {
 				studySubject = tmpStudySubj;
 		}
 
-		List<Object[]> workitems = instance.studySubjectToWorkItems(studySubject, convertedStudy);
+		List<Map<String,Object>> workitems = instance.studySubjectToWorkItems(studySubject, convertedStudy);
 
 		assertThat("The number of workitems are supposed to be 2", workitems.size(), is(2));
 
-		for (Object[] objects : workitems) {
-			if (objects[0].equals("TEST_SUBJECT_EVENT-TEST_EVENT1_OID"))
-				assertThat("The number of form References Should be 2 ", ((List<?>) objects[2]).size(), is(2));
-			else if (objects[0].equals("TEST_SUBJECT_EVENT-TEST_EVENT2_OID"))
-				assertThat("The number of form References Should be 3 ", ((List<?>) objects[2]).size(), is(3));
+		for (Map<String, Object> objects : workitems) {
+			if (objects.get("name").equals("TEST_SUBJECT_EVENT-TEST_EVENT1_OID"))
+				assertThat("The number of form References Should be 2 ", ((List<?>) objects.get("formrefs")).size(), is(2));
+			else if (objects.get("name").equals("TEST_SUBJECT_EVENT-TEST_EVENT2_OID"))
+				assertThat("The number of form References Should be 3 ", ((List<?>) objects.get("formrefs")).size(), is(3));
 			else
 				fail("None of the expected Workitems were found");
 		}
@@ -165,7 +165,7 @@ public class OCSubmissionContextTest {
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(convertedStudy);
 
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(null);
-		List<Object[]> availableWorkitems = instance.availableWorkitems();
+		List<Map<String,Object>> availableWorkitems = instance.availableWorkitems();
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(Collections.<Integer, String> emptyMap());
