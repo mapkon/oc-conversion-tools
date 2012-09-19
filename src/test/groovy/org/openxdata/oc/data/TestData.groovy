@@ -1,11 +1,9 @@
 package org.openxdata.oc.data
 
-import java.util.List
-
 import org.junit.Ignore
+import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.util.TransformUtil
 import org.openxdata.server.admin.model.FormData
-import org.openxdata.oc.model.StudySubject
 
 
 @Ignore("Some maven installations will attempt to run this as a test")
@@ -198,4 +196,25 @@ class TestData {
 									      </importDataResponse>
 									   </SOAP-ENV:Body>
 									</SOAP-ENV:Envelope>'''
+	
+	static def userDetailsResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+										   <SOAP-ENV:Header/>
+										   <SOAP-ENV:Body>
+										      <findUserResponse xmlns="http://openclinica.org/ws/data/v1">
+										         <result>Success</result>
+										         <username>foo</username>
+										         <hashedPassword>hash LoL</hashedPassword>
+										         <canUseWebservices>false</canUseWebservices>
+										         <allowedStudyOid>S_DEFAULTS1</allowedStudyOid>
+										         <allowedStudyOid>S_123456</allowedStudyOid>
+										      </findUserResponse>
+										   </SOAP-ENV:Body>
+										</SOAP-ENV:Envelope>'''
+	
+	static def getFindUserResponse() {
+		
+		def xml = new XmlSlurper().parseText(userDetailsResponse)
+		
+		return xml.depthFirst().find {it.name().equals("findUserResponse")}
+	}
 }
