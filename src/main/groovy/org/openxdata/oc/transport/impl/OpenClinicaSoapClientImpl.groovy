@@ -4,10 +4,12 @@ import groovy.util.logging.Log
 
 import org.openxdata.oc.Transformer
 import org.openxdata.oc.exception.ImportException
+import org.openxdata.oc.model.OpenClinicaUser
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.transport.OpenClinicaSoapClient
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.transport.soap.proxy.CRFMetaDataVersionProxy
+import org.openxdata.oc.transport.soap.proxy.DataWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.SubjectEventWebServiceProxy
 import org.openxdata.server.admin.model.FormData
@@ -22,6 +24,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	def password
 	def connectionFactory
 	
+	private def dataProxy
 	private def importProxy
 	private def eventsProxy
 	private def crfMetaDataVersionProxy
@@ -92,5 +95,13 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		}
 
 		return subjects
+	}
+	
+	OpenClinicaUser getUserDetails(def username) {
+		
+		dataProxy = new DataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		
+		return dataProxy.getUserDetails(username)
+		
 	}
 }

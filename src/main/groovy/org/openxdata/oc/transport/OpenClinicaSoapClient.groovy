@@ -1,5 +1,6 @@
 package org.openxdata.oc.transport
 
+import org.openxdata.oc.model.OpenClinicaUser;
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.server.admin.model.FormData
 
@@ -18,4 +19,6 @@ public interface OpenClinicaSoapClient {
 	HashMap<String, String> importData(List<FormData> instanceData)
 	
 	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID)
+	
+	OpenClinicaUser getUserDetails(def username)
 }

@@ -337,6 +337,72 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 		}
 	}
 	
+	@Test void testGetUserDetailsDoesNotReturnNullOnValidUsername() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.userDetailsResponse)
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+			
+			def user = client.getUserDetails("username")
+			
+			assertNotNull "Should not return null user on valid username", user
+			
+		}
+	}
+	
+	@Test void testGetUserDetailsReturnsUserWithCorrectUsername(){
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.userDetailsResponse)
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+			
+			def user = client.getUserDetails("username")
+			
+			assertEquals "Username should be foo", "foo", user.username
+		}
+	}
+	
+	@Test void testGetUserDetailsReturnsUserWithCorrectHashedPassword() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.userDetailsResponse)
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+			
+			def user = client.getUserDetails("username")
+			
+			assertEquals "Hashed Password should be hash LoL", "hash LoL", user.hashedPassword
+		}
+	}
+	
+	@Test void testGetUserDetailsReturnsUserWithCorrectWebServicePermissions() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.userDetailsResponse)
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+			
+			def user = client.getUserDetails("username")
+			
+			assertFalse "User not authorized to use web services", user.canUseWebServices
+		}
+	}
+	
+	@Test void testGetUserDetailsReturnsUserAssignedToCorrectNumberOfStudies() {
+		
+		def connectionFactory = setUpConnectionFactoryMock(TestData.userDetailsResponse)
+		play{
+
+			client.setConnectionFactory(connectionFactory)
+			
+			def user = client.getUserDetails("username")
+			
+			assertEquals "User has access to only 2 studies", 2, user.getAllowedStudies().size()
+		}
+	}
+	
 	private def setUpConnectionFactoryMock(returnXml) {
 		
 		def connection = mock(HttpURLConnection.class)
