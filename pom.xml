@@ -317,8 +317,6 @@
 	</dependencies>
 
 	<build>
-	
-		<sourceDirectory>src/main/groovy</sourceDirectory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -397,6 +395,9 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>codenarc-maven-plugin</artifactId>
 				<version>0.17-2</version>
+				<configuration>
+					<sourceDirectory>src/main/groovy</sourceDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>

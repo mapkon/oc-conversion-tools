@@ -4,10 +4,6 @@ package org.openxdata.oc.service.impl
 import groovy.util.logging.Log
 import groovy.util.slurpersupport.NodeChild
 
-import java.util.Date
-import java.util.List
-import java.util.Properties
-
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.service.OpenClinicaService
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl

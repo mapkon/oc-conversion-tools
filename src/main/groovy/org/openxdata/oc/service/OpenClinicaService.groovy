@@ -1,7 +1,5 @@
 package org.openxdata.oc.service
 
-import java.util.List
-
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.StudyDef
