@@ -12,6 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 import org.openxdata.oc.data.TestData
+import org.openxdata.oc.model.OpenClinicaUser
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.service.impl.OpenClinicaServiceImpl
 import org.openxdata.oc.transport.OpenClinicaSoapClient
@@ -41,9 +42,10 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		createFormDataList()
 
-		Mockito.when(client.findStudySubjectEventsByStudyOID(Mockito.anyString())).thenReturn(createStudySubjectEvents())
-		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(TestData.createImportMessages())
 		Mockito.when(client.getOpenxdataForm(Mockito.anyString())).thenReturn(TestData.getConvertedXform())
+		Mockito.when(client.importData(Mockito.anyCollection())).thenReturn(TestData.createImportMessages())
+		Mockito.when(client.findStudySubjectEventsByStudyOID(Mockito.anyString())).thenReturn(createStudySubjectEvents())
+		Mockito.when(client.getUserDetails(Mockito.anyString())).thenReturn(new OpenClinicaUser(TestData.findUserResponse))
 
 		Mockito.when(studyService.getStudies()).thenReturn(createStudyList())
 		Mockito.when(studyService.getStudyKey(Mockito.anyInt())).thenReturn("key")
@@ -351,6 +353,34 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		assertNotSame "Foo_Key", openClinicaService.extractKey(xml)
 	}
 
+	@Test public void testGetUserDetailsRetursnCreatedOpenClinicaUserWithCorrectUsername() {
+		
+		def user = openClinicaService.getUserDetails("username")
+		
+		assertEquals "Username should be foo", "foo", user.username
+	}
+	
+	@Test public void testGetUserDetailsReturnsCreatedOpenCLinicaUserWithCorrectHashedPassword() {
+		
+		def user = openClinicaService.getUserDetails("username")
+		
+		assertEquals "Hashed Password should be hash LoL", "hash LoL", user.hashedPassword
+	}
+	
+	@Test public void testGetUserDetailsReturnsCreatedOpenClinicaNotAuthorizedToUseWebservices() {
+		 
+		def user = openClinicaService.getUserDetails("username")
+		
+		assertFalse "User is not authorized to user web services", user.canUseWebServices
+	}
+	
+	@Test public void testGetUserDetailsReturnsCreatedOpenClinicaUserWithCorrectStudyPermissions() {
+		
+		def user = openClinicaService.getUserDetails("username")
+		
+		assertEquals "User is authorized to access only two studies", 2, user.getAllowedStudies().size()
+	}
+	
 	private createResponse(message) {
 
 		def responses = [:]

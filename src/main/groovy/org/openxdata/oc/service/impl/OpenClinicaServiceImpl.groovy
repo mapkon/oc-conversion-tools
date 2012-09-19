@@ -4,6 +4,7 @@ package org.openxdata.oc.service.impl
 import groovy.util.logging.Log
 import groovy.util.slurpersupport.NodeChild
 
+import org.openxdata.oc.model.OpenClinicaUser
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.oc.service.OpenClinicaService
 import org.openxdata.oc.transport.impl.OpenClinicaSoapClientImpl
@@ -213,5 +214,10 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 	public void setDataExportService(DataExportService dataExportService) {
 		this.dataExportService = dataExportService
+	}
+	
+	public OpenClinicaUser getUserDetails(def username) {
+		
+		return client.getUserDetails(username)
 	}
 }

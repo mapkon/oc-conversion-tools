@@ -1,5 +1,6 @@
 package org.openxdata.oc.service
 
+import org.openxdata.oc.model.OpenClinicaUser;
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.StudyDef
@@ -9,20 +10,22 @@ import org.openxdata.server.service.FormService
 import org.openxdata.server.service.StudyManagerService
 
 public interface OpenClinicaService {
-
+	
 	Boolean hasStudyData(String studyKey)
-
-	StudyDef importOpenClinicaStudy(String oid) throws UnexpectedException
 
 	String exportFormData(FormData formData)
 
-	HashMap<String, String> exportOpenClinicaStudyData()
-
 	List<StudySubject> getStudySubjectEvents()
+	
+	OpenClinicaUser getUserDetails(def username)
 
 	void setFormService(FormService formService)
+	
+	HashMap<String, String> exportOpenClinicaStudyData()
 
 	void setStudyService(StudyManagerService studyService)
 
 	void setDataExportService(DataExportService dataExportService)
+	
+	StudyDef importOpenClinicaStudy(String oid) throws UnexpectedException
 }
