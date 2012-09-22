@@ -62,8 +62,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	public OCSubmissionContext(InputStream input, OutputStream output, HttpServletRequest httpReq,
 			HttpServletResponse httpRsp, Map<String, List<String>> metaData, OpenClinicaService openclinicaService,
 			Properties props) {
-		
-		super(input, output, httpReq, httpRsp, metaData);
+		setRawInputStream(input);
+		setRawOutputStream(output);
 		
 		this.props = props;
 		this.openclinicaService = openclinicaService;
@@ -132,9 +132,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 			workitem.put("name", workitemName);
 			workitem.put("id", generateWorkitemID(studySubject, entry.getKey()));
 
-			List<Map<String,Object>> formReferences = new ArrayList<Map<String,Object>>();
+			List<Map<String, Object>> formReferences = new ArrayList<Map<String, Object>>();
 			for (Event ocEvent : eventList) {
-				List<Map<String,Object>> formRefs = extractFormReferencesFromEvent(ocEvent, ocStudy, studySubject);
+				List<Map<String, Object>> formRefs = extractFormReferencesFromEvent(ocEvent, ocStudy, studySubject);
 				formReferences.addAll(formRefs);
 			}
 			if (!formReferences.isEmpty()) {
@@ -146,11 +146,12 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return workitems;
 	}
 
-	private List<Map<String,Object>> extractFormReferencesFromEvent(Event ocEvent, StudyDef studyDef, StudySubject studySubject) {
-		List<Map<String,Object>> formReferences = new ArrayList<Map<String,Object>>();
+	private List<Map<String, Object>> extractFormReferencesFromEvent(Event ocEvent, StudyDef studyDef,
+			StudySubject studySubject) {
+		List<Map<String, Object>> formReferences = new ArrayList<Map<String, Object>>();
 		List<String> formOIDs = ocEvent.getFormOIDs();
 		for (String formOID : formOIDs) {
-			Map<String,Object> formRef = formDefToFormReferece(formOID, studyDef, ocEvent, studySubject);
+			Map<String, Object> formRef = formDefToFormReferece(formOID, studyDef, ocEvent, studySubject);
 			if (formRef != null) {
 				formReferences.add(formRef);
 			}
@@ -158,7 +159,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return formReferences;
 	}
 
-	private Map<String, Object> formDefToFormReferece(String formOID, StudyDef oCStudyID, Event event, StudySubject studySubject) {
+	private Map<String, Object> formDefToFormReferece(String formOID, StudyDef oCStudyID, Event event,
+			StudySubject studySubject) {
 		FormDef formDef = getFormByDescription(oCStudyID, formOID);
 
 		if (formDef == null) {
@@ -169,9 +171,9 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		List<String[]> prefills = new ArrayList<String[]>();
 		prefills.add(new String[] { "SubjectKey_", "subjectkey", studySubject.getSubjectOID() + "", "false" });
 
-		Map<String, Object>  formRef = new HashMap<String, Object>();
-		formRef.put("studyid",oCStudyID.getId());
-		formRef.put("formid",formDef.getDefaultVersion().getId());
+		Map<String, Object> formRef = new HashMap<String, Object>();
+		formRef.put("studyid", oCStudyID.getId());
+		formRef.put("formid", formDef.getDefaultVersion().getId());
 		formRef.put("prefills", prefills);
 		return formRef;
 	}
