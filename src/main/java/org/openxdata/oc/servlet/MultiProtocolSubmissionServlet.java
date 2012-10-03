@@ -9,7 +9,6 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +53,7 @@ public class MultiProtocolSubmissionServlet {
 	private OpenClinicaService openclinicaService;
 	private Properties props;
 
-	public MultiProtocolSubmissionServlet(ServletConfig config, ServletContext sctx,
+	public MultiProtocolSubmissionServlet(ServletContext sctx,
 			OpenClinicaService openclinicaService, Properties props) throws ServletException {
 
 		this.sctx = sctx;

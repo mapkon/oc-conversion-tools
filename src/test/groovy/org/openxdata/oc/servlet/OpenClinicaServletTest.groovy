@@ -25,6 +25,7 @@ class OpenClinicaServletTest extends GroovyTestCase {
 
 	@Mock OpenClinicaService service
 	@Mock MultiProtocolSubmissionServlet multiProtoSubmissionServlet
+	
 	@InjectMocks def servlet = new OpenClinicaServlet()
 
 	@Before void setUp() {
@@ -32,8 +33,8 @@ class OpenClinicaServletTest extends GroovyTestCase {
 		def map = new HashMap()
 		map.put(null, "No data items found to export.")
 
-		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(createStudy())
 		Mockito.when(service.exportOpenClinicaStudyData()).thenReturn(map)
+		Mockito.when(service.importOpenClinicaStudy('oid')).thenReturn(createStudy())
 
 		request = new MockHttpServletRequest()
 		response = new MockHttpServletResponse()
