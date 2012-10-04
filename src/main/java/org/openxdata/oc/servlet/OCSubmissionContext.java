@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +20,9 @@ import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.proto.WFSubmissionContext;
+import org.openxdata.proto.model.OxdWorkitem;
+import org.openxdata.proto.model.ParameterQuestionMap;
+import org.openxdata.proto.model.WorkitemFormRef;
 import org.openxdata.server.admin.model.FormData;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.StudyDef;
@@ -83,7 +85,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public Map<String, Object> getWorkitem(String caseId) {
+	public OxdWorkitem getWorkitem(String caseId) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
@@ -91,19 +93,19 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public List<Map<String, Object>> availableWorkitems() {
+	public List<OxdWorkitem> availableWorkitems() {
 
 		clearOphanedEvents();
 
 		List<StudySubject> sbjEvents = openclinicaService.getStudySubjectEvents();
-		List<Map<String, Object>> workitems = new ArrayList<Map<String, Object>>();
+		List<OxdWorkitem> workitems = new ArrayList<OxdWorkitem>();
 		StudyDef ocStudy = loadConvertedOpenClinicaStudy();
 		if (ocStudy == null) {
 			return workitems;
 		}
 
 		for (StudySubject studySubject : sbjEvents) {
-			List<Map<String, Object>> studySubjWorkitems = studySubjectToWorkItems(studySubject, ocStudy);
+			List<OxdWorkitem> studySubjWorkitems = studySubjectToWorkItems(studySubject, ocStudy);
 			workitems.addAll(studySubjWorkitems);
 		}
 
@@ -118,27 +120,29 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return orphanedEvents;
 	}
 
-	List<Map<String, Object>> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
+	List<OxdWorkitem> studySubjectToWorkItems(StudySubject studySubject, StudyDef ocStudy) {
 
-		List<Map<String, Object>> workitems = new ArrayList<Map<String, Object>>();
+		List<OxdWorkitem> workitems = new ArrayList<OxdWorkitem>();
 		List<Event> allEvents = studySubject.getEvents();
 		Hashtable<String, List<Event>> eventsGroupedByName = groupEventByName(allEvents);
 		Set<Entry<String, List<Event>>> eventGroupEntry = eventsGroupedByName.entrySet();
 
 		for (Entry<String, List<Event>> entry : eventGroupEntry) {
 			List<Event> eventList = entry.getValue();
-			Map<String, Object> workitem = new HashMap<String, Object>();
-			String workitemName = (studySubject.getSubjectOID() + "-" + entry.getKey()).replaceFirst("SS_", "");
-			workitem.put("name", workitemName);
-			workitem.put("id", generateWorkitemID(studySubject, entry.getKey()));
 
-			List<Map<String, Object>> formReferences = new ArrayList<Map<String, Object>>();
+			String workitemName = (studySubject.getSubjectOID() + "-" + entry.getKey()).replaceFirst("SS_", "");
+			String workitemId = generateWorkitemID(studySubject, entry.getKey());
+
+			OxdWorkitem workitem = new OxdWorkitem(workitemId, workitemName);
+
+			List<WorkitemFormRef> formReferences = new ArrayList<WorkitemFormRef>();
+
 			for (Event ocEvent : eventList) {
-				List<Map<String, Object>> formRefs = extractFormReferencesFromEvent(ocEvent, ocStudy, studySubject);
+				List<WorkitemFormRef> formRefs = extractFormReferencesFromEvent(ocEvent, ocStudy, studySubject);
 				formReferences.addAll(formRefs);
 			}
 			if (!formReferences.isEmpty()) {
-				workitem.put("formrefs", formReferences);
+				workitem.getWorkitemForms().addAll(formReferences);
 				workitems.add(workitem);
 			}
 
@@ -146,12 +150,12 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return workitems;
 	}
 
-	private List<Map<String, Object>> extractFormReferencesFromEvent(Event ocEvent, StudyDef studyDef,
+	private List<WorkitemFormRef> extractFormReferencesFromEvent(Event ocEvent, StudyDef studyDef,
 			StudySubject studySubject) {
-		List<Map<String, Object>> formReferences = new ArrayList<Map<String, Object>>();
+		List<WorkitemFormRef> formReferences = new ArrayList<WorkitemFormRef>();
 		List<String> formOIDs = ocEvent.getFormOIDs();
 		for (String formOID : formOIDs) {
-			Map<String, Object> formRef = formDefToFormReferece(formOID, studyDef, ocEvent, studySubject);
+			WorkitemFormRef formRef = formDefToFormReferece(formOID, studyDef, ocEvent, studySubject);
 			if (formRef != null) {
 				formReferences.add(formRef);
 			}
@@ -159,7 +163,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		return formReferences;
 	}
 
-	private Map<String, Object> formDefToFormReferece(String formOID, StudyDef oCStudyID, Event event,
+	private WorkitemFormRef formDefToFormReferece(String formOID, StudyDef oCStudyID, Event event,
 			StudySubject studySubject) {
 		FormDef formDef = getFormByDescription(oCStudyID, formOID);
 
@@ -168,17 +172,13 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 			return null;
 		}
 
-		List<String[]> prefills = new ArrayList<String[]>();
-		prefills.add(new String[] { "SubjectKey_", "subjectkey", studySubject.getSubjectOID() + "", "false" });
-
-		Map<String, Object> formRef = new HashMap<String, Object>();
-		formRef.put("studyid", oCStudyID.getId());
-		formRef.put("formid", formDef.getDefaultVersion().getId());
-		formRef.put("prefills", prefills);
+		WorkitemFormRef formRef = new WorkitemFormRef(oCStudyID.getId(), formDef.getDefaultVersion().getId());
+		formRef.addParameterQuetionMap(new ParameterQuestionMap("SubjectKey_", "subjectkey", studySubject
+				.getSubjectOID() + "", false));
 		return formRef;
 	}
 
-	public List<Map<String, Object>> getWorkItems(String... caseIds) {
+	public List<OxdWorkitem> getWorkItems(String... caseIds) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
@@ -280,6 +280,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public void disableWorkitem(String workitemId) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void setAuthenticationProvider(AuthenticationProvider authProvider) {
