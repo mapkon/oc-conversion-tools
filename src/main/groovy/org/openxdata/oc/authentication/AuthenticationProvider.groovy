@@ -10,8 +10,8 @@ import org.openxdata.server.admin.model.mapping.UserStudyMap
 @Log
 class AuthenticationProvider {
 
-	def username
-	def password
+	private def username
+	private def password
 
 	def userService
 	def roleService
