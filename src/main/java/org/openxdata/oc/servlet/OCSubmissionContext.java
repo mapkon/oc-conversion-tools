@@ -11,9 +11,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openxdata.oc.authentication.AuthenticationProvider;
 import org.openxdata.oc.exception.ExportException;
 import org.openxdata.oc.model.Event;
 import org.openxdata.oc.model.StudySubject;
@@ -22,7 +24,10 @@ import org.openxdata.proto.WFSubmissionContext;
 import org.openxdata.server.admin.model.FormData;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.StudyDef;
+import org.openxdata.server.admin.model.User;
+import org.openxdata.server.service.AuthenticationService;
 import org.openxdata.server.service.FormDownloadService;
+import org.openxdata.server.service.RoleService;
 import org.openxdata.server.service.StudyManagerService;
 import org.openxdata.server.service.UserService;
 import org.openxdata.server.servlet.DefaultSubmissionContext;
@@ -35,22 +40,43 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
 
 	private Properties props;
-	private OpenClinicaService ocService;
+	private OpenClinicaService openclinicaService;
 
-	@Autowired
-	private StudyManagerService studyManagerService;
+	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired private RoleService roleService;
+	
 	@Autowired
 	private FormDownloadService formService;
+	
+	@Autowired
+	private StudyManagerService studyManagerService;
+	
+	@Autowired private AuthenticationService authenticationService;
+
 	private List<Event> orphanedEvents = new ArrayList<Event>();
+	private AuthenticationProvider authProvider;
 
 	public OCSubmissionContext(InputStream input, OutputStream output, HttpServletRequest httpReq,
-			HttpServletResponse httpRsp, Map<String, List<String>> metaData, OpenClinicaService ocService,
+			HttpServletResponse httpRsp, Map<String, List<String>> metaData, OpenClinicaService openclinicaService,
 			Properties props) {
+		
 		super(input, output, httpReq, httpRsp, metaData);
-		this.ocService = ocService;
+		
 		this.props = props;
+		this.openclinicaService = openclinicaService;
+		
+		// Initialize authentication provider for this session.
+		authProvider = new AuthenticationProvider();
+		
+		authProvider.setUserService(userService);
+		authProvider.setRoleService(roleService);
+		authProvider.setStudyService(studyManagerService);
+		authProvider.setOpenclinicaService(openclinicaService);
+		authProvider.setAuthenticationService(authenticationService);
+		
 	}
 
 	public Map<String, String> getOutParamsQuestionMapping(int formId, String caseId) {
@@ -69,7 +95,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		clearOphanedEvents();
 
-		List<StudySubject> sbjEvents = ocService.getStudySubjectEvents();
+		List<StudySubject> sbjEvents = openclinicaService.getStudySubjectEvents();
 		List<Map<String, Object>> workitems = new ArrayList<Map<String, Object>>();
 		StudyDef ocStudy = loadConvertedOpenClinicaStudy();
 		if (ocStudy == null) {
@@ -231,13 +257,21 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	@Override
 	public String setUploadResult(String formInstance) {
 		FormData formData = formService.saveFormData(formInstance, userService.getLoggedInUser(), new Date());
-		String exportResponse = ocService.exportFormData(formData);
+		String exportResponse = openclinicaService.exportFormData(formData);
 		if (exportResponse.equalsIgnoreCase("Success"))
 			return formData.getId() + "";
 		else
 			throw new ExportException("Upload Failed: " + exportResponse);
 	}
 
+	@Override
+	public boolean authenticate(String username, String password) {
+
+		User authenticatedUser = authProvider.authenticate(username, password);
+		
+		return authenticatedUser != null;
+	}
+	
 	public void setFormService(FormDownloadService formService) {
 		this.formService = formService;
 	}
@@ -246,4 +280,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		this.userService = userService;
 	}
 
+	public void setAuthenticationProvider(AuthenticationProvider authProvider) {
+		this.authProvider = authProvider;
+	}
 }

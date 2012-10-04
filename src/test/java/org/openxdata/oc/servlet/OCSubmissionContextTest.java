@@ -2,6 +2,7 @@ package org.openxdata.oc.servlet;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -10,6 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +23,20 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.openxdata.oc.authentication.AuthenticationProvider;
 import org.openxdata.oc.data.TestData;
+import org.openxdata.oc.model.OpenClinicaUser;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.server.admin.model.FormData;
 import org.openxdata.server.admin.model.FormDef;
+import org.openxdata.server.admin.model.Role;
 import org.openxdata.server.admin.model.StudyDef;
 import org.openxdata.server.admin.model.User;
+import org.openxdata.server.admin.model.exception.UserNotFoundException;
+import org.openxdata.server.service.AuthenticationService;
 import org.openxdata.server.service.FormDownloadService;
+import org.openxdata.server.service.RoleService;
 import org.openxdata.server.service.StudyManagerService;
 import org.openxdata.server.service.UserService;
 import org.openxdata.xform.StudyImporter;
@@ -37,8 +45,9 @@ public class OCSubmissionContextTest {
 
 	private Properties props;
 	private StudyDef convertedStudy;
-	private OCSubmissionContext instance;
 
+	@Mock private RoleService roleService;
+	
 	@Mock
 	private OpenClinicaService ocService;
 
@@ -51,9 +60,14 @@ public class OCSubmissionContextTest {
 	@Mock
 	private FormDownloadService formService;
 	private static List<StudySubject> studySubjects;
+	
+	@Mock private AuthenticationProvider authProvider;
+	@Mock private AuthenticationService authenticationService;
+	
+	private OCSubmissionContext instance;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws UserNotFoundException {
 
 		studySubjects = TestData.getStudySubjectsAsList();
 
@@ -72,12 +86,39 @@ public class OCSubmissionContextTest {
 		instance.setStudyManagerService(studyManagerService);
 		instance.setFormService(formService);
 		instance.setUserService(userService);
+		instance.setAuthenticationProvider(authProvider);
+		
+		authProvider.setUserService(userService);
+		authProvider.setRoleService(roleService);
+		authProvider.setOpenclinicaService(ocService);
+		authProvider.setStudyService(studyManagerService);
 
 		Map<Integer, String> mappedStudyNames = new HashMap<Integer, String>();
 		mappedStudyNames.put(convertedStudy.getId(), convertedStudy.getName());
+		
+		when(userService.findUserByUsername("foo")).thenReturn(createUser());
+		when(authProvider.authenticate("foo", "password")).thenReturn(createUser());
+		when(userService.saveUser(Mockito.any(User.class))).thenReturn(createUser());
+		when(roleService.getRolesByName(Mockito.anyString())).thenReturn(createRoles());
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(mappedStudyNames);
+		when(ocService.getUserDetails(Mockito.anyString())).thenReturn(createOpenclinicaUser());
 
 	}
+
+	private List<Role> createRoles() {
+		
+		List<Role> roles = new ArrayList<Role>();
+		
+		roles.add(new Role("Role_Mobile_User"));
+		
+		return roles;
+	}
+
+	private OpenClinicaUser createOpenclinicaUser() {
+		
+		return new OpenClinicaUser(TestData.getFindUserResponse());
+	}
+	
 
 	@Test
 	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
@@ -226,4 +267,37 @@ public class OCSubmissionContextTest {
 
 	}
 
+	@Test public void testAuthenticatePassesWhenUserExistsInOpenXData() {
+		
+		boolean authenticated = instance.authenticate("foo", "password");
+		
+		assertTrue ("Should authenticate valid OXD user", authenticated);
+	}
+	
+	@Test public void testAuthenticatePassesWhenUserDoesExistsInOpenXDataButIsFetchedFromOC() throws UserNotFoundException {
+		
+		when(userService.findUserByUsername(Mockito.anyString())).thenReturn(null);
+		when(studyManagerService.getStudyByKey(Mockito.anyString())).thenReturn(convertedStudy);
+		
+		boolean authenticated = instance.authenticate("foo", "password");
+		
+		assertTrue ("Should authenticate valid OXD user", authenticated);
+	}
+
+	@Test public void testAuthenticateFailsWhenOXDPasswordIsWrong() throws UserNotFoundException {
+		
+		when(authProvider.authenticate("foo", "password")).thenReturn(null);
+
+		boolean authenticated = instance.authenticate("foo", "password");
+		
+		assertFalse ("Should authenticate valid OXD user", authenticated);
+	}
+	
+	private User createUser() {
+		
+		User user = new User("foo");
+		user.setPassword("password");
+		
+		return user;
+	}
 }
