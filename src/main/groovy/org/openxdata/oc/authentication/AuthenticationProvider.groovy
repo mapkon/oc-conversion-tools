@@ -35,7 +35,7 @@ class AuthenticationProvider {
 		}
 	}
 
-	def authenticateViaOpenXData() {
+	private def authenticateViaOpenXData() {
 
 		log.info("Attempting to authenticate user: ${username} using openXdata authentication mechanism")
 
@@ -53,7 +53,7 @@ class AuthenticationProvider {
 		}
 	}
 
-	def authenticateViaOpenClinica() {
+	private def authenticateViaOpenClinica() {
 
 		log.info("Attempting to fetch user: ${username} from openclinica...")
 		
@@ -68,7 +68,7 @@ class AuthenticationProvider {
 		}
 	}
 
-	def createOXDUserFromOpenClinicaUserDetails(def openclinicaUser) {
+	private def createOXDUserFromOpenClinicaUserDetails(def openclinicaUser) {
 
 		log.info("Creating openXdata user with name: ${username} from openclinica user")
 		
@@ -94,7 +94,7 @@ class AuthenticationProvider {
 		return userService.saveUser(user)
 	}
 
-	def getStudyKey() {
+	private def getStudyKey() {
 
 		def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
 
