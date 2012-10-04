@@ -184,7 +184,7 @@ public class OCSubmissionContextTest {
 	}
 
 	@Test
-	public void testsetUploadResultExportsData() {
+	public void testSetUploadResultExportsData() {
 		FormData formData = new FormData();
 		formData.setId(1);
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
@@ -198,7 +198,7 @@ public class OCSubmissionContextTest {
 	}
 
 	@Test
-	public void testsetUploadResultReturnsAnIntStringIfExportIsSuccessful() {
+	public void testSetUploadResultReturnsAnIntStringIfExportIsSuccessful() {
 		FormData formData = new FormData();
 		formData.setId(1);
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
@@ -211,7 +211,7 @@ public class OCSubmissionContextTest {
 	}
 
 	@Test
-	public void testsetUploadResultThrowsExceptionWhenExportFails() {
+	public void testSetUploadResultThrowsExceptionWhenExportFails() {
 		FormData formData = new FormData();
 		formData.setId(1);
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
