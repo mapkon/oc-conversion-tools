@@ -18,7 +18,7 @@ class AuthenticationProvider {
 	def openclinicaService
 	def authenticationService
 
-	def authenticate(def username, def password) {
+	public User authenticate(String username, String password) {
 
 		log.info("Attempting to authenticate user: ${username}")
 
