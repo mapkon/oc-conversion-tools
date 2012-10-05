@@ -48,7 +48,7 @@ public class OCSubmissionContextTest {
 	private StudyDef convertedStudy;
 
 	@Mock private RoleService roleService;
-	
+
 	@Mock
 	private OpenClinicaService ocService;
 
@@ -61,10 +61,10 @@ public class OCSubmissionContextTest {
 	@Mock
 	private FormDownloadService formService;
 	private static List<StudySubject> studySubjects;
-	
+
 	@Mock private AuthenticationProvider authProvider;
 	@Mock private AuthenticationService authenticationService;
-	
+
 	private OCSubmissionContext instance;
 
 	@Before
@@ -82,13 +82,16 @@ public class OCSubmissionContextTest {
 		props = new Properties();
 		props.setProperty("studyOID", "Test Study");
 
-		instance = new OCSubmissionContext(null, null, null, null, null, ocService, props);
+		instance = new OCSubmissionContext();
+		instance.init();
 
+		instance.setProps(props);
 		instance.setStudyManagerService(studyManagerService);
 		instance.setFormService(formService);
 		instance.setUserService(userService);
 		instance.setAuthenticationProvider(authProvider);
-		
+		instance.setOpenClinicaService(ocService);
+
 		authProvider.setUserService(userService);
 		authProvider.setRoleService(roleService);
 		authProvider.setOpenclinicaService(ocService);
@@ -96,7 +99,7 @@ public class OCSubmissionContextTest {
 
 		Map<Integer, String> mappedStudyNames = new HashMap<Integer, String>();
 		mappedStudyNames.put(convertedStudy.getId(), convertedStudy.getName());
-		
+
 		when(userService.findUserByUsername("foo")).thenReturn(createUser());
 		when(authProvider.authenticate("foo", "password")).thenReturn(createUser());
 		when(userService.saveUser(Mockito.any(User.class))).thenReturn(createUser());
@@ -107,19 +110,18 @@ public class OCSubmissionContextTest {
 	}
 
 	private List<Role> createRoles() {
-		
+
 		List<Role> roles = new ArrayList<Role>();
-		
+
 		roles.add(new Role("Role_Mobile_User"));
-		
+
 		return roles;
 	}
 
 	private OpenClinicaUser createOpenclinicaUser() {
-		
+
 		return new OpenClinicaUser(TestData.getFindUserResponse());
 	}
-	
 
 	@Test
 	public void testAvailableWorkitemsReturnsStudyEventsAsWorkitems() {
@@ -269,36 +271,36 @@ public class OCSubmissionContextTest {
 	}
 
 	@Test public void testAuthenticatePassesWhenUserExistsInOpenXData() {
-		
+
 		boolean authenticated = instance.authenticate("foo", "password");
-		
+
 		assertTrue ("Should authenticate valid OXD user", authenticated);
 	}
-	
+
 	@Test public void testAuthenticatePassesWhenUserDoesExistsInOpenXDataButIsFetchedFromOC() throws UserNotFoundException {
-		
+
 		when(userService.findUserByUsername(Mockito.anyString())).thenReturn(null);
 		when(studyManagerService.getStudyByKey(Mockito.anyString())).thenReturn(convertedStudy);
-		
+
 		boolean authenticated = instance.authenticate("foo", "password");
-		
+
 		assertTrue ("Should authenticate valid OXD user", authenticated);
 	}
 
 	@Test public void testAuthenticateFailsWhenOXDPasswordIsWrong() throws UserNotFoundException {
-		
+
 		when(authProvider.authenticate("foo", "password")).thenReturn(null);
 
 		boolean authenticated = instance.authenticate("foo", "password");
-		
+
 		assertFalse ("Should authenticate valid OXD user", authenticated);
 	}
-	
+
 	private User createUser() {
-		
+
 		User user = new User("foo");
 		user.setPassword("password");
-		
+
 		return user;
 	}
 }
