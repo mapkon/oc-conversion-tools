@@ -47,7 +47,6 @@ public class OpenClinicaServlet extends HttpServlet {
 	private DataExportService dataExportService;
 	private OpenClinicaService openclinicaService;
 	private AuthenticationService authenticationService;
-	private MultiProtocolSubmissionServlet mobileServlet;
 	private final String JSP_FILE_NAME = "openclinica.jsp";
 
 	@Override
@@ -72,9 +71,6 @@ public class OpenClinicaServlet extends HttpServlet {
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
 		openclinicaService.setDataExportService(dataExportService);
-
-		mobileServlet = new MultiProtocolSubmissionServlet(sctx, openclinicaService, props);
-
 	}
 
 	private Properties loadProperties() {
@@ -137,11 +133,6 @@ public class OpenClinicaServlet extends HttpServlet {
 			StudyDef study = null;
 			String oid = request.getParameter("oid");
 			String action = request.getParameter("action");
-
-			if (action == null || action.isEmpty()) {
-				mobileServlet.doPost(request, response);
-				return;
-			}
 
 			if (IMPORT.equals(action)) {
 
