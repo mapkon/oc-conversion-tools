@@ -50,7 +50,7 @@ public class OCSubmissionContextTest {
 	@Mock private RoleService roleService;
 
 	@Mock
-	private OpenClinicaService ocService;
+	private OpenClinicaService openclinicaService;
 
 	@Mock
 	private StudyManagerService studyManagerService;
@@ -90,11 +90,11 @@ public class OCSubmissionContextTest {
 		instance.setFormService(formService);
 		instance.setUserService(userService);
 		instance.setAuthenticationProvider(authProvider);
-		instance.setOpenClinicaService(ocService);
+		instance.setOpenClinicaService(openclinicaService);
 
 		authProvider.setUserService(userService);
 		authProvider.setRoleService(roleService);
-		authProvider.setOpenclinicaService(ocService);
+		authProvider.setOpenclinicaService(openclinicaService);
 		authProvider.setStudyService(studyManagerService);
 
 		Map<Integer, String> mappedStudyNames = new HashMap<Integer, String>();
@@ -105,7 +105,7 @@ public class OCSubmissionContextTest {
 		when(userService.saveUser(Mockito.any(User.class))).thenReturn(createUser());
 		when(roleService.getRolesByName(Mockito.anyString())).thenReturn(createRoles());
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(mappedStudyNames);
-		when(ocService.getUserDetails(Mockito.anyString())).thenReturn(createOpenclinicaUser());
+		when(openclinicaService.getUserDetails(Mockito.anyString())).thenReturn(createOpenclinicaUser());
 
 	}
 
@@ -128,7 +128,7 @@ public class OCSubmissionContextTest {
 
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(convertedStudy);
 
-		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
+		when(openclinicaService.getStudySubjectEvents()).thenReturn(studySubjects);
 
 		List<?> result = instance.availableWorkitems();
 
@@ -142,7 +142,7 @@ public class OCSubmissionContextTest {
 		dummyStudy.addForm(new FormDef(0, "FunnyForm", dummyStudy));
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(dummyStudy);
 
-		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
+		when(openclinicaService.getStudySubjectEvents()).thenReturn(studySubjects);
 
 		List<?> result = instance.availableWorkitems();
 
@@ -152,7 +152,7 @@ public class OCSubmissionContextTest {
 
 	@Test
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
-		when(ocService.getStudySubjectEvents()).thenReturn(studySubjects);
+		when(openclinicaService.getStudySubjectEvents()).thenReturn(studySubjects);
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(Collections.<StudyDef> emptyList());
 		List<OxdWorkitem> availableWorkitems = instance.availableWorkitems();
 
@@ -233,11 +233,11 @@ public class OCSubmissionContextTest {
 		formData.setId(1);
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
 				.thenReturn(formData);
-		when(ocService.exportFormData(formData)).thenReturn("Success");
+		when(openclinicaService.exportFormData(formData)).thenReturn("Success");
 
 		instance.setUploadResult("<ANY_XML/>");
 
-		verify(ocService, atLeastOnce()).exportFormData(formData);
+		verify(openclinicaService, atLeastOnce()).exportFormData(formData);
 
 	}
 
@@ -247,7 +247,7 @@ public class OCSubmissionContextTest {
 		formData.setId(1);
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
 				.thenReturn(formData);
-		when(ocService.exportFormData(formData)).thenReturn("Success");
+		when(openclinicaService.exportFormData(formData)).thenReturn("Success");
 
 		String result = instance.setUploadResult("<ANY_XML/>");
 		assertEquals("1", result);
@@ -260,7 +260,7 @@ public class OCSubmissionContextTest {
 		formData.setId(1);
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
 				.thenReturn(formData);
-		when(ocService.exportFormData(formData)).thenReturn("This is an error message");
+		when(openclinicaService.exportFormData(formData)).thenReturn("This is an error message");
 
 		try {
 			instance.setUploadResult("<ANY_XML/>");
