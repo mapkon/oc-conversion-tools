@@ -48,7 +48,7 @@ class AuthenticationProvider {
 
 		if(user) {
 			
-			log.info("User: ${username} exists in db. Validating credentials...")
+			log.info("User: ${username} exists in openXdata db. Validating credentials...")
 			return authenticationService.authenticate(username, password)
 			
 		} else {
