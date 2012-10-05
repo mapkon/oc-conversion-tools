@@ -71,6 +71,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 	}
 
 	public void init() {
+		
 		if (initaliazed)
 			return;
 		this.openclinicaService = new OpenClinicaServiceImpl(props);
@@ -276,8 +277,11 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	@Override
 	public boolean authenticate(String username, String password) {
-		init();// This is not the right place to do this.We need to be notified that our object creation has
-				// been completed by oxd then we initialize our this SubmissionContext
+		
+		// This is not the right place to do this.We need to be notified that our object creation has
+		// been completed by oxd then we initialize our this SubmissionContext
+		init();
+		
 		User authenticatedUser = authProvider.authenticate(username, password);
 
 		return authenticatedUser != null;
