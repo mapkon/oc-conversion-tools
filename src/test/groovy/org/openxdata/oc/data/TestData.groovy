@@ -217,4 +217,24 @@ class TestData {
 		
 		return xml.depthFirst().find {it.name().equals("findUserResponse")}
 	}
+
+	static def nonExistingUserResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+									   <SOAP-ENV:Header/>
+									   <SOAP-ENV:Body>
+									      <findUserResponse xmlns="http://openclinica.org/ws/data/v1">
+									         <result>Fail</result>
+									         <error>This user does not exist in the database.</error>
+									      </findUserResponse>
+									   </SOAP-ENV:Body>
+									</SOAP-ENV:Envelope>'''
+
+	static def getUserDetailsPermissionUserResponse = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+									   <SOAP-ENV:Header/>
+									   <SOAP-ENV:Body>
+									      <findUserResponse xmlns="http://openclinica.org/ws/data/v1">
+									         <result>Fail</result>
+									         <error>You do not have enough privileges to retrieve this information.</error>
+									      </findUserResponse>
+									   </SOAP-ENV:Body>
+									</SOAP-ENV:Envelope>'''
 }

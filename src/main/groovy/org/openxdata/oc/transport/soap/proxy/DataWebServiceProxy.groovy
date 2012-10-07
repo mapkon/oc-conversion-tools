@@ -27,19 +27,33 @@ class DataWebServiceProxy extends SoapRequestProperties {
 	def getUserDetails(def username) {
 
 		if(username.size() > 0) {
+
 			log.info("Fetching user details for: ${username}")
 			envelope = getSoapEnvelope(username)
 
 			def transportHandler = new HttpTransportHandler(envelope:envelope)
 			def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
 
-			def userDetails = response.depthFirst().findUserResponse[0]
-
-			def user = new OpenClinicaUser(userDetails)
+			def user = evaluateResponse(response)
 
 			return user
 		} else {
 			throw new ImportException("Username cannot be null or empty")
+		}
+	}
+
+	private def evaluateResponse(httpResonse) {
+
+		def response = httpResonse.depthFirst().findUserResponse[0]
+
+		if(response.result.text().equals("Fail")){
+
+			def resp = response.error.text()
+			log.info(resp)
+			throw new ImportException(resp)
+		} else {
+
+			return new OpenClinicaUser(response)
 		}
 	}
 }

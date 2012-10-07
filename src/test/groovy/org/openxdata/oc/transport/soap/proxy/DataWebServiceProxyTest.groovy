@@ -106,6 +106,7 @@ class DataWebServiceProxyTest extends GroovyTestCase {
 			assertFalse "User is not authorized to use web services", user.canUseWebServices
 		}
 	}
+
 	@Test void testThatGetUserDetailsReturnsWithWithAccessToTwoStudies() {
 		
 		play {
@@ -114,6 +115,44 @@ class DataWebServiceProxyTest extends GroovyTestCase {
 			
 			assertEquals "User should have access to two studies", 2, user.getAllowedStudies().size()
 		}
+	}
+
+	@Test void testThatExceptionIsThrownOnNonExistingOpenclinicaUser() {
+
+		def factory = setUpConnectionFactoryMock(TestData.nonExistingUserResponse)
+		play {
+
+			def proxy = createProxy(factory)
+
+			def message = shouldFail(ImportException) {
+				proxy.getUserDetails("non-existent-username")
+			}
+
+			assertEquals "Failure message should be the same", "This user does not exist in the database.", message
+		}
+	}
+
+	@Test void testThatExceptionIsThrownOnLackOfPermissionsToPerformGetUserOperation() {
+
+		def factory = setUpConnectionFactoryMock(TestData.getUserDetailsPermissionUserResponse)
+		play {
+
+			def proxy = createProxy(factory)
+
+			def message = shouldFail(ImportException) {
+				proxy.getUserDetails("non-existent-username")
+			}
+
+			assertEquals "No Permission message should be the same", "You do not have enough privileges to retrieve this information.", message
+		}
+	}
+
+	private def createProxy (def factory) {
+
+		def proxy = new DataWebServiceProxy()
+		proxy.setConnectionFactory(factory)
+
+		return proxy
 	}
 
 	private def setUpConnectionFactoryMock(returnXml) {
