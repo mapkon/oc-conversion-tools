@@ -37,7 +37,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	@Mock private StudyManagerService studyService
 	@Mock private DataExportService dataExportService
 
-	@InjectMocks private def openClinicaService = new OpenClinicaServiceImpl()
+	@InjectMocks private def openclinicaService = new OpenClinicaServiceImpl()
 
 	@Before public void setUp() throws Exception {
 
@@ -116,20 +116,20 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 	@Test public void testHasStudyData(){
 
 		String studyKey = studyService.getStudyKey(1)
-		assertTrue(openClinicaService.hasStudyData(studyKey))
+		assertTrue(openclinicaService.hasStudyData(studyKey))
 
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
 
 		String studyKey2 = studyService.getStudyKey(2)
 
-		assertFalse(openClinicaService.hasStudyData(studyKey2))
+		assertFalse(openclinicaService.hasStudyData(studyKey2))
 
 		Mockito.verify(studyService, Mockito.atLeastOnce()).hasEditableData(Mockito.any(Editable.class))
 	}
 
 	@Test public void testExportDataShouldReturnsCorrectNumberOfMessages() {
 
-		def messages = openClinicaService.exportOpenClinicaStudyData()
+		def messages = openclinicaService.exportOpenClinicaStudyData()
 
 		assertEquals 4, messages.size()
 
@@ -142,7 +142,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn([])
 
-		def messages = openClinicaService.exportOpenClinicaStudyData()
+		def messages = openclinicaService.exportOpenClinicaStudyData()
 
 		assertEquals("No data items found to export.", messages.get(""))
 
@@ -153,7 +153,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testExportDataShouldReturnFailureMessageOnErraticExport() {
 
-		def messages = openClinicaService.exportOpenClinicaStudyData()
+		def messages = openclinicaService.exportOpenClinicaStudyData()
 		assertEquals("Fail: Incorrect FormData OID", messages.get("key1"))
 
 		Mockito.verify(client).importData(Mockito.any(User.class), Mockito.anyList())
@@ -163,7 +163,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testExportDataShouldSetFormDataWithOpenclinicaExportBitFlag() {
 
-		openClinicaService.exportOpenClinicaStudyData()
+		openclinicaService.exportOpenClinicaStudyData()
 
 		formDataList.each {
 
@@ -179,7 +179,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		createResponse("Success")
 
-		def message = openClinicaService.exportFormData(createUser(), createFormData())
+		def message = openclinicaService.exportFormData(createUser(), createFormData())
 
 		assertEquals "Export should succeed", "Success", message
 
@@ -188,21 +188,21 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testGetStudySubjectEventsDoesNotReturnNull() {
 
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
+		def studySubjectEvents = openclinicaService.getStudySubjectEvents()
 
 		assertNotNull "Should never return null on valid studyOID", studySubjectEvents
 	}
 
 	@Test public void testGetStudysubjectEventReturnsCorrectNumberOfStudySubjectEvents() {
 
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
+		def studySubjectEvents = openclinicaService.getStudySubjectEvents()
 
 		assertEquals 10, studySubjectEvents.size()
 	}
 
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEvents() {
 
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
+		def studySubjectEvents = openclinicaService.getStudySubjectEvents()
 
 		studySubjectEvents.each {
 
@@ -212,7 +212,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingFormOIDs() {
 
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
+		def studySubjectEvents = openclinicaService.getStudySubjectEvents()
 
 		studySubjectEvents.each {
 
@@ -225,7 +225,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingStartDate() {
 
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
+		def studySubjectEvents = openclinicaService.getStudySubjectEvents()
 
 		studySubjectEvents.each {
 
@@ -238,7 +238,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testGetStudysubjectEventReturnsStudySubjectEventsWithEventsHavingEndDate() {
 
-		def studySubjectEvents = openClinicaService.getStudySubjectEvents()
+		def studySubjectEvents = openclinicaService.getStudySubjectEvents()
 
 		studySubjectEvents.each {
 
@@ -251,63 +251,63 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 	@Test public void testImportOpenClinicaStudyDoesNotReturnNull() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertNotNull "Should never return null on valid studyOID", study
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectName() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals "Test Study", study.getName()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectStudyKey() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals "Test-OID", study.getStudyKey()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithCorrectNumberOfForms() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals 4, study.getForms().size()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals "MSA1: Mother Screening Assessment 1 - 3", study.getForms()[0].getName()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName1() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals "MSA1: Mother Screening Assessment 1 - 2", study.getForms()[1].getName()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName2() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals "MSA2: Mother Screening Assessment 2 - 2", study.getForms()[2].getName()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingCorrectName3() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		assertEquals "MSA2: Mother Screening Assessment 2 - 1", study.getForms()[3].getName()
 	}
 
 	@Test public void testImportOpenClinicaStudyReturnsStudyWithFormHavingFormVersions() {
 
-		def study = openClinicaService.importOpenClinicaStudy("oid")
+		def study = openclinicaService.importOpenClinicaStudy("oid")
 
 		study.getForms().each {
 
@@ -320,7 +320,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createResponse("Success")
 		def formData = createFormData()
 
-		def response = openClinicaService.exportFormData(createUser(), formData)
+		def response = openclinicaService.exportFormData(createUser(), formData)
 
 		assertEquals "Success", response
 	}
@@ -330,7 +330,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createResponse("Some Failure Message")
 		def formData = createFormData()
 
-		def response = openClinicaService.exportFormData(createUser(), formData)
+		def response = openclinicaService.exportFormData(createUser(), formData)
 
 		assertEquals "Some Failure Message", response
 	}
@@ -340,7 +340,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createResponse("Success")
 		def formData = createFormData()
 
-		openClinicaService.exportFormData(createUser(), formData)
+		openclinicaService.exportFormData(createUser(), formData)
 
 		assertTrue "Should reset export flag", formData.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
@@ -350,7 +350,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createResponse("Some Failure Message")
 		def formData = createFormData()
 
-		openClinicaService.exportFormData(createUser(), formData)
+		openclinicaService.exportFormData(createUser(), formData)
 
 		assertFalse "Should not reset export flag on failed OpenClinica Export", formData.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
@@ -359,40 +359,40 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		def xml = """<ODM formKey="Foo_Key"/>"""
 
-		assertEquals "Foo_Key", openClinicaService.extractKey(xml)
+		assertEquals "Foo_Key", openclinicaService.extractKey(xml)
 	}
 
 	@Test public void testExtractKeyExtractsCorrectKey2() {
 
 		def xml = """<ODM formKey="Foo_Key"/>"""
 
-		assertNotSame "Foo_Key", openClinicaService.extractKey(xml)
+		assertNotSame "Foo_Key", openclinicaService.extractKey(xml)
 	}
 
 	@Test public void testGetUserDetailsRetursnCreatedOpenClinicaUserWithCorrectUsername() {
 		
-		def user = openClinicaService.getUserDetails("username")
+		def user = openclinicaService.getUserDetails("username")
 		
 		assertEquals "Username should be foo", "foo", user.username
 	}
 	
 	@Test public void testGetUserDetailsReturnsCreatedOpenCLinicaUserWithCorrectHashedPassword() {
 		
-		def user = openClinicaService.getUserDetails("username")
+		def user = openclinicaService.getUserDetails("username")
 		
 		assertEquals "Hashed Password should be hash LoL", "hash LoL", user.hashedPassword
 	}
 	
 	@Test public void testGetUserDetailsReturnsCreatedOpenClinicaNotAuthorizedToUseWebservices() {
 		 
-		def user = openClinicaService.getUserDetails("username")
+		def user = openclinicaService.getUserDetails("username")
 		
 		assertFalse "User is not authorized to user web services", user.canUseWebServices
 	}
 	
 	@Test public void testGetUserDetailsReturnsCreatedOpenClinicaUserWithCorrectStudyPermissions() {
 		
-		def user = openClinicaService.getUserDetails("username")
+		def user = openclinicaService.getUserDetails("username")
 		
 		assertEquals "User is authorized to access only two studies", 2, user.getAllowedStudies().size()
 	}
