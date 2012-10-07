@@ -26,7 +26,7 @@ import org.openxdata.xform.StudyImporter
 @Log
 public class OpenClinicaServiceImpl implements OpenClinicaService {
 
-	def user
+	def user = null
 	private def client
 
 	private def props
@@ -118,7 +118,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		def exportResponseMessages = [:]
 
 		if(dataList.size() > 0) {
-			exportResponseMessages = client.importData(dataList)
+			exportResponseMessages = client.importData(user, dataList)
 		}
 		else {
 

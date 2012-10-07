@@ -9,13 +9,22 @@ import org.openxdata.oc.data.TestData
 import org.openxdata.oc.exception.ImportException
 import org.openxdata.oc.transport.factory.ConnectionFactory
 import org.openxdata.oc.util.PropertiesUtil
+import org.openxdata.server.admin.model.User
 
 
 @WithGMock
 class OpenClinicaSoapClientTest extends GroovyTestCase {
 	
 	def client
-	
+
+	private def createUser() {
+
+		def user = new User("foo")
+		user.setSecretAnswer("openclinica-user-hash")
+
+		return user
+	}
+
 	@Before public void setUp(){
 		
 		def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
@@ -191,7 +200,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def reponse = client.importData(TestData.getInstanceData())
+			def reponse = client.importData(createUser(), TestData.getInstanceData())
 			
 			assertNotNull reponse
 		}
@@ -204,7 +213,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def importMessages = client.importData(TestData.getInstanceData())
+			def importMessages = client.importData(createUser(), TestData.getInstanceData())
 			
 			assertEquals 'Success', importMessages.get("F_MSA2_1")
 		}
@@ -217,7 +226,7 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 			
 			client.setConnectionFactory(connectionFactory)
 			
-			def importMessages = client.importData(TestData.getInstanceData())
+			def importMessages = client.importData(createUser(), TestData.getInstanceData())
 			
 			assertEquals 'Fail: Subject key not found', importMessages.get("F_MSA2_1")
 		}
@@ -231,10 +240,23 @@ class OpenClinicaSoapClientTest extends GroovyTestCase {
 
 			client.setConnectionFactory(connectionFactory)
 
-			def reponse = client.importData([])
+			def reponse = client.importData(createUser(), [])
 		}
 	}
+
+	@Test void testThatImportProceedsOnNullUser() {
+
+		def connectionFactory = setUpConnectionFactoryMock(TestData.importSOAPSuccessResponse)
+		play{
 	
+			client.setConnectionFactory(connectionFactory)
+
+			def importMessages = client.importData(null, TestData.getInstanceData())
+
+			assertEquals 'Success', importMessages.get("F_MSA2_1")
+		}
+	}
+
 	@Test void testThatInvalidXmlThrowsRaisesTransformationException(){
 		
 		def connectionFactory = setUpConnectionFactoryMock('''<////ODM>''')

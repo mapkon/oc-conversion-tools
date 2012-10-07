@@ -13,6 +13,7 @@ import org.openxdata.oc.transport.soap.proxy.DataWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.ImportWebServiceProxy
 import org.openxdata.oc.transport.soap.proxy.SubjectEventWebServiceProxy
 import org.openxdata.server.admin.model.FormData
+import org.openxdata.server.admin.model.User
 
 
 @Log
@@ -98,9 +99,14 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return subjects
 	}
 	
-	HashMap<String, String> importData(List<FormData> instanceData){
+	HashMap<String, String> importData(User user, List<FormData> instanceData){
 		
-
+		if(user) {
+			importProxy = new ImportWebServiceProxy(username:user.getName(), hashedPassword:user.getSecretAnswer(), connectionFactory:connectionFactory)
+		} else {
+			importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		}
 		
+		return importProxy.importData(instanceData)
 	}
 }
