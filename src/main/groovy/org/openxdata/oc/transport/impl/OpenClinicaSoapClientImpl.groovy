@@ -99,7 +99,7 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 	
 	OpenClinicaUser getUserDetails(def username) {
 		
-		dataProxy = new DataWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
+		dataProxy = new DataWebServiceProxy(username:this.username, hashedPassword:password, connectionFactory:connectionFactory)
 		
 		return dataProxy.getUserDetails(username)
 		

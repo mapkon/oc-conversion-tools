@@ -163,15 +163,6 @@ class AuthenticationProviderTest extends GroovyTestCase {
 		}
 	}
 
-	@Test void testThatCreatedUserHasAccessToAtleastOneStudy() {
-
-		Mockito.when(userService.findUserByUsername(Mockito.anyString())).thenReturn(null)
-
-		def user = authProvider.authenticate("username", "password")
-
-		assertEquals "User should be mapped to at least one study", 1, user.getMappedStudies().size()
-	}
-
 	@Test void testThatCreatedUserHasAccessToStudyInPropertiesFile() {
 
 		Mockito.when(userService.findUserByUsername(Mockito.anyString())).thenReturn(null)

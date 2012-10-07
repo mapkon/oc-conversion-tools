@@ -17,7 +17,9 @@ class DataWebServiceProxy extends SoapRequestProperties {
 		envelope = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://openclinica.org/ws/data/v1">
 							${getHeader()}
 						<soapenv:Body>
-							<v1:findUserRequest>${username}</v1:findUserRequest>
+							<v1:findUserRequest>
+								<v1:username>${username}</v1:username>
+							</v1:findUserRequest>
 						</soapenv:Body>
 					 </soapenv:Envelope>"""
 	}
@@ -33,7 +35,7 @@ class DataWebServiceProxy extends SoapRequestProperties {
 
 			def userDetails = response.depthFirst().findUserResponse[0]
 
-			OpenClinicaUser user = new OpenClinicaUser(userDetails)
+			def user = new OpenClinicaUser(userDetails)
 
 			return user
 		} else {

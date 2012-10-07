@@ -1,5 +1,6 @@
 package org.openxdata.oc.model
 
+
 class OpenClinicaUser {
 
 	private def xml

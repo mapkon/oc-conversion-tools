@@ -2,10 +2,9 @@ package org.openxdata.oc.authentication
 
 import groovy.util.logging.Log
 
-import org.openxdata.oc.model.OpenClinicaUser
 import org.openxdata.oc.util.PropertiesUtil
+import org.openxdata.server.admin.model.StudyDefHeader
 import org.openxdata.server.admin.model.User
-import org.openxdata.server.admin.model.mapping.UserStudyMap
 import org.openxdata.server.admin.model.exception.UserNotFoundException
 
 @Log
@@ -85,55 +84,73 @@ class AuthenticationProvider {
 		return user
 	}
 
+	private def authenticateAgainstOpenXData() {
+
+		def props = getProperties()
+
+		log.info("Authenticating in openXdata with username ${props.get("oxdUserName")} to access openXdata services.")
+
+		def username = props.get("oxdUserName")
+		def password = props.get("oxdPassword")
+
+		return authenticationService.authenticate(username, password)
+
+	}
+
 	private def createOXDUserFromOpenClinicaUserDetails(def openclinicaUser) {
 
 		log.info("Creating openXdata user with name: ${username} from openclinica user")
 
+		// Authenticate in order to access openXdata services
+		User creator = authenticateAgainstOpenXData()
+
 		def user = new User()
 
+		user.setCreator(creator)
+		user.setDateCreated(new Date())
 		user.setClearTextPassword(password)
 		user.setName(openclinicaUser.username)
+		user.setFirstName(openclinicaUser.username)
 
 		// Keep the openclinica hashed password in the secret answer field for later use.
 		user.setSecretAnswer(openclinicaUser.hashedPassword)
 
 		log.info("Adding mobile role to user: ${username} to enable them use mobile")
+
 		def mobileRole = roleService.getRolesByName("Role_Mobile_User")
 		user.addRole(mobileRole.get(0))
 
-		def mappedStudy = createUserStudyMap(user)
+		// Create user study map
+		createUserStudyMap(user)
 
-		user.setMappedStudies(mappedStudy)
-
-		return userService.saveUser(user)
+		return user
 	}
 
-	private def createUserStudyMap(User user) {
+	private def createUserStudyMap(def user) {
 		
 		log.info("Mapping study with key: ${getStudyKey()} to user: ${username}");
-		
-		// Save the user to get hold of the id
-		userService.saveUser(user);
 		
 		def studyKey = getStudyKey();
 		
 		def study = studyService.getStudyByKey(studyKey);
-		def mappedStudy = new HashSet<UserStudyMap>();
 
-		def map = new UserStudyMap();
+		def studyDefHeader = new StudyDefHeader(study.getId(), study.getName())
+		def mappedStudies = new ArrayList<StudyDefHeader>();
 		
-		map.setUser(user);
-		map.setStudy(study);
+		mappedStudies.add(studyDefHeader)
 		
-		mappedStudy.add(map);
+		user = userService.saveUser(user);
 		
-		return mappedStudy;
+		studyService.saveMappedUserStudyNames(user.getId(), mappedStudies, new ArrayList<StudyDefHeader>())
 	}
 	
-	private def getStudyKey() {
+	private def getProperties () {
 
 		def props = new PropertiesUtil().loadProperties('META-INF/openclinica.properties')
+	}
 
-		return props.get("studyOID", "")
+	private def getStudyKey() {
+
+		def props = getProperties().get("studyOID", "")
 	}
 }
