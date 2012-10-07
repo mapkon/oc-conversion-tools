@@ -272,7 +272,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 		FormData formData = formDownloadService.saveFormData(formInstance, user, new Date());
 		String exportResponse = openclinicaService.exportFormData(user, formData);
-		if (exportResponse.equalsIgnoreCase("Success"))
+		if ("Success".equals(exportResponse))
 			return formData.getId() + "";
 		else
 			throw new ExportException("Upload Failed: " + exportResponse);
