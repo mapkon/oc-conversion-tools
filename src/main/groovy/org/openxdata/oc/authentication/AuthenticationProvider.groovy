@@ -6,6 +6,7 @@ import org.openxdata.oc.model.OpenClinicaUser
 import org.openxdata.oc.util.PropertiesUtil
 import org.openxdata.server.admin.model.User
 import org.openxdata.server.admin.model.mapping.UserStudyMap
+import org.openxdata.server.admin.model.exception.UserNotFoundException
 
 @Log
 class AuthenticationProvider {
@@ -44,9 +45,9 @@ class AuthenticationProvider {
 
 		log.info("Attempting to authenticate user: ${username} using openXdata authentication mechanism")
 
-		def user = userService.findUserByUsername(username)
+		def existingUser = getOXDUser() 
 
-		if(user) {
+		if(existingUser) {
 			
 			log.info("User: ${username} exists in openXdata db. Validating credentials...")
 			return authenticationService.authenticate(username, password)
@@ -58,6 +59,17 @@ class AuthenticationProvider {
 		}
 	}
 
+	private def getOXDUser() {
+		
+		try {
+			
+			return userService.findUserByUsername(username)
+			
+		} catch (UserNotFoundException ex) {
+			return null
+		}
+	}
+	
 	private def authenticateViaOpenClinica() {
 
 		log.info("Attempting to fetch user: ${username} from openclinica...")
