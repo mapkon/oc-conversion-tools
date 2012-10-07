@@ -34,7 +34,7 @@ class DataWebServiceProxy extends SoapRequestProperties {
 			def transportHandler = new HttpTransportHandler(envelope:envelope)
 			def response = transportHandler.sendRequest(connectionFactory.getStudyConnection())
 
-			def user = evaluateResponse(response)
+			def user = extractResponse(response)
 
 			return user
 		} else {
@@ -42,7 +42,7 @@ class DataWebServiceProxy extends SoapRequestProperties {
 		}
 	}
 
-	private def evaluateResponse(httpResonse) {
+	private def extractResponse(httpResonse) {
 
 		def response = httpResonse.depthFirst().findUserResponse[0]
 

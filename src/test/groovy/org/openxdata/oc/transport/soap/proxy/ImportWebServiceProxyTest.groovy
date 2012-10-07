@@ -70,9 +70,10 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 		}
 	}
 
-	@Test void testImportShouldFailOnWithCorrectExceptionOnEmptyInstanceData(){
+	@Test void testImportShouldFailOnWithCorrectExceptionOnEmptyInstanceData() {
 
-		shouldFail(ImportException){
+		shouldFail(ImportException) {
+
 			def message = importProxy.importData([])
 			assertEquals 'Error', message[0]
 		}
