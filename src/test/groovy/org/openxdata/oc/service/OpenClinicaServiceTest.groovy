@@ -20,6 +20,7 @@ import org.openxdata.server.admin.model.Editable
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.FormDef
 import org.openxdata.server.admin.model.StudyDef
+import org.openxdata.server.admin.model.User;
 import org.openxdata.server.export.ExportConstants
 import org.openxdata.server.service.DataExportService
 import org.openxdata.server.service.FormService
@@ -55,6 +56,22 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		Mockito.when(dataExportService.getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)).thenReturn(formDataList)
 	}
 
+	private User createUser() {
+
+		User user = new User("foo");
+		user.setPassword("password");
+		return user;
+	}
+
+	private StudyDef createStudy() {
+
+		StudyDef study = new StudyDef()
+		FormDef form = new FormDef()
+		study.addForm(form)
+
+		return study
+	}
+
 	private void createFormDataList() {
 
 		FormData formData = new FormData()
@@ -67,17 +84,6 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		formDataList.add(formData)
 		formDataList.add(formData2)
-	}
-
-	private StudyDef createStudy() {
-
-		StudyDef study = new StudyDef()
-
-		FormDef form = new FormDef()
-
-		study.addForm(form)
-
-		return study
 	}
 
 	private List<StudyDef> createStudyList() {
@@ -304,7 +310,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createResponse("Success")
 		def formData = createFormData()
 
-		def response = openClinicaService.exportFormData(formData)
+		def response = openClinicaService.exportFormData(createUser(), formData)
 
 		assertEquals "Success", response
 	}
@@ -314,27 +320,27 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		createResponse("Some Failure Message")
 		def formData = createFormData()
 
-		def response = openClinicaService.exportFormData(formData)
+		def response = openClinicaService.exportFormData(createUser(), formData)
 
 		assertEquals "Some Failure Message", response
 	}
 
-	@Test void testThatExportFormDataResetsExportFlagOnSuccessfulExportToOpenClinica() {
+	@Test public void testThatExportFormDataResetsExportFlagOnSuccessfulExportToOpenClinica() {
 
 		createResponse("Success")
 		def formData = createFormData()
 
-		openClinicaService.exportFormData(formData)
+		openClinicaService.exportFormData(createUser(), formData)
 
 		assertTrue "Should reset export flag", formData.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
 
-	@Test void testThatExportFormDataDoesNotResetExportFlagOnFailedExportToOpenClinica() {
+	@Test public void testThatExportFormDataDoesNotResetExportFlagOnFailedExportToOpenClinica() {
 
 		createResponse("Some Failure Message")
 		def formData = createFormData()
 
-		openClinicaService.exportFormData(formData)
+		openClinicaService.exportFormData(createUser(), formData)
 
 		assertFalse "Should not reset export flag on failed OpenClinica Export", formData.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}

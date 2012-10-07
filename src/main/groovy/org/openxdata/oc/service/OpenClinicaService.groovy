@@ -1,9 +1,10 @@
 package org.openxdata.oc.service
 
-import org.openxdata.oc.model.OpenClinicaUser;
+import org.openxdata.oc.model.OpenClinicaUser
 import org.openxdata.oc.model.StudySubject
 import org.openxdata.server.admin.model.FormData
 import org.openxdata.server.admin.model.StudyDef
+import org.openxdata.server.admin.model.User
 import org.openxdata.server.admin.model.exception.UnexpectedException
 import org.openxdata.server.service.DataExportService
 import org.openxdata.server.service.FormService
@@ -13,7 +14,7 @@ public interface OpenClinicaService {
 	
 	Boolean hasStudyData(String studyKey)
 
-	String exportFormData(FormData formData)
+	String exportFormData(User user, FormData formData)
 
 	List<StudySubject> getStudySubjectEvents()
 	

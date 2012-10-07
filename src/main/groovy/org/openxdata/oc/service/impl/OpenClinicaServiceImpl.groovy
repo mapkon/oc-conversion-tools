@@ -174,11 +174,11 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		formData.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
 
-	public String exportFormData(FormData formData) {
+	public String exportFormData(User user, FormData formData) {
 
 		def formDataList = []
 
-		log.info("Exporting FormData with id: ${formData.getId()}")
+		log.info("Exporting FormData with id: ${formData.getId()} uploaded by ${user.getName()}")
 
 		formDataList.add(formData)
 

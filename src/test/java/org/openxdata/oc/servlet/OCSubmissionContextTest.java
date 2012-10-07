@@ -25,6 +25,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openxdata.oc.authentication.AuthenticationProvider;
 import org.openxdata.oc.data.TestData;
+import org.openxdata.oc.exception.ExportException;
 import org.openxdata.oc.model.OpenClinicaUser;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
@@ -68,7 +69,7 @@ public class OCSubmissionContextTest {
 	private OCSubmissionContext instance;
 
 	@Before
-	public void setUp() throws UserNotFoundException {
+	public void setUp() {
 
 		studySubjects = TestData.getStudySubjectsAsList();
 
@@ -100,13 +101,33 @@ public class OCSubmissionContextTest {
 		Map<Integer, String> mappedStudyNames = new HashMap<Integer, String>();
 		mappedStudyNames.put(convertedStudy.getId(), convertedStudy.getName());
 
-		when(userService.findUserByUsername("foo")).thenReturn(createUser());
+		when(userService.getLoggedInUser()).thenReturn(createUser());
 		when(authProvider.authenticate("foo", "password")).thenReturn(createUser());
 		when(userService.saveUser(Mockito.any(User.class))).thenReturn(createUser());
 		when(roleService.getRolesByName(Mockito.anyString())).thenReturn(createRoles());
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(mappedStudyNames);
-		when(openclinicaService.getUserDetails(Mockito.anyString())).thenReturn(createOpenclinicaUser());
 
+		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
+		.thenReturn(createFormData());
+
+		when(openclinicaService.getUserDetails(Mockito.anyString())).thenReturn(createOpenclinicaUser());
+		when(openclinicaService.exportFormData(Mockito.any(User.class), Mockito.any(FormData.class))).thenReturn("Success");
+
+	}
+
+	private User createUser() {
+
+		User user = new User("foo");
+		user.setPassword("password");
+
+		return user;
+	}
+
+	private FormData createFormData() {
+
+		FormData formData = new FormData();
+		formData.setId(1);
+		return formData;
 	}
 
 	private List<Role> createRoles() {
@@ -229,45 +250,26 @@ public class OCSubmissionContextTest {
 
 	@Test
 	public void testSetUploadResultExportsData() {
-		FormData formData = new FormData();
-		formData.setId(1);
-		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
-				.thenReturn(formData);
-		when(openclinicaService.exportFormData(formData)).thenReturn("Success");
 
 		instance.setUploadResult("<ANY_XML/>");
 
-		verify(openclinicaService, atLeastOnce()).exportFormData(formData);
-
+		verify(openclinicaService, atLeastOnce()).exportFormData(Mockito.any(User.class), Mockito.any(FormData.class));
 	}
 
 	@Test
 	public void testSetUploadResultReturnsAnIntStringIfExportIsSuccessful() {
-		FormData formData = new FormData();
-		formData.setId(1);
-		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
-				.thenReturn(formData);
-		when(openclinicaService.exportFormData(formData)).thenReturn("Success");
 
 		String result = instance.setUploadResult("<ANY_XML/>");
 		assertEquals("1", result);
-
 	}
 
-	@Test
+	@Test(expected = ExportException.class)
 	public void testSetUploadResultThrowsExceptionWhenExportFails() {
-		FormData formData = new FormData();
-		formData.setId(1);
-		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
-				.thenReturn(formData);
-		when(openclinicaService.exportFormData(formData)).thenReturn("This is an error message");
 
-		try {
-			instance.setUploadResult("<ANY_XML/>");
-			fail("An Exception Was Expected");
-		} catch (Exception e) {
-		}
+		when(openclinicaService.exportFormData(Mockito.any(User.class), Mockito.any(FormData.class)))
+			.thenReturn("This is an error message");
 
+		instance.setUploadResult("<ANY_XML/>");
 	}
 
 	@Test public void testAuthenticatePassesWhenUserExistsInOpenXData() {
@@ -294,13 +296,5 @@ public class OCSubmissionContextTest {
 		boolean authenticated = instance.authenticate("foo", "password");
 
 		assertFalse ("Should authenticate valid OXD user", authenticated);
-	}
-
-	private User createUser() {
-
-		User user = new User("foo");
-		user.setPassword("password");
-
-		return user;
 	}
 }
