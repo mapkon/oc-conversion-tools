@@ -50,12 +50,18 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return crfMetaDataVersionProxy.findAllCRFS(studyOID)
 	}
 	
-	public HashMap<String, String> importData(List<FormData> instanceData){
+	private getXform(def studyOID) {
+
+		log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
+
+		def transformer = new Transformer()
 		
-		importProxy = new ImportWebServiceProxy(username:username, hashedPassword:password, connectionFactory:connectionFactory)
-		return importProxy.importData(instanceData)
+		def odmMetaData = findAllCRFS(studyOID)
+		
+		return transformer.convert(odmMetaData)
+
 	}
-		
+
 	public def getOpenxdataForm(def studyOID) {
 		
 		try{
@@ -63,22 +69,17 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 			return getXform(studyOID)
 
 		}catch(def ex){
-		
+
 			log.info(ex.getMessage())
 			throw new ImportException(ex.getMessage())
 		}
 	}
 
-	private getXform(def studyOID) {
-
-		log.info("Fetching Latest CRF Version for Openclinica study with OID: ${studyOID}")
+	OpenClinicaUser getUserDetails(def username) {
 		
-		def transformer = new Transformer()
+		dataProxy = new DataWebServiceProxy(username:this.username, hashedPassword:password, connectionFactory:connectionFactory)
 		
-		def odmMetaData = findAllCRFS(studyOID)
-		
-		return transformer.convert(odmMetaData)
-
+		return dataProxy.getUserDetails(username)
 	}
 	
 	List<StudySubject> findStudySubjectEventsByStudyOID(def studyOID){
@@ -97,11 +98,9 @@ public class OpenClinicaSoapClientImpl implements OpenClinicaSoapClient {
 		return subjects
 	}
 	
-	OpenClinicaUser getUserDetails(def username) {
+	HashMap<String, String> importData(List<FormData> instanceData){
 		
-		dataProxy = new DataWebServiceProxy(username:this.username, hashedPassword:password, connectionFactory:connectionFactory)
-		
-		return dataProxy.getUserDetails(username)
+
 		
 	}
 }
