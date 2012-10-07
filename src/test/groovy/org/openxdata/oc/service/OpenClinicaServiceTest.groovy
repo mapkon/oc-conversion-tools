@@ -113,10 +113,13 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		return subjects
 	}
 
-	@Test public void testHasStudyData(){
+	@Test public void testHasStudyDataReturnTrueWhenStudyHasData() {
 
 		String studyKey = studyService.getStudyKey(1)
 		assertTrue(openclinicaService.hasStudyData(studyKey))
+	}
+
+	@Test void testHasStudyDataReturnsFalseWhenStudyHasNoData() {
 
 		Mockito.when(studyService.hasEditableData(Mockito.any(Editable.class))).thenReturn(Boolean.FALSE)
 
