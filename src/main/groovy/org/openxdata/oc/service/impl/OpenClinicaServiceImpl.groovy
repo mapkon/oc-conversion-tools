@@ -26,6 +26,7 @@ import org.openxdata.xform.StudyImporter
 @Log
 public class OpenClinicaServiceImpl implements OpenClinicaService {
 
+	def user
 	private def client
 
 	private def props
@@ -112,6 +113,22 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		return client.findStudySubjectEventsByStudyOID(props.getProperty("studyOID"))
 	}
 
+	private def buildResponseMessage(def dataList) {
+
+		def exportResponseMessages = [:]
+
+		if(dataList.size() > 0) {
+			exportResponseMessages = client.importData(dataList)
+		}
+		else {
+
+			log.info("No data items found to export.")
+			exportResponseMessages.put("", "No data items found to export.")
+		}
+
+		return exportResponseMessages
+	}
+
 	@Override
 	public HashMap<String, String> exportOpenClinicaStudyData() {
 
@@ -134,28 +151,35 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		return exportResponseMessages
 	}
 
-	private def buildResponseMessage(def dataList) {
+	public String exportFormData(User user, FormData formData) {
 
-		def exportResponseMessages = [:]
+		log.info("Exporting FormData with id: ${formData.getId()} uploaded by ${user.getName()}")
 
-		if(dataList.size() == 0) {
+		this.user = user
 
-			def message = "No data items found to export."
+		def formDataList = []
 
-			log.info(message)
-			exportResponseMessages.put("", message)
+		formDataList.add(formData)
+
+		def response = buildResponseMessage(formDataList)
+
+		def formKey = extractKey(formData.getData())
+
+		def resp = response.get(formKey)
+
+		if(resp.equals("Success")) {
+			resetExportFlag(formData)
 		}
-		else {
-			exportResponseMessages = client.importData(dataList)
-		}
 
-		return exportResponseMessages
+		log.info("Export of Form Data with id: ${formData.getId()} finished with message: ${resp}")
+
+		return response.get(formKey)
 	}
-
+	
 	private setFormDataExportedForKey(def dataList, def key) {
 
 		dataList.each {
-
+		
 			def xml = new XmlSlurper().parseText(it.getData())
 
 			if(key.equals(xml.@formKey.text())) {
@@ -174,30 +198,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 		formData.setExportedFlag(ExportConstants.EXPORT_BIT_OPENCLINICA)
 	}
 
-	public String exportFormData(User user, FormData formData) {
-
-		def formDataList = []
-
-		log.info("Exporting FormData with id: ${formData.getId()} uploaded by ${user.getName()}")
-
-		formDataList.add(formData)
-
-		def response = buildResponseMessage(formDataList)
-
-		def formKey = extractKey(formData.getData())
-
-		def resp = response.get(formKey)
-
-		if(resp.equals("Success")) {
-			resetExportFlag(formData)
-		}
-
-		log.info("Export of Form Data with id: ${formData.getId()} finished with message: ${resp}")
-
-		return response.get(formKey)
-	}
-
-	def extractKey(def xml) {
+	private def extractKey(def xml) {
 
 		def slurpedXml = new XmlSlurper().parseText(xml)
 
