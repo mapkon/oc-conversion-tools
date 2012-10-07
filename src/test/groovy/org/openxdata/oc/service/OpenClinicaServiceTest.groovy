@@ -136,7 +136,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		assertEquals 4, messages.size()
 
-		Mockito.verify(client, Mockito.atLeast(0)).importData(Mockito.any(User.class), Mockito.anyList())
+		Mockito.verify(client, Mockito.atMost(1)).importData(Mockito.any(User.class), Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atLeast(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
@@ -149,7 +149,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		assertEquals("No data items found to export.", messages.get(""))
 
-		Mockito.verify(client, Mockito.atLeast(0)).importData(Mockito.any(User.class), Mockito.anyList())
+		Mockito.verify(client, Mockito.atMost(1)).importData(Mockito.any(User.class), Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atLeast(0)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
@@ -159,7 +159,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 		def messages = openclinicaService.exportOpenClinicaStudyData()
 		assertEquals("Fail: Incorrect FormData OID", messages.get("key1"))
 
-		Mockito.verify(client).importData(Mockito.any(User.class), Mockito.anyList())
+		Mockito.verify(client, Mockito.atMost(1)).importData(Mockito.any(User.class), Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atLeast(0)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
@@ -173,7 +173,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 			assertTrue "Should be marked as Exported with openclinica export bit flag", it.isExported(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		}
 
-		Mockito.verify(client).importData(Mockito.any(User.class), Mockito.anyList())
+		Mockito.verify(client, Mockito.atMost(1)).importData(Mockito.any(User.class), Mockito.anyList())
 		Mockito.verify(dataExportService, Mockito.atLeastOnce()).getFormDataToExport(ExportConstants.EXPORT_BIT_OPENCLINICA)
 		Mockito.verify(dataExportService, Mockito.atMost(2)).setFormDataExported(Mockito.any(FormData.class), Mockito.anyInt())
 	}
@@ -186,7 +186,7 @@ public class OpenClinicaServiceTest extends GroovyTestCase {
 
 		assertEquals "Export should succeed", "Success", message
 
-		Mockito.verify(client, Mockito.atLeastOnce()).importData(Mockito.any(User.class), Mockito.anyList())
+		Mockito.verify(client, Mockito.atMost(1)).importData(Mockito.any(User.class), Mockito.anyList())
 	}
 
 	@Test public void testGetStudySubjectEventsDoesNotReturnNull() {
