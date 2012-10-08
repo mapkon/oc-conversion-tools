@@ -1,6 +1,9 @@
 package org.openxdata.oc.util
 
+import javax.servlet.ServletContext;
+import groovy.util.logging.Log
 
+@Log
 class PropertiesUtil {
 
 	def props = new Properties()
@@ -18,5 +21,17 @@ class PropertiesUtil {
 	
 	def getOCProperty(def propName) {
 		return props.getProperty(propName)
+	}
+	
+	Properties loadOpenClinicaProperties(ServletContext servletContext) {
+		InputStream propFileStream = servletContext?.getResourceAsStream("openclinica.properties");
+		if(propFileStream){
+			log.info("loading properties file from Web Context...")
+			props.load(propFileStream)
+		}else{
+			// We assume the absence of an external properties file in openxdata/WEB-INF
+			log.info("loading properties file from classpath...")
+			props = loadProperties('META-INF/openclinica.properties')
+		}
 	}
 }

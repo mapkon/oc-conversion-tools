@@ -1,8 +1,6 @@
 package org.openxdata.oc.servlet;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.openxdata.oc.exception.ImportException;
 import org.openxdata.oc.service.OpenClinicaService;
 import org.openxdata.oc.service.impl.OpenClinicaServiceImpl;
-import org.openxdata.oc.util.TransformUtil;
+import org.openxdata.oc.util.PropertiesUtil;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.FormDefVersion;
 import org.openxdata.server.admin.model.StudyDef;
@@ -64,62 +62,13 @@ public class OpenClinicaServlet extends HttpServlet {
 		dataExportService = (DataExportService) ctx.getBean("dataExportService");
 		authenticationService = (AuthenticationService) ctx.getBean("authenticationService");
 
-		props = loadProperties();
+		props = new PropertiesUtil().loadOpenClinicaProperties(sctx);
 
 		openclinicaService = new OpenClinicaServiceImpl(props);
 
 		openclinicaService.setStudyService(studyService);
 		openclinicaService.setFormService(formService);
 		openclinicaService.setDataExportService(dataExportService);
-	}
-
-	private Properties loadProperties() {
-
-		try {
-
-			log.debug("Attempting to load properties file from Web Context");
-			InputStream propFileStream = getServletContext().getResourceAsStream("openclinica.properties");
-			props.load(propFileStream);
-
-		} catch (Exception e) {
-
-			// We assume the absence of an external properties file in openxdata/WEB-INF
-			loadInternalProperties();
-		}
-
-		return props;
-	}
-
-	private void loadInternalProperties() {
-
-		try {
-
-			log.debug("Properties file not found in Web context. Attempting to load internal properties file");
-
-			String propFileContent = new TransformUtil().loadFileContents("META-INF/openclinica.properties");
-			props.load(new ByteArrayInputStream(propFileContent.getBytes()));
-
-		} catch (IOException e) {
-			log.debug(e.getLocalizedMessage());
-		}
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-
-		try {
-
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put(" ", "No studies downloaded during this session.");
-
-			request.setAttribute("message", map);
-			request.getRequestDispatcher(JSP_FILE_NAME).forward(request, response);
-
-		} catch (ServletException e) {
-			log.error(e.getLocalizedMessage());
-		} catch (IOException e) {
-			log.error(e.getLocalizedMessage());
-		}
 	}
 
 	@Override

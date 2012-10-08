@@ -4,14 +4,21 @@ import static org.junit.Assert.*
 
 import org.junit.Before
 import org.junit.Test
+import org.gmock.WithGMock
+import javax.servlet.ServletContext;
 
+@WithGMock
 class PropertiesUtilTest extends GroovyTestCase {
 
 	def props
 	def util = new PropertiesUtil()
+	ServletContext servletContext
+	def servletCtxInputStream
 
 	@Before void setUp() {
 		props = util.loadProperties('META-INF/openclinica.properties')
+		servletCtxInputStream =this.getClass().getClassLoader().getResourceAsStream('META-INF/openclinica.properties')
+		servletContext = mock(ServletContext)
 	}
 
 	@Test void testLoadPropertiesDoesNotReturnNull() {
@@ -99,5 +106,29 @@ class PropertiesUtilTest extends GroovyTestCase {
 	@Test void testGetOCPropertyReturnsValidPassword() {
 		def password = util.getOCProperty('password')
 		assertNotNull 'password', password
+	}
+
+	@Test void testLoadOpenClinicaPropertiesFileInWebApp(){
+		servletContext.getResourceAsStream('openclinica.properties').returns(servletCtxInputStream)
+		play{
+			checkOpenlincaPropertiesNotEmpty(servletContext)
+		}
+	}
+
+	@Test void testLoadOpenClinicaPropertiesWhenFileClassPath(){
+		servletContext.getResourceAsStream('openclinica.properties').returns(null)
+		play{
+			checkOpenlincaPropertiesNotEmpty(servletContext)
+		}
+	}
+
+	@Test void testLoadOpenClinicaPropertiesWhenServletContextIsNull(){
+		checkOpenlincaPropertiesNotEmpty(null)
+	}
+
+	void checkOpenlincaPropertiesNotEmpty(def servletContext){
+		util = new PropertiesUtil()
+		util.loadOpenClinicaProperties(servletContext)
+		assertFalse 'Properties should not be empty',util.props.isEmpty()
 	}
 }

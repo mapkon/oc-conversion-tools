@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+
 import org.openxdata.oc.authentication.AuthenticationProvider;
 import org.openxdata.oc.exception.ExportException;
 import org.openxdata.oc.model.Event;
@@ -34,9 +36,12 @@ import org.openxdata.server.service.UserService;
 import org.openxdata.server.servlet.DefaultSubmissionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.ServletContextAware;
 
-public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext {
+public class OCSubmissionContext extends DefaultSubmissionContext implements WFSubmissionContext, ServletContextAware,
+		InitializingBean {
 
 	private static Logger log = LoggerFactory.getLogger(OCSubmissionContext.class);
 
@@ -60,6 +65,8 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	@Autowired
 	private AuthenticationService authenticationService;
+	@Autowired
+	private ServletContext servletContext;
 
 	private boolean initaliazed = false;
 	private List<Event> orphanedEvents = new ArrayList<Event>();
@@ -67,11 +74,10 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	public OCSubmissionContext() {
 		super();
-		props = new PropertiesUtil().loadProperties("META-INF/openclinica.properties");
 	}
 
 	public void init() {
-		
+
 		if (initaliazed)
 			return;
 		this.openclinicaService = new OpenClinicaServiceImpl(props);
@@ -87,6 +93,7 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 		authProvider.setStudyService(studyManagerService);
 		authProvider.setOpenclinicaService(openclinicaService);
 		authProvider.setAuthenticationService(authenticationService);
+		props = new PropertiesUtil().loadOpenClinicaProperties(servletContext);
 		initaliazed = true;
 	}
 
@@ -280,11 +287,6 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	@Override
 	public boolean authenticate(String username, String password) {
-		
-		// This is not the right place to do this.We need to be notified that our object creation has
-		// been completed by oxd then we initialize our this SubmissionContext
-		init();
-		
 		User authenticatedUser = authProvider.authenticate(username, password);
 
 		return authenticatedUser != null;
@@ -308,6 +310,14 @@ public class OCSubmissionContext extends DefaultSubmissionContext implements WFS
 
 	void setOpenClinicaService(OpenClinicaService openClinicaService) {
 		this.openclinicaService = openClinicaService;
+	}
+
+	public void afterPropertiesSet() throws Exception {
+		init();
+	}
+
+	public void setServletContext(ServletContext servletContext) {
+		this.servletContext = servletContext;
 	}
 
 }
