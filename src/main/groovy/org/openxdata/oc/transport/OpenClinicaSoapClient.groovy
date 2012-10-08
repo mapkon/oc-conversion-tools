@@ -12,7 +12,7 @@ import org.openxdata.server.admin.model.User
  * <p>
  * This should be used in tandem with the application specific services to consume what OpenClinica exposes through the web services.
  *<p>
- * The methods in this interface assume that the user who is retrieving the events has access to perform web services operations in OpenClinica.
+ * The methods in this interface assume that the user who is attempting to perform web service operations has the correct permissions to do so in OpenClinica.
  */
 public interface OpenClinicaSoapClient {
 
@@ -37,6 +37,8 @@ public interface OpenClinicaSoapClient {
 	/**
 	 * Exports the given OpenXdata instance data to OpenClinica.
 	 * <p>
+	 * The misnomer arises because we are programming against the interfaces that OpenClinica exposes as part of the CDSIC spec and not the operation being performed.
+	 * <p>
 	 * This method assumes that the instance data has a studyKey corresponding to an existing study in OpenClinica.
 	 * 
 	 * @param user User who submitted the data
@@ -46,7 +48,9 @@ public interface OpenClinicaSoapClient {
 	HashMap<String, String> importData(User user, List<FormData> instanceData)
 	
 	/**
-	 * Retrieves all the events for the subjects in a given study that the user has access to. By user we mean the user initiating the web service operation.
+	 * Retrieves all the events for the subjects in a given study that the user has access to.
+	 * <p> 
+	 * By user we mean the user initiating the web service operation.
 	 * 
 	 * @param studyOID OID of the study we are retrieving events from.
 	 * @return ODM XML of the events.

@@ -11,15 +11,15 @@ import org.openxdata.server.service.FormService
 import org.openxdata.server.service.StudyManagerService
 
 /**
- * Provide an interface to OpenClinica web service endpoint
+ * Provide an interface to OpenClinica web service endpoints
  * <p>
- * The methods in this interface assume that the user who is retrieving the events has access to perform web services operations in OpenClinica.
+ * The methods in this interface assume that the user who is attempting to perform web service operations has the correct permissions to do so in OpenClinica.
  *
  */
 public interface OpenClinicaService {
 	
 	/**
-	 * Checks if a given study for the specified studyKey has data collected for it.
+	 * Checks if a given study has data.
 	 * 
 	 * @param studyKey study key for the study to check again
 	 * 
@@ -28,7 +28,7 @@ public interface OpenClinicaService {
 	Boolean hasStudyData(String studyKey)
 
 	/**
-	 * Exports a given FormData to OpenClinica. This method assumes that the user is not null.
+	 * Exports a given FormData to OpenClinica. 
 	 * <p> 
 	 * It should typically be used for direct submissions from the mobile.
 	 * 
@@ -41,7 +41,7 @@ public interface OpenClinicaService {
 	String exportFormData(User user, FormData formData)
 
 	/**
-	 * Retrieves all the events for all the subjects defined in a given study that the current user has access to.
+	 * Retrieves all the events for all the subjects defined in a given study that a user has access to.
 	 * 
 	 * @return List of StudySubjects and their corresponding events.
 	 */
