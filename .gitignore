@@ -8,3 +8,4 @@ target/*
 /copy-jar.bat
 bin/
 src/test/resources/pep.odm.xml
+/.idea/
