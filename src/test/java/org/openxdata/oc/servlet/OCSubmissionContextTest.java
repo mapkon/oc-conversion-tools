@@ -29,7 +29,7 @@ import org.openxdata.oc.exception.ExportException;
 import org.openxdata.oc.model.OpenClinicaUser;
 import org.openxdata.oc.model.StudySubject;
 import org.openxdata.oc.service.OpenClinicaService;
-import org.openxdata.proto.model.OxdWorkitem;
+import org.openxdata.proto.model.WorkItem;
 import org.openxdata.server.admin.model.FormData;
 import org.openxdata.server.admin.model.FormDef;
 import org.openxdata.server.admin.model.Role;
@@ -48,7 +48,8 @@ public class OCSubmissionContextTest {
 	private Properties props;
 	private StudyDef convertedStudy;
 
-	@Mock private RoleService roleService;
+	@Mock
+	private RoleService roleService;
 
 	@Mock
 	private OpenClinicaService openclinicaService;
@@ -63,8 +64,10 @@ public class OCSubmissionContextTest {
 	private FormDownloadService formService;
 	private static List<StudySubject> studySubjects;
 
-	@Mock private AuthenticationProvider authProvider;
-	@Mock private AuthenticationService authenticationService;
+	@Mock
+	private AuthenticationProvider authProvider;
+	@Mock
+	private AuthenticationService authenticationService;
 
 	private OCSubmissionContext instance;
 
@@ -108,10 +111,11 @@ public class OCSubmissionContextTest {
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(mappedStudyNames);
 
 		when(formService.saveFormData(Mockito.anyString(), Mockito.any(User.class), Mockito.any(Date.class)))
-		.thenReturn(createFormData());
+				.thenReturn(createFormData());
 
 		when(openclinicaService.getUserDetails(Mockito.anyString())).thenReturn(createOpenclinicaUser());
-		when(openclinicaService.exportFormData(Mockito.any(User.class), Mockito.any(FormData.class))).thenReturn("Success");
+		when(openclinicaService.exportFormData(Mockito.any(User.class), Mockito.any(FormData.class))).thenReturn(
+				"Success");
 
 	}
 
@@ -175,12 +179,12 @@ public class OCSubmissionContextTest {
 	public void testAvailableWorkitemReturnEmptListOfWorkitemsIfNoOcStudyAvailable() {
 		when(openclinicaService.getStudySubjectEvents()).thenReturn(studySubjects);
 		when(studyManagerService.getStudyByName(getStudyName())).thenReturn(Collections.<StudyDef> emptyList());
-		List<OxdWorkitem> availableWorkitems = instance.availableWorkitems();
+		List<WorkItem> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
 		when(studyManagerService.getStudyByKey(getStudyName())).thenThrow(new RuntimeException("Deliberate Exception"));
-		List<OxdWorkitem> availableWorkitems1 = instance.availableWorkitems();
+		List<WorkItem> availableWorkitems1 = instance.availableWorkitems();
 
 		assertThat("Workitems are expected to be empty", availableWorkitems1.isEmpty(), is(true));
 
@@ -189,13 +193,13 @@ public class OCSubmissionContextTest {
 	@Test
 	public void testAvailableWorkitemReturnEmptListIfOCStudyPropertyIsNullOrEmpty() {
 		props.setProperty("studyOID", "");
-		List<OxdWorkitem> availableWorkitems = instance.availableWorkitems();
+		List<WorkItem> availableWorkitems = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
 		props = new Properties();
 		instance.setProps(props);
-		List<OxdWorkitem> availableWorkitems2 = instance.availableWorkitems();
+		List<WorkItem> availableWorkitems2 = instance.availableWorkitems();
 
 		assertTrue("Workitems are expected to be empty", availableWorkitems2.isEmpty());
 
@@ -209,11 +213,11 @@ public class OCSubmissionContextTest {
 				studySubject = tmpStudySubj;
 		}
 
-		List<OxdWorkitem> workitems = instance.studySubjectToWorkItems(studySubject, convertedStudy);
+		List<WorkItem> workitems = instance.studySubjectToWorkItems(studySubject, convertedStudy);
 
 		assertThat("The number of workitems are supposed to be 2", workitems.size(), is(2));
 
-		for (OxdWorkitem objects : workitems) {
+		for (WorkItem objects : workitems) {
 			if (objects.getWorkitemName().equals("TEST_SUBJECT_EVENT-TEST_EVENT1_OID"))
 				assertThat("The number of form References Should be 2 ", objects.getWorkitemForms().size(), is(2));
 			else if (objects.getWorkitemName().equals("TEST_SUBJECT_EVENT-TEST_EVENT2_OID"))
@@ -230,7 +234,7 @@ public class OCSubmissionContextTest {
 		when(studyManagerService.getStudyByKey(getStudyName())).thenReturn(convertedStudy);
 
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(null);
-		List<OxdWorkitem> availableWorkitems = instance.availableWorkitems();
+		List<WorkItem> availableWorkitems = instance.availableWorkitems();
 		assertTrue("Workitems are expected to be empty", availableWorkitems.isEmpty());
 
 		when(studyManagerService.getStudyNamesForCurrentUser()).thenReturn(Collections.<Integer, String> emptyMap());
@@ -266,35 +270,38 @@ public class OCSubmissionContextTest {
 	@Test(expected = ExportException.class)
 	public void testSetUploadResultThrowsExceptionWhenExportFails() {
 
-		when(openclinicaService.exportFormData(Mockito.any(User.class), Mockito.any(FormData.class)))
-			.thenReturn("This is an error message");
+		when(openclinicaService.exportFormData(Mockito.any(User.class), Mockito.any(FormData.class))).thenReturn(
+				"This is an error message");
 
 		instance.setUploadResult("<ANY_XML/>");
 	}
 
-	@Test public void testAuthenticatePassesWhenUserExistsInOpenXData() {
+	@Test
+	public void testAuthenticatePassesWhenUserExistsInOpenXData() {
 
 		boolean authenticated = instance.authenticate("foo", "password");
 
-		assertTrue ("Should authenticate valid OXD user", authenticated);
+		assertTrue("Should authenticate valid OXD user", authenticated);
 	}
 
-	@Test public void testAuthenticatePassesWhenUserDoesExistsInOpenXDataButIsFetchedFromOC() throws UserNotFoundException {
+	@Test
+	public void testAuthenticatePassesWhenUserDoesExistsInOpenXDataButIsFetchedFromOC() throws UserNotFoundException {
 
 		when(userService.findUserByUsername(Mockito.anyString())).thenReturn(null);
 		when(studyManagerService.getStudyByKey(Mockito.anyString())).thenReturn(convertedStudy);
 
 		boolean authenticated = instance.authenticate("foo", "password");
 
-		assertTrue ("Should authenticate valid OXD user", authenticated);
+		assertTrue("Should authenticate valid OXD user", authenticated);
 	}
 
-	@Test public void testAuthenticateFailsWhenOXDPasswordIsWrong() throws UserNotFoundException {
+	@Test
+	public void testAuthenticateFailsWhenOXDPasswordIsWrong() throws UserNotFoundException {
 
 		when(authProvider.authenticate("foo", "password")).thenReturn(null);
 
 		boolean authenticated = instance.authenticate("foo", "password");
 
-		assertFalse ("Should authenticate valid OXD user", authenticated);
+		assertFalse("Should authenticate valid OXD user", authenticated);
 	}
 }
