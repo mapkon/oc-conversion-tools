@@ -11,3 +11,4 @@ converter/src/test/resources/pep.odm.xml
 /.idea/
 converter/target/
 xform-study/target/
+it/target/
