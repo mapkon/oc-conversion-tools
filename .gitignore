@@ -9,3 +9,5 @@ target/*
 bin/
 src/test/resources/pep.odm.xml
 /.idea/
+converter/target/
+xform-study/target/
