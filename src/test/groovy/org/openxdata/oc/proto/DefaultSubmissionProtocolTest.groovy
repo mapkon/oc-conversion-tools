@@ -294,8 +294,6 @@ class DefaultSubmissionProtocolTest {
 
 		def xml = protocol.processMultipleSelectValues("11 22 33 44")
 
-		println XmlUtil.serialize(xml)
-
 		assertThat xml, Matchers.containsString(',')
 	}
 
