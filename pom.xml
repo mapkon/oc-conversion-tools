@@ -45,20 +45,9 @@
 
 	<developers>
 		<developer>
-			<id>cattabanks@gmail.com</id>
+			<id>gerard.musoba@student.uib.no</id>
 			<name>Mark Gerard</name>
-			<email>cattabanks@gmail.com</email>
-			<organization>Centre for International Health, University of Bergen</organization>
-			<organizationUrl>http://www.uib.no/cih/en</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-		<developer>
-			<id>morten.bendiksen@gmail.com</id>
-			<name>Morten Bendiksen</name>
-			<email>morten.bendiksen@gmail.com</email>
+			<email>gerard.musoba@student.uib.no</email>
 			<organization>Centre for International Health, University of Bergen</organization>
 			<organizationUrl>http://www.uib.no/cih/en</organizationUrl>
 			<roles>
@@ -317,12 +306,6 @@
 	</dependencies>
 
 	<build>
-		<testResources>
-			<testResource>
-				<directory>${basedir}/src/test/resources</directory>
-				<filtering>true</filtering>
-			</testResource>
-		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
