@@ -113,14 +113,18 @@
 			<version>0.3.1</version>
 			<exclusions>
 				<exclusion>
-					<artifactId>org.codehaus.groovy</artifactId>
-					<groupId>groovyall</groupId>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy-all</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy</artifactId>
+			<artifactId>groovy-all</artifactId>
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
