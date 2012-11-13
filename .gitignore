@@ -7,7 +7,7 @@ target/*
 .groovy
 /copy-jar.bat
 bin/
-src/test/resources/pep.odm.xml
+converter/src/test/resources/pep.odm.xml
 /.idea/
 converter/target/
 xform-study/target/
