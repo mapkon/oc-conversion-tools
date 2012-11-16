@@ -108,21 +108,22 @@ class PropertiesUtilTest extends GroovyTestCase {
 		assertNotNull 'password', password
 	}
 
-	@Test void testLoadOpenClinicaPropertiesFileInWebApp(){
+	@Test void testOCPropertyFileIsLoadedFromWebAppFolderIfItsPresent(){
 		servletContext.getResourceAsStream('openclinica.properties').returns(servletCtxInputStream)
 		play{
 			checkOpenlincaPropertiesNotEmpty(servletContext)
 		}
+
 	}
 
-	@Test void testLoadOpenClinicaPropertiesWhenFileClassPath(){
+	@Test void testOCPropertyFileIsLoadedFromClasspathIfItsNotPresentInWebAppFolder(){
 		servletContext.getResourceAsStream('openclinica.properties').returns(null)
 		play{
 			checkOpenlincaPropertiesNotEmpty(servletContext)
 		}
 	}
 
-	@Test void testLoadOpenClinicaPropertiesWhenServletContextIsNull(){
+	@Test void testOCPropertyFileIsLoadedFromClasspathIfServletContextIsNull(){
 		checkOpenlincaPropertiesNotEmpty(null)
 	}
 
