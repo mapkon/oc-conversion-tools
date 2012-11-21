@@ -108,15 +108,33 @@ class StudyImporterTest extends GroovyTestCase {
 				
 		def form1 = forms[0]
 		
-		assertEquals 'Test Version', form1.getVersion('Test Version').getName()
-		assertEquals 'Test Version 1', form1.getVersion('Test Version 1').getName()
+		assertEquals 'Test Version 0', form1.getVersion('Test Version 0').getName()
 		
+	}
+	
+	@Test void testThatImportStudyReturnsValidStudyWithCorrectFormVersion1() {
+		
+		def form1 = forms[0]
+		
+		assertEquals 'Test Version 1', form1.getVersion('Test Version 1').getName()
 	}
 	
 	@Test void testImportStudyReturnsValidStudyWithCorrectFormVersion2() {
 
 		def form2 = forms[1]
 		assertEquals 'Test Version 2', form2.getVersion('Test Version 2').getName()
+	}
+	
+	@Test void testImportStudyReturnsValidStudyWithCorrectVersionContainingANumber() {
+		
+		forms.each {
+			it.getVersions().each { assert it.name =~ /\d$/ }
+		}
+	}
+	
+	@Test void testImportStudyReturnsValidStudyWithCorrectFormVersionForForm3() {
+		
+		def form2 = forms[1]
 		assertEquals 'Test Version 3', form2.getVersion('Test Version 3').getName()
 	}
 	
@@ -124,7 +142,7 @@ class StudyImporterTest extends GroovyTestCase {
 				
 		def form1 = forms[0]
 		
-		assertEquals  'Test Version', form1.getDefaultVersion().getName()
+		assertEquals  'Test Version 0', form1.getDefaultVersion().getName()
 		
 	}
 	
@@ -137,17 +155,14 @@ class StudyImporterTest extends GroovyTestCase {
 	
 	@Test void testImportStudyReturnsValidStudyWithFormVersionHavingXform() {
 		
-		def form = study.getForm('Test Form')
-		
-		def version = form.getVersion('Test Version')
+		def version = study.getForm('Test Form').getVersion('Test Version 0')
 		
 		assertNotNull version.getXform()
 	}
 	
 	@Test void testImportStudyReturnsValidStudyWithValidXformElement() {
-		def form = study.getForm('Test Form')
 		
-		def version = form.getVersion('Test Version')
+		def version = study.getForm('Test Form').getVersion('Test Version 0')
 		
 		def xform = version.getXform()
 		
@@ -221,9 +236,7 @@ class StudyImporterTest extends GroovyTestCase {
 	
 	@Test void testImportStudyReturnsValidStudyWithFormVersionHavingXformText() {
 		
-		def form = study.getForm('Test Form')
-		
-		def version = form.getVersion('Test Version')
+		def version = study.getForm('Test Form').getVersion('Test Version 0')
 		def versionText = version.getXform()
 		
 		assertTrue versionText instanceof String
@@ -261,7 +274,7 @@ class StudyImporterTest extends GroovyTestCase {
 	
 	def xmlString = '''<study name='test' description='Test Study' studyKey='Test Key'>
 						<form name='Test Form' description='Test Description'>
-						 <version name='Test Version'>
+						 <version name='Test Version 0'>
 							  <xform>
 								&lt;xf:xforms xmlns:xf=&quot;http://www.w3.org/2002/xforms&quot;
 								xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&#10;
