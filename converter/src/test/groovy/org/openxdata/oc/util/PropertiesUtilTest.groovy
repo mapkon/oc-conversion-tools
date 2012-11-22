@@ -51,7 +51,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 	@Test void testLoadPropertiesReturnsValidURL() {
 
 		def host = props.host
-		assert host =~ /^http(?:s)?:(\/)+([-.\w]+)\1([-\w]+)/
+		assertTrue host.matches(/^http(?:s)?:(\/)+([-.\w]+)\1([-\w]+)/)
 	}
 
 	@Test void testLoadPropertiesReturnsValidHostProperty() {
