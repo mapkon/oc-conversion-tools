@@ -61,7 +61,7 @@ class TransformerTest extends GroovyTestCase {
 
 		def binds = getBinds()
 
-		// The extra bindings are because of the repeat parent bindings and Header/Sub Header locked questions
+		// The extra bindings are due to repeat parent bindings and Header/Sub Header locked questions
 		assertEquals 72, binds.size()
 	}
 
@@ -70,7 +70,7 @@ class TransformerTest extends GroovyTestCase {
 		def binds = getBinds()
 		def itemRefs = getItemRefs()
 
-		// The extra two bindings are because of the repeat parent bindings
+		// The extra two bindings are due to repeat parent bindings
 		assertTrue  'The number of binds should be equal to the number of ItemRefs in ODM + 2', binds.size() >= itemRefs.size()
 	}
 

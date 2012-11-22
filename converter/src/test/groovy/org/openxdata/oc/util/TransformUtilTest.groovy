@@ -31,7 +31,8 @@ class TransformUtilTest extends GroovyTestCase {
 		odmFileContent = util.loadFileContents('test-odm.xml')
 	}
 
-	@Test void testLoadFileContentsDoesNotReturnNull(){
+	@Test void testLoadFileContentsDoesNotReturnNull() {
+		
 		assertNotNull odmFileContent
 	}
 
@@ -45,8 +46,9 @@ class TransformUtilTest extends GroovyTestCase {
 		assertTrue odmFileContent.endsWith('</ODM>')
 	}
 
-	@Test void testLoadFileContentsStartWithXmlProcessingInstructions(){
-		assertTrue odmFileContent.startsWith('''<?xml version="1.0" encoding="UTF-8"?>''')
+	@Test void testLoadFileContentsStartWithXmlProcessingInstructions() {
+		
+		assert odmFileContent =~ /^<\?xml\s+version/
 	}
 
 	@Test void testLoadFileContentsMUSTThrowExceptionOnNullOrEmptyFileName(){

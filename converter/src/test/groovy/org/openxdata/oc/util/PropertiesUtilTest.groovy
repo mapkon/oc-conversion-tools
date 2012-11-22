@@ -17,7 +17,7 @@ class PropertiesUtilTest extends GroovyTestCase {
 
 	@Before void setUp() {
 		props = util.loadProperties('META-INF/openclinica.properties')
-		servletCtxInputStream =this.getClass().getClassLoader().getResourceAsStream('META-INF/openclinica.properties')
+		servletCtxInputStream = this.getClass().getClassLoader().getResourceAsStream('META-INF/openclinica.properties')
 		servletContext = mock(ServletContext)
 	}
 
@@ -46,6 +46,12 @@ class PropertiesUtilTest extends GroovyTestCase {
 
 		def host = props.getAt('host')
 		assertNotNull host
+	}
+
+	@Test void testLoadPropertiesReturnsURL() {
+
+		def host = props.host
+		assert host =~ /^http(?:s)?:(\/)+([.\w-]+)\1([\w-]+)/
 	}
 
 	@Test void testLoadPropertiesReturnsValidHostProperty() {
@@ -130,6 +136,6 @@ class PropertiesUtilTest extends GroovyTestCase {
 	void checkOpenlincaPropertiesNotEmpty(def servletContext){
 		util = new PropertiesUtil()
 		util.loadOpenClinicaProperties(servletContext)
-		assertFalse 'Properties should not be empty',util.props.isEmpty()
+		assertFalse 'Properties should not be empty', util.props.isEmpty()
 	}
 }
