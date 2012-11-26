@@ -12,6 +12,8 @@ import org.openxdata.oc.exception.UnAvailableException
 
 @WithGMock
 class HttpTransportHandlerTest extends GroovyTestCase {
+
+	static final String SERVER_IS_UNREACHEABLE = "Server is unreacheable!"
 	
 	def transportHandler
 	
@@ -122,14 +124,29 @@ class HttpTransportHandlerTest extends GroovyTestCase {
 	}
 	
 	@Test void testUnAvailableExceptionShouldBeThrownWhenServerCannotBeReached(){
+		
 		def mock = new MockFor(HttpTransportHandler)
-		mock.demand.sendRequest { throw new UnAvailableException("Server is unreacheable!") }
+		mock.demand.sendRequest { throw new UnAvailableException(SERVER_IS_UNREACHEABLE) }
 
 		def handler = mock.proxyInstance()
 
 		shouldFail(UnAvailableException) {
 			def response = handler.sendRequest(null)
 		}
+	}
+	
+	@Test void testSendRequestFailsWithUnAvailableExceptionWithCorrectMessage() {
+		
+		def mock = new MockFor(HttpTransportHandler)
+		mock.demand.sendRequest { throw new UnAvailableException(SERVER_IS_UNREACHEABLE) }
+
+		def handler = mock.proxyInstance()
+
+		def msg = shouldFail(UnAvailableException) {
+			def response = handler.sendRequest(null)
+		}
+		
+		assertEquals SERVER_IS_UNREACHEABLE, msg
 	}
 	
 	private def setUpConnectionFactoryMock(responseStream) {

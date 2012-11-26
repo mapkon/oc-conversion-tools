@@ -63,6 +63,16 @@ class InstanceDataHandlerTest extends GroovyTestCase {
 			new InstanceDataHandler().processInstanceData(emptyInstanceData)
 		}
 	}
+	
+	@Test void testAppendInstanceDataShouldFailWithCorrectExceptionmessage() {
+		
+		def emptyInstanceData = new ArrayList<String>()
+		def msg = shouldFail(ImportException.class){
+			new InstanceDataHandler().processInstanceData(emptyInstanceData)
+		}
+		
+		assertEquals 'Cannot process empty instance data.', msg
+	}
 
 	@Test void testThatUncleanedXmlHasHeaders() {
 

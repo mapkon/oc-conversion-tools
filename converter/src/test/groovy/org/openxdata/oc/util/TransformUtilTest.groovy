@@ -52,17 +52,18 @@ class TransformUtilTest extends GroovyTestCase {
 	}
 
 	@Test void testLoadFileContentsMUSTThrowExceptionOnNullOrEmptyFileName(){
-		shouldFail(IllegalArgumentException.class){
+		shouldFail(IllegalArgumentException){
 			def file = util.loadFileContents('')
 		}
 	}
 
 	@Test void testLoadFileContentsRendersCorrectMessageOnEmptyFileName(){
-		try{
+		
+		def msg = shouldFail(IllegalArgumentException) {
 			util.loadFileContents('')
-		}catch(def ex){
-			assertEquals 'File name cannot be null or empty.', ex.getMessage()
 		}
+		
+		assertEquals 'File name cannot be null or empty.', msg
 	}
 
 	@Test void testIsRepeatReturnsFalseWhenItemIsRepeat() {

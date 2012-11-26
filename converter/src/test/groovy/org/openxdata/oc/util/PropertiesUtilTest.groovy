@@ -34,12 +34,11 @@ class PropertiesUtilTest extends GroovyTestCase {
 	}
 
 	@Test void testLoadPropertiesThrowsExceptionOnNullFileNameWithCorrectMessage() {
-		try {
-			def util = new PropertiesUtil()
-			util.loadProperties(null)
-		}catch(def ex) {
-			assertEquals 'File Name cannot be Null or Empty!', ex.getMessage()
+		def msg = shouldFail(IllegalArgumentException) {
+			util.loadProperties('')
 		}
+		
+		assertEquals 'File Name cannot be Null or Empty!', msg
 	}
 
 	@Test void testLoadPropertiesReturnsHostProperty() {

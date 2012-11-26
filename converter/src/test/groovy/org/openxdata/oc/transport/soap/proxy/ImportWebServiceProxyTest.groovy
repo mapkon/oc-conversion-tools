@@ -72,11 +72,21 @@ class ImportWebServiceProxyTest extends GroovyTestCase {
 
 	@Test void testImportShouldFailOnWithCorrectExceptionOnEmptyInstanceData() {
 
-		shouldFail(ImportException) {
+		def msg = shouldFail(ImportException) {
 
 			def message = importProxy.importData([])
 			assertEquals 'Error', message[0]
 		}
+	}
+	
+	@Test void testImportShouldFailOnWithCorrectExceptionMessage() {
+		
+		def msg = shouldFail(ImportException) {
+		
+			def message = importProxy.importData([])
+		}
+				
+		assertEquals 'Cannot process empty instance data.', msg
 	}
 
 	private def setUpConnectionFactoryMock(returnXml) {
