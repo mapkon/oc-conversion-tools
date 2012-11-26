@@ -74,7 +74,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 		List<FormDef> forms = study.getForms()
 
-		for(FormDef form : forms) {
+		for(form in forms) {
 
 			form.setStudy(study)
 			form.setCreator(creator)
@@ -100,7 +100,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 	private void setFormVersionProperties(FormDef form, Date dateCreated, User creator) {
 		List<FormDefVersion> versions = form.getVersions()
 
-		for(FormDefVersion version : versions) {
+		for(version in versions) {
 
 			version.setFormDef(form)
 			version.setCreator(creator)
@@ -138,7 +138,7 @@ public class OpenClinicaServiceImpl implements OpenClinicaService {
 
 		def exportResponseMessages = buildResponseMessage(dataList)
 
-		for(Map.Entry<String, String> entry : exportResponseMessages.entrySet()) {
+		for(entry in exportResponseMessages.entrySet()) {
 
 			def key = entry.key
 			if(exportResponseMessages.get(key).equals("Success")) {
