@@ -13,7 +13,7 @@ def tomcatWEBAPPSDIR = new File("${TOMCAT_INSTALLATION_FOLDER}/webapps")
 // Confirm openxdata installation
 tomcatWEBAPPSDIR.eachDir {
 
-	if(it.name =~ /^[oO]pen[xX][dD]ata([0-9]+)?/) {
+	if(it.name =~ /(?ix)^openxdata[\d]*?/) {
 
 		OXD_FOLDERNAME = it.name
 		exists = true
@@ -22,7 +22,7 @@ tomcatWEBAPPSDIR.eachDir {
 
 if(exists) {
 
-	println "OpenXData installed. Proceeding with install..."
+	println "OpenXdata installed. Proceeding with install..."
 
 	def builder = new AntBuilder()
 	builder.unzip(src:ZIP_FILENAME, dest:DESTINATION_FOLDERNAME, overwrite:"true")
@@ -44,7 +44,7 @@ if(exists) {
 	if(depFolder.isDirectory()) {
 
 		depFolder.eachFile {
-			if(it.name =~ /\w+.jar/)
+			if(it.name =~ /\.jar$/)
 				jarFiles.add(it)
 		}
 	}
@@ -104,20 +104,10 @@ if(exists) {
 	// Delete temporary extraction folder
 
 	println "Cleaning up..."
-	
+
 	builder.delete(dir:"temp")
 	builder.delete(file:"web.xml")
 } 
 else {
 	println "openxdata is not installed in ${TOMCAT_INSTALLATION_FOLDER/webapps}. Please install openxdata to proceed"
 }
-
-
-
-
-
-
-
-
-
-
