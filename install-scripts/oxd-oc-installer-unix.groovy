@@ -13,7 +13,7 @@ def tomcatWEBAPPSDIR = new File("${TOMCAT_INSTALLATION_FOLDER}/webapps")
 // Confirm openxdata installation
 tomcatWEBAPPSDIR.eachDir {
 
-	if(it.name =~ /(?ix)^openxdata[\d]*?/) {
+	if(it.name =~ /(?ix)^openxdata\d*/) {
 
 		OXD_FOLDERNAME = it.name
 		exists = true
