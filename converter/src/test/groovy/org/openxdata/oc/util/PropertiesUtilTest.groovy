@@ -132,9 +132,10 @@ class PropertiesUtilTest extends GroovyTestCase {
 		checkOpenlincaPropertiesNotEmpty(null)
 	}
 
-	void checkOpenlincaPropertiesNotEmpty(def servletContext){
+	@Test void checkOpenlincaPropertiesNotEmpty(def servletContext){
+		
 		util = new PropertiesUtil()
-		util.loadOpenClinicaProperties(servletContext)
-		assertFalse 'Properties should not be empty', util.props.isEmpty()
+		def returnedProps = util.loadOpenClinicaProperties(servletContext)
+		assertFalse 'Properties should not be empty', returnedProps.isEmpty()
 	}
 }

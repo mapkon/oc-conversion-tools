@@ -24,6 +24,7 @@ class PropertiesUtil {
 	}
 	
 	Properties loadOpenClinicaProperties(ServletContext servletContext) {
+		
 		InputStream propFileStream = servletContext?.getResourceAsStream("openclinica.properties");
 		if(propFileStream){
 			log.info("loading properties file from Web Context...")
@@ -33,5 +34,7 @@ class PropertiesUtil {
 			log.info("loading properties file from classpath...")
 			props = loadProperties('META-INF/openclinica.properties')
 		}
+		
+		return props
 	}
 }
