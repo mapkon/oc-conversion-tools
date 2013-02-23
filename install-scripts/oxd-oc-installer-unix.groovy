@@ -107,6 +107,8 @@ if(exists) {
 
 	builder.delete(dir:"temp")
 	builder.delete(file:"web.xml")
+
+	println "oc-converstion-tools installation successfully completed."
 } 
 else {
 	println "openxdata is not installed in ${TOMCAT_INSTALLATION_FOLDER/webapps}. Please install openxdata to proceed"
