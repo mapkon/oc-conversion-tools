@@ -93,7 +93,7 @@
 			<dependency>
 				<artifactId>junit</artifactId>
 				<groupId>junit</groupId>
-				<version>4.10</version>
+				<version>4.13.1</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
