@@ -79,7 +79,7 @@
 	<properties>
 		<java.version>1.6</java.version>
 		<slf4j.version>1.6.1</slf4j.version>
-		<groovy.version>2.0.4</groovy.version>
+		<groovy.version>2.4.21</groovy.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
